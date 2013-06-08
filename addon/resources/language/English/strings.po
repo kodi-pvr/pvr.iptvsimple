@@ -1,0 +1,72 @@
+# XBMC Media Center language file
+# Addon Name: PVR IP-TV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon version: 0.1.0
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: XBMC Main Translation Project (Frodo)\n"
+"Report-Msgid-Bugs-To: http://trac.xbmc.org/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: XBMC Translation Team\n"
+"Language-Team: English (http://www.transifex.com/projects/p/XBMC-Main-Frodo/language/en/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: en\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#settings labels
+
+msgctxt "#30000"
+msgid "File Location"
+msgstr ""
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Play List Settings"
+msgstr ""
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr ""
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr ""
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr ""
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr ""
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr ""
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr ""
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr ""
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr ""
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr ""
