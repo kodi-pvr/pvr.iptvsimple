@@ -32,7 +32,7 @@ msgid "Remote Path (Internet address)"
 msgstr ""
 
 msgctxt "#30010"
-msgid "Play List Settings"
+msgid "General"
 msgstr ""
 
 msgctxt "#30011"
@@ -41,6 +41,10 @@ msgstr ""
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
+msgstr ""
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
 msgstr ""
 
 msgctxt "#30020"

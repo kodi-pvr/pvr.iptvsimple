@@ -103,6 +103,7 @@ protected:
   virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, std::string &strContent);
   virtual void                 ApplyChannelsLogos();
   virtual CStdString           ReadMarkerValue(std::string &strLine, const char * strMarkerName);
+  virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);
 
 protected:
   virtual void *Process(void);

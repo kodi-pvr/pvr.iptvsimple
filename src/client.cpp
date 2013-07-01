@@ -54,6 +54,7 @@ std::string g_strTvgPath    = "";
 std::string g_strM3UPath    = "";
 std::string g_strLogoPath   = "";
 int         g_iEPGTimeShift = 0;
+int         g_iStartNumber  = 1;
 bool        g_bTSOverride   = true;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
@@ -102,7 +103,10 @@ void ADDON_ReadSettings(void)
   {
     g_strM3UPath = GetClientFilePath(M3U_FILE_NAME);
   }
-
+  if (!XBMC->GetSetting("startNum", &g_iStartNumber)) 
+  {
+    g_iStartNumber = 1;
+  }
   if (!XBMC->GetSetting("epgPathType", &iPathType)) 
   {
     iPathType = 1;

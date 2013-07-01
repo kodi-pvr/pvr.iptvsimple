@@ -30,8 +30,8 @@ msgid "Remote Path (Internet address)"
 msgstr "Удалённый путь (сеть Интернет)"
 
 msgctxt "#30010"
-msgid "Play List Settings"
-msgstr "Установки плейлиста"
+msgid "General"
+msgstr "Основные"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
@@ -40,6 +40,10 @@ msgstr "Путь к M3U"
 msgctxt "#30012"
 msgid "M3U Play List URL"
 msgstr "Ссылка на M3U"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Начинать нумерацию каналов с"
 
 msgctxt "#30020"
 msgid "EPG Settings"

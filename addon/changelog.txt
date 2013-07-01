@@ -1,0 +1,9 @@
+v1.8.1
+- fixed issue with BOM header in EPG XML
+- fixed issue with update channels if they are changed in m3u
+- added setting starting number of channels
+
+v1.8.0
+- Initial version
+- Supports m3u as Live TV streams source and XMLTV as EPG source
+- Supports Live TV, Radio channels and EPG
