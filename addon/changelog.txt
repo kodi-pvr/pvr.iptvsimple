@@ -1,3 +1,6 @@
+v1.8.2
+- add timeshift buffer functions
+
 v1.8.1
 - fixed issue with BOM header in EPG XML
 - fixed issue with update channels if they are changed in m3u
