@@ -6,6 +6,7 @@
     <setting id="m3uPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
     <setting id="m3uPath" type="file" label="30011" default="" visible="eq(-1,0)"/>
     <setting id="m3uUrl" type="text" label="30012" default="" visible="eq(-2,1)"/>
+    <setting id="m3uCache" type="bool" label="30025" default="true" visible="eq(-3,1)"/>
     <setting id="startNum" type="number" label="30013" default="1" />
   </category>
 
@@ -15,14 +16,16 @@
     <setting id="epgPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
     <setting id="epgPath" type="file" label="30021" default="" visible="eq(-1,0)"/>
     <setting id="epgUrl" type="text" label="30022" default="" visible="eq(-2,1)"/>
-<!--    <setting id="epgTimeShift" type="slider" label="30024" default="0" range="-12,.5,12" option="float"/>-->
-    <setting id="epgTimeShift_" type="enum" label="30024" default="12" values="-12|-11|-10|-9|-8|-7|-6|-5|-4|-3|-2|-1|0|+1|+2|+3|+4|+5|+6|+7|+8|+9|+10|+11|+12"/>-->
+    <setting id="epgCache" type="bool" label="30026" default="true" visible="eq(-3,1)"/>
+    <setting id="epgTimeShift" type="slider" label="30024" default="0" range="-12,.5,12" option="float"/>
     <setting id="epgTSOverride" type="bool" label="30023" default="false"/>
   </category>
 
   <!-- Logos -->
   <category label="30030">
     <setting id="sep3" label="30030" type="lsep"/>
-    <setting id="logoPath" type="folder" label="30031" default="" />
+    <setting id="logoPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
+    <setting id="logoPath" type="folder" label="30031" default="" visible="eq(-1,0)"/>
+    <setting id="logoBaseUrl" type="text" label="30032" default="" visible="eq(-2,1)"/>
   </category>
 </settings>

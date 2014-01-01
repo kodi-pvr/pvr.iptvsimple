@@ -1,3 +1,10 @@
+v1.9.3
+- added setting to disable cache m3u/epg
+- added support <icon src=""/> for programme in epg
+- added possibility to specify logo path as URL
+- changed tvg-logo should contains full logo filename (with extention)
+- changed don't try download xmltv if it doesn't load after 3 attempt.
+
 v1.9.2
 - add timeshift buffer functions
 

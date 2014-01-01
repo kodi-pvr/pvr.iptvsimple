@@ -100,7 +100,8 @@ protected:
   virtual PVRIptvEpgChannel   *FindEpgForChannel(PVRIptvChannel &channel);
   virtual int                  ParseDateTime(CStdString strDate, bool iDateFormat = true);
   virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
-  virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, std::string &strContent);
+  virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, 
+                                                     std::string &strContent, const bool bUseCache = false);
   virtual void                 ApplyChannelsLogos();
   virtual CStdString           ReadMarkerValue(std::string &strLine, const char * strMarkerName);
   virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);

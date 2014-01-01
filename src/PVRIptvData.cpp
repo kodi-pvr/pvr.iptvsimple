@@ -115,14 +115,14 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   int iCount = 0;
   while(iCount < 3) // max 3 tries
   {
-    if ((iReaded = GetCachedFileContents(TVG_FILE_NAME, m_strXMLTVUrl, data)) != 0) 
+    if ((iReaded = GetCachedFileContents(TVG_FILE_NAME, m_strXMLTVUrl, data, g_bCacheEPG)) != 0) 
     {
       break;
     }
     XBMC->Log(LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. :%dth try.", m_strXMLTVUrl.c_str(), ++iCount);
     if (iCount < 3)
     {
-      usleep(5 * 1000 * 1000); // sleep 5 sec before next try.
+      usleep(2 * 1000 * 1000); // sleep 2 sec before next try.
     }
   }
   
@@ -130,6 +130,8 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   {
     XBMC->Log(LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. After %d tries.", m_strXMLTVUrl.c_str(), iCount);
     m_bEGPLoaded = true;
+    m_iLastStart = iStart;
+    m_iLastEnd = iEnd;
     return false;
   }
 
@@ -283,6 +285,16 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     GetNodeValue(pChannelNode, "category", strCategory);
     GetNodeValue(pChannelNode, "desc", strDesc);
 
+    CStdString strIconPath;
+    xml_node<> *pIconNode = pChannelNode->first_node("icon");
+    if (pIconNode != NULL)
+    {
+      if (!GetAttributeValue(pIconNode, "src", strIconPath)) 
+      {
+        strIconPath = "";
+      }
+    }
+
     PVRIptvEpgEntry entry;
     entry.iBroadcastId    = ++iBroadCastId;
     entry.iGenreType      = 0;
@@ -290,6 +302,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.strTitle        = strTitle;
     entry.strPlot         = strDesc;
     entry.strPlotOutline  = "";
+    entry.strIconPath     = strIconPath;
     entry.startTime       = iTmpStart;
     entry.endTime         = iTmpEnd;
     entry.strGenreString  = strCategory;
@@ -314,7 +327,7 @@ bool PVRIptvData::LoadPlayList(void)
   }
 
   CStdString strPlaylistContent;
-  if (!GetCachedFileContents(M3U_FILE_NAME, m_strM3uUrl, strPlaylistContent))
+  if (!GetCachedFileContents(M3U_FILE_NAME, m_strM3uUrl, strPlaylistContent, g_bCacheM3U))
   {
     XBMC->Log(LOG_ERROR, "Unable to load playlist file '%s':  file is missing or empty.", m_strM3uUrl.c_str());
     return false;
@@ -607,8 +620,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       continue;
     }
 
-    if (!m_bEGPLoaded || 
-      iStart > m_iLastStart || iEnd > m_iLastEnd) 
+    if (!m_bEGPLoaded || iStart > m_iLastStart || iEnd > m_iLastEnd) 
     {
       if (LoadEPG(iStart, iEnd))
       {
@@ -618,8 +630,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
     }
 
     PVRIptvEpgChannel *epg;
-    if ((epg = FindEpgForChannel(*myChannel)) == NULL
-      || epg->epg.size() == 0)
+    if ((epg = FindEpgForChannel(*myChannel)) == NULL || epg->epg.size() == 0)
     {
       return PVR_ERROR_NO_ERROR;
     }
@@ -852,13 +863,15 @@ bool PVRIptvData::GzipInflate( const std::string& compressedBytes, std::string& 
   return true ;  
 }  
 
-int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const std::string &filePath, std::string &strContents)
+int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const std::string &filePath, 
+                                       std::string &strContents, const bool bUseCache /* false */)
 {
   bool bNeedReload = false;
   CStdString strCachedPath = GetUserFilePath(strCachedName);
   CStdString strFilePath = filePath;
 
-  if (XBMC->FileExists(strCachedPath, false)) 
+  // check cached file is exists
+  if (bUseCache && XBMC->FileExists(strCachedPath, false)) 
   {
     struct __stat64 statCached;
     struct __stat64 statOrig;
@@ -866,7 +879,7 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
     XBMC->StatFile(strCachedPath, &statCached);
     XBMC->StatFile(strFilePath, &statOrig);
 
-    bNeedReload = statCached.st_mtime < statOrig.st_mtime;
+    bNeedReload = statCached.st_mtime < statOrig.st_mtime || statOrig.st_mtime == 0;
   } 
   else 
   {
@@ -876,7 +889,9 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
   if (bNeedReload) 
   {
     GetFileContents(strFilePath, strContents);
-    if (strContents.length() > 0) 
+
+    // write to cache
+    if (bUseCache && strContents.length() > 0) 
     {
       void* fileHandle = XBMC->OpenFileForWrite(strCachedPath, true);
       if (fileHandle)
@@ -900,7 +915,7 @@ void PVRIptvData::ApplyChannelsLogos()
   for(channel = m_channels.begin(); channel < m_channels.end(); channel++)
   {
     channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
-    channel->strLogoPath.append(CHANNEL_LOGO_EXTENSION);
+    //channel->strLogoPath.append(CHANNEL_LOGO_EXTENSION);
   }
 }
 

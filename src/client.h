@@ -27,7 +27,7 @@
 #include "libXBMC_pvr.h"
 #include "libXBMC_gui.h"
 
-#define PVR_CLIENT_VERSION     "1.8.1"
+#define PVR_CLIENT_VERSION     "1.9.3"
 #define M3U_FILE_NAME          "iptv.m3u.cache"
 #define TVG_FILE_NAME          "xmltv.xml.cache"
 
@@ -49,6 +49,8 @@ extern std::string g_strLogoPath;
 extern int         g_iEPGTimeShift;
 extern int         g_iStartNumber;
 extern bool        g_bTSOverride;
+extern bool        g_bCacheM3U;
+extern bool        g_bCacheEPG;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName);
 extern std::string GetClientFilePath(const std::string &strFileName);

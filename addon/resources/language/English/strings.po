@@ -20,7 +20,7 @@ msgstr ""
 #settings labels
 
 msgctxt "#30000"
-msgid "File Location"
+msgid "Location"
 msgstr ""
 
 msgctxt "#30001"
@@ -67,10 +67,22 @@ msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
 msgstr ""
 
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr ""
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr ""
+
 msgctxt "#30030"
 msgid "Channels Logos"
 msgstr ""
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
+msgstr ""
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
 msgstr ""
