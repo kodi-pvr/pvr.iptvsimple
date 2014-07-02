@@ -9,85 +9,77 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-main/language/en/)\n"
+"Language-Team: Icelandic (http://www.transifex.com/projects/p/xbmc-main/language/is/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: is\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#settings labels
 
 msgctxt "#30000"
 msgid "Location"
-msgstr ""
+msgstr "Staðsetning"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr ""
+msgstr "Staðvær slóð (nærnet innifalið)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr ""
-
-#empty strings from id 30003 to 30009
+msgstr "Fjarlæg slóð (Internet netfang)"
 
 msgctxt "#30010"
 msgid "General"
-msgstr ""
+msgstr "Almennt"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr ""
+msgstr "Slóð að M3U spilunarlista"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr ""
+msgstr "Veffang á M3U spilunarlista"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr ""
-
-#empty strings from id 30014 to 30019
+msgstr "Númeraðar stöðvar byrja á"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr ""
+msgstr "Stillingar fyrir rafræna dagskrárvísa (EPG)"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr ""
+msgstr "XMLTV Slóð"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr ""
+msgstr "XMLTV Netfang"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr ""
+msgstr "Setja tímahliðrun á allar rásir"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr ""
+msgstr "Tímahliðrun rafrænna dagskrárvísa (klukkutímar)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr ""
+msgstr "Setja m3u í staðvært flýtiminni"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr ""
-
-#empty strings from id 30027 to 30029
+msgstr "Setja XMLTV í staðvært flýtiminni"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr ""
+msgstr "Merki Rása"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr ""
+msgstr "Mappa fyrir Merki Rása"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr ""
+msgstr "Netfang fyrir Merki Rása"

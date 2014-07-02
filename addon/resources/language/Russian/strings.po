@@ -1,16 +1,15 @@
 # XBMC Media Center language file
-# Addon Name: PVR IP-TV Simple Client
+# Addon Name: PVR IPTV Simple Client
 # Addon id: pvr.iptvsimple
-# Addon version: 0.1.0
 # Addon Provider: nightik
 msgid ""
 msgstr ""
-"Project-Id-Version: XBMC Main Translation Project (Frodo)\n"
+"Project-Id-Version: XBMC Main\n"
 "Report-Msgid-Bugs-To: http://trac.xbmc.org/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team\n"
-"Language-Team: Russian (http://www.transifex.com/projects/p/XBMC-Main-Frodo/language/ru/)\n"
+"Language-Team: Russian (http://www.transifex.com/projects/p/xbmc-main/language/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgctxt "#30000"
-msgid "File Location"
-msgstr "Расположение файла"
+msgid "Location"
+msgstr "Расположение"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
@@ -65,6 +64,14 @@ msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
 msgstr "Сдвиг по времени для EPG (часов)"
 
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Кэшировать m3u в локальное хранилище"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Кэшировать XMLTV в локальное хранилище"
+
 msgctxt "#30030"
 msgid "Channels Logos"
 msgstr "Логотипы каналов"
@@ -72,3 +79,7 @@ msgstr "Логотипы каналов"
 msgctxt "#30031"
 msgid "Channels Logos Folder"
 msgstr "Папка с логотипами каналов"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Основной URL для логитипов каналов"

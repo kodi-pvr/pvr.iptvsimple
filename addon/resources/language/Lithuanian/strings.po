@@ -9,85 +9,77 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-main/language/en/)\n"
+"Language-Team: Lithuanian (http://www.transifex.com/projects/p/xbmc-main/language/lt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#settings labels
+"Language: lt\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 msgctxt "#30000"
 msgid "Location"
-msgstr ""
+msgstr "Vieta"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr ""
+msgstr "Vietinis kelias (įskaitant vietinį tinklą)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr ""
-
-#empty strings from id 30003 to 30009
+msgstr "Nuotolinis kelias (interneto adresas)"
 
 msgctxt "#30010"
 msgid "General"
-msgstr ""
+msgstr "Pagrindinis"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr ""
+msgstr "M3U grojaraščio kelias"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr ""
+msgstr "M3U grojaraščio adresas"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr ""
-
-#empty strings from id 30014 to 30019
+msgstr "Kanalų numeracija prasideda nuo"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr ""
+msgstr "EPG nustatymai"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr ""
+msgstr "XMLTV kelias"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr ""
+msgstr "XMLTV adresas"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr ""
+msgstr "Pritaikyti laiko poslinkį visiems kanalams"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr ""
+msgstr "EPG laiko poslinkis (valandomis)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr ""
+msgstr "Laikinai saugoti m3u vietiniame diske"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr ""
-
-#empty strings from id 30027 to 30029
+msgstr "Laikinai saugoti XMLTV vietiniame diske"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr ""
+msgstr "Kanalų logotipai"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr ""
+msgstr "Kanalų logotipų aplankas"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr ""
+msgstr "Kanalų logotipų adreso bazė"

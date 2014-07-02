@@ -9,85 +9,77 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-main/language/en/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/projects/p/xbmc-main/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#settings labels
 
 msgctxt "#30000"
 msgid "Location"
-msgstr ""
+msgstr "Localização"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr ""
+msgstr "Localização no Sistema (incluir Rede Local)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr ""
-
-#empty strings from id 30003 to 30009
+msgstr "Localização Remota (endereço da internet)"
 
 msgctxt "#30010"
 msgid "General"
-msgstr ""
+msgstr "Geral"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr ""
+msgstr "Localização da Lista Reprodução M3U"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr ""
+msgstr "Endereço da Lista Reprodução M3U"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr ""
-
-#empty strings from id 30014 to 30019
+msgstr "Numeração dos canais começa em"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr ""
+msgstr "Definições EPG"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr ""
+msgstr "Localização XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr ""
+msgstr "Endereço XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr ""
+msgstr "Aplicar Deslocamento no Tempo a Todos os Canais"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr ""
+msgstr "Deslocamento no Tempo do EPG (horas)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr ""
+msgstr "Cache de m3u em armazenamento local"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr ""
-
-#empty strings from id 30027 to 30029
+msgstr "Cache de XMLTV em armazenamento local"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr ""
+msgstr "Logotipos de Canais"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr ""
+msgstr "Localização dos Logotipos de Canais"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr ""
+msgstr "Endereço dos Logotipos de Canais"

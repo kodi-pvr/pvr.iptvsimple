@@ -9,85 +9,77 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-main/language/en/)\n"
+"Language-Team: Turkish (http://www.transifex.com/projects/p/xbmc-main/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#settings labels
+"Language: tr\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 msgctxt "#30000"
 msgid "Location"
-msgstr ""
+msgstr "Konum"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr ""
+msgstr "Yerel Yol (Yerel Ağ Dahil)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr ""
-
-#empty strings from id 30003 to 30009
+msgstr "Uzak Yol (İnternet adresi)"
 
 msgctxt "#30010"
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr ""
+msgstr "M3U Çalma Listesi Yolu"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr ""
+msgstr "M3U Çalma Listesi URL'si"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr ""
-
-#empty strings from id 30014 to 30019
+msgstr "Kanal numaralandırma başlangıcı"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr ""
+msgstr "EPG Ayarları"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr ""
+msgstr "XMLTV Yolu"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr ""
+msgstr "XMLTV URL'si"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr ""
+msgstr "Süre Değiştirmeyi Bütün Kanallara Uygula"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr ""
+msgstr "EPG Süre Değiştirme (saat)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr ""
+msgstr "m3u'yu yerel depoda önbelleğe al"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr ""
-
-#empty strings from id 30027 to 30029
+msgstr "XMLTV'yi yerel depoda önbelleğe al"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr ""
+msgstr "Kanal Logoları"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr ""
+msgstr "Kanal Logoları Klasörü"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr ""
+msgstr "Kanal Logoları Taban URL'si"

@@ -9,85 +9,77 @@ msgstr ""
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: XBMC Translation Team\n"
-"Language-Team: English (http://www.transifex.com/projects/p/xbmc-main/language/en/)\n"
+"Language-Team: Swedish (http://www.transifex.com/projects/p/xbmc-main/language/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
+"Language: sv\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#settings labels
 
 msgctxt "#30000"
 msgid "Location"
-msgstr ""
+msgstr "Plats"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr ""
+msgstr "Lokal sökväg (inklusive lokalt nätverk)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr ""
-
-#empty strings from id 30003 to 30009
+msgstr "Fjärrsökväg (Internet adress)"
 
 msgctxt "#30010"
 msgid "General"
-msgstr ""
+msgstr "Allmänt"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr ""
+msgstr "Sökväg till M3U-spellista"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr ""
+msgstr "URL till M3U-spellista"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr ""
-
-#empty strings from id 30014 to 30019
+msgstr "Börja kanalnumrering på"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr ""
+msgstr "EPG-inställningar"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr ""
+msgstr "Sökväg till XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr ""
+msgstr "URL till XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr ""
+msgstr "Aktivera tidsförskjutning för alla kanaler"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr ""
+msgstr "Tidsförskjutning för EPG (timmar)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr ""
+msgstr "Buffra m3u på lokalt utrymme"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr ""
-
-#empty strings from id 30027 to 30029
+msgstr "Buffra XMLTV på lokalt utrymme"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr ""
+msgstr "Kanalloggor"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr ""
+msgstr "Mapp för kanalloggor"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr ""
+msgstr "Bas-URL för kanalloggor"
