@@ -64,6 +64,10 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ws2_32.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\project\BuildDependencies\lib</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>if "$(SolutionName)"=="XBMC for Windows" robocopy $(OutDir) "$(SolutionDir)..\..\addons\$(ProjectName)" /s /NP
+if errorlevel 1 exit 0 else exit %errorlevel%</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -82,6 +86,10 @@
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;ws2_32.lib;zlib.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>..\..\..\..\project\BuildDependencies\lib</AdditionalLibraryDirectories>
     </Link>
+    <PostBuildEvent>
+      <Command>if "$(SolutionName)"=="XBMC for Windows" robocopy $(OutDir) "$(SolutionDir)..\..\addons\$(ProjectName)" /s /NP
+if errorlevel 1 exit 0 else exit %errorlevel%</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\src\client.cpp" />
