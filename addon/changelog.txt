@@ -1,3 +1,6 @@
+v1.9.6
+- updated to API v1.9.2
+
 v1.9.3
 - added setting to disable cache m3u/epg
 - added support <icon src=""/> for programme in epg
