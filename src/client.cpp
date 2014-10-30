@@ -336,6 +336,11 @@ const char *GetConnectionString(void)
   return strConnectionString.c_str();
 }
 
+const char *GetBackendHostname(void)
+{
+  return "";
+}
+
 PVR_ERROR GetDriveSpace(long long *iTotal, long long *iUsed)
 {
   *iTotal = 0;
