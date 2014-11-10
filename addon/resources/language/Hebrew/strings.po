@@ -1,4 +1,4 @@
-# XBMC Media Center language file
+# Kodi Media Center language file
 # Addon Name: PVR IPTV Simple Client
 # Addon id: pvr.iptvsimple
 # Addon Provider: nightik
@@ -8,7 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: http://trac.xbmc.org/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: XBMC Translation Team\n"
+"Last-Translator: Kodi Translation Team\n"
 "Language-Team: Hebrew (http://www.transifex.com/projects/p/xbmc-main/language/he/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -22,11 +22,11 @@ msgstr "מיקום"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr "נתיב מקומי (כלול רשת מקומית)"
+msgstr "נתיב מקומי (כולל רשת מקומית)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "הסרת נתיב (כתובת אינטרנט)"
+msgstr "נתיב מרוחק (כתובת אינטרנט)"
 
 msgctxt "#30010"
 msgid "General"
@@ -38,7 +38,7 @@ msgstr "נתיב רשימת ניגון M3U"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr "כתובת URL רשימת ניגון M3U"
+msgstr "כתובת רשימת ניגון M3U"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
@@ -46,7 +46,7 @@ msgstr "מספור ערוצים מתחיל ב"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "הגדרות לוח שידורים"
+msgstr "לוח שידורים"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
@@ -54,7 +54,7 @@ msgstr "נתיב XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "כתובת URL XMLTV"
+msgstr "כתובת XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
@@ -62,15 +62,15 @@ msgstr "החל היסט זמן על כל הערוצים"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "תזמון לוח שידורים (שעות)"
+msgstr "היסט זמן ללוח השידורים (שעות)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "מטמון M3U בחסון מקומי"
+msgstr "שמור m3u באחסון מקומי"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "מטמון XMLTV באחסון מקומי"
+msgstr "שמור XMLTV באחסון מקומי"
 
 msgctxt "#30030"
 msgid "Channels Logos"
@@ -82,4 +82,4 @@ msgstr "תיקיית סמלי ערוצים"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "נתיב בסיסי של סמלי ערוצים"
+msgstr "נתיב בסיס של סמלי ערוצים"
