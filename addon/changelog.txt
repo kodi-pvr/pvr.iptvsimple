@@ -1,3 +1,6 @@
+v1.9.9
+- fixed deadlock when activating the addon on some darwin (osx, ios) runtimes
+
 v1.9.6
 - updated to API v1.9.2
 
