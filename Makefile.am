@@ -5,7 +5,7 @@
 # how to reach the author.
 #
 
-ADDONBINNAME    = XBMC_IPTV_Simple
+ADDONBINNAME    = Kodi_IPTV_Simple
 ADDONNAME       = pvr.iptvsimple
 LIBNAME         = libpvriptvsimple-addon
 lib_LTLIBRARIES = libpvriptvsimple-addon.la

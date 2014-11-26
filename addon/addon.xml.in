@@ -10,12 +10,12 @@
   </requires>
   <extension
     point="xbmc.pvrclient"
-    library_linux="XBMC_IPTV_Simple.pvr"
-    library_osx="XBMC_IPTV_Simple.pvr"
-    library_freebsd="XBMC_IPTV_Simple.pvr"
-    library_wingl="XBMC_IPTV_Simple_win32.dll"
-    library_windx="XBMC_IPTV_Simple_win32.dll"
-    library_android="libXBMC_IPTV_Simple.so" />
+    library_linux="Kodi_IPTV_Simple.pvr"
+    library_osx="Kodi_IPTV_Simple.pvr"
+    library_freebsd="Kodi_IPTV_Simple.pvr"
+    library_wingl="Kodi_IPTV_Simple_win32.dll"
+    library_windx="Kodi_IPTV_Simple_win32.dll"
+    library_android="libKodi_IPTV_Simple.so" />
   <extension point="xbmc.addon.metadata">
     <summary lang="bg">Kodi ПВР добавка за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca">Complement d'Kodi PVR amb suport per IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
