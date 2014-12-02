@@ -46,7 +46,7 @@ msgstr "Numeracja kanałów zaczyna się od"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "Ustawienia przewodnika TV"
+msgstr "Ustawienia przewodnika programów"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
@@ -62,7 +62,7 @@ msgstr "Zastosuj przesunięcie czasowe dla wszystkich kanałów "
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "Przesunięcie czasowe Przewodnika TV (godziny) "
+msgstr "Przesunięcie czasowe przewodnika (godziny) "
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"

@@ -42,7 +42,7 @@ msgstr "כתובת רשימת ניגון M3U"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr "מספור ערוצים מתחיל ב"
+msgstr "התחל מספור ערוצים מהמספר"
 
 msgctxt "#30020"
 msgid "EPG Settings"
@@ -82,4 +82,4 @@ msgstr "תיקיית סמלי ערוצים"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "נתיב בסיס של סמלי ערוצים"
+msgstr "כתובת בסיס של סמלי ערוצים"
