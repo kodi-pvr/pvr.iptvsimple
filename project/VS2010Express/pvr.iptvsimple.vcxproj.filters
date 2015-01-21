@@ -30,4 +30,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\addon\addon.xml.in" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\addon\changelog.txt" />
+  </ItemGroup>
 </Project>
