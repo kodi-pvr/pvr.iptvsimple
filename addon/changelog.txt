@@ -1,6 +1,7 @@
-v1.9.14
+v1.10.0
 - language files from Transifex
 - minor changes to conform with C++11
+- Updated to API v1.9.4
 
 v1.9.12
 - added getBackendHostname function
