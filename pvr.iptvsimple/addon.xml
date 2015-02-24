@@ -10,12 +10,11 @@
   </requires>
   <extension
     point="xbmc.pvrclient"
-    library_linux="Kodi_IPTV_Simple.pvr"
-    library_osx="Kodi_IPTV_Simple.pvr"
-    library_freebsd="Kodi_IPTV_Simple.pvr"
-    library_wingl="Kodi_IPTV_Simple_win32.dll"
-    library_windx="Kodi_IPTV_Simple_win32.dll"
-    library_android="libKodi_IPTV_Simple.so" />
+    library_linux="pvr.iptvsimple.so"
+    library_osx="pvr.iptvsimple.dylib"
+    library_freebsd="pvr.iptvsimple.so"
+    library_windx="pvr.iptvsimple.dll"
+    library_android="libpvr.iptvsimple.dll" />
   <extension point="xbmc.addon.metadata">
     <summary lang="bg">Kodi ПВР добавка за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca">Complement PVR de Kodi per a al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -137,6 +136,6 @@
     <disclaimer lang="sv">Denna mjukvara är ostabil! Författarna kan inte på något sätt hållas ansvariga för felaktiga uppspelningar, EPG-tider, bortslösade timmar eller andra oönskade effekter.</disclaimer>
     <disclaimer lang="tr">Bu kararsız bir yazılımdır! Yazanlar oynatma hatası, yanlış EPG zamanları, harcanmış saatler ya da diğer etkilerden sorumlu değiller.</disclaimer>
     <disclaimer lang="zh">这是不稳定版的软件！作者不对录像失败、错误定时造成时间浪费或其它不良影响负责。</disclaimer>
-    <platform>@OS@</platform>
+    <platform>all</platform>
   </extension>
 </addon>
