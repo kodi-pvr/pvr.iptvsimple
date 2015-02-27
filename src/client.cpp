@@ -1,5 +1,5 @@
 /*
- *      Copyright (C) 2013 Anton Fedchin
+ *      Copyright (C) 2013-2015 Anton Fedchin
  *      http://github.com/afedchin/xbmc-addon-iptvsimple/
  *
  *      Copyright (C) 2011 Pulse-Eight

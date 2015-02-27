@@ -1,6 +1,6 @@
 Source: kodi-pvr-iptvsimple
 Priority: extra
-Maintainer: Arne Morten Kvarving <arne.morten.kvarving@sintef.no>
+Maintainer: Anton Fedchin <anightik@gmail.com>
 Build-Depends: debhelper (>= 9.0.0), cmake, kodi-pvr-dev,
                libkodiplatform-dev, kodi-addon-dev, zlib1g-dev
 Standards-Version: 3.9.4
