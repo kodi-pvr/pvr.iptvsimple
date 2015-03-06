@@ -26,7 +26,7 @@
 #include "kodi/libXBMC_addon.h"
 #include "kodi/libXBMC_pvr.h"
 
-#define PVR_CLIENT_VERSION     "1.9.3"
+#define PVR_CLIENT_VERSION     "1.9.5"
 #define M3U_FILE_NAME          "iptv.m3u.cache"
 #define TVG_FILE_NAME          "xmltv.xml.cache"
 
