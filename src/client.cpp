@@ -324,7 +324,7 @@ const char *GetBackendName(void)
 
 const char *GetBackendVersion(void)
 {
-  static CStdString strBackendVersion = PVR_CLIENT_VERSION;
+  static CStdString strBackendVersion = XBMC_PVR_API_VERSION;
   return strBackendVersion.c_str();
 }
 
