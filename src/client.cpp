@@ -115,10 +115,6 @@ void ADDON_ReadSettings(void)
     }
     g_bCacheM3U = false;
   }
-  if (g_strM3UPath == "") 
-  {
-    g_strM3UPath = GetClientFilePath(M3U_FILE_NAME);
-  }
   if (!XBMC->GetSetting("startNum", &g_iStartNumber)) 
   {
     g_iStartNumber = 1;
@@ -162,10 +158,6 @@ void ADDON_ReadSettings(void)
   if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer)) 
   {
     g_strLogoPath = buffer;
-  }
-  if (g_strLogoPath == "")
-  {
-    g_strLogoPath = GetClientFilePath("icons/");
   }
 }
 
