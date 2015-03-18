@@ -565,16 +565,17 @@ int PVRIptvData::GetChannelGroupsAmount(void)
 
 PVR_ERROR PVRIptvData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
 {
-  for (unsigned int iGroupPtr = 0; iGroupPtr < m_groups.size(); iGroupPtr++)
+  std::vector<PVRIptvChannelGroup>::iterator it;
+  for (it = m_groups.begin(); it != m_groups.end(); ++it)
   {
-    PVRIptvChannelGroup &group = m_groups.at(iGroupPtr);
-    if (group.bRadio == bRadio)
+    if (it->bRadio == bRadio)
     {
       PVR_CHANNEL_GROUP xbmcGroup;
       memset(&xbmcGroup, 0, sizeof(PVR_CHANNEL_GROUP));
 
-      xbmcGroup.bIsRadio = bRadio;
-      strncpy(xbmcGroup.strGroupName, group.strGroupName.c_str(), sizeof(xbmcGroup.strGroupName) - 1);
+      xbmcGroup.iPosition = 0;      /* not supported  */
+      xbmcGroup.bIsRadio  = bRadio; /* is radio group */
+      strncpy(xbmcGroup.strGroupName, it->strGroupName.c_str(), sizeof(xbmcGroup.strGroupName) - 1);
 
       PVR->TransferChannelGroup(handle, &xbmcGroup);
     }
@@ -588,13 +589,13 @@ PVR_ERROR PVRIptvData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
   PVRIptvChannelGroup *myGroup;
   if ((myGroup = FindGroup(group.strGroupName)) != NULL)
   {
-    for (unsigned int iPtr = 0; iPtr < myGroup->members.size(); iPtr++)
+    std::vector<int>::iterator it;
+    for (it = myGroup->members.begin(); it != myGroup->members.end(); ++it)
     {
-      int iIndex = myGroup->members.at(iPtr);
-      if (iIndex < 0 || iIndex >= (int) m_channels.size())
+      if ((*it) < 0 || (*it) >= (int)m_channels.size())
         continue;
 
-      PVRIptvChannel &channel = m_channels.at(iIndex);
+      PVRIptvChannel &channel = m_channels.at(*it);
       PVR_CHANNEL_GROUP_MEMBER xbmcGroupMember;
       memset(&xbmcGroupMember, 0, sizeof(PVR_CHANNEL_GROUP_MEMBER));
 
@@ -652,10 +653,23 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.endTime             = myTag->endTime + iShift;
       tag.strPlotOutline      = myTag->strPlotOutline.c_str();
       tag.strPlot             = myTag->strPlot.c_str();
+      tag.strOriginalTitle    = NULL;  /* not supported */
+      tag.strCast             = NULL;  /* not supported */
+      tag.strDirector         = NULL;  /* not supported */
+      tag.strWriter           = NULL;  /* not supported */
+      tag.iYear               = 0;     /* not supported */
+      tag.strIMDBNumber       = NULL;  /* not supported */
       tag.strIconPath         = myTag->strIconPath.c_str();
-      tag.iGenreType          = EPG_GENRE_USE_STRING;        //myTag.iGenreType;
-      tag.iGenreSubType       = 0;                           //myTag.iGenreSubType;
+      tag.iGenreType          = EPG_GENRE_USE_STRING;
+      tag.iGenreSubType       = 0;     /* not supported */
       tag.strGenreDescription = myTag->strGenreString.c_str();
+      tag.iParentalRating     = 0;     /* not supported */
+      tag.iStarRating         = 0;     /* not supported */
+      tag.bNotify             = false; /* not supported */
+      tag.iSeriesNumber       = 0;     /* not supported */
+      tag.iEpisodeNumber      = 0;     /* not supported */
+      tag.iEpisodePartNumber  = 0;     /* not supported */
+      tag.strEpisodeName      = NULL;  /* not supported */
 
       PVR->TransferEpgEntry(handle, &tag);
 
