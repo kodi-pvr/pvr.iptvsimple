@@ -41,7 +41,6 @@
 #define CHANNEL_LOGO_EXTENSION  ".png"
 #define SECONDS_IN_DAY          86400
 
-using namespace std;
 using namespace ADDON;
 using namespace rapidxml;
 
@@ -237,8 +236,8 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     iMinShiftTime = SECONDS_IN_DAY;
     iMaxShiftTime = -SECONDS_IN_DAY;
 
-    vector<PVRIptvChannel>::iterator it;
-    for (it = m_channels.begin(); it < m_channels.end(); it++)
+    std::vector<PVRIptvChannel>::iterator it;
+    for (it = m_channels.begin(); it < m_channels.end(); ++it)
     {
       if (it->iTvgShift + m_iEPGTimeShift < iMinShiftTime)
         iMinShiftTime = it->iTvgShift + m_iEPGTimeShift;
@@ -612,8 +611,8 @@ PVR_ERROR PVRIptvData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
 
 PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd)
 {
-  vector<PVRIptvChannel>::iterator myChannel;
-  for (myChannel = m_channels.begin(); myChannel < m_channels.end(); myChannel++)
+  std::vector<PVRIptvChannel>::iterator myChannel;
+  for (myChannel = m_channels.begin(); myChannel < m_channels.end(); ++myChannel)
   {
     if (myChannel->iUniqueId != (int) channel.iUniqueId)
     {
@@ -637,8 +636,8 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
 
     int iShift = m_bTSOverride ? m_iEPGTimeShift : myChannel->iTvgShift + m_iEPGTimeShift;
 
-    vector<PVRIptvEpgEntry>::iterator myTag;
-    for (myTag = epg->epg.begin(); myTag < epg->epg.end(); myTag++)
+    std::vector<PVRIptvEpgEntry>::iterator myTag;
+    for (myTag = epg->epg.begin(); myTag < epg->epg.end(); ++myTag)
     {
       if ((myTag->endTime + iShift) < iStart) 
         continue;
@@ -711,8 +710,8 @@ PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::s
   CStdString strTvgName = strName;
   strTvgName.Replace(' ', '_');
 
-  vector<PVRIptvChannel>::iterator it;
-  for(it = m_channels.begin(); it < m_channels.end(); it++)
+  std::vector<PVRIptvChannel>::iterator it;
+  for(it = m_channels.begin(); it < m_channels.end(); ++it)
   {
     if (it->strTvgId == strId)
     {
@@ -737,8 +736,8 @@ PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::s
 
 PVRIptvChannelGroup * PVRIptvData::FindGroup(const std::string &strName)
 {
-  vector<PVRIptvChannelGroup>::iterator it;
-  for(it = m_groups.begin(); it < m_groups.end(); it++)
+  std::vector<PVRIptvChannelGroup>::iterator it;
+  for(it = m_groups.begin(); it < m_groups.end(); ++it)
   {
     if (it->strGroupName == strName)
     {
@@ -751,8 +750,8 @@ PVRIptvChannelGroup * PVRIptvData::FindGroup(const std::string &strName)
 
 PVRIptvEpgChannel * PVRIptvData::FindEpg(const std::string &strId)
 {
-  vector<PVRIptvEpgChannel>::iterator it;
-  for(it = m_epg.begin(); it < m_epg.end(); it++)
+  std::vector<PVRIptvEpgChannel>::iterator it;
+  for(it = m_epg.begin(); it < m_epg.end(); ++it)
   {
     if (it->strId == strId)
     {
@@ -765,8 +764,8 @@ PVRIptvEpgChannel * PVRIptvData::FindEpg(const std::string &strId)
 
 PVRIptvEpgChannel * PVRIptvData::FindEpgForChannel(PVRIptvChannel &channel)
 {
-  vector<PVRIptvEpgChannel>::iterator it;
-  for(it = m_epg.begin(); it < m_epg.end(); it++)
+  std::vector<PVRIptvEpgChannel>::iterator it;
+  for(it = m_epg.begin(); it < m_epg.end(); ++it)
   {
     if (it->strId == channel.strTvgId)
     {
@@ -911,8 +910,8 @@ void PVRIptvData::ApplyChannelsLogos()
   if (m_strLogoPath.IsEmpty())
     return;
 
-  vector<PVRIptvChannel>::iterator channel;
-  for(channel = m_channels.begin(); channel < m_channels.end(); channel++)
+  std::vector<PVRIptvChannel>::iterator channel;
+  for(channel = m_channels.begin(); channel < m_channels.end(); ++channel)
   {
     channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
     //channel->strLogoPath.append(CHANNEL_LOGO_EXTENSION);

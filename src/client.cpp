@@ -28,7 +28,6 @@
 #include "PVRIptvData.h"
 #include "kodi/util/util.h"
 
-using namespace std;
 using namespace ADDON;
 
 #ifdef TARGET_WINDOWS
@@ -244,7 +243,7 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 {
   // reset cache and restart addon 
 
-  string strFile = GetUserFilePath(M3U_FILE_NAME);
+  std::string strFile = GetUserFilePath(M3U_FILE_NAME);
   if (XBMC->FileExists(strFile.c_str(), false))
   {
 #ifdef TARGET_WINDOWS
