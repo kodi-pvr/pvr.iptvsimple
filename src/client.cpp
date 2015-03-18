@@ -315,13 +315,13 @@ const char *GetBackendName(void)
 
 const char *GetBackendVersion(void)
 {
-  static CStdString strBackendVersion = XBMC_PVR_API_VERSION;
+  static std::string strBackendVersion = XBMC_PVR_API_VERSION;
   return strBackendVersion.c_str();
 }
 
 const char *GetConnectionString(void)
 {
-  static CStdString strConnectionString = "connected";
+  static std::string strConnectionString = "connected";
   return strConnectionString.c_str();
 }
 
