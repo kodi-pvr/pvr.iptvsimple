@@ -221,6 +221,11 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     epgChannel.strId = strId;
     epgChannel.strName = strName;
 
+    // get icon if available
+    xml_node<> *pIconNode = pChannelNode->first_node("icon");
+    if (pIconNode == NULL || !GetAttributeValue(pIconNode, "src", epgChannel.strIcon))
+      epgChannel.strIcon = "";
+
     m_epg.push_back(epgChannel);
   }
 
@@ -247,7 +252,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     }
   }
 
-  std::string strEmpty("");
   PVRIptvEpgChannel *epg = NULL;
   for(pChannelNode = pRootElement->first_node("programme"); pChannelNode; pChannelNode = pChannelNode->next_sibling("programme"))
   {
@@ -255,15 +259,13 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     if (!GetAttributeValue(pChannelNode, "channel", strId))
       continue;
 
-    if (epg == NULL || epg->strId != strId) 
+    if (NULL == epg || StringUtils::CompareNoCase(epg->strId, strId) != 0)
     {
-      if ((epg = FindEpg(strId)) == NULL) 
+      if ((epg = FindEpg(strId)) == NULL)
         continue;
     }
 
-    std::string strStart;
-    std::string strStop;
-
+    std::string strStart, strStop;
     if (!GetAttributeValue(pChannelNode, "start", strStart) || !GetAttributeValue(pChannelNode, "stop", strStop)) 
     {
       continue;
@@ -272,40 +274,25 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     int iTmpStart = ParseDateTime(strStart);
     int iTmpEnd = ParseDateTime(strStop);
 
-    if ((iTmpEnd + iMaxShiftTime < iStart) || (iTmpStart + iMinShiftTime > iEnd))
-    {
+    if ( (iTmpEnd   + iMaxShiftTime < iStart) 
+      || (iTmpStart + iMinShiftTime > iEnd))
       continue;
-    }
-
-    std::string strTitle;
-    std::string strCategory;
-    std::string strDesc;
-
-    GetNodeValue(pChannelNode, "title", strTitle);
-    GetNodeValue(pChannelNode, "category", strCategory);
-    GetNodeValue(pChannelNode, "desc", strDesc);
-
-    std::string strIconPath;
-    xml_node<> *pIconNode = pChannelNode->first_node("icon");
-    if (pIconNode != NULL)
-    {
-      if (!GetAttributeValue(pIconNode, "src", strIconPath)) 
-      {
-        strIconPath = "";
-      }
-    }
 
     PVRIptvEpgEntry entry;
-    entry.iBroadcastId    = ++iBroadCastId;
-    entry.iGenreType      = 0;
-    entry.iGenreSubType   = 0;
-    entry.strTitle        = strTitle;
-    entry.strPlot         = strDesc;
-    entry.strPlotOutline  = "";
-    entry.strIconPath     = strIconPath;
-    entry.startTime       = iTmpStart;
-    entry.endTime         = iTmpEnd;
-    entry.strGenreString  = strCategory;
+    entry.iBroadcastId = ++iBroadCastId;
+    entry.iGenreType = 0;
+    entry.iGenreSubType = 0;
+    entry.strPlotOutline = "";
+    entry.startTime = iTmpStart;
+    entry.endTime = iTmpEnd;
+
+    GetNodeValue(pChannelNode, "title", entry.strTitle);
+    GetNodeValue(pChannelNode, "desc", entry.strPlot);
+    GetNodeValue(pChannelNode, "category", entry.strGenreString);
+
+    xml_node<> *pIconNode = pChannelNode->first_node("icon");
+    if (pIconNode == NULL || !GetAttributeValue(pIconNode, "src", entry.strIconPath))
+      entry.strIconPath = "";
 
     epg->epg.push_back(entry);
   }
@@ -314,6 +301,9 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   m_bEGPLoaded = true;
 
   XBMC->Log(LOG_NOTICE, "EPG Loaded.");
+
+  if (g_iEPGLogos > 0)
+    ApplyChannelsLogosFromEPG();
 
   return true;
 }
@@ -767,10 +757,8 @@ PVRIptvEpgChannel * PVRIptvData::FindEpg(const std::string &strId)
   std::vector<PVRIptvEpgChannel>::iterator it;
   for(it = m_epg.begin(); it < m_epg.end(); ++it)
   {
-    if (it->strId == strId)
-    {
+    if (StringUtils::CompareNoCase(it->strId, strId) == 0)
       return &*it;
-    }
   }
 
   return NULL;
@@ -927,9 +915,36 @@ void PVRIptvData::ApplyChannelsLogos()
   std::vector<PVRIptvChannel>::iterator channel;
   for(channel = m_channels.begin(); channel < m_channels.end(); ++channel)
   {
-    channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
-    //channel->strLogoPath.append(CHANNEL_LOGO_EXTENSION);
+    if (!channel->strTvgLogo.empty())
+      channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
   }
+}
+
+void PVRIptvData::ApplyChannelsLogosFromEPG()
+{
+  bool bUpdated = false;
+
+  std::vector<PVRIptvChannel>::iterator channel;
+  for (channel = m_channels.begin(); channel < m_channels.end(); ++channel)
+  {
+    PVRIptvEpgChannel *epg;
+    if ((epg = FindEpgForChannel(*channel)) == NULL || epg->strIcon.empty())
+      continue;
+
+    // 1 - prefer logo from playlist
+    if (!channel->strLogoPath.empty() && g_iEPGLogos == 1)
+      continue;
+
+    // 2 - prefer logo from epg
+    if (!epg->strIcon.empty() && g_iEPGLogos == 2)
+    {
+      channel->strLogoPath = epg->strIcon;
+      bUpdated = true;
+    }
+  }
+
+  if (bUpdated)
+    PVR->TriggerChannelUpdate();
 }
 
 void PVRIptvData::ReaplyChannelsLogos(const char * strNewPath)

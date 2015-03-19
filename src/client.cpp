@@ -58,6 +58,7 @@ int         g_iStartNumber  = 1;
 bool        g_bTSOverride   = true;
 bool        g_bCacheM3U     = false;
 bool        g_bCacheEPG     = false;
+int         g_iEPGLogos     = 0;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -159,6 +160,10 @@ void ADDON_ReadSettings(void)
   {
     g_strLogoPath = buffer;
   }
+
+  // Logos from EPG
+  if (!XBMC->GetSetting("logoFromEpg", &g_iEPGLogos))
+    g_iEPGLogos = 0;
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)

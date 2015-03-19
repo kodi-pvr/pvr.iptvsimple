@@ -47,6 +47,7 @@ struct PVRIptvEpgChannel
 {
   std::string                  strId;
   std::string                  strName;
+  std::string                  strIcon;
   std::vector<PVRIptvEpgEntry> epg;
 };
 
@@ -103,6 +104,7 @@ protected:
   virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, 
                                                      std::string &strContent, const bool bUseCache = false);
   virtual void                 ApplyChannelsLogos();
+  virtual void                 ApplyChannelsLogosFromEPG();
   virtual std::string          ReadMarkerValue(std::string &strLine, const char * strMarkerName);
   virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);
 

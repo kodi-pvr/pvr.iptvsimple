@@ -27,5 +27,7 @@
     <setting id="logoPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
     <setting id="logoPath" type="folder" label="30031" default="" visible="eq(-1,0)"/>
     <setting id="logoBaseUrl" type="text" label="30032" default="" visible="eq(-2,1)"/>
+    <setting id="sep3" label="30040" type="lsep"/>
+    <setting id="logoFromEpg" type="enum" label="30041" default="0" lvalues="30042|30043|30044"/>
   </category>
 </settings>
