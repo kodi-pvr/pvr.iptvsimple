@@ -74,6 +74,13 @@ struct PVRIptvChannelGroup
   std::vector<int>  members;
 };
 
+struct PVRIptvEpgGenre
+{
+  int               iGenreType;
+  int               iGenreSubType;
+  std::string       strGenre;
+};
+
 class PVRIptvData : public PLATFORM::CThread
 {
 public:
@@ -94,11 +101,13 @@ public:
 protected:
   virtual bool                 LoadPlayList(void);
   virtual bool                 LoadEPG(time_t iStart, time_t iEnd);
+  virtual bool                 LoadGenres(void);
   virtual int                  GetFileContents(std::string& url, std::string &strContent);
-  virtual PVRIptvChannel      *FindChannel(const std::string &strId, const std::string &strName);
-  virtual PVRIptvChannelGroup *FindGroup(const std::string &strName);
-  virtual PVRIptvEpgChannel   *FindEpg(const std::string &strId);
-  virtual PVRIptvEpgChannel   *FindEpgForChannel(PVRIptvChannel &channel);
+  virtual PVRIptvChannel*      FindChannel(const std::string &strId, const std::string &strName);
+  virtual PVRIptvChannelGroup* FindGroup(const std::string &strName);
+  virtual PVRIptvEpgChannel*   FindEpg(const std::string &strId);
+  virtual PVRIptvEpgChannel*   FindEpgForChannel(PVRIptvChannel &channel);
+  virtual bool                 FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
   virtual int                  ParseDateTime(std::string& strDate, bool iDateFormat = true);
   virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
   virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, 
@@ -123,4 +132,5 @@ private:
   std::vector<PVRIptvChannelGroup>  m_groups;
   std::vector<PVRIptvChannel>       m_channels;
   std::vector<PVRIptvEpgChannel>    m_epg;
+  std::vector<PVRIptvEpgGenre>      m_genres;
 };

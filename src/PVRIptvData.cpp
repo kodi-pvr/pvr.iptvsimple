@@ -41,6 +41,7 @@
 #define RADIO_MARKER            "radio="
 #define CHANNEL_LOGO_EXTENSION  ".png"
 #define SECONDS_IN_DAY          86400
+#define GENRES_MAP_FILENAME     "genres.xml"
 
 using namespace ADDON;
 using namespace rapidxml;
@@ -79,6 +80,11 @@ PVRIptvData::PVRIptvData(void)
   m_iLastStart    = 0;
   m_iLastEnd      = 0;
 
+  m_channels.clear();
+  m_groups.clear();
+  m_epg.clear();
+  m_genres.clear();
+
   m_bEGPLoaded = false;
 
   if (LoadPlayList())
@@ -97,6 +103,7 @@ PVRIptvData::~PVRIptvData(void)
   m_channels.clear();
   m_groups.clear();
   m_epg.clear();
+  m_genres.clear();
 }
 
 bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd) 
@@ -298,8 +305,9 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   }
 
   xmlDoc.clear();
-  m_bEGPLoaded = true;
+  LoadGenres();
 
+  m_bEGPLoaded = true;
   XBMC->Log(LOG_NOTICE, "EPG Loaded.");
 
   if (g_iEPGLogos > 0)
@@ -495,6 +503,85 @@ bool PVRIptvData::LoadPlayList(void)
   return true;
 }
 
+static bool SafeString2Int(const std::string& str, int& result)
+{
+  try
+  {
+    std::size_t lastChar;
+    result = std::stoi(str, &lastChar, 10);
+    return lastChar == str.size();
+  }
+  catch (std::invalid_argument&)
+  {
+    return false;
+  }
+  catch (std::out_of_range&)
+  {
+    return false;
+  }
+}
+
+bool PVRIptvData::LoadGenres(void)
+{
+  std::string data;
+
+  // try to load genres from userdata folder
+  std::string strFilePath = GetUserFilePath(GENRES_MAP_FILENAME);
+  if (!XBMC->FileExists(strFilePath.c_str(), false))
+  {
+    // try to load file from addom folder
+    strFilePath = GetClientFilePath(GENRES_MAP_FILENAME);
+    if (!XBMC->FileExists(strFilePath.c_str(), false))
+      return false;
+  }
+
+  GetFileContents(strFilePath, data);
+
+  if (data.empty())
+    return false;
+
+  m_genres.clear();
+
+  char* buffer = &(data[0]);
+  xml_document<> xmlDoc;
+  try
+  {
+    xmlDoc.parse<0>(buffer);
+  }
+  catch (parse_error p)
+  {
+    return false;
+  }
+
+  xml_node<> *pRootElement = xmlDoc.first_node("genres");
+  if (!pRootElement)
+    return false;
+
+  for (xml_node<> *pGenreNode = pRootElement->first_node("genre"); pGenreNode; pGenreNode = pGenreNode->next_sibling("genre"))
+  {
+    std::string buff;
+    if (!GetAttributeValue(pGenreNode, "type", buff))
+      continue;
+
+    int iGenreType;
+    if (!SafeString2Int(buff, iGenreType))
+      continue;
+
+    PVRIptvEpgGenre genre;
+    genre.strGenre = pGenreNode->value();
+    genre.iGenreType = iGenreType;
+
+    if ( !GetAttributeValue(pGenreNode, "subtype", buff) 
+      || !SafeString2Int(buff, genre.iGenreSubType))
+      genre.iGenreSubType = 0;
+
+    m_genres.push_back(genre);
+  }
+
+  xmlDoc.clear();
+  return true;
+}
+
 int PVRIptvData::GetChannelsAmount(void)
 {
   return m_channels.size();
@@ -650,9 +737,12 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.iYear               = 0;     /* not supported */
       tag.strIMDBNumber       = NULL;  /* not supported */
       tag.strIconPath         = myTag->strIconPath.c_str();
-      tag.iGenreType          = EPG_GENRE_USE_STRING;
-      tag.iGenreSubType       = 0;     /* not supported */
-      tag.strGenreDescription = myTag->strGenreString.c_str();
+      if (!FindEpgGenre(myTag->strGenreString, tag.iGenreType, tag.iGenreSubType))
+      {
+        tag.iGenreType          = EPG_GENRE_USE_STRING;
+        tag.iGenreSubType       = 0;     /* not supported */
+        tag.strGenreDescription = myTag->strGenreString.c_str();
+      }
       tag.iParentalRating     = 0;     /* not supported */
       tag.iStarRating         = 0;     /* not supported */
       tag.bNotify             = false; /* not supported */
@@ -787,6 +877,25 @@ PVRIptvEpgChannel * PVRIptvData::FindEpgForChannel(PVRIptvChannel &channel)
   }
 
   return NULL;
+}
+
+bool PVRIptvData::FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType)
+{
+  if (m_genres.empty())
+    return false;
+
+  std::vector<PVRIptvEpgGenre>::iterator it;
+  for (it = m_genres.begin(); it != m_genres.end(); ++it)
+  {
+    if (StringUtils::CompareNoCase(it->strGenre, strGenre) == 0)
+    {
+      iType = it->iGenreType;
+      iSubType = it->iGenreSubType;
+      return true;
+    }
+  }
+
+  return false;
 }
 
 /*
