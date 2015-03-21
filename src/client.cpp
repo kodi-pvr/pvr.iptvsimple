@@ -28,7 +28,6 @@
 #include "PVRIptvData.h"
 #include "kodi/util/util.h"
 
-using namespace std;
 using namespace ADDON;
 
 #ifdef TARGET_WINDOWS
@@ -59,6 +58,7 @@ int         g_iStartNumber  = 1;
 bool        g_bTSOverride   = true;
 bool        g_bCacheM3U     = false;
 bool        g_bCacheEPG     = false;
+int         g_iEPGLogos     = 0;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -116,10 +116,6 @@ void ADDON_ReadSettings(void)
     }
     g_bCacheM3U = false;
   }
-  if (g_strM3UPath == "") 
-  {
-    g_strM3UPath = GetClientFilePath(M3U_FILE_NAME);
-  }
   if (!XBMC->GetSetting("startNum", &g_iStartNumber)) 
   {
     g_iStartNumber = 1;
@@ -164,10 +160,10 @@ void ADDON_ReadSettings(void)
   {
     g_strLogoPath = buffer;
   }
-  if (g_strLogoPath == "")
-  {
-    g_strLogoPath = GetClientFilePath("icons/");
-  }
+
+  // Logos from EPG
+  if (!XBMC->GetSetting("logoFromEpg", &g_iEPGLogos))
+    g_iEPGLogos = 0;
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -244,7 +240,7 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 {
   // reset cache and restart addon 
 
-  string strFile = GetUserFilePath(M3U_FILE_NAME);
+  std::string strFile = GetUserFilePath(M3U_FILE_NAME);
   if (XBMC->FileExists(strFile.c_str(), false))
   {
 #ifdef TARGET_WINDOWS
@@ -324,13 +320,13 @@ const char *GetBackendName(void)
 
 const char *GetBackendVersion(void)
 {
-  static CStdString strBackendVersion = XBMC_PVR_API_VERSION;
+  static std::string strBackendVersion = XBMC_PVR_API_VERSION;
   return strBackendVersion.c_str();
 }
 
 const char *GetConnectionString(void)
 {
-  static CStdString strConnectionString = "connected";
+  static std::string strConnectionString = "connected";
   return strConnectionString.c_str();
 }
 

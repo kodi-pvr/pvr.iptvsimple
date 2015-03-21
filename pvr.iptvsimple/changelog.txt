@@ -1,5 +1,12 @@
+v1.11.0
+- updated to API v1.9.6
+- new feature: channel logos from xmltv
+- new feature: map xmltv genre to Kodi genre via genres.xml
+- now possible to define full logo path in m3u if logos path is empty in setting
+- a lot of code improvements.
+
 v1.10.2
-- Updated to API v1.9.5
+- updated to API v1.9.5
 
 v1.10.1
 - language files from Transifex

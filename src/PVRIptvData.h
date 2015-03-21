@@ -47,6 +47,7 @@ struct PVRIptvEpgChannel
 {
   std::string                  strId;
   std::string                  strName;
+  std::string                  strIcon;
   std::vector<PVRIptvEpgEntry> epg;
 };
 
@@ -73,6 +74,13 @@ struct PVRIptvChannelGroup
   std::vector<int>  members;
 };
 
+struct PVRIptvEpgGenre
+{
+  int               iGenreType;
+  int               iGenreSubType;
+  std::string       strGenre;
+};
+
 class PVRIptvData : public PLATFORM::CThread
 {
 public:
@@ -93,17 +101,20 @@ public:
 protected:
   virtual bool                 LoadPlayList(void);
   virtual bool                 LoadEPG(time_t iStart, time_t iEnd);
-  virtual int                  GetFileContents(CStdString& url, std::string &strContent);
-  virtual PVRIptvChannel      *FindChannel(const std::string &strId, const std::string &strName);
-  virtual PVRIptvChannelGroup *FindGroup(const std::string &strName);
-  virtual PVRIptvEpgChannel   *FindEpg(const std::string &strId);
-  virtual PVRIptvEpgChannel   *FindEpgForChannel(PVRIptvChannel &channel);
-  virtual int                  ParseDateTime(CStdString strDate, bool iDateFormat = true);
+  virtual bool                 LoadGenres(void);
+  virtual int                  GetFileContents(std::string& url, std::string &strContent);
+  virtual PVRIptvChannel*      FindChannel(const std::string &strId, const std::string &strName);
+  virtual PVRIptvChannelGroup* FindGroup(const std::string &strName);
+  virtual PVRIptvEpgChannel*   FindEpg(const std::string &strId);
+  virtual PVRIptvEpgChannel*   FindEpgForChannel(PVRIptvChannel &channel);
+  virtual bool                 FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
+  virtual int                  ParseDateTime(std::string& strDate, bool iDateFormat = true);
   virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
   virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, 
                                                      std::string &strContent, const bool bUseCache = false);
   virtual void                 ApplyChannelsLogos();
-  virtual CStdString           ReadMarkerValue(std::string &strLine, const char * strMarkerName);
+  virtual void                 ApplyChannelsLogosFromEPG();
+  virtual std::string          ReadMarkerValue(std::string &strLine, const char * strMarkerName);
   virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);
 
 protected:
@@ -115,10 +126,11 @@ private:
   int                               m_iEPGTimeShift;
   int                               m_iLastStart;
   int                               m_iLastEnd;
-  CStdString                        m_strXMLTVUrl;
-  CStdString                        m_strM3uUrl;
-  CStdString                        m_strLogoPath;
+  std::string                       m_strXMLTVUrl;
+  std::string                       m_strM3uUrl;
+  std::string                       m_strLogoPath;
   std::vector<PVRIptvChannelGroup>  m_groups;
   std::vector<PVRIptvChannel>       m_channels;
   std::vector<PVRIptvEpgChannel>    m_epg;
+  std::vector<PVRIptvEpgGenre>      m_genres;
 };

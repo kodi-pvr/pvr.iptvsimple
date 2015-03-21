@@ -91,3 +91,27 @@ msgstr ""
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr ""
+
+#empty strings from id 30033 to 30039
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr ""
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr ""
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr ""
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr ""
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr ""
+
+
