@@ -385,7 +385,8 @@ bool PVRIptvData::LoadPlayList(void)
       {
         // parse name
         iComma++;
-        strChnlName = StringUtils::Trim(StringUtils::Right(strLine, (int)strLine.size() - iComma));
+        strChnlName = StringUtils::Right(strLine, (int)strLine.size() - iComma);
+        strChnlName = StringUtils::Trim(strChnlName);
         tmpChannel.strChannelName = XBMC->UnknownToUTF8(strChnlName.c_str());
 
         // parse info
@@ -549,17 +550,18 @@ bool PVRIptvData::LoadGenres(void)
     if (!GetAttributeValue(pGenreNode, "type", buff))
       continue;
 
-    int iGenreType;
+    int iGenreType, iGenreSubType;
     if (!SafeString2Int(buff, iGenreType))
       continue;
 
     PVRIptvEpgGenre genre;
     genre.strGenre = pGenreNode->value();
     genre.iGenreType = iGenreType;
+    genre.iGenreSubType = 0;
 
-    if ( !GetAttributeValue(pGenreNode, "subtype", buff) 
-      || !SafeString2Int(buff, genre.iGenreSubType))
-      genre.iGenreSubType = 0;
+    if ( GetAttributeValue(pGenreNode, "subtype", buff)
+      && SafeString2Int(buff, iGenreSubType))
+      genre.iGenreSubType = iGenreSubType;
 
     m_genres.push_back(genre);
   }
@@ -702,6 +704,8 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       if ((myTag->endTime + iShift) < iStart) 
         continue;
 
+      int iGenreType, iGenreSubType;
+
       EPG_TAG tag;
       memset(&tag, 0, sizeof(EPG_TAG));
 
@@ -719,7 +723,13 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.iYear               = 0;     /* not supported */
       tag.strIMDBNumber       = NULL;  /* not supported */
       tag.strIconPath         = myTag->strIconPath.c_str();
-      if (!FindEpgGenre(myTag->strGenreString, tag.iGenreType, tag.iGenreSubType))
+      if (FindEpgGenre(myTag->strGenreString, iGenreType, iGenreSubType))
+      {
+        tag.iGenreType          = iGenreType;
+        tag.iGenreSubType       = iGenreSubType;
+        tag.strGenreDescription = NULL;
+      }
+      else
       {
         tag.iGenreType          = EPG_GENRE_USE_STRING;
         tag.iGenreSubType       = 0;     /* not supported */
