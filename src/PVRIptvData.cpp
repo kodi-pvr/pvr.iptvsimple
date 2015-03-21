@@ -26,6 +26,7 @@
 #include <string>
 #include <fstream>
 #include <map>
+#include <stdexcept>
 #include "zlib.h"
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
