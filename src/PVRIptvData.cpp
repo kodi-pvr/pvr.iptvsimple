@@ -491,24 +491,6 @@ bool PVRIptvData::LoadPlayList(void)
   return true;
 }
 
-static bool SafeString2Int(const std::string& str, int& result)
-{
-  try
-  {
-    std::size_t lastChar;
-    result = std::stoi(str, &lastChar, 10);
-    return lastChar == str.size();
-  }
-  catch (std::invalid_argument&)
-  {
-    return false;
-  }
-  catch (std::out_of_range&)
-  {
-    return false;
-  }
-}
-
 bool PVRIptvData::LoadGenres(void)
 {
   std::string data;
@@ -551,18 +533,17 @@ bool PVRIptvData::LoadGenres(void)
     if (!GetAttributeValue(pGenreNode, "type", buff))
       continue;
 
-    int iGenreType, iGenreSubType;
-    if (!SafeString2Int(buff, iGenreType))
+    if (!StringUtils::IsNaturalNumber(buff))
       continue;
 
     PVRIptvEpgGenre genre;
     genre.strGenre = pGenreNode->value();
-    genre.iGenreType = iGenreType;
+    genre.iGenreType = atoi(buff.c_str());
     genre.iGenreSubType = 0;
 
     if ( GetAttributeValue(pGenreNode, "subtype", buff)
-      && SafeString2Int(buff, iGenreSubType))
-      genre.iGenreSubType = iGenreSubType;
+      && StringUtils::IsNaturalNumber(buff))
+      genre.iGenreSubType = atoi(buff.c_str());
 
     m_genres.push_back(genre);
   }
