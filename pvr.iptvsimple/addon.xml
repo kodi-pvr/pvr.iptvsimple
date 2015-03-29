@@ -14,7 +14,7 @@
     library_osx="pvr.iptvsimple.dylib"
     library_freebsd="pvr.iptvsimple.so"
     library_windx="pvr.iptvsimple.dll"
-    library_android="libpvr.iptvsimple.dll" />
+    library_android="libpvr.iptvsimple.so" />
   <extension point="xbmc.addon.metadata">
     <summary lang="bg">Kodi ПВР добавка за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca">Complement PVR de Kodi per a al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
