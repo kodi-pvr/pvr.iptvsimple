@@ -80,7 +80,6 @@ PVRIptvData::PVRIptvData(void)
   m_bTSOverride   = g_bTSOverride;
   m_iLastStart    = 0;
   m_iLastEnd      = 0;
-  m_bEGPLoaded    = false;
 
   m_channels.clear();
   m_groups.clear();
@@ -109,7 +108,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   if (m_strXMLTVUrl.empty())
   {
     XBMC->Log(LOG_NOTICE, "EPG file path is not configured. EPG not loaded.");
-    m_bEGPLoaded = true;
     return false;
   }
 
@@ -134,9 +132,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   if (iReaded == 0)
   {
     XBMC->Log(LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. After %d tries.", m_strXMLTVUrl.c_str(), iCount);
-    m_bEGPLoaded = true;
-    m_iLastStart = iStart;
-    m_iLastEnd = iEnd;
     return false;
   }
 
@@ -148,7 +143,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     if (!GzipInflate(data, decompressed))
     {
       XBMC->Log(LOG_ERROR, "Invalid EPG file '%s': unable to decompress file.", m_strXMLTVUrl.c_str());
-      m_bEGPLoaded = true;
       return false;
     }
     buffer = &(decompressed[0]);
@@ -169,7 +163,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       else
       {
         XBMC->Log(LOG_ERROR, "Invalid EPG file '%s': unable to parse file.", m_strXMLTVUrl.c_str());
-        m_bEGPLoaded = true;
         return false;
       }
     }
@@ -183,7 +176,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   catch(parse_error p) 
   {
     XBMC->Log(LOG_ERROR, "Unable parse EPG XML: %s", p.what());
-    m_bEGPLoaded = true;
     return false;
   }
 
@@ -191,7 +183,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   if (!pRootElement)
   {
     XBMC->Log(LOG_ERROR, "Invalid EPG XML: no <tv> tag found");
-    m_bEGPLoaded = true;
     return false;
   }
 
@@ -294,7 +285,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   xmlDoc.clear();
   LoadGenres();
 
-  m_bEGPLoaded = true;
   XBMC->Log(LOG_NOTICE, "EPG Loaded.");
 
   if (g_iEPGLogos > 0)
@@ -665,10 +655,12 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
     if (myChannel->iUniqueId != (int) channel.iUniqueId)
       continue;
 
-    if (!m_bEGPLoaded || iStart > m_iLastStart || iEnd > m_iLastEnd) 
+    if (iStart > m_iLastStart || iEnd > m_iLastEnd) 
     {
-      if (LoadEPG(iStart, iEnd))
+      // reload EPG for new time interval only
+      LoadEPG(iStart, iEnd);
       {
+        // doesn't matter is epg loaded or not we shouldn't try to load it for same interval
         m_iLastStart = iStart;
         m_iLastEnd = iEnd;
       }
@@ -1030,7 +1022,6 @@ void PVRIptvData::ReloadEPG(const char * strNewPath)
   if (strNewPath != m_strXMLTVUrl)
   {
     m_strXMLTVUrl = strNewPath;
-    m_bEGPLoaded = false;
     // TODO clear epg for all channels
 
     if (LoadEPG(m_iLastStart, m_iLastEnd))

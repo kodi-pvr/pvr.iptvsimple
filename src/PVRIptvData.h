@@ -122,7 +122,6 @@ protected:
 
 private:
   bool                              m_bTSOverride;
-  bool                              m_bEGPLoaded;
   int                               m_iEPGTimeShift;
   int                               m_iLastStart;
   int                               m_iLastEnd;

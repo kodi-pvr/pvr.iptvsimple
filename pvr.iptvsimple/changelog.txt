@@ -1,3 +1,6 @@
+v1.11.1
+- fixed EPG loading.
+
 v1.11.0
 - updated to API v1.9.6
 - new feature: channel logos from xmltv
