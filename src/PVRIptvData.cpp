@@ -30,7 +30,7 @@
 #include "zlib.h"
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
-#include "kodi/util/StringUtils.h"
+#include "platform/util/StringUtils.h"
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"

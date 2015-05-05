@@ -6,14 +6,16 @@ enable_language(CXX)
 
 find_package(kodi REQUIRED)
 find_package(kodiplatform REQUIRED)
+find_package(platform REQUIRED)
 find_package(ZLIB REQUIRED)
 
 include_directories(${kodiplatform_INCLUDE_DIRS}
+                    ${platform_INCLUDE_DIRS}
                     ${KODI_INCLUDE_DIR}
                     ${ZLIB_INCLUDE_DIRS}
                     ${PROJECT_SOURCE_DIR}/lib)
 
-set(DEPLIBS ${kodiplatform_LIBRARIES}
+set(DEPLIBS ${platform_LIBRARIES}
             ${ZLIB_LIBRARIES})
 
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")

@@ -1,3 +1,6 @@
+v1.11.2
+- updated to use new libplatform-dev
+
 v1.11.1
 - fixed EPG loading.
 

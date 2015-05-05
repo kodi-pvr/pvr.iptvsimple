@@ -26,7 +26,7 @@
 #include "kodi/xbmc_pvr_dll.h"
 #include "kodi/libKODI_guilib.h"
 #include "PVRIptvData.h"
-#include "kodi/util/util.h"
+#include "platform/util/util.h"
 
 using namespace ADDON;
 
