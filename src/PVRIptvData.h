@@ -91,9 +91,11 @@ public:
   virtual PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio);
   virtual bool      GetChannel(const PVR_CHANNEL &channel, PVRIptvChannel &myChannel);
   virtual int       GetChannelGroupsAmount(void);
+  virtual bool      GetChannelByName(const std::string strChannelName, PVRIptvChannel &myChannel);
   virtual PVR_ERROR GetChannelGroups(ADDON_HANDLE handle, bool bRadio);
   virtual PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP &group);
   virtual PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd);
+  virtual PVR_ERROR GetEPGTagForChannel(EPG_TAG &tag, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd);
   virtual void      ReaplyChannelsLogos(const char * strNewPath);
   virtual void      ReloadPlayList(const char * strNewPath);
   virtual void      ReloadEPG(const char * strNewPath);

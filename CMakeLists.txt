@@ -21,7 +21,8 @@ set(DEPLIBS ${platform_LIBRARIES}
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 set(IPTV_SOURCES src/client.cpp
-                 src/PVRIptvData.cpp)
+                 src/PVRIptvData.cpp
+                 src/PVRSimpleRecorder.cpp)
 
 build_addon(pvr.iptvsimple IPTV DEPLIBS)
 

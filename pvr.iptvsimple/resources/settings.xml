@@ -30,4 +30,10 @@
     <setting id="sep3" label="30040" type="lsep"/>
     <setting id="logoFromEpg" type="enum" label="30041" default="0" lvalues="30042|30043|30044"/>
   </category>
+  
+  <!-- Recordings -->
+  <category label="30050">
+    <setting id="recordingsPath" label="30051" type="folder" />
+  </category>
+
 </settings>

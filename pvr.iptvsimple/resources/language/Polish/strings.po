@@ -83,3 +83,11 @@ msgstr "Folder logo kanałów "
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Bazowy adres URL logo kanałów "
+
+msgctxt "#30050"
+msgid "Recording settings"
+msgstr "Ustawienia nagrywania "
+
+msgctxt "#30051"
+msgid "Recording store folder"
+msgstr "Podaj katalog do zapisywania nagrań "

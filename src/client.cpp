@@ -26,6 +26,7 @@
 #include "kodi/xbmc_pvr_dll.h"
 #include "kodi/libKODI_guilib.h"
 #include "PVRIptvData.h"
+#include "PVRSimpleRecorder.h"
 #include "platform/util/util.h"
 
 using namespace ADDON;
@@ -37,6 +38,7 @@ using namespace ADDON;
 bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRIptvData   *m_data           = NULL;
+PVRSimpleRecorder *m_recorder   = NULL;
 bool           m_bIsPlaying     = false;
 PVRIptvChannel m_currentChannel;
 
@@ -59,6 +61,7 @@ bool        g_bTSOverride   = true;
 bool        g_bCacheM3U     = false;
 bool        g_bCacheEPG     = false;
 int         g_iEPGLogos     = 0;
+std::string g_recordingsPath   = "";
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -164,6 +167,10 @@ void ADDON_ReadSettings(void)
   // Logos from EPG
   if (!XBMC->GetSetting("logoFromEpg", &g_iEPGLogos))
     g_iEPGLogos = 0;
+  
+  if (XBMC->GetSetting("recordingsPath", &buffer)) {
+    g_recordingsPath = buffer;
+  }
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -208,6 +215,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   ADDON_ReadSettings();
 
   m_data = new PVRIptvData;
+  m_recorder = new PVRSimpleRecorder(m_data, g_recordingsPath);
   m_CurStatus = ADDON_STATUS_OK;
   m_bCreated = true;
 
@@ -307,7 +315,8 @@ PVR_ERROR GetAddonCapabilities(PVR_ADDON_CAPABILITIES* pCapabilities)
   pCapabilities->bSupportsTV              = true;
   pCapabilities->bSupportsRadio           = true;
   pCapabilities->bSupportsChannelGroups   = true;
-  pCapabilities->bSupportsRecordings      = false;
+  pCapabilities->bSupportsRecordings      = true;
+  pCapabilities->bSupportsTimers          = true;
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -436,6 +445,27 @@ PVR_ERROR SignalStatus(PVR_SIGNAL_STATUS &signalStatus)
   return PVR_ERROR_NO_ERROR;
 }
 
+PVR_ERROR AddTimer(const PVR_TIMER &timer) {
+  return m_recorder->AddTimer (timer);
+}
+
+PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) {
+  return m_recorder->DeleteTimer (timer,bForceDelete);
+}
+
+PVR_ERROR UpdateTimer(const PVR_TIMER &timer) {
+  return m_recorder->UpdateTimer (timer);
+}
+
+PVR_ERROR GetTimers(ADDON_HANDLE handle) {
+  return m_recorder->GetTimers(handle);
+}
+
+int GetTimersAmount(void) {
+  int job = m_recorder->GetTimersAmount();
+  return job; 
+}
+
 /** UNUSED API FUNCTIONS */
 const char * GetLiveStreamURL(const PVR_CHANNEL &channel)  { return ""; }
 bool CanPauseStream(void) { return false; }
@@ -466,11 +496,6 @@ PVR_ERROR SetRecordingPlayCount(const PVR_RECORDING &recording, int count) { ret
 PVR_ERROR SetRecordingLastPlayedPosition(const PVR_RECORDING &recording, int lastplayedposition) { return PVR_ERROR_NOT_IMPLEMENTED; }
 int GetRecordingLastPlayedPosition(const PVR_RECORDING &recording) { return -1; }
 PVR_ERROR GetRecordingEdl(const PVR_RECORDING&, PVR_EDL_ENTRY[], int*) { return PVR_ERROR_NOT_IMPLEMENTED; };
-int GetTimersAmount(void) { return -1; }
-PVR_ERROR GetTimers(ADDON_HANDLE handle) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR AddTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR UpdateTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 void DemuxAbort(void) {}
 DemuxPacket* DemuxRead(void) { return NULL; }
 unsigned int GetChannelSwitchDelay(void) { return 0; }
