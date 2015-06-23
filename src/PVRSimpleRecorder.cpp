@@ -458,6 +458,7 @@ void *PVRSimpleRecorderThread::Process(void)
     {
         bool opened = false;
         void *fileHandle;
+        
         while (true)
         {
             //Stream is chunked
@@ -485,10 +486,12 @@ void *PVRSimpleRecorderThread::Process(void)
                 string filename = entry.Timer.strTitle;
                 filename = filename+strDate+".flv";
                 string videoFile = p_recordingsPath + filename;
-                XBMC->Log(LOG_NOTICE,"File to write (ch): %s ",videoFile.c_str());
+                
                 
                 if (opened==false)
                 {
+                    XBMC->Log(LOG_NOTICE,"File to write (ch): %s ",videoFile.c_str());
+                    XBMC->Log(LOG_NOTICE,"Recording started using chunks method: %s ",entry.Timer.strTitle);
                     fileHandle = XBMC->OpenFileForWrite(videoFile.c_str(), true);
                     opened=true;
                 }
@@ -542,8 +545,14 @@ void *PVRSimpleRecorderThread::Process(void)
             char buff [9];
             t_startRecTime = time(NULL);
             bytes_read = XBMC->ReadStream(stream,buffer,1024);
+            bool opened = false;
+            
             while(bytes_read>=0)
             {
+                if (opened==false) {
+                    XBMC->Log(LOG_NOTICE,"Recording started using rtmp: %s ",entry.Timer.strTitle);
+                }
+                opened = true;
                 p_RecJob->getJobEntry(t_iClientIndex, entry);
                 if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
                 {
@@ -608,22 +617,26 @@ void *PVRSimpleRecorderThread::Process(void)
                 }
                 bytes_read = XBMC->ReadStream(stream,buffer,1024);
             }
-            XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
-            XBMC->CloseFile(fileHandle);
-            XBMC->CloseStream(stream);
-            time_t end_time = time(NULL);
-            if (end_time<entry.Timer.endTime)
-            {
-                //Correct duration time
-                duration = end_time-t_startRecTime;
-                CorrectDurationFLVFile (videoFile,duration);
+            if (opened==true) {
+                XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
+                XBMC->CloseFile(fileHandle);
+                XBMC->CloseStream(stream);
+                time_t end_time = time(NULL);
+                if (end_time<entry.Timer.endTime)
+                {
+                    //Correct duration time
+                    duration = end_time-t_startRecTime;
+                    CorrectDurationFLVFile (videoFile,duration);
+                }
+                entry.Status = PVR_STREAM_STOPPED;
+                entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
+                p_RecJob->updateJobEntry(entry);
+                PVR->TriggerTimerUpdate();
+                return NULL;
             }
-            entry.Status = PVR_STREAM_STOPPED;
-            entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-            p_RecJob->updateJobEntry(entry);
-            PVR->TriggerTimerUpdate();
-            return NULL;
         }
+        // Bad status.
+        XBMC->Log(LOG_NOTICE,"Failed to start recording %s ",entry.Timer.strTitle);
         entry.Status = PVR_STREAM_STOPPED;
         entry.Timer.state= PVR_TIMER_STATE_ERROR;
         p_RecJob->updateJobEntry(entry);
