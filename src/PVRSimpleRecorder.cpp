@@ -85,7 +85,7 @@ extern void CloseRecordingThreads(void)
             while (entry.Status!=PVR_STREAM_NO_STREAM && entry.Status!=PVR_STREAM_STOPPED)
             {    
                 p_RecJob->getJobEntry(entry.Timer.iClientIndex, entry);
-                XBMC->Log(LOG_DEBUG,"Stopping recording %s:",entry.Timer.strTitle);
+                XBMC->Log(LOG_NOTICE,"Stopping recording %s:",entry.Timer.strTitle);
             }
         }
     }
@@ -453,7 +453,6 @@ void *PVRSimpleRecorderThread::Process(void)
     string sec = inttostr(current->tm_sec);
     if (current->tm_sec<10) sec = "0"+sec;
     
-    
     string strDate = " ("+inttostr(current->tm_year+1900)+"-"+month+"-"+day+" "+hour+"-"+min+"-"+sec+")";
     if (size>0)
     {
@@ -486,7 +485,7 @@ void *PVRSimpleRecorderThread::Process(void)
                 string filename = entry.Timer.strTitle;
                 filename = filename+strDate+".flv";
                 string videoFile = p_recordingsPath + filename;
-                XBMC->Log(LOG_DEBUG,"File to write (ch): %s ",videoFile.c_str());
+                XBMC->Log(LOG_NOTICE,"File to write (ch): %s ",videoFile.c_str());
                 
                 if (opened==false)
                 {
@@ -509,7 +508,7 @@ void *PVRSimpleRecorderThread::Process(void)
                 if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
                 {
                     XBMC->CloseFile(fileHandle);
-                    XBMC->Log(LOG_DEBUG, "Recording stopped %s", entry.Timer.strTitle);
+                    XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
                     entry.Status = PVR_STREAM_STOPPED;
                     entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
                     p_RecJob->updateJobEntry(entry);
@@ -522,7 +521,7 @@ void *PVRSimpleRecorderThread::Process(void)
     }
     else
     {   
-        XBMC->Log(LOG_DEBUG, "Try to open stream %s", t_currentChannel.strStreamURL.c_str());
+        XBMC->Log(LOG_NOTICE, "Try to open stream %s", t_currentChannel.strStreamURL.c_str());
         void *stream = XBMC->OpenStream(t_currentChannel.strStreamURL.c_str());   
         if (stream)
         {
@@ -531,7 +530,7 @@ void *PVRSimpleRecorderThread::Process(void)
             filename = filename+strDate+".flv";
 
             string videoFile = p_recordingsPath + filename;
-            XBMC->Log(LOG_DEBUG,"File to write (s): %s ",videoFile.c_str());
+            XBMC->Log(LOG_NOTICE,"File to write (s): %s ",videoFile.c_str());
             void *fileHandle;
             fileHandle = XBMC->OpenFileForWrite(videoFile.c_str(), true);
         
@@ -551,7 +550,7 @@ void *PVRSimpleRecorderThread::Process(void)
                     XBMC->CloseStream(stream);
                     XBMC->CloseFile(fileHandle);
                             
-                    XBMC->Log(LOG_DEBUG, "Recording stopped %s", entry.Timer.strTitle);
+                    XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
                     time_t end_time = time(NULL);
                     if (end_time<entry.Timer.endTime)
                     {
@@ -593,7 +592,7 @@ void *PVRSimpleRecorderThread::Process(void)
                     XBMC->CloseStream(stream);
                     XBMC->CloseFile(fileHandle);
     
-                    XBMC->Log(LOG_DEBUG, "Recording stopped %s", entry.Timer.strTitle);
+                    XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
                     time_t end_time = time(NULL);
                     if (end_time<entry.Timer.endTime)
                     {
@@ -609,7 +608,7 @@ void *PVRSimpleRecorderThread::Process(void)
                 }
                 bytes_read = XBMC->ReadStream(stream,buffer,1024);
             }
-            XBMC->Log(LOG_DEBUG, "Recording stopped %s", entry.Timer.strTitle);
+            XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
             XBMC->CloseFile(fileHandle);
             XBMC->CloseStream(stream);
             time_t end_time = time(NULL);
@@ -653,7 +652,7 @@ bool PVRSimpleRecorder::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
         entry = RecJobEntry;
         if (p_RecJob->getProperlyChannel(entry))
         {
-            XBMC->Log(LOG_DEBUG,"Starting recording %s ",RecJobEntry.Timer.strTitle);
+            XBMC->Log(LOG_NOTICE,"Starting recording %s ",RecJobEntry.Timer.strTitle);
             entry.Status = PVR_STREAM_START_RECORDING;
             entry.Timer.state = PVR_TIMER_STATE_RECORDING;
             p_iClientIndex = RecJobEntry.Timer.iClientIndex;
@@ -662,6 +661,7 @@ bool PVRSimpleRecorder::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
             PVRSimpleRecorderThread* TPtr = new PVRSimpleRecorderThread();
             entry.ThreadPtr = (void*) TPtr;
             p_RecJob->updateJobEntry(entry);
+            PVR->TriggerTimerUpdate();
             return true;
         }
         else
@@ -669,6 +669,7 @@ bool PVRSimpleRecorder::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
             //Channel not found, update status
             entry.Timer.state = PVR_TIMER_STATE_ERROR;
             p_RecJob->updateJobEntry(entry);
+            PVR->TriggerTimerUpdate();
         }
     }
     return false;
@@ -680,9 +681,10 @@ bool PVRSimpleRecorder::stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
     entry = RecJobEntry;
     if (entry.Timer.state!=PVR_TIMER_STATE_NEW)
     {
-        XBMC->Log(LOG_DEBUG,"Stopping recording %s ",entry.Timer.strTitle);
+        XBMC->Log(LOG_NOTICE,"Stopping recording %s ",entry.Timer.strTitle);
         entry.Status = PVR_STREAM_IS_STOPPING;
         p_RecJob->updateJobEntry(entry);
+        PVR->TriggerTimerUpdate();
     }
     
     return true;
@@ -724,15 +726,19 @@ void PVRSimpleRecorder::updateRecordingStatus()
             p_RecJob->delJobEntry(rec->first);
             jobsUpdated = true;
         }
+        else if (rec->second.Timer.endTime<time(NULL)) {
+            p_RecJob->delJobEntry(rec->first);
+            jobsUpdated = true;
+        }
         else if ((rec->second.Timer.startTime-10)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED)
         {
             //Start new Recording
-            XBMC->Log(LOG_DEBUG,"Try to start recording %s ",rec->second.Timer.strTitle);
+            XBMC->Log(LOG_NOTICE,"Try to start recording %s ",rec->second.Timer.strTitle);
             if (startRecording(rec->second)) jobsUpdated = true;
         }
         else if (rec->second.Timer.endTime<=time(NULL) && (rec->second.Timer.state==PVR_TIMER_STATE_RECORDING))
         {
-            XBMC->Log(LOG_DEBUG,"Try to stop recording %s ",rec->second.Timer.strTitle);
+            XBMC->Log(LOG_NOTICE,"Try to stop recording %s ",rec->second.Timer.strTitle);
             //Stop Recording
             if (stopRecording(rec->second)) jobsUpdated = true;
         }
@@ -740,7 +746,7 @@ void PVRSimpleRecorder::updateRecordingStatus()
     p_RecJob_lock=0;
     if (jobsUpdated)
     {
-        PVR->TriggerTimerUpdate();
+        //PVR->TriggerTimerUpdate();
     }
 }
 
