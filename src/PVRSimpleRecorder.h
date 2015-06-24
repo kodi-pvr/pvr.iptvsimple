@@ -70,8 +70,8 @@ struct PVR_REC_JOB_ENTRY {
 
 class PVRSimpleRecorderThread : PLATFORM::CThread {
     public: 
-    PVRSimpleRecorderThread(void);
-    virtual ~PVRSimpleRecorderThread();
+    PVRSimpleRecorderThread(PVRIptvChannel &currentChannel,int iClientIndex);
+    virtual ~PVRSimpleRecorderThread(void);
     virtual void StopThread(bool bWait = true);
     virtual void *Process(void);
     private:
@@ -90,11 +90,13 @@ public:
     ~PVRRecJob(void);
     map<int,PVR_REC_JOB_ENTRY> getEntryData(void);
     bool addJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
-    bool getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry);
-    bool getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry);
-    bool updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
-    bool delJobEntry(const int ientryIndex);
-    bool getProperlyChannel (PVR_REC_JOB_ENTRY &entry);
+    bool getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);
+    bool getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);
+    bool updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel);
+    bool delJobEntry(const int ientryIndex, PVRIptvChannel &currentChannel);
+    bool getProperlyChannel (PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);
+    bool setLock (void);
+    void setUnlock (void);
 private:
     PVRIptvData *m_data;
     map <int,PVR_REC_JOB_ENTRY> m_JobEntryData;
@@ -117,6 +119,6 @@ private:
     int m_maxRecordingTime = 240;
     PVRIptvData *m_data;
     void updateRecordingStatus();
-    bool startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry);
-    bool stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry);
+    bool startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel);
+    bool stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel);
 };
