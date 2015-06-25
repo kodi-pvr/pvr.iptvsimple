@@ -36,6 +36,7 @@ using namespace std;
 #define RECJOB_FILE_NAME "pvrsimplerecorder.cache"
 string p_recordingsPath;
 PVRRecJob *p_RecJob;
+PVRSchedulerThread *p_Scheduler;
 
 int p_RecJob_lock = 0;
 
@@ -68,34 +69,30 @@ string inttostr (int i)
 
 extern void CloseRecordingThreads(void)
 {
-    PVRIptvChannel currentChannel;
+    delete (p_Scheduler);
+    XBMC->Log(LOG_NOTICE,"Scheduler deleted");
     p_RecJob->setLock();
-    /*
-    while (p_RecJob_lock==1)
-    {
-        //wait for unlock 
-    }
-    p_RecJob_lock=1;
-    */
     map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
     for (map<int,PVR_REC_JOB_ENTRY>::iterator rec=RecJobs.begin(); rec!=RecJobs.end(); ++rec)
     {
         PVR_REC_JOB_ENTRY entry = rec->second;
         if (entry.Status!=PVR_STREAM_NO_STREAM && entry.Status!=PVR_STREAM_STOPPED)
         {
-            XBMC->Log(LOG_NOTICE,"Recording is still active, trying to stop: %s ",entry.Timer.strTitle);
+            XBMC->Log(LOG_NOTICE,"Recording is still active, trying to stop: %s",entry.Timer.strTitle);
             entry.Status = PVR_STREAM_IS_STOPPING;
-            p_RecJob->updateJobEntry(entry, currentChannel);
+            p_RecJob->updateJobEntry(entry);
             while (entry.Status!=PVR_STREAM_NO_STREAM && entry.Status!=PVR_STREAM_STOPPED)
             {    
-                p_RecJob->getJobEntry(entry.Timer.iClientIndex, entry ,currentChannel);
-                XBMC->Log(LOG_NOTICE,"Stopping recording %s:",entry.Timer.strTitle);
+                p_RecJob->getJobEntry(entry.Timer.iClientIndex, entry);
+                XBMC->Log(LOG_NOTICE,"Stopping recording %s",entry.Timer.strTitle);
             }
         }
     }
     p_RecJob->setUnlock();
-    //p_RecJob_lock=0;
+    XBMC->Log(LOG_NOTICE,"Stopped all recodrings jobs");
     delete (p_RecJob);
+    XBMC->Log(LOG_NOTICE,"RecJob deleted");
+    
 }
 
 /****************************************************
@@ -208,6 +205,7 @@ bool PVRRecJob::addJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry)
 {
     if (m_JobEntryData.find(RecJobEntry.Timer.iClientIndex) == m_JobEntryData.end())
     {
+        XBMC->Log(LOG_NOTICE,"Add job entry %s",RecJobEntry.Timer.strTitle);
         m_JobEntryData[RecJobEntry.Timer.iClientIndex] = RecJobEntry;
         storeEntryData();
         return true;
@@ -215,32 +213,32 @@ bool PVRRecJob::addJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry)
     return false;
 }
     
-bool PVRRecJob::getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel)
+bool PVRRecJob::getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry)
 {
     if (m_JobEntryData.find(ientryIndex) == m_JobEntryData.end()) return false;
     
     entry = m_JobEntryData[ientryIndex];
-    return getProperlyChannel(entry, currentChannel);
+    return true;
 }
     
-bool PVRRecJob::getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel)
+bool PVRRecJob::getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry)
 {
     for (std::map<int,PVR_REC_JOB_ENTRY>::iterator it=m_JobEntryData.begin(); it!=m_JobEntryData.end(); ++it)
     {
         if (it->second.strChannelName==strChannelName)
         {
             entry = it->second;
-            return getProperlyChannel(entry, currentChannel);
+            return true;
         }
         return false;
     }
     return false;
 }
     
-bool PVRRecJob::updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel)
+bool PVRRecJob::updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry)
 {
     PVR_REC_JOB_ENTRY entry = RecJobEntry;
-    if (getJobEntry(RecJobEntry.Timer.iClientIndex ,entry ,currentChannel))
+    if (getJobEntry(RecJobEntry.Timer.iClientIndex ,entry))
     {
         //status flow validation
         switch (entry.Status)
@@ -257,21 +255,22 @@ bool PVRRecJob::updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChan
                 { if (RecJobEntry.Status!=PVR_STREAM_STOPPED) return false; break; }
         }
         entry = RecJobEntry;
-        if (getProperlyChannel(entry, currentChannel))
-        {
-            m_JobEntryData[RecJobEntry.Timer.iClientIndex] = entry;
-            storeEntryData();
-            return true; 
-        }
+        
+        m_JobEntryData[RecJobEntry.Timer.iClientIndex] = entry;
+        storeEntryData();
+        XBMC->Log(LOG_NOTICE,"Updated job entry %s",RecJobEntry.Timer.strTitle);
+        return true; 
+
     }
     return false;
 }
     
-bool PVRRecJob::delJobEntry(const int ientryIndex, PVRIptvChannel &currentChannel)
+bool PVRRecJob::delJobEntry(const int ientryIndex)
 {
     PVR_REC_JOB_ENTRY entry;
-    if (getJobEntry(ientryIndex ,entry ,currentChannel))
+    if (getJobEntry(ientryIndex ,entry))
     {
+        XBMC->Log(LOG_NOTICE,"Deleted job entry %s",entry.Timer.strTitle);
         m_JobEntryData.erase(ientryIndex);
         storeEntryData();
         return true;
@@ -288,11 +287,12 @@ bool PVRRecJob::setLock (void)
         else {
             while (p_RecJob_lock>0)
             {
-                //wait for unlock 
+                //wait for unlock by other thread
             } 
             p_RecJob_lock = lock_rand;
         }
     }
+    return true;
 }
 
 void PVRRecJob::setUnlock (void)
@@ -368,6 +368,141 @@ bool PVRRecJob::ParseJobString(string BuffStr, PVR_REC_JOB_ENTRY &RecJobEntry)
 }
 
 /****************************************************
+ *  Class PVRSchedulerThread
+ ****************************************************/
+PVRSchedulerThread::PVRSchedulerThread(void)
+{
+    XBMC->Log(LOG_NOTICE,"Creating scheduler thread");
+    b_interval = 10;
+    isWorking = false;
+    b_stop = false;
+    b_lastCheck = time(NULL)-b_interval;
+    CreateThread();
+}
+
+PVRSchedulerThread::~PVRSchedulerThread(void)
+{
+    b_stop = true;
+    XBMC->Log(LOG_NOTICE,"Closing scheduler thread");
+    while (isWorking==true)
+    {
+        XBMC->Log(LOG_NOTICE,"Waiting for close scheduler thread");
+    }
+}
+void PVRSchedulerThread::StopThread(bool bWait /*= true*/)
+{
+    b_stop = true;
+}
+
+void *PVRSchedulerThread::Process(void)
+{
+    XBMC->Log(LOG_NOTICE,"Starting scheduler thread");
+    isWorking = true;
+    while (true) {
+        if (b_stop==true)
+        {
+            isWorking = false;
+            return NULL;
+        }
+        time_t now = time(NULL);
+        if (now>=b_lastCheck+b_interval) {
+            //XBMC->Log(LOG_NOTICE,"Checking for scheduled jobs");
+            PVRIptvChannel currentChannel;
+            bool jobsUpdated = false;
+            p_RecJob->setLock();
+            
+            map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
+            for (map<int,PVR_REC_JOB_ENTRY>::iterator rec=RecJobs.begin(); rec!=RecJobs.end(); ++rec)
+            {
+                if (jobsUpdated == false)
+                {
+                    if (rec->second.Status==PVR_STREAM_STOPPED)
+                    {
+                        XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                        p_RecJob->delJobEntry(rec->first);
+                        jobsUpdated = true;
+                    }
+                    else if (rec->second.Timer.endTime<time(NULL)) {
+                        XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                        p_RecJob->delJobEntry(rec->first);
+                        jobsUpdated = true;
+                    }
+                    else if ((rec->second.Timer.startTime-60)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED)
+                    {
+                        //Start new Recording
+                        XBMC->Log(LOG_NOTICE,"Try to start recording %s",rec->second.Timer.strTitle);
+                        startRecording(rec->second);
+                        jobsUpdated = true;
+                    }
+                    else if (rec->second.Timer.endTime<=time(NULL) && (rec->second.Timer.state==PVR_TIMER_STATE_RECORDING))
+                    {
+                        XBMC->Log(LOG_NOTICE,"Try to stop recording %s",rec->second.Timer.strTitle);
+                        //Stop Recording
+                        stopRecording(rec->second);
+                        jobsUpdated = true;
+                    }
+                }
+            }
+            
+            p_RecJob->setUnlock();
+            
+            if (jobsUpdated)
+            {
+                PVR->TriggerTimerUpdate();
+            }
+            //XBMC->Log(LOG_NOTICE,"Check done");
+            b_lastCheck=time(NULL);
+        }
+    }
+    return NULL;
+}
+
+bool PVRSchedulerThread::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
+{
+    PVR_REC_JOB_ENTRY entry;
+    PVRIptvChannel currentChannel;
+    if (p_RecJob->getJobEntry(RecJobEntry.Timer.iClientIndex, entry))
+    {
+        entry = RecJobEntry;
+        if (p_RecJob->getProperlyChannel(entry, currentChannel))
+        {
+            XBMC->Log(LOG_NOTICE,"Starting recording %s",RecJobEntry.Timer.strTitle);
+            entry.Status = PVR_STREAM_START_RECORDING;
+            entry.Timer.state = PVR_TIMER_STATE_RECORDING;
+            p_RecJob->updateJobEntry(entry);
+            PVRSimpleRecorderThread* TPtr = new PVRSimpleRecorderThread(currentChannel,RecJobEntry.Timer.iClientIndex);
+            entry.ThreadPtr = TPtr;
+            p_RecJob->updateJobEntry(entry);
+            //PVR->TriggerTimerUpdate();
+            return true;
+        }
+        else
+        {
+            //Channel not found, update status
+            entry.Status = PVR_STREAM_STOPPED;
+            entry.Timer.state = PVR_TIMER_STATE_ERROR;
+            p_RecJob->updateJobEntry(entry);
+            //PVR->TriggerTimerUpdate();
+        }
+    }
+    return false;
+}
+
+bool PVRSchedulerThread::stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
+{
+    PVR_REC_JOB_ENTRY entry;
+    entry = RecJobEntry;
+    if (entry.Timer.state!=PVR_TIMER_STATE_NEW)
+    {
+        XBMC->Log(LOG_NOTICE,"Stopping recording %s",entry.Timer.strTitle);
+        entry.Status = PVR_STREAM_IS_STOPPING;
+        p_RecJob->updateJobEntry(entry);
+        //PVR->TriggerTimerUpdate();
+    }
+    
+    return true;
+}
+/****************************************************
  *  Class PVRSimpleRecorderThread
  ****************************************************/
 void PVRSimpleRecorderThread::CorrectBufferDurationFlV (char* buffer, const double &duration, const int &pos)
@@ -420,6 +555,7 @@ void PVRSimpleRecorderThread::CorrectDurationFLVFile (const string &videoFile, c
 
 PVRSimpleRecorderThread::PVRSimpleRecorderThread(PVRIptvChannel &currentChannel, int iClientIndex)
 {
+    isWorking = false;
     t_iClientIndex = iClientIndex;
     t_currentChannel = currentChannel;
     CreateThread();
@@ -429,34 +565,33 @@ PVRSimpleRecorderThread::~PVRSimpleRecorderThread(void)
 {
     PVR_REC_JOB_ENTRY entry;
     PVRIptvChannel currentChannel;
-    p_RecJob->getJobEntry(t_iClientIndex, entry, currentChannel);
+    p_RecJob->getJobEntry(t_iClientIndex, entry);
         
-    XBMC->Log(LOG_DEBUG,"Closing thread %s:",entry.Timer.strTitle);
+    XBMC->Log(LOG_DEBUG,"Closing thread %s",entry.Timer.strTitle);
     while (entry.Status==PVR_STREAM_IS_RECORDING)
     {
-        p_RecJob->getJobEntry(t_iClientIndex, entry, currentChannel);
-        XBMC->Log(LOG_DEBUG,"Closing recording thread %s ",entry.Timer.strTitle);
+        p_RecJob->getJobEntry(t_iClientIndex, entry);
+        XBMC->Log(LOG_DEBUG,"Closing recording thread %s",entry.Timer.strTitle);
     }
 }
 
 void PVRSimpleRecorderThread::StopThread(bool bWait /*= true*/)
 {
     PVR_REC_JOB_ENTRY entry;
-    PVRIptvChannel currentChannel;
-    p_RecJob->getJobEntry(t_iClientIndex, entry, currentChannel);
+    p_RecJob->getJobEntry(t_iClientIndex, entry);
     entry.Status = PVR_STREAM_IS_STOPPING;
-    p_RecJob->updateJobEntry(entry, currentChannel);
-    XBMC->Log(LOG_DEBUG,"Stopping thread %s:",entry.Timer.strTitle);
+    p_RecJob->updateJobEntry(entry);
+    XBMC->Log(LOG_DEBUG,"Stopping thread %s",entry.Timer.strTitle);
     CThread::StopThread(bWait);
 }
 
 void *PVRSimpleRecorderThread::Process(void)
 {   
     PVR_REC_JOB_ENTRY entry;
-    p_RecJob->getJobEntry(t_iClientIndex, entry, t_currentChannel);
+    p_RecJob->getJobEntry(t_iClientIndex, entry);
     entry.Status = PVR_STREAM_IS_RECORDING;
-    p_RecJob->updateJobEntry(entry, t_currentChannel);
-    
+    p_RecJob->updateJobEntry(entry);
+    isWorking = true;
     char strPlayList[65535];
     char buffer[1024];
     int bytes_read;
@@ -494,7 +629,7 @@ void *PVRSimpleRecorderThread::Process(void)
                 XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
                 entry.Status = PVR_STREAM_STOPPED;
                 entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-                p_RecJob->updateJobEntry(entry, t_currentChannel);
+                p_RecJob->updateJobEntry(entry);
                 PVR->TriggerTimerUpdate();
                 return NULL;
             }
@@ -527,8 +662,8 @@ void *PVRSimpleRecorderThread::Process(void)
                 
                 if (opened==false)
                 {
-                    XBMC->Log(LOG_NOTICE,"File to write (ch): %s ",videoFile.c_str());
-                    XBMC->Log(LOG_NOTICE,"Recording started using chunks method: %s ",entry.Timer.strTitle);
+                    XBMC->Log(LOG_NOTICE,"File to write: %s",videoFile.c_str());
+                    XBMC->Log(LOG_NOTICE,"Recording started using chunks method: %s",entry.Timer.strTitle);
                     fileHandle = XBMC->OpenFileForWrite(videoFile.c_str(), true);
                     opened=true;
                 }
@@ -544,14 +679,14 @@ void *PVRSimpleRecorderThread::Process(void)
                     XBMC->CloseStream(stream);
                 }
 
-                p_RecJob->getJobEntry(t_iClientIndex, entry, t_currentChannel);
+                p_RecJob->getJobEntry(t_iClientIndex, entry);
                 if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
                 {
                     XBMC->CloseFile(fileHandle);
                     XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
                     entry.Status = PVR_STREAM_STOPPED;
                     entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-                    p_RecJob->updateJobEntry(entry, t_currentChannel);
+                    p_RecJob->updateJobEntry(entry);
                     PVR->TriggerTimerUpdate();
                     return NULL;
                 }
@@ -570,7 +705,7 @@ void *PVRSimpleRecorderThread::Process(void)
             filename = filename+strDate+".flv";
 
             string videoFile = p_recordingsPath + filename;
-            XBMC->Log(LOG_NOTICE,"File to write (s): %s ",videoFile.c_str());
+            XBMC->Log(LOG_NOTICE,"File to write: %s ",videoFile.c_str());
             void *fileHandle;
             fileHandle = XBMC->OpenFileForWrite(videoFile.c_str(), true);
         
@@ -587,10 +722,10 @@ void *PVRSimpleRecorderThread::Process(void)
             while(bytes_read>=0)
             {
                 if (opened==false) {
-                    XBMC->Log(LOG_NOTICE,"Recording started using rtmp: %s ",entry.Timer.strTitle);
+                    XBMC->Log(LOG_NOTICE,"Recording started using rtmp method: %s ",entry.Timer.strTitle);
                 }
                 opened = true;
-                p_RecJob->getJobEntry(t_iClientIndex, entry, t_currentChannel);
+                p_RecJob->getJobEntry(t_iClientIndex, entry);
                 if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
                 {
                     XBMC->CloseStream(stream);
@@ -606,7 +741,7 @@ void *PVRSimpleRecorderThread::Process(void)
                     }
                     entry.Status = PVR_STREAM_STOPPED;
                     entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-                    p_RecJob->updateJobEntry(entry, t_currentChannel);
+                    p_RecJob->updateJobEntry(entry);
                     PVR->TriggerTimerUpdate();
                     return NULL;
                 }
@@ -648,7 +783,7 @@ void *PVRSimpleRecorderThread::Process(void)
                     }
                     entry.Status = PVR_STREAM_STOPPED;
                     entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-                    p_RecJob->updateJobEntry(entry, t_currentChannel);
+                    p_RecJob->updateJobEntry(entry);
                     PVR->TriggerTimerUpdate();
                     return NULL;
                 }
@@ -667,19 +802,18 @@ void *PVRSimpleRecorderThread::Process(void)
                 }
                 entry.Status = PVR_STREAM_STOPPED;
                 entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-                p_RecJob->updateJobEntry(entry, t_currentChannel);
+                p_RecJob->updateJobEntry(entry);
                 PVR->TriggerTimerUpdate();
                 return NULL;
             }
         }
-        // Bad status.
-        XBMC->Log(LOG_NOTICE,"Failed to start recording %s ",entry.Timer.strTitle);
-        entry.Status = PVR_STREAM_STOPPED;
-        entry.Timer.state= PVR_TIMER_STATE_ERROR;
-        p_RecJob->updateJobEntry(entry, t_currentChannel);
-        PVR->TriggerTimerUpdate();
-        return NULL;
     }
+    // Bad status.
+    XBMC->Log(LOG_NOTICE,"Failed to start recording %s",entry.Timer.strTitle);
+    entry.Status = PVR_STREAM_STOPPED;
+    entry.Timer.state= PVR_TIMER_STATE_ERROR;
+    p_RecJob->updateJobEntry(entry);
+    PVR->TriggerTimerUpdate();
     return NULL;
 }
 
@@ -690,66 +824,14 @@ void *PVRSimpleRecorderThread::Process(void)
 PVRSimpleRecorder::PVRSimpleRecorder (PVRIptvData *data, const std::string &recordingsPath)
 {
     m_data = data;
-    m_recordingsPath = recordingsPath;
+    p_recordingsPath = recordingsPath;
     p_RecJob = new PVRRecJob (data);
-}
-
-bool PVRSimpleRecorder::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel)
-{
-    PVR_REC_JOB_ENTRY entry;
-    if (p_RecJob->getJobEntry(RecJobEntry.Timer.iClientIndex, entry, currentChannel))
-    {
-        entry = RecJobEntry;
-        if (p_RecJob->getProperlyChannel(entry, currentChannel))
-        {
-            XBMC->Log(LOG_NOTICE,"Starting recording %s ",RecJobEntry.Timer.strTitle);
-            entry.Status = PVR_STREAM_START_RECORDING;
-            entry.Timer.state = PVR_TIMER_STATE_RECORDING;
-            //p_iClientIndex = RecJobEntry.Timer.iClientIndex;
-            p_recordingsPath = m_recordingsPath;
-            p_RecJob->updateJobEntry(entry, currentChannel);
-            PVRSimpleRecorderThread* TPtr = new PVRSimpleRecorderThread(currentChannel,RecJobEntry.Timer.iClientIndex);
-            entry.ThreadPtr = TPtr;
-            p_RecJob->updateJobEntry(entry, currentChannel);
-            PVR->TriggerTimerUpdate();
-            return true;
-        }
-        else
-        {
-            //Channel not found, update status
-            entry.Timer.state = PVR_TIMER_STATE_ERROR;
-            p_RecJob->updateJobEntry(entry, currentChannel);
-            PVR->TriggerTimerUpdate();
-        }
-    }
-    return false;
-}
-
-bool PVRSimpleRecorder::stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel)
-{
-    PVR_REC_JOB_ENTRY entry;
-    entry = RecJobEntry;
-    if (entry.Timer.state!=PVR_TIMER_STATE_NEW)
-    {
-        XBMC->Log(LOG_NOTICE,"Stopping recording %s ",entry.Timer.strTitle);
-        entry.Status = PVR_STREAM_IS_STOPPING;
-        p_RecJob->updateJobEntry(entry, currentChannel);
-        PVR->TriggerTimerUpdate();
-    }
-    
-    return true;
+    p_Scheduler = new PVRSchedulerThread();
 }
 
 PVR_ERROR PVRSimpleRecorder::GetTimers(ADDON_HANDLE handle)
 {
     PVRIptvChannel currentChannel;
-    /*
-    while (p_RecJob_lock==1)
-    {
-        //wait for unlock 
-    }
-    p_RecJob_lock=1;
-    */
     p_RecJob->setLock();
     
     map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
@@ -757,82 +839,23 @@ PVR_ERROR PVRSimpleRecorder::GetTimers(ADDON_HANDLE handle)
     {
         if (p_RecJob->getProperlyChannel(rec->second,currentChannel))
         {
-            p_RecJob->updateJobEntry(rec->second, currentChannel);
+            p_RecJob->updateJobEntry(rec->second);
             PVR->TransferTimerEntry(handle, &rec->second.Timer); 
         }
     }
-    
-    //p_RecJob_lock=0;
     p_RecJob->setUnlock();
     
     return PVR_ERROR_NO_ERROR;
 }
 
-void PVRSimpleRecorder::updateRecordingStatus()
-{
-    PVRIptvChannel currentChannel;
-    bool jobsUpdated = false;
-    /*
-    while (p_RecJob_lock==1)
-    {
-        //wait for unlock 
-    }
-    p_RecJob_lock=1;
-    */
-    p_RecJob->setLock();
-    
-    map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
-    for (map<int,PVR_REC_JOB_ENTRY>::iterator rec=RecJobs.begin(); rec!=RecJobs.end(); ++rec)
-    {
-        if (rec->second.Status==PVR_STREAM_STOPPED)
-        {
-            p_RecJob->delJobEntry(rec->first, currentChannel);
-            jobsUpdated = true;
-        }
-        else if (rec->second.Timer.endTime<time(NULL)) {
-            p_RecJob->delJobEntry(rec->first, currentChannel);
-            jobsUpdated = true;
-        }
-        else if ((rec->second.Timer.startTime-10)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED)
-        {
-            //Start new Recording
-            XBMC->Log(LOG_NOTICE,"Try to start recording %s ",rec->second.Timer.strTitle);
-            if (startRecording(rec->second,currentChannel)) jobsUpdated = true;
-        }
-        else if (rec->second.Timer.endTime<=time(NULL) && (rec->second.Timer.state==PVR_TIMER_STATE_RECORDING))
-        {
-            XBMC->Log(LOG_NOTICE,"Try to stop recording %s ",rec->second.Timer.strTitle);
-            //Stop Recording
-            if (stopRecording(rec->second,currentChannel)) jobsUpdated = true;
-        }
-    }
-    
-    //p_RecJob_lock=0;
-    p_RecJob->setUnlock();
-    
-    if (jobsUpdated)
-    {
-        //PVR->TriggerTimerUpdate();
-    }
-}
-
 int PVRSimpleRecorder::GetTimersAmount(void)
 {    
-    updateRecordingStatus();
-    /*
-    while (p_RecJob_lock==1)
-    {
-        //wait for unlock 
-    }
-    p_RecJob_lock=1;
-    */
-    
+    //updateRecordingStatus();
     p_RecJob->setLock();
     
     map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
     int size = RecJobs.size();
     
-    //p_RecJob_lock=0;
     p_RecJob->setUnlock();
     
     return size;
@@ -842,8 +865,7 @@ PVR_ERROR PVRSimpleRecorder::UpdateTimer(const PVR_TIMER &timer)
 {
     PVR_TIMER myTimer = timer;
     PVR_REC_JOB_ENTRY entry;
-    PVRIptvChannel currentChannel;
-    if (p_RecJob->getJobEntry(timer.iClientIndex,entry, currentChannel))
+    if (p_RecJob->getJobEntry(timer.iClientIndex,entry))
     {
         
         if (entry.Timer.state==PVR_TIMER_STATE_RECORDING && (entry.Status==PVR_STREAM_IS_RECORDING || entry.Status==PVR_STREAM_START_RECORDING || entry.Status==PVR_STREAM_IS_STOPPING)) {
@@ -851,7 +873,7 @@ PVR_ERROR PVRSimpleRecorder::UpdateTimer(const PVR_TIMER &timer)
             if (timer.state==PVR_TIMER_STATE_CANCELLED)
             {
                //stop recording
-               stopRecording(entry, currentChannel);
+               p_Scheduler->stopRecording(entry);
             }
             else
             {
@@ -859,7 +881,7 @@ PVR_ERROR PVRSimpleRecorder::UpdateTimer(const PVR_TIMER &timer)
             }
         }
         entry.Timer = myTimer;
-        p_RecJob->updateJobEntry(entry, currentChannel);
+        p_RecJob->updateJobEntry(entry);
         PVR->TriggerTimerUpdate();
         return PVR_ERROR_NO_ERROR;
     }
@@ -870,10 +892,9 @@ PVR_ERROR PVRSimpleRecorder::UpdateTimer(const PVR_TIMER &timer)
 PVR_ERROR PVRSimpleRecorder::DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
 {    
     PVR_REC_JOB_ENTRY entry;
-    PVRIptvChannel currentChannel;
-    if (p_RecJob->getJobEntry(timer.iClientIndex,entry, currentChannel))
+    if (p_RecJob->getJobEntry(timer.iClientIndex,entry))
     {
-        if (stopRecording(entry, currentChannel))
+        if (p_Scheduler->stopRecording(entry))
         {
             PVR->TriggerTimerUpdate();
             return PVR_ERROR_NO_ERROR;
@@ -884,9 +905,9 @@ PVR_ERROR PVRSimpleRecorder::DeleteTimer(const PVR_TIMER &timer, bool bForceDele
 
 PVR_ERROR PVRSimpleRecorder::AddTimer (const PVR_TIMER &timer)
 {
-    if (m_recordingsPath.length()==0)
+    if (p_recordingsPath.length()==0)
     {
-        XBMC->Log(LOG_ERROR,"Recordins store folder is not set. Please change addon configuration.");
+        XBMC->Log(LOG_ERROR,"Store folder is not set. Please change addon configuration.");
         return PVR_ERROR_FAILED;
     }
     //Set start time for Job
@@ -917,14 +938,6 @@ PVR_ERROR PVRSimpleRecorder::AddTimer (const PVR_TIMER &timer)
         if (myData == PVR_ERROR_NO_ERROR)
             endTime = tag.endTime;
     }
-    
-    /*
-    while (p_RecJob_lock==1)
-    {
-        //wait for unlock 
-    }
-    p_RecJob_lock=1;
-    */
     p_RecJob->setLock();
     
     //Check, if job is aleready schduled for this time
@@ -949,7 +962,6 @@ PVR_ERROR PVRSimpleRecorder::AddTimer (const PVR_TIMER &timer)
         }
     }
     
-    //p_RecJob_lock=0;
     p_RecJob->setUnlock();
     
     //recalculate new job id
@@ -970,15 +982,15 @@ PVR_ERROR PVRSimpleRecorder::AddTimer (const PVR_TIMER &timer)
     {
         recJobEntry.Status = PVR_STREAM_IS_RECORDING;
         recJobEntry.Timer.state = PVR_TIMER_STATE_RECORDING;
-        p_RecJob->updateJobEntry(recJobEntry, currentChannel);
-        startRecording(recJobEntry, currentChannel);
+        p_RecJob->updateJobEntry(recJobEntry);
+        p_Scheduler->startRecording(recJobEntry);
         
     }
     else
     {
         recJobEntry.Status = PVR_STREAM_NO_STREAM;
         recJobEntry.Timer.state = PVR_TIMER_STATE_SCHEDULED;
-        p_RecJob->updateJobEntry(recJobEntry, currentChannel);
+        p_RecJob->updateJobEntry(recJobEntry);
     }
     PVR->TriggerTimerUpdate();
     return PVR_ERROR_NO_ERROR;

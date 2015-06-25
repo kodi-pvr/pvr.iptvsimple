@@ -68,14 +68,31 @@ struct PVR_REC_JOB_ENTRY {
     void*                       ThreadPtr;
 };
 
+class PVRSchedulerThread : PLATFORM::CThread {
+    public: 
+    PVRSchedulerThread(void);
+    virtual ~PVRSchedulerThread(void);
+    virtual void StopThread(bool bWait = true);
+    virtual void *Process(void);
+    bool startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry);
+    bool stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry);
+    private:
+    
+    bool b_stop;
+    bool isWorking;
+    time_t b_lastCheck;
+    int b_interval;
+};
+
 class PVRSimpleRecorderThread : PLATFORM::CThread {
     public: 
     PVRSimpleRecorderThread(PVRIptvChannel &currentChannel,int iClientIndex);
     virtual ~PVRSimpleRecorderThread(void);
     virtual void StopThread(bool bWait = true);
     virtual void *Process(void);
-    private:
     
+    bool isWorking;
+    private:
     void CorrectBufferDurationFlV (char* buffer, const double &duration, const int &pos);
     void CorrectDurationFLVFile (const string &videoFile, const double &duration);
     
@@ -90,10 +107,10 @@ public:
     ~PVRRecJob(void);
     map<int,PVR_REC_JOB_ENTRY> getEntryData(void);
     bool addJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
-    bool getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);
-    bool getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);
-    bool updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel);
-    bool delJobEntry(const int ientryIndex, PVRIptvChannel &currentChannel);
+    bool getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry);
+    bool getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry);
+    bool updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
+    bool delJobEntry(const int ientryIndex);
     bool getProperlyChannel (PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);
     bool setLock (void);
     void setUnlock (void);
@@ -115,10 +132,5 @@ public:
     PVR_ERROR GetTimers(ADDON_HANDLE handle);
     int GetTimersAmount(void);
 private:
-    std::string m_recordingsPath = "";
-    int m_maxRecordingTime = 240;
     PVRIptvData *m_data;
-    void updateRecordingStatus();
-    bool startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel);
-    bool stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry, PVRIptvChannel &currentChannel);
 };

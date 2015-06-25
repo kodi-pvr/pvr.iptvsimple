@@ -89,5 +89,5 @@ msgid "Recording settings"
 msgstr "Ustawienia nagrywania "
 
 msgctxt "#30051"
-msgid "Recording store folder"
+msgid "Store folder"
 msgstr "Podaj katalog do zapisywania nagrań "
