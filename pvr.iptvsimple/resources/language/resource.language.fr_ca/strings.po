@@ -1,0 +1,105 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: French (Canada) (http://www.transifex.com/projects/p/kodi-main/language/fr_CA/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr_CA\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Emplacement"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Chemin local (inclure le réseau local)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Chemin distant (adresse Internet)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Général"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Chemin de la liste de lecture m3u"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "URL de la liste de lecture m3u"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Les numéros de chaînes commencent à"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "Paramètres du GÉP"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "Chemin de XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "URL de XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Appliquer le décalage temporel à toutes les chaînes"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Décalage temporel du GÉP (heures)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Cache m3u sur stockage local"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Cache XMLTV sur stockage local"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Logos de chaînes"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Dossier des logos de chaînes"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "URL de base des logos de chaînes"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Options de logos XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logos de chaînes de XMLTV"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Ignorer"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Préférer M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Préférer XMLTV"

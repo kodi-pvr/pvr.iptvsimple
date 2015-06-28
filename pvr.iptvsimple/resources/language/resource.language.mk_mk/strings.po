@@ -1,0 +1,89 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Macedonian (Macedonia) (http://www.transifex.com/projects/p/kodi-main/language/mk_MK/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: mk_MK\n"
+"Plural-Forms: nplurals=2; plural=(n % 10 == 1 && n % 100 != 11) ? 0 : 1;\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Локација"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Локална патека (локална мрежа)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Друга локација (интернет адреса)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Општо"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Патека до M3U Play List"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "Адреса до M3U Play List"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Нумерирањето на каналите започнува од"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG поставки"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "Патека до XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "Адреса до XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Примени корекција на сите канали"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Корекција на EPG (часови)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Кеширај ја m3u листата локално"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Кеширај XMLTV локално"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Логоа на каналите"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Фолдер за логоа на каналите"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "URL Адреса за логоа на каналите"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Игнорирај"

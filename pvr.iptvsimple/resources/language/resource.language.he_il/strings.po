@@ -1,0 +1,105 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Hebrew (Israel) (http://www.transifex.com/projects/p/kodi-main/language/he_IL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "מיקום"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "נתיב מקומי (כולל רשת מקומית)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "נתיב מרוחק (כתובת אינטרנט)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "כללי"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "נתיב רשימת ניגון M3U"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "כתובת רשימת ניגון M3U"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "התחל מספור ערוצים מהמספר"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "לוח שידורים"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "נתיב XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "כתובת XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "החל היסט זמן על כל הערוצים"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "היסט זמן ללוח השידורים (שעות)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "שמור m3u באחסון מקומי"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "שמור XMLTV באחסון מקומי"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "סמלי ערוצים"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "תיקיית סמלי ערוצים"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "כתובת בסיס של סמלי ערוצים"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "אפשרויות לוגאים של XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "לוגואים של ערוצים מ XMLTV"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "התעלם"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "העדפת M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "העדפת XMLTV"

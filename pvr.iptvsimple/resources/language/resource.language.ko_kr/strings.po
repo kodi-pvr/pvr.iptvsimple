@@ -1,0 +1,89 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Korean (Korea) (http://www.transifex.com/projects/p/kodi-main/language/ko_KR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ko_KR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "위치"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "로컬 경로 (로컬 네트워크 포함)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "원격 경로 (인터넷 주소)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "일반"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "M3U 재생 목록 경로"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "M3U 재생 목록 URL"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "채널 시작 번호"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG 설정"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV 경로"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV URL"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "모든 채널에 타임 시프트 적용"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "EPG 타임 시프트 (시간)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "로컬 저장소에 m3u 캐시"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "로컬 저장소에 XMLTV 캐시"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "채널 로고"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "채널 로고 폴더"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "채널 로고 기본 URL"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "무시"

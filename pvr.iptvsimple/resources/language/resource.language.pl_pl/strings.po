@@ -1,0 +1,105 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Polish (Poland) (http://www.transifex.com/projects/p/kodi-main/language/pl_PL/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: pl_PL\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Lokalizacja "
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Ścieżka lokalna (obejmuje lokalną sieć)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Ścieżka zdalna (adres internetowy)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Ogólne "
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Ścieżka listy odtwarzania M3U"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "Adres URL listy odtwarzania M3U"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Numeracja kanałów zaczyna się od"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "Ustawienia przewodnika"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "Ścieżka XMLTV "
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "Adres URL XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Zastosuj przesunięcie czasowe dla wszystkich kanałów "
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Przesunięcie czasowe przewodnika (godziny) "
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Buforuj lokalnie listę M3U"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Buforuj lokalnie dane XMLTV "
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Logo kanałów "
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Folder logo kanałów "
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Bazowy adres URL logo kanałów "
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Opcje logo dla XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logo kanałów ze źródła XMLTV"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Ignoruj"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Preferuj listę M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Preferuj dane XMLTV"
