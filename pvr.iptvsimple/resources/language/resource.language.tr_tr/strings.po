@@ -1,0 +1,105 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/kodi-main/language/tr_TR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: tr_TR\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Konum"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Yerel Yol (Yerel Ağ Dahil)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Uzak Yol (İnternet adresi)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Genel"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "M3U Çalma Listesi Yolu"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "M3U Çalma Listesi URL'si"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Kanal numaralandırma başlangıcı"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG Ayarları"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV Yolu"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV URL'si"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Süre Değiştirmeyi Bütün Kanallara Uygula"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "EPG Süre Değiştirme (saat)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "m3u'yu yerel depoda önbelleğe al"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "XMLTV'yi yerel depoda önbelleğe al"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Kanal Logoları"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Kanal Logoları Klasörü"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Kanal Logoları Taban URL'si"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "XMLTV Logo Ayarları"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "XMLTV'den Kanal Logoları"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Yoksay"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "M3U tercih et"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "XMLTV tercih et"
