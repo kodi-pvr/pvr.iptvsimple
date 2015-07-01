@@ -34,15 +34,17 @@ extern PVRIptvData   *m_data;
 string p_recordingsPath;
 string p_ffmpegPath;
 string p_ffmpegParams;
+string p_rtmpdumpPath;
 PVRRecJob *p_RecJob;
 PVRSchedulerThread *p_Scheduler;
 
-PVRRecorder::PVRRecorder (PVRIptvData *data, const std::string &recordingsPath, const std::string &ffmpegPath, const std::string &ffmpegParams)
+PVRRecorder::PVRRecorder (PVRIptvData *data, const std::string &recordingsPath, const std::string &ffmpegPath, const std::string &ffmpegParams, const std::string &rtmpdumpPath)
 {
     m_data = data;
     p_recordingsPath = recordingsPath;
     p_ffmpegPath = ffmpegPath;
     p_ffmpegParams = ffmpegParams;
+    p_rtmpdumpPath = rtmpdumpPath;
     p_RecJob = new PVRRecJob (data);
     p_Scheduler = new PVRSchedulerThread();
 }
@@ -126,17 +128,6 @@ PVR_ERROR PVRRecorder::AddTimer (const PVR_TIMER &timer)
         return PVR_ERROR_FAILED;
     }
     
-    if (p_ffmpegPath.length()==0)
-    {
-        XBMC->Log(LOG_ERROR,"Path to ffmpeg binary is not set. Please change addon configuration.");
-        return PVR_ERROR_FAILED;
-    }
-    
-    if (p_ffmpegParams.length()==0)
-    {
-        XBMC->Log(LOG_ERROR,"Recompression params for ffmpeg are not set. Please change addon configuration.");
-        return PVR_ERROR_FAILED;
-    }
     //Set start time for Job
     time_t startTime = timer.startTime;
     //Bad start time and end time  

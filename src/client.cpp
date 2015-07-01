@@ -67,6 +67,7 @@ int         g_iEPGLogos     = 0;
 std::string g_recordingsPath   = "";
 std::string g_ffmpegPath   = "";
 std::string g_ffmpegParams   = "";
+std::string g_rtmpdumpPath   = "";
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -184,6 +185,10 @@ void ADDON_ReadSettings(void)
   if (XBMC->GetSetting("ffmpegParams", &buffer)) {
     g_ffmpegParams = buffer;
   }
+  
+  if (XBMC->GetSetting("rtmpdumpPath", &buffer)) {
+    g_rtmpdumpPath = buffer;
+  }
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -228,7 +233,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   ADDON_ReadSettings();
 
   m_data = new PVRIptvData;
-  m_recorder = new PVRRecorder(m_data, g_recordingsPath, g_ffmpegPath, g_ffmpegParams);
+  m_recorder = new PVRRecorder(m_data, g_recordingsPath, g_ffmpegPath, g_ffmpegParams, g_rtmpdumpPath);
   m_CurStatus = ADDON_STATUS_OK;
   m_bCreated = true;
 

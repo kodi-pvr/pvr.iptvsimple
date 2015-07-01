@@ -41,6 +41,8 @@ extern PVRSchedulerThread *p_Scheduler;
 extern string p_recordingsPath;
 extern string p_ffmpegPath;
 extern string p_ffmpegParams;
+extern string p_rtmpdumpPath;
+
 PVRRecorderThread::PVRRecorderThread(PVRIptvChannel &currentChannel, int iClientIndex)
 {
     isWorking = false;
@@ -123,6 +125,78 @@ void PVRRecorderThread::CorrectDurationFLVFile (const string &videoFile, const d
     }
 }
 
+bool PVRRecorderThread::OpenStream (const string strStreamUrl)
+{   
+    if(strStreamUrl.substr(0, 7) == "rtmp://"
+       || strStreamUrl.substr(0, 8) == "rtmpt://"
+       || strStreamUrl.substr(0, 8) == "rtmpe://"
+       || strStreamUrl.substr(0, 9) == "rtmpte://"
+       || strStreamUrl.substr(0, 8) == "rtmps://")
+    {
+	vector<string> stremaUrlVect = StringUtils::Split (strStreamUrl," ");
+	string strParams;
+	if (stremaUrlVect.size()>0) {
+	    strParams = " -r \""+stremaUrlVect[0]+"\"";
+	    for (unsigned int i=1; i<stremaUrlVect.size();i++) {
+		string line = StringUtils::Trim(stremaUrlVect[i]);
+		if (line.length()>0) {
+		    vector<string> lineVect = StringUtils::Split (line,"=");
+		    if (lineVect[0]=="live") {
+			strParams = strParams + " --live";
+		    }
+		    else {
+			strParams = strParams + " --"+line;
+		    }
+		}
+	    }
+	}
+	try {
+	    string rtmpDump = p_rtmpdumpPath;
+	    //string rtmpDump = "cat";
+	    string strCommand = rtmpDump+strParams;
+	    XBMC->Log(LOG_NOTICE,"Starting rtmpdump: %s",strCommand.c_str());
+	    es.set_binary_mode(exec_stream_t::s_out);
+	    es.set_wait_timeout(exec_stream_t::s_out,10000);
+	    es.start( rtmpDump , strParams);
+	    return true;
+	
+	}catch( std::exception const & e ) {
+	    return false;
+        }
+	return false;
+    }
+    return false;
+}
+
+int PVRRecorderThread::ReadStream(void *fileHandle)
+{
+    
+    try {
+	string strBuffer;
+	getline( es.out(), strBuffer,'\n' ).good();
+	strBuffer = strBuffer+"\n";
+	XBMC->WriteFile(fileHandle, strBuffer.c_str(), strBuffer.size());
+	return strBuffer.size();
+	
+    }catch( std::exception const & e ) {
+	return 0;
+    }
+    return -1;
+}
+
+void PVRRecorderThread::CloseStream (void)
+{
+    
+    try {
+	if (!es.close())
+	{
+	    es.kill();  
+	}
+    }catch( std::exception const & e ) {
+	es.kill();
+    }
+}
+
 void *PVRRecorderThread::Process(void)
 {   
     PVR_REC_JOB_ENTRY entry;
@@ -157,7 +231,131 @@ void *PVRRecorderThread::Process(void)
     string videoFile = p_recordingsPath + filename;
     XBMC->Log(LOG_NOTICE,"File to write: %s ",videoFile.c_str());
     
-    vector<string> stremaUrlVect = StringUtils::Split (t_currentChannel.strStreamURL," ");
+    if(t_currentChannel.strStreamURL.substr(0, 7) == "rtmp://"
+       || t_currentChannel.strStreamURL.substr(0, 8) == "rtmpt://"
+       || t_currentChannel.strStreamURL.substr(0, 8) == "rtmpe://"
+       || t_currentChannel.strStreamURL.substr(0, 9) == "rtmpte://"
+       || t_currentChannel.strStreamURL.substr(0, 8) == "rtmps://")
+    {
+	if (p_rtmpdumpPath.length()==0)
+	{
+	    XBMC->Log(LOG_ERROR,"Path to rtmpdump binary is not set. Please change addon configuration.");
+	    entry.Status = PVR_STREAM_STOPPED;
+            entry.Timer.state= PVR_TIMER_STATE_ERROR;
+	    p_RecJob->updateJobEntry(entry);
+            try {
+		PVR->TriggerTimerUpdate();
+	    }catch( std::exception const & e ) {
+		//Closing Kodi, TriggerTimerUpdate is not available
+	    }
+	    return NULL;
+	}
+	
+	if (OpenStream(t_currentChannel.strStreamURL.c_str()))
+        {
+	    //Stream is live
+            void *fileHandle;
+            fileHandle = XBMC->OpenFileForWrite(videoFile.c_str(), true);
+        
+            int bytes_read;
+            double duration = entry.Timer.endTime-entry.Timer.startTime;
+            bool found = false;
+            
+            char buffer[1024];
+            char buff [9];
+            t_startRecTime = time(NULL);
+	    
+	    bytes_read = ReadStream(fileHandle);
+            bool opened = false;
+	    bool started = false;
+            while(bytes_read>0)
+            {
+		if (started==false)
+		{
+		    t_startRecTime = time(NULL);
+		    XBMC->Log(LOG_NOTICE,"Recording started using rtmp method: %s ",entry.Timer.strTitle);
+		    started = true;
+		}
+                
+                p_RecJob->getJobEntry(t_iClientIndex, entry);
+                if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
+                {
+                    CloseStream();
+                    XBMC->CloseFile(fileHandle);
+                            
+                    XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
+                    time_t end_time = time(NULL);
+                   
+                    //Correct duration time
+                    duration = end_time-t_startRecTime;
+                    CorrectDurationFLVFile (videoFile,duration);
+                    
+                    entry.Status = PVR_STREAM_STOPPED;
+                    entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
+                    p_RecJob->updateJobEntry(entry);
+                    try {
+			PVR->TriggerTimerUpdate();
+		    }catch( std::exception const & e ) {
+			//Closing Kodi, TriggerTimerUpdate is not available
+		    }
+                    return NULL;
+                }
+                if (bytes_read<=0)
+                {
+                    CloseStream();
+                    XBMC->CloseFile(fileHandle);
+    
+                    XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
+                    time_t end_time = time(NULL);
+                    
+                    //Correct duration time
+                    duration = end_time-t_startRecTime;
+                    CorrectDurationFLVFile (videoFile,duration);
+                    entry.Status = PVR_STREAM_STOPPED;
+                    entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
+                    p_RecJob->updateJobEntry(entry);
+                    try {
+			PVR->TriggerTimerUpdate();
+		    }catch( std::exception const & e ) {
+			//Closing Kodi, TriggerTimerUpdate is not available
+		    }
+                    return NULL;
+                }
+		bytes_read = ReadStream(fileHandle);
+            }
+	}
+    }
+    else
+    {
+	if (p_ffmpegPath.length()==0)
+	{
+	    XBMC->Log(LOG_ERROR,"Path to ffmpeg binary is not set. Please change addon configuration.");
+	    entry.Status = PVR_STREAM_STOPPED;
+            entry.Timer.state= PVR_TIMER_STATE_ERROR;
+	    p_RecJob->updateJobEntry(entry);
+            try {
+		PVR->TriggerTimerUpdate();
+	    }catch( std::exception const & e ) {
+		//Closing Kodi, TriggerTimerUpdate is not available
+	    }
+	    return NULL;
+	}
+	
+	if (p_ffmpegParams.length()==0)
+	{
+	    XBMC->Log(LOG_ERROR,"Recompression params for ffmpeg are not set. Please change addon configuration.");
+	    entry.Status = PVR_STREAM_STOPPED;
+            entry.Timer.state= PVR_TIMER_STATE_ERROR;
+	    p_RecJob->updateJobEntry(entry);
+            try {
+		PVR->TriggerTimerUpdate();
+	    }catch( std::exception const & e ) {
+		//Closing Kodi, TriggerTimerUpdate is not available
+	    }
+	    return NULL;
+	}
+    
+	vector<string> stremaUrlVect = StringUtils::Split (t_currentChannel.strStreamURL," ");
 	string strParams;
 	if (stremaUrlVect.size()>0)
 	{
@@ -177,46 +375,50 @@ void *PVRRecorderThread::Process(void)
 		    }
 		}
 	    }
-	    //strParams =  strParams+"\" -c:v h264 -vprofile main -c:a aac -ar 44100 -qscale 0 -strict -2 \""+videoFile+"\"";
 	    strParams =  strParams+"\" "+p_ffmpegParams+" \""+videoFile+"\"";
 	}
+	
+	string strCommand = p_ffmpegPath+strParams;
     
-    string strCommand = p_ffmpegPath+strParams;
-
-    XBMC->Log(LOG_NOTICE,"Starting ffmpeg: %s",strCommand.c_str());
-    es.set_binary_mode(exec_stream_t::s_out);
-    //es.set_wait_timeout(exec_stream_t::s_out,100000);
-    try {
-	es.start( p_ffmpegPath , strParams);
-    }catch( std::exception const & e ) {
-	XBMC->Log(LOG_NOTICE, "Error recording %s", entry.Timer.strTitle);
-        entry.Status = PVR_STREAM_STOPPED;
-        entry.Timer.state= PVR_TIMER_STATE_ERROR;
-        p_RecJob->updateJobEntry(entry);
-	PVR->TriggerTimerUpdate();
-	return NULL;
-    }
-    while (true)
-    {
-	p_RecJob->getJobEntry(t_iClientIndex, entry);
-	if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
-        {
-	    es.kill();
-            XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
-            entry.Status = PVR_STREAM_STOPPED;
-            entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
-            p_RecJob->updateJobEntry(entry);
-	    time_t end_time = time(NULL);
-            //Correct duration time
-            double duration = end_time-t_startRecTime;
-            CorrectDurationFLVFile (videoFile,duration);
+	XBMC->Log(LOG_NOTICE,"Starting ffmpeg: %s",strCommand.c_str());
+	es.set_binary_mode(exec_stream_t::s_out);
+	//es.set_wait_timeout(exec_stream_t::s_out,100000);
+	try {
+	    es.start( p_ffmpegPath , strParams);
+	}catch( std::exception const & e ) {
+	    XBMC->Log(LOG_NOTICE, "Error recording %s", entry.Timer.strTitle);
+	    entry.Status = PVR_STREAM_STOPPED;
+	    entry.Timer.state= PVR_TIMER_STATE_ERROR;
+	    p_RecJob->updateJobEntry(entry);
 	    try {
 		PVR->TriggerTimerUpdate();
 	    }catch( std::exception const & e ) {
 		//Closing Kodi, TriggerTimerUpdate is not available
 	    }
-            return NULL;
-        }
+	    return NULL;
+	}
+	while (true)
+	{
+	    p_RecJob->getJobEntry(t_iClientIndex, entry);
+	    if (entry.Timer.endTime<time(NULL) || entry.Status==PVR_STREAM_IS_STOPPING || entry.Status==PVR_STREAM_STOPPED)
+	    {
+		es.kill();
+		XBMC->Log(LOG_NOTICE, "Recording stopped %s", entry.Timer.strTitle);
+		entry.Status = PVR_STREAM_STOPPED;
+		entry.Timer.state= PVR_TIMER_STATE_COMPLETED;
+		p_RecJob->updateJobEntry(entry);
+		time_t end_time = time(NULL);
+		//Correct duration time
+		double duration = end_time-t_startRecTime;
+		CorrectDurationFLVFile (videoFile,duration);
+		try {
+		    PVR->TriggerTimerUpdate();
+		}catch( std::exception const & e ) {
+		    //Closing Kodi, TriggerTimerUpdate is not available
+		}
+		return NULL;
+	    }
+	}
     }
     return NULL;
 }

@@ -93,9 +93,13 @@ msgid "Store folder"
 msgstr "Podaj katalog do zapisywania nagrań "
 
 msgctxt "#30052"
+msgid "Path to rtmpdump binary"
+msgstr "Podaj położenie pliku rtmpdump "
+
+msgctxt "#30053"
 msgid "Path to ffmpeg binary"
 msgstr "Podaj położenie pliku ffmpeg "
 
-msgctxt "#30053"
+msgctxt "#30054"
 msgid "Recompression params for ffmpeg"
 msgstr "Podaj paramatry rekompresji ffmpeg "

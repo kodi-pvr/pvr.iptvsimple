@@ -40,6 +40,10 @@ class PVRRecorderThread : PLATFORM::CThread
     private:
     void CorrectDurationFLVFile (const string &videoFile, const double &duration);
     void CorrectBufferDurationFlV (char* buffer, const double &duration, const int &pos);
+    bool OpenStream (const string strStreamUrl);
+    void CloseStream (void);
+    //int ReadStream(char *buffer,const int buffersize);
+    int ReadStream(void *fileHandle);
     exec_stream_t es;
     int t_iClientIndex;
     PVRIptvChannel t_currentChannel;

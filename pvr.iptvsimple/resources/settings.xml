@@ -34,8 +34,9 @@
   <!-- Recordings -->
   <category label="30050">
     <setting id="recordingsPath" label="30051" type="folder" />
-    <setting id="ffmpegPath" label="30052" type="file" />
-    <setting id="ffmpegParams" label="30053" type="text" default="-c:v h264 -vprofile main -c:a aac -ar 44100 -qscale 0 -strict -2" />
+    <setting id="rtmpdumpPath" label="30052" type="file" />
+    <setting id="ffmpegPath" label="30053" type="file" />
+    <setting id="ffmpegParams" label="30054" type="text" default="-c:v h264 -vprofile main -c:a aac -ar 44100 -qscale 0 -strict -2" />
   </category>
 
 </settings>
