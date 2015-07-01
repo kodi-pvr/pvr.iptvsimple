@@ -31,7 +31,7 @@
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
 #include "platform/util/StringUtils.h"
-#include "PVRSimpleRecorder.h"
+#include "PVRUtils.h"
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"

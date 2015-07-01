@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>libexecstream home page</title>
+<link href="libexecstream.css" type="text/css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+<h1>The libexecstream library</h1>
+
+<table class="maintable">
+<col class="linksbar"></col>
+<col class="body"></col>
+<tr>
+
+<td class="linksbar" valign="top">
+         <div class="linksbar"><a href="#overview">Overview</a></div>
+         <div class="linksbar"><a href="#download">Download</a></div>
+         <div class="linksbar"><a href="#installation">Installation</a></div>
+         <div class="linksbar"><a href="reference.html">Reference</a></div>
+         <div class="linksbar"><a href="news.html">News</a></div>
+         <div class="linksbar"><a href="license.html">License</a></div>
+         <div class="sflogo"><!--SFLOGO--></div>
+</td>
+
+<td class="body">
+
+
+<!-- OVERVIEW-->
+<h2><a name="overview"></a>Overview</h2>
+
+<p>Libexecstream is a C++ library that allows you to run a child process and have its input, output and error
+avaliable as standard C++ streams. 
+</p>
+<p>Like this:</p>
+
+<pre>
+#include &lt;exec-stream.h&gt;
+#include &lt;string&gt;
+...
+try {
+    exec_stream_t <a href="reference.html#constructor1">es</a>( "perl", "" ); <span class="comment">// run perl without any arguments </span>
+    es.<a href="reference.html#in">in</a>() &lt;&lt; "print \"hello world\";"; <span class="comment">// and make it print "hello world" </span>
+    es.<a href="reference.html#close_in">close_in</a>();                        <span class="comment">// after the input was closed </span>
+    std::string hello, world;
+    es.<a href="reference.html#out">out</a>() &gt;&gt; hello; <span class="comment">// read the first word of output </span>
+    es.<a href="reference.html#out">out</a>() &gt;&gt; world; <span class="comment">// read the second word </span>
+}catch( std::exception const &amp; e ) {
+    std::cerr &lt;&lt; "error: "  &lt;&lt;  e.what()  &lt;&lt;  "\n";
+}
+</pre>
+
+<p>Features:
+<ul>
+<li>Works on Linux and Windows</li>
+<li>Uses threads</li>
+<li>Does not depend on any other non-standard library</li>
+<li>Distributed as source code only, requires you to compile and link one file into your program</li>
+<li>BSD-style <a href="license.html">license</a></li>
+</ul>
+</p>
+
+<p>Another example:
+</p>
+<pre>
+#include &lt;exec-stream.h&gt;
+...
+exec_stream_t <a href="reference.html#constructor0">es</a>;
+try {
+    <span class="comment">// run command to print network configuration, depending on the operating system</span>
+    #ifdef _WIN32
+        es.<a href="reference.html#start1">start</a>( "ipconfig", "/all" );
+    #else
+        es.<a href="reference.html#start1">start</a>( "ifconfig", "-a" );
+    #endif
+    
+    std::string s;
+    while( std::getline( es.<a href="reference.html#out">out</a>(), s ).good() ) {
+        <span class="comment">// do something with <var>s</var></span>
+    }
+}catch( std::exception const &amp; e ) {
+    std::cerr &lt;&lt; "error: "  &lt;&lt;  e.what()  &lt;&lt;  "\n";
+}
+</pre>
+
+<p>For more examples see the file <var>test/exec-stream-test.cpp</var> in the source distribution. 
+The interface provided by the library is documented in the <a href="reference.html">reference</a>.
+</p>
+
+
+<!-- DOWNLOADS-->
+<h2><a name="download"></a>Download</h2>
+
+<table class="downloadlinks"><tr><td>
+Latest source release from SourceForge:
+</td><td>
+<a href="http://sourceforge.net/project/showfiles.php?group_id=103810&package_id=111533&release_id=230408">follow this link</a> for downloading libexecstream-0.3.tar.gz
+</td></tr></table>
+
+<table class="downloadlinks"><tr><td>
+Get source from the CVS:
+<br/>(password is empty)
+</td><td>
+cvs -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexecstream login 
+<br/>cvs -z3 -d:pserver:anonymous@cvs.sourceforge.net:/cvsroot/libexecstream co libexecstream
+</td></tr></table>
+
+<table class="downloadlinks"><tr><td>
+View source in the CVS:
+</td><td>
+<a href="http://cvs.sourceforge.net/viewcvs.py/libexecstream">http://cvs.sourceforge.net/viewcvs.py/libexecstream</a>
+</td></tr></table>
+
+<table class="downloadlinks"><tr><td>
+Link to the SourceForge project page:
+</td><td>
+<a href="http://sourceforge.net/projects/libexecstream/">http://sourceforge.net/projects/libexecstream/</a>
+</td></tr></table>
+
+
+<!-- INSTALLATION-->
+<h2><a name="installation"></a>Installation</h2>
+
+<p>Libexecstream is provided in source code form only. In order to use it, you need to compile and link
+one file, <var>exec-stream.cpp</var>, into your program.
+</p>
+
+<p>On Linux, libexecstream was tested on Red Hat 9 with gcc compiler. Versions of gcc prior to 3.0 will not work.
+Make sure that <var>exec-stream.h</var> is found somewhere on the include path, 
+compile <var>exec-stream.cpp</var> as usual, link your program with <var>-lpthread</var>.
+GCC must be configured with <var>--enable-threads</var>, which is by default on most Linux distributions.
+</p>
+
+<p>On Windows, libexecstream was tested on XP and 95 flavors with VC++ 7 compiler. VC++ 6 will not work. 
+Make sure that <var>exec-stream.h</var> is found somewhere on the include path, 
+compile <var>exec-stream.cpp</var> as usual, link you program with multi-threaded runtime.
+</p>
+
+<p>Example makefiles for Windows and Linux (used to build the testsute) are provided in the <var>test</var> directory
+of the source distribution.
+</p>
+
+<p>The <var>exec-stream.cpp</var> file includes several platform-dependent 
+implementation files. Selection of platform-specific implementation is done at compile time: when <var>_WIN32</var>
+macro is defined (usually by windows compiler) win32 implementation is included, when that macro is not defined,
+posix implementation is included.
+</p>
+
+<p>Header file <var>exec-stream.h</var> defines interface of the library and uses only standard C++. 
+It does not include any platform-specific header files.
+</p>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

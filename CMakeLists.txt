@@ -22,7 +22,12 @@ message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 set(IPTV_SOURCES src/client.cpp
                  src/PVRIptvData.cpp
-                 src/PVRSimpleRecorder.cpp)
+                 src/PVRRecorder.cpp
+                 src/PVRUtils.cpp
+                 src/PVRRecJob.cpp
+                 src/PVRSchedulerThread.cpp
+                 src/PVRRecorderThread.cpp
+                 src/libexecstream/exec-stream.cpp)
 
 build_addon(pvr.iptvsimple IPTV DEPLIBS)
 

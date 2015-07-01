@@ -24,6 +24,7 @@
  */
 
 #include <vector>
+#include <string>
 #include "platform/util/StdString.h"
 #include "client.h"
 #include "platform/threads/threads.h"

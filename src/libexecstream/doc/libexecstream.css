@@ -1,0 +1,137 @@
+
+body {
+    background-color: #ffffff;
+}
+
+body, table, td, p {
+    color: #000000;
+}
+
+a {
+    color: #1010d0;
+}
+
+h1 {
+    font-size: 120%;
+    font-weight: bold;
+}
+
+h2 {
+    font-size: 100%;
+    font-weight: bold;
+    background-color: #f4f4ff;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 1em;
+}
+
+p {
+    text-indent: 3em;
+}
+
+col.linksbar {
+    width: 1em;
+}
+
+table.maintable {
+    width: 100%;
+    margin-top: 1em;
+    border-collapse: collapse;
+}
+
+td.linksbar {
+    vertical-align: top;
+    text-align: right;
+}
+
+div.linksbar {
+    margin-bottom: 8px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 1em;
+    padding-right: 1em;
+    background-color: #e0e0ff;
+}
+
+div.linksbar a:link {
+    text-decoration: none;
+    color: #0030d0;
+}
+div.linksbar a:active {
+    text-decoration: none;
+    color: #0030d0;
+}
+div.linksbar a:visited {
+    text-decoration: none;
+    color: #0060d0;
+}
+
+td.body {
+    vertical-align: top;
+    text-align: left;
+    padding-left: 1em;
+}
+
+pre {
+    color: #001090;
+}
+
+.comment {
+    color: #3540f0;
+}
+
+table.downloadlinks a {
+    margin-left: 1em;
+    margin-bottom: 5px;
+}
+
+div.membersdesc {
+    padding-left: 3em;
+}
+div.memberslink {
+    padding-top: 5px;
+    color: #001090;
+}
+div.memberslink a:link {
+    color: #001090;
+    text-decoration: none;
+}
+div.memberslink a:visited {
+    color: #001090;
+    text-decoration: none;
+}
+div.memberslink a:active {
+    color: #001090;
+    text-decoration: none;
+}
+div.memberslink a .link {
+    text-decoration: underline;
+}
+
+td.reference {
+    vertical-align: top;
+    text-align: left;
+    padding-left: 1em;
+}
+
+td.reference p {
+    font-family: verdana, arial, sans;
+    font-size: smaller;
+}
+
+td.reference h2 {
+    color: #001090;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 1em;
+    margin-top: 40px;
+    font-weight: normal;
+    font-family: courier new, fixed, courier;
+    font-size: smaller;
+}
+
+table.downloadlinks td {
+    vertical-align: top;
+    padding-top: 8px;
+    padding-left: 0.5em;
+}

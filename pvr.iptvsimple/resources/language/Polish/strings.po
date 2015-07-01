@@ -91,3 +91,11 @@ msgstr "Ustawienia nagrywania "
 msgctxt "#30051"
 msgid "Store folder"
 msgstr "Podaj katalog do zapisywania nagrań "
+
+msgctxt "#30052"
+msgid "Path to ffmpeg binary"
+msgstr "Podaj położenie pliku ffmpeg "
+
+msgctxt "#30053"
+msgid "Recompression params for ffmpeg"
+msgstr "Podaj paramatry rekompresji ffmpeg "

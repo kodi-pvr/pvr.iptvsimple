@@ -22,14 +22,17 @@
  *
  */
 
+
 #include "client.h"
 #include "kodi/xbmc_pvr_dll.h"
 #include "kodi/libKODI_guilib.h"
 #include "PVRIptvData.h"
-#include "PVRSimpleRecorder.h"
 #include "platform/util/util.h"
 
 using namespace ADDON;
+
+#include "PVRRecorder.h"
+
 
 #ifdef TARGET_WINDOWS
 #define snprintf _snprintf
@@ -38,7 +41,7 @@ using namespace ADDON;
 bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRIptvData   *m_data           = NULL;
-PVRSimpleRecorder *m_recorder   = NULL;
+PVRRecorder   *m_recorder   = NULL;
 bool           m_bIsPlaying     = false;
 PVRIptvChannel m_currentChannel;
 
@@ -62,6 +65,8 @@ bool        g_bCacheM3U     = false;
 bool        g_bCacheEPG     = false;
 int         g_iEPGLogos     = 0;
 std::string g_recordingsPath   = "";
+std::string g_ffmpegPath   = "";
+std::string g_ffmpegParams   = "";
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -171,6 +176,14 @@ void ADDON_ReadSettings(void)
   if (XBMC->GetSetting("recordingsPath", &buffer)) {
     g_recordingsPath = buffer;
   }
+  
+  if (XBMC->GetSetting("ffmpegPath", &buffer)) {
+    g_ffmpegPath = buffer;
+  }
+  
+  if (XBMC->GetSetting("ffmpegParams", &buffer)) {
+    g_ffmpegParams = buffer;
+  }
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -215,7 +228,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   ADDON_ReadSettings();
 
   m_data = new PVRIptvData;
-  m_recorder = new PVRSimpleRecorder(m_data, g_recordingsPath);
+  m_recorder = new PVRRecorder(m_data, g_recordingsPath, g_ffmpegPath, g_ffmpegParams);
   m_CurStatus = ADDON_STATUS_OK;
   m_bCreated = true;
 
@@ -445,23 +458,28 @@ PVR_ERROR SignalStatus(PVR_SIGNAL_STATUS &signalStatus)
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR AddTimer(const PVR_TIMER &timer) {
+PVR_ERROR AddTimer(const PVR_TIMER &timer)
+{
   return m_recorder->AddTimer (timer);
 }
 
-PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) {
+PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
+{
   return m_recorder->DeleteTimer (timer,bForceDelete);
 }
 
-PVR_ERROR UpdateTimer(const PVR_TIMER &timer) {
+PVR_ERROR UpdateTimer(const PVR_TIMER &timer)
+{
   return m_recorder->UpdateTimer (timer);
 }
 
-PVR_ERROR GetTimers(ADDON_HANDLE handle) {
+PVR_ERROR GetTimers(ADDON_HANDLE handle)
+{
   return m_recorder->GetTimers(handle);
 }
 
-int GetTimersAmount(void) {
+int GetTimersAmount(void)
+{
   int job = m_recorder->GetTimersAmount();
   return job; 
 }
