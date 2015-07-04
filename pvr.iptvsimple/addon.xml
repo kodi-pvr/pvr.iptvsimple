@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="1.12.0"
+  version="1.12.1"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>
     <c-pluff version="0.1"/>
-    <import addon="xbmc.pvr" version="1.9.7"/>
+    <import addon="xbmc.pvr" version="2.0.0"/>
   </requires>
   <extension
     point="xbmc.pvrclient"
