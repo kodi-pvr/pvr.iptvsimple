@@ -68,6 +68,9 @@ std::string g_recordingsPath   = "";
 std::string g_ffmpegPath   = "";
 std::string g_ffmpegParams   = "";
 std::string g_rtmpdumpPath   = "";
+std::string g_fileExtension = "";
+int         g_streamTimeout = 60;
+int         g_streamQuality = 1;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -189,6 +192,22 @@ void ADDON_ReadSettings(void)
   if (XBMC->GetSetting("rtmpdumpPath", &buffer)) {
     g_rtmpdumpPath = buffer;
   }
+  
+  if (XBMC->GetSetting("fileExtension", &buffer)) {
+    g_fileExtension = buffer;
+  }
+  
+  int streamTimeout;
+  if (XBMC->GetSetting("streamTimeout", &streamTimeout))
+  {
+    g_streamTimeout = streamTimeout;
+  }
+  
+  int streamQuality;
+  if (XBMC->GetSetting("streamQuality", &streamQuality))
+  {
+    g_streamQuality = streamQuality;
+  }
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -233,7 +252,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   ADDON_ReadSettings();
 
   m_data = new PVRIptvData;
-  m_recorder = new PVRRecorder(m_data, g_recordingsPath, g_ffmpegPath, g_ffmpegParams, g_rtmpdumpPath);
+  m_recorder = new PVRRecorder();
   m_CurStatus = ADDON_STATUS_OK;
   m_bCreated = true;
 

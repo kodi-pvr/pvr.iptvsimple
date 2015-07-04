@@ -1,0 +1,57 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Sinhala (Sri Lanka) (http://www.transifex.com/projects/p/kodi-main/language/si_LK/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: si_LK\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "පරිස්ථානය"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "ස්ථානීය පෙත (ස්ථානීය ජාලය අන්තර්ගතයි)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "දුරස්ථ පෙත (අන්තර්ජාල ලිපිනය)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "සාමාන්‍ය"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "M3U වාදන ලැයිස්තු පෙත"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "M3U වාදන ලැයිස්තු ලින්කුව"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG කට්ටල අංග"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV පෙත"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV ලිනුකුව"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "EPG කාල-මාරු (පැයවලින්)"

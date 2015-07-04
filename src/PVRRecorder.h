@@ -55,13 +55,11 @@ struct RecordingStruct
 
 class PVRRecorder {
 public:
-    PVRRecorder (PVRIptvData *data, const std::string &recordingsPath, const std::string &ffmpegPath, const std::string &ffmpegParams, const std::string &rtmpdumpPath);
+    PVRRecorder (void);
     PVR_ERROR AddTimer (const PVR_TIMER &timer);
     PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete);
     PVR_ERROR UpdateTimer(const PVR_TIMER &timer);
     PVR_ERROR GetTimers(ADDON_HANDLE handle);
     int GetTimersAmount(void);
-private:
-    PVRIptvData *m_data;
 };
 

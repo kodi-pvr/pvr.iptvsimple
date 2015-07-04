@@ -1,0 +1,89 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Slovak (Slovakia) (http://www.transifex.com/projects/p/kodi-main/language/sk_SK/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Umiestnenie"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Miestna cesta (vrátane miestnej LAN siete)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Vzdialená cesta (internetový prístup)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Hlavné"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Cesta k M3U zoznamu skladieb"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "URL adresa M3U zoznamu skladieb"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Číslovanie kanálov začína na"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "Nastavenia EPG"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "Cesta k XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "URL adresa XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Použiť časový posun pre všetky kanály"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Časový posun EPG (hodiny)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Ukladať do vyrovnávacej pamäte m3u v lokálnom úložisku"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Ukladať do vyrovnávacej pamäte XMLTV v lokálnom úložisku"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Logá staníc"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Priečinok s logami staníc"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Základná URL adresa log staníc"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Ignorovať"

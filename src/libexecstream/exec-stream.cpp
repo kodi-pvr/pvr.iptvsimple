@@ -391,6 +391,11 @@ std::istream & exec_stream_t::out()
     return m_impl->m_out;
 }
 
+std::istream & exec_stream_t::out(std::streamsize &bytes_read)
+{
+    bytes_read = m_impl->m_out_buffer.in_avail();
+    return m_impl->m_out;
+}
 std::istream & exec_stream_t::err()
 {
     return m_impl->m_err;

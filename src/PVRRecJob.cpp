@@ -27,16 +27,18 @@
 #include "PVRRecJob.h"
 #include <time.h>
 #include <string>
+#include <mutex>
 
 using namespace std;
 using namespace ADDON;
 
+extern PVRIptvData *m_data;
+mutex p_mutex;
 int p_RecJob_lock = 0;
 #define RECJOB_FILE_NAME "pvrsimplerecorder.cache"
 
-PVRRecJob::PVRRecJob(PVRIptvData *data)
+PVRRecJob::PVRRecJob()
 {
-    m_data = data;
     loadData();
     storeEntryData();
 }
@@ -215,6 +217,9 @@ bool PVRRecJob::delJobEntry(const int ientryIndex)
 
 bool PVRRecJob::setLock (void)
 {
+    p_mutex.lock();
+    return true;
+/*
     bool ok = false;
     int lock_rand = rand() % 10000000;
     while (ok==false) {
@@ -228,11 +233,13 @@ bool PVRRecJob::setLock (void)
         }
     }
     return true;
+    */
 }
 
 void PVRRecJob::setUnlock (void)
 {
-    p_RecJob_lock = 0;
+    p_mutex.unlock();
+    //p_RecJob_lock = 0;
 }
 string PVRRecJob::GetJobString(const PVR_REC_JOB_ENTRY &RecJobEntry )
 {

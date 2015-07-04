@@ -34,6 +34,8 @@ using namespace std;
 
 extern PVRRecJob *p_RecJob;
 extern PVRSchedulerThread *p_Scheduler;
+extern bool p_getTimersTransferFinished;
+bool s_triggerTimerUpdate;
 
 PVRSchedulerThread::PVRSchedulerThread(void)
 {
@@ -43,6 +45,7 @@ PVRSchedulerThread::PVRSchedulerThread(void)
     b_stop = false;
     b_lastCheck = time(NULL)-b_interval;
     CreateThread();
+    s_triggerTimerUpdate = false;
 }
 
 PVRSchedulerThread::~PVRSchedulerThread(void)
@@ -78,44 +81,49 @@ void *PVRSchedulerThread::Process(void)
             
             map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
             for (map<int,PVR_REC_JOB_ENTRY>::iterator rec=RecJobs.begin(); rec!=RecJobs.end(); ++rec)
-            {
-                //if (jobsUpdated == false)
+            {  
+                if (rec->second.Status==PVR_STREAM_STOPPED)
                 {
-                    if (rec->second.Status==PVR_STREAM_STOPPED)
-                    {
-                        XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
-                        p_RecJob->delJobEntry(rec->first);
-                        jobsUpdated = true;
-                    }
-                    else if (rec->second.Timer.endTime<time(NULL)) {
-                        XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
-                        p_RecJob->delJobEntry(rec->first);
-                        jobsUpdated = true;
-                    }
-                    else if ((rec->second.Timer.startTime-10)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED)
-                    {
-                        //Start new Recording
-                        XBMC->Log(LOG_NOTICE,"Try to start recording %s",rec->second.Timer.strTitle);
-                        startRecording(rec->second);
-                        jobsUpdated = true;
-                    }
-                    else if (rec->second.Timer.endTime<=time(NULL) && (rec->second.Timer.state==PVR_TIMER_STATE_RECORDING))
-                    {
-                        XBMC->Log(LOG_NOTICE,"Try to stop recording %s",rec->second.Timer.strTitle);
-                        //Stop Recording
-                        stopRecording(rec->second);
-                        jobsUpdated = true;
-                    }
+                    XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                    p_RecJob->delJobEntry(rec->first);
+                    s_triggerTimerUpdate = true;
+                    //jobsUpdated = true;
+                }
+                else if (rec->second.Timer.endTime<time(NULL)) {
+                    XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                    p_RecJob->delJobEntry(rec->first);
+                    s_triggerTimerUpdate = true;
+                    //jobsUpdated = true;
+                }
+                else if ((rec->second.Timer.startTime-10)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED)
+                {
+                    //Start new Recording
+                    XBMC->Log(LOG_NOTICE,"Try to start recording %s",rec->second.Timer.strTitle);
+                    startRecording(rec->second);
+                    s_triggerTimerUpdate = true;
+                    //jobsUpdated = true;
+                }
+                else if (rec->second.Timer.endTime<=time(NULL) && (rec->second.Timer.state==PVR_TIMER_STATE_RECORDING))
+                {
+                    XBMC->Log(LOG_NOTICE,"Try to stop recording %s",rec->second.Timer.strTitle);
+                    //Stop Recording
+                    stopRecording(rec->second);
+                    s_triggerTimerUpdate = true;
+                    //jobsUpdated = true;
                 }
             }
             
             p_RecJob->setUnlock();
-            
-            if (jobsUpdated)
+            if (p_getTimersTransferFinished==true && s_triggerTimerUpdate==true)
             {
-                PVR->TriggerTimerUpdate();
+                s_triggerTimerUpdate=false;
+                try {
+                    p_getTimersTransferFinished = false;
+                    PVR->TriggerTimerUpdate();
+                }catch( std::exception const & e ) {
+                    //Closing Kodi, TriggerTimerUpdate is not available
+                }
             }
-            //XBMC->Log(LOG_NOTICE,"Check done");
             b_lastCheck=time(NULL);
         }
     }
@@ -138,7 +146,6 @@ bool PVRSchedulerThread::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
             PVRRecorderThread* TPtr = new PVRRecorderThread(currentChannel,RecJobEntry.Timer.iClientIndex);
             entry.ThreadPtr = TPtr;
             p_RecJob->updateJobEntry(entry);
-            //PVR->TriggerTimerUpdate();
             return true;
         }
         else
@@ -147,9 +154,9 @@ bool PVRSchedulerThread::startRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
             entry.Status = PVR_STREAM_STOPPED;
             entry.Timer.state = PVR_TIMER_STATE_ERROR;
             p_RecJob->updateJobEntry(entry);
-            //PVR->TriggerTimerUpdate();
         }
     }
+    
     return false;
 }
 
@@ -162,7 +169,6 @@ bool PVRSchedulerThread::stopRecording (const PVR_REC_JOB_ENTRY &RecJobEntry)
         XBMC->Log(LOG_NOTICE,"Stopping recording %s",entry.Timer.strTitle);
         entry.Status = PVR_STREAM_IS_STOPPING;
         p_RecJob->updateJobEntry(entry);
-        //PVR->TriggerTimerUpdate();
     }
     
     return true;

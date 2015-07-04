@@ -65,6 +65,7 @@ public:
 
     std::ostream & in();
     std::istream & out();
+    std::istream & out(std::streamsize &bytes_read);
     std::istream & err();
 
     typedef unsigned long error_code_t;

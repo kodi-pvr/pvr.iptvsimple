@@ -1,0 +1,89 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Icelandic (Iceland) (http://www.transifex.com/projects/p/kodi-main/language/is_IS/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: is_IS\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Staðsetning"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Staðvær slóð (nærnet innifalið)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Fjarlæg slóð (Internet netfang)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Almennt"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Slóð að M3U spilunarlista"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "Veffang á M3U spilunarlista"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Númeraðar stöðvar byrja á"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "Stillingar fyrir rafræna dagskrárvísa (EPG)"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV Slóð"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV Netfang"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Setja tímahliðrun á allar rásir"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Tímahliðrun rafrænna dagskrárvísa (klukkutímar)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Setja m3u í staðvært flýtiminni"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Setja XMLTV í staðvært flýtiminni"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Merki Rása"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Mappa fyrir Merki Rása"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Netfang fyrir Merki Rása"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Hundsa"

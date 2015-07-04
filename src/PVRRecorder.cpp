@@ -30,23 +30,23 @@
 
 using namespace ADDON;
 using namespace std;
+
 extern PVRIptvData   *m_data;
-string p_recordingsPath;
-string p_ffmpegPath;
-string p_ffmpegParams;
-string p_rtmpdumpPath;
+extern bool s_triggerTimerUpdate;
+
+extern std::string g_recordingsPath;
+extern string g_fileExtension;
+
 PVRRecJob *p_RecJob;
 PVRSchedulerThread *p_Scheduler;
 
-PVRRecorder::PVRRecorder (PVRIptvData *data, const std::string &recordingsPath, const std::string &ffmpegPath, const std::string &ffmpegParams, const std::string &rtmpdumpPath)
+bool p_getTimersTransferFinished;
+
+PVRRecorder::PVRRecorder ()
 {
-    m_data = data;
-    p_recordingsPath = recordingsPath;
-    p_ffmpegPath = ffmpegPath;
-    p_ffmpegParams = ffmpegParams;
-    p_rtmpdumpPath = rtmpdumpPath;
-    p_RecJob = new PVRRecJob (data);
+    p_RecJob = new PVRRecJob ();
     p_Scheduler = new PVRSchedulerThread();
+    p_getTimersTransferFinished = true;
 }
 
 PVR_ERROR PVRRecorder::GetTimers(ADDON_HANDLE handle)
@@ -63,6 +63,7 @@ PVR_ERROR PVRRecorder::GetTimers(ADDON_HANDLE handle)
             PVR->TransferTimerEntry(handle, &rec->second.Timer); 
         }
     }
+    p_getTimersTransferFinished = true;
     p_RecJob->setUnlock();
     return PVR_ERROR_NO_ERROR;
 }
@@ -99,10 +100,10 @@ PVR_ERROR PVRRecorder::UpdateTimer(const PVR_TIMER &timer)
         }
         entry.Timer = myTimer;
         p_RecJob->updateJobEntry(entry);
-        PVR->TriggerTimerUpdate();
+        s_triggerTimerUpdate = true;
         return PVR_ERROR_NO_ERROR;
     }
-    PVR->TriggerTimerUpdate();
+    s_triggerTimerUpdate = true;
     return PVR_ERROR_FAILED;
 }
 
@@ -113,7 +114,7 @@ PVR_ERROR PVRRecorder::DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
     {
         if (p_Scheduler->stopRecording(entry))
         {
-            PVR->TriggerTimerUpdate();
+            s_triggerTimerUpdate = true;
             return PVR_ERROR_NO_ERROR;
         }
     }
@@ -122,7 +123,14 @@ PVR_ERROR PVRRecorder::DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
 
 PVR_ERROR PVRRecorder::AddTimer (const PVR_TIMER &timer)
 {
-    if (p_recordingsPath.length()==0)
+    
+    if (g_fileExtension.length()==0)
+	{
+	    XBMC->Log(LOG_ERROR,"No file extension. Please change addon configuration.");
+	    return PVR_ERROR_FAILED;
+    }
+        
+    if (g_recordingsPath.length()==0)
     {
         XBMC->Log(LOG_ERROR,"Store folder is not set. Please change addon configuration.");
         return PVR_ERROR_FAILED;
@@ -149,15 +157,18 @@ PVR_ERROR PVRRecorder::AddTimer (const PVR_TIMER &timer)
     
     //set end time for Job
     time_t endTime = timer.endTime;
-    /*
+    
     if (timer.startTime==0)
     {     
         EPG_TAG tag;
         PVR_ERROR myData = m_data->GetEPGTagForChannel(tag,channel, startTime, startTime);
         if (myData == PVR_ERROR_NO_ERROR)
+        {
+            if (tag.endTime>time(NULL)+60)
             endTime = tag.endTime;
+        }
     }
-    */
+    
     p_RecJob->setLock();
     
     //Check, if job is aleready schduled for this time
@@ -197,6 +208,7 @@ PVR_ERROR PVRRecorder::AddTimer (const PVR_TIMER &timer)
     recJobEntry.Timer.endTime = endTime;
     recJobEntry.strChannelName = currentChannel.strChannelName;
     p_RecJob->addJobEntry(recJobEntry);
+    s_triggerTimerUpdate = true;
     
     if (startTime<=time(NULL))
     {
@@ -212,6 +224,6 @@ PVR_ERROR PVRRecorder::AddTimer (const PVR_TIMER &timer)
         recJobEntry.Timer.state = PVR_TIMER_STATE_SCHEDULED;
         p_RecJob->updateJobEntry(recJobEntry);
     }
-    PVR->TriggerTimerUpdate();
+    s_triggerTimerUpdate = true;
     return PVR_ERROR_NO_ERROR;
 }

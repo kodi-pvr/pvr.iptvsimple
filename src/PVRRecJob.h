@@ -32,7 +32,7 @@ using namespace ADDON;
 class PVRRecJob
 {
 public:
-    PVRRecJob(PVRIptvData *data);
+    PVRRecJob(void);
     ~PVRRecJob(void);
     map<int,PVR_REC_JOB_ENTRY> getEntryData(void);
     bool addJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
@@ -44,7 +44,6 @@ public:
     bool setLock (void);
     void setUnlock (void);
 private:
-    PVRIptvData *m_data;
     map <int,PVR_REC_JOB_ENTRY> m_JobEntryData;
     bool loadData(void);
     bool storeEntryData (void);

@@ -1,0 +1,89 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Bulgarian (Bulgaria) (http://www.transifex.com/projects/p/kodi-main/language/bg_BG/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: bg_BG\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Локация"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Локален път (включва локалната мрежа)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Отдалечен път (интернет адрес)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Основни"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Път до M3U плейлист"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "Връзка до M3U плейлист"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Започни номерирането на каналите от"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "ЕПС настройки"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "Път до XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "Връзка до XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Приложи времевото отместване за всички канали"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "ЕПС времево отместване (часове)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Кеширай m3u в локално хранилище"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Кеширай XMLTV в локално хранилище"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Лога на каналите"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Папка с логата на каналите"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Връзка към базата  с логата на каналите"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Игнорирай"

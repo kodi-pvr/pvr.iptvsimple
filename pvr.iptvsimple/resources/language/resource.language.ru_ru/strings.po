@@ -1,0 +1,105 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Russian (Russia) (http://www.transifex.com/projects/p/kodi-main/language/ru_RU/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: ru_RU\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Расположение"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Локальный путь (в т.ч. Локальная Сеть)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Удалённый путь (сеть Интернет)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Основные"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Путь к M3U"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "Ссылка на M3U"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Начинать нумерацию каналов с"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "Установки EPG"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "Путь к XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "Ссылка на XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Применять сдвиг по времени для всех каналов"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Сдвиг по времени для EPG (часов)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Кэшировать m3u в локальное хранилище"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Кэшировать XMLTV в локальное хранилище"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Логотипы каналов"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Папка с логотипами каналов"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Основной URL для логитипов каналов"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Установки логотипов из XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Логотипы каналов из XMLTV"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Игнорировать"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Предпочтительно M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Предпочтительно XMLTV"

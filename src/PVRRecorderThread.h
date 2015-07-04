@@ -38,13 +38,10 @@ class PVRRecorderThread : PLATFORM::CThread
     virtual void *Process(void);
     bool isWorking;
     private:
-    void CorrectDurationFLVFile (const string &videoFile, const double &duration);
-    void CorrectBufferDurationFlV (char* buffer, const double &duration, const int &pos);
-    bool OpenStream (const string strStreamUrl);
-    void CloseStream (void);
-    //int ReadStream(char *buffer,const int buffersize);
-    int ReadStream(void *fileHandle);
+    FILE* t_proc;
     exec_stream_t es;
+    double t_duration;
+    void CorrectDurationFLVFile (const string &videoFile, const double &duration);
     int t_iClientIndex;
     PVRIptvChannel t_currentChannel;
     time_t t_startRecTime;

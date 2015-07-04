@@ -27,6 +27,7 @@ set(IPTV_SOURCES src/client.cpp
                  src/PVRRecJob.cpp
                  src/PVRSchedulerThread.cpp
                  src/PVRRecorderThread.cpp
+                 src/PVRPlayList.cpp
                  src/libexecstream/exec-stream.cpp)
 
 build_addon(pvr.iptvsimple IPTV DEPLIBS)

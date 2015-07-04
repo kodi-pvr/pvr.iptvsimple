@@ -1,0 +1,105 @@
+# Kodi Media Center language file
+# Addon Name: PVR IPTV Simple Client
+# Addon id: pvr.iptvsimple
+# Addon Provider: nightik
+msgid ""
+msgstr ""
+"Project-Id-Version: KODI Main\n"
+"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Kodi Translation Team\n"
+"Language-Team: Lithuanian (Lithuania) (http://www.transifex.com/projects/p/kodi-main/language/lt_LT/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: lt_LT\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+msgctxt "#30000"
+msgid "Location"
+msgstr "Vieta"
+
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Vietinis kelias (įskaitant vietinį tinklą)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Nuotolinis kelias (interneto adresas)"
+
+msgctxt "#30010"
+msgid "General"
+msgstr "Pagrindinis"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "M3U grojaraščio kelias"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "M3U grojaraščio adresas"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Kanalų numeracija prasideda nuo"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG nustatymai"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV kelias"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV adresas"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Pritaikyti laiko poslinkį visiems kanalams"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "EPG laiko poslinkis (valandomis)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Laikinai saugoti m3u vietiniame diske"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Laikinai saugoti XMLTV vietiniame diske"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Kanalų logotipai"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Kanalų logotipų aplankas"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Kanalų logotipų adreso bazė"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "XMLTV logotipų parinktys"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Kanalų logotipai iš XMLTV"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Ignoruoti"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Pirmenybė M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Pirmenybė XMLTV"
