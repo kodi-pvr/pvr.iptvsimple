@@ -143,4 +143,3 @@ msgstr "Preferuj listę M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Preferuj dane XMLTV"
->>>>>>> upstream/master:pvr.iptvsimple/resources/language/resource.language.pl_pl/strings.po
