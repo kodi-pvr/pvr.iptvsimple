@@ -475,6 +475,7 @@ PVR_ERROR UpdateTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED
 void DemuxAbort(void) {}
 DemuxPacket* DemuxRead(void) { return NULL; }
 unsigned int GetChannelSwitchDelay(void) { return 0; }
+bool IsTimeshifting(void) { return false; }
 void PauseStream(bool bPaused) {}
 bool CanSeekStream(void) { return false; }
 bool SeekTime(int,bool,double*) { return false; }
