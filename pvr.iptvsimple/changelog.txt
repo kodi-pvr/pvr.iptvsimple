@@ -1,3 +1,6 @@
+v1.12.4
+- Updated to PVR API v3.0.0 (API 1.9.7 compatibility mode)
+
 v1.12.3
 - Updated to PVR API v2.1.0
 - Automatically fill in platform and library name
