@@ -487,7 +487,7 @@ PVR_ERROR AddTimer(const PVR_TIMER &timer)
   return m_recorder->AddTimer (timer);
 }
 
-PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
+PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete, bool bDeleteScheduled)
 {
   return m_recorder->DeleteTimer (timer,bForceDelete);
 }
