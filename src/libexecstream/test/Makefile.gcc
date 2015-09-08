@@ -1,0 +1,21 @@
+
+builddir=build
+srcdir=..
+
+CC=g++
+
+CDEBUGFLAGS= -g -D _DEBUG
+
+CFLAGS= -I .. -Wall $(CDEBUGFLAGS)
+
+all : $(builddir)/exec-stream-test
+
+$(builddir)/exec-stream.o : $(srcdir)/exec-stream.cpp $(srcdir)/exec-stream.h $(srcdir)/posix/exec-stream-helpers.h $(srcdir)/posix/exec-stream-helpers.cpp $(srcdir)/posix/exec-stream-impl.cpp
+	$(CC) -c $(CFLAGS) -o $(builddir)/exec-stream.o $(srcdir)/exec-stream.cpp
+
+$(builddir)/exec-stream-test.o : ./exec-stream-test.cpp $(srcdir)/exec-stream.h
+	$(CC) -c $(CFLAGS) -o $(builddir)/exec-stream-test.o ./exec-stream-test.cpp
+
+$(builddir)/exec-stream-test : $(builddir)/exec-stream.o $(builddir)/exec-stream-test.o
+	$(CC) $(CFLAGS) -o $(builddir)/exec-stream-test $(builddir)/exec-stream-test.o $(builddir)/exec-stream.o -lpthread
+

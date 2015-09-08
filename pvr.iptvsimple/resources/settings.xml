@@ -30,4 +30,16 @@
     <setting id="sep3" label="30040" type="lsep"/>
     <setting id="logoFromEpg" type="enum" label="30041" default="0" lvalues="30042|30043|30044"/>
   </category>
+  
+  <!-- Recordings -->
+  <category label="30100">
+    <setting id="recordingsPath" label="30101" type="folder" />
+    <setting id="fileExtension" label="30105" type="text" default="flv" />
+    <setting id="rtmpdumpPath" label="30102" type="file" />
+    <setting id="ffmpegPath" label="30103" type="file" />
+    <setting id="ffmpegParams" label="30104" type="text" default="-ar 44100" />
+    <setting id="streamTimeout" label="30109" type="number" default="60" />
+    <setting id="streamQuality" type="enum" label="30106" lvalues="30107|30108" default="1" />
+  </category>
+
 </settings>

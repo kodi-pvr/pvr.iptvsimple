@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html
+     PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+     "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>libexecstream reference</title>
+<link href="libexecstream.css" type="text/css" rel="stylesheet"></link>
+</head>
+
+<body>
+
+<h1>The libexecstream library reference</h1>
+
+<table class="maintable">
+<col class="linksbar"></col>
+<col class="reference"></col>
+<tr>
+
+<td class="linksbar" valign="top">
+         <div class="linksbar"><a href="index.html#overview">Overview</a></div>
+         <div class="linksbar"><a href="index.html#download">Download</a></div>
+         <div class="linksbar"><a href="index.html#installation">Installation</a></div>
+         <div class="linksbar">Reference</div>
+         <div class="linksbar"><a href="news.html">News</a></div>
+         <div class="linksbar"><a href="license.html">License</a></div>
+         <div class="sflogo"><!--SFLOGO--></div>
+</td>
+
+<td class="reference">
+
+<p>Libexecstream provides one class, exec_stream_t, which has the following members:
+</p>
+
+<h2><a name="error_t"></a>class error_t : public std::exception</h2>
+<p>Exceptions thrown from exec_stream_t members are derived from error_t. error_t is derived from std::exception and has no additional
+public members besides constructors. Exceptions may be thrown from any exec_stream_t member function except destructor and accessors: in(), out() and err().
+Writing to in() and reading out() and err() will also throw exceptions when errors occur.
+</p>
+
+<h2><a name="constructor0"></a>exec_stream_t()</h2>
+<p>Constructs exec_stream_t in the default state. You may change timeouts, buffer limits and text or binary modes
+of the streams before <a href=#start1>start</a>ing child process (see <a href="#set_buffer_limit">set_buffer_limit</a>, 
+<a href="#set_binary_mode">set_binary_mode</a>, <a href="#set_text_mode">set_text_mode</a>, 
+<a href="#set_wait_timeout">set_wait_timeout</a>). In the default state, amount of data buffered for writing to child's stdin,
+and amount of data read in advance from child's stdout and stderr is unlimited. On windows, all streams are in the text mode.
+</p>
+
+<h2><a name="constructor1"></a>exec_stream_t( std::string const &amp; program, std::string const &amp; arguments )</h2>
+<p>Constructs exec_stream_t in the default state, then starts program with arguments. Arguments containing space should be
+included in double quotation marks, and double quote in such arguments should be escaped with backslash.
+</p>
+
+<h2><a name="constructor2"></a>template&lt; class iterator &gt; exec_stream_t( std::string const &amp; program, iterator args_begin, iterator args_end )</h2>
+<p>Constructs exec_stream_t in the default state, then starts program with arguments specified by the range args_begin, args_end. 
+args_begin should be an input iterator that when dereferenced gives value assignable to std::string. 
+Spaces and double quotes in arguments need not to be escaped.
+</p>
+
+<h2><a name="destructor"></a>~exec_stream_t()</h2>
+<p>Writes (with <a href="#set_wait_timeout">timeout</a>) all pending data to child stdin, 
+closes streams and waits (with <a href="#set_wait_timeout">timeout</a>) for child process to stop.
+</p>
+
+<h2><a name="in"></a>std::ostream &amp; in()</h2>
+<p>Returns output stream for writing to child's stdin.
+</p>
+
+<h2><a name="out"></a>std::istream &amp; out()</h2>
+<p>Returns input stream for reading child's stdout.
+</p>
+
+<h2><a name="err"></a>std::istream &amp; err()</h2>
+<p>Returns input stream for reading child's stderr.
+</p>
+
+<h2><a name="close_in"></a>bool close_in()</h2>
+<p>Closes child's standard input after writing (with <a href="#set_wait_timeout">timeout</a>) all pending data to it.
+</p>
+
+<h2><a name="start1"></a>void start( std::string const &amp; program, std::string const &amp; arguments )</h2>
+<p>Starts program with arguments. Arguments are space-separated. Arguments containing space should be
+included in double quotation marks, and double quote in such arguments should be escaped with backslash.
+</p>
+
+<h2><a name="start2"></a>template&lt; class iterator &gt; void start( std::string const &amp; program, iterator args_begin, iterator args_end )</h2>
+<p>Starts program with arguments specified by the range args_begin, args_end. args_begin should be an input iterator that when dereferenced 
+gives value assignable to std::string. Spaces and double quotes in arguments need not to be escaped.
+</p>
+
+<h2><a name="stream_kind_t"></a>enum stream_kind_t { s_in=1, s_out=2, s_err=4, s_all=s_in|s_out|s_err, s_child=8  }</h2>
+<p>Used for the first argument to <a href="#set_buffer_limit">set_buffer_limit</a>, <a href="#set_wait_timeout">set_wait_timeout</a>, 
+<a href="#set_binary_mode">set_binary_mode</a>, <a href="#set_text_mode">set_text_mode</a> for selecting stream to operate upon.
+</p>
+
+<h2><a name="set_buffer_limit"></a>void set_buffer_limit( int stream_kind, std::size_t size )</h2>
+<p>For <a href="#out">out()</a> and <a href="#err">err()</a> streams (when <a href="#stream_kind_t">exec_stream_t::s_out</a> 
+or <a href="#stream_kind_t">exec_stream_t::s_err</a> is set in the stream_kind), sets maximum amount of data to read from child process 
+before it will be consumed by reading from <a href="#out">out()</a> or <a href="#err">err()</a>.
+</p>
+<p>For <a href="#in">in()</a> stream (when <a href="#stream_kind_t">exec_stream_t::s_in</a> is set in the stream_kind)
+sets maximum amount of data to store as result of writing to <a href="#in">in()</a> before it will be consumed by child process.
+</p>
+<p>Setting limit for both input and output streams may cause deadlock in situations when both your program and child process
+are writing data to each other without reading it. Such deadlock will cause the <a href="#set_wait_timeout">timeout</a> to expire while
+writing to <a href="#in">in()</a>.
+</p>
+<p>When size argument to set_buffer_limit is 0, buffers are considered unlimited, and will grow unlimited if one side produce data that the other side does not consume.
+This is the default state after exec_stream_t creation.
+</p>
+<p> set_buffer_limit will throw <a href="#error_t">exception</a> when called while child process is running.
+</p>
+
+<h2><a name="timeout_t"></a>typedef unsigned long timeout_t</h2>
+<p>Type of second argument to <a href="#set_wait_timeout">set_wait_timeout</a> - timeout in milliseconds.
+</p>
+
+<h2><a name="set_wait_timeout"></a>void set_wait_timeout( int stream_kind, timeout_t milliseconds )</h2>
+<p>For <a href="#out">out()</a> and <a href="#err">err()</a> streams (when <a href="#stream_kind_t">exec_stream_t::s_out</a> 
+or <a href="#stream_kind_t">exec_stream_t::s_err</a> is set in the stream_kind), sets maximum amount of time to wait for a 
+child process to produce data when reading <a href="#out">out()</a> and <a href="#err">err()</a> respectively.
+</p>
+<p>For <a href="#in">in()</a> stream (when <a href="#stream_kind_t">exec_stream_t::s_in</a> is set in the stream_kind), 
+sets maximum amount of time to wait for a child process to consume data that were written to <a href="#in">in()</a>. 
+Note that when <a href="#set_buffer_limit">buffer limit</a> for in() is not set, writing to in() always writes to buffer and does not wait for child at all.
+</p>
+<p>If that amount of time is exceeded while reading in() or writing to out() and err(), exception is thrown.
+</p>
+<p>When <a href="#stream_kind_t">exec_stream_t::s_child</a> is set in the stream kind, set_wait_timeout sets the maximum amount of time to wait
+for a child process to terminate when <a href="#close">close</a> is called. If that amount of time is exceeded, close() will return false.
+</p>
+<p> set_wait_timeout will throw <a href="#error_t">exception</a> when called while child process is running.
+</p>
+
+<h2><a name="set_text_mode"></a>void set_text_mode( int stream_kind )</h2>
+<p>
+sets stream specified by <a href="#stream_kind_t">stream_kind</a> to text mode. In text mode, in the data written to child's stdin,
+\n are replaced by \r\n; and in the data read from child's stdout and stderr, \r\n are replaced by \n. Text mode is the default on Windows. 
+set_text_mode has no effect on Linux.
+</p>
+<p> set_text_mode will throw <a href="#error_t">exception</a> when called while child process is running.
+</p>
+
+<h2><a name="set_binary_mode"></a>void set_binary_mode( int stream_kind )</h2>
+<p>
+sets stream specified by <a href="#stream_kind_t">stream_kind</a> to binary mode. All data written or read from streams are passed unchanged.
+set_binary_mode has no effect on Linux.
+</p>
+<p> set_binary_mode will throw <a href="#error_t">exception</a> when called while child process is running.
+</p>
+
+<h2><a name="close"></a>bool close()</h2>
+<p>Writes (with <a href="#set_wait_timeout">timeout</a>) all pending data to child stdin, 
+closes streams and waits (with <a href="#set_wait_timeout">timeout</a>) for child process to stop.
+If timeout expires while waiting for child to stop, returns false. Otherwise, returns true.
+</p>
+
+<h2><a name="kill"></a>void kill()</h2>
+<p>
+Terminates child process, without giving it a chance of proper shutdown.
+</p>
+
+<h2><a name="exit_code"></a>int exit_code()</h2>
+<p>Returns exit code from child process. Exit code usually is available only after close. Exception is thrown if chid process
+has not yet terminated. Exit code has indeterminable value after <a href="#kill">kill</a>.
+</p>
+
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>

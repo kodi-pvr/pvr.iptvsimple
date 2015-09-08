@@ -1,0 +1,19 @@
+
+builddir=build
+srcdir=..
+
+CLDEBUGFLAG=/Zi /D "_DEBUG"
+LIBDEBUGFLAG=d
+CLFLAGS=/nologo /I .. /W3 /EHsc /MD$(LIBDEBUGFLAG) $(CLDEBUGFLAG) /Fo"$(builddir)/" /Fe"$(builddir)/" /Fd"$(builddir)/exec-stream-test.pdb"
+
+all : $(builddir)/exec-stream-test.exe
+
+$(builddir)/exec-stream.obj : $(srcdir)/exec-stream.cpp $(srcdir)/exec-stream.h $(srcdir)/win/exec-stream-helpers.h $(srcdir)/win/exec-stream-helpers.cpp $(srcdir)/win/exec-stream-impl.cpp
+	cl /c $(CLFLAGS) $(srcdir)/exec-stream.cpp
+
+$(builddir)/exec-stream-test.obj : ./exec-stream-test.cpp $(srcdir)/exec-stream.h
+	cl /c $(CLFLAGS) ./exec-stream-test.cpp
+
+$(builddir)/exec-stream-test.exe : $(builddir)/exec-stream.obj $(builddir)/exec-stream-test.obj 
+	cl $(CLFLAGS) $(builddir)/exec-stream-test.obj $(builddir)/exec-stream.obj /link /subsystem:console
+
