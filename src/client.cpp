@@ -487,7 +487,7 @@ PVR_ERROR AddTimer(const PVR_TIMER &timer)
   return m_recorder->AddTimer (timer);
 }
 
-PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
+PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete, bool bDeleteScheduled)
 {
   return m_recorder->DeleteTimer (timer,bForceDelete);
 }
@@ -542,6 +542,7 @@ PVR_ERROR GetTimerTypes(PVR_TIMER_TYPE types[], int *size) { return PVR_ERROR_NO
 void DemuxAbort(void) {}
 DemuxPacket* DemuxRead(void) { return NULL; }
 unsigned int GetChannelSwitchDelay(void) { return 0; }
+bool IsTimeshifting(void) { return false; }
 void PauseStream(bool bPaused) {}
 bool CanSeekStream(void) { return false; }
 bool SeekTime(int,bool,double*) { return false; }

@@ -256,9 +256,9 @@ string PVRRecJob::GetJobString(const PVR_REC_JOB_ENTRY &RecJobEntry )
     Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.state);
     Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iPriority);
     Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iLifetime);
-    if (RecJobEntry.Timer.bIsRepeating==true)
-        Line = Line+"\"|\"1";
-    else
+    //if (RecJobEntry.Timer.bIsRepeating==true)
+    //    Line = Line+"\"|\"1";
+    //else
         Line = Line+"\"|\"0";
     Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.firstDay);
     Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iWeekdays);
@@ -298,7 +298,7 @@ bool PVRRecJob::ParseJobString(string BuffStr, PVR_REC_JOB_ENTRY &RecJobEntry)
     RecJobEntry.Timer.state           = (PVR_TIMER_STATE) strtoint(lineVect[6]);
     RecJobEntry.Timer.iPriority       = strtoint(lineVect[7]);
     RecJobEntry.Timer.iLifetime       = strtoint(lineVect[8]);
-    if (strtoint(lineVect[9])==1) RecJobEntry.Timer.bIsRepeating = true; else RecJobEntry.Timer.bIsRepeating = false;
+    //if (strtoint(lineVect[9])==1) RecJobEntry.Timer.bIsRepeating = true; else RecJobEntry.Timer.bIsRepeating = false;
     RecJobEntry.Timer.firstDay        = strtoint(lineVect[10]);
     RecJobEntry.Timer.iWeekdays       = strtoint(lineVect[11]);
     RecJobEntry.Timer.iEpgUid         = strtoint(lineVect[12]);

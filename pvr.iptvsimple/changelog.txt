@@ -1,3 +1,14 @@
+v1.12.4
+- Updated to PVR API v3.0.0 (API 1.9.7 compatibility mode)
+
+v1.12.3
+- Updated to PVR API v2.1.0
+- Automatically fill in platform and library name
+
+v1.12.2
+- Debian packaging: fix library install path
+- Miscellaneous backend fixes
+
 v1.12.1
 - updated to API v2.0.0
 
