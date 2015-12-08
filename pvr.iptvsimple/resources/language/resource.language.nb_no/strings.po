@@ -22,11 +22,11 @@ msgstr "Plassering"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr "Lokal bane (inkluder lokalt nettverk)"
+msgstr "Lokal sti (inkluder lokalt nettverk)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Ekstern bane (internett adresse)"
+msgstr "Ekstern sti (internett adresse)"
 
 msgctxt "#30010"
 msgid "General"
@@ -34,7 +34,7 @@ msgstr "Generelt"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "M3U spillelistebane"
+msgstr "M3U spillelistesti"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
@@ -50,7 +50,7 @@ msgstr "Innstillinger for programguide"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr "XMLTV bane"
+msgstr "XMLTV sti"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
@@ -84,6 +84,22 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Plassering for kanallogoer"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "XMLTV Logo alternativer"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Kanallogoer fra XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignorer"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Foretrekk M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Foretrekk XMLTV"

@@ -28,6 +28,10 @@ msgctxt "#30012"
 msgid "M3U Play List URL"
 msgstr "Danh sách đường dẫn M3U"
 
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Bắt đầu tại kênh"
+
 msgctxt "#30020"
 msgid "EPG Settings"
 msgstr "Tùy chọn Thông tin kênh"
@@ -35,6 +39,18 @@ msgstr "Tùy chọn Thông tin kênh"
 msgctxt "#30030"
 msgid "Channels Logos"
 msgstr "Biểu tượng kênh"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Thư mục biểu tượng kênh"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Cài đặt biểu tượng XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Biểu tượng kênh từ XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"

@@ -84,6 +84,22 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "URL base per a logos de canals"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Opcions de logos XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logos de canals de XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignora"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Preferir M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "XMLTV preferit"

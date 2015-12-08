@@ -20,6 +20,86 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Lokacija"
 
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Lokalna Putanja (uključi Lokalnu Mrežu)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Udaljena putanja (Internet adresa)"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Opšte"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "Putanja M3U Liste za Reprodukciju"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "URL M3U Liste za Reprodukciju"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Numerisanje kanala počinje od"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG podešavanja"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV Putanja"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV URL"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Primeni Vremenski Pomeraj Na Sve Kanale"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "EPG Vremenski Pomeraj (sati)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Keširaj m3u na lokalno skladište"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Keširaj XMLTV na lokalno skladište"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Logoi Kanala"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Fascikla Logoa Kanala"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Osnovni URL Logoa Kanala"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "XMLTV Opcije Logoa"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logoi Kanala od XMLTV"
+
+msgctxt "#30042"
+msgid "Ignore"
+msgstr "Ignorisati"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Dati prednost M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Dati prednost XMLTV"

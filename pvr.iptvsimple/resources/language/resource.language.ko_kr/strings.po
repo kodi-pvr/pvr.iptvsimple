@@ -87,3 +87,7 @@ msgstr "채널 로고 기본 URL"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "무시"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "XMLTV 우선"

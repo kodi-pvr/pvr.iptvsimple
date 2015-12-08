@@ -27,3 +27,7 @@ msgstr "General"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignorar"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "XMLTV preferido"

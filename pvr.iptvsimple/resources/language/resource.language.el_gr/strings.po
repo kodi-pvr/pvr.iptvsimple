@@ -84,6 +84,22 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Βασική URL Λογότυπων Καναλιών"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Επιλογές λογότυπων XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Λογότυπα καναλιών από XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Αγνόηση"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Προτίμηση M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Προτίμηση XMLTV"

@@ -46,7 +46,7 @@ msgstr "Започни номерирането на каналите от"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "ЕПС настройки"
+msgstr "Настройки на справочника"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
@@ -62,7 +62,7 @@ msgstr "Приложи времевото отместване за всички
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "ЕПС времево отместване (часове)"
+msgstr "Времево отместване в справочника (часове)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"

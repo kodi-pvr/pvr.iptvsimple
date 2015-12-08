@@ -22,23 +22,23 @@ msgstr "Emplacement"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr "Chemin local (inclue le réseau local)"
+msgstr "Chemin local (inclure le réseau local)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Chemin d'accès (adresse internet)"
+msgstr "Chemin d'accès distant (adresse internet)"
 
 msgctxt "#30010"
 msgid "General"
-msgstr "General"
+msgstr "Général"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "Chemin de la Playlist M3U"
+msgstr "Chemin de la liste de chaînes M3U"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr "URL de la playlist M3U"
+msgstr "URL de la liste de chaînes M3U"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
@@ -46,7 +46,7 @@ msgstr "Début de numérotation des chaînes"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "Paramètres du guide des programmes"
+msgstr "Guide TV"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
@@ -58,19 +58,19 @@ msgstr "URL du fichier XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr "Appliquer un décalage horaire sur toutes les chaînes"
+msgstr "Appliquer un différé sur toutes les chaînes"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "Décalage horaire de l'EPG (heures)"
+msgstr "Différé du guide des programmes (heures)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Cache de m3u sur le stockage local"
+msgstr "Cacher le M3U sur le stockage local"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Cache de XMLTV sur le stockage local"
+msgstr "Cacher le XMLTV sur le stockage local"
 
 msgctxt "#30030"
 msgid "Channels Logos"
@@ -82,7 +82,7 @@ msgstr "Dossier des logos de chaînes"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "URL de base des Logos de chaînes"
+msgstr "URL de base des logos de chaînes"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
@@ -90,7 +90,7 @@ msgstr "Options des logos XMLTV"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
-msgstr "Logos des chaînes de XMLTV"
+msgstr "Logos des chaînes à partir du XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"

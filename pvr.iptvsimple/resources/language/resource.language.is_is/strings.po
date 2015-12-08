@@ -84,6 +84,22 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Netfang fyrir Merki Rása"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Valkostir XMLTV táknmynda"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Rása-táknmyndir frá XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Hundsa"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Kjósa M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Kjósa XMLTV"

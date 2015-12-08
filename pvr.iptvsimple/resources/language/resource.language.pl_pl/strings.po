@@ -74,15 +74,15 @@ msgstr "Buforuj lokalnie dane XMLTV "
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr "Logo kanałów "
+msgstr "Loga kanałów "
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr "Folder logo kanałów "
+msgstr "Folder z logami kanałów "
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "Bazowy adres URL logo kanałów "
+msgstr "Bazowy adres URL z logami kanałów "
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
