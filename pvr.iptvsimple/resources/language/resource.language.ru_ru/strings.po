@@ -103,3 +103,31 @@ msgstr "Предпочтительно M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Предпочтительно XMLTV"
+
+msgctxt "#30050"
+msgid "Sources"
+msgstr "Источники"
+
+msgctxt "#30051"
+msgid "Number of sources"
+msgstr "Количество источников"
+
+msgctxt "#30052"
+msgid "Source"
+msgstr "Источник"
+
+msgctxt "#30053"
+msgid "Channels list"
+msgstr "Список каналов"
+
+msgctxt "#30054"
+msgid "Group name format"
+msgstr "Формат имени группы"
+
+msgctxt "#30055"
+msgid "Channel name format"
+msgstr "Формат имени канала"
+
+msgctxt "#30056"
+msgid "Logo file name format"
+msgstr "Формат имени файла логотипа"

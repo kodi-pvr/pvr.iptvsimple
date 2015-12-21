@@ -1,3 +1,10 @@
+v4.0.0
+- Implemented support for multiple (up to 10) m3u sources
+- Added settings for channel, group and logo name format
+- Added support for the url-tvg tag
+- Fixed support for tvg-logo URLs
+- Enabled the pause button
+
 v3.0.0
 - Initial Kodi v18 version
 

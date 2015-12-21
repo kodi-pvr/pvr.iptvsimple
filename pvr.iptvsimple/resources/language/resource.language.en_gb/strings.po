@@ -113,3 +113,31 @@ msgstr ""
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr ""
+
+msgctxt "#30050"
+msgid "Sources"
+msgstr ""
+
+msgctxt "#30051"
+msgid "Number of sources"
+msgstr ""
+
+msgctxt "#30052"
+msgid "Source"
+msgstr ""
+
+msgctxt "#30053"
+msgid "Channels list"
+msgstr ""
+
+msgctxt "#30054"
+msgid "Group name format"
+msgstr ""
+
+msgctxt "#30055"
+msgid "Channel name format"
+msgstr ""
+
+msgctxt "#30056"
+msgid "Logo file name format"
+msgstr ""

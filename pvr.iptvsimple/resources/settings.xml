@@ -1,33 +1,371 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <settings>
-  <!-- M3U -->
   <category label="30010">
-    <setting id="sep1" label="30010" type="lsep"/> 
-    <setting id="m3uPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
-    <setting id="m3uPath" type="file" label="30011" default="" visible="eq(-1,0)"/>
-    <setting id="m3uUrl" type="text" label="30012" default="" visible="eq(-2,1)"/>
-    <setting id="m3uCache" type="bool" label="30025" default="true" visible="eq(-3,1)"/>
-    <setting id="startNum" type="number" label="30013" default="1" />
+    <!-- Channels list -->
+    <setting label="30053" type="lsep"/> 
+    <setting id="startNum" type="number" label="30013" default="1"/>
+    <setting id="groupNameFormat_0" type="text" label="30054" default="%s"/>
+    <setting id="channelNameFormat_0" type="text" label="30055" default="%s"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep"/>
+    <setting id="epgPathType_0" type="enum" label="30000" lvalues="30001|30002" default="1"/>
+    <setting id="epgPath_0" type="file" label="30021" default="" visible="eq(-1,0)"/>
+    <setting id="epgUrl_0" type="text" label="30022" default="" visible="eq(-2,1)"/>
+    <setting id="epgCache_0" type="bool" label="30026" default="true" visible="eq(-3,1)"/>
+    <setting id="epgTimeShift_0" type="slider" label="30024" default="0" range="-12,.5,12" option="float"/>
+    <setting id="epgTSOverride_0" type="bool" label="30023" default="false"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep"/>
+    <setting id="logoPathType_0" type="enum" label="30000" lvalues="30001|30002" default="1"/>
+    <setting id="logoPath_0" type="folder" label="30031" default="" visible="eq(-1,0)"/>
+    <setting id="logoBaseUrl_0" type="text" label="30032" default="" visible="eq(-2,1)"/>
+    <setting id="logoFileNameFormat_0" type="text" label="30056" default="%s"/>
   </category>
+  
+  <category label="30050">
+    <setting id="sourceCount" type="enum" label="30051" default="0" values="1|2|3|4|5|6|7|8|9|10"/>
+    
+    <!-- _______________________________ Source 1 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-1,-1)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 1" type="lsep" visible="gt(-2,-1)"/>
+    <setting type="sep" visible="gt(-3,-1)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-4,-1)"/> 
+    <setting id="m3uPathType_1" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-5,-1)"/>
+    <setting id="m3uPath_1" type="file" label="30011" default="" visible="eq(-1,0)+gt(-6,-1)"/>
+    <setting id="m3uUrl_1" type="text" label="30012" default="" visible="eq(-2,1)+gt(-7,-1)"/>
+    <setting id="m3uCache_1" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-8,-1)"/>
+    <setting id="groupNameFormat_1" type="text" label="30054" default="%s" visible="gt(-9,-1)"/>
+    <setting id="channelNameFormat_1" type="text" label="30055" default="%s" visible="gt(-10,-1)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-11,-1)"/>
+    <setting id="epgPathType_1" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-12,-1)"/>
+    <setting id="epgPath_1" type="file" label="30021" default="" visible="eq(-1,0)+gt(-13,-1)"/>
+    <setting id="epgUrl_1" type="text" label="30022" default="" visible="eq(-2,1)+gt(-14,-1)"/>
+    <setting id="epgCache_1" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-15,-1)"/>
+    <setting id="epgTimeShift_1" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-16,-1)"/>
+    <setting id="epgTSOverride_1" type="bool" label="30023" default="false" visible="gt(-17,-1)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-18,-1)"/>
+    <setting id="logoPathType_1" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-19,-1)"/>
+    <setting id="logoPath_1" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-20,-1)"/>
+    <setting id="logoBaseUrl_1" type="text" label="30032" default="" visible="eq(-2,1)+gt(-21,-1)"/>
+    <setting id="logoFileNameFormat_1" type="text" label="30056" default="%s" visible="gt(-22,-1)"/>
+    <setting id="logoFromEpg_1" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-23,-1)"/>
+    
+    <setting type="sep" visible="gt(-24,-1)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 2 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-25,0)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 2" type="lsep" visible="gt(-26,0)"/>
+    <setting type="sep" visible="gt(-27,0)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-28,0)"/> 
+    <setting id="m3uPathType_2" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-29,0)"/>
+    <setting id="m3uPath_2" type="file" label="30011" default="" visible="eq(-1,0)+gt(-30,0)"/>
+    <setting id="m3uUrl_2" type="text" label="30012" default="" visible="eq(-2,1)+gt(-31,0)"/>
+    <setting id="m3uCache_2" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-32,0)"/>
+    <setting id="groupNameFormat_2" type="text" label="30054" default="%s" visible="gt(-33,0)"/>
+    <setting id="channelNameFormat_2" type="text" label="30055" default="%s" visible="gt(-34,0)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-35,0)"/>
+    <setting id="epgPathType_2" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-36,0)"/>
+    <setting id="epgPath_2" type="file" label="30021" default="" visible="eq(-1,0)+gt(-37,0)"/>
+    <setting id="epgUrl_2" type="text" label="30022" default="" visible="eq(-2,1)+gt(-38,0)"/>
+    <setting id="epgCache_2" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-39,0)"/>
+    <setting id="epgTimeShift_2" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-40,0)"/>
+    <setting id="epgTSOverride_2" type="bool" label="30023" default="false" visible="gt(-41,0)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-42,0)"/>
+    <setting id="logoPathType_2" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-43,0)"/>
+    <setting id="logoPath_2" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-44,0)"/>
+    <setting id="logoBaseUrl_2" type="text" label="30032" default="" visible="eq(-2,1)+gt(-45,0)"/>
+    <setting id="logoFileNameFormat_2" type="text" label="30056" default="%s" visible="gt(-46,0)"/>
+    <setting id="logoFromEpg_2" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-47,0)"/>
+    
+    <setting type="sep" visible="gt(-48,0)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 3 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-49,1)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 3" type="lsep" visible="gt(-50,1)"/>
+    <setting type="sep" visible="gt(-51,1)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-52,1)"/> 
+    <setting id="m3uPathType_3" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-53,1)"/>
+    <setting id="m3uPath_3" type="file" label="30011" default="" visible="eq(-1,0)+gt(-54,1)"/>
+    <setting id="m3uUrl_3" type="text" label="30012" default="" visible="eq(-2,1)+gt(-55,1)"/>
+    <setting id="m3uCache_3" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-56,1)"/>
+    <setting id="groupNameFormat_3" type="text" label="30054" default="%s" visible="gt(-57,1)"/>
+    <setting id="channelNameFormat_3" type="text" label="30055" default="%s" visible="gt(-58,1)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-59,1)"/>
+    <setting id="epgPathType_3" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-60,1)"/>
+    <setting id="epgPath_3" type="file" label="30021" default="" visible="eq(-1,0)+gt(-61,1)"/>
+    <setting id="epgUrl_3" type="text" label="30022" default="" visible="eq(-2,1)+gt(-62,1)"/>
+    <setting id="epgCache_3" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-63,1)"/>
+    <setting id="epgTimeShift_3" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-64,1)"/>
+    <setting id="epgTSOverride_3" type="bool" label="30023" default="false" visible="gt(-65,1)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-66,1)"/>
+    <setting id="logoPathType_3" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-67,1)"/>
+    <setting id="logoPath_3" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-68,1)"/>
+    <setting id="logoBaseUrl_3" type="text" label="30032" default="" visible="eq(-2,1)+gt(-69,1)"/>
+    <setting id="logoFileNameFormat_3" type="text" label="30056" default="%s" visible="gt(-70,1)"/>
+    <setting id="logoFromEpg_3" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-71,1)"/>
+    
+    <setting type="sep" visible="gt(-72,1)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 4 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-73,2)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 4" type="lsep" visible="gt(-74,2)"/>
+    <setting type="sep" visible="gt(-75,2)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-76,2)"/> 
+    <setting id="m3uPathType_4" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-77,2)"/>
+    <setting id="m3uPath_4" type="file" label="30011" default="" visible="eq(-1,0)+gt(-78,2)"/>
+    <setting id="m3uUrl_4" type="text" label="30012" default="" visible="eq(-2,1)+gt(-79,2)"/>
+    <setting id="m3uCache_4" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-80,2)"/>
+    <setting id="groupNameFormat_4" type="text" label="30054" default="%s" visible="gt(-81,2)"/>
+    <setting id="channelNameFormat_4" type="text" label="30055" default="%s" visible="gt(-82,2)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-83,2)"/>
+    <setting id="epgPathType_4" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-84,2)"/>
+    <setting id="epgPath_4" type="file" label="30021" default="" visible="eq(-1,0)+gt(-85,2)"/>
+    <setting id="epgUrl_4" type="text" label="30022" default="" visible="eq(-2,1)+gt(-86,2)"/>
+    <setting id="epgCache_4" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-87,2)"/>
+    <setting id="epgTimeShift_4" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-88,2)"/>
+    <setting id="epgTSOverride_4" type="bool" label="30023" default="false" visible="gt(-89,2)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-90,2)"/>
+    <setting id="logoPathType_4" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-91,2)"/>
+    <setting id="logoPath_4" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-92,2)"/>
+    <setting id="logoBaseUrl_4" type="text" label="30032" default="" visible="eq(-2,1)+gt(-93,2)"/>
+    <setting id="logoFileNameFormat_4" type="text" label="30056" default="%s" visible="gt(-94,2)"/>
+    <setting id="logoFromEpg_4" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-95,2)"/>
+    
+    <setting type="sep" visible="gt(-96,2)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 5 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-97,3)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 5" type="lsep" visible="gt(-98,3)"/>
+    <setting type="sep" visible="gt(-99,3)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-100,3)"/> 
+    <setting id="m3uPathType_5" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-101,3)"/>
+    <setting id="m3uPath_5" type="file" label="30011" default="" visible="eq(-1,0)+gt(-102,3)"/>
+    <setting id="m3uUrl_5" type="text" label="30012" default="" visible="eq(-2,1)+gt(-103,3)"/>
+    <setting id="m3uCache_5" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-104,3)"/>
+    <setting id="groupNameFormat_5" type="text" label="30054" default="%s" visible="gt(-105,3)"/>
+    <setting id="channelNameFormat_5" type="text" label="30055" default="%s" visible="gt(-106,3)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-107,3)"/>
+    <setting id="epgPathType_5" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-108,3)"/>
+    <setting id="epgPath_5" type="file" label="30021" default="" visible="eq(-1,0)+gt(-109,3)"/>
+    <setting id="epgUrl_5" type="text" label="30022" default="" visible="eq(-2,1)+gt(-110,3)"/>
+    <setting id="epgCache_5" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-111,3)"/>
+    <setting id="epgTimeShift_5" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-112,3)"/>
+    <setting id="epgTSOverride_5" type="bool" label="30023" default="false" visible="gt(-113,3)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-114,3)"/>
+    <setting id="logoPathType_5" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-115,3)"/>
+    <setting id="logoPath_5" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-116,3)"/>
+    <setting id="logoBaseUrl_5" type="text" label="30032" default="" visible="eq(-2,1)+gt(-117,3)"/>
+    <setting id="logoFileNameFormat_5" type="text" label="30056" default="%s" visible="gt(-118,3)"/>
+    <setting id="logoFromEpg_5" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-119,3)"/>
+    
+    <setting type="sep" visible="gt(-120,3)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 6 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-121,4)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 6" type="lsep" visible="gt(-122,4)"/>
+    <setting type="sep" visible="gt(-123,4)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-124,4)"/> 
+    <setting id="m3uPathType_6" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-125,4)"/>
+    <setting id="m3uPath_6" type="file" label="30011" default="" visible="eq(-1,0)+gt(-126,4)"/>
+    <setting id="m3uUrl_6" type="text" label="30012" default="" visible="eq(-2,1)+gt(-127,4)"/>
+    <setting id="m3uCache_6" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-128,4)"/>
+    <setting id="groupNameFormat_6" type="text" label="30054" default="%s" visible="gt(-129,4)"/>
+    <setting id="channelNameFormat_6" type="text" label="30055" default="%s" visible="gt(-130,4)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-131,4)"/>
+    <setting id="epgPathType_6" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-132,4)"/>
+    <setting id="epgPath_6" type="file" label="30021" default="" visible="eq(-1,0)+gt(-133,4)"/>
+    <setting id="epgUrl_6" type="text" label="30022" default="" visible="eq(-2,1)+gt(-134,4)"/>
+    <setting id="epgCache_6" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-135,4)"/>
+    <setting id="epgTimeShift_6" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-136,4)"/>
+    <setting id="epgTSOverride_6" type="bool" label="30023" default="false" visible="gt(-137,4)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-138,4)"/>
+    <setting id="logoPathType_6" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-139,4)"/>
+    <setting id="logoPath_6" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-140,4)"/>
+    <setting id="logoBaseUrl_6" type="text" label="30032" default="" visible="eq(-2,1)+gt(-141,4)"/>
+    <setting id="logoFileNameFormat_6" type="text" label="30056" default="%s" visible="gt(-142,4)"/>
+    <setting id="logoFromEpg_6" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-143,4)"/>
+    
+    <setting type="sep" visible="gt(-144,4)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 7 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-145,5)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 7" type="lsep" visible="gt(-146,5)"/>
+    <setting type="sep" visible="gt(-147,5)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-148,5)"/> 
+    <setting id="m3uPathType_7" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-149,5)"/>
+    <setting id="m3uPath_7" type="file" label="30011" default="" visible="eq(-1,0)+gt(-150,5)"/>
+    <setting id="m3uUrl_7" type="text" label="30012" default="" visible="eq(-2,1)+gt(-151,5)"/>
+    <setting id="m3uCache_7" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-152,5)"/>
+    <setting id="groupNameFormat_7" type="text" label="30054" default="%s" visible="gt(-153,5)"/>
+    <setting id="channelNameFormat_7" type="text" label="30055" default="%s" visible="gt(-154,5)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-155,5)"/>
+    <setting id="epgPathType_7" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-156,5)"/>
+    <setting id="epgPath_7" type="file" label="30021" default="" visible="eq(-1,0)+gt(-157,5)"/>
+    <setting id="epgUrl_7" type="text" label="30022" default="" visible="eq(-2,1)+gt(-158,5)"/>
+    <setting id="epgCache_7" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-159,5)"/>
+    <setting id="epgTimeShift_7" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-160,5)"/>
+    <setting id="epgTSOverride_7" type="bool" label="30023" default="false" visible="gt(-161,5)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-162,5)"/>
+    <setting id="logoPathType_7" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-163,5)"/>
+    <setting id="logoPath_7" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-164,5)"/>
+    <setting id="logoBaseUrl_7" type="text" label="30032" default="" visible="eq(-2,1)+gt(-165,5)"/>
+    <setting id="logoFileNameFormat_7" type="text" label="30056" default="%s" visible="gt(-166,5)"/>
+    <setting id="logoFromEpg_7" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-167,5)"/>
+    
+    <setting type="sep" visible="gt(-168,5)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 8 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-169,6)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 8" type="lsep" visible="gt(-170,6)"/>
+    <setting type="sep" visible="gt(-171,6)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-172,6)"/> 
+    <setting id="m3uPathType_8" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-173,6)"/>
+    <setting id="m3uPath_8" type="file" label="30011" default="" visible="eq(-1,0)+gt(-174,6)"/>
+    <setting id="m3uUrl_8" type="text" label="30012" default="" visible="eq(-2,1)+gt(-175,6)"/>
+    <setting id="m3uCache_8" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-176,6)"/>
+    <setting id="groupNameFormat_8" type="text" label="30054" default="%s" visible="gt(-177,6)"/>
+    <setting id="channelNameFormat_8" type="text" label="30055" default="%s" visible="gt(-178,6)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-179,6)"/>
+    <setting id="epgPathType_8" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-180,6)"/>
+    <setting id="epgPath_8" type="file" label="30021" default="" visible="eq(-1,0)+gt(-181,6)"/>
+    <setting id="epgUrl_8" type="text" label="30022" default="" visible="eq(-2,1)+gt(-182,6)"/>
+    <setting id="epgCache_8" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-183,6)"/>
+    <setting id="epgTimeShift_8" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-184,6)"/>
+    <setting id="epgTSOverride_8" type="bool" label="30023" default="false" visible="gt(-185,6)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-186,6)"/>
+    <setting id="logoPathType_8" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-187,6)"/>
+    <setting id="logoPath_8" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-188,6)"/>
+    <setting id="logoBaseUrl_8" type="text" label="30032" default="" visible="eq(-2,1)+gt(-189,6)"/>
+    <setting id="logoFileNameFormat_8" type="text" label="30056" default="%s" visible="gt(-190,6)"/>
+    <setting id="logoFromEpg_8" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-191,6)"/>
+    
+    <setting type="sep" visible="gt(-192,6)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 9 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-193,7)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 9" type="lsep" visible="gt(-194,7)"/>
+    <setting type="sep" visible="gt(-195,7)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-196,7)"/> 
+    <setting id="m3uPathType_9" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-197,7)"/>
+    <setting id="m3uPath_9" type="file" label="30011" default="" visible="eq(-1,0)+gt(-198,7)"/>
+    <setting id="m3uUrl_9" type="text" label="30012" default="" visible="eq(-2,1)+gt(-199,7)"/>
+    <setting id="m3uCache_9" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-200,7)"/>
+    <setting id="groupNameFormat_9" type="text" label="30054" default="%s" visible="gt(-201,7)"/>
+    <setting id="channelNameFormat_9" type="text" label="30055" default="%s" visible="gt(-202,7)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-203,7)"/>
+    <setting id="epgPathType_9" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-204,7)"/>
+    <setting id="epgPath_9" type="file" label="30021" default="" visible="eq(-1,0)+gt(-205,7)"/>
+    <setting id="epgUrl_9" type="text" label="30022" default="" visible="eq(-2,1)+gt(-206,7)"/>
+    <setting id="epgCache_9" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-207,7)"/>
+    <setting id="epgTimeShift_9" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-208,7)"/>
+    <setting id="epgTSOverride_9" type="bool" label="30023" default="false" visible="gt(-209,7)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-210,7)"/>
+    <setting id="logoPathType_9" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-211,7)"/>
+    <setting id="logoPath_9" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-212,7)"/>
+    <setting id="logoBaseUrl_9" type="text" label="30032" default="" visible="eq(-2,1)+gt(-213,7)"/>
+    <setting id="logoFileNameFormat_9" type="text" label="30056" default="%s" visible="gt(-214,7)"/>
+    <setting id="logoFromEpg_9" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-215,7)"/>
+    
+    <setting type="sep" visible="gt(-216,7)"/>
+    <!-- _____________________________________________________________________________ -->
+    
+    <!-- _______________________________ Source 10 _____________________________________ -->
+    <setting label="" type="lsep" visible="gt(-217,8)"/>
+    <setting label="$ADDON[pvr.iptvsimple 30052] 10" type="lsep" visible="gt(-218,8)"/>
+    <setting type="sep" visible="gt(-219,8)"/>
+    
+    <!-- Channels list -->
+    <setting label="30053" type="lsep" visible="gt(-220,8)"/> 
+    <setting id="m3uPathType_10" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-221,8)"/>
+    <setting id="m3uPath_10" type="file" label="30011" default="" visible="eq(-1,0)+gt(-222,8)"/>
+    <setting id="m3uUrl_10" type="text" label="30012" default="" visible="eq(-2,1)+gt(-223,8)"/>
+    <setting id="m3uCache_10" type="bool" label="30025" default="true" visible="eq(-3,1)+gt(-224,8)"/>
+    <setting id="groupNameFormat_10" type="text" label="30054" default="%s" visible="gt(-225,8)"/>
+    <setting id="channelNameFormat_10" type="text" label="30055" default="%s" visible="gt(-226,8)"/>
+    
+    <!-- EPG -->
+    <setting label="30020" type="lsep" visible="gt(-227,8)"/>
+    <setting id="epgPathType_10" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-228,8)"/>
+    <setting id="epgPath_10" type="file" label="30021" default="" visible="eq(-1,0)+gt(-229,8)"/>
+    <setting id="epgUrl_10" type="text" label="30022" default="" visible="eq(-2,1)+gt(-230,8)"/>
+    <setting id="epgCache_10" type="bool" label="30026" default="true" visible="eq(-3,1)+gt(-231,8)"/>
+    <setting id="epgTimeShift_10" type="slider" label="30024" default="0" range="-12,.5,12" option="float" visible="gt(-232,8)"/>
+    <setting id="epgTSOverride_10" type="bool" label="30023" default="false" visible="gt(-233,8)"/>
+    
+    <!-- Logos -->
+    <setting label="30030" type="lsep" visible="gt(-234,8)"/>
+    <setting id="logoPathType_10" type="enum" label="30000" lvalues="30001|30002" default="1" visible="gt(-235,8)"/>
+    <setting id="logoPath_10" type="folder" label="30031" default="" visible="eq(-1,0)+gt(-236,8)"/>
+    <setting id="logoBaseUrl_10" type="text" label="30032" default="" visible="eq(-2,1)+gt(-237,8)"/>
+    <setting id="logoFileNameFormat_10" type="text" label="30056" default="%s" visible="gt(-238,8)"/>
+    <setting id="logoFromEpg_10" type="enum" label="30041" default="0" lvalues="30042|30043|30044" visible="gt(-239,8)"/>
+    
+    <setting type="sep" visible="gt(-240,8)"/>
+    <!-- _____________________________________________________________________________ -->
 
-  <!-- EPG -->
-  <category label="30020">
-    <setting id="sep2" label="30020" type="lsep"/>
-    <setting id="epgPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
-    <setting id="epgPath" type="file" label="30021" default="" visible="eq(-1,0)"/>
-    <setting id="epgUrl" type="text" label="30022" default="" visible="eq(-2,1)"/>
-    <setting id="epgCache" type="bool" label="30026" default="true" visible="eq(-3,1)"/>
-    <setting id="epgTimeShift" type="slider" label="30024" default="0" range="-12,.5,12" option="float"/>
-    <setting id="epgTSOverride" type="bool" label="30023" default="false"/>
-  </category>
-
-  <!-- Logos -->
-  <category label="30030">
-    <setting id="sep3" label="30030" type="lsep"/>
-    <setting id="logoPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
-    <setting id="logoPath" type="folder" label="30031" default="" visible="eq(-1,0)"/>
-    <setting id="logoBaseUrl" type="text" label="30032" default="" visible="eq(-2,1)"/>
-    <setting id="sep3" label="30040" type="lsep"/>
-    <setting id="logoFromEpg" type="enum" label="30041" default="0" lvalues="30042|30043|30044"/>
   </category>
 </settings>
