@@ -12,7 +12,16 @@ debian/kodi-pvr-iptvsimple.substvars
 debian/kodi-pvr-iptvsimple/
 debian/tmp/
 obj-x86_64-linux-gnu/
+CMakeCache.txt
+CMakeFiles/
+CPackConfig.cmake
+CPackSourceConfig.cmake
+Makefile
+cmake_install.cmake
+pvr.iptvsimple.so
+pvr.iptvsimple.so.*
 pvr.iptvsimple/addon.xml
+install_manifest.txt
 
 # clion
 .idea/
