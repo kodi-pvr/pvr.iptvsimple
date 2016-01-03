@@ -86,7 +86,7 @@ msgstr "Βασική URL Λογότυπων Καναλιών"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "Επιλογές λογότυπων XMLTV"
+msgstr "Επιλογές Λογότυπων XMLTV"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
