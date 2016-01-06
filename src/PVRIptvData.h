@@ -24,9 +24,9 @@
  */
 
 #include <vector>
-#include "platform/util/StdString.h"
+#include "p8-platform/util/StdString.h"
 #include "client.h"
-#include "platform/threads/threads.h"
+#include "p8-platform/threads/threads.h"
 
 struct PVRIptvEpgEntry
 {
@@ -81,7 +81,7 @@ struct PVRIptvEpgGenre
   std::string       strGenre;
 };
 
-class PVRIptvData : public PLATFORM::CThread
+class PVRIptvData : public P8PLATFORM::CThread
 {
 public:
   PVRIptvData(void);
