@@ -20,9 +20,29 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Ligging"
 
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Afgeleë pad (Internet adres)"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Algemeen"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG verstellings"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "XMLTV pad"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "XMLTV URL"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "EPG tyd skuif (ure)"
 
 msgctxt "#30042"
 msgid "Ignore"
