@@ -476,6 +476,7 @@ void DemuxAbort(void) {}
 DemuxPacket* DemuxRead(void) { return NULL; }
 unsigned int GetChannelSwitchDelay(void) { return 0; }
 bool IsTimeshifting(void) { return false; }
+bool IsRealTimeStream(void) { return true; }
 void PauseStream(bool bPaused) {}
 bool CanSeekStream(void) { return false; }
 bool SeekTime(int,bool,double*) { return false; }
