@@ -1,3 +1,6 @@
+v2.0.1
+ - Updated to PVR API v4.2.0
+
 v2.0.0
 - Initial Kodi Krypton version.
 
