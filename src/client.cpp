@@ -386,11 +386,6 @@ void CloseLiveStream(void)
   m_bIsPlaying = false;
 }
 
-int GetCurrentClientChannel(void)
-{
-  return m_currentChannel.iUniqueId;
-}
-
 bool SwitchChannel(const PVR_CHANNEL &channel)
 {
   CloseLiveStream();
