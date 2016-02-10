@@ -1,0 +1,23 @@
+# build artifacts
+build/
+debian/changelog
+debian/files
+debian/kodi-pvr-iptvsimple-dbg.debhelper.log
+debian/kodi-pvr-iptvsimple-dbg.substvars
+debian/kodi-pvr-iptvsimple-dbg/
+debian/kodi-pvr-iptvsimple.debhelper.log
+debian/kodi-pvr-iptvsimple.postinst.debhelper
+debian/kodi-pvr-iptvsimple.postrm.debhelper
+debian/kodi-pvr-iptvsimple.substvars
+debian/kodi-pvr-iptvsimple/
+debian/tmp/
+obj-x86_64-linux-gnu/
+pvr.iptvsimple/addon.xml
+
+# clion
+.idea/
+
+# Eclipse/CDT
+.cproject
+.project
+.settings/
