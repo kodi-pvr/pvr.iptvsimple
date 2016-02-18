@@ -1,3 +1,7 @@
+v2.1.1
+- Fix: Don't ignore channels logo if base logo path setting is empty.
+- Fix: Don't apply base logo path to channels logo if tvg-logo has a full NET path.
+
 v2.1.0
 - Updated to PVR addon API v5.0.0
 
