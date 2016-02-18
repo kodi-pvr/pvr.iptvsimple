@@ -968,14 +968,18 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
 
 void PVRIptvData::ApplyChannelsLogos()
 {
-  if (m_strLogoPath.empty())
-    return;
-
   std::vector<PVRIptvChannel>::iterator channel;
   for(channel = m_channels.begin(); channel < m_channels.end(); ++channel)
   {
     if (!channel->strTvgLogo.empty())
-      channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
+    {
+      if (!m_strLogoPath.empty() 
+        // special proto
+        && channel->strTvgLogo.find("://") == std::string::npos)
+        channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
+      else
+        channel->strLogoPath = channel->strTvgLogo;
+    }
   }
 }
 
