@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Ligging"
 
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "Lokale pad (sluit lokale netwerlk in)"
+
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
 msgstr "Afgeleë pad (Internet adres)"
@@ -27,6 +31,18 @@ msgstr "Afgeleë pad (Internet adres)"
 msgctxt "#30010"
 msgid "General"
 msgstr "Algemeen"
+
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "M3U speellys pad"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "M3U speellys URL"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "Nommer van kanale begin by"
 
 msgctxt "#30020"
 msgid "EPG Settings"
@@ -40,10 +56,50 @@ msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV URL"
 
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Pas tyd skuif toe op alle kanale"
+
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
 msgstr "EPG tyd skuif (ure)"
 
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Kas M3U by lokale stoor"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Kas XMLTV by lokale stoor"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Kanale logos"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "Kanale logos gids"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "Kanale logos basis URL"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "XMLTV logos opsies"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Kanale logos vanaf XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignoreer"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Verkies M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Verkies XMLTV"

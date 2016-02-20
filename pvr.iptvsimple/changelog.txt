@@ -1,3 +1,6 @@
+v1.12.11
+- updated language files from Transifex
+
 v1.12.10
 - Fix: Don't ignore channels logo if base logo path setting is empty.
 - Fix: Don't apply base logo path to channels logo if tvg-logo has a full NET path.
