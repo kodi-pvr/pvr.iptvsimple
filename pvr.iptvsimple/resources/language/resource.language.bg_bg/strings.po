@@ -87,3 +87,11 @@ msgstr "Връзка към базата  с логата на каналите"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Игнорирай"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Предпочитай M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Предпочитай XMLTV"
