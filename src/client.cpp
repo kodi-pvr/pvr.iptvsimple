@@ -23,11 +23,13 @@
  */
 
 #include "client.h"
-#include "kodi/xbmc_pvr_dll.h"
 #include "PVRIptvData.h"
 #include "p8-platform/util/util.h"
-
-using namespace ADDON;
+#include <kodi/api2/AddonLib.hpp>
+#include <kodi/api2/addon/General.hpp>
+#include <kodi/api2/addon/VFSUtils.hpp>
+#include <kodi/api2/pvr/General.hpp>
+#include "kodi/xbmc_pvr_dll.h"
 
 #ifdef TARGET_WINDOWS
 #define snprintf _snprintf
@@ -45,9 +47,6 @@ PVRIptvChannel m_currentChannel;
  */
 std::string g_strUserPath   = "";
 std::string g_strClientPath = "";
-
-CHelper_libXBMC_addon *XBMC = NULL;
-CHelper_libXBMC_pvr   *PVR  = NULL;
 
 std::string g_strTvgPath    = "";
 std::string g_strM3UPath    = "";
@@ -90,79 +89,66 @@ extern "C" {
 
 void ADDON_ReadSettings(void)
 {
-  char buffer[1024];
-  int iPathType = 0;
-  if (!XBMC->GetSetting("m3uPathType", &iPathType)) 
-  {
-    iPathType = 1;
-  }
+  int iPathType = 1;
+  if (!KodiAPI::AddOn::General::GetSettingInt("m3uPathType", iPathType)) 
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'iPathType' setting, falling back to %i as default", iPathType);
   if (iPathType)
   {
-    if (XBMC->GetSetting("m3uUrl", &buffer)) 
-    {
-      g_strM3UPath = buffer;
-    }
-    if (!XBMC->GetSetting("m3uCache", &g_bCacheM3U))
-    {
-      g_bCacheM3U = true;
-    }
+    if (!KodiAPI::AddOn::General::GetSettingString("m3uUrl", g_strM3UPath)) 
+      KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'm3uUrl' setting");
+
+    g_bCacheM3U = true;
+    if (!KodiAPI::AddOn::General::GetSettingBoolean("m3uCache", g_bCacheM3U))
+      KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'm3uCache' setting, falling back to %s as default", g_bCacheM3U ? "true" : "false");
   }
   else
   {
-    if (XBMC->GetSetting("m3uPath", &buffer)) 
-    {
-      g_strM3UPath = buffer;
-    }
+    if (!KodiAPI::AddOn::General::GetSettingString("m3uPath", g_strM3UPath)) 
+      KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'g_strM3UPath' setting");
     g_bCacheM3U = false;
   }
-  if (!XBMC->GetSetting("startNum", &g_iStartNumber)) 
-  {
-    g_iStartNumber = 1;
-  }
-  if (!XBMC->GetSetting("epgPathType", &iPathType)) 
-  {
-    iPathType = 1;
-  }
+
+  if (!KodiAPI::AddOn::General::GetSettingInt("startNum", g_iStartNumber)) 
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'startNum' setting, falling back to %i as default", g_iStartNumber);
+
+  if (!KodiAPI::AddOn::General::GetSettingInt("epgPathType", iPathType)) 
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'epgPathType' setting, falling back to %i as default", iPathType);
   if (iPathType)
   {
-    if (XBMC->GetSetting("epgUrl", &buffer)) 
-    {
-      g_strTvgPath = buffer;
-    }
-    if (!XBMC->GetSetting("epgCache", &g_bCacheEPG))
-    {
-      g_bCacheEPG = true;
-    }
+    if (!KodiAPI::AddOn::General::GetSettingString("epgUrl", g_strTvgPath))
+      KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'epgUrl' setting");
+
+    g_bCacheEPG = true;
+    if (!KodiAPI::AddOn::General::GetSettingBoolean("epgCache", g_bCacheEPG))
+      KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'epgCache' setting, falling back to %s as default", g_bCacheEPG ? "true" : "false");
   }
   else
   {
-    if (XBMC->GetSetting("epgPath", &buffer)) 
-    {
-      g_strTvgPath = buffer;
-    }
+    if (!KodiAPI::AddOn::General::GetSettingString("epgPath", g_strTvgPath))
+      KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'epgPath' setting");
+
     g_bCacheEPG = false;
   }
+
   float fShift;
-  if (XBMC->GetSetting("epgTimeShift", &fShift))
-  {
+  if (KodiAPI::AddOn::General::GetSettingFloat("epgTimeShift", fShift))
     g_iEPGTimeShift = (int)(fShift * 3600.0); // hours to seconds
-  }
-  if (!XBMC->GetSetting("epgTSOverride", &g_bTSOverride))
-  {
-    g_bTSOverride = true;
-  }
-  if (!XBMC->GetSetting("logoPathType", &iPathType)) 
-  {
-    iPathType = 1;
-  }
-  if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer)) 
-  {
-    g_strLogoPath = buffer;
-  }
+  else
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'epgTimeShift' setting, falling back to %i as default", g_iEPGTimeShift);
+
+  if (!KodiAPI::AddOn::General::GetSettingBoolean("epgTSOverride", g_bTSOverride))
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'epgTSOverride' setting, falling back to %s as default", g_bTSOverride ? "true" : "false");
+
+  iPathType = 1;
+  if (!KodiAPI::AddOn::General::GetSettingInt("logoPathType", iPathType))
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'logoPathType' setting, falling back to %i as default", iPathType);
+
+  if (!KodiAPI::AddOn::General::GetSettingString(iPathType ? "logoBaseUrl" : "logoPath", g_strLogoPath))
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get '%s' setting", iPathType ? "logoBaseUrl" : "logoPath");
 
   // Logos from EPG
-  if (!XBMC->GetSetting("logoFromEpg", &g_iEPGLogos))
-    g_iEPGLogos = 0;
+  if (!KodiAPI::AddOn::General::GetSettingInt("logoFromEpg", g_iEPGLogos))
+    KodiAPI::Log(ADDON_LOG_ERROR, "Couldn't get 'logoFromEpg' setting, falling back to %i as default", g_iEPGLogos);
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -174,35 +160,20 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
 
   PVR_PROPERTIES* pvrprops = (PVR_PROPERTIES*)props;
 
-  XBMC = new CHelper_libXBMC_addon;
-  if (!XBMC->RegisterMe(hdl))
+  if (KodiAPI::InitLibAddon(hdl) != API_SUCCESS)
   {
-    SAFE_DELETE(XBMC);
+    fprintf(stderr, "pvr.iptvsimple InitLibAddon failed with %s\n", KodiAPI_ErrorCodeToString(KODI_API_lasterror));
     return ADDON_STATUS_PERMANENT_FAILURE;
   }
 
-  PVR = new CHelper_libXBMC_pvr;
-  if (!PVR->RegisterMe(hdl))
-  {
-    SAFE_DELETE(PVR);
-    SAFE_DELETE(XBMC);
-    return ADDON_STATUS_PERMANENT_FAILURE;
-  }
-
-  XBMC->Log(LOG_DEBUG, "%s - Creating the PVR IPTV Simple add-on", __FUNCTION__);
+  KodiAPI::Log(ADDON_LOG_DEBUG, "%s - Creating the PVR IPTV Simple add-on", __FUNCTION__);
 
   m_CurStatus     = ADDON_STATUS_UNKNOWN;
   g_strUserPath   = pvrprops->strUserPath;
   g_strClientPath = pvrprops->strClientPath;
 
-  if (!XBMC->DirectoryExists(g_strUserPath.c_str()))
-  {
-#ifdef TARGET_WINDOWS
-    CreateDirectory(g_strUserPath.c_str(), NULL);
-#else
-    XBMC->CreateDirectory(g_strUserPath.c_str());
-#endif
-  }
+  if (!KodiAPI::AddOn::VFSUtils::DirectoryExists(g_strUserPath))
+    KodiAPI::AddOn::VFSUtils::CreateDirectory(g_strUserPath);
 
   ADDON_ReadSettings();
 
@@ -221,6 +192,7 @@ ADDON_STATUS ADDON_GetStatus()
 void ADDON_Destroy()
 {
   delete m_data;
+  KodiAPI::Finalize();
   m_bCreated = false;
   m_CurStatus = ADDON_STATUS_UNKNOWN;
 }
@@ -240,24 +212,12 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
   // reset cache and restart addon 
 
   std::string strFile = GetUserFilePath(M3U_FILE_NAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-  {
-#ifdef TARGET_WINDOWS
-    DeleteFile(strFile.c_str());
-#else
-    XBMC->DeleteFile(strFile.c_str());
-#endif
-  }
+  if (KodiAPI::AddOn::VFSUtils::FileExists(strFile))
+    KodiAPI::AddOn::VFSUtils::DeleteFile(strFile);
 
   strFile = GetUserFilePath(TVG_FILE_NAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-  {
-#ifdef TARGET_WINDOWS
-    DeleteFile(strFile.c_str());
-#else
-    XBMC->DeleteFile(strFile.c_str());
-#endif
-  }
+  if (KodiAPI::AddOn::VFSUtils::FileExists(strFile))
+    KodiAPI::AddOn::VFSUtils::DeleteFile(strFile);
 
   return ADDON_STATUS_NEED_RESTART;
 }

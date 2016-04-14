@@ -22,6 +22,8 @@
  *
  */
 
+#include "client.h"
+
 #include <sstream>
 #include <string>
 #include <fstream>
@@ -31,6 +33,11 @@
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
 #include "p8-platform/util/StringUtils.h"
+#include <kodi/api2/AddonLib.hpp>
+#include <kodi/api2/addon/General.hpp>
+#include <kodi/api2/addon/VFSUtils.hpp>
+#include <kodi/api2/pvr/Transfer.hpp>
+#include <kodi/api2/pvr/Trigger.hpp>
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"
@@ -44,7 +51,6 @@
 #define SECONDS_IN_DAY          86400
 #define GENRES_MAP_FILENAME     "genres.xml"
 
-using namespace ADDON;
 using namespace rapidxml;
 
 template<class Ch>
@@ -87,7 +93,7 @@ PVRIptvData::PVRIptvData(void)
   m_genres.clear();
 
   if (LoadPlayList())
-    XBMC->QueueNotification(QUEUE_INFO, "%d channels loaded.", m_channels.size());
+    KodiAPI::AddOn::General::QueueFormattedNotification(QUEUE_INFO, "%d channels loaded.", m_channels.size());
 }
 
 void *PVRIptvData::Process(void)
@@ -107,7 +113,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
 {
   if (m_strXMLTVUrl.empty())
   {
-    XBMC->Log(LOG_NOTICE, "EPG file path is not configured. EPG not loaded.");
+    KodiAPI::Log(ADDON_LOG_NOTICE, "EPG file path is not configured. EPG not loaded.");
     return false;
   }
 
@@ -122,7 +128,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     {
       break;
     }
-    XBMC->Log(LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. :%dth try.", m_strXMLTVUrl.c_str(), ++iCount);
+    KodiAPI::Log(ADDON_LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. :%dth try.", m_strXMLTVUrl.c_str(), ++iCount);
     if (iCount < 3)
     {
       usleep(2 * 1000 * 1000); // sleep 2 sec before next try.
@@ -131,7 +137,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   
   if (iReaded == 0)
   {
-    XBMC->Log(LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. After %d tries.", m_strXMLTVUrl.c_str(), iCount);
+    KodiAPI::Log(ADDON_LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. After %d tries.", m_strXMLTVUrl.c_str(), iCount);
     return false;
   }
 
@@ -142,7 +148,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   {
     if (!GzipInflate(data, decompressed))
     {
-      XBMC->Log(LOG_ERROR, "Invalid EPG file '%s': unable to decompress file.", m_strXMLTVUrl.c_str());
+      KodiAPI::Log(ADDON_LOG_ERROR, "Invalid EPG file '%s': unable to decompress file.", m_strXMLTVUrl.c_str());
       return false;
     }
     buffer = &(decompressed[0]);
@@ -162,7 +168,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
         buffer += 0x200; // RECORDSIZE = 512
       else
       {
-        XBMC->Log(LOG_ERROR, "Invalid EPG file '%s': unable to parse file.", m_strXMLTVUrl.c_str());
+        KodiAPI::Log(ADDON_LOG_ERROR, "Invalid EPG file '%s': unable to parse file.", m_strXMLTVUrl.c_str());
         return false;
       }
     }
@@ -175,14 +181,14 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   } 
   catch(parse_error p) 
   {
-    XBMC->Log(LOG_ERROR, "Unable parse EPG XML: %s", p.what());
+    KodiAPI::Log(ADDON_LOG_ERROR, "Unable parse EPG XML: %s", p.what());
     return false;
   }
 
   xml_node<> *pRootElement = xmlDoc.first_node("tv");
   if (!pRootElement)
   {
-    XBMC->Log(LOG_ERROR, "Invalid EPG XML: no <tv> tag found");
+    KodiAPI::Log(ADDON_LOG_ERROR, "Invalid EPG XML: no <tv> tag found");
     return false;
   }
 
@@ -217,7 +223,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
 
   if (m_epg.size() == 0) 
   {
-    XBMC->Log(LOG_ERROR, "EPG channels not found.");
+    KodiAPI::Log(ADDON_LOG_ERROR, "EPG channels not found.");
     return false;
   }
   
@@ -285,7 +291,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   xmlDoc.clear();
   LoadGenres();
 
-  XBMC->Log(LOG_NOTICE, "EPG Loaded.");
+  KodiAPI::Log(ADDON_LOG_NOTICE, "EPG Loaded.");
 
   if (g_iEPGLogos > 0)
     ApplyChannelsLogosFromEPG();
@@ -297,14 +303,14 @@ bool PVRIptvData::LoadPlayList(void)
 {
   if (m_strM3uUrl.empty())
   {
-    XBMC->Log(LOG_NOTICE, "Playlist file path is not configured. Channels not loaded.");
+    KodiAPI::Log(ADDON_LOG_NOTICE, "Playlist file path is not configured. Channels not loaded.");
     return false;
   }
 
   std::string strPlaylistContent;
   if (!GetCachedFileContents(M3U_FILE_NAME, m_strM3uUrl, strPlaylistContent, g_bCacheM3U))
   {
-    XBMC->Log(LOG_ERROR, "Unable to load playlist file '%s':  file is missing or empty.", m_strM3uUrl.c_str());
+    KodiAPI::Log(ADDON_LOG_ERROR, "Unable to load playlist file '%s':  file is missing or empty.", m_strM3uUrl.c_str());
     return false;
   }
 
@@ -378,7 +384,7 @@ bool PVRIptvData::LoadPlayList(void)
         iComma++;
         strChnlName = StringUtils::Right(strLine, (int)strLine.size() - iComma);
         strChnlName = StringUtils::Trim(strChnlName);
-        tmpChannel.strChannelName = XBMC->UnknownToUTF8(strChnlName.c_str());
+        KodiAPI::AddOn::General::UnknownToUTF8(strChnlName, tmpChannel.strChannelName);
 
         // parse info
         std::string strInfoLine = StringUtils::Mid(strLine, ++iColon, --iComma - iColon);
@@ -403,8 +409,8 @@ bool PVRIptvData::LoadPlayList(void)
 
         bRadio                = !StringUtils::CompareNoCase(strRadio, "true");
         tmpChannel.strTvgId   = strTvgId;
-        tmpChannel.strTvgName = XBMC->UnknownToUTF8(strTvgName.c_str());
-        tmpChannel.strTvgLogo = XBMC->UnknownToUTF8(strTvgLogo.c_str());
+        KodiAPI::AddOn::General::UnknownToUTF8(strTvgName, tmpChannel.strTvgName);
+        KodiAPI::AddOn::General::UnknownToUTF8(strTvgLogo, tmpChannel.strTvgLogo);
         tmpChannel.iTvgShift  = (int)(fTvgShift * 3600.0);
         tmpChannel.bRadio     = bRadio;
 
@@ -415,7 +421,7 @@ bool PVRIptvData::LoadPlayList(void)
 
         if (!strGroupName.empty())
         {
-          strGroupName = XBMC->UnknownToUTF8(strGroupName.c_str());
+          KodiAPI::AddOn::General::UnknownToUTF8(strGroupName, strGroupName);
 
           PVRIptvChannelGroup * pGroup;
           if ((pGroup = FindGroup(strGroupName)) == NULL)
@@ -471,13 +477,13 @@ bool PVRIptvData::LoadPlayList(void)
 
   if (m_channels.size() == 0)
   {
-    XBMC->Log(LOG_ERROR, "Unable to load channels from file '%s':  file is corrupted.", m_strM3uUrl.c_str());
+    KodiAPI::Log(ADDON_LOG_ERROR, "Unable to load channels from file '%s':  file is corrupted.", m_strM3uUrl.c_str());
     return false;
   }
 
   ApplyChannelsLogos();
 
-  XBMC->Log(LOG_NOTICE, "Loaded %d channels.", m_channels.size());
+  KodiAPI::Log(ADDON_LOG_NOTICE, "Loaded %d channels.", m_channels.size());
   return true;
 }
 
@@ -487,11 +493,11 @@ bool PVRIptvData::LoadGenres(void)
 
   // try to load genres from userdata folder
   std::string strFilePath = GetUserFilePath(GENRES_MAP_FILENAME);
-  if (!XBMC->FileExists(strFilePath.c_str(), false))
+  if (!KodiAPI::AddOn::VFSUtils::FileExists(strFilePath))
   {
     // try to load file from addom folder
     strFilePath = GetClientFilePath(GENRES_MAP_FILENAME);
-    if (!XBMC->FileExists(strFilePath.c_str(), false))
+    if (!KodiAPI::AddOn::VFSUtils::FileExists(strFilePath))
       return false;
   }
 
@@ -566,7 +572,7 @@ PVR_ERROR PVRIptvData::GetChannels(ADDON_HANDLE handle, bool bRadio)
       strncpy(xbmcChannel.strIconPath, channel.strLogoPath.c_str(), sizeof(xbmcChannel.strIconPath) - 1);
       xbmcChannel.bIsHidden         = false;
 
-      PVR->TransferChannelEntry(handle, &xbmcChannel);
+      KodiAPI::PVR::Transfer::ChannelEntry(handle, &xbmcChannel);
     }
   }
 
@@ -614,7 +620,7 @@ PVR_ERROR PVRIptvData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
       xbmcGroup.bIsRadio  = bRadio; /* is radio group */
       strncpy(xbmcGroup.strGroupName, it->strGroupName.c_str(), sizeof(xbmcGroup.strGroupName) - 1);
 
-      PVR->TransferChannelGroup(handle, &xbmcGroup);
+      KodiAPI::PVR::Transfer::ChannelGroup(handle, &xbmcGroup);
     }
   }
 
@@ -640,7 +646,7 @@ PVR_ERROR PVRIptvData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
       xbmcGroupMember.iChannelUniqueId = channel.iUniqueId;
       xbmcGroupMember.iChannelNumber   = channel.iChannelNumber;
 
-      PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
+      KodiAPI::PVR::Transfer::ChannelGroupMember(handle, &xbmcGroupMember);
     }
   }
 
@@ -718,7 +724,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.strEpisodeName      = NULL;  /* not supported */
       tag.iFlags              = EPG_TAG_FLAG_UNDEFINED;
 
-      PVR->TransferEpgEntry(handle, &tag);
+      KodiAPI::PVR::Transfer::EpgEntry(handle, &tag);
 
       if ((myTag->startTime + iShift) > iEnd)
         break;
@@ -733,13 +739,13 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
 int PVRIptvData::GetFileContents(std::string& url, std::string &strContent)
 {
   strContent.clear();
-  void* fileHandle = XBMC->OpenFile(url.c_str(), 0);
-  if (fileHandle)
+
+  KodiAPI::AddOn::CVFSFile fileHandle;
+  if (fileHandle.OpenFile(url))
   {
     char buffer[1024];
-    while (int bytesRead = XBMC->ReadFile(fileHandle, buffer, 1024))
+    while (ssize_t bytesRead = fileHandle.Read(buffer, sizeof(buffer)))
       strContent.append(buffer, bytesRead);
-    XBMC->CloseFile(fileHandle);
   }
 
   return strContent.length();
@@ -933,13 +939,13 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
   std::string strFilePath = filePath;
 
   // check cached file is exists
-  if (bUseCache && XBMC->FileExists(strCachedPath.c_str(), false)) 
+  if (bUseCache && KodiAPI::AddOn::VFSUtils::FileExists(strCachedPath))
   {
     struct __stat64 statCached;
     struct __stat64 statOrig;
 
-    XBMC->StatFile(strCachedPath.c_str(), &statCached);
-    XBMC->StatFile(strFilePath.c_str(), &statOrig);
+    KodiAPI::AddOn::VFSUtils::StatFile(strCachedPath, &statCached);
+    KodiAPI::AddOn::VFSUtils::StatFile(strFilePath, &statOrig);
 
     bNeedReload = statCached.st_mtime < statOrig.st_mtime || statOrig.st_mtime == 0;
   } 
@@ -953,12 +959,9 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
     // write to cache
     if (bUseCache && strContents.length() > 0) 
     {
-      void* fileHandle = XBMC->OpenFileForWrite(strCachedPath.c_str(), true);
-      if (fileHandle)
-      {
-        XBMC->WriteFile(fileHandle, strContents.c_str(), strContents.length());
-        XBMC->CloseFile(fileHandle);
-      }
+      KodiAPI::AddOn::CVFSFile fileHandle;
+      if (fileHandle.OpenFileForWrite(strCachedPath, true))
+        fileHandle.Write(strContents.c_str(), strContents.length());
     }
     return strContents.length();
   } 
@@ -1007,7 +1010,7 @@ void PVRIptvData::ApplyChannelsLogosFromEPG()
   }
 
   if (bUpdated)
-    PVR->TriggerChannelUpdate();
+    KodiAPI::PVR::Trigger::ChannelUpdate();
 }
 
 void PVRIptvData::ReaplyChannelsLogos(const char * strNewPath)
@@ -1017,8 +1020,8 @@ void PVRIptvData::ReaplyChannelsLogos(const char * strNewPath)
     m_strLogoPath = strNewPath;
     ApplyChannelsLogos();
 
-    PVR->TriggerChannelUpdate();
-    PVR->TriggerChannelGroupsUpdate();
+    KodiAPI::PVR::Trigger::ChannelUpdate();
+    KodiAPI::PVR::Trigger::ChannelGroupsUpdate();
   }
 }
 
@@ -1034,7 +1037,7 @@ void PVRIptvData::ReloadEPG(const char * strNewPath)
       for(unsigned int iChannelPtr = 0, max = m_channels.size(); iChannelPtr < max; iChannelPtr++)
       {
         PVRIptvChannel &myChannel = m_channels.at(iChannelPtr);
-        PVR->TriggerEpgUpdate(myChannel.iUniqueId);
+        KodiAPI::PVR::Trigger::EpgUpdate(myChannel.iUniqueId);
       }
     }
   }
@@ -1049,8 +1052,8 @@ void PVRIptvData::ReloadPlayList(const char * strNewPath)
 
     if (LoadPlayList())
     {
-      PVR->TriggerChannelUpdate();
-      PVR->TriggerChannelGroupsUpdate();
+      KodiAPI::PVR::Trigger::ChannelUpdate();
+      KodiAPI::PVR::Trigger::ChannelGroupsUpdate();
     }
   }
 }
