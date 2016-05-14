@@ -24,8 +24,8 @@
  */
 
 #include <vector>
+#include <kodi/api2/pvr/General.hpp>
 #include "p8-platform/util/StdString.h"
-#include "client.h"
 #include "p8-platform/threads/threads.h"
 
 struct PVRIptvEpgEntry
