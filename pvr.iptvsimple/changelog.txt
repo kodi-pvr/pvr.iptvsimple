@@ -1,3 +1,6 @@
+v2.4.0
+- Cmake: rename find_package kodi to Kodi
+
 v2.3.1
 - Fix includes
 
