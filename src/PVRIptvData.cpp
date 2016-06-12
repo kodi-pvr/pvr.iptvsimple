@@ -329,10 +329,11 @@ bool PVRIptvData::LoadPlayList(void)
   char szLine[1024];
   while(stream.getline(szLine, 1024)) 
   {
-  
     std::string strLine(szLine);
     strLine = StringUtils::TrimRight(strLine, " \t\r\n");
     strLine = StringUtils::TrimLeft(strLine, " \t");
+
+    XBMC->Log(LOG_DEBUG, "Read line: '%s'", strLine.c_str());
 
     if (strLine.empty())
     {
@@ -354,7 +355,10 @@ bool PVRIptvData::LoadPlayList(void)
       }
       else
       {
-        break;
+        XBMC->Log(LOG_ERROR,
+                  "URL '%s' missing %s descriptor on line 1, attempting to "
+                  "parse it anyway.",
+                  m_strM3uUrl.c_str(), M3U_START_MARKER);
       }
     }
 
@@ -437,6 +441,10 @@ bool PVRIptvData::LoadPlayList(void)
     } 
     else if (strLine[0] != '#')
     {
+      XBMC->Log(LOG_DEBUG,
+                "Found URL: '%s' (current channel name: '%s')",
+                strLine.c_str(), tmpChannel.strChannelName.c_str());
+
       PVRIptvChannel channel;
       channel.iUniqueId         = GetChannelId(tmpChannel.strChannelName.c_str(), strLine.c_str());
       channel.iChannelNumber    = iChannelNum++;
