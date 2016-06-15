@@ -66,7 +66,7 @@ msgstr "Programguide tidshopp (timer)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Mellomlagre m3u lokalt"
+msgstr "Mellomlagre M3U lokalt"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
