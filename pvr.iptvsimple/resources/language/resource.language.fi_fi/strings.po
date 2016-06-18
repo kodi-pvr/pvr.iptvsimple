@@ -24,6 +24,10 @@ msgctxt "#30001"
 msgid "Local Path (include Local Network)"
 msgstr "Paikallinen polku (sisältää lähiverkon)"
 
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "Verkkopolku (Internet osoite)"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Yleiset"

@@ -24,6 +24,10 @@ msgctxt "#30010"
 msgid "General"
 msgstr "General"
 
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "Logos de canal"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignorar"
