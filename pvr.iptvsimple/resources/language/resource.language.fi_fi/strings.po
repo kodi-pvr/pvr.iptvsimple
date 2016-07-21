@@ -74,7 +74,7 @@ msgstr "Käytä paikallista levyä XMLTV tiedostojen välimuistina."
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr "Kanava logot"
+msgstr "Kanavalogot"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
