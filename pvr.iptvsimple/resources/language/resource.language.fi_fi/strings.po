@@ -26,7 +26,7 @@ msgstr "Paikallinen polku (sisältää lähiverkon)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Verkkopolku (Internet osoite)"
+msgstr "Verkkopolku (Internet-osoite)"
 
 msgctxt "#30010"
 msgid "General"
@@ -34,11 +34,11 @@ msgstr "Yleiset"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "M3U soittolistan polku"
+msgstr "M3U-soittolistan polku"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr "M3U soittolistan URL"
+msgstr "M3U-soittolistan URL"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
@@ -46,15 +46,15 @@ msgstr "Kanavien numerointi alkaa"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "EPG asetukset"
+msgstr "EPG-asetukset"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr "XMLTV polku"
+msgstr "XMLTV:n polku"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV polku"
+msgstr "XMLTV:n URL"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
@@ -62,15 +62,15 @@ msgstr "Käytä ajansiirtoa kaikilla kanavilla"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "EPG ajansiirto (tuntia)"
+msgstr "EPG-ajansiirto (tuntia)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Käytä paikallista levyä m3u tiedostojen välimuistina."
+msgstr "Käytä paikallista levyä m3u-tiedostojen välimuistina."
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Käytä paikallista levyä XMLTV tiedostojen välimuistina."
+msgstr "Käytä paikallista levyä XMLTV-tiedostojen välimuistina."
 
 msgctxt "#30030"
 msgid "Channels Logos"
@@ -78,7 +78,7 @@ msgstr "Kanavalogot"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr "Kanava logojen kansio"
+msgstr "Kanavalogojen kansio"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
@@ -86,7 +86,7 @@ msgstr "Kanavalogojen URL"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "XMLTV logojen asetukset"
+msgstr "XMLTV-logojen asetukset"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
@@ -98,8 +98,8 @@ msgstr "Jätä huomioimatta"
 
 msgctxt "#30043"
 msgid "Prefer M3U"
-msgstr "Suosi M3U"
+msgstr "Suosi M3U:ta"
 
 msgctxt "#30044"
 msgid "Prefer XMLTV"
-msgstr "Suosi XMLTV"
+msgstr "Suosi XMLTV:tä"

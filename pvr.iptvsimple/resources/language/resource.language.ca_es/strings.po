@@ -46,7 +46,7 @@ msgstr "La numeració de canals comença al"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "Configuració de l'EPG"
+msgstr "Ajusts de l'EPG"
 
 msgctxt "#30021"
 msgid "XMLTV Path"

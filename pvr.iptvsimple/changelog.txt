@@ -1,3 +1,6 @@
+v2.4.3
+- updated language files from Transifex
+
 v2.4.2
 - updated language files from Transifex
 
