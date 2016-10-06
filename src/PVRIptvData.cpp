@@ -749,9 +749,12 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
 {
   struct tm timeinfo;
   memset(&timeinfo, 0, sizeof(tm));
+  char sign = '+';
+  int hours = 0;
+  int minutes = 0;
 
   if (iDateFormat)
-    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
+    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec, &sign, &hours, &minutes);
   else
     sscanf(strDate.c_str(), "%02d.%02d.%04d%02d:%02d:%02d", &timeinfo.tm_mday, &timeinfo.tm_mon, &timeinfo.tm_year, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
 
@@ -759,7 +762,16 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
   timeinfo.tm_year -= 1900;
   timeinfo.tm_isdst = -1;
 
-  return mktime(&timeinfo);
+  std::time_t current_time;
+  std::time(&current_time);
+  long offset = std::localtime(&current_time)->tm_gmtoff;
+  
+  long offset_of_date = (hours * 60 * 60) + (minutes * 60);
+  if (sign == '-') {
+    offset_of_date = 0 - offset_of_date;
+  }
+
+  return mktime(&timeinfo) - offset_of_date + offset;
 }
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)
