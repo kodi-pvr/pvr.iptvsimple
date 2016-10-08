@@ -1,3 +1,6 @@
+v2.4.4
+- Fix: Handle time offset in EPG programme start and end times.
+
 v2.4.3
 - updated language files from Transifex
 
