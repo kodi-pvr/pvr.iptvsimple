@@ -764,14 +764,20 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
 
   std::time_t current_time;
   std::time(&current_time);
-  long offset = std::localtime(&current_time)->tm_gmtoff;
+  long offset = 0;
+#ifndef TARGET_WINDOWS
+  offset = -std::localtime(&current_time)->tm_gmtoff;
+#else
+  _get_timezone(&offset);
+#endif // TARGET_WINDOWS
   
   long offset_of_date = (hours * 60 * 60) + (minutes * 60);
-  if (sign == '-') {
-    offset_of_date = 0 - offset_of_date;
+  if (sign == '-') 
+  {
+    offset_of_date = -offset_of_date;
   }
 
-  return mktime(&timeinfo) - offset_of_date + offset;
+  return mktime(&timeinfo) - offset_of_date - offset;
 }
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)
