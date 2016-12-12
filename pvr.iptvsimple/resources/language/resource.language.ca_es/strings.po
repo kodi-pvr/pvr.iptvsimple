@@ -34,7 +34,7 @@ msgstr "General"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "Camí de llista de reproducció M3U"
+msgstr "Camí a la llista de reproducció M3U"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
@@ -50,7 +50,7 @@ msgstr "Ajusts de l'EPG"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr "Camí de XMLTV"
+msgstr "Camí a XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
@@ -58,11 +58,11 @@ msgstr "URL de XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr "Aplicar Time Shift a tots els canals"
+msgstr "Aplica Time Shift a tots els canals"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "Time Shift de l'EPG (en hores)"
+msgstr "Time Shift d'EPG (hores)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -78,19 +78,19 @@ msgstr "Logos dels canals"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr "Carpeta de logos de canals"
+msgstr "Carpeta dels logos dels canals"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "URL base per a logos de canals"
+msgstr "URL base dels logos dels canals"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "Opcions de logos XMLTV"
+msgstr "Opcions dels logos de XMLTV"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
-msgstr "Logos de canals de XMLTV"
+msgstr "Logos dels canals des de XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -98,8 +98,8 @@ msgstr "Ignora"
 
 msgctxt "#30043"
 msgid "Prefer M3U"
-msgstr "Preferir M3U"
+msgstr "Prefereix M3U"
 
 msgctxt "#30044"
 msgid "Prefer XMLTV"
-msgstr "XMLTV preferit"
+msgstr "Prefereix XMLTV"

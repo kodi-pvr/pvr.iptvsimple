@@ -84,6 +84,14 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Връзка към базата  с логата на каналите"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "XMLTV настройки за Лога"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Лога на каналите от XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Игнорирай"

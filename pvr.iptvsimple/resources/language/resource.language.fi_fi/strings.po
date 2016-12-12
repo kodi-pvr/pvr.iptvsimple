@@ -22,11 +22,11 @@ msgstr "Sijainti"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr "Paikallinen polku (sisältää lähiverkon)"
+msgstr "Paikallinen sijainti (sisältää lähiverkon)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Verkkopolku (Internet-osoite)"
+msgstr "Ulkoinen sijainti (Internet-osoite)"
 
 msgctxt "#30010"
 msgid "General"
@@ -38,39 +38,39 @@ msgstr "M3U-soittolistan polku"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr "M3U-soittolistan URL"
+msgstr "M3U-soittolistan URL-osoite"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr "Kanavien numerointi alkaa"
+msgstr "Ensimmäisen kanavan numero"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "EPG-asetukset"
+msgstr "Ohjelmaopas"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr "XMLTV:n polku"
+msgstr "XMLTV-tiedoston polku"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV:n URL"
+msgstr "XMLTV-tiedoston URL-osoite"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr "Käytä ajansiirtoa kaikilla kanavilla"
+msgstr "Siirrä kaikkien kanavien aikoja"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "EPG-ajansiirto (tuntia)"
+msgstr "Ohjelmaoppaan aikojen siirto (tunteina)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Käytä paikallista levyä m3u-tiedostojen välimuistina."
+msgstr "Tallenna m3u-tiedostot paikalliselle levylle"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Käytä paikallista levyä XMLTV-tiedostojen välimuistina."
+msgstr "Tallenna XMLTV-tiedostot paikalliselle levylle"
 
 msgctxt "#30030"
 msgid "Channels Logos"
@@ -82,7 +82,7 @@ msgstr "Kanavalogojen kansio"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "Kanavalogojen URL"
+msgstr "Kanavalogojen URL-osoite"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
@@ -90,7 +90,7 @@ msgstr "XMLTV-logojen asetukset"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
-msgstr "Kanavalogot XMLTV:stä"
+msgstr "XMLTV:n kanavalogot"
 
 msgctxt "#30042"
 msgid "Ignore"

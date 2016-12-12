@@ -66,11 +66,11 @@ msgstr "Différé du guide des programmes (heures)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Cacher le M3U sur le stockage local"
+msgstr "Placer le M3U en cache sur le stockage local"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Cacher le XMLTV sur le stockage local"
+msgstr "Placer le XMLTV en cache sur le stockage local"
 
 msgctxt "#30030"
 msgid "Channels Logos"
