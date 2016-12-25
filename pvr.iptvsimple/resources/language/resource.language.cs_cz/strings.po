@@ -22,7 +22,7 @@ msgstr "Umístění"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr "Místní cesta (včetně LAN)"
+msgstr "Místní cesta (včetně místní sítě)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
