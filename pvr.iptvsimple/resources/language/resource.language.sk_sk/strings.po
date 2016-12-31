@@ -84,6 +84,22 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Základná URL adresa log staníc"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Možnosti pre logá XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logá kanálov z XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignorovať"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Uprednostniť M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Prednostný XMLTV"

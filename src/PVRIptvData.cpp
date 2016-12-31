@@ -30,8 +30,10 @@
 #include "zlib.h"
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
-#include "platform/util/StringUtils.h"
+
+#include "p8-platform/util/StringUtils.h"
 #include "PVRUtils.h"
+
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"
@@ -39,6 +41,7 @@
 #define TVG_INFO_NAME_MARKER    "tvg-name="
 #define TVG_INFO_LOGO_MARKER    "tvg-logo="
 #define TVG_INFO_SHIFT_MARKER   "tvg-shift="
+#define TVG_INFO_CHNO_MARKER    "tvg-chno="
 #define GROUP_NAME_MARKER       "group-title="
 #define RADIO_MARKER            "radio="
 #define CHANNEL_LOGO_EXTENSION  ".png"
@@ -331,10 +334,11 @@ bool PVRIptvData::LoadPlayList(void)
   char szLine[1024];
   while(stream.getline(szLine, 1024)) 
   {
-  
     std::string strLine(szLine);
     strLine = StringUtils::TrimRight(strLine, " \t\r\n");
     strLine = StringUtils::TrimLeft(strLine, " \t");
+
+    XBMC->Log(LOG_DEBUG, "Read line: '%s'", strLine.c_str());
 
     if (strLine.empty())
     {
@@ -356,7 +360,10 @@ bool PVRIptvData::LoadPlayList(void)
       }
       else
       {
-        break;
+        XBMC->Log(LOG_ERROR,
+                  "URL '%s' missing %s descriptor on line 1, attempting to "
+                  "parse it anyway.",
+                  m_strM3uUrl.c_str(), M3U_START_MARKER);
       }
     }
 
@@ -364,6 +371,7 @@ bool PVRIptvData::LoadPlayList(void)
     {
       bool        bRadio       = false;
       double      fTvgShift    = 0;
+      std::string strChnlNo    = "";
       std::string strChnlName  = "";
       std::string strTvgId     = "";
       std::string strTvgName   = "";
@@ -388,6 +396,7 @@ bool PVRIptvData::LoadPlayList(void)
         strTvgId      = ReadMarkerValue(strInfoLine, TVG_INFO_ID_MARKER);
         strTvgName    = ReadMarkerValue(strInfoLine, TVG_INFO_NAME_MARKER);
         strTvgLogo    = ReadMarkerValue(strInfoLine, TVG_INFO_LOGO_MARKER);
+        strChnlNo     = ReadMarkerValue(strInfoLine, TVG_INFO_CHNO_MARKER);
         strGroupName  = ReadMarkerValue(strInfoLine, GROUP_NAME_MARKER);
         strRadio      = ReadMarkerValue(strInfoLine, RADIO_MARKER);
         fTvgShift     = atof(ReadMarkerValue(strInfoLine, TVG_INFO_SHIFT_MARKER).c_str());
@@ -401,6 +410,10 @@ bool PVRIptvData::LoadPlayList(void)
         if (strTvgLogo.empty())
         {
           strTvgLogo = strChnlName;
+        }
+        if (!strChnlNo.empty()) 
+        {
+          iChannelNum = atoi(strChnlNo.c_str());
         }
 
         bRadio                = !StringUtils::CompareNoCase(strRadio, "true");
@@ -439,9 +452,13 @@ bool PVRIptvData::LoadPlayList(void)
     } 
     else if (strLine[0] != '#')
     {
+      XBMC->Log(LOG_DEBUG,
+                "Found URL: '%s' (current channel name: '%s')",
+                strLine.c_str(), tmpChannel.strChannelName.c_str());
+
       PVRIptvChannel channel;
       channel.iUniqueId         = GetChannelId(tmpChannel.strChannelName.c_str(), strLine.c_str());
-      channel.iChannelNumber    = iChannelNum++;
+      channel.iChannelNumber    = iChannelNum;
       channel.strTvgId          = tmpChannel.strTvgId;
       channel.strChannelName    = tmpChannel.strChannelName;
       channel.strTvgName        = tmpChannel.strTvgName;
@@ -450,6 +467,8 @@ bool PVRIptvData::LoadPlayList(void)
       channel.bRadio            = tmpChannel.bRadio;
       channel.strStreamURL      = strLine;
       channel.iEncryptionSystem = 0;
+
+      iChannelNum++;
 
       if (iCurrentGroupId > 0) 
       {
@@ -740,6 +759,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.iEpisodeNumber      = 0;     /* not supported */
       tag.iEpisodePartNumber  = 0;     /* not supported */
       tag.strEpisodeName      = NULL;  /* not supported */
+      tag.iFlags              = EPG_TAG_FLAG_UNDEFINED;
 
       PVR->TransferEpgEntry(handle, &tag);
 
@@ -840,9 +860,12 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
 {
   struct tm timeinfo;
   memset(&timeinfo, 0, sizeof(tm));
+  char sign = '+';
+  int hours = 0;
+  int minutes = 0;
 
   if (iDateFormat)
-    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
+    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec, &sign, &hours, &minutes);
   else
     sscanf(strDate.c_str(), "%02d.%02d.%04d%02d:%02d:%02d", &timeinfo.tm_mday, &timeinfo.tm_mon, &timeinfo.tm_year, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
 
@@ -850,7 +873,22 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
   timeinfo.tm_year -= 1900;
   timeinfo.tm_isdst = -1;
 
-  return mktime(&timeinfo);
+  std::time_t current_time;
+  std::time(&current_time);
+  long offset = 0;
+#ifndef TARGET_WINDOWS
+  offset = -std::localtime(&current_time)->tm_gmtoff;
+#else
+  _get_timezone(&offset);
+#endif // TARGET_WINDOWS
+  
+  long offset_of_date = (hours * 60 * 60) + (minutes * 60);
+  if (sign == '-') 
+  {
+    offset_of_date = -offset_of_date;
+  }
+
+  return mktime(&timeinfo) - offset_of_date - offset;
 }
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)
@@ -1059,14 +1097,18 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
 
 void PVRIptvData::ApplyChannelsLogos()
 {
-  if (m_strLogoPath.empty())
-    return;
-
   std::vector<PVRIptvChannel>::iterator channel;
   for(channel = m_channels.begin(); channel < m_channels.end(); ++channel)
   {
     if (!channel->strTvgLogo.empty())
-      channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
+    {
+      if (!m_strLogoPath.empty() 
+        // special proto
+        && channel->strTvgLogo.find("://") == std::string::npos)
+        channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
+      else
+        channel->strLogoPath = channel->strTvgLogo;
+    }
   }
 }
 

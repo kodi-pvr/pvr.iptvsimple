@@ -84,6 +84,22 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Osnovni URL logotipova programa"
 
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Mogućnosti XMLTV logotipa"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logotipovi programa s XMLTV-a"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Zanemari"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Preferiraj M3U"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "Preferiraj XMLTV"

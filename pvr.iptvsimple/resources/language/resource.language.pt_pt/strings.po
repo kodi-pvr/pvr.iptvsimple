@@ -22,11 +22,11 @@ msgstr "Localização"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
-msgstr "Localização no Sistema (incluir Rede Local)"
+msgstr "Caminho local (incluir rede local)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Localização Remota (endereço da internet)"
+msgstr "Caminho remoto (endereço web)"
 
 msgctxt "#30010"
 msgid "General"
@@ -34,11 +34,11 @@ msgstr "Geral"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "Localização da Lista Reprodução M3U"
+msgstr "Caminho da lista de reprodução M3U"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr "Endereço da Lista Reprodução M3U"
+msgstr "URL da lista de reprodução M3U"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
@@ -50,43 +50,55 @@ msgstr "Definições EPG"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr "Localização XMLTV"
+msgstr "Caminho XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "Endereço XMLTV"
+msgstr "URL XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr "Aplicar Deslocamento no Tempo a Todos os Canais"
+msgstr "Aplicar deslocação de tempo para todos os canais"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "Deslocamento no Tempo do EPG (horas)"
+msgstr "Deslocação de tempo do EPG (horas)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Cache de m3u em armazenamento local"
+msgstr "Cache m3u no armazenamento local"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Cache de XMLTV em armazenamento local"
+msgstr "Cache XMLTV no armazenamento local"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr "Logotipos de Canais"
+msgstr "Logotipos dos canais"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr "Localização dos Logotipos de Canais"
+msgstr "Pasta de logótipos dos canais"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "Endereço dos Logotipos de Canais"
+msgstr "URL base dos logótipos de canais"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Opções de logótipos do XMLTV "
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Logótipos dos canais do XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ignorar"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "Preferir M3U"
 
 msgctxt "#30044"
 msgid "Prefer XMLTV"

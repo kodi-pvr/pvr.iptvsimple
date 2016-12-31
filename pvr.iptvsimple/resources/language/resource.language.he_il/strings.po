@@ -86,11 +86,11 @@ msgstr "כתובת בסיס של סמלי ערוצים"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "אפשרויות לוגאים של XMLTV"
+msgstr "סמלי XMLTV"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
-msgstr "לוגואים של ערוצים מ XMLTV"
+msgstr "סמלי ערוצים מ־XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -98,8 +98,8 @@ msgstr "התעלם"
 
 msgctxt "#30043"
 msgid "Prefer M3U"
-msgstr "העדפת M3U"
+msgstr "העדף M3U"
 
 msgctxt "#30044"
 msgid "Prefer XMLTV"
-msgstr "העדפת XMLTV"
+msgstr "העדף XMLTV"

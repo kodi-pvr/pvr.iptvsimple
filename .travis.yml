@@ -1,0 +1,43 @@
+language: cpp
+
+#
+# Define the build matrix
+#
+# Travis defaults to building on Ubuntu Precise when building on 
+# Linux. We need Trusty in order to get up to date versions of 
+# cmake and g++.
+#
+matrix:
+  include:
+    - os: linux
+      dist: trusty    
+      sudo: required
+      compiler: gcc
+    - os: linux
+      dist: trusty    
+      sudo: required
+      compiler: clang
+    - os: osx
+      osx_image: xcode7.3
+    - os: osx
+      osx_image: xcode6.1
+
+#
+# Some of the OS X images don't have cmake, contrary to what people 
+# on the Internet say
+#
+before_install:
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which cmake || brew update        ; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which cmake || brew install cmake ; fi
+
+#
+# The addon source is automatically checked out in $TRAVIS_BUILD_DIR,
+# we'll put the Kodi source on the same level
+#
+before_script:
+  - cd $TRAVIS_BUILD_DIR/..
+  - git clone --depth=1 https://github.com/xbmc/xbmc.git
+  - cd pvr.iptvsimple && mkdir build && cd build
+  - cmake -DADDONS_TO_BUILD=pvr.iptvsimple -DADDON_SRC_PREFIX=$TRAVIS_BUILD_DIR/.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$TRAVIS_BUILD_DIR/../xbmc/addons -DPACKAGE_ZIP=1 $TRAVIS_BUILD_DIR/../xbmc/project/cmake/addons
+
+script: make

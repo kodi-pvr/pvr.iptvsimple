@@ -1,3 +1,62 @@
+v3.0.0
+- Initial Kodi v18 version
+
+v2.4.4
+- Fix: Handle time offset in EPG programme start and end times.
+
+v2.4.3
+- updated language files from Transifex
+
+v2.4.2
+- updated language files from Transifex
+
+v2.4.1
+- updated language files from Transifex
+
+v2.4.0
+- Cmake: rename find_package kodi to Kodi
+- Attempt to parse playlists lacking EXTM3U marker
+
+v2.3.1
+- Fix includes
+
+v2.3.0
+- Updated to PVR addon API v5.2.0
+
+v2.2.0
+- Updated to PVR addon API v5.1.0
+
+v2.1.1
+- Fix: Don't ignore channels logo if base logo path setting is empty.
+- Fix: Don't apply base logo path to channels logo if tvg-logo has a full NET path.
+
+v2.1.0
+- Updated to PVR addon API v5.0.0
+
+v2.0.2
+- updated language files from Transifex
+
+v2.0.1
+- Updated to PVR API v4.2.0
+
+v2.0.0
+- Initial Kodi Krypton version.
+
+v1.12.9
+- updated language files from Transifex
+
+v1.12.8
+- updated language files from Transifex
+
+v1.12.7
+- updated language files from Transifex
+
+v1.12.6
+- Updated to PVR API v4.1.0
+
+v1.12.5
+- Updated to PVR API v4.0.0
+
 v1.12.4
 - Updated to PVR API v3.0.0 (API 1.9.7 compatibility mode)
 

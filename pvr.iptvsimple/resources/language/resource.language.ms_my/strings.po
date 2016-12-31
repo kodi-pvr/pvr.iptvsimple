@@ -18,7 +18,7 @@ msgstr ""
 
 msgctxt "#30000"
 msgid "Location"
-msgstr "Kedudukan"
+msgstr "Lokasi"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
@@ -58,7 +58,7 @@ msgstr "URL XMLTV"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr "Laksana Anjak Masa Kepada Semua Saluran"
+msgstr "Laksana Anjak Masa Ke Semua Saluran"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"

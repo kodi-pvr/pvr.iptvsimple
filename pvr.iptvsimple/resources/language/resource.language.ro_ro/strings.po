@@ -46,7 +46,7 @@ msgstr "Numerotarea canalelor începe de la"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "Setări EPG"
+msgstr "Stabiliri EPG"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
@@ -55,6 +55,22 @@ msgstr "Cale XMLTV"
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "Aplică decalaj temporal la toate canalele"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "Decalaj temporal pentru ghidul tv (ore)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "Preîncarcă m3u în stocarea locală"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "Preîncarcă XMLTV în stocarea locală"
 
 msgctxt "#30030"
 msgid "Channels Logos"
@@ -67,6 +83,14 @@ msgstr "Dosar embleme canale"
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr " URL de bază pentru sigle canale"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "Opțiuni sigle XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "Sigle canale din XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
