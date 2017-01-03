@@ -20,16 +20,16 @@
  *
  */
 
-#include "platform/util/StringUtils.h"
+#include "p8-platform/util/StringUtils.h"
 #include <map>
-#include "platform/threads/threads.h"
+#include "p8-platform/threads/threads.h"
 #include "PVRIptvData.h"
 #include <string>
 #include "libexecstream/exec-stream.h"
 
 using namespace ADDON;
 
-class PVRRecorderThread : PLATFORM::CThread
+class PVRRecorderThread : P8PLATFORM::CThread
 {
     public: 
     PVRRecorderThread(PVRIptvChannel &currentChannel,int iClientIndex);

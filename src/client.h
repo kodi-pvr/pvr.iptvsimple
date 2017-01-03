@@ -24,9 +24,10 @@
  */
 
 
-#include "PVRRECNamespace.h"
+
 #include "libXBMC_addon.h"
 #include "libXBMC_pvr.h"
+#include "PVRRECNamespace.h"
 
 #define M3U_FILE_NAME          "iptv.m3u.cache"
 #define TVG_FILE_NAME          "xmltv.xml.cache"

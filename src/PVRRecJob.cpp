@@ -19,8 +19,8 @@
  *
  */
 
-#include "platform/util/StringUtils.h"
-#include "platform/threads/threads.h"
+#include "p8-platform/util/StringUtils.h"
+#include "p8-platform/threads/threads.h"
 #include <map>
 #include "PVRIptvData.h"
 #include "PVRUtils.h"

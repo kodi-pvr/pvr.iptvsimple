@@ -19,16 +19,16 @@
  *  http://www.gnu.org/copyleft/gpl.html
  *
  */
-#include "platform/util/StringUtils.h"
+#include "p8-platform/util/StringUtils.h"
 #include <map>
-#include "platform/threads/threads.h"
+#include "p8-platform/threads/threads.h"
 #include "PVRIptvData.h"
 #include <string>
 
 using namespace ADDON;
 using namespace std;
 
-class PVRSchedulerThread : PLATFORM::CThread
+class PVRSchedulerThread : P8PLATFORM::CThread
 {
     public: 
     PVRSchedulerThread(void);

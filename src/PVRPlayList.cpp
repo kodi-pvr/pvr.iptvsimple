@@ -19,7 +19,7 @@
  *
  */
 
-#include "platform/util/StringUtils.h"
+#include "p8-platform/util/StringUtils.h"
 #include <vector>
 #include <string>
 #include "PVRIptvData.h"

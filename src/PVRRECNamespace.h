@@ -21,6 +21,9 @@
  */
 
 #include <string>
+//#include "xbmc_pvr_dll.h"
+//#include "libXBMC_pvr.h"
+#include "p8-platform/util/util.h"
 using namespace std;
 using namespace ADDON;
 
