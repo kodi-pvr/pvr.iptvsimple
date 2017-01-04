@@ -190,6 +190,16 @@ void *PVRRecorderThread::Process(void)
     
     double length = 0;
     
+    int rtmpStream = 0;
+    if(strStreamUrl.substr(0, 7) == "rtmp://"
+       || strStreamUrl.substr(0, 8) == "rtmpt://"
+       || strStreamUrl.substr(0, 8) == "rtmpe://"
+       || strStreamUrl.substr(0, 9) == "rtmpte://"
+       || strStreamUrl.substr(0, 8) == "rtmps://")
+    {
+	rtmpStream = 1;
+    }
+    
     vector<string> stremaUrlVect = StringUtils::Split (strStreamUrl," ");
     if (stremaUrlVect.size()>0) {
 	strParams = stremaUrlVect[0];
@@ -201,17 +211,23 @@ void *PVRRecorderThread::Process(void)
 		    strParams = strParams + " --live";
 		}
 		else {
-		    strParams = strParams + " --"+line;
+		    if (rtmpStream==1) {
+			if (lineVect.size()>1) {
+			    strParams = strParams + " --"+lineVect[0]+"=\""+lineVect[1]+"\"";
+			}
+			else {
+			    strParams = strParams + " --"+line;
+			}
+		    }
+		    else {
+			strParams = strParams + " --"+line;
+		    }
 		}
 	    }
         }
     }
     
-    if(strStreamUrl.substr(0, 7) == "rtmp://"
-       || strStreamUrl.substr(0, 8) == "rtmpt://"
-       || strStreamUrl.substr(0, 8) == "rtmpe://"
-       || strStreamUrl.substr(0, 9) == "rtmpte://"
-       || strStreamUrl.substr(0, 8) == "rtmps://")
+    if(rtmpStream==1)
     {
 	strParams = " -r "+strParams;
 	if (g_rtmpdumpPath.length()==0)
