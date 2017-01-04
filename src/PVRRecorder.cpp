@@ -75,6 +75,8 @@ int PVRRecorder::GetTimersAmount(void)
     map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
     int size = RecJobs.size();
     
+    XBMC->Log(LOG_NOTICE,"GetTimersAmount %i",size);
+     
     p_RecJob->setUnlock();
     return size;
 }
@@ -197,7 +199,7 @@ PVR_ERROR PVRRecorder::AddTimer (const PVR_TIMER &timer)
     
     //recalculate new job id
     int iJobId = timer.iClientIndex;
-    if (iJobId==-1)
+    if (iJobId<=0)
         iJobId = time(NULL);
         
     //Prepare new entry
