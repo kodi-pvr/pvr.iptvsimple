@@ -38,6 +38,7 @@ public:
     bool addJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
     bool getJobEntry(const int ientryIndex, PVR_REC_JOB_ENTRY &entry);
     bool getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entry);
+    bool rescheduleJobEntry (const PVR_REC_JOB_ENTRY &RecJobEntry);
     bool updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry);
     bool delJobEntry(const int ientryIndex);
     bool getProperlyChannel (PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &currentChannel);

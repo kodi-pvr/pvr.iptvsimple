@@ -116,6 +116,8 @@ PVR_ERROR PVRRecorder::DeleteTimer(const PVR_TIMER &timer, bool bForceDelete)
     {
         if (p_Scheduler->stopRecording(entry))
         {
+	    entry.toDelete = 1;
+	    p_RecJob->updateJobEntry(entry);
             s_triggerTimerUpdate = true;
             return PVR_ERROR_NO_ERROR;
         }
