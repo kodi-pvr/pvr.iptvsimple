@@ -58,13 +58,13 @@ bool PVRRecJob::getProperlyChannel (PVR_REC_JOB_ENTRY &entry, PVRIptvChannel &cu
         if (entry.strChannelName==currentChannel.strChannelName)
             foundChannel = true;
     }
-    
+
     if (foundChannel == false)
     {
         if (m_data->GetChannelByName(entry.strChannelName, currentChannel))
             foundChannel = true;
     }
-    
+
     if (foundChannel == true)
     {   
         entry.Timer.iClientChannelUid = currentChannel.iUniqueId;
@@ -171,7 +171,52 @@ bool PVRRecJob::getJobEntry(const string strChannelName, PVR_REC_JOB_ENTRY &entr
     }
     return false;
 }
-    
+bool PVRRecJob::rescheduleJobEntry (const PVR_REC_JOB_ENTRY &RecJobEntry)
+{
+    PVR_REC_JOB_ENTRY entry = RecJobEntry;
+    if (getJobEntry(RecJobEntry.Timer.iClientIndex ,entry))
+    {
+        struct tm *startTime = localtime (&entry.Timer.startTime);
+        int oneDayInt = 24*3600;
+
+        bool reScheduled = false;
+
+        //Create DOW schedule map
+        map<int,int> daysOfWeek;
+        int i,k;
+        k = 1;
+        for (i=1; i<=7; i++) {
+            daysOfWeek[i] = entry.Timer.iWeekdays & k;
+            daysOfWeek[i+7] = entry.Timer.iWeekdays & k;
+            k = k<<1;
+        }
+
+        //Calculate next DOW recording day
+        int nextRecDays = 1;
+        for (i=startTime->tm_wday+1; i<=14; i++) {
+            if (daysOfWeek[i]>0) {
+                reScheduled = true;
+                break;
+            }
+            nextRecDays++;
+        }
+
+        if (reScheduled==true) {
+            entry.Timer.startTime = entry.Timer.startTime+(oneDayInt*nextRecDays);
+            entry.Timer.endTime = entry.Timer.endTime+(oneDayInt*nextRecDays);
+            entry.Timer.firstDay = entry.Timer.startTime;
+            entry.Timer.state = PVR_TIMER_STATE_SCHEDULED;
+            entry.Status = PVR_STREAM_NO_STREAM;
+
+            m_JobEntryData[RecJobEntry.Timer.iClientIndex] = entry;
+            storeEntryData();
+            XBMC->Log(LOG_NOTICE,"Rescheduled job entry %s",RecJobEntry.Timer.strTitle);
+            return true;
+        }
+    }
+    return false;
+}
+
 bool PVRRecJob::updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry)
 {
     PVR_REC_JOB_ENTRY entry = RecJobEntry;
@@ -192,7 +237,7 @@ bool PVRRecJob::updateJobEntry(const PVR_REC_JOB_ENTRY &RecJobEntry)
                 { if (RecJobEntry.Status!=PVR_STREAM_STOPPED) return false; break; }
         }
         entry = RecJobEntry;
-        
+
         m_JobEntryData[RecJobEntry.Timer.iClientIndex] = entry;
         storeEntryData();
         XBMC->Log(LOG_NOTICE,"Updated job entry %s",RecJobEntry.Timer.strTitle);
@@ -219,54 +264,57 @@ bool PVRRecJob::setLock (void)
 {
     p_mutex.lock();
     return true;
-/*
-    bool ok = false;
-    int lock_rand = rand() % 10000000;
-    while (ok==false) {
-        if (p_RecJob_lock>0 && p_RecJob_lock==lock_rand) return true;
-        else {
-            while (p_RecJob_lock>0)
-            {
-                //wait for unlock by other thread
-            } 
-            p_RecJob_lock = lock_rand;
-        }
-    }
-    return true;
-    */
 }
 
 void PVRRecJob::setUnlock (void)
 {
     p_mutex.unlock();
-    //p_RecJob_lock = 0;
 }
+
 string PVRRecJob::GetJobString(const PVR_REC_JOB_ENTRY &RecJobEntry )
 {
     string ChannelName = RecJobEntry.strChannelName;
     StringUtils::Replace(ChannelName,"|","\\|");
-    string TitleName = RecJobEntry.Timer.strTitle;
-    StringUtils::Replace(TitleName,"|","\\|");
-    string Line = "\""+inttostr(RecJobEntry.Timer.iClientIndex);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iClientChannelUid);
-    Line = Line+"\"|\""+ChannelName;
-    Line = Line+"\"|\""+TitleName;
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.startTime);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.endTime);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.state);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iPriority);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iLifetime);
-    //if (RecJobEntry.Timer.bIsRepeating==true)
-    //    Line = Line+"\"|\"1";
-    //else
-        Line = Line+"\"|\"0";
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.firstDay);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iWeekdays);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iEpgUid);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iMarginStart);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iMarginEnd);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iGenreType);
-    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iGenreSubType);
+    
+    string strTitle = RecJobEntry.Timer.strTitle;
+    StringUtils::Replace(strTitle,"|","\\|");
+    
+    string strEpgSearchString = RecJobEntry.Timer.strEpgSearchString;
+    StringUtils::Replace(strEpgSearchString,"|","\\|");
+    
+    string strDirectory = RecJobEntry.Timer.strDirectory;
+    StringUtils::Replace(strDirectory,"|","\\|");
+    
+    string strSummary = RecJobEntry.Timer.strSummary;
+    StringUtils::Replace(strSummary,"|","\\|");
+    
+    string Line = "\""+ChannelName;                                             //0
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iClientIndex);               //1
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iParentClientIndex);         //2
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iClientChannelUid);          //3
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.startTime);                  //4
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.endTime);                    //5
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.state);                      //6
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iTimerType);                 //7
+    Line = Line+"\"|\""+strTitle;                                               //8
+    Line = Line+"\"|\""+strEpgSearchString;                                     //9
+    if (RecJobEntry.Timer.bFullTextEpgSearch==true)
+        Line = Line+"\"|\"1";
+    else
+        Line = Line+"\"|\"0";                                                   //10
+    Line = Line+"\"|\""+strDirectory;                                           //11
+    Line = Line+"\"|\""+strSummary;                                             //12
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iPriority);                  //13
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iLifetime);                  //14
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iRecordingGroup);            //15
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.firstDay);                   //16
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iWeekdays);                  //17
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iPreventDuplicateEpisodes);  //18
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iEpgUid);                    //19
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iMarginStart);               //20
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iMarginEnd);                 //21
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iGenreType);                 //22
+    Line = Line+"\"|\""+inttostr(RecJobEntry.Timer.iGenreSubType);              //23
     Line = Line+"\"\n";
     return Line;
 }
@@ -276,35 +324,55 @@ bool PVRRecJob::ParseJobString(string BuffStr, PVR_REC_JOB_ENTRY &RecJobEntry)
     BuffStr = StringUtils::Trim(BuffStr);
     if (BuffStr.length()==0)
         return false;
-    
+
     //StringUtils::Trim " from start and EOL
     BuffStr = BuffStr.substr(1,BuffStr.length()-2);
     if (BuffStr.length()==0)
         return false;
-        
+
     vector<string> lineVect = StringUtils::Split (BuffStr,"\"|\"");
     if (lineVect.size()<17)
         return false;
 
-    RecJobEntry.Timer.iClientIndex       = strtoint(lineVect[0]);
-    RecJobEntry.Timer.iClientChannelUid  = strtoint(lineVect[1]);
-    RecJobEntry.strChannelName  = lineVect[2];
+    RecJobEntry.strChannelName                    = lineVect[0];                                        //0
     StringUtils::Replace(RecJobEntry.strChannelName,"\\|","|");
-    string strTitle = lineVect[3];
+    
+    RecJobEntry.Timer.iClientIndex                = strtoint(lineVect[1]);                              //1
+    RecJobEntry.Timer.iParentClientIndex          = strtoint(lineVect[2]);                              //2
+    RecJobEntry.Timer.iClientChannelUid           = strtoint(lineVect[3]);                              //3
+    RecJobEntry.Timer.startTime                   = strtoint(lineVect[4]);                              //4
+    RecJobEntry.Timer.endTime                     = strtoint(lineVect[5]);                              //5
+    RecJobEntry.Timer.state                       = (PVR_TIMER_STATE) strtoint(lineVect[6]);            //6
+    RecJobEntry.Timer.iTimerType                  = strtoint(lineVect[7]);                              //7
+    
+    string strTitle                               = lineVect[8];                                        //8
     StringUtils::Replace(strTitle,"\\|","|");
-    strncpy(RecJobEntry.Timer.strTitle, strTitle.c_str(), sizeof(RecJobEntry.Timer.strTitle) - 1);
-    RecJobEntry.Timer.startTime       = strtoint(lineVect[4]);
-    RecJobEntry.Timer.endTime         = strtoint(lineVect[5]);
-    RecJobEntry.Timer.state           = (PVR_TIMER_STATE) strtoint(lineVect[6]);
-    RecJobEntry.Timer.iPriority       = strtoint(lineVect[7]);
-    RecJobEntry.Timer.iLifetime       = strtoint(lineVect[8]);
-    //if (strtoint(lineVect[9])==1) RecJobEntry.Timer.bIsRepeating = true; else RecJobEntry.Timer.bIsRepeating = false;
-    RecJobEntry.Timer.firstDay        = strtoint(lineVect[10]);
-    RecJobEntry.Timer.iWeekdays       = strtoint(lineVect[11]);
-    RecJobEntry.Timer.iEpgUid         = strtoint(lineVect[12]);
-    RecJobEntry.Timer.iMarginStart    = strtoint(lineVect[13]);
-    RecJobEntry.Timer.iMarginEnd      = strtoint(lineVect[14]);
-    RecJobEntry.Timer.iGenreType      = strtoint(lineVect[15]);
-    RecJobEntry.Timer.iGenreSubType   = strtoint(lineVect[16]);
+    strncpy(RecJobEntry.Timer.strTitle, strTitle.c_str(), PVR_ADDON_NAME_STRING_LENGTH - 1);
+    
+    string strEpgSearchString                     = lineVect[9];                                        //9
+    StringUtils::Replace(strEpgSearchString,"\\|","|");
+    strncpy(RecJobEntry.Timer.strEpgSearchString, strEpgSearchString.c_str(), PVR_ADDON_NAME_STRING_LENGTH - 1);
+    
+    RecJobEntry.Timer.bFullTextEpgSearch          = strtoint(lineVect[10]);                             //10
+    
+    string strDirectory                           = lineVect[11];                                       //11
+    StringUtils::Replace(strDirectory,"\\|","|");
+    strncpy(RecJobEntry.Timer.strDirectory, strDirectory.c_str(), PVR_ADDON_NAME_STRING_LENGTH - 1);
+    
+    string strSummary                              = lineVect[12];                                      //12
+    StringUtils::Replace(strSummary,"\\|","|");
+    strncpy(RecJobEntry.Timer.strSummary, strSummary.c_str(), PVR_ADDON_NAME_STRING_LENGTH - 1);
+    
+    RecJobEntry.Timer.iPriority                   = strtoint(lineVect[13]);                             //13
+    RecJobEntry.Timer.iLifetime                   = strtoint(lineVect[14]);                             //14
+    RecJobEntry.Timer.iRecordingGroup             = strtoint(lineVect[15]);                             //15
+    RecJobEntry.Timer.firstDay                    = strtoint(lineVect[16]);                             //16
+    RecJobEntry.Timer.iWeekdays                   = strtoint(lineVect[17]);                             //17
+    RecJobEntry.Timer.iPreventDuplicateEpisodes   = strtoint(lineVect[18]);                             //18
+    RecJobEntry.Timer.iEpgUid                     = strtoint(lineVect[19]);                             //19
+    RecJobEntry.Timer.iMarginStart                = strtoint(lineVect[20]);                             //20
+    RecJobEntry.Timer.iMarginEnd                  = strtoint(lineVect[21]);                             //21
+    RecJobEntry.Timer.iGenreType                  = strtoint(lineVect[22]);                             //22
+    RecJobEntry.Timer.iGenreSubType               = strtoint(lineVect[23]);                             //23
     return true;
 }

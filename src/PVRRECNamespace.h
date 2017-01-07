@@ -50,5 +50,6 @@ namespace ADDON
         string                      strChannelName;
         PVR_TIMER                   Timer;
         void*                       ThreadPtr;
+        int                         toDelete = 0;
     };
 }

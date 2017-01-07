@@ -81,21 +81,41 @@ void *PVRSchedulerThread::Process(void)
             
             map<int,PVR_REC_JOB_ENTRY> RecJobs = p_RecJob->getEntryData();
             for (map<int,PVR_REC_JOB_ENTRY>::iterator rec=RecJobs.begin(); rec!=RecJobs.end(); ++rec)
-            {  
-                if (rec->second.Status==PVR_STREAM_STOPPED)
-                {
+            {
+                if (rec->second.toDelete==1) {
                     XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
-                    p_RecJob->delJobEntry(rec->first);
+                    p_RecJob->delJobEntry(rec->first);  
+                }
+                else if (rec->second.Status==PVR_STREAM_STOPPED)
+                {
+                    if (rec->second.Timer.iTimerType!=PVR_TIMER_TYPE_NONE) {
+                        XBMC->Log(LOG_NOTICE,"Try to reschedule recording %s",rec->second.Timer.strTitle);
+                        if (!p_RecJob->rescheduleJobEntry(rec->second)) {
+                            XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                            p_RecJob->delJobEntry(rec->first);
+                        }
+                    }
+                    else {
+                        XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                        p_RecJob->delJobEntry(rec->first);
+                    }
                     s_triggerTimerUpdate = true;
-                    //jobsUpdated = true;
                 }
                 else if (rec->second.Timer.endTime<time(NULL)) {
-                    XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
-                    p_RecJob->delJobEntry(rec->first);
+                    if (rec->second.Timer.iTimerType!=PVR_TIMER_TYPE_NONE) {
+                        XBMC->Log(LOG_NOTICE,"Try to reschedule recording %s",rec->second.Timer.strTitle);
+                        if (!p_RecJob->rescheduleJobEntry(rec->second)) {
+                            XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                            p_RecJob->delJobEntry(rec->first);
+                        }
+                    }
+                    else {
+                        XBMC->Log(LOG_NOTICE,"Try to delete recording %s",rec->second.Timer.strTitle);
+                        p_RecJob->delJobEntry(rec->first);
+                    }
                     s_triggerTimerUpdate = true;
-                    //jobsUpdated = true;
                 }
-                else if ((rec->second.Timer.startTime-10)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED)
+                else if ((rec->second.Timer.startTime-10)<=time(NULL) && rec->second.Timer.state == PVR_TIMER_STATE_SCHEDULED && rec->second.Timer.firstDay<=time(NULL))
                 {
                     //Start new Recording
                     XBMC->Log(LOG_NOTICE,"Try to start recording %s",rec->second.Timer.strTitle);
