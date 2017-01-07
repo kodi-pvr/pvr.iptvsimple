@@ -142,10 +142,10 @@ void *PVRRecorderThread::Process(void)
     
     struct tm *current;
     time_t now;
-	
+
     time(&now);
     current = localtime(&now);
-    string month = inttostr(current->tm_mon);
+    string month = inttostr(current->tm_mon+1);
     if (current->tm_mon<10) month = "0"+month;
     string day = inttostr(current->tm_mday);
     if (current->tm_mday<10) day = "0"+day;

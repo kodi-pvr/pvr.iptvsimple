@@ -19,7 +19,7 @@ IPTV Live TV and Radio PVR client addon for [Kodi] (http://kodi.tv)
 * [Kodi's PVR user support] (http://forum.kodi.tv/forumdisplay.php?fid=167)
 * [Kodi's PVR development support] (http://forum.kodi.tv/forumdisplay.php?fid=136)
 
-### Radek Kubera (rkubera) modification
+## Radek Kubera (rkubera) modification
 ##### Features
 1. Mutlitask recording
 2. Time shifting support
