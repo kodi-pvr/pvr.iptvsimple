@@ -100,7 +100,7 @@ bool PVRRecJob::loadData(void)
             {
                 if (jobEntry.Timer.state==PVR_TIMER_STATE_NEW || jobEntry.Timer.state==PVR_TIMER_STATE_SCHEDULED)
                 {
-                    if (jobEntry.Timer.startTime>time(NULL))
+                    if (jobEntry.Timer.startTime>time(NULL) || jobEntry.Timer.iTimerType!=PVR_TIMER_TYPE_NONE)
                     {
                         jobEntry.Status = PVR_STREAM_NO_STREAM;
                         m_JobEntryData[jobEntry.Timer.iClientIndex] = jobEntry;
