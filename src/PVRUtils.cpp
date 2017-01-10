@@ -77,8 +77,7 @@ extern int strtoint(string s)
 extern string inttostr (int i)
 {
     string tmp;
-    sprintf((char*)tmp.c_str(), "%d", i);
-    string str = tmp.c_str();
-    return str;
+    tmp = std::to_string(i);
+    return tmp;
 }
 
