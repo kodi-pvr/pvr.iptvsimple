@@ -127,11 +127,11 @@ msgid "Path to rtmpdump binary"
 msgstr ""
 
 msgctxt "#30103"
-msgid "Path to ffmpeg binary"
+msgid "Path to avconv binary"
 msgstr ""
 
 msgctxt "#30104"
-msgid "Recompression params for ffmpeg"
+msgid "Recompression params for avconv"
 msgstr ""
 
 msgctxt "#30105"

@@ -97,12 +97,12 @@ msgid "Path to rtmpdump binary"
 msgstr "Podaj położenie pliku rtmpdump "
 
 msgctxt "#30103"
-msgid "Path to ffmpeg binary"
-msgstr "Podaj położenie pliku ffmpeg "
+msgid "Path to avconv binary"
+msgstr "Podaj położenie pliku avconv "
 
 msgctxt "#30104"
-msgid "Recompression params for ffmpeg"
-msgstr "Podaj paramatry rekompresji ffmpeg "
+msgid "Recompression params for avconv"
+msgstr "Podaj paramatry rekompresji avconv "
 
 msgctxt "#30105"
 msgid "File extension"

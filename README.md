@@ -26,10 +26,10 @@ IPTV Live TV and Radio PVR client addon for [Kodi] (http://kodi.tv)
 3. EPG recording support
 
 ##### Requirements
-1. ffmpeg binary
+1. avconv binary
 2. rtmpdump binary
 
 ##### Tested with
 1. OSX Sierra
-2. Raspberry pi 2 (raspbian)
+2. Raspberry pi 2 (OSMC - debian)
 3. Ubuntu 16.10
