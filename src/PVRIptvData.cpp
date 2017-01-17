@@ -104,7 +104,7 @@ PVRIptvData::~PVRIptvData(void)
   m_genres.clear();
 }
 
-bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd) 
+bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
 {
   if (m_strXMLTVUrl.empty())
   {
@@ -119,7 +119,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   int iCount = 0;
   while(iCount < 3) // max 3 tries
   {
-    if ((iReaded = GetCachedFileContents(TVG_FILE_NAME, m_strXMLTVUrl, data, g_bCacheEPG)) != 0) 
+    if ((iReaded = GetCachedFileContents(TVG_FILE_NAME, m_strXMLTVUrl, data, g_bCacheEPG)) != 0)
     {
       break;
     }
@@ -129,7 +129,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       usleep(2 * 1000 * 1000); // sleep 2 sec before next try.
     }
   }
-  
+
   if (iReaded == 0)
   {
     XBMC->Log(LOG_ERROR, "Unable to load EPG file '%s':  file is missing or empty. After %d tries.", m_strXMLTVUrl.c_str(), iCount);
@@ -139,7 +139,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   char * buffer;
 
   // gzip packed
-  if (data[0] == '\x1F' && data[1] == '\x8B' && data[2] == '\x08') 
+  if (data[0] == '\x1F' && data[1] == '\x8B' && data[2] == '\x08')
   {
     if (!GzipInflate(data, decompressed))
     {
@@ -170,11 +170,11 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   }
 
   xml_document<> xmlDoc;
-  try 
+  try
   {
     xmlDoc.parse<0>(buffer);
-  } 
-  catch(parse_error p) 
+  }
+  catch(parse_error p)
   {
     XBMC->Log(LOG_ERROR, "Unable parse EPG XML: %s", p.what());
     return false;
@@ -188,7 +188,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   }
 
   // clear previously loaded epg
-  if (m_epg.size() > 0) 
+  if (m_epg.size() > 0)
     m_epg.clear();
 
   int iBroadCastId = 0;
@@ -216,12 +216,12 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     m_epg.push_back(epgChannel);
   }
 
-  if (m_epg.size() == 0) 
+  if (m_epg.size() == 0)
   {
     XBMC->Log(LOG_ERROR, "EPG channels not found.");
     return false;
   }
-  
+
   int iMinShiftTime = m_iEPGTimeShift;
   int iMaxShiftTime = m_iEPGTimeShift;
   if (!m_bTSOverride)
@@ -253,14 +253,14 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     }
 
     std::string strStart, strStop;
-    if ( !GetAttributeValue(pChannelNode, "start", strStart) 
-      || !GetAttributeValue(pChannelNode, "stop", strStop)) 
+    if ( !GetAttributeValue(pChannelNode, "start", strStart)
+      || !GetAttributeValue(pChannelNode, "stop", strStop))
       continue;
 
     int iTmpStart = ParseDateTime(strStart);
     int iTmpEnd = ParseDateTime(strStop);
 
-    if ( (iTmpEnd   + iMaxShiftTime < iStart) 
+    if ( (iTmpEnd   + iMaxShiftTime < iStart)
       || (iTmpStart + iMinShiftTime > iEnd))
       continue;
 
@@ -294,7 +294,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   return true;
 }
 
-bool PVRIptvData::LoadPlayList(void) 
+bool PVRIptvData::LoadPlayList(void)
 {
   if (m_strM3uUrl.empty())
   {
@@ -328,7 +328,7 @@ bool PVRIptvData::LoadPlayList(void)
   tmpChannel.iTvgShift      = 0;
 
   char szLine[1024];
-  while(stream.getline(szLine, 1024)) 
+  while(stream.getline(szLine, 1024))
   {
     std::string strLine(szLine);
     strLine = StringUtils::TrimRight(strLine, " \t\r\n");
@@ -341,7 +341,7 @@ bool PVRIptvData::LoadPlayList(void)
       continue;
     }
 
-    if (bFirst) 
+    if (bFirst)
     {
       bFirst = false;
       if (StringUtils::Left(strLine, 3) == "\xEF\xBB\xBF")
@@ -378,7 +378,7 @@ bool PVRIptvData::LoadPlayList(void)
       // parse line
       int iColon = (int)strLine.find(':');
       int iComma = (int)strLine.rfind(',');
-      if (iColon >= 0 && iComma >= 0 && iComma > iColon) 
+      if (iColon >= 0 && iComma >= 0 && iComma > iColon)
       {
         // parse name
         iComma++;
@@ -407,7 +407,7 @@ bool PVRIptvData::LoadPlayList(void)
         {
           strTvgLogo = strChnlName;
         }
-        if (!strChnlNo.empty()) 
+        if (!strChnlNo.empty())
         {
           iChannelNum = atoi(strChnlNo.c_str());
         }
@@ -445,7 +445,7 @@ bool PVRIptvData::LoadPlayList(void)
           }
         }
       }
-    } 
+    }
     else if (strLine[0] != '#')
     {
       XBMC->Log(LOG_DEBUG,
@@ -466,7 +466,7 @@ bool PVRIptvData::LoadPlayList(void)
 
       iChannelNum++;
 
-      if (iCurrentGroupId > 0) 
+      if (iCurrentGroupId > 0)
       {
         channel.bRadio = m_groups.at(iCurrentGroupId - 1).bRadio;
         m_groups.at(iCurrentGroupId - 1).members.push_back(iChannelIndex);
@@ -483,7 +483,7 @@ bool PVRIptvData::LoadPlayList(void)
       tmpChannel.bRadio         = false;
     }
   }
-  
+
   stream.clear();
 
   if (m_channels.size() == 0)
@@ -672,7 +672,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
     if (myChannel->iUniqueId != (int) channel.iUniqueId)
       continue;
 
-    if (iStart > m_iLastStart || iEnd > m_iLastEnd) 
+    if (iStart > m_iLastStart || iEnd > m_iLastEnd)
     {
       // reload EPG for new time interval only
       LoadEPG(iStart, iEnd);
@@ -692,7 +692,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
     std::vector<PVRIptvEpgEntry>::iterator myTag;
     for (myTag = epg->epg.begin(); myTag < epg->epg.end(); ++myTag)
     {
-      if ((myTag->endTime + iShift) < iStart) 
+      if ((myTag->endTime + iShift) < iStart)
         continue;
 
       int iGenreType, iGenreSubType;
@@ -787,9 +787,9 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
 #else
   _get_timezone(&offset);
 #endif // TARGET_WINDOWS
-  
+
   long offset_of_date = (hours * 60 * 60) + (minutes * 60);
-  if (sign == '-') 
+  if (sign == '-')
   {
     offset_of_date = -offset_of_date;
   }
@@ -808,7 +808,7 @@ PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::s
     if (it->strTvgId == strId)
       return &*it;
 
-    if (strTvgName == "") 
+    if (strTvgName == "")
       continue;
 
     if (it->strTvgName == strTvgName)
@@ -890,7 +890,7 @@ bool PVRIptvData::FindEpgGenre(const std::string& strGenre, int& iType, int& iSu
  * Author: Andrew Lim Chong Liang
  * http://windrealm.org
  */
-bool PVRIptvData::GzipInflate( const std::string& compressedBytes, std::string& uncompressedBytes ) {  
+bool PVRIptvData::GzipInflate( const std::string& compressedBytes, std::string& uncompressedBytes ) {
 
 #define HANDLE_CALL_ZLIB(status) {   \
   if(status != Z_OK) {        \
@@ -899,68 +899,68 @@ bool PVRIptvData::GzipInflate( const std::string& compressedBytes, std::string& 
   }                           \
 }
 
-  if ( compressedBytes.size() == 0 ) 
-  {  
-    uncompressedBytes = compressedBytes ;  
-    return true ;  
-  }  
-  
-  uncompressedBytes.clear() ;  
-  
-  unsigned full_length = compressedBytes.size() ;  
-  unsigned half_length = compressedBytes.size() / 2;  
-  
-  unsigned uncompLength = full_length ;  
-  char* uncomp = (char*) calloc( sizeof(char), uncompLength );  
-  
-  z_stream strm;  
-  strm.next_in = (Bytef *) compressedBytes.c_str();  
-  strm.avail_in = compressedBytes.size() ;  
-  strm.total_out = 0;  
-  strm.zalloc = Z_NULL;  
-  strm.zfree = Z_NULL;  
-  
-  bool done = false ;  
-  
+  if ( compressedBytes.size() == 0 )
+  {
+    uncompressedBytes = compressedBytes ;
+    return true ;
+  }
+
+  uncompressedBytes.clear() ;
+
+  unsigned full_length = compressedBytes.size() ;
+  unsigned half_length = compressedBytes.size() / 2;
+
+  unsigned uncompLength = full_length ;
+  char* uncomp = (char*) calloc( sizeof(char), uncompLength );
+
+  z_stream strm;
+  strm.next_in = (Bytef *) compressedBytes.c_str();
+  strm.avail_in = compressedBytes.size() ;
+  strm.total_out = 0;
+  strm.zalloc = Z_NULL;
+  strm.zfree = Z_NULL;
+
+  bool done = false ;
+
   HANDLE_CALL_ZLIB(inflateInit2(&strm, (16+MAX_WBITS)));
-  
-  while (!done) 
-  {  
-    // If our output buffer is too small  
-    if (strm.total_out >= uncompLength ) 
+
+  while (!done)
+  {
+    // If our output buffer is too small
+    if (strm.total_out >= uncompLength )
     {
-      // Increase size of output buffer  
+      // Increase size of output buffer
       uncomp = (char *) realloc(uncomp, uncompLength + half_length);
       if (uncomp == NULL)
         return false;
-      uncompLength += half_length ;  
-    }  
-  
-    strm.next_out = (Bytef *) (uncomp + strm.total_out);  
-    strm.avail_out = uncompLength - strm.total_out;  
-  
-    // Inflate another chunk.  
-    int err = inflate (&strm, Z_SYNC_FLUSH);  
-    if (err == Z_STREAM_END) 
-      done = true;  
-    else if (err != Z_OK)  
-    {  
-      break;  
-    }  
-  }  
-  
+      uncompLength += half_length ;
+    }
+
+    strm.next_out = (Bytef *) (uncomp + strm.total_out);
+    strm.avail_out = uncompLength - strm.total_out;
+
+    // Inflate another chunk.
+    int err = inflate (&strm, Z_SYNC_FLUSH);
+    if (err == Z_STREAM_END)
+      done = true;
+    else if (err != Z_OK)
+    {
+      break;
+    }
+  }
+
   HANDLE_CALL_ZLIB(inflateEnd (&strm));
-  
-  for ( size_t i=0; i<strm.total_out; ++i ) 
-  {  
-    uncompressedBytes += uncomp[ i ];  
-  }  
 
-  free( uncomp );  
-  return true ;  
-}  
+  for ( size_t i=0; i<strm.total_out; ++i )
+  {
+    uncompressedBytes += uncomp[ i ];
+  }
 
-int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const std::string &filePath, 
+  free( uncomp );
+  return true ;
+}
+
+int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const std::string &filePath,
                                        std::string &strContents, const bool bUseCache /* false */)
 {
   bool bNeedReload = false;
@@ -968,7 +968,7 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
   std::string strFilePath = filePath;
 
   // check cached file is exists
-  if (bUseCache && XBMC->FileExists(strCachedPath.c_str(), false)) 
+  if (bUseCache && XBMC->FileExists(strCachedPath.c_str(), false))
   {
     struct __stat64 statCached;
     struct __stat64 statOrig;
@@ -977,16 +977,16 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
     XBMC->StatFile(strFilePath.c_str(), &statOrig);
 
     bNeedReload = statCached.st_mtime < statOrig.st_mtime || statOrig.st_mtime == 0;
-  } 
-  else 
+  }
+  else
     bNeedReload = true;
 
-  if (bNeedReload) 
+  if (bNeedReload)
   {
     GetFileContents(strFilePath, strContents);
 
     // write to cache
-    if (bUseCache && strContents.length() > 0) 
+    if (bUseCache && strContents.length() > 0)
     {
       void* fileHandle = XBMC->OpenFileForWrite(strCachedPath.c_str(), true);
       if (fileHandle)
@@ -996,7 +996,7 @@ int PVRIptvData::GetCachedFileContents(const std::string &strCachedName, const s
       }
     }
     return strContents.length();
-  } 
+  }
 
   return GetFileContents(strCachedPath, strContents);
 }
@@ -1008,7 +1008,7 @@ void PVRIptvData::ApplyChannelsLogos()
   {
     if (!channel->strTvgLogo.empty())
     {
-      if (!m_strLogoPath.empty() 
+      if (!m_strLogoPath.empty()
         // special proto
         && channel->strTvgLogo.find("://") == std::string::npos)
         channel->strLogoPath = PathCombine(m_strLogoPath, channel->strTvgLogo);
@@ -1117,7 +1117,7 @@ std::string PVRIptvData::ReadMarkerValue(std::string &strLine, const char* strMa
   return std::string("");
 }
 
-int PVRIptvData::GetChannelId(const char * strChannelName, const char * strStreamUrl) 
+int PVRIptvData::GetChannelId(const char * strChannelName, const char * strStreamUrl)
 {
   std::string concat(strChannelName);
   concat.append(strStreamUrl);

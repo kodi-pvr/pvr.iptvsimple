@@ -3,18 +3,18 @@ language: cpp
 #
 # Define the build matrix
 #
-# Travis defaults to building on Ubuntu Precise when building on 
-# Linux. We need Trusty in order to get up to date versions of 
+# Travis defaults to building on Ubuntu Precise when building on
+# Linux. We need Trusty in order to get up to date versions of
 # cmake and g++.
 #
 matrix:
   include:
     - os: linux
-      dist: trusty    
+      dist: trusty
       sudo: required
       compiler: gcc
     - os: linux
-      dist: trusty    
+      dist: trusty
       sudo: required
       compiler: clang
     - os: osx
@@ -23,7 +23,7 @@ matrix:
       osx_image: xcode6.1
 
 #
-# Some of the OS X images don't have cmake, contrary to what people 
+# Some of the OS X images don't have cmake, contrary to what people
 # on the Internet say
 #
 before_install:
@@ -38,6 +38,6 @@ before_script:
   - cd $TRAVIS_BUILD_DIR/..
   - git clone --depth=1 https://github.com/xbmc/xbmc.git
   - cd pvr.iptvsimple && mkdir build && cd build
-  - cmake -DADDONS_TO_BUILD=pvr.iptvsimple -DADDON_SRC_PREFIX=$TRAVIS_BUILD_DIR/.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$TRAVIS_BUILD_DIR/../xbmc/addons -DPACKAGE_ZIP=1 $TRAVIS_BUILD_DIR/../xbmc/project/cmake/addons
+  - cmake -DADDONS_TO_BUILD=pvr.iptvsimple -DADDON_SRC_PREFIX=$TRAVIS_BUILD_DIR/.. -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=$TRAVIS_BUILD_DIR/../xbmc/addons -DPACKAGE_ZIP=1 $TRAVIS_BUILD_DIR/../xbmc/cmake/addons
 
 script: make
