@@ -372,6 +372,7 @@ bool PVRIptvData::LoadPlayList(void)
       std::string strTvgId     = "";
       std::string strTvgName   = "";
       std::string strTvgLogo   = "";
+      std::string strTvgShift  = "";
       std::string strGroupName = "";
       std::string strRadio     = "";
 
@@ -395,7 +396,7 @@ bool PVRIptvData::LoadPlayList(void)
         strChnlNo     = ReadMarkerValue(strInfoLine, TVG_INFO_CHNO_MARKER);
         strGroupName  = ReadMarkerValue(strInfoLine, GROUP_NAME_MARKER);
         strRadio      = ReadMarkerValue(strInfoLine, RADIO_MARKER);
-        fTvgShift     = atof(ReadMarkerValue(strInfoLine, TVG_INFO_SHIFT_MARKER).c_str());
+        strTvgShift   = ReadMarkerValue(strInfoLine, TVG_INFO_SHIFT_MARKER);
 
         if (strTvgId.empty())
         {
@@ -411,6 +412,7 @@ bool PVRIptvData::LoadPlayList(void)
         {
           iChannelNum = atoi(strChnlNo.c_str());
         }
+        fTvgShift = atof(strTvgShift.c_str());
 
         bRadio                = !StringUtils::CompareNoCase(strRadio, "true");
         tmpChannel.strTvgId   = strTvgId;
@@ -419,7 +421,7 @@ bool PVRIptvData::LoadPlayList(void)
         tmpChannel.iTvgShift  = (int)(fTvgShift * 3600.0);
         tmpChannel.bRadio     = bRadio;
 
-        if (tmpChannel.iTvgShift == 0 && iEPGTimeShift != 0)
+        if (strTvgShift.empty())
         {
           tmpChannel.iTvgShift = iEPGTimeShift;
         }
