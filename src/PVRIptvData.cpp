@@ -38,7 +38,7 @@
 #define TVG_INFO_NAME_MARKER    "tvg-name="
 #define TVG_INFO_LOGO_MARKER    "tvg-logo="
 #define TVG_INFO_SHIFT_MARKER   "tvg-shift="
-#define TVG_INFO_CHNO_MARKER   	"tvg-chno="
+#define TVG_INFO_CHNO_MARKER    "tvg-chno="
 #define GROUP_NAME_MARKER       "group-title="
 #define RADIO_MARKER            "radio="
 #define CHANNEL_LOGO_EXTENSION  ".png"
@@ -411,9 +411,9 @@ bool PVRIptvData::LoadPlayList(void)
         fTvgShift = atof(strTvgShift.c_str());
 
         if (!strChnlNo.empty()) 
-	{
+        {
           iChannelNum = atoi(strChnlNo.c_str());
-	}
+        }
 
         bRadio                = !StringUtils::CompareNoCase(strRadio, "true");
         tmpChannel.strTvgId   = strTvgId;
