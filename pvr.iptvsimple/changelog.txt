@@ -1,3 +1,6 @@
+v2.4.10
+- added Channel number tvg-chno to m3u 
+
 v2.4.9
 - Fix: Change the line lenght to 4k.
 
