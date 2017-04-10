@@ -316,9 +316,9 @@ bool PVRIptvData::LoadPlayList(void)
 
   int iChannelIndex     = 0;
   int iUniqueGroupId    = 0;
-  int iCurrentGroupId   = 0;
   int iChannelNum       = g_iStartNumber;
   int iEPGTimeShift     = 0;
+  std::vector<int> iCurrentGroupId;
 
   PVRIptvChannel tmpChannel;
   tmpChannel.strTvgId       = "";
@@ -427,22 +427,28 @@ bool PVRIptvData::LoadPlayList(void)
 
         if (!strGroupName.empty())
         {
-          strGroupName = XBMC->UnknownToUTF8(strGroupName.c_str());
-
+          std::stringstream streamGroups(strGroupName);
           PVRIptvChannelGroup * pGroup;
-          if ((pGroup = FindGroup(strGroupName)) == NULL)
-          {
-            PVRIptvChannelGroup group;
-            group.strGroupName = strGroupName;
-            group.iGroupId = ++iUniqueGroupId;
-            group.bRadio = bRadio;
+          iCurrentGroupId.clear();
 
-            m_groups.push_back(group);
-            iCurrentGroupId = iUniqueGroupId;
-          }
-          else
+          while(std::getline(streamGroups, strGroupName, ';'))
           {
-            iCurrentGroupId = pGroup->iGroupId;
+            strGroupName = XBMC->UnknownToUTF8(strGroupName.c_str());
+
+            if ((pGroup = FindGroup(strGroupName)) == NULL)
+            {
+              PVRIptvChannelGroup group;
+              group.strGroupName = strGroupName;
+              group.iGroupId = ++iUniqueGroupId;
+              group.bRadio = bRadio;
+
+              m_groups.push_back(group);
+              iCurrentGroupId.push_back(iUniqueGroupId);
+            }
+            else
+            {
+              iCurrentGroupId.push_back(pGroup->iGroupId);
+            }
           }
         }
       }
@@ -467,10 +473,11 @@ bool PVRIptvData::LoadPlayList(void)
 
       iChannelNum++;
 
-      if (iCurrentGroupId > 0)
+      std::vector<int>::iterator it;
+      for (auto it = iCurrentGroupId.begin(); it != iCurrentGroupId.end(); ++it)
       {
-        channel.bRadio = m_groups.at(iCurrentGroupId - 1).bRadio;
-        m_groups.at(iCurrentGroupId - 1).members.push_back(iChannelIndex);
+        channel.bRadio = m_groups.at(*it - 1).bRadio;
+        m_groups.at(*it - 1).members.push_back(iChannelIndex);
       }
 
       m_channels.push_back(channel);
