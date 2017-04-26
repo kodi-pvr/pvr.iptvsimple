@@ -225,16 +225,6 @@ void ADDON_Destroy()
   m_CurStatus = ADDON_STATUS_UNKNOWN;
 }
 
-bool ADDON_HasSettings()
-{
-  return true;
-}
-
-unsigned int ADDON_GetSettings(ADDON_StructSetting ***sSet)
-{
-  return 0;
-}
-
 ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 {
   // reset cache and restart addon 
@@ -263,10 +253,6 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 }
 
 void ADDON_Stop()
-{
-}
-
-void ADDON_FreeSettings()
 {
 }
 
