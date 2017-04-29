@@ -6,7 +6,7 @@
   provider-name="nightik">
   <requires>
     <c-pluff version="0.1"/>
-    <import addon="xbmc.pvr" version="5.2.1"/>
+    <import addon="xbmc.pvr" version="5.2.2"/>
   </requires>
   <extension
     point="xbmc.pvrclient"
