@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="3.0.3"
+  version="3.0.2"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>
     <c-pluff version="0.1"/>
-    <import addon="kodi.global.main" version="@ADDON_GLOBAL_VERSION_MAIN@"/>
-    <import addon="kodi.instance.pvr" version="@ADDON_INSTANCE_VERSION_PVR@"/>
+    <import addon="xbmc.pvr" version="5.2.2"/>
   </requires>
   <extension
     point="xbmc.pvrclient"
