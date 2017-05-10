@@ -23,6 +23,9 @@ message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 set(IPTV_SOURCES src/client.cpp
                  src/PVRIptvData.cpp)
 
+set(IPTV_HEADERS src/client.h
+                 src/PVRIptvData.h)
+
 build_addon(pvr.iptvsimple IPTV DEPLIBS)
 
 include(CPack)
