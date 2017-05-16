@@ -1,3 +1,8 @@
+v3.0.3
+- set dependency versions automatic during build
+- removed never used kodi to addon functions
+- build system fixes
+
 v3.0.2
 - Fix: Change the line lenght to 4k
 
