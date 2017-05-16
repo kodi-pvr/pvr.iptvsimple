@@ -1,3 +1,6 @@
+v3.0.4
+- Removed old no more needed version functions
+
 v3.0.3
 - set dependency versions automatic during build
 - removed never used kodi to addon functions
