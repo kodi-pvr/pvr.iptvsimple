@@ -18,3 +18,18 @@ IPTV Live TV and Radio PVR client addon for [Kodi] (http://kodi.tv)
 
 * [Kodi's PVR user support] (http://forum.kodi.tv/forumdisplay.php?fid=167)
 * [Kodi's PVR development support] (http://forum.kodi.tv/forumdisplay.php?fid=136)
+
+## Radek Kubera (rkubera) modification
+##### Features
+1. Mutlitask recording
+2. Time shifting support
+3. EPG recording support
+
+##### Requirements
+1. avconv binary
+2. rtmpdump binary
+
+##### Tested with
+1. OSX Sierra
+2. Raspberry pi 2 (OSMC - debian)
+3. Ubuntu 16.10

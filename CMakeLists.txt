@@ -21,7 +21,14 @@ set(DEPLIBS ${p8-platform_LIBRARIES}
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 set(IPTV_SOURCES src/client.cpp
-                 src/PVRIptvData.cpp)
+                 src/PVRIptvData.cpp
+                 src/PVRRecorder.cpp
+                 src/PVRUtils.cpp
+                 src/PVRRecJob.cpp
+                 src/PVRSchedulerThread.cpp
+                 src/PVRRecorderThread.cpp
+                 src/PVRPlayList.cpp
+                 src/libexecstream/exec-stream.cpp)
 
 set(IPTV_HEADERS src/client.h
                  src/PVRIptvData.h)

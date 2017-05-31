@@ -30,7 +30,10 @@
 #include "zlib.h"
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
+
 #include "p8-platform/util/StringUtils.h"
+#include "PVRUtils.h"
+
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"
@@ -98,6 +101,7 @@ void *PVRIptvData::Process(void)
 
 PVRIptvData::~PVRIptvData(void)
 {
+  CloseRecordingThreads();
   m_channels.clear();
   m_groups.clear();
   m_epg.clear();
@@ -614,6 +618,28 @@ bool PVRIptvData::GetChannel(const PVR_CHANNEL &channel, PVRIptvChannel &myChann
   return false;
 }
 
+bool PVRIptvData::GetChannelByName(const std::string strChannelName, PVRIptvChannel &myChannel)
+{
+  for (unsigned int iChannelPtr = 0; iChannelPtr < m_channels.size(); iChannelPtr++)
+  {
+    PVRIptvChannel &thisChannel = m_channels.at(iChannelPtr);
+    if (thisChannel.strChannelName == strChannelName)
+    {
+      myChannel.iUniqueId         = thisChannel.iUniqueId;
+      myChannel.bRadio            = thisChannel.bRadio;
+      myChannel.iChannelNumber    = thisChannel.iChannelNumber;
+      myChannel.iEncryptionSystem = thisChannel.iEncryptionSystem;
+      myChannel.strChannelName    = thisChannel.strChannelName;
+      myChannel.strLogoPath       = thisChannel.strLogoPath;
+      myChannel.strStreamURL      = thisChannel.strStreamURL;
+
+      return true;
+    }
+  }
+
+  return false;
+}
+
 int PVRIptvData::GetChannelGroupsAmount(void)
 {
   return m_groups.size();
@@ -747,6 +773,74 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
   }
 
   return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR PVRIptvData::GetEPGTagForChannel(EPG_TAG &tag, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd)
+{
+  std::vector<PVRIptvChannel>::iterator myChannel;
+  for (myChannel = m_channels.begin(); myChannel < m_channels.end(); ++myChannel)
+  {
+    if (myChannel->iUniqueId != (int) channel.iUniqueId)
+      continue;
+
+    PVRIptvEpgChannel *epg;
+    if ((epg = FindEpgForChannel(*myChannel)) == NULL || epg->epg.size() == 0)
+      return PVR_ERROR_FAILED;
+
+    int iShift = m_bTSOverride ? m_iEPGTimeShift : myChannel->iTvgShift + m_iEPGTimeShift;
+
+    std::vector<PVRIptvEpgEntry>::iterator myTag;
+    for (myTag = epg->epg.begin(); myTag < epg->epg.end(); ++myTag)
+    {
+      if ((myTag->endTime + iShift) < iStart) 
+        continue;
+
+      int iGenreType, iGenreSubType;
+      
+      tag.iUniqueBroadcastId  = myTag->iBroadcastId;
+      tag.strTitle            = myTag->strTitle.c_str();
+      tag.iChannelNumber      = myTag->iChannelId;
+      tag.startTime           = myTag->startTime + iShift;
+      tag.endTime             = myTag->endTime + iShift;
+      tag.strPlotOutline      = myTag->strPlotOutline.c_str();
+      tag.strPlot             = myTag->strPlot.c_str();
+      tag.strOriginalTitle    = NULL;  /* not supported */
+      tag.strCast             = NULL;  /* not supported */
+      tag.strDirector         = NULL;  /* not supported */
+      tag.strWriter           = NULL;  /* not supported */
+      tag.iYear               = 0;     /* not supported */
+      tag.strIMDBNumber       = NULL;  /* not supported */
+      tag.strIconPath         = myTag->strIconPath.c_str();
+      if (FindEpgGenre(myTag->strGenreString, iGenreType, iGenreSubType))
+      {
+        tag.iGenreType          = iGenreType;
+        tag.iGenreSubType       = iGenreSubType;
+        tag.strGenreDescription = NULL;
+      }
+      else
+      {
+        tag.iGenreType          = EPG_GENRE_USE_STRING;
+        tag.iGenreSubType       = 0;     /* not supported */
+        tag.strGenreDescription = myTag->strGenreString.c_str();
+      }
+      tag.iParentalRating     = 0;     /* not supported */
+      tag.iStarRating         = 0;     /* not supported */
+      tag.bNotify             = false; /* not supported */
+      tag.iSeriesNumber       = 0;     /* not supported */
+      tag.iEpisodeNumber      = 0;     /* not supported */
+      tag.iEpisodePartNumber  = 0;     /* not supported */
+      tag.strEpisodeName      = NULL;  /* not supported */
+
+
+      
+      if ((myTag->startTime + iShift) > iEnd)
+        break;
+    }
+
+    return PVR_ERROR_NO_ERROR;
+  }
+
+  return PVR_ERROR_FAILED;
 }
 
 int PVRIptvData::GetFileContents(std::string& url, std::string &strContent)

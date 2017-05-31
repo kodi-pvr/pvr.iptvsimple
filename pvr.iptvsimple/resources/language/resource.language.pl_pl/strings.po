@@ -84,6 +84,46 @@ msgctxt "#30032"
 msgid "Channels Logos Base URL"
 msgstr "Bazowy adres URL z logami kanałów "
 
+msgctxt "#30100"
+msgid "Recording settings"
+msgstr "Ustawienia nagrywania "
+
+msgctxt "#30101"
+msgid "Store folder"
+msgstr "Podaj katalog do zapisywania nagrań "
+
+msgctxt "#30102"
+msgid "Path to rtmpdump binary"
+msgstr "Podaj położenie pliku rtmpdump "
+
+msgctxt "#30103"
+msgid "Path to avconv binary"
+msgstr "Podaj położenie pliku avconv "
+
+msgctxt "#30104"
+msgid "Recompression params for avconv"
+msgstr "Podaj paramatry rekompresji avconv "
+
+msgctxt "#30105"
+msgid "File extension"
+msgstr "Podaj rozszerzenie pliku "
+
+msgctxt "#30106"
+msgid "Input stream quality"
+msgstr "Jakość pobieranego strumienia "
+
+msgctxt "#30107"
+msgid "Low"
+msgstr "Niska "
+
+msgctxt "#30108"
+msgid "High"
+msgstr "Wysoka "
+
+msgctxt "#30109"
+msgid "Stream timeout (sec)"
+msgstr "Timeout strumienia (sek) "
+
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Opcje logo dla XMLTV"

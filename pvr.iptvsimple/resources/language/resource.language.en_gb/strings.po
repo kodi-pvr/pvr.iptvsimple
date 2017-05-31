@@ -113,3 +113,43 @@ msgstr ""
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr ""
+
+msgctxt "#30100"
+msgid "Recording settings"
+msgstr ""
+
+msgctxt "#30101"
+msgid "Store folder"
+msgstr ""
+
+msgctxt "#30102"
+msgid "Path to rtmpdump binary"
+msgstr ""
+
+msgctxt "#30103"
+msgid "Path to avconv binary"
+msgstr ""
+
+msgctxt "#30104"
+msgid "Recompression params for avconv"
+msgstr ""
+
+msgctxt "#30105"
+msgid "File extension"
+msgstr ""
+
+msgctxt "#30106"
+msgid "Input stream quality"
+msgstr ""
+
+msgctxt "#30107"
+msgid "Low"
+msgstr ""
+
+msgctxt "#30108"
+msgid "High"
+msgstr ""
+
+msgctxt "#30109"
+msgid "Stream timeout (sec)"
+msgstr ""
