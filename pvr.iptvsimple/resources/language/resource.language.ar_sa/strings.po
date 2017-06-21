@@ -20,10 +20,86 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "الموقع"
 
+msgctxt "#30001"
+msgid "Local Path (include Local Network)"
+msgstr "مسار محلي (يتضمن الشبكة المحلية)"
+
+msgctxt "#30002"
+msgid "Remote Path (Internet address)"
+msgstr "مسار بعيد (عنوان انترنت)"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "عام"
 
+msgctxt "#30011"
+msgid "M3U Play List Path"
+msgstr "قائمة تشغيل M3U"
+
+msgctxt "#30012"
+msgid "M3U Play List URL"
+msgstr "عنوانن قائمة تشغيل M3U"
+
+msgctxt "#30013"
+msgid "Numbering channels starts at"
+msgstr "ترقيم القنوات يبدأ مت"
+
+msgctxt "#30020"
+msgid "EPG Settings"
+msgstr "EPG اعدادات الدليل"
+
+msgctxt "#30021"
+msgid "XMLTV Path"
+msgstr "مسار XMLTV"
+
+msgctxt "#30022"
+msgid "XMLTV URL"
+msgstr "عنوان XMLTV"
+
+msgctxt "#30023"
+msgid "Apply Time Shift To All Channels"
+msgstr "تطبيق التايم شيفت على جميع القنوات"
+
+msgctxt "#30024"
+msgid "EPG Time Shift (hours)"
+msgstr "التايم شيفت للدليل (ساعات)"
+
+msgctxt "#30025"
+msgid "Cache m3u at local storage"
+msgstr "تخزين مؤقت لملفات m3u في الذاكره المعلية"
+
+msgctxt "#30026"
+msgid "Cache XMLTV at local storage"
+msgstr "تخزين مؤقت لملفات XMLTV في الذاكره المعلية"
+
+msgctxt "#30030"
+msgid "Channels Logos"
+msgstr "شعارات القنوات"
+
+msgctxt "#30031"
+msgid "Channels Logos Folder"
+msgstr "مجلد شعارات القنوات"
+
+msgctxt "#30032"
+msgid "Channels Logos Base URL"
+msgstr "العنوان الأساسي لشعارات القنوات"
+
+msgctxt "#30040"
+msgid "XMLTV Logos Options"
+msgstr "خيارات شعارات XMLTV"
+
+msgctxt "#30041"
+msgid "Channels Logos from XMLTV"
+msgstr "شعارات القنوات من XMLTV"
+
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "تجاهل"
+
+msgctxt "#30043"
+msgid "Prefer M3U"
+msgstr "M3U المفضل"
+
+msgctxt "#30044"
+msgid "Prefer XMLTV"
+msgstr "XMLTV المفضل"

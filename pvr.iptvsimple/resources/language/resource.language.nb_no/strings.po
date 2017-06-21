@@ -62,7 +62,7 @@ msgstr "Aktiver tidshopp til alle kanaler"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "Programguide tidshopp (timer)"
+msgstr "Programguide-tidshopp (timer)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
