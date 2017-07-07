@@ -1,3 +1,6 @@
+v3.1.0
+- Updated to PVR addon API v5.3.0
+
 v3.0.6
 - Remove of never used addon interface function
 
