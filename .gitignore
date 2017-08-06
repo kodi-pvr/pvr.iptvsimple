@@ -1,5 +1,6 @@
 # build artifacts
 build/
+cmake-build-debug/
 debian/changelog
 debian/files
 debian/kodi-pvr-iptvsimple-dbg.debhelper.log

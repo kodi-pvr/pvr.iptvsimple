@@ -1,3 +1,10 @@
+v2.4.13
+- fixed install path in the Debian package
+- remove line size limitation when parsing M3U files
+
+v2.4.12
+- updated language files from Transifex
+
 v2.4.10
 - added Channel number tvg-chno to m3u 
 
