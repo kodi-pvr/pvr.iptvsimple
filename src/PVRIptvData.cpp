@@ -580,7 +580,6 @@ PVR_ERROR PVRIptvData::GetChannels(ADDON_HANDLE handle, bool bRadio)
       xbmcChannel.bIsRadio          = channel.bRadio;
       xbmcChannel.iChannelNumber    = channel.iChannelNumber;
       strncpy(xbmcChannel.strChannelName, channel.strChannelName.c_str(), sizeof(xbmcChannel.strChannelName) - 1);
-      strncpy(xbmcChannel.strStreamURL, channel.strStreamURL.c_str(), sizeof(xbmcChannel.strStreamURL) - 1);
       xbmcChannel.iEncryptionSystem = channel.iEncryptionSystem;
       strncpy(xbmcChannel.strIconPath, channel.strLogoPath.c_str(), sizeof(xbmcChannel.strIconPath) - 1);
       xbmcChannel.bIsHidden         = false;
