@@ -36,7 +36,6 @@ using namespace ADDON;
 bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRIptvData   *m_data           = NULL;
-bool           m_bIsPlaying     = false;
 PVRIptvChannel m_currentChannel;
 
 /* User adjustable settings are saved here.
@@ -340,32 +339,12 @@ PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio)
   return PVR_ERROR_SERVER_ERROR;
 }
 
-bool OpenLiveStream(const PVR_CHANNEL &channel)
+const char *GetLiveStreamURL(const PVR_CHANNEL &channel)
 {
-  if (m_data)
-  {
-    CloseLiveStream();
+  if (m_data && m_data->GetChannel(channel, m_currentChannel))
+    return m_currentChannel.strStreamURL.c_str();
 
-    if (m_data->GetChannel(channel, m_currentChannel))
-    {
-      m_bIsPlaying = true;
-      return true;
-    }
-  }
-
-  return false;
-}
-
-void CloseLiveStream(void)
-{
-  m_bIsPlaying = false;
-}
-
-bool SwitchChannel(const PVR_CHANNEL &channel)
-{
-  CloseLiveStream();
-
-  return OpenLiveStream(channel);
+  return "";
 }
 
 PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES* pProperties)
@@ -406,7 +385,6 @@ PVR_ERROR SignalStatus(PVR_SIGNAL_STATUS &signalStatus)
 }
 
 /** UNUSED API FUNCTIONS */
-const char * GetLiveStreamURL(const PVR_CHANNEL &channel)  { return ""; }
 bool CanPauseStream(void) { return false; }
 int GetRecordingsAmount(bool deleted) { return -1; }
 PVR_ERROR GetRecordings(ADDON_HANDLE handle, bool deleted) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -417,7 +395,9 @@ PVR_ERROR RenameChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLE
 PVR_ERROR MoveChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR OpenDialogChannelSettings(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR OpenDialogChannelAdd(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
+void CloseLiveStream(void) { }
 bool OpenRecordedStream(const PVR_RECORDING &recording) { return false; }
+bool OpenLiveStream(const PVR_CHANNEL &channel) { return false; }
 void CloseRecordedStream(void) {}
 int ReadRecordedStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0; }
 long long SeekRecordedStream(long long iPosition, int iWhence /* = SEEK_SET */) { return 0; }
