@@ -1,3 +1,6 @@
+v3.2.0
+- Updated to PVR addon API v5.5.0
+
 v3.1.1
 - removed line length limitation when parsing M3U files
 
