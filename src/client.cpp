@@ -443,7 +443,6 @@ PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) { return PVR_ER
 PVR_ERROR UpdateTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 void DemuxAbort(void) {}
 DemuxPacket* DemuxRead(void) { return NULL; }
-unsigned int GetChannelSwitchDelay(void) { return 0; }
 bool IsTimeshifting(void) { return false; }
 bool IsRealTimeStream(void) { return true; }
 void PauseStream(bool bPaused) {}
