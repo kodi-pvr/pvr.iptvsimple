@@ -24,8 +24,8 @@
  */
 
 #include <vector>
-#include "p8-platform/util/StdString.h"
-#include "client.h"
+#include "p8-platform/os.h"
+#include "libXBMC_pvr.h"
 #include "p8-platform/threads/threads.h"
 
 struct PVRIptvEpgEntry

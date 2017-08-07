@@ -22,15 +22,18 @@
  *
  */
 
-#include <sstream>
-#include <string>
+#include <ctime>
 #include <fstream>
 #include <map>
+#include <sstream>
 #include <stdexcept>
+#include <string>
+
 #include "zlib.h"
 #include "rapidxml/rapidxml.hpp"
 #include "PVRIptvData.h"
 #include "p8-platform/util/StringUtils.h"
+#include "client.h"
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"

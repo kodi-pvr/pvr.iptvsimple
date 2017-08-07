@@ -23,7 +23,6 @@
  */
 
 #include "client.h"
-#include "xbmc_pvr_dll.h"
 #include "PVRIptvData.h"
 #include "p8-platform/util/util.h"
 
@@ -31,6 +30,12 @@ using namespace ADDON;
 
 #ifdef TARGET_WINDOWS
 #define snprintf _snprintf
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif
+#ifdef DeleteFile
+#undef DeleteFile
+#endif
 #endif
 
 bool           m_bCreated       = false;
@@ -196,11 +201,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
 
   if (!XBMC->DirectoryExists(g_strUserPath.c_str()))
   {
-#ifdef TARGET_WINDOWS
-    CreateDirectory(g_strUserPath.c_str(), NULL);
-#else
     XBMC->CreateDirectory(g_strUserPath.c_str());
-#endif
   }
 
   ADDON_ReadSettings();
@@ -231,21 +232,13 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
   std::string strFile = GetUserFilePath(M3U_FILE_NAME);
   if (XBMC->FileExists(strFile.c_str(), false))
   {
-#ifdef TARGET_WINDOWS
-    DeleteFile(strFile.c_str());
-#else
     XBMC->DeleteFile(strFile.c_str());
-#endif
   }
 
   strFile = GetUserFilePath(TVG_FILE_NAME);
   if (XBMC->FileExists(strFile.c_str(), false))
   {
-#ifdef TARGET_WINDOWS
-    DeleteFile(strFile.c_str());
-#else
     XBMC->DeleteFile(strFile.c_str());
-#endif
   }
 
   return ADDON_STATUS_NEED_RESTART;
