@@ -278,6 +278,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
     GetNodeValue(pChannelNode, "category", entry.strGenreString);
+    GetNodeValue(pChannelNode, "sub-title", entry.strEpisodeName);
 
     xml_node<> *pIconNode = pChannelNode->first_node("icon");
     if (pIconNode == NULL || !GetAttributeValue(pIconNode, "src", entry.strIconPath))
@@ -742,7 +743,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.iSeriesNumber       = 0;     /* not supported */
       tag.iEpisodeNumber      = 0;     /* not supported */
       tag.iEpisodePartNumber  = 0;     /* not supported */
-      tag.strEpisodeName      = NULL;  /* not supported */
+      tag.strEpisodeName      = myTag->strEpisodeName.c_str();
       tag.iFlags              = EPG_TAG_FLAG_UNDEFINED;
 
       PVR->TransferEpgEntry(handle, &tag);
