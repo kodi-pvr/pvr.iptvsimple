@@ -1055,51 +1055,6 @@ void PVRIptvData::ApplyChannelsLogosFromEPG()
     PVR->TriggerChannelUpdate();
 }
 
-void PVRIptvData::ReaplyChannelsLogos(const char * strNewPath)
-{
-  if (strlen(strNewPath) > 0)
-  {
-    m_strLogoPath = strNewPath;
-    ApplyChannelsLogos();
-
-    PVR->TriggerChannelUpdate();
-    PVR->TriggerChannelGroupsUpdate();
-  }
-}
-
-void PVRIptvData::ReloadEPG(const char * strNewPath)
-{
-  if (strNewPath != m_strXMLTVUrl)
-  {
-    m_strXMLTVUrl = strNewPath;
-    // TODO clear epg for all channels
-
-    if (LoadEPG(m_iLastStart, m_iLastEnd))
-    {
-      for(unsigned int iChannelPtr = 0, max = m_channels.size(); iChannelPtr < max; iChannelPtr++)
-      {
-        PVRIptvChannel &myChannel = m_channels.at(iChannelPtr);
-        PVR->TriggerEpgUpdate(myChannel.iUniqueId);
-      }
-    }
-  }
-}
-
-void PVRIptvData::ReloadPlayList(const char * strNewPath)
-{
-  if (strNewPath != m_strM3uUrl)
-  {
-    m_strM3uUrl = strNewPath;
-    m_channels.clear();
-
-    if (LoadPlayList())
-    {
-      PVR->TriggerChannelUpdate();
-      PVR->TriggerChannelGroupsUpdate();
-    }
-  }
-}
-
 std::string PVRIptvData::ReadMarkerValue(std::string &strLine, const char* strMarkerName)
 {
   int iMarkerStart = (int) strLine.find(strMarkerName);
