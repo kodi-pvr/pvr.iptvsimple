@@ -1,3 +1,6 @@
+v2.4.14
+- Backport: Added support for multiple groups per channel, separated by semicolon
+
 v2.4.13
 - fixed install path in the Debian package
 - remove line size limitation when parsing M3U files
