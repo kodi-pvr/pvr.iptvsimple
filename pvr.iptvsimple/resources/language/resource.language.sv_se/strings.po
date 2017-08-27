@@ -66,11 +66,11 @@ msgstr "Tidsförskjutning för EPG (timmar)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Buffra m3u på lokalt utrymme"
+msgstr "Cacha m3u på lokalt utrymme"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Buffra XMLTV på lokalt utrymme"
+msgstr "Cacha XMLTV på lokalt utrymme"
 
 msgctxt "#30030"
 msgid "Channels Logos"
