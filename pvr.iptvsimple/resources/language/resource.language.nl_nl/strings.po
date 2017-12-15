@@ -26,7 +26,7 @@ msgstr "Lokale locatie (inclusief lokaal netwerk)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Lokatie op afstand (Internet adres)"
+msgstr "Lokatie op afstand (internetadres)"
 
 msgctxt "#30010"
 msgid "General"
@@ -34,35 +34,35 @@ msgstr "Algemeen"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "M3U afspeellijstlocatie"
+msgstr "M3U-afspeellijstlocatie"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
-msgstr "M3U afspeellijst URL"
+msgstr "M3U-afspeellijst-URL"
 
 msgctxt "#30013"
 msgid "Numbering channels starts at"
-msgstr "Nummeren kanalen start op"
+msgstr "Kanalennummering start vanaf"
 
 msgctxt "#30020"
 msgid "EPG Settings"
-msgstr "EPG instellingen"
+msgstr "EPG-instellingen"
 
 msgctxt "#30021"
 msgid "XMLTV Path"
-msgstr "XMLTV locatie"
+msgstr "XMLTV-locatie"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV URL"
+msgstr "XMLTV-URL"
 
 msgctxt "#30023"
 msgid "Apply Time Shift To All Channels"
-msgstr "Voer tijdsprong toe aan alle kanalen"
+msgstr "Tijdsprong aan alle kanalen toepassen"
 
 msgctxt "#30024"
 msgid "EPG Time Shift (hours)"
-msgstr "EPG tijdsprong (uren)"
+msgstr "EPG-tijdsprong (uren)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -70,23 +70,23 @@ msgstr "Buffer m3u op lokale opslag"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "buffer XMLTV op lokale opslag"
+msgstr "Buffer XMLTV op lokale opslag"
 
 msgctxt "#30030"
 msgid "Channels Logos"
-msgstr "Kanalen logo`s"
+msgstr "Kanalenlogo's"
 
 msgctxt "#30031"
 msgid "Channels Logos Folder"
-msgstr "Kanalen logo`s map"
+msgstr "Map voor kanalenlogo's"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "Kanalen logo`s basis URL"
+msgstr "Kanalenlogo's basis-URL"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "XMLTV logo's opties"
+msgstr "XMLTV logo-opties"
 
 msgctxt "#30041"
 msgid "Channels Logos from XMLTV"
@@ -98,8 +98,8 @@ msgstr "Negeren"
 
 msgctxt "#30043"
 msgid "Prefer M3U"
-msgstr "M3U voorkeur"
+msgstr "M3U-voorkeur"
 
 msgctxt "#30044"
 msgid "Prefer XMLTV"
-msgstr "XMLTV voorkeur"
+msgstr "XMLTV-voorkeur"
