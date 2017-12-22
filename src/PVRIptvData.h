@@ -132,4 +132,5 @@ private:
   std::vector<PVRIptvChannel>       m_channels;
   std::vector<PVRIptvEpgChannel>    m_epg;
   std::vector<PVRIptvEpgGenre>      m_genres;
+  P8PLATFORM::CMutex                m_mutex;
 };
