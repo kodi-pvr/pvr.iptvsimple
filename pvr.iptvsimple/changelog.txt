@@ -1,3 +1,6 @@
+v3.4.0
+- Updated to PVR addon API v5.8.0
+
 v3.3.3
 - Fixed multithreading issues
 
