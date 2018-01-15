@@ -346,6 +346,17 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
     strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
     strncpy(properties[0].strValue, m_currentChannel.strStreamURL.c_str(), sizeof(properties[0].strValue) - 1);
     *iPropertiesCount = 1;
+    if (!m_currentChannel.properties.empty())
+    {
+      for (auto& prop : m_currentChannel.properties)
+      {
+        strncpy(properties[*iPropertiesCount].strName, prop.first.c_str(),
+                sizeof(properties[*iPropertiesCount].strName) - 1);
+        strncpy(properties[*iPropertiesCount].strValue, prop.second.c_str(),
+                sizeof(properties[*iPropertiesCount].strName) - 1);
+        (*iPropertiesCount)++;
+      }
+    }
     return PVR_ERROR_NO_ERROR;
   }
 

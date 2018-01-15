@@ -1,3 +1,6 @@
+v3.4.1
+- Add support for KODIPROP in M3U (for inputstream.adaptive)
+
 v3.4.0
 - Updated to PVR addon API v5.8.0
 
