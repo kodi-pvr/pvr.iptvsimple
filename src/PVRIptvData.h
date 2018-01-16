@@ -23,6 +23,7 @@
  *
  */
 
+#include <map>
 #include <vector>
 #include "p8-platform/os.h"
 #include "libXBMC_pvr.h"
@@ -64,6 +65,7 @@ struct PVRIptvChannel
   std::string strTvgId;
   std::string strTvgName;
   std::string strTvgLogo;
+  std::map<std::string, std::string> properties;
 };
 
 struct PVRIptvChannelGroup
