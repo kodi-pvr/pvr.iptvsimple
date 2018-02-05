@@ -26,7 +26,7 @@ msgstr "Místní cesta (včetně místní sítě)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Vzdálená cesta (internetová adresa)"
+msgstr "Popis vzdáleného umístění (internetová adresa)"
 
 msgctxt "#30010"
 msgid "General"
@@ -82,7 +82,7 @@ msgstr "Složka pro loga kanálů"
 
 msgctxt "#30032"
 msgid "Channels Logos Base URL"
-msgstr "Základní URL pro loga kanálů"
+msgstr "Základ URL adres log kanálů"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
