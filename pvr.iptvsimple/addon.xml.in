@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="3.4.3"
+  version="3.4.4"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -11,7 +11,7 @@
   <extension point="xbmc.addon.metadata">
     <summary lang="af_ZA">Kodi PVR byvoegsel vir IPTV ondersteuning. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="az_AZ">IPTV dəstəyi üçün Kodi PVR əlavəsini yükləyin.&#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="bg_BG">Kodi ПВР добавка за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="bg_BG">Добавка за ПВР за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca_ES">Complement PVR de Kodi per al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="cs_CZ">Doplněk PVR Kodi pro podporu IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="cy_GB">Ychwanegyn recordydd Kodi ar gyfer cefnogi IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -61,7 +61,7 @@
     <summary lang="zh_CN">Kodi PVR 插件需要 IPTV 支持。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="zh_TW">支援IPTV的Kodi PVR附加元件。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <description lang="af_ZA">IPTV Simple PVR kliënt ondersteun M3U speellyste, stroom van lewendige TV vir multisaai / unisaai bronne, luister na radio kanale en EPG.</description>
-    <description lang="bg_BG">IPTV обикновен ПВР клиент. Поддържа m3u плейлисти, поточна телевизия за мултикаст/уникаст източници, слушане на радио канали и електронен програмен справочник.</description>
+    <description lang="bg_BG">Прост клиент за ПВР за телевизия по Интернет. Поддържа списъци за възпроизвеждане във формат „m3u“, поточно предавана телевизия от източници с излъчване мултикаст и уникаст, слушане на радио канали и електронен програмен справочник.</description>
     <description lang="ca_ES">Client senzill per a IPTV PVR compatible amb les llistes de reproducció m3u, transmissions en línia de TV en directe per als orígens difusió única o múltiple, escolta d'emissores de ràdio i guia electrònica de programació (EPG).</description>
     <description lang="cs_CZ">Jednoduchý klient PVR pro IPTV podporuje seznamy stop m3u, streamování živého vysílání pro zdroje vícesměrového nebo jednosměrového vysílání, poslech rozhlasových stanic a televizní program.</description>
     <description lang="cy_GB">Cleient IPTV Simple PVR  Mae'n cynnal rhestrau m3u, ffrydio Teledu Byw o ffynonellau darlledu eang ac unigol, gwrando ar sianeli Radio ac Amserlen Rhaglenni.</description>

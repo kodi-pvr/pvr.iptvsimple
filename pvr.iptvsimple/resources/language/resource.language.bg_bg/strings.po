@@ -18,7 +18,7 @@ msgstr ""
 
 msgctxt "#30000"
 msgid "Location"
-msgstr "Локация"
+msgstr "Местоположение"
 
 msgctxt "#30001"
 msgid "Local Path (include Local Network)"
