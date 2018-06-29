@@ -1,3 +1,5 @@
+v3.5.8
+- Fix considering DST in timestamp conversion
 
 v3.5.7
 - Correctly show build version in Kodi
