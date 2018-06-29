@@ -28,6 +28,7 @@
 #include <sstream>
 #include <stdexcept>
 #include <string>
+#include <iomanip>
 
 #include "zlib.h"
 #include "rapidxml/rapidxml.hpp"
@@ -49,6 +50,14 @@
 #define CHANNEL_LOGO_EXTENSION  ".png"
 #define SECONDS_IN_DAY          86400
 #define GENRES_MAP_FILENAME     "genres.xml"
+
+#if defined(TARGET_WINDOWS)
+# define LOCALTIME_R(src, dst) localtime_s(dst, src)
+# define GMTIME_R(src, dst) gmtime_s(dst, src)
+#else
+# define LOCALTIME_R(src, dst) localtime_r(src, dst)
+# define GMTIME_R(src, dst) gmtime_r(src, dst)
+#endif
 
 using namespace ADDON;
 using namespace rapidxml;
@@ -76,6 +85,25 @@ inline bool GetAttributeValue(const xml_node<Ch> * pNode, const char* strAttribu
   strStringValue = pAttribute->value();
   return true;
 }
+
+static unsigned DiffBetweenUTCAndLocalTime(const time_t * when = nullptr)
+{
+  time_t tloc;
+  if (0 == when)
+    time(&tloc);
+  else
+    tloc = *when;
+
+  struct tm tm1;
+  LOCALTIME_R(&tloc, &tm1);
+  auto isdst = tm1.tm_isdst;
+  GMTIME_R(&tloc, &tm1);
+  tm1.tm_isdst = isdst;
+  time_t t2 = mktime(&tm1);
+
+  return tloc - t2;
+}
+
 
 PVRIptvData::PVRIptvData(void)
 {
@@ -808,35 +836,41 @@ int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
 {
   struct tm timeinfo;
   memset(&timeinfo, 0, sizeof(tm));
-  char sign = '+';
-  int hours = 0;
-  int minutes = 0;
 
+  std::istringstream is(strDate);
+  is >> std::get_time(&timeinfo, iDateFormat ? "%Y%m%d%H%M%S" : "%d.%m.%Y%H:%M:%S");
+  if (is.fail())
+    return -1;
+  timeinfo.tm_isdst = -1; // reset the DST, as it should be not considered in this timestamp format
+
+  long offset_of_date = 0;
   if (iDateFormat)
-    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec, &sign, &hours, &minutes);
-  else
-    sscanf(strDate.c_str(), "%02d.%02d.%04d%02d:%02d:%02d", &timeinfo.tm_mday, &timeinfo.tm_mon, &timeinfo.tm_year, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
-
-  timeinfo.tm_mon  -= 1;
-  timeinfo.tm_year -= 1900;
-  timeinfo.tm_isdst = -1;
-
-  std::time_t current_time;
-  std::time(&current_time);
-  long offset = 0;
-#ifndef TARGET_WINDOWS
-  offset = -std::localtime(&current_time)->tm_gmtoff;
-#else
-  _get_timezone(&offset);
-#endif // TARGET_WINDOWS
-
-  long offset_of_date = (hours * 60 * 60) + (minutes * 60);
-  if (sign == '-')
   {
-    offset_of_date = -offset_of_date;
+    // parse offset
+    char sign;
+    is >> std::skipws >> sign;
+
+    if (!is.fail() && (sign == '+' || sign == '-'))
+    {
+      int hours;
+      int minutes;
+      char stamp_offset[4];
+      if (4 == is.readsome(stamp_offset, 4))
+      {
+        if (2 == sscanf(stamp_offset, "%02d%02d", &hours, &minutes))
+        {
+          offset_of_date = (hours * 60 * 60) + (minutes * 60);
+          if (sign == '-')
+          {
+            offset_of_date = -offset_of_date;
+          }
+        }
+      }
+    }
   }
 
-  return mktime(&timeinfo) - offset_of_date - offset;
+  time_t t = mktime(&timeinfo) - offset_of_date;
+  return t + DiffBetweenUTCAndLocalTime(&t);
 }
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)
