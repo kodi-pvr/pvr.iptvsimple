@@ -34,7 +34,7 @@ msgstr "Obecné"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "Cesta k seznamu stop M3U"
+msgstr "Popis umístění M3U seznamu stop"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"

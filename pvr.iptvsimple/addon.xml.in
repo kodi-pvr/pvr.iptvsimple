@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="3.5.1"
+  version="3.5.2"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -13,7 +13,7 @@
     <summary lang="az_AZ">IPTV dəstəyi üçün Kodi PVR əlavəsini yükləyin.&#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="bg_BG">Добавка за ПВР за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca_ES">Complement PVR de Kodi per al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="cs_CZ">Doplněk PVR Kodi pro podporu IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="cs_CZ">Doplněk do Kodi pro nahrávání (PVR) z IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="cy_GB">Ychwanegyn recordydd Kodi ar gyfer cefnogi IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="da_DK">Kodi PVR addon til IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="de_DE">Kodi PVR Addon für IPTV Unterstützung. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -64,7 +64,7 @@
     <description lang="bg_BG">Прост клиент за ПВР за телевизия по Интернет. Поддържа списъци за възпроизвеждане във формат „m3u“, поточно предавана телевизия от източници с излъчване мултикаст и уникаст, слушане на радио канали и електронен програмен справочник.</description>
     <description lang="ca_ES">Client senzill per a IPTV PVR compatible amb les llistes de reproducció m3u, transmissions en línia de TV en directe per als orígens difusió única o múltiple, escolta d'emissores de ràdio i guia electrònica de programació (EPG).</description>
     <description lang="cs_CZ">Jednoduchý klient PVR pro IPTV podporuje seznamy stop m3u, streamování živého vysílání pro zdroje vícesměrového nebo jednosměrového vysílání, poslech rozhlasových stanic a televizní program.</description>
-    <description lang="cy_GB">Cleient IPTV Simple PVR  Mae'n cynnal rhestrau m3u, ffrydio Teledu Byw o ffynonellau darlledu eang ac unigol, gwrando ar sianeli Radio ac Amserlen Rhaglenni.</description>
+    <description lang="cy_GB">Mae Cleient IPTV Simple PVR yn cynnal rhestrau m3u, ffrydio Teledu Byw o ffynonellau darlledu eang ac unigol, gwrando ar sianeli Radio ac Amserlen Rhaglenni.</description>
     <description lang="da_DK">IPTV Simpel PVR klient understøttelse M3U-afspilningslister, streaming af direkte tv til multicast/unicast kilder, lytte til radio kanaler og EPG.</description>
     <description lang="de_DE">IPTV Simple PVR Client unterstützt m3u Wiedergabelisten, Streaming von Live TV für Multicast/Unicast Quellen, Radiosender und EPG.</description>
     <description lang="el_GR">Απλός Πελάτης PVR του IPTV, με υποστήριξη λιστών αναπαραγωγής m3u, αναπαραγωγή ροών Live TV για πηγές πολλαπλής/μοναδικής διανομής, ακρόαση ραδιοφωνικών καναλιών και EPG.</description>
@@ -112,7 +112,7 @@
     <disclaimer lang="bg_BG">Тази програма е нестабилна! Авторите не носят отговорност за неуспешно възпроизвеждане, некоректни часове в електронния програмен справочник, пропиляното време и други нежелани ефекти.</disclaimer>
     <disclaimer lang="ca_ES">Aquest programari és inestable! Els autors no es fan responsables de reproduccions fallides, horaris incorrectes a la guia electrònica de programació (EPG), hores perdudes o qualsevol altre efecte no desitjat.</disclaimer>
     <disclaimer lang="cs_CZ">Tento software není stabilní! Autoři nejsou žádným způsobem zodpovědní za neúspěšná nahrávání, chybné časy televizního programu, ztracený čas nebo jakékoliv jiné nežádoucí výsledky...</disclaimer>
-    <disclaimer lang="cy_GB">Mae hwn yn feddalwedd ansad! Nid yw'r awduron yn gyfrifol mewn unrhyw ffordd am fethu recordio, amseru gwallus, oriau wedi eu gwastraffu nac effeithiau anymunol eraill.</disclaimer>
+    <disclaimer lang="cy_GB">Mae'r feddalwedd hon yn fregus! Nid yw'r awduron yn gyfrifol mewn unrhyw ffordd am fethu recordio, amseru gwallus, oriau wedi eu gwastraffu nac effeithiau annymunol eraill.</disclaimer>
     <disclaimer lang="da_DK">Dette er ustabil software! Ophavsmændene er på ingen måde ansvarlig for mislykkede afspilninger, forkerte EPG tider, spildte timer, eller andre bivirkninger.</disclaimer>
     <disclaimer lang="de_DE">Dies ist instabile Software! Die Autoren sind in keiner Weise verantwortlich für fehlgeschlagene Wiedergaben, falsche EPG Zeiten, verschwendete Zeit oder unerwünschte Effekte jeglicher Art.</disclaimer>
     <disclaimer lang="el_GR">Ασταθές πρόγραμμα! Οι δημιουργοί δεν είναι σε καμία περίπτωση υπεύθυνοι για αποτυχημένες εγγραφές, λανθασμένους χρονοδιακόπτες, χαμένες ώρες, ή κάθε είδους ανεπιθύμητα αποτελέσματα.</disclaimer>
@@ -123,6 +123,7 @@
     <disclaimer lang="es_AR">Este es un software inestable. El autor no se hace responsable por reproducciones fallidas, datos de GEP incorrectos, horas perdidas o cualquier otro efecto indeseable.</disclaimer>
     <disclaimer lang="es_ES">Este es un software inestable! El autor no se hace responsable de reproducciones fallidas, datos de EPG incorrectos, horas perdidas o cualquier otro efecto indeseado.</disclaimer>
     <disclaimer lang="es_MX">¡Este es un software inestable! Los autores no son responsables en absoluto de reproducciones fallidas, tiempos EPG incorrectos, desperdicio de horas, o cualquier otro efecto indeseable.</disclaimer>
+    <disclaimer lang="eu_ES">Software hau ezegonkorra da! Egileak ez dira inolaz ere erantzule editen erreprodukzio akatsez, EPG denbora okerrez, ordu galduez edo beste edozein ondorio ezerosotaz.</disclaimer>
     <disclaimer lang="fi_FI">Tämä on epävakaa ohjelma! Sen tekijät eivät ole millään muotoa vastuussa epäonnistuneista tallennuksista, virheellisistä ajastuksista, haaskatusta ajasta, verenpaineen noususta tai mistään muusta epäsuotuisasta vaikutuksesta.</disclaimer>
     <disclaimer lang="fr_CA">Ce logiciel est instable ! Les auteurs ne sont aucunement responsables des lectures  défaillantes, d’horaires erronés du GÉP, des heures perdues ou tout autre effet indésirable.</disclaimer>
     <disclaimer lang="fr_FR">Logiciel en cours d'élaboration ! Les auteurs ne sont en aucun cas responsables de l'échec des enregistrements, programmations défectueuses, temps perdu ou autres effets indésirables.</disclaimer>
