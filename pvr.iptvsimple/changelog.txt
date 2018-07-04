@@ -1,3 +1,6 @@
+v3.5.2
+- Add support for #EXT-X-PLAYLIST-TYPE in M3U
+
 v3.5.1
 - Updated to PVR addon API v5.10.1
 
