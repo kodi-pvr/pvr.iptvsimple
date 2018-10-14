@@ -10,25 +10,17 @@ language: cpp
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: xenial
       sudo: required
       compiler: gcc
     - os: linux
-      dist: trusty
+      dist: xenial
       sudo: required
       compiler: clang
     - os: osx
-      osx_image: xcode7.3
+      osx_image: xcode9
     - os: osx
-      osx_image: xcode6.1
-
-#
-# Some of the OS X images don't have cmake, contrary to what people
-# on the Internet say
-#
-before_install:
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which cmake || brew update        ; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then which cmake || brew install cmake ; fi
+      osx_image: xcode9.4
 
 #
 # The addon source is automatically checked out in $TRAVIS_BUILD_DIR,
