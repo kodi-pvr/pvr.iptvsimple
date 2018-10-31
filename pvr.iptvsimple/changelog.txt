@@ -1,3 +1,6 @@
+v3.5.6
+- Correctly show build version in Kodi
+
 v3.5.5
 - Bump zlib to version 1.2.11
 
