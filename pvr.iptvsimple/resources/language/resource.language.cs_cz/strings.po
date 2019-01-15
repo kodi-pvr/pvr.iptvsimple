@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: http://trac.kodi.tv/\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: Kodi Translation Team\n"
@@ -26,7 +26,7 @@ msgstr "Místní cesta (včetně místní sítě)"
 
 msgctxt "#30002"
 msgid "Remote Path (Internet address)"
-msgstr "Popis vzdáleného umístění (internetová adresa)"
+msgstr "Cesta vzdáleného umístění (Internetová adresa)"
 
 msgctxt "#30010"
 msgid "General"
@@ -34,7 +34,7 @@ msgstr "Obecné"
 
 msgctxt "#30011"
 msgid "M3U Play List Path"
-msgstr "Popis umístění M3U seznamu stop"
+msgstr "Cesta umístění M3U seznamu stop"
 
 msgctxt "#30012"
 msgid "M3U Play List URL"
