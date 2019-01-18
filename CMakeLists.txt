@@ -24,10 +24,16 @@ set(DEPLIBS ${p8-platform_LIBRARIES}
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 set(IPTV_SOURCES src/client.cpp
-                 src/PVRIptvData.cpp)
+                 src/PVRIptvData.cpp
+                 src/StreamReader.cpp
+                 src/TimeshiftBuffer.cpp)
 
 set(IPTV_HEADERS src/client.h
-                 src/PVRIptvData.h)
+                 src/PVRIptvData.h
+                 src/IStreamReader.h
+                 src/StreamReader.h
+                 src/TimeshiftBuffer.h
+                 src/LocalizedString.h)
 
 addon_version(pvr.iptvsimple IPTV)
 add_definitions(-DIPTV_VERSION=${IPTV_VERSION})

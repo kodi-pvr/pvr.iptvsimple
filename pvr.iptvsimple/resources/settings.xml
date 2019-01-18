@@ -30,4 +30,12 @@
     <setting id="sep3" label="30040" type="lsep"/>
     <setting id="logoFromEpg" type="enum" label="30041" default="0" lvalues="30042|30043|30044"/>
   </category>
+
+  <!-- Timeshift -->
+  <category label="30060">
+    <setting id="enabletimeshift" type="enum" label="30061" lvalues="30063|30064|30065"/>
+    <setting id="timeshiftbufferpath" type="folder" label="30062" source="auto" option="writeable" enable="gt(-1,0)" default="special://userdata/addon_data/pvr.iptvsimple"/>
+    <setting id="readtimeout" type="number" label="30050" enable="gt(-2,0)" default="0"/>
+  </category>
+
 </settings>

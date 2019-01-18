@@ -99,6 +99,9 @@ public:
   virtual void      ReaplyChannelsLogos(const char * strNewPath);
   virtual void      ReloadPlayList(const char * strNewPath);
   virtual void      ReloadEPG(const char * strNewPath);
+  virtual bool OpenLiveStream(const PVR_CHANNEL &channelinfo);
+  virtual void CloseLiveStream();
+  virtual const std::string GetLiveStreamURL(const PVR_CHANNEL &channelinfo);
 
 protected:
   virtual bool                 LoadPlayList(void);
@@ -118,6 +121,8 @@ protected:
   virtual void                 ApplyChannelsLogosFromEPG();
   virtual std::string          ReadMarkerValue(std::string &strLine, const char * strMarkerName);
   virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);
+  virtual bool                 HasChannel(int iUniqueId);
+  virtual PVRIptvChannel       GetChannel(int iUniqueId);
 
 protected:
   virtual void *Process(void);

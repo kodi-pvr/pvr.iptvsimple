@@ -1176,3 +1176,70 @@ int PVRIptvData::GetChannelId(const char * strChannelName, const char * strStrea
 
   return abs(iId);
 }
+
+/***************************************************************************
+ * Livestream
+ **************************************************************************/
+bool PVRIptvData::OpenLiveStream(const PVR_CHANNEL &channelinfo)
+{
+  // XBMC->Log(LOG_DEBUG, "%s: channel=%u", __FUNCTION__, channelinfo.iUniqueId);
+  // CLockObject lock(m_mutex);
+
+  // if (channelinfo.iUniqueId != m_iCurrentChannel)
+  // {
+  //   m_iCurrentChannel = channelinfo.iUniqueId;
+
+  //   if (g_bZap)
+  //   {
+  //     // Zapping is set to true, so send the zapping command to the PVR box
+  //     std::string strServiceReference = m_channels.at(channelinfo.iUniqueId-1).strServiceReference.c_str();
+
+  //     std::string strTmp;
+  //     strTmp = StringUtils::Format("web/zap?sRef=%s", URLEncodeInline(strServiceReference).c_str());
+
+  //     std::string strResult;
+  //     if(!SendSimpleCommand(strTmp, strResult))
+  //       return false;
+
+  //   }
+  // }
+  return true;
+}
+
+void PVRIptvData::CloseLiveStream(void)
+{
+  //P8PLATFORM::CLockObject lock(m_mutex);
+  //m_iCurrentChannel = -1;
+}
+
+const std::string PVRIptvData::GetLiveStreamURL(const PVR_CHANNEL &channelinfo)
+{
+  if (HasChannel(channelinfo.iUniqueId))
+    return GetChannel(channelinfo.iUniqueId).strStreamURL;
+
+  return "";
+}
+
+bool PVRIptvData::HasChannel(int iUniqueId)
+{
+  for (auto &channel : m_channels)
+  {
+    if (channel.iUniqueId == iUniqueId)
+      return true;
+  }
+
+  return false;
+}
+
+PVRIptvChannel PVRIptvData::GetChannel(int iUniqueId)
+{
+  PVRIptvChannel &myChannel = m_channels.front();
+
+  for (auto &channel : m_channels)
+  {
+    if (channel.iUniqueId == iUniqueId)
+      myChannel = channel;
+  }  
+  
+  return myChannel;
+}

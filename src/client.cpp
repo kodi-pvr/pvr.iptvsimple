@@ -26,7 +26,13 @@
 #include "xbmc_pvr_dll.h"
 #include "PVRIptvData.h"
 #include "p8-platform/util/util.h"
+#include "StreamReader.h"
+#include "TimeshiftBuffer.h"
+#include "LocalizedString.h"
 
+#include <stdlib.h>
+
+using namespace iptvsimple;
 using namespace ADDON;
 
 #ifdef TARGET_WINDOWS
@@ -43,6 +49,8 @@ bool           m_bCreated       = false;
 ADDON_STATUS   m_CurStatus      = ADDON_STATUS_UNKNOWN;
 PVRIptvData   *m_data           = NULL;
 PVRIptvChannel m_currentChannel;
+IStreamReader  *strReader  = nullptr;
+int            m_streamReadChunkSize = 0;
 
 /* User adjustable settings are saved here.
  * Default values are defined inside client.h
@@ -63,6 +71,9 @@ bool        g_bTSOverride   = true;
 bool        g_bCacheM3U     = false;
 bool        g_bCacheEPG     = false;
 int         g_iEPGLogos     = 0;
+int         g_iEnableTimeshift        = TIMESHIFT_OFF;
+std::string g_strTimeshiftBufferPath  = DEFAULT_TSBUFFERPATH;
+int         g_iReadTimeout            = 0;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -168,6 +179,20 @@ void ADDON_ReadSettings(void)
   // Logos from EPG
   if (!XBMC->GetSetting("logoFromEpg", &g_iEPGLogos))
     g_iEPGLogos = 0;
+
+  // read setting "enabletimeshift" from settings.xml 
+  if (!XBMC->GetSetting("enabletimeshift", &g_iEnableTimeshift))
+    g_iEnableTimeshift = TIMESHIFT_OFF;
+
+    // read setting "timeshiftbufferpath" from settings.xml 
+  if (XBMC->GetSetting("timeshiftbufferpath", buffer) && !std::string(buffer).empty())
+    g_strTimeshiftBufferPath = buffer;
+  else
+    g_strTimeshiftBufferPath = DEFAULT_TSBUFFERPATH;
+
+  // read setting "enabletimeshift" from settings.xml 
+  if (!XBMC->GetSetting("readtimeout", &g_iReadTimeout))
+    g_iReadTimeout = 0;    
 }
 
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -228,6 +253,7 @@ void ADDON_Destroy()
 
 ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 {
+  std::string str = settingName;
   // reset cache and restart addon 
 
   std::string strFile = GetUserFilePath(M3U_FILE_NAME);
@@ -241,6 +267,18 @@ ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
   {
     XBMC->DeleteFile(strFile.c_str());
   }
+
+  if (str == "enabletimeshift")
+  {
+    int iNewValue = *(int*) settingValue;
+
+    if (g_iEnableTimeshift != iNewValue)
+    {
+      XBMC->Log(LOG_INFO, "%s - Changed Setting 'enabletimeshift' from %u to %u", __FUNCTION__, g_iEnableTimeshift, iNewValue);
+      g_iEnableTimeshift = iNewValue;
+      return ADDON_STATUS_OK;
+    }
+  }  
 
   return ADDON_STATUS_NEED_RESTART;
 }
@@ -275,6 +313,8 @@ PVR_ERROR GetAddonCapabilities(PVR_ADDON_CAPABILITIES* pCapabilities)
   pCapabilities->bSupportsRecordingsRename = false;
   pCapabilities->bSupportsRecordingsLifetimeChange = false;
   pCapabilities->bSupportsDescrambleInfo = false;
+  pCapabilities->bHandlesInputStream     = true;
+  //pCapabilities->bHandlesDemuxing = true;
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -335,6 +375,9 @@ PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio)
 
 PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE* properties, unsigned int* iPropertiesCount)
 {
+  if (g_iEnableTimeshift != TIMESHIFT_OFF)
+    return PVR_ERROR_NOT_IMPLEMENTED;
+
   if (!channel || !properties || !iPropertiesCount)
     return PVR_ERROR_SERVER_ERROR;
 
@@ -394,9 +437,132 @@ PVR_ERROR SignalStatus(PVR_SIGNAL_STATUS &signalStatus)
 
   return PVR_ERROR_NO_ERROR;
 }
+//Timeshifting 
+
+PVR_ERROR GetStreamReadChunkSize(int* chunksize)
+{
+  if (!chunksize)
+    return PVR_ERROR_INVALID_PARAMETERS;
+  *chunksize = m_streamReadChunkSize;
+  return PVR_ERROR_NO_ERROR;
+}
+
+/* live stream functions */
+bool OpenLiveStream(const PVR_CHANNEL &channel)
+{
+  if (!m_data)
+    return false;
+
+  if (!m_data->OpenLiveStream(channel))
+    return false;
+
+  /* queue a warning if the timeshift buffer path does not exist */
+  if (g_iEnableTimeshift != TIMESHIFT_OFF
+      && !XBMC->DirectoryExists(g_strTimeshiftBufferPath.c_str()))
+    XBMC->QueueNotification(QUEUE_ERROR, LocalizedString(30514).c_str());
+
+  std::string streamURL = m_data->GetLiveStreamURL(channel);
+  strReader = new StreamReader(streamURL, g_iReadTimeout);
+  if (g_iEnableTimeshift == TIMESHIFT_ON_PLAYBACK)// || g_iEnableTimeshift == TIMESHIFT_ON_PAUSE)
+    strReader = new TimeshiftBuffer(strReader, g_strTimeshiftBufferPath, g_iReadTimeout);
+
+  return strReader->Start();
+}
+
+void CloseLiveStream(void)
+{
+  //m_data->CloseLiveStream();
+  SAFE_DELETE(strReader);
+}
+
+bool IsRealTimeStream()
+{
+  return (strReader) ? strReader->IsRealTime() : false;
+}
+
+bool CanPauseStream(void)
+{
+  if (!m_data)
+    return false;
+
+  if (g_iEnableTimeshift != TIMESHIFT_OFF && strReader)
+    return (strReader->IsTimeshifting() || XBMC->DirectoryExists(g_strTimeshiftBufferPath.c_str()));
+
+  return false;
+}
+
+bool CanSeekStream(void)
+{
+  if (!m_data)
+    return false;
+
+  return (g_iEnableTimeshift != TIMESHIFT_OFF);
+}
+
+int ReadLiveStream(unsigned char *buffer, unsigned int size)
+{
+  return (strReader) ? strReader->ReadData(buffer, size) : 0;
+}
+
+long long SeekLiveStream(long long position, int whence)
+{
+  return (strReader) ? strReader->Seek(position, whence) : -1;
+}
+
+long long LengthLiveStream(void)
+{
+  return (strReader) ? strReader->Length() : -1;
+}
+
+bool IsTimeshifting(void)
+{
+  return (strReader && strReader->IsTimeshifting());
+}
+
+PVR_ERROR GetStreamTimes(PVR_STREAM_TIMES *times)
+{
+  if (!times)
+    return PVR_ERROR_INVALID_PARAMETERS;
+  if (strReader)
+  {
+    times->startTime = strReader->TimeStart();
+    times->ptsStart  = 0;
+    times->ptsBegin  = 0;
+    times->ptsEnd    = (!strReader->IsTimeshifting()) ? 0
+      : (strReader->TimeEnd() - strReader->TimeStart()) * DVD_TIME_BASE;
+
+    return PVR_ERROR_NO_ERROR;
+  }
+  return PVR_ERROR_NOT_IMPLEMENTED;
+}
+
+void PauseStream(bool paused)
+{
+  if (!m_data)
+    return;
+
+  /* start timeshift on pause */
+  if (paused && g_iEnableTimeshift == TIMESHIFT_ON_PAUSE
+      && strReader && !strReader->IsTimeshifting()
+      && XBMC->DirectoryExists(g_strTimeshiftBufferPath.c_str()))
+  {
+    strReader = new TimeshiftBuffer(strReader, g_strTimeshiftBufferPath ,g_iReadTimeout);
+    (void)strReader->Start();
+  }
+}
+
+void DemuxReset(void) {}
+void DemuxFlush(void) {}
+void DemuxAbort(void) {}
+DemuxPacket* DemuxRead(void) 
+{     
+  XBMC->Log(LOG_NOTICE, "%s - DEMUX", __FUNCTION__);  
+  
+  return NULL;
+}
 
 /** UNUSED API FUNCTIONS */
-bool CanPauseStream(void) { return false; }
+//PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL*, PVR_NAMED_VALUE*, unsigned int*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 int GetRecordingsAmount(bool deleted) { return -1; }
 PVR_ERROR GetRecordings(ADDON_HANDLE handle, bool deleted) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetRecordingStreamProperties(const PVR_RECORDING*, PVR_NAMED_VALUE*, unsigned int*) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -406,18 +572,11 @@ PVR_ERROR DeleteChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLE
 PVR_ERROR RenameChannel(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR OpenDialogChannelSettings(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR OpenDialogChannelAdd(const PVR_CHANNEL &channel) { return PVR_ERROR_NOT_IMPLEMENTED; }
-void CloseLiveStream(void) { }
 bool OpenRecordedStream(const PVR_RECORDING &recording) { return false; }
-bool OpenLiveStream(const PVR_CHANNEL &channel) { return false; }
 void CloseRecordedStream(void) {}
 int ReadRecordedStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0; }
 long long SeekRecordedStream(long long iPosition, int iWhence /* = SEEK_SET */) { return 0; }
 long long LengthRecordedStream(void) { return 0; }
-void DemuxReset(void) {}
-void DemuxFlush(void) {}
-int ReadLiveStream(unsigned char *pBuffer, unsigned int iBufferSize) { return 0; }
-long long SeekLiveStream(long long iPosition, int iWhence /* = SEEK_SET */) { return -1; }
-long long LengthLiveStream(void) { return -1; }
 PVR_ERROR DeleteRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR RenameRecording(const PVR_RECORDING &recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetRecordingPlayCount(const PVR_RECORDING &recording, int count) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -430,12 +589,6 @@ PVR_ERROR GetTimers(ADDON_HANDLE handle) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR AddTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteTimer(const PVR_TIMER &timer, bool bForceDelete) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR UpdateTimer(const PVR_TIMER &timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
-void DemuxAbort(void) {}
-DemuxPacket* DemuxRead(void) { return NULL; }
-bool IsTimeshifting(void) { return false; }
-bool IsRealTimeStream(void) { return true; }
-void PauseStream(bool bPaused) {}
-bool CanSeekStream(void) { return false; }
 bool SeekTime(double,bool,double*) { return false; }
 void SetSpeed(int) {};
 PVR_ERROR UndeleteRecording(const PVR_RECORDING& recording) { return PVR_ERROR_NOT_IMPLEMENTED; }
@@ -443,12 +596,10 @@ PVR_ERROR DeleteAllRecordingsFromTrash() { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetEPGTimeFrame(int) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetDescrambleInfo(PVR_DESCRAMBLE_INFO*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR SetRecordingLifetime(const PVR_RECORDING*) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR GetStreamTimes(PVR_STREAM_TIMES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR IsEPGTagRecordable(const EPG_TAG*, bool*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR IsEPGTagPlayable(const EPG_TAG*, bool*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG*, PVR_NAMED_VALUE*, unsigned int*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetEPGTagEdl(const EPG_TAG* epgTag, PVR_EDL_ENTRY edl[], int *size) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR GetStreamReadChunkSize(int* chunksize) { return PVR_ERROR_NOT_IMPLEMENTED; }
 
 } // extern "C"
