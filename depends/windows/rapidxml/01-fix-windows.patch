@@ -9,7 +9,7 @@
          typedef void (free_func)(void *);              // Type of user-defined function used to free memory
          //! \endcond
          
-@@ -549,7 +549,7 @@ namespace rapidxml
+@@ -549,7 +549,7 @@
          //! </code><br>
          //! \param af Allocation function, or 0 to restore default function
          //! \param ff Free function, or 0 to restore default function
@@ -18,7 +18,7 @@
          {
              assert(m_begin == m_static_memory && m_ptr == align(m_begin));    // Verify that no memory is allocated yet
              m_alloc_func = af;
-@@ -634,7 +634,7 @@ namespace rapidxml
+@@ -634,7 +634,7 @@
          char *m_ptr;                                        // First free byte in current pool
          char *m_end;                                        // One past last available byte in current pool
          char m_static_memory[RAPIDXML_STATIC_POOL_SIZE];    // Static raw memory

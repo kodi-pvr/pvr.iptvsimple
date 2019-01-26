@@ -1,0 +1,1 @@
+rapidxml http://mirrors.kodi.tv/build-deps/sources/rapidxml-1.13.zip
