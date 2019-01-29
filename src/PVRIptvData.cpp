@@ -453,7 +453,9 @@ bool PVRIptvData::LoadPlayList(void)
         tmpChannel.strChannelName = XBMC->UnknownToUTF8(strChnlName.c_str());
 
         // parse info
-        std::string strInfoLine = StringUtils::Mid(strLine, ++iColon, --iComma - iColon);
+        iColon++;
+        iComma--;
+        std::string strInfoLine = StringUtils::Mid(strLine, iColon, iComma - iColon);
 
         strTvgId      = ReadMarkerValue(strInfoLine, TVG_INFO_ID_MARKER);
         strTvgName    = ReadMarkerValue(strInfoLine, TVG_INFO_NAME_MARKER);
@@ -1211,7 +1213,7 @@ int PVRIptvData::GetChannelId(const char * strChannelName, const char * strStrea
   const char* strString = concat.c_str();
   int iId = 0;
   int c;
-  while (c = *strString++)
+  while ((c = *strString++))
     iId = ((iId << 5) + iId) + c; /* iId * 33 + c */
 
   return abs(iId);
