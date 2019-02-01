@@ -28,6 +28,10 @@
 
 #define M3U_FILE_NAME          "iptv.m3u.cache"
 #define TVG_FILE_NAME          "xmltv.xml.cache"
+#define DEFAULT_TSBUFFERPATH     "special://userdata/addon_data/pvr.iptvsimple"
+#define TIMESHIFT_OFF            0
+#define TIMESHIFT_ON_PLAYBACK    1
+#define TIMESHIFT_ON_PAUSE       2
 
 /*!
  * @brief PVR macros for string exchange
@@ -50,6 +54,9 @@ extern bool        g_bTSOverride;
 extern bool        g_bCacheM3U;
 extern bool        g_bCacheEPG;
 extern int         g_iEPGLogos;
+extern int         g_iEnableTimeshift;
+extern std::string g_strTimeshiftBufferPath;
+extern int         g_iReadTimeout;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName);
 extern std::string GetClientFilePath(const std::string &strFileName);

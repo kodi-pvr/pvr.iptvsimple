@@ -1,4 +1,7 @@
 
+v3.6.0
+- Added: Support for Timeshifting
+
 v3.5.7
 - Correctly show build version in Kodi
 
