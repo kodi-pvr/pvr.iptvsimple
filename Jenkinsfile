@@ -1,1 +1,1 @@
-buildPlugin(version: "Leia")
+buildPlugin(version: "Matrix")
