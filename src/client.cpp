@@ -63,6 +63,7 @@ bool        g_bTSOverride   = true;
 bool        g_bCacheM3U     = false;
 bool        g_bCacheEPG     = false;
 int         g_iEPGLogos     = 0;
+int         g_logoPathType  = 0;
 
 extern std::string PathCombine(const std::string &strPath, const std::string &strFileName)
 {
@@ -160,6 +161,7 @@ void ADDON_ReadSettings(void)
   {
     iPathType = 1;
   }
+  g_logoPathType = iPathType;
   if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer)) 
   {
     g_strLogoPath = buffer;

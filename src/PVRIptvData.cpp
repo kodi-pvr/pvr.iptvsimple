@@ -77,6 +77,31 @@ inline bool GetAttributeValue(const xml_node<Ch> * pNode, const char* strAttribu
   return true;
 }
 
+// http://stackoverflow.com/a/17708801
+static const std::string UrlEncode(const std::string &value)
+{
+  std::ostringstream escaped;
+  escaped.fill('0');
+  escaped << std::hex;
+
+  for (std::string::const_iterator i = value.begin(), n = value.end(); i != n; ++i)
+  {
+    std::string::value_type c = (*i);
+
+    // Keep alphanumeric and other accepted characters intact
+    if (isalnum(c) || c == '-' || c == '_' || c == '.' || c == '~')
+    {
+      escaped << c;
+      continue;
+    }
+
+    // Any other characters are percent-encoded
+    escaped << '%' << std::setw(2) << int((unsigned char) c);
+  }
+
+  return escaped.str();
+}
+
 PVRIptvData::PVRIptvData(void)
 {
   m_strXMLTVUrl   = g_strTvgPath;
@@ -84,6 +109,7 @@ PVRIptvData::PVRIptvData(void)
   m_strLogoPath   = g_strLogoPath;
   m_iEPGTimeShift = g_iEPGTimeShift;
   m_bTSOverride   = g_bTSOverride;
+  m_logoPathType  = g_logoPathType;
   m_iLastStart    = 0;
   m_iLastEnd      = 0;
 
@@ -391,6 +417,7 @@ bool PVRIptvData::LoadPlayList(void)
         strChnlName = StringUtils::Right(strLine, (int)strLine.size() - iComma);
         strChnlName = StringUtils::Trim(strChnlName);
         tmpChannel.strChannelName = XBMC->UnknownToUTF8(strChnlName.c_str());
+        bool logoFromChannelName = false;
 
         // parse info
         std::string strInfoLine = StringUtils::Mid(strLine, ++iColon, --iComma - iColon);
@@ -411,6 +438,7 @@ bool PVRIptvData::LoadPlayList(void)
         }
         if (strTvgLogo.empty())
         {
+          logoFromChannelName = true;
           strTvgLogo = strChnlName;
         }
         if (!strChnlNo.empty())
@@ -425,6 +453,12 @@ bool PVRIptvData::LoadPlayList(void)
         tmpChannel.strTvgLogo = XBMC->UnknownToUTF8(strTvgLogo.c_str());
         tmpChannel.iTvgShift  = (int)(fTvgShift * 3600.0);
         tmpChannel.bRadio     = bRadio;
+
+        // urlencode channel logo when set from channel name and source is Remote Path
+        // append extension as channel name wouldn't have it
+        if (m_logoPathType == 1 && logoFromChannelName)
+          tmpChannel.strTvgLogo = \
+            UrlEncode(tmpChannel.strTvgLogo) + CHANNEL_LOGO_EXTENSION;
 
         if (strTvgShift.empty())
         {

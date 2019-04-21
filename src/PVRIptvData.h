@@ -23,7 +23,9 @@
  *
  */
 
+#include <iomanip>
 #include <map>
+#include <sstream>
 #include <vector>
 #include "p8-platform/os.h"
 #include "libXBMC_pvr.h"
@@ -130,6 +132,7 @@ private:
   std::string                       m_strXMLTVUrl;
   std::string                       m_strM3uUrl;
   std::string                       m_strLogoPath;
+  int                               m_logoPathType;
   std::vector<PVRIptvChannelGroup>  m_groups;
   std::vector<PVRIptvChannel>       m_channels;
   std::vector<PVRIptvEpgChannel>    m_epg;
