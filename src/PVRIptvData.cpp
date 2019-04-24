@@ -706,13 +706,13 @@ PVR_ERROR PVRIptvData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd)
+PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd)
 {
   P8PLATFORM::CLockObject lock(m_mutex);
   std::vector<PVRIptvChannel>::iterator myChannel;
   for (myChannel = m_channels.begin(); myChannel < m_channels.end(); ++myChannel)
   {
-    if (myChannel->iUniqueId != (int) channel.iUniqueId)
+    if (myChannel->iUniqueId != iChannelUid)
       continue;
 
     if (iStart > m_iLastStart || iEnd > m_iLastEnd)
@@ -745,7 +745,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
 
       tag.iUniqueBroadcastId  = myTag->iBroadcastId;
       tag.strTitle            = myTag->strTitle.c_str();
-      tag.iUniqueChannelId    = channel.iUniqueId;
+      tag.iUniqueChannelId    = iChannelUid;
       tag.startTime           = myTag->startTime + iShift;
       tag.endTime             = myTag->endTime + iShift;
       tag.strPlotOutline      = myTag->strPlotOutline.c_str();
@@ -771,7 +771,6 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       }
       tag.iParentalRating     = 0;     /* not supported */
       tag.iStarRating         = 0;     /* not supported */
-      tag.bNotify             = false; /* not supported */
       tag.iSeriesNumber       = 0;     /* not supported */
       tag.iEpisodeNumber      = 0;     /* not supported */
       tag.iEpisodePartNumber  = 0;     /* not supported */

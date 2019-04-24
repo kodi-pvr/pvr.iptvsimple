@@ -95,7 +95,7 @@ public:
   virtual int       GetChannelGroupsAmount(void);
   virtual PVR_ERROR GetChannelGroups(ADDON_HANDLE handle, bool bRadio);
   virtual PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP &group);
-  virtual PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &channel, time_t iStart, time_t iEnd);
+  virtual PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd);
   virtual void      ReaplyChannelsLogos(const char * strNewPath);
   virtual void      ReloadPlayList(const char * strNewPath);
   virtual void      ReloadEPG(const char * strNewPath);
