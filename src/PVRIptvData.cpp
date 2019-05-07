@@ -37,6 +37,7 @@
 
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"
+#define M3U_GROUP_MARKER        "#EXTGRP:"
 #define TVG_INFO_ID_MARKER      "tvg-id="
 #define TVG_INFO_NAME_MARKER    "tvg-name="
 #define TVG_INFO_LOGO_MARKER    "tvg-logo="
@@ -300,6 +301,33 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   return true;
 }
 
+void PVRIptvData::UpdateGroup(std::string &strGroupName, std::vector<int> &iCurrentGroupId, int &iUniqueGroupId, const bool bRadio)
+{
+  std::stringstream streamGroups(strGroupName);
+  PVRIptvChannelGroup * pGroup;
+  iCurrentGroupId.clear();
+
+  while(std::getline(streamGroups, strGroupName, ';'))
+  {
+    strGroupName = XBMC->UnknownToUTF8(strGroupName.c_str());
+
+    if ((pGroup = FindGroup(strGroupName)) == NULL)
+    {
+      PVRIptvChannelGroup group;
+      group.strGroupName = strGroupName;
+      group.iGroupId = ++iUniqueGroupId;
+      group.bRadio = bRadio;
+
+      m_groups.push_back(group);
+      iCurrentGroupId.push_back(iUniqueGroupId);
+    }
+    else
+    {
+      iCurrentGroupId.push_back(pGroup->iGroupId);
+    }
+  }
+}
+
 bool PVRIptvData::LoadPlayList(void)
 {
   if (m_strM3uUrl.empty())
@@ -325,6 +353,7 @@ bool PVRIptvData::LoadPlayList(void)
   int iChannelNum       = g_iStartNumber;
   int iEPGTimeShift     = 0;
   std::vector<int> iCurrentGroupId;
+  bool        bRadio       = false;
 
   PVRIptvChannel tmpChannel;
   tmpChannel.strTvgId       = "";
@@ -370,7 +399,6 @@ bool PVRIptvData::LoadPlayList(void)
 
     if (StringUtils::Left(strLine, strlen(M3U_INFO_MARKER)) == M3U_INFO_MARKER)
     {
-      bool        bRadio       = false;
       double      fTvgShift    = 0;
       std::string strChnlNo    = "";
       std::string strChnlName  = "";
@@ -380,6 +408,8 @@ bool PVRIptvData::LoadPlayList(void)
       std::string strTvgShift  = "";
       std::string strGroupName = "";
       std::string strRadio     = "";
+
+      bRadio       = false;
 
       // parse line
       int iColon = (int)strLine.find(':');
@@ -433,29 +463,7 @@ bool PVRIptvData::LoadPlayList(void)
 
         if (!strGroupName.empty())
         {
-          std::stringstream streamGroups(strGroupName);
-          PVRIptvChannelGroup * pGroup;
-          iCurrentGroupId.clear();
-
-          while(std::getline(streamGroups, strGroupName, ';'))
-          {
-            strGroupName = XBMC->UnknownToUTF8(strGroupName.c_str());
-
-            if ((pGroup = FindGroup(strGroupName)) == NULL)
-            {
-              PVRIptvChannelGroup group;
-              group.strGroupName = strGroupName;
-              group.iGroupId = ++iUniqueGroupId;
-              group.bRadio = bRadio;
-
-              m_groups.push_back(group);
-              iCurrentGroupId.push_back(iUniqueGroupId);
-            }
-            else
-            {
-              iCurrentGroupId.push_back(pGroup->iGroupId);
-            }
-          }
+          UpdateGroup(strGroupName, iCurrentGroupId, iUniqueGroupId, bRadio);
         }
       }
     }
@@ -470,6 +478,14 @@ bool PVRIptvData::LoadPlayList(void)
         tmpChannel.properties.insert({prop, propValue});
       }
     }
+    else if (StringUtils::Left(strLine, strlen(M3U_GROUP_MARKER)) == M3U_GROUP_MARKER)
+    {
+      std::string strGroupName = ReadMarkerValue(strLine, M3U_GROUP_MARKER);
+      if (!strGroupName.empty())
+        {
+          UpdateGroup(strGroupName, iCurrentGroupId, iUniqueGroupId, bRadio);
+        }
+    }    
     else if (StringUtils::Left(strLine, strlen(PLAYLIST_TYPE_MARKER)) == PLAYLIST_TYPE_MARKER)
     {
       if (ReadMarkerValue(strLine, PLAYLIST_TYPE_MARKER) == "VOD")

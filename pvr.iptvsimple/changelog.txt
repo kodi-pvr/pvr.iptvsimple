@@ -1,3 +1,5 @@
+v3.7.0
+- Add support for #EXTGRP tag in M3U
 
 v3.5.7
 - Correctly show build version in Kodi

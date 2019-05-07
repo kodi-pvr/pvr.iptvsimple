@@ -118,6 +118,7 @@ protected:
   virtual void                 ApplyChannelsLogosFromEPG();
   virtual std::string          ReadMarkerValue(std::string &strLine, const char * strMarkerName);
   virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);
+  virtual void                 UpdateGroup(std::string &strGroupName, std::vector<int> &iCurrentGroupId, int &iUniqueGroupId, const bool bRadio);
 
 protected:
   virtual void *Process(void);
