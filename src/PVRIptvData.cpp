@@ -53,6 +53,36 @@
 using namespace ADDON;
 using namespace rapidxml;
 
+namespace
+{
+/*
+  Adapted from https://stackoverflow.com/a/31533119
+  Conversion from UTC date to second, signed 64-bit adjustable epoch version.
+  Written by François Grieu, 2015-07-21; public domain. 
+*/
+
+int MakeTime(int year, int month, int day)
+{
+  return year * 365 + year / 4 - year / 100 * 3 / 4 + (month + 2) * 153 / 5 + day;
+}
+
+int GetUTCTime(int year, int mon, int mday, int hour, int min, int sec)
+{
+  int m = mon - 1;
+  int y = year + 100;
+
+  if (m < 2)
+  {
+    m += 12;
+    --y;
+  }
+
+  // compute number of days within constant, assuming appropriate origin
+  return (((MakeTime(y, m, mday) - MakeTime(1970 + 99, 12, 1)) * 24 + hour) * 60 + min) * 60 + sec;
+}
+
+} // unnamed namespace
+
 template<class Ch>
 inline bool GetNodeValue(const xml_node<Ch> * pRootNode, const char* strTag, std::string& strStringValue)
 {
@@ -806,37 +836,27 @@ int PVRIptvData::GetFileContents(std::string& url, std::string &strContent)
 
 int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
 {
-  struct tm timeinfo;
-  memset(&timeinfo, 0, sizeof(tm));
+  int year = 2000;
+  int mon = 1;
+  int mday = 1;
+  int hour = 0;
+  int min = 0;
+  int sec = 0;
   char sign = '+';
   int hours = 0;
   int minutes = 0;
 
   if (iDateFormat)
-    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec, &sign, &hours, &minutes);
+    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &year, &mon, &mday, &hour, &min, &sec, &sign, &hours, &minutes);
   else
-    sscanf(strDate.c_str(), "%02d.%02d.%04d%02d:%02d:%02d", &timeinfo.tm_mday, &timeinfo.tm_mon, &timeinfo.tm_year, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
+    sscanf(strDate.c_str(), "%02d.%02d.%04d%02d:%02d:%02d", &mday, &mon, &year, &hour, &min, &sec);
 
-  timeinfo.tm_mon  -= 1;
-  timeinfo.tm_year -= 1900;
-  timeinfo.tm_isdst = -1;
-
-  std::time_t current_time;
-  std::time(&current_time);
-  long offset = 0;
-#ifndef TARGET_WINDOWS
-  offset = -std::localtime(&current_time)->tm_gmtoff;
-#else
-  _get_timezone(&offset);
-#endif // TARGET_WINDOWS
-
-  long offset_of_date = (hours * 60 * 60) + (minutes * 60);
+  long offset_of_date = (hours * 60 + minutes) * 60;
+  
   if (sign == '-')
-  {
     offset_of_date = -offset_of_date;
-  }
 
-  return mktime(&timeinfo) - offset_of_date - offset;
+  return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
 }
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)
