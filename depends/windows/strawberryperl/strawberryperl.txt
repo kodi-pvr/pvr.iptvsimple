@@ -1,0 +1,1 @@
+strawberryperl http://strawberryperl.com/download/5.28.0.1/strawberry-perl-5.28.0.1-64bit-portable.zip

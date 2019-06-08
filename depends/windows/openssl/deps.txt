@@ -1,0 +1,2 @@
+strawberryperl
+zlib
