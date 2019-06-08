@@ -1,0 +1,19 @@
+--- a/Configurations/15-android.conf
++++ b/Configurations/15-android.conf
+@@ -89,7 +89,6 @@
+                 if (which("$triarch-gcc") !~ m|^$ndk/.*/prebuilt/([^/]+)/|) {
+                     die "no NDK $triarch-gcc on \$PATH";
+                 }
+-                $cflags .= " -mandroid";
+                 $user{CROSS_COMPILE} = "$triarch-";
+             }
+ 
+@@ -105,7 +104,7 @@
+ 
+             $sysroot =~ s|^$ndk/||;
+             $android_ndk = {
+-                cflags   => "$cflags --sysroot=\$(ANDROID_NDK)/$sysroot",
++                cflags   => $cflags,
+                 cppflags => $cppflags,
+                 bn_ops   => $arch =~ m/64$/ ? "SIXTY_FOUR_BIT_LONG"
+                                             : "BN_LLONG",
