@@ -286,6 +286,12 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
 
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
+    GetNodeValue(pChannelNode, "sub-title", entry.strOriginalTitle);
+    GetNodeValue(pChannelNode, "actor", entry.strCast);
+    GetNodeValue(pChannelNode, "director", entry.strDirector);
+    GetNodeValue(pChannelNode, "writer", entry.strWriter);
+    GetNodeValue(pChannelNode, "category", entry.strIMDBNumber);
+    GetNodeValue(pChannelNode, "episode-num", entry.strEpisodeName);
     GetNodeValue(pChannelNode, "category", entry.strGenreString);
 
     xml_node<> *pIconNode = pChannelNode->first_node("icon");
@@ -762,7 +768,6 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
       tag.strWriter           = myTag->strWriter.c_str();
       tag.iYear               = myTag->iYear;
       tag.strIMDBNumber       = myTag->strIMDBNumber.c_str();
-      tag.strEpisodeName      = myTag->strEpisodeName.c_str();
       tag.strIconPath         = myTag->strIconPath.c_str();
       if (FindEpgGenre(myTag->strGenreString, iGenreType, iGenreSubType))
       {
@@ -781,7 +786,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
       tag.iSeriesNumber       = 0;     /* not supported */
       tag.iEpisodeNumber      = 0;     /* not supported */
       tag.iEpisodePartNumber  = 0;     /* not supported */
-      tag.strEpisodeName      = NULL;  /* not supported */
+      tag.strEpisodeName      = myTag->strEpisodeName.c_str();
       tag.iFlags              = EPG_TAG_FLAG_UNDEFINED;
 
       PVR->TransferEpgEntry(handle, &tag);
