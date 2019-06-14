@@ -1,3 +1,6 @@
+v4.0.2
+- Fix wrong EPG times due to DST on Windows
+
 v4.0.1
 - Remove channels loaded notification
 
