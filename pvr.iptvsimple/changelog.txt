@@ -1,3 +1,6 @@
+v4.0.1
+- Remove channels loaded notification
+
 v4.0.0
 - Update to PVR addon API v6.0.0
 
