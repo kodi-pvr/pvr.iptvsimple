@@ -274,6 +274,13 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.iGenreType = 0;
     entry.iGenreSubType = 0;
     entry.strPlotOutline = "";
+    entry.strOriginalTitle = "";
+    entry.strCast = "";
+    entry.strDirector = "";
+    entry.strWriter = "";
+    entry.iYear = 0;
+    entry.strIMDBNumber = "";
+    entry.strEpisodeName = "";
     entry.startTime = iTmpStart;
     entry.endTime = iTmpEnd;
 
@@ -749,12 +756,13 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
       tag.endTime             = myTag->endTime + iShift;
       tag.strPlotOutline      = myTag->strPlotOutline.c_str();
       tag.strPlot             = myTag->strPlot.c_str();
-      tag.strOriginalTitle    = NULL;  /* not supported */
-      tag.strCast             = NULL;  /* not supported */
-      tag.strDirector         = NULL;  /* not supported */
-      tag.strWriter           = NULL;  /* not supported */
-      tag.iYear               = 0;     /* not supported */
-      tag.strIMDBNumber       = NULL;  /* not supported */
+      tag.strOriginalTitle    = myTag->strOriginalTitle.c_str();
+      tag.strCast             = myTag->strCast.c_str();
+      tag.strDirector         = myTag->strDirector.c_str();
+      tag.strWriter           = myTag->strWriter.c_str();
+      tag.iYear               = myTag->iYear;
+      tag.strIMDBNumber       = myTag->strIMDBNumber.c_str();
+      tag.strEpisodeName      = myTag->strEpisodeName.c_str();
       tag.strIconPath         = myTag->strIconPath.c_str();
       if (FindEpgGenre(myTag->strGenreString, iGenreType, iGenreSubType))
       {

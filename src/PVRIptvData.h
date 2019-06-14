@@ -35,10 +35,17 @@ struct PVRIptvEpgEntry
   int         iChannelId;
   int         iGenreType;
   int         iGenreSubType;
+  int         iYear;
   time_t      startTime;
   time_t      endTime;
   std::string strTitle;
   std::string strPlotOutline;
+  std::string strOriginalTitle;
+  std::string strCast;
+  std::string strDirector;
+  std::string strWriter;
+  std::string strIMDBNumber;
+  std::string strEpisodeName;  
   std::string strPlot;
   std::string strIconPath;
   std::string strGenreString;

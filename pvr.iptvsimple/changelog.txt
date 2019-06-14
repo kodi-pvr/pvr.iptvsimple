@@ -1,3 +1,7 @@
+v4.0.2
+- Add missing Epg tags 
+ (OriginalTitle,Cast,Director,Writer,Year,IMDBNumber,EpisodeName)
+
 v4.0.1
 - Remove channels loaded notification
 
