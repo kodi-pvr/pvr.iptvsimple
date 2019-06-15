@@ -290,7 +290,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     GetNodeValue(pChannelNode, "actor", entry.strCast);
     GetNodeValue(pChannelNode, "director", entry.strDirector);
     GetNodeValue(pChannelNode, "writer", entry.strWriter);
-    GetNodeValue(pChannelNode, "category", entry.strIMDBNumber);
+    GetNodeValue(pChannelNode, "Id", entry.strIMDBNumber);
     GetNodeValue(pChannelNode, "episode-num", entry.strEpisodeName);
     GetNodeValue(pChannelNode, "category", entry.strGenreString);
 
