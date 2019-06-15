@@ -77,6 +77,57 @@ inline bool GetAttributeValue(const xml_node<Ch> * pNode, const char* strAttribu
   return true;
 }
 
+namespace
+{
+
+// Adapted from https://stackoverflow.com/a/31533119
+
+// Conversion from UTC date to second, signed 64-bit adjustable epoch version.
+// Written by François Grieu, 2015-07-21; public domain.
+
+long long MakeTime(int year, int month, int day)
+{
+  return static_cast<long long>(year) * 365 + year / 4 - year / 100 * 3 / 4 + (month + 2) * 153 / 5 + day;
+}
+
+long long GetUTCTime(int year, int mon, int mday, int hour, int min, int sec)
+{
+  int m = mon - 1;
+  int y = year + 100;
+
+  if (m < 2)
+  {
+    m += 12;
+    --y;
+  }
+
+  return (((MakeTime(y, m, mday) - MakeTime(1970 + 99, 12, 1)) * 24 + hour) * 60 + min) * 60 + sec;
+}
+
+long long ParseDateTime(const std::string& strDate)
+{
+  int year = 2000;
+  int mon = 1;
+  int mday = 1;
+  int hour = 0;
+  int min = 0;
+  int sec = 0;
+  char offset_sign = '+';
+  int offset_hours = 0;
+  int offset_minutes = 0;
+
+  sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &year, &mon, &mday, &hour, &min, &sec, &offset_sign, &offset_hours, &offset_minutes);
+
+  long offset_of_date = (offset_hours * 60 + offset_minutes) * 60;
+  if (offset_sign == '-')
+    offset_of_date = -offset_of_date;
+
+  return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
+}
+
+} // unnamed namespace
+
+
 PVRIptvData::PVRIptvData(void)
 {
   m_strXMLTVUrl   = g_strTvgPath;
@@ -262,8 +313,8 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       || !GetAttributeValue(pChannelNode, "stop", strStop))
       continue;
 
-    int iTmpStart = ParseDateTime(strStart);
-    int iTmpEnd = ParseDateTime(strStop);
+    long long iTmpStart = ParseDateTime(strStart);
+    long long iTmpEnd = ParseDateTime(strStop);
 
     if ( (iTmpEnd   + iMaxShiftTime < iStart)
       || (iTmpStart + iMinShiftTime > iEnd))
@@ -275,8 +326,8 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.iGenreType = 0;
     entry.iGenreSubType = 0;
     entry.strPlotOutline = "";
-    entry.startTime = iTmpStart;
-    entry.endTime = iTmpEnd;
+    entry.startTime = static_cast<time_t>(iTmpStart);
+    entry.endTime = static_cast<time_t>(iTmpEnd);
 
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
@@ -803,41 +854,6 @@ int PVRIptvData::GetFileContents(std::string& url, std::string &strContent)
   }
 
   return strContent.length();
-}
-
-int PVRIptvData::ParseDateTime(std::string& strDate, bool iDateFormat)
-{
-  struct tm timeinfo;
-  memset(&timeinfo, 0, sizeof(tm));
-  char sign = '+';
-  int hours = 0;
-  int minutes = 0;
-
-  if (iDateFormat)
-    sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &timeinfo.tm_year, &timeinfo.tm_mon, &timeinfo.tm_mday, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec, &sign, &hours, &minutes);
-  else
-    sscanf(strDate.c_str(), "%02d.%02d.%04d%02d:%02d:%02d", &timeinfo.tm_mday, &timeinfo.tm_mon, &timeinfo.tm_year, &timeinfo.tm_hour, &timeinfo.tm_min, &timeinfo.tm_sec);
-
-  timeinfo.tm_mon  -= 1;
-  timeinfo.tm_year -= 1900;
-  timeinfo.tm_isdst = -1;
-
-  std::time_t current_time;
-  std::time(&current_time);
-  long offset = 0;
-#ifndef TARGET_WINDOWS
-  offset = -std::localtime(&current_time)->tm_gmtoff;
-#else
-  _get_timezone(&offset);
-#endif // TARGET_WINDOWS
-
-  long offset_of_date = (hours * 60 * 60) + (minutes * 60);
-  if (sign == '-')
-  {
-    offset_of_date = -offset_of_date;
-  }
-
-  return mktime(&timeinfo) - offset_of_date - offset;
 }
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)

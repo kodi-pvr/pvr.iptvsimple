@@ -1,3 +1,5 @@
+v3.5.8
+- Fix wrong EPG times due to DST on Windows
 
 v3.5.7
 - Correctly show build version in Kodi
