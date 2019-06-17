@@ -260,9 +260,19 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     if ( !GetAttributeValue(pChannelNode, "start", strStart)
       || !GetAttributeValue(pChannelNode, "stop", strStop))
       continue;
-
+	  
+    std::string strYearEPG;
+    if (!GetAttributeValue(pChannelNode, "date", strYearEPG))
+      continue;
+  
+    std::string strStarRating;
+    if (!GetAttributeValue(pChannelNode, "star-rating", strStarRating))
+      continue;
+  
     int iTmpStart = ParseDateTime(strStart);
     int iTmpEnd = ParseDateTime(strStop);
+    int iYear = stoi(strYearEPG);
+    int iStarRating = stoi(strStarRating);
 
     if ( (iTmpEnd   + iMaxShiftTime < iStart)
       || (iTmpStart + iMinShiftTime > iEnd))
@@ -279,6 +289,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.strDirector = "";
     entry.strWriter = "";
     entry.iYear = 0;
+    entry.iStarRating = 0;
     entry.strIMDBNumber = "";
     entry.strEpisodeName = "";
     entry.startTime = iTmpStart;
@@ -782,7 +793,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
         tag.strGenreDescription = myTag->strGenreString.c_str();
       }
       tag.iParentalRating     = 0;     /* not supported */
-      tag.iStarRating         = 0;     /* not supported */
+      tag.iStarRating         = myTag->iStarRating;
       tag.iSeriesNumber       = 0;     /* not supported */
       tag.iEpisodeNumber      = 0;     /* not supported */
       tag.iEpisodePartNumber  = 0;     /* not supported */
