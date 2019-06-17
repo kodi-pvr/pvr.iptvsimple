@@ -284,7 +284,6 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.iGenreType = 0;
     entry.iGenreSubType = 0;
     entry.strPlotOutline = "";
-    entry.strOriginalTitle = "";
     entry.strCast = "";
     entry.strDirector = "";
     entry.strWriter = "";
@@ -297,12 +296,19 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
 
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
+<<<<<<< refs/remotes/origin/Matrix
     GetNodeValue(pChannelNode, "sub-title", entry.strOriginalTitle);
+=======
+    GetNodeValue(pChannelNode, "sub-title", entry.strEpisodeName);
+>>>>>>> request changes
     GetNodeValue(pChannelNode, "actor", entry.strCast);
     GetNodeValue(pChannelNode, "director", entry.strDirector);
     GetNodeValue(pChannelNode, "writer", entry.strWriter);
     GetNodeValue(pChannelNode, "Id", entry.strIMDBNumber);
+<<<<<<< refs/remotes/origin/Matrix
     GetNodeValue(pChannelNode, "episode-num", entry.strEpisodeName);
+=======
+>>>>>>> request changes
     GetNodeValue(pChannelNode, "category", entry.strGenreString);
 
     xml_node<> *pIconNode = pChannelNode->first_node("icon");
@@ -773,7 +779,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
       tag.endTime             = myTag->endTime + iShift;
       tag.strPlotOutline      = myTag->strPlotOutline.c_str();
       tag.strPlot             = myTag->strPlot.c_str();
-      tag.strOriginalTitle    = myTag->strOriginalTitle.c_str();
+      tag.strOriginalTitle    = NULL;  /* not supported */
       tag.strCast             = myTag->strCast.c_str();
       tag.strDirector         = myTag->strDirector.c_str();
       tag.strWriter           = myTag->strWriter.c_str();

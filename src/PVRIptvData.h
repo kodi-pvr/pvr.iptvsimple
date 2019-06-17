@@ -41,7 +41,6 @@ struct PVRIptvEpgEntry
   time_t      endTime;
   std::string strTitle;
   std::string strPlotOutline;
-  std::string strOriginalTitle;
   std::string strCast;
   std::string strDirector;
   std::string strWriter;
