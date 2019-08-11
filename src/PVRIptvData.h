@@ -105,11 +105,11 @@ protected:
   bool LoadPlayList(void);
   bool LoadEPG(time_t iStart, time_t iEnd);
   bool LoadGenres(void);
-  int GetFileContents(std::string& url, std::string& strContent);
-  PVRIptvChannel* FindChannel(const std::string& strId, const std::string& strName);
-  PVRIptvChannelGroup* FindGroup(const std::string& strName);
+  int GetFileContents(const std::string& url, std::string& strContent);
+  const PVRIptvChannel* FindChannel(const std::string& strId, const std::string& strName) const;
+  const PVRIptvChannelGroup* FindGroup(const std::string& strName) const;
   PVRIptvEpgChannel* FindEpg(const std::string& strId);
-  PVRIptvEpgChannel* FindEpgForChannel(PVRIptvChannel& channel);
+  const PVRIptvEpgChannel* FindEpgForChannel(const PVRIptvChannel& channel) const;
   bool FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
   bool GzipInflate(const std::string& compressedBytes, std::string& uncompressedBytes);
   int GetCachedFileContents(const std::string& strCachedName, const std::string& strFilePath,
