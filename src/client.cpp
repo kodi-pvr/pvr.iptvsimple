@@ -42,7 +42,7 @@ using namespace ADDON;
 
 bool m_bCreated = false;
 ADDON_STATUS m_CurStatus = ADDON_STATUS_UNKNOWN;
-PVRIptvData* m_data = NULL;
+PVRIptvData* m_data = nullptr;
 PVRIptvChannel m_currentChannel;
 
 /* User adjustable settings are saved here.
@@ -52,8 +52,8 @@ PVRIptvChannel m_currentChannel;
 std::string g_strUserPath = "";
 std::string g_strClientPath = "";
 
-CHelper_libXBMC_addon* XBMC = NULL;
-CHelper_libXBMC_pvr* PVR = NULL;
+CHelper_libXBMC_addon* XBMC = nullptr;
+CHelper_libXBMC_pvr* PVR = nullptr;
 
 std::string g_strTvgPath = "";
 std::string g_strM3UPath = "";
@@ -423,7 +423,7 @@ PVR_ERROR AddTimer(const PVR_TIMER& timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR DeleteTimer(const PVR_TIMER& timer, bool bForceDelete) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR UpdateTimer(const PVR_TIMER& timer) { return PVR_ERROR_NOT_IMPLEMENTED; }
 void DemuxAbort(void) {}
-DemuxPacket* DemuxRead(void) { return NULL; }
+DemuxPacket* DemuxRead(void) { return nullptr; }
 bool IsRealTimeStream(void) { return true; }
 void PauseStream(bool bPaused) {}
 bool CanSeekStream(void) { return false; }
