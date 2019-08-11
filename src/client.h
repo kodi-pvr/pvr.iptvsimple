@@ -26,31 +26,31 @@
 #include "libXBMC_addon.h"
 #include "libXBMC_pvr.h"
 
-#define M3U_FILE_NAME          "iptv.m3u.cache"
-#define TVG_FILE_NAME          "xmltv.xml.cache"
+#define M3U_FILE_NAME "iptv.m3u.cache"
+#define TVG_FILE_NAME "xmltv.xml.cache"
 
 /*!
  * @brief PVR macros for string exchange
  */
-#define PVR_STRCPY(dest, source) do { strncpy(dest, source, sizeof(dest)-1); dest[sizeof(dest)-1] = '\0'; } while(0)
+#define PVR_STRCPY(dest, source) do { strncpy(dest, source, sizeof(dest) - 1); dest[sizeof(dest) - 1] = '\0'; } while (0)
 #define PVR_STRCLR(dest) memset(dest, 0, sizeof(dest))
 
-extern bool                          m_bCreated;
-extern std::string                   g_strUserPath;
-extern std::string                   g_strClientPath;
-extern ADDON::CHelper_libXBMC_addon *XBMC;
-extern CHelper_libXBMC_pvr          *PVR;
+extern bool m_bCreated;
+extern std::string g_strUserPath;
+extern std::string g_strClientPath;
+extern ADDON::CHelper_libXBMC_addon* XBMC;
+extern CHelper_libXBMC_pvr* PVR;
 
 extern std::string g_strM3UPath;
 extern std::string g_strTvgPath;
 extern std::string g_strLogoPath;
-extern int         g_iEPGTimeShift;
-extern int         g_iStartNumber;
-extern bool        g_bTSOverride;
-extern bool        g_bCacheM3U;
-extern bool        g_bCacheEPG;
-extern int         g_iEPGLogos;
+extern int g_iEPGTimeShift;
+extern int g_iStartNumber;
+extern bool g_bTSOverride;
+extern bool g_bCacheM3U;
+extern bool g_bCacheEPG;
+extern int g_iEPGLogos;
 
-extern std::string PathCombine(const std::string &strPath, const std::string &strFileName);
-extern std::string GetClientFilePath(const std::string &strFileName);
-extern std::string GetUserFilePath(const std::string &strFileName);
+extern std::string PathCombine(const std::string& strPath, const std::string& strFileName);
+extern std::string GetClientFilePath(const std::string& strFileName);
+extern std::string GetUserFilePath(const std::string& strFileName);
