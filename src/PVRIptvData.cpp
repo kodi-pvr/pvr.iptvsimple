@@ -434,13 +434,13 @@ bool PVRIptvData::LoadPlayList(void)
       std::string strRadio     = "";
 
       // parse line
-      int iColon = (int)strLine.find(':');
-      int iComma = (int)strLine.rfind(',');
+      int iColon = static_cast<int>(strLine.find(':'));
+      int iComma = static_cast<int>(strLine.rfind(','));
       if (iColon >= 0 && iComma >= 0 && iComma > iColon)
       {
         // parse name
         iComma++;
-        strChnlName = StringUtils::Right(strLine, (int)strLine.size() - iComma);
+        strChnlName = StringUtils::Right(strLine, static_cast<int>(strLine.size() - iComma));
         strChnlName = StringUtils::Trim(strChnlName);
         tmpChannel.strChannelName = XBMC->UnknownToUTF8(strChnlName.c_str());
 
@@ -697,7 +697,7 @@ bool PVRIptvData::GetChannel(const PVR_CHANNEL& channel, PVRIptvChannel& myChann
   for (unsigned int iChannelPtr = 0; iChannelPtr < m_channels.size(); iChannelPtr++)
   {
     PVRIptvChannel& thisChannel = m_channels.at(iChannelPtr);
-    if (thisChannel.iUniqueId == (int)channel.iUniqueId)
+    if (thisChannel.iUniqueId == static_cast<int>(channel.iUniqueId))
     {
       myChannel.iUniqueId         = thisChannel.iUniqueId;
       myChannel.bRadio            = thisChannel.bRadio;
@@ -752,7 +752,7 @@ PVR_ERROR PVRIptvData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHA
     std::vector<int>::iterator it;
     for (it = myGroup->members.begin(); it != myGroup->members.end(); ++it)
     {
-      if ((*it) < 0 || (*it) >= (int)m_channels.size())
+      if ((*it) < 0 || (*it) >= static_cast<int>(m_channels.size()))
         continue;
 
       PVRIptvChannel& channel = m_channels.at(*it);
@@ -982,7 +982,7 @@ bool PVRIptvData::GzipInflate(const std::string& compressedBytes, std::string& u
   unsigned half_length = compressedBytes.size() / 2;
 
   unsigned uncompLength = full_length;
-  char* uncomp = (char*)calloc(sizeof(char), uncompLength);
+  char* uncomp = static_cast<char*>(calloc(sizeof(char), uncompLength));
 
   z_stream strm;
   strm.next_in = (Bytef*)compressedBytes.c_str();
@@ -1001,7 +1001,7 @@ bool PVRIptvData::GzipInflate(const std::string& compressedBytes, std::string& u
     if (strm.total_out >= uncompLength)
     {
       // Increase size of output buffer
-      uncomp = (char*)realloc(uncomp, uncompLength + half_length);
+      uncomp = static_cast<char*>(realloc(uncomp, uncompLength + half_length));
       if (!uncomp)
         return false;
       uncompLength += half_length;
@@ -1166,12 +1166,12 @@ void PVRIptvData::ReloadPlayList(const char* strNewPath)
 
 std::string PVRIptvData::ReadMarkerValue(const std::string& strLine, const char* strMarkerName)
 {
-  int iMarkerStart = (int)strLine.find(strMarkerName);
+  int iMarkerStart = static_cast<int>(strLine.find(strMarkerName));
   if (iMarkerStart >= 0)
   {
     std::string strMarker = strMarkerName;
     iMarkerStart += strMarker.length();
-    if (iMarkerStart < (int)strLine.length())
+    if (iMarkerStart < static_cast<int>(strLine.length()))
     {
       char cFind = ' ';
       if (strLine[iMarkerStart] == '"')
@@ -1179,7 +1179,7 @@ std::string PVRIptvData::ReadMarkerValue(const std::string& strLine, const char*
         cFind = '"';
         iMarkerStart++;
       }
-      int iMarkerEnd = (int)strLine.find(cFind, iMarkerStart);
+      int iMarkerEnd = static_cast<int>(strLine.find(cFind, iMarkerStart));
       if (iMarkerEnd < 0)
       {
         iMarkerEnd = strLine.length();
