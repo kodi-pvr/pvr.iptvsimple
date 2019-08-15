@@ -39,10 +39,14 @@ struct PVRIptvEpgEntry
   time_t startTime;
   time_t endTime;
   std::string strTitle;
+  std::string strEpisodeName;
   std::string strPlotOutline;
   std::string strPlot;
   std::string strIconPath;
   std::string strGenreString;
+  std::string strCast;
+  std::string strDirector;
+  std::string strWriter;
 };
 
 struct PVRIptvEpgChannel
