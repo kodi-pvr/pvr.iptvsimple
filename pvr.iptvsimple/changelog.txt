@@ -1,3 +1,6 @@
+v4.2.1
+- Fix nullptr initialisation
+
 v4.2.0
 - Add support for sub-title/actor/director/writer in XML
 
