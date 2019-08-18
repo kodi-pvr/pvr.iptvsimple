@@ -250,7 +250,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     m_epg.clear();
 
   int iBroadCastId = 0;
-  xml_node<>* pChannelNode;
+  xml_node<>* pChannelNode = nullptr;
   for (pChannelNode = pRootElement->first_node("channel"); pChannelNode; pChannelNode = pChannelNode->next_sibling("channel"))
   {
     std::string strName;
@@ -296,7 +296,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     }
   }
 
-  PVRIptvEpgChannel* epg;
+  PVRIptvEpgChannel* epg = nullptr;
   for (pChannelNode = pRootElement->first_node("programme"); pChannelNode; pChannelNode = pChannelNode->next_sibling("programme"))
   {
     std::string strId;
