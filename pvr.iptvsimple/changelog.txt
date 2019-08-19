@@ -1,3 +1,6 @@
+v3.6.0
+- Add support for sub-title/actor/director/writer
+
 v3.5.8
 - Fix wrong EPG times due to DST on Windows
 
