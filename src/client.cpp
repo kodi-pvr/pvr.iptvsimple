@@ -25,10 +25,15 @@
 #include "client.h"
 
 #include "PVRIptvData.h"
+#include "iptvsimple/data/Channel.h"
+#include "iptvsimple/utilities/Logger.h"
 #include "p8-platform/util/util.h"
 #include "kodi/xbmc_pvr_dll.h"
 
 using namespace ADDON;
+using namespace iptvsimple;
+using namespace iptvsimple::data;
+using namespace iptvsimple::utilities;
 
 #ifdef TARGET_WINDOWS
 #define snprintf _snprintf
@@ -40,137 +45,22 @@ using namespace ADDON;
 #endif
 #endif
 
-bool m_bCreated = false;
-ADDON_STATUS m_CurStatus = ADDON_STATUS_UNKNOWN;
+bool m_created = false;
+ADDON_STATUS m_currentStatus = ADDON_STATUS_UNKNOWN;
 PVRIptvData* m_data = nullptr;
-PVRIptvChannel m_currentChannel;
+Channel m_currentChannel;
+Settings& settings = Settings::GetInstance();
 
 /* User adjustable settings are saved here.
  * Default values are defined inside client.h
  * and exported to the other source files.
  */
-std::string g_strUserPath = "";
-std::string g_strClientPath = "";
 
 CHelper_libXBMC_addon* XBMC = nullptr;
 CHelper_libXBMC_pvr* PVR = nullptr;
 
-std::string g_strTvgPath = "";
-std::string g_strM3UPath = "";
-std::string g_strLogoPath = "";
-int g_iEPGTimeShift = 0;
-int g_iStartNumber = 1;
-bool g_bTSOverride = true;
-bool g_bCacheM3U = false;
-bool g_bCacheEPG = false;
-int g_iEPGLogos = 0;
-
-extern std::string PathCombine(const std::string& strPath, const std::string& strFileName)
-{
-  std::string strResult = strPath;
-  if (strResult.at(strResult.size() - 1) == '\\' ||
-      strResult.at(strResult.size() - 1) == '/')
-  {
-    strResult.append(strFileName);
-  }
-  else
-  {
-    strResult.append("/");
-    strResult.append(strFileName);
-  }
-
-  return strResult;
-}
-
-extern std::string GetClientFilePath(const std::string& strFileName)
-{
-  return PathCombine(g_strClientPath, strFileName);
-}
-
-extern std::string GetUserFilePath(const std::string& strFileName)
-{
-  return PathCombine(g_strUserPath, strFileName);
-}
-
 extern "C"
 {
-void ADDON_ReadSettings(void)
-{
-  char buffer[1024];
-  int iPathType = 0;
-  if (!XBMC->GetSetting("m3uPathType", &iPathType))
-  {
-    iPathType = 1;
-  }
-  if (iPathType)
-  {
-    if (XBMC->GetSetting("m3uUrl", &buffer))
-    {
-      g_strM3UPath = buffer;
-    }
-    if (!XBMC->GetSetting("m3uCache", &g_bCacheM3U))
-    {
-      g_bCacheM3U = true;
-    }
-  }
-  else
-  {
-    if (XBMC->GetSetting("m3uPath", &buffer))
-    {
-      g_strM3UPath = buffer;
-    }
-    g_bCacheM3U = false;
-  }
-  if (!XBMC->GetSetting("startNum", &g_iStartNumber))
-  {
-    g_iStartNumber = 1;
-  }
-  if (!XBMC->GetSetting("epgPathType", &iPathType))
-  {
-    iPathType = 1;
-  }
-  if (iPathType)
-  {
-    if (XBMC->GetSetting("epgUrl", &buffer))
-    {
-      g_strTvgPath = buffer;
-    }
-    if (!XBMC->GetSetting("epgCache", &g_bCacheEPG))
-    {
-      g_bCacheEPG = true;
-    }
-  }
-  else
-  {
-    if (XBMC->GetSetting("epgPath", &buffer))
-    {
-      g_strTvgPath = buffer;
-    }
-    g_bCacheEPG = false;
-  }
-  float fShift;
-  if (XBMC->GetSetting("epgTimeShift", &fShift))
-  {
-    g_iEPGTimeShift = (int)(fShift * 3600.0); // hours to seconds
-  }
-  if (!XBMC->GetSetting("epgTSOverride", &g_bTSOverride))
-  {
-    g_bTSOverride = true;
-  }
-  if (!XBMC->GetSetting("logoPathType", &iPathType))
-  {
-    iPathType = 1;
-  }
-  if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer))
-  {
-    g_strLogoPath = buffer;
-  }
-
-  // Logos from EPG
-  if (!XBMC->GetSetting("logoFromEpg", &g_iEPGLogos))
-    g_iEPGLogos = 0;
-}
-
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
 {
   if (!hdl || !props)
@@ -195,55 +85,68 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
     return ADDON_STATUS_PERMANENT_FAILURE;
   }
 
-  XBMC->Log(LOG_DEBUG, "%s - Creating the PVR IPTV Simple add-on", __FUNCTION__);
-
-  m_CurStatus = ADDON_STATUS_UNKNOWN;
-  g_strUserPath = pvrprops->strUserPath;
-  g_strClientPath = pvrprops->strClientPath;
-
-  if (!XBMC->DirectoryExists(g_strUserPath.c_str()))
+  /* Configure the logger */
+  Logger::GetInstance().SetImplementation([](LogLevel level, const char* message)
   {
-    XBMC->CreateDirectory(g_strUserPath.c_str());
-  }
+    /* Convert the log level */
+    addon_log_t addonLevel;
 
-  ADDON_ReadSettings();
+    switch (level)
+    {
+      case LogLevel::LEVEL_ERROR:
+        addonLevel = addon_log_t::LOG_ERROR;
+        break;
+      case LogLevel::LEVEL_INFO:
+        addonLevel = addon_log_t::LOG_INFO;
+        break;
+      case LogLevel::LEVEL_NOTICE:
+        addonLevel = addon_log_t::LOG_NOTICE;
+        break;
+      default:
+        addonLevel = addon_log_t::LOG_DEBUG;
+    }
+
+    XBMC->Log(addonLevel, "%s", message);
+  });
+
+  Logger::GetInstance().SetPrefix("pvr.iptvsimple");
+
+  Logger::Log(LogLevel::LEVEL_INFO, "%s Creating the PVR IPTV Simple add-on", __FUNCTION__);
+
+  m_currentStatus = ADDON_STATUS_UNKNOWN;
+  const std::string userPath = pvrprops->strUserPath;
+  const std::string clientPath = pvrprops->strClientPath;
+
+  if (!XBMC->DirectoryExists(settings.GetUserPath().c_str()))
+    XBMC->CreateDirectory(settings.GetUserPath().c_str());
+
+  settings.ReadFromAddon(userPath, clientPath);
 
   m_data = new PVRIptvData;
-  m_CurStatus = ADDON_STATUS_OK;
-  m_bCreated = true;
+  m_currentStatus = ADDON_STATUS_OK;
+  m_created = true;
 
-  return m_CurStatus;
+  return m_currentStatus;
 }
 
 ADDON_STATUS ADDON_GetStatus()
 {
-  return m_CurStatus;
+  return m_currentStatus;
 }
 
 void ADDON_Destroy()
 {
   delete m_data;
-  m_bCreated = false;
-  m_CurStatus = ADDON_STATUS_UNKNOWN;
+  m_created = false;
+  m_currentStatus = ADDON_STATUS_UNKNOWN;
 }
 
 ADDON_STATUS ADDON_SetSetting(const char* settingName, const void* settingValue)
 {
-  // reset cache and restart addon
+  if (!XBMC || !m_data)
+    return ADDON_STATUS_OK;
 
-  std::string strFile = GetUserFilePath(M3U_FILE_NAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-  {
-    XBMC->DeleteFile(strFile.c_str());
-  }
-
-  strFile = GetUserFilePath(TVG_FILE_NAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-  {
-    XBMC->DeleteFile(strFile.c_str());
-  }
-
-  return ADDON_STATUS_NEED_RESTART;
+  return settings.SetValue(settingName, settingValue);
 }
 
 /***********************************************************
@@ -274,20 +177,20 @@ PVR_ERROR GetAddonCapabilities(PVR_ADDON_CAPABILITIES* pCapabilities)
 
 const char* GetBackendName(void)
 {
-  static const char* strBackendName = "IPTV Simple PVR Add-on";
-  return strBackendName;
+  static const char* backendName = "IPTV Simple PVR Add-on";
+  return backendName;
 }
 
 const char* GetBackendVersion(void)
 {
-  static std::string strBackendVersion = STR(IPTV_VERSION);
-  return strBackendVersion.c_str();
+  static std::string backendVersion = STR(IPTV_VERSION);
+  return backendVersion.c_str();
 }
 
 const char* GetConnectionString(void)
 {
-  static std::string strConnectionString = "connected";
-  return strConnectionString.c_str();
+  static std::string connectionString = "connected";
+  return connectionString.c_str();
 }
 
 const char* GetBackendHostname(void)
@@ -337,11 +240,11 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
   if (m_data && m_data->GetChannel(*channel, m_currentChannel))
   {
     strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
-    strncpy(properties[0].strValue, m_currentChannel.strStreamURL.c_str(), sizeof(properties[0].strValue) - 1);
+    strncpy(properties[0].strValue, m_currentChannel.GetStreamURL().c_str(), sizeof(properties[0].strValue) - 1);
     *iPropertiesCount = 1;
-    if (!m_currentChannel.properties.empty())
+    if (!m_currentChannel.GetProperties().empty())
     {
-      for (auto& prop : m_currentChannel.properties)
+      for (auto& prop : m_currentChannel.GetProperties())
       {
         strncpy(properties[*iPropertiesCount].strName, prop.first.c_str(), sizeof(properties[*iPropertiesCount].strName) - 1);
         strncpy(properties[*iPropertiesCount].strValue, prop.second.c_str(), sizeof(properties[*iPropertiesCount].strName) - 1);

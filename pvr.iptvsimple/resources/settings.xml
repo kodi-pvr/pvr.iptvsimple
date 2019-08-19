@@ -1,33 +1,184 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
-  <!-- M3U -->
-  <category label="30010">
-    <setting id="sep1" label="30010" type="lsep"/> 
-    <setting id="m3uPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
-    <setting id="m3uPath" type="file" label="30011" default="" visible="eq(-1,0)"/>
-    <setting id="m3uUrl" type="text" label="30012" default="" visible="eq(-2,1)"/>
-    <setting id="m3uCache" type="bool" label="30025" default="true" visible="eq(-3,1)"/>
-    <setting id="startNum" type="number" label="30013" default="1" />
-  </category>
+<?xml version="1.0" encoding="utf-8" ?>
+<settings version="1">
+  <section id="pvr.iptvsimple">
 
-  <!-- EPG -->
-  <category label="30020">
-    <setting id="sep2" label="30020" type="lsep"/>
-    <setting id="epgPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
-    <setting id="epgPath" type="file" label="30021" default="" visible="eq(-1,0)"/>
-    <setting id="epgUrl" type="text" label="30022" default="" visible="eq(-2,1)"/>
-    <setting id="epgCache" type="bool" label="30026" default="true" visible="eq(-3,1)"/>
-    <setting id="epgTimeShift" type="slider" label="30024" default="0" range="-12,.5,12" option="float"/>
-    <setting id="epgTSOverride" type="bool" label="30023" default="false"/>
-  </category>
+    <!-- M3U -->
+    <category id="general" label="30010" help="30600">
+      <group id="1" label="30010">
+        <setting id="m3uPathType" type="integer" label="30000" help="30601">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="m3uPath" type="path" parent="m3uPathType" label="30011" help="30602">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="m3uPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="m3uUrl" type="string" parent="m3uPathType" label="30012" help="30603">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="m3uPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="m3uCache" type="boolean" parent="m3uPathType" label="30025" help="30604">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="visible" setting="m3uPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="startNum" type="integer" label="30013" help="30605">
+          <level>0</level>
+          <default>1</default>
+          <control type="edit" format="integer" />
+        </setting>
+      </group>
+    </category>
 
-  <!-- Logos -->
-  <category label="30030">
-    <setting id="sep3" label="30030" type="lsep"/>
-    <setting id="logoPathType" type="enum" label="30000" lvalues="30001|30002" default="1" />
-    <setting id="logoPath" type="folder" label="30031" default="" visible="eq(-1,0)"/>
-    <setting id="logoBaseUrl" type="text" label="30032" default="" visible="eq(-2,1)"/>
-    <setting id="sep3" label="30040" type="lsep"/>
-    <setting id="logoFromEpg" type="enum" label="30041" default="0" lvalues="30042|30043|30044"/>
-  </category>
+    <!-- EPG -->
+    <category id="epgsettings" label="30020" help="30620">
+      <group id="1" label="30020">
+       <setting id="epgPathType" type="integer" label="30000" help="30621">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="epgPath" type="path" parent="epgPathType" label="30021" help="30622">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="epgPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="epgUrl" type="string" parent="epgPathType" label="30022" help="30623">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="epgPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="epgCache" type="boolean" parent="epgPathType" label="30026" help="30624">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="visible" setting="epgPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="epgTimeShift" type="integer" label="30024" help="30625">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <minimum>-720</minimum>
+            <step>30</step>
+            <maximum>720</maximum>
+          </constraints>
+          <control type="slider" format="integer">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+        <setting id="epgTSOverride" type="boolean" label="30023" help="30626">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- Logos -->
+    <category id="channellogos" label="30030" help="30640">
+      <group id="1" label="30030">
+       <setting id="logoPathType" type="integer" label="30000" help="30641">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="logoPath" type="path" parent="logoPathType" label="30031" help="30642">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>true</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="logoPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="path">
+            <heading>657</heading>
+          </control>
+        </setting>
+        <setting id="logoBaseUrl" type="string" parent="logoPathType" label="30032" help="30643">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="logoPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+      <group id="2" label="30040">
+       <setting id="logoFromEpg" type="integer" label="30041" help="30644">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30042">0</option> <!-- IGNORE -->
+              <option label="30043">1</option> <!-- PREFER_M3U -->
+              <option label="30044">2</option> <!-- PREFER_XMLTV -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+      </group>
+    </category>
+
+  </section>
 </settings>

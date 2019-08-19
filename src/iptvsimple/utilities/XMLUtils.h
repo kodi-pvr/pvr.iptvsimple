@@ -1,10 +1,8 @@
 #pragma once
+
 /*
- *      Copyright (C) 2013-2015 Anton Fedchin
- *      http://github.com/afedchin/xbmc-addon-iptvsimple/
- *
- *      Copyright (C) 2011 Pulse-Eight
- *      http://www.pulse-eight.com/
+ *      Copyright (C) 2005-2015 Team Kodi
+ *      http://kodi.tv
  *
  *  This Program is free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
@@ -23,8 +21,27 @@
  *
  */
 
-#include "kodi/libXBMC_addon.h"
-#include "kodi/libXBMC_pvr.h"
+#include "rapidxml/rapidxml.hpp"
+#include <string>
 
-extern ADDON::CHelper_libXBMC_addon* XBMC;
-extern CHelper_libXBMC_pvr* PVR;
+template<class Ch>
+inline std::string GetNodeValue(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
+{
+  rapidxml::xml_node<Ch>* childNode = rootNode->first_node(tag);
+  if (!childNode)
+    return "";
+
+  return childNode->value();
+}
+
+template<class Ch>
+inline bool GetAttributeValue(const rapidxml::xml_node<Ch>* node, const char* attributeName, std::string& stringValue)
+{
+  rapidxml::xml_attribute<Ch>* attribute = node->first_attribute(attributeName);
+  if (!attribute)
+  {
+    return false;
+  }
+  stringValue = attribute->value();
+  return true;
+}
