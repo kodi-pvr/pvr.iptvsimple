@@ -32,6 +32,7 @@ namespace iptvsimple
 {
   static const std::string M3U_START_MARKER        = "#EXTM3U";
   static const std::string M3U_INFO_MARKER         = "#EXTINF";
+  static const std::string M3U_GROUP_MARKER        = "#EXTGRP:";
   static const std::string TVG_INFO_ID_MARKER      = "tvg-id=";
   static const std::string TVG_INFO_NAME_MARKER    = "tvg-name=";
   static const std::string TVG_INFO_LOGO_MARKER    = "tvg-logo=";
