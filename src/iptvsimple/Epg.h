@@ -49,6 +49,7 @@ namespace iptvsimple
 
     PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t start, time_t end);
     void Clear();
+    void ReloadEPG();
 
   private:
     static const XmltvFileFormat GetXMLTVFileFormat(const char* buffer);
@@ -59,7 +60,6 @@ namespace iptvsimple
     bool LoadChannelEpgs(rapidxml::xml_node<>* rootElement);
     void LoadEpgEntries(rapidxml::xml_node<>* rootElement, int start, int end);
     bool LoadGenres();
-    void ReloadEPG(const char* newPath);
 
     data::ChannelEpg* FindEpgForChannel(const std::string& id);
     data::ChannelEpg* FindEpgForChannel(const data::Channel& channel);

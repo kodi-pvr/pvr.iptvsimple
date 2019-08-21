@@ -25,6 +25,7 @@
 #include "client.h"
 
 #include "PVRIptvData.h"
+#include "iptvsimple/Settings.h"
 #include "iptvsimple/data/Channel.h"
 #include "iptvsimple/utilities/Logger.h"
 #include "p8-platform/util/util.h"
@@ -123,6 +124,15 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   settings.ReadFromAddon(userPath, clientPath);
 
   m_data = new PVRIptvData;
+  if (!m_data->Start())
+  {
+    SAFE_DELETE(m_data);
+    SAFE_DELETE(PVR);
+    SAFE_DELETE(XBMC);
+    m_currentStatus = ADDON_STATUS_LOST_CONNECTION;
+    return m_currentStatus;
+  }
+
   m_currentStatus = ADDON_STATUS_OK;
   m_created = true;
 
@@ -146,7 +156,7 @@ ADDON_STATUS ADDON_SetSetting(const char* settingName, const void* settingValue)
   if (!XBMC || !m_data)
     return ADDON_STATUS_OK;
 
-  return settings.SetValue(settingName, settingValue);
+  return m_data->SetSetting(settingName, settingValue);
 }
 
 /***********************************************************

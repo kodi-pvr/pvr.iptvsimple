@@ -235,22 +235,20 @@ void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
 }
 
 
-void Epg::ReloadEPG(const char* newPath)
+void Epg::ReloadEPG()
 {
-  //P8PLATFORM::CLockObject lock(m_mutex);
-  //TODO Lock should happen in calling class
-  if (newPath != m_xmltvLocation)
-  {
-    m_xmltvLocation = newPath;
-    Clear();
+  m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
+  m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
+  m_tsOverride = Settings::GetInstance().GetTsOverride();
+  m_lastStart = 0;
+  m_lastEnd = 0;
 
-    if (LoadEPG(m_lastStart, m_lastEnd))
-    {
-      for (const auto& myChannel : m_channels.GetChannelsList())
-      {
-        PVR->TriggerEpgUpdate(myChannel.GetUniqueId());
-      }
-    }
+  Clear();
+
+  if (LoadEPG(m_lastStart, m_lastEnd))
+  {
+    for (const auto& myChannel : m_channels.GetChannelsList())
+      PVR->TriggerEpgUpdate(myChannel.GetUniqueId());
   }
 }
 

@@ -225,21 +225,17 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
   }
 }
 
-void PlaylistLoader::ReloadPlayList(const char* newPath)
+void PlaylistLoader::ReloadPlayList()
 {
-  //P8PLATFORM::CLockObject lock(m_mutex);
-  //TODO Lock should happe in calling class
-  if (newPath != m_m3uLocation)
-  {
-    m_m3uLocation = newPath;
-    m_channels.Clear();
-    m_channelGroups.Clear();
+  m_m3uLocation = Settings::GetInstance().GetM3ULocation();
 
-    if (LoadPlayList())
-    {
-      PVR->TriggerChannelUpdate();
-      PVR->TriggerChannelGroupsUpdate();
-    }
+  m_channels.Clear();
+  m_channelGroups.Clear();
+
+  if (LoadPlayList())
+  {
+    PVR->TriggerChannelUpdate();
+    PVR->TriggerChannelGroupsUpdate();
   }
 }
 

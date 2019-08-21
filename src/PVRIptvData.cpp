@@ -25,6 +25,7 @@
 #include "PVRIptvData.h"
 
 #include "client.h"
+#include "iptvsimple/Settings.h"
 #include "iptvsimple/utilities/Logger.h"
 
 using namespace ADDON;
@@ -41,13 +42,43 @@ PVRIptvData::PVRIptvData(void)
   m_playlistLoader.LoadPlayList();
 }
 
+bool PVRIptvData::Start()
+{
+  P8PLATFORM::CLockObject lock(m_mutex);
+
+  XBMC->Log(LOG_INFO, "%s Starting separate client update thread...", __FUNCTION__);
+  CreateThread();
+
+  return IsRunning();
+}
+
 void* PVRIptvData::Process()
 {
+  while(!IsStopped())
+  {
+    Sleep(PROCESS_LOOP_WAIT_SECS * 1000);
+
+    P8PLATFORM::CLockObject lock(m_mutex);
+    if (m_reloadChannelsGroupsAndEPG)
+    {
+      Sleep(1000);
+
+      m_playlistLoader.ReloadPlayList();
+      m_epg.ReloadEPG();
+
+      m_reloadChannelsGroupsAndEPG = false;
+    }
+  }
+
   return nullptr;
 }
 
 PVRIptvData::~PVRIptvData(void)
 {
+  P8PLATFORM::CLockObject lock(m_mutex);
+  Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
+  StopThread();
+
   m_channels.Clear();
   m_channelGroups.Clear();
   m_epg.Clear();
@@ -116,4 +147,14 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, ti
   P8PLATFORM::CLockObject lock(m_mutex);
 
   return m_epg.GetEPGForChannel(handle, iChannelUid, iStart, iEnd);
+}
+
+ADDON_STATUS PVRIptvData::SetSetting(const char* settingName, const void* settingValue)
+{
+  P8PLATFORM::CLockObject lock(m_mutex);
+
+  if (!m_reloadChannelsGroupsAndEPG)
+    m_reloadChannelsGroupsAndEPG = true;
+
+  return Settings::GetInstance().SetValue(settingName, settingValue);
 }

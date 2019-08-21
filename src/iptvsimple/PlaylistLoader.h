@@ -51,7 +51,7 @@ namespace iptvsimple
     PlaylistLoader(iptvsimple::Channels& channels, iptvsimple::ChannelGroups& channelGroups);
 
     bool LoadPlayList(void);
-    void ReloadPlayList(const char* strNewPath);
+    void ReloadPlayList();
 
   private:
     static std::string ReadMarkerValue(const std::string& line, const std::string& markerName);
