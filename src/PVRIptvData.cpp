@@ -67,6 +67,23 @@ inline bool GetNodeValue(const xml_node<Ch> * pRootNode, const char* strTag, std
 }
 
 template<class Ch>
+inline bool GetJoinedNodeValues(const xml_node<Ch>* pRootNode, const char* strTag, std::string& strStringValue)
+{
+  xml_node<Ch>* pChildNode = nullptr;
+  for (pChildNode = pRootNode->first_node(strTag); pChildNode; pChildNode = pChildNode->next_sibling(strTag))
+  {
+    if (pChildNode)
+    {
+      if (!strStringValue.empty())
+        strStringValue += ",";
+      strStringValue += pChildNode->value();
+    }
+  }
+
+  return !strStringValue.empty();
+}
+
+template<class Ch>
 inline bool GetAttributeValue(const xml_node<Ch> * pNode, const char* strAttributeName, std::string& strStringValue)
 {
   xml_attribute<Ch> *pAttribute = pNode->first_attribute(strAttributeName);
@@ -335,11 +352,12 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     GetNodeValue(pChannelNode, "category", entry.strGenreString);
     GetNodeValue(pChannelNode, "sub-title", entry.strEpisodeName);
 
-    xml_node<> *pCreditsNode = pChannelNode->first_node("credits");
-    if (pCreditsNode != NULL) {
-        GetNodeValue(pCreditsNode, "actor", entry.strCast);
-        GetNodeValue(pCreditsNode, "director", entry.strDirector);
-        GetNodeValue(pCreditsNode, "writer", entry.strWriter);
+    xml_node<>* pCreditsNode = pChannelNode->first_node("credits");
+    if (pCreditsNode)
+    {
+      GetJoinedNodeValues(pCreditsNode, "actor", entry.strCast);
+      GetJoinedNodeValues(pCreditsNode, "director", entry.strDirector);
+      GetJoinedNodeValues(pCreditsNode, "writer", entry.strWriter);
     }
 
     xml_node<> *pIconNode = pChannelNode->first_node("icon");
