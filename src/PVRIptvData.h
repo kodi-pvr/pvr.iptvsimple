@@ -24,7 +24,7 @@
  */
 
 #include "p8-platform/os.h"
-#include "libXBMC_pvr.h"
+#include "kodi/libXBMC_pvr.h"
 #include "p8-platform/threads/threads.h"
 
 #include <map>
