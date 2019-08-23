@@ -44,6 +44,7 @@
 #define TVG_INFO_CHNO_MARKER    "tvg-chno="
 #define GROUP_NAME_MARKER       "group-title="
 #define KODIPROP_MARKER         "#KODIPROP:"
+#define EXTVLCOPT_MARKER        "#EXTVLCOPT:"
 #define RADIO_MARKER            "radio="
 #define PLAYLIST_TYPE_MARKER    "#EXT-X-PLAYLIST-TYPE:"
 #define CHANNEL_LOGO_EXTENSION  ".png"
@@ -452,7 +453,9 @@ bool PVRIptvData::LoadPlayList(void)
         tmpChannel.strChannelName = XBMC->UnknownToUTF8(strChnlName.c_str());
 
         // parse info
-        std::string strInfoLine = StringUtils::Mid(strLine, ++iColon, --iComma - iColon);
+        iColon++;
+        iComma--;
+        std::string strInfoLine = StringUtils::Mid(strLine, iColon, iComma - iColon);
 
         strTvgId      = ReadMarkerValue(strInfoLine, TVG_INFO_ID_MARKER);
         strTvgName    = ReadMarkerValue(strInfoLine, TVG_INFO_NAME_MARKER);
@@ -527,6 +530,21 @@ bool PVRIptvData::LoadPlayList(void)
         std::string prop = value.substr(0,pos);
         std::string propValue = value.substr(pos+1);
         tmpChannel.properties.insert({prop, propValue});
+      }
+    }
+    else if (StringUtils::Left(strLine, strlen(EXTVLCOPT_MARKER)) == EXTVLCOPT_MARKER)
+    {
+      const std::string value = ReadMarkerValue(strLine, EXTVLCOPT_MARKER);
+      auto pos = value.find('=');
+      if (pos != std::string::npos)
+      {
+        const std::string prop = value.substr(0, pos);
+        const std::string propValue = value.substr(pos + 1);
+        tmpChannel.properties.insert({prop, propValue});
+
+        XBMC->Log(LOG_DEBUG,
+                  "Found #EXTVLCOPT property: '%s' value: '%s'",
+                  prop.c_str(), propValue.c_str());
       }
     }
     else if (StringUtils::Left(strLine, strlen(PLAYLIST_TYPE_MARKER)) == PLAYLIST_TYPE_MARKER)
@@ -1195,7 +1213,7 @@ int PVRIptvData::GetChannelId(const char * strChannelName, const char * strStrea
   const char* strString = concat.c_str();
   int iId = 0;
   int c;
-  while (c = *strString++)
+  while ((c = *strString++))
     iId = ((iId << 5) + iId) + c; /* iId * 33 + c */
 
   return abs(iId);

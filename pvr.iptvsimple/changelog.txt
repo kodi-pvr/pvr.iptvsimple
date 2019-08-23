@@ -1,3 +1,8 @@
+v3.7.0
+- Support EXTVCOPT in m3u
+- Build helper script for OSX
+- Add appveyor.yml
+
 v3.6.0
 - Add support for sub-title/actor/director/writer
 
