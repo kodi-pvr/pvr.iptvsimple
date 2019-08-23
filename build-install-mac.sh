@@ -12,6 +12,16 @@ if [[ "$OSTYPE" != "darwin"* ]]; then
   exit 1
 fi
 
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+if [[ "$1" = /* ]]
+then
+  #absolute path
+  SCRIPT_DIR=""  
+else
+  #relative
+  SCRIPT_DIR="$SCRIPT_DIR/"
+fi
+
 BINARY_ADDONS_TARGET_DIR="$1/tools/depends/target/binary-addons"
 MACOSX_BINARY_ADDONS_TARGET_DIR=""
 KODI_ADDONS_DIR="$HOME/Library/Application Support/Kodi/addons"
@@ -42,6 +52,6 @@ fi
 cd "$MACOSX_BINARY_ADDONS_TARGET_DIR"
 make
 
-XBMC_BUILD_ADDON_INSTALL_DIR=$(cd $1/addons/$ADDON_NAME 2> /dev/null && pwd -P)
+XBMC_BUILD_ADDON_INSTALL_DIR=$(cd "$SCRIPT_DIR$1/addons/$ADDON_NAME" 2> /dev/null && pwd -P)
 rm -rf "$KODI_ADDONS_DIR/$ADDON_NAME"
 cp -rf "$XBMC_BUILD_ADDON_INSTALL_DIR" "$KODI_ADDONS_DIR"
