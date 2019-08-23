@@ -1,3 +1,6 @@
+v3.7.1
+- Fix OSX build script
+
 v3.7.0
 - Support EXTVCOPT in m3u
 - Build helper script for OSX

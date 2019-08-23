@@ -41,7 +41,30 @@ Note that the steps in the following section need to be performed before the add
 1. `cd $HOME/pvr.iptvsimple`
 2. `./build-install-mac.sh ../xbmc-addon`
 
+If you would prefer to run the rebuild steps manually instead of using the above helper script check the appendix [here](#manual-steps-to-rebuild-the-addon-on-macosx)
+
 ##### Useful links
 
 * [Kodi's PVR user support](http://forum.kodi.tv/forumdisplay.php?fid=167)
 * [Kodi's PVR development support](http://forum.kodi.tv/forumdisplay.php?fid=136)
+
+## Appendix
+
+### Manual Steps to rebuild the addon on MacOSX
+
+The following steps can be followed manually instead of using the `build-install-mac.sh` in the root of the addon repo after the [initial addon build](#build-tools-and-initial-addon-build) has been completed.
+
+**To rebuild the addon after changes**
+
+1. `rm tools/depends/target/binary-addons/.installed-macosx*`
+2. `make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.vuplus" ADDON_SRC_PREFIX=$HOME`
+
+or
+
+1. `cd tools/depends/target/binary-addons/macosx*`
+2. `make`
+
+**Copy the addon to the Kodi addon directory on Mac**
+
+1. `rm -rf "$HOME/Library/Application Support/Kodi/addons/pvr.vuplus"`
+2. `cp -rf $HOME/xbmc-addon/addons/pvr.vuplus "$HOME/Library/Application Support/Kodi/addons"`
