@@ -7,17 +7,14 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-ChannelGroups::ChannelGroups(Channels& channels)
-      : m_channels(channels)
-{
-}
+ChannelGroups::ChannelGroups(const Channels& channels) : m_channels(channels) {}
 
 void ChannelGroups::Clear()
 {
   m_channelGroups.clear();
 }
 
-int ChannelGroups::GetChannelGroupsAmount()
+int ChannelGroups::GetChannelGroupsAmount() const
 {
   return m_channelGroups.size();
 }
@@ -45,17 +42,16 @@ void ChannelGroups::GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannel
 
 PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& group)
 {
-  ChannelGroup* myGroup = FindChannelGroup(group.strGroupName);
+  const ChannelGroup* myGroup = FindChannelGroup(group.strGroupName);
   if (myGroup)
   {
-    for (int memberId : myGroup->GetMemberChannels())
+    for (int memberId : myGroup->GetMemberChannelIndexes())
     {
-      if ((memberId) < 0 || (memberId) >= static_cast<int>(m_channels.GetChannelsAmount()))
+      if (memberId < 0 || memberId >= static_cast<int>(m_channels.GetChannelsAmount()))
         continue;
 
       const Channel& channel = m_channels.GetChannelsList().at(memberId);
-      PVR_CHANNEL_GROUP_MEMBER xbmcGroupMember;
-      memset(&xbmcGroupMember, 0, sizeof(PVR_CHANNEL_GROUP_MEMBER));
+      PVR_CHANNEL_GROUP_MEMBER xbmcGroupMember = {0};
 
       strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
       xbmcGroupMember.iChannelUniqueId = channel.GetUniqueId();

@@ -31,14 +31,22 @@ using namespace iptvsimple::utilities;
 std::string FileUtils::PathCombine(const std::string& path, const std::string& fileName)
 {
   std::string result = path;
-  if (result.at(result.size() - 1) == '\\' ||
-      result.at(result.size() - 1) == '/')
+  
+  if (!result.empty())
   {
-    result.append(fileName);
+    if (result.at(result.size() - 1) == '\\' ||
+        result.at(result.size() - 1) == '/')
+    {
+      result.append(fileName);
+    }
+    else
+    {
+      result.append("/");
+      result.append(fileName);
+    }
   }
   else
   {
-    result.append("/");
     result.append(fileName);
   }
 
@@ -86,10 +94,9 @@ bool FileUtils::GzipInflate(const std::string& compressedBytes, std::string& unc
 
   uncompressedBytes.clear();
 
-  unsigned full_length = compressedBytes.size();
-  unsigned half_length = compressedBytes.size() / 2;
+  unsigned uncompLength = compressedBytes.size();
+  const unsigned half_length = compressedBytes.size() / 2;
 
-  unsigned uncompLength = full_length;
   char* uncomp = static_cast<char*>(calloc(sizeof(char), uncompLength));
 
   z_stream strm;
@@ -99,15 +106,14 @@ bool FileUtils::GzipInflate(const std::string& compressedBytes, std::string& unc
   strm.zalloc = Z_NULL;
   strm.zfree = Z_NULL;
 
-  bool done = false;
-
-  int status = inflateInit2(&strm, (16 + MAX_WBITS));
-  if(status != Z_OK)
+  int status = inflateInit2(&strm, 16 + MAX_WBITS);
+  if (status != Z_OK)
   {
     free(uncomp);
     return false;
   }
 
+  bool done = false;
   while (!done)
   {
     // If our output buffer is too small
@@ -120,7 +126,7 @@ bool FileUtils::GzipInflate(const std::string& compressedBytes, std::string& unc
       uncompLength += half_length;
     }
 
-    strm.next_out = (Bytef*)(uncomp + strm.total_out);
+    strm.next_out = reinterpret_cast<Bytef*>(uncomp + strm.total_out);
     strm.avail_out = uncompLength - strm.total_out;
 
     // Inflate another chunk.
@@ -132,7 +138,7 @@ bool FileUtils::GzipInflate(const std::string& compressedBytes, std::string& unc
   }
 
   status = inflateEnd(&strm);
-  if(status != Z_OK)
+  if (status != Z_OK)
   {
     free(uncomp);
     return false;

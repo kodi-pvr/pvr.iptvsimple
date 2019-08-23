@@ -34,9 +34,9 @@ namespace iptvsimple
   class ChannelGroups
   {
   public:
-    ChannelGroups(iptvsimple::Channels& channels);
+    ChannelGroups(const iptvsimple::Channels& channels);
 
-    int GetChannelGroupsAmount();
+    int GetChannelGroupsAmount() const;
     void GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannelGroups, bool radio) const;
     PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& group);
 
@@ -47,7 +47,7 @@ namespace iptvsimple
     void Clear();
 
   private:
-    iptvsimple::Channels& m_channels;
+    const iptvsimple::Channels& m_channels;
     std::vector<iptvsimple::data::ChannelGroup> m_channelGroups;
   };
 } //namespace iptvsimple

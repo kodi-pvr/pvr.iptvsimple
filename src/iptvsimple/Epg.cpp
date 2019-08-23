@@ -18,15 +18,9 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace rapidxml;
 
-Epg::Epg(Channels& channels)
-      : m_channels(channels)
-{
-  m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
-  m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
-  m_tsOverride = Settings::GetInstance().GetTsOverride();
-  m_lastStart = 0;
-  m_lastEnd = 0;
-}
+Epg::Epg(Channels& channels) 
+  : m_channels(channels), m_xmltvLocation(Settings::GetInstance().GetEpgLocation()), m_epgTimeShift(Settings::GetInstance().GetEpgTimeshiftSecs()), 
+    m_tsOverride(Settings::GetInstance().GetTsOverride()), m_lastStart(0), m_lastEnd(0) {}
 
 void Epg::Clear()
 {
@@ -132,7 +126,9 @@ char* Epg::FillBufferFromXMLTVData(std::string& data)
     buffer = &(decompressed[0]);
   }
   else
-    buffer = &(data[0]);
+  {
+   buffer = &(data[0]);
+  }
 
   XmltvFileFormat fileFormat = GetXMLTVFileFormat(buffer);
 
@@ -150,6 +146,9 @@ char* Epg::FillBufferFromXMLTVData(std::string& data)
 
 const XmltvFileFormat Epg::GetXMLTVFileFormat(const char* buffer)
 {
+  if (!buffer)
+    return XmltvFileFormat::INVALID;
+
   // xml should starts with '<?xml'
   if (buffer[0] != '\x3C' || buffer[1] != '\x3F' || buffer[2] != '\x78' ||
       buffer[3] != '\x6D' || buffer[4] != '\x6C')
@@ -170,6 +169,9 @@ const XmltvFileFormat Epg::GetXMLTVFileFormat(const char* buffer)
 
 bool Epg::LoadChannelEpgs(xml_node<>* rootElement)
 {
+  if (!rootElement)
+    return false;
+
   m_channelEpgs.clear();
 
   xml_node<>* channelNode = nullptr;
@@ -178,7 +180,7 @@ bool Epg::LoadChannelEpgs(xml_node<>* rootElement)
     ChannelEpg channelEpg;
 
     if (channelEpg.UpdateFrom(channelNode, m_channels))
-      m_channelEpgs.push_back(channelEpg);
+      m_channelEpgs.emplace_back(channelEpg);
   }
 
   if (m_channelEpgs.size() == 0)
@@ -208,11 +210,10 @@ void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
     }
   }
 
-  xml_node<>* channelNode = nullptr;
   ChannelEpg* channelEpg = nullptr;
   int broadcastId = 0;
 
-  for (channelNode = rootElement->first_node("programme"); channelNode; channelNode = channelNode->next_sibling("programme"))
+  for (xml_node<>* channelNode = rootElement->first_node("programme"); channelNode; channelNode = channelNode->next_sibling("programme"))
   {
     std::string id;
     if (!GetAttributeValue(channelNode, "channel", id))
@@ -225,11 +226,11 @@ void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
     }
 
     EpgEntry entry;
-    if (entry.UpdateFrom(channelNode, channelEpg, id, broadcastId + 1, start, end, minShiftTime, maxShiftTime))
+    if (entry.UpdateFrom(channelNode, id, broadcastId + 1, start, end, minShiftTime, maxShiftTime))
     {
       broadcastId++;
 
-      channelEpg->GetEpgEntries().push_back(entry);
+      channelEpg->AddEpgEntry(entry);
     }
   }
 }
@@ -281,8 +282,7 @@ PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t sta
       if ((epgEntry.GetEndTime() + shift) < start)
         continue;
 
-      EPG_TAG tag;
-      memset(&tag, 0, sizeof(EPG_TAG));
+      EPG_TAG tag = {0};
 
       epgEntry.UpdateTo(tag, iChannelUid, shift, m_genres);
 
@@ -355,8 +355,6 @@ void Epg::ApplyChannelsLogosFromEPG()
 
 bool Epg::LoadGenres()
 {
-  std::string data;
-
   // try to load genres from userdata folder
   std::string filePath = FileUtils::GetUserFilePath(GENRES_MAP_FILENAME);
   if (!XBMC->FileExists(filePath.c_str(), false))
@@ -367,6 +365,7 @@ bool Epg::LoadGenres()
       return false;
   }
 
+  std::string data;
   FileUtils::GetFileContents(filePath, data);
 
   if (data.empty())
@@ -394,7 +393,7 @@ bool Epg::LoadGenres()
     EpgGenre genre;
 
     if (genre.UpdateFrom(pGenreNode))
-      m_genres.push_back(genre);
+      m_genres.emplace_back(genre);
   }
 
   xmlDoc.clear();

@@ -1,10 +1,11 @@
 #include "EpgEntry.h"
 
-#include "ChannelEpg.h"
 #include "../utilities/XMLUtils.h"
 
 #include "p8-platform/util/StringUtils.h"
 #include "rapidxml/rapidxml.hpp"
+
+#include <cstdlib>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
@@ -115,7 +116,7 @@ long long ParseDateTime(const std::string& strDate)
 
 } // unnamed namespace
 
-bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, ChannelEpg* channelEpg, const std::string& id, int broadcastId,
+bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& id, int broadcastId,
                           int start, int end, int minShiftTime, int maxShiftTime)
 {
   std::string strStart, strStop;
@@ -129,7 +130,7 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, ChannelEpg* channel
     return false;
 
   m_broadcastId = broadcastId;
-  m_channelId = atoi(id.c_str());
+  m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;
   m_plotOutline= "";

@@ -34,8 +34,6 @@ namespace iptvsimple
 {
   namespace data
   {
-    class ChannelEpg;
-
     class EpgEntry
     {
     public:
@@ -85,7 +83,7 @@ namespace iptvsimple
       void SetWriter(const std::string& value) { m_writer = value; }
 
       void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genres);
-      bool UpdateFrom(rapidxml::xml_node<>* channelNode, iptvsimple::data::ChannelEpg* channelEpg, const std::string& id, int broadcastId,
+      bool UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& id, int broadcastId,
                       int start, int end, int minShiftTime, int maxShiftTime);
 
     private:

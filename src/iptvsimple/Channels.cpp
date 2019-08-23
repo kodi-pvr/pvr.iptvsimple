@@ -12,11 +12,9 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-Channels::Channels()
-{
-  m_logoLocation = Settings::GetInstance().GetLogoLocation();
-  m_currentChannelNumber = Settings::GetInstance().GetStartChannelNumber();
-}
+Channels::Channels() 
+  : m_logoLocation(Settings::GetInstance().GetLogoLocation()), 
+    m_currentChannelNumber(Settings::GetInstance().GetStartChannelNumber()) {}
 
 void Channels::Clear()
 {
@@ -25,7 +23,7 @@ void Channels::Clear()
   m_currentChannelNumber = Settings::GetInstance().GetStartChannelNumber();
 }
 
-int Channels::GetChannelsAmount()
+int Channels::GetChannelsAmount() const
 {
   return m_channels.size();
 }
@@ -70,7 +68,7 @@ void Channels::AddChannel(Channel& channel, std::vector<int>& groupIdList, Chann
   for (int myGroupId : groupIdList)
   {
     channel.SetRadio(channelGroups.GetChannelGroup(myGroupId)->IsRadio());
-    channelGroups.GetChannelGroup(myGroupId)->GetMemberChannels().push_back(m_channels.size());
+    channelGroups.GetChannelGroup(myGroupId)->AddMemberChannelIndex(m_channels.size());
   }
 
   m_channels.emplace_back(channel);
@@ -98,7 +96,7 @@ const Channel* Channels::FindChannel(const std::string& id, const std::string& n
     if (myChannel.GetTvgId() == id)
       return &myChannel;
 
-    if (tvgName == "")
+    if (tvgName.empty())
       continue;
 
     if (myChannel.GetTvgName() == tvgName)
@@ -122,20 +120,6 @@ void Channels::ApplyChannelLogos()
       else
         channel.SetLogoPath(channel.GetTvgLogo());
     }
-  }
-}
-
-void Channels::ReapplyChannelLogos(const char* newLogoPath)
-{
-  //P8PLATFORM::CLockObject lock(m_mutex);
-  //TODO Lock should happen in calling class
-  if (strlen(newLogoPath) > 0)
-  {
-    m_logoLocation = newLogoPath;
-    ApplyChannelLogos();
-
-    PVR->TriggerChannelUpdate();
-    PVR->TriggerChannelGroupsUpdate();
   }
 }
 

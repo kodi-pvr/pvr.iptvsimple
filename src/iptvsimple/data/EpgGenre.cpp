@@ -3,6 +3,8 @@
 #include "../utilities/XMLUtils.h"
 #include "p8-platform/util/StringUtils.h"
 
+#include <cstdlib>
+
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace rapidxml;
@@ -17,11 +19,11 @@ bool EpgGenre::UpdateFrom(rapidxml::xml_node<>* genreNode)
     return false;
 
   m_genreString = genreNode->value();
-  m_genreType = atoi(buffer.c_str());
+  m_genreType = std::atoi(buffer.c_str());
   m_genreSubType = 0;
 
   if (GetAttributeValue(genreNode, "subtype", buffer) && StringUtils::IsNaturalNumber(buffer))
-    m_genreSubType = atoi(buffer.c_str());
+    m_genreSubType = std::atoi(buffer.c_str());
 
   return true;
 }

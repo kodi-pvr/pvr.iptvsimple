@@ -47,6 +47,7 @@ namespace iptvsimple
       void SetIcon(const std::string& value) { m_icon = value; }
 
       std::vector<EpgEntry>& GetEpgEntries() { return m_epgEntries; }
+      void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries.emplace_back(epgEntry); }
 
       bool UpdateFrom(rapidxml::xml_node<>* channelNode, iptvsimple::Channels& channels);
 

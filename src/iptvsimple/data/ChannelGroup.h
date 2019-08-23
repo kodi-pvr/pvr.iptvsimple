@@ -42,7 +42,8 @@ namespace iptvsimple
       const std::string& GetGroupName() const { return m_groupName; }
       void SetGroupName(const std::string& value) { m_groupName = value; }
 
-      std::vector<int>& GetMemberChannels() { return m_memberChannels; }
+      const std::vector<int>& GetMemberChannelIndexes() const { return m_memberChannelIndexes; }
+      void AddMemberChannelIndex(int channelIndex) { m_memberChannelIndexes.emplace_back(channelIndex); }
 
       void UpdateTo(PVR_CHANNEL_GROUP& left) const;
 
@@ -50,7 +51,7 @@ namespace iptvsimple
       bool m_radio;
       int m_uniqueId;
       std::string m_groupName;
-      std::vector<int> m_memberChannels;
+      std::vector<int> m_memberChannelIndexes;
     };
   } //namespace data
 } //namespace iptvsimple

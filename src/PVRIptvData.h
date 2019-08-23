@@ -37,8 +37,8 @@
 class PVRIptvData : public P8PLATFORM::CThread
 {
 public:
-  PVRIptvData(void);
-  ~PVRIptvData(void);
+  PVRIptvData();
+  ~PVRIptvData();
 
   bool Start();
   int GetChannelsAmount();
@@ -57,9 +57,9 @@ private:
   static const int PROCESS_LOOP_WAIT_SECS = 2;
 
   iptvsimple::Channels m_channels;
-  iptvsimple::ChannelGroups m_channelGroups = iptvsimple::ChannelGroups(m_channels);
-  iptvsimple::PlaylistLoader m_playlistLoader = iptvsimple::PlaylistLoader(m_channels, m_channelGroups);
-  iptvsimple::Epg m_epg = iptvsimple::Epg(m_channels);
+  iptvsimple::ChannelGroups m_channelGroups{m_channels};
+  iptvsimple::PlaylistLoader m_playlistLoader{m_channels, m_channelGroups};
+  iptvsimple::Epg m_epg{m_channels};
 
   P8PLATFORM::CMutex m_mutex;
   std::atomic_bool m_reloadChannelsGroupsAndEPG{false};

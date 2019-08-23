@@ -33,7 +33,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-PVRIptvData::PVRIptvData(void)
+PVRIptvData::PVRIptvData()
 {
   m_channels.Clear();
   m_channelGroups.Clear();
@@ -54,7 +54,7 @@ bool PVRIptvData::Start()
 
 void* PVRIptvData::Process()
 {
-  while(!IsStopped())
+  while (!IsStopped())
   {
     Sleep(PROCESS_LOOP_WAIT_SECS * 1000);
 
@@ -73,7 +73,7 @@ void* PVRIptvData::Process()
   return nullptr;
 }
 
-PVRIptvData::~PVRIptvData(void)
+PVRIptvData::~PVRIptvData()
 {
   P8PLATFORM::CLockObject lock(m_mutex);
   Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
@@ -153,6 +153,8 @@ ADDON_STATUS PVRIptvData::SetSetting(const char* settingName, const void* settin
 {
   P8PLATFORM::CLockObject lock(m_mutex);
 
+  // When a number of settings change set this on the first one so it can be picked up
+  // in the process call for a reload of channels, groups and EPG.
   if (!m_reloadChannelsGroupsAndEPG)
     m_reloadChannelsGroupsAndEPG = true;
 

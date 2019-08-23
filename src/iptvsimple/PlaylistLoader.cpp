@@ -7,6 +7,7 @@
 
 #include "p8-platform/util/StringUtils.h"
 
+#include <cstdlib>
 #include <map>
 #include <regex>
 #include <sstream>
@@ -17,12 +18,9 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
 PlaylistLoader::PlaylistLoader(Channels& channels, ChannelGroups& channelGroups)
-      : m_channels(channels), m_channelGroups(channelGroups)
-{
-  m_m3uLocation = Settings::GetInstance().GetM3ULocation();
-}
+  : m_channels(channels), m_channelGroups(channelGroups), m_m3uLocation(Settings::GetInstance().GetM3ULocation()) {}
 
-bool PlaylistLoader::LoadPlayList(void)
+bool PlaylistLoader::LoadPlayList()
 {
   if (m_m3uLocation.empty())
   {
@@ -67,14 +65,14 @@ bool PlaylistLoader::LoadPlayList(void)
 
       if (StringUtils::StartsWith(line, M3U_START_MARKER)) //#EXTM3U
       {
-        double tvgShiftDecimal = atof(ReadMarkerValue(line, TVG_INFO_SHIFT_MARKER).c_str());
+        double tvgShiftDecimal = std::atof(ReadMarkerValue(line, TVG_INFO_SHIFT_MARKER).c_str());
         epgTimeShift = static_cast<int>(tvgShiftDecimal * 3600.0);
         continue;
       }
       else
       {
         Logger::Log(LEVEL_ERROR, "URL '%s' missing %s descriptor on line 1, attempting to parse it anyway.",
-                  m_m3uLocation.c_str(), M3U_START_MARKER.c_str());
+                    m_m3uLocation.c_str(), M3U_START_MARKER.c_str());
       }
     }
 
@@ -163,7 +161,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (strTvgId.empty())
     {
       char buff[255];
-      sprintf(buff, "%d", atoi(infoLine.c_str()));
+      sprintf(buff, "%d", std::atoi(infoLine.c_str()));
       strTvgId.append(buff);
     }
 
@@ -171,9 +169,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       strTvgLogo = channelName;
 
     if (!strChnlNo.empty())
-      channel.SetChannelNumber(atoi(strChnlNo.c_str()));
+      channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
 
-    double tvgShiftDecimal = atof(strTvgShift.c_str());
+    double tvgShiftDecimal = std::atof(strTvgShift.c_str());
 
     bool isRadio = !StringUtils::CompareNoCase(strRadio, "true");
     channel.SetTvgId(strTvgId);
@@ -207,7 +205,7 @@ void PlaylistLoader::ParseAndAddChannelGroups(const std::string& groupNamesListS
     group.SetRadio(isRadio);
 
     int uniqueGroupId = m_channelGroups.AddChannelGroup(group);
-    groupIdList.push_back(uniqueGroupId);
+    groupIdList.emplace_back(uniqueGroupId);
   }
 }
 
@@ -263,5 +261,5 @@ std::string PlaylistLoader::ReadMarkerValue(const std::string& line, const std::
     }
   }
 
-  return std::string("");
+  return "";
 }

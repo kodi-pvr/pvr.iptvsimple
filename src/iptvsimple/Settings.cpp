@@ -8,10 +8,6 @@ using namespace iptvsimple;
 using namespace iptvsimple::utilities;
 
 #ifdef TARGET_WINDOWS
-#define snprintf _snprintf
-#ifdef CreateDirectory
-#undef CreateDirectory
-#endif
 #ifdef DeleteFile
 #undef DeleteFile
 #endif

@@ -50,7 +50,7 @@ namespace iptvsimple
   public:
     PlaylistLoader(iptvsimple::Channels& channels, iptvsimple::ChannelGroups& channelGroups);
 
-    bool LoadPlayList(void);
+    bool LoadPlayList();
     void ReloadPlayList();
 
   private:
