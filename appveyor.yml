@@ -1,0 +1,33 @@
+version: BuildNr.{build}
+
+image: Visual Studio 2017
+
+shallow_clone: true
+
+clone_folder: c:\projects\pvr.iptvsimple
+
+environment:
+  app_id: pvr.iptvsimple
+
+  matrix:
+    - GENERATOR: "Visual Studio 15"
+      CONFIG: Release
+    - GENERATOR: "Visual Studio 15 Win64"
+      CONFIG: Release
+    - GENERATOR: "Visual Studio 15 Win64"
+      CONFIG: Release
+      WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.17763.0"
+    - GENERATOR: "Visual Studio 15 ARM"
+      CONFIG: Release
+      WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.17763.0"
+
+build_script:
+  - cd ..
+  - git clone --branch master --depth=1 https://github.com/xbmc/xbmc.git
+  - cd %app_id%
+  - mkdir build
+  - cd build
+  - mkdir -p definition\%app_id%
+  - echo %app_id% %APPVEYOR_BUILD_FOLDER% %APPVEYOR_REPO_COMMIT% > definition\%app_id%\%app_id%.txt
+  - cmake -T host=x64 -G "%GENERATOR%" %WINSTORE% -DADDONS_TO_BUILD=%app_id% -DCMAKE_BUILD_TYPE=%CONFIG% -DADDONS_DEFINITION_DIR=%APPVEYOR_BUILD_FOLDER%/build/definition -DADDON_SRC_PREFIX=../.. -DCMAKE_INSTALL_PREFIX=../../xbmc/addons -DPACKAGE_ZIP=1 ../../xbmc/cmake/addons
+  - cmake --build . --config %CONFIG% --target %app_id%
