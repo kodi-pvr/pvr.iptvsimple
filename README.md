@@ -1,9 +1,10 @@
-[![Build Status](https://travis-ci.org/kodi-pvr/pvr.iptvsimple.svg?branch=master)](https://travis-ci.org/kodi-pvr/pvr.iptvsimple)
+[![Build Status](https://travis-ci.org/kodi-pvr/pvr.iptvsimple.svg?branch=Leia)](https://travis-ci.org/kodi-pvr/pvr.iptvsimple/branches)
+[![Build Status](https://ci.appveyor.com/api/projects/status/github/kodi-pvr/pvr.iptvsimple?branch=Leia&svg=true)](https://ci.appveyor.com/project/kodi-pvr/pvr-iptvsimple?branch=Leia)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/5120/badge.svg)](https://scan.coverity.com/projects/5120)
 
 # IPTV Simple PVR
 
-IPTV Live TV and Radio PVR client addon for [Kodi](http://kodi.tv)
+IPTV Live TV and Radio PVR client addon for [Kodi](https://kodi.tv)
 
 ## Build instructions
 
@@ -57,7 +58,7 @@ The following steps can be followed manually instead of using the `build-install
 **To rebuild the addon after changes**
 
 1. `rm tools/depends/target/binary-addons/.installed-macosx*`
-2. `make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.vuplus" ADDON_SRC_PREFIX=$HOME`
+2. `make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.iptvsimple" ADDON_SRC_PREFIX=$HOME`
 
 or
 
@@ -66,5 +67,5 @@ or
 
 **Copy the addon to the Kodi addon directory on Mac**
 
-1. `rm -rf "$HOME/Library/Application Support/Kodi/addons/pvr.vuplus"`
-2. `cp -rf $HOME/xbmc-addon/addons/pvr.vuplus "$HOME/Library/Application Support/Kodi/addons"`
+1. `rm -rf "$HOME/Library/Application Support/Kodi/addons/pvr.iptvsimple"`
+2. `cp -rf $HOME/xbmc-addon/addons/pvr.iptvsimple "$HOME/Library/Application Support/Kodi/addons"`
