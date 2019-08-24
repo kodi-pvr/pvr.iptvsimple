@@ -21,7 +21,7 @@
  *
  */
 
-#include "libXBMC_pvr.h"
+#include "kodi/libXBMC_pvr.h"
 
 #include "EpgEntry.h"
 #include "../Channels.h"

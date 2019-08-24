@@ -21,7 +21,7 @@
  *
  */
 
-#include "libXBMC_pvr.h"
+#include "kodi/libXBMC_pvr.h"
 
 #include "data/Channel.h"
 

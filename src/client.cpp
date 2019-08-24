@@ -28,8 +28,8 @@
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/data/Channel.h"
 #include "iptvsimple/utilities/Logger.h"
-#include "p8-platform/util/util.h"
 #include "kodi/xbmc_pvr_dll.h"
+#include "p8-platform/util/util.h"
 
 using namespace ADDON;
 using namespace iptvsimple;
