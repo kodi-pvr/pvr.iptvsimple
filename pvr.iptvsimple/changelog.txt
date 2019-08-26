@@ -1,3 +1,9 @@
+v4.3.0
+- Added: Auto reload channels, groups and EPG on settings change
+- Added: Support for #EXTGRP tag in M3U file
+- Fixed: Channel with no groups inherit previous channels groups
+- Added: update new file kodi headers to start with kodi/
+
 v4.2.2
 - Update build system version
 - Change header include way

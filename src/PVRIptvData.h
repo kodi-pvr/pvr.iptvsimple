@@ -23,120 +23,44 @@
  *
  */
 
-#include "p8-platform/os.h"
 #include "kodi/libXBMC_pvr.h"
 #include "p8-platform/threads/threads.h"
 
-#include <map>
-#include <vector>
+#include "iptvsimple/Channels.h"
+#include "iptvsimple/ChannelGroups.h"
+#include "iptvsimple/Epg.h"
+#include "iptvsimple/PlaylistLoader.h"
+#include "iptvsimple/data/Channel.h"
 
-struct PVRIptvEpgEntry
-{
-  int iBroadcastId;
-  int iChannelId;
-  int iGenreType;
-  int iGenreSubType;
-  time_t startTime;
-  time_t endTime;
-  std::string strTitle;
-  std::string strEpisodeName;
-  std::string strPlotOutline;
-  std::string strPlot;
-  std::string strIconPath;
-  std::string strGenreString;
-  std::string strCast;
-  std::string strDirector;
-  std::string strWriter;
-};
-
-struct PVRIptvEpgChannel
-{
-  std::string strId;
-  std::string strName;
-  std::string strIcon;
-  std::vector<PVRIptvEpgEntry> epg;
-};
-
-struct PVRIptvChannel
-{
-  bool bRadio;
-  int iUniqueId;
-  int iChannelNumber;
-  int iEncryptionSystem;
-  int iTvgShift;
-  std::string strChannelName;
-  std::string strLogoPath;
-  std::string strStreamURL;
-  std::string strTvgId;
-  std::string strTvgName;
-  std::string strTvgLogo;
-  std::map<std::string, std::string> properties;
-};
-
-struct PVRIptvChannelGroup
-{
-  bool bRadio;
-  int iGroupId;
-  std::string strGroupName;
-  std::vector<int> members;
-};
-
-struct PVRIptvEpgGenre
-{
-  int iGenreType;
-  int iGenreSubType;
-  std::string strGenre;
-};
+#include <atomic>
 
 class PVRIptvData : public P8PLATFORM::CThread
 {
 public:
-  PVRIptvData(void);
-  ~PVRIptvData(void);
+  PVRIptvData();
+  ~PVRIptvData();
 
-  int GetChannelsAmount(void);
+  bool Start();
+  int GetChannelsAmount();
   PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio);
-  bool GetChannel(const PVR_CHANNEL& channel, PVRIptvChannel& myChannel);
-  int GetChannelGroupsAmount(void);
+  bool GetChannel(const PVR_CHANNEL& channel, iptvsimple::data::Channel& myChannel);
+  int GetChannelGroupsAmount();
   PVR_ERROR GetChannelGroups(ADDON_HANDLE handle, bool bRadio);
   PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& group);
   PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd);
-  void ReaplyChannelsLogos(const char* strNewPath);
-  void ReloadPlayList(const char* strNewPath);
-  void ReloadEPG(const char* strNewPath);
+  ADDON_STATUS SetSetting(const char* settingName, const void* settingValue);
 
 protected:
-  bool LoadPlayList(void);
-  bool LoadEPG(time_t iStart, time_t iEnd);
-  bool LoadGenres(void);
-  int GetFileContents(const std::string& url, std::string& strContent);
-  const PVRIptvChannel* FindChannel(const std::string& strId, const std::string& strName) const;
-  const PVRIptvChannelGroup* FindGroup(const std::string& strName) const;
-  PVRIptvEpgChannel* FindEpg(const std::string& strId);
-  const PVRIptvEpgChannel* FindEpgForChannel(const PVRIptvChannel& channel) const;
-  bool FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
-  bool GzipInflate(const std::string& compressedBytes, std::string& uncompressedBytes);
-  int GetCachedFileContents(const std::string& strCachedName, const std::string& strFilePath,
-                                    std::string& strContent, const bool bUseCache = false);
-  void ApplyChannelsLogos();
-  void ApplyChannelsLogosFromEPG();
-  std::string ReadMarkerValue(const std::string& strLine, const char* strMarkerName);
-  int GetChannelId(const char* strChannelName, const char* strStreamUrl);
-
-protected:
-  void* Process(void) override;
+  void* Process() override;
 
 private:
-  bool m_bTSOverride;
-  int m_iEPGTimeShift;
-  int m_iLastStart;
-  int m_iLastEnd;
-  std::string m_strXMLTVUrl;
-  std::string m_strM3uUrl;
-  std::string m_strLogoPath;
-  std::vector<PVRIptvChannelGroup> m_groups;
-  std::vector<PVRIptvChannel> m_channels;
-  std::vector<PVRIptvEpgChannel> m_epg;
-  std::vector<PVRIptvEpgGenre> m_genres;
+  static const int PROCESS_LOOP_WAIT_SECS = 2;
+
+  iptvsimple::Channels m_channels;
+  iptvsimple::ChannelGroups m_channelGroups{m_channels};
+  iptvsimple::PlaylistLoader m_playlistLoader{m_channels, m_channelGroups};
+  iptvsimple::Epg m_epg{m_channels};
+
   P8PLATFORM::CMutex m_mutex;
+  std::atomic_bool m_reloadChannelsGroupsAndEPG{false};
 };

@@ -18,98 +18,235 @@ msgstr ""
 
 #settings labels
 
+#label: General - m3uPathType
+#label: EPG Settings - epgPathType
+#label: Channel Logos - logoPathType
 msgctxt "#30000"
 msgid "Location"
 msgstr ""
 
+#label-option: General - m3uPathType
+#label-option: General - epgPathType
+#label-option: General - logoPathType
 msgctxt "#30001"
-msgid "Local Path (include Local Network)"
+msgid "Local path (include local network)"
 msgstr ""
 
+#label-option: General - m3uPathType
+#label-option: General - epgPathType
+#label-option: General - logoPathType
 msgctxt "#30002"
-msgid "Remote Path (Internet address)"
+msgid "Remote path (Internet address)"
 msgstr ""
 
 #empty strings from id 30003 to 30009
 
+#label-category: general
+#label-group: General - General
 msgctxt "#30010"
 msgid "General"
 msgstr ""
 
+#label: General - m3uPath
 msgctxt "#30011"
-msgid "M3U Play List Path"
+msgid "M3U playlist path"
 msgstr ""
 
+#label: General - m3uUrl
 msgctxt "#30012"
-msgid "M3U Play List URL"
+msgid "M3U playlist URL"
 msgstr ""
 
 msgctxt "#30013"
-msgid "Numbering channels starts at"
+msgid "Start channel number"
 msgstr ""
 
 #empty strings from id 30014 to 30019
 
+#label-category: epgsettings
+#label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
 msgid "EPG Settings"
 msgstr ""
 
+#label: EPG Settings - epgPath
 msgctxt "#30021"
-msgid "XMLTV Path"
+msgid "XMLTV path"
 msgstr ""
 
+#label: EPG Settings - epgUrl
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr ""
 
+#label: EPG Settings - epgTSOverride
 msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
+msgid "Apply time shift to all channels"
 msgstr ""
 
+#label: EPG Settings - epgTimeShift
 msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
+msgid "EPG time shift"
 msgstr ""
 
+#label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
 msgstr ""
 
+#label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr ""
 
 #empty strings from id 30027 to 30029
 
+#label-category: channellogos
+#label-group: Channel Logos - Channel Logos
 msgctxt "#30030"
-msgid "Channels Logos"
+msgid "Channel Logos"
 msgstr ""
 
+#label: Channel Logos - logoPath
 msgctxt "#30031"
-msgid "Channels Logos Folder"
+msgid "Channel logos folder"
 msgstr ""
 
+#label: Channel Logos - logoBaseUrl
 msgctxt "#30032"
-msgid "Channels Logos Base URL"
+msgid "Channel logos base URL"
 msgstr ""
 
 #empty strings from id 30033 to 30039
 
+#label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr ""
 
+#label: Channel Logos - logoFromEpg
 msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
+msgid "Channels logos from XMLTV"
 msgstr ""
 
+#label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
 msgid "Ignore"
 msgstr ""
 
+#label-option: Channel Logos - logoFromEpg
 msgctxt "#30043"
 msgid "Prefer M3U"
 msgstr ""
 
+#label-option: Channel Logos - logoFromEpg
 msgctxt "#30044"
 msgid "Prefer XMLTV"
+msgstr ""
+
+#empty strings from id 30045 to 30599
+
+#############
+# help info #
+#############
+
+#help info - General
+
+#help-category: General
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr ""
+
+#help: General - m3uPathType
+msgctxt "#30601"
+msgid "Select where to find the M3U resource. The options are: [Local path] - A path to an M3U file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the M3U file."
+msgstr ""
+
+#help: General - m3uPath
+msgctxt "#30602"
+msgid "If location is [Local path] this setting must contain a valid path for the addon to function."
+msgstr ""
+
+#help: General - m3uUrl
+msgctxt "#30603"
+msgid "If location is [Remote path] this setting must contain a valid URL for the addon to function."
+msgstr ""
+
+#help: General - m3uCache
+msgctxt "#30604"
+msgid "If location is [Remote path] select whether or not the the M3U file should be cached locally."
+msgstr ""
+
+#help: General - startNum
+msgctxt "#30605"
+msgid "The number to start numbering channels from."
+msgstr ""
+
+#empty strings from id 30006 to 30619
+
+
+#help info - EPG Settings
+
+#help-category: EPG Settings
+msgctxt "#30620"
+msgid "Settings related to the EPG."
+msgstr ""
+
+#help: EPG Settings - epgPathType
+msgctxt "#30621"
+msgid "Select where to find the XMLTV resource. The options are: [Local path] - A path to an XMLTV file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the XMLTV file."
+msgstr ""
+
+#help: EPG Settings - epgPath
+msgctxt "#30622"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr ""
+
+#help: EPG Settings - epgUrl
+msgctxt "#30623"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr ""
+
+#help: EPG Settings - epgCache
+msgctxt "#30624"
+msgid "If location is [Remote path] select whether or not the the XMLTV file should be cached locally."
+msgstr ""
+
+#help: EPG Settings - epgTimeShift
+msgctxt "#30625"
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +720 mins (+/- 12 hours)."
+msgstr ""
+
+#help: EPG Settings - epgTSOverside
+msgctxt "#30626"
+msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#empty strings from id 30027 to 30639
+
+#help info - Channel Logos
+
+#help-category: Channel Logos
+msgctxt "#30640"
+msgid "Settings realted to Channel Logos."
+msgstr ""
+
+#help: Channel Logos - logoPathType
+msgctxt "#30641"
+msgid "Select where to find the channel logos. The options are: [Local path] - A path to a folder whether it be on the device or the local network; [Remote path] - A base URL specifying the location of the logos."
+msgstr ""
+
+#help: Channel Logos - logo Path
+msgctxt "#30642"
+msgid "If location is [Local Path] this setting should contain a valid folder."
+msgstr ""
+
+#help: Channel Logos - logoBaseUrl
+msgctxt "#30643"
+msgid "If location is [Remote Path] this setting should contain a valid base URL."
+msgstr ""
+
+#help: Channel Logos - logoFromEpg
+msgctxt "#30644"
+msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
 msgstr ""

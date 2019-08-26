@@ -19,10 +19,35 @@ set(DEPLIBS ${p8-platform_LIBRARIES}
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 
 set(IPTV_SOURCES src/client.cpp
-                 src/PVRIptvData.cpp)
+                 src/PVRIptvData.cpp
+                 src/iptvsimple/Settings.cpp
+                 src/iptvsimple/Channels.cpp
+                 src/iptvsimple/ChannelGroups.cpp
+                 src/iptvsimple/Epg.cpp
+                 src/iptvsimple/PlaylistLoader.cpp
+                 src/iptvsimple/data/Channel.cpp
+                 src/iptvsimple/data/ChannelEpg.cpp
+                 src/iptvsimple/data/ChannelGroup.cpp
+                 src/iptvsimple/data/EpgEntry.cpp
+                 src/iptvsimple/data/EpgGenre.cpp
+                 src/iptvsimple/utilities/FileUtils.cpp
+                 src/iptvsimple/utilities/Logger.cpp)
 
 set(IPTV_HEADERS src/client.h
-                 src/PVRIptvData.h)
+                 src/PVRIptvData.h
+                 src/iptvsimple/Settings.h
+                 src/iptvsimple/Channels.h
+                 src/iptvsimple/ChannelGroups.h
+                 src/iptvsimple/Epg.h
+                 src/iptvsimple/PlaylistLoader.h
+                 src/iptvsimple/data/Channel.h
+                 src/iptvsimple/data/ChannelEpg.h
+                 src/iptvsimple/data/ChannelGroup.h
+                 src/iptvsimple/data/EpgEntry.h
+                 src/iptvsimple/data/EpgGenre.h
+                 src/iptvsimple/utilities/FileUtils.h
+                 src/iptvsimple/utilities/Logger.h
+                 src/iptvsimple/utilities/XMLUtils.h)
 
 addon_version(pvr.iptvsimple IPTV)
 add_definitions(-DIPTV_VERSION=${IPTV_VERSION})
