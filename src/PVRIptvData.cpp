@@ -22,6 +22,7 @@
  *
  */
 
+#include <cmath>
 #include <ctime>
 #include <fstream>
 #include <map>
@@ -51,6 +52,7 @@
 #define CHANNEL_LOGO_EXTENSION  ".png"
 #define SECONDS_IN_DAY          86400
 #define GENRES_MAP_FILENAME     "genres.xml"
+#define STAR_RATING_SCALE       10.0f
 
 using namespace ADDON;
 using namespace rapidxml;
@@ -142,6 +144,25 @@ long long ParseDateTime(const std::string& strDate)
     offset_of_date = -offset_of_date;
 
   return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
+}
+
+int ParseStarRating(const std::string& starRatingString)
+{
+  float starRating = 0;
+  float starRatingScale;
+
+  int ret = std::sscanf(starRatingString.c_str(), "%f/%f", &starRating, &starRatingScale);
+
+  if (ret == 2 && starRatingScale != STAR_RATING_SCALE && starRatingScale != 0.0f)
+  {
+    starRating /= starRatingScale;
+    starRating *= 10;
+  }
+
+  if (ret >= 1 && starRating > STAR_RATING_SCALE)
+    starRating = STAR_RATING_SCALE;
+
+  return static_cast<int>(std::round(starRating));
 }
 
 } // unnamed namespace
@@ -349,6 +370,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.endTime = static_cast<time_t>(iTmpEnd);
     entry.iYear = 0;
     entry.firstAired = 0;
+    entry.iStarRating = 0;
 
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
@@ -363,6 +385,16 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
         entry.firstAired = static_cast<time_t>(ParseDateTime(dateString));
 
       std::sscanf(dateString.c_str(), "%04d", &entry.iYear);
+    }
+
+    xml_node<>* pStarRatingNode = pChannelNode->first_node("star-rating");
+    if (pStarRatingNode)
+    {
+      std::string starRatingString;
+      GetNodeValue(pStarRatingNode, "value", starRatingString);
+
+      if (!starRatingString.empty())
+        entry.iStarRating = ParseStarRating(starRatingString);
     }
 
     xml_node<>* pCreditsNode = pChannelNode->first_node("credits");
@@ -878,7 +910,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
         tag.strGenreDescription = myTag->strGenreString.c_str();
       }
       tag.iParentalRating     = 0;     /* not supported */
-      tag.iStarRating         = 0;     /* not supported */
+      tag.iStarRating         = myTag->iStarRating;
       tag.bNotify             = false; /* not supported */
       tag.iSeriesNumber       = 0;     /* not supported */
       tag.iEpisodeNumber      = 0;     /* not supported */

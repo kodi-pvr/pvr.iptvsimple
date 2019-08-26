@@ -36,6 +36,7 @@ struct PVRIptvEpgEntry
   int         iGenreType;
   int         iGenreSubType;
   int         iYear;
+  int         iStarRating;
   time_t      startTime;
   time_t      endTime;
   time_t      firstAired;
