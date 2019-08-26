@@ -27,6 +27,7 @@
 #include "p8-platform/util/StringUtils.h"
 #include "rapidxml/rapidxml.hpp"
 
+#include <cmath>
 #include <cstdlib>
 #include <regex>
 
@@ -63,7 +64,7 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
     left.strGenreDescription = m_genreString.c_str();
   }
   left.iParentalRating     = 0;     /* not supported */
-  left.iStarRating         = 0;     /* not supported */
+  left.iStarRating         = m_starRating;
   left.iSeriesNumber       = 0;     /* not supported */
   left.iEpisodeNumber      = 0;     /* not supported */
   left.iEpisodePartNumber  = 0;     /* not supported */
@@ -129,13 +130,32 @@ long long ParseDateTime(const std::string& strDate)
   int offset_hours = 0;
   int offset_minutes = 0;
 
-  sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &year, &mon, &mday, &hour, &min, &sec, &offset_sign, &offset_hours, &offset_minutes);
+  std::sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &year, &mon, &mday, &hour, &min, &sec, &offset_sign, &offset_hours, &offset_minutes);
 
   long offset_of_date = (offset_hours * 60 + offset_minutes) * 60;
   if (offset_sign == '-')
     offset_of_date = -offset_of_date;
 
   return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
+}
+
+int ParseStarRating(const std::string& starRatingString)
+{
+  float starRating = 0;
+  float starRatingScale;
+
+  int ret = std::sscanf(starRatingString.c_str(), "%f/ %f", &starRating, &starRatingScale);
+
+  if (ret == 2 && starRatingScale != STAR_RATING_SCALE && starRatingScale != 0.0f)
+  {
+    starRating /= starRatingScale;
+    starRating *= 10;
+  }
+
+  if (ret >= 1 && starRating > STAR_RATING_SCALE)
+    starRating = STAR_RATING_SCALE;
+
+  return static_cast<int>(std::round(starRating));
 }
 
 } // unnamed namespace
@@ -162,7 +182,8 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   m_endTime = static_cast<time_t>(tmpEnd);
   m_year = 0;
   m_firstAired = 0;
-
+  m_starRating = 0;
+  
   m_title = GetNodeValue(channelNode, "title");
   m_plot = GetNodeValue(channelNode, "desc");
   m_genreString = GetNodeValue(channelNode, "category");
@@ -176,6 +197,10 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
 
     std::sscanf(dateString.c_str(), "%04d", &m_year);
   }
+
+  xml_node<>* starRatingNode = channelNode->first_node("star-rating");
+  if (starRatingNode)
+    m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
 
   xml_node<> *creditsNode = channelNode->first_node("credits");
   if (creditsNode)

@@ -34,6 +34,8 @@ namespace iptvsimple
 {
   namespace data
   {
+    static const float STAR_RATING_SCALE = 10.0f;
+
     class EpgEntry
     {
     public:
@@ -51,6 +53,9 @@ namespace iptvsimple
 
       int GetYear() const { return m_year; }
       void SetYear(int value) { m_year = value; }
+
+      int GetStarRating() const { return m_starRating; }
+      void SetStarRating(int value) { m_starRating = value; }
 
       time_t GetStartTime() const { return m_startTime; }
       void SetStartTime(time_t value) { m_startTime = value; }
@@ -100,6 +105,7 @@ namespace iptvsimple
       int m_genreType;
       int m_genreSubType;
       int m_year;
+      int m_starRating;
       time_t m_startTime;
       time_t m_endTime;
       time_t m_firstAired;
