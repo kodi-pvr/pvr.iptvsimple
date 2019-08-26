@@ -35,6 +35,25 @@ inline std::string GetNodeValue(const rapidxml::xml_node<Ch>* rootNode, const ch
 }
 
 template<class Ch>
+inline std::string GetJoinedNodeValues(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
+{
+  std::string stringValue;
+
+  rapidxml::xml_node<Ch>* childNode = nullptr;
+  for (childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
+  {
+    if (childNode)
+    {
+      if (!stringValue.empty())
+        stringValue += ",";
+      stringValue += childNode->value();
+    }
+  }
+
+  return stringValue;
+}
+
+template<class Ch>
 inline bool GetAttributeValue(const rapidxml::xml_node<Ch>* node, const char* attributeName, std::string& stringValue)
 {
   rapidxml::xml_attribute<Ch>* attribute = node->first_attribute(attributeName);

@@ -165,11 +165,11 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   m_episodeName = GetNodeValue(channelNode, "sub-title");
 
   xml_node<> *creditsNode = channelNode->first_node("credits");
-  if (creditsNode != NULL)
+  if (creditsNode)
   {
-    m_cast = GetNodeValue(creditsNode, "actor");
-    m_director = GetNodeValue(creditsNode, "director");
-    m_writer = GetNodeValue(creditsNode, "writer");
+    m_cast = GetJoinedNodeValues(creditsNode, "actor");
+    m_director = GetJoinedNodeValues(creditsNode, "director");
+    m_writer = GetJoinedNodeValues(creditsNode, "writer");
   }
 
   xml_node<>* iconNode = channelNode->first_node("icon");
