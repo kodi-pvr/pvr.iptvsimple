@@ -25,6 +25,7 @@
 #include <ctime>
 #include <fstream>
 #include <map>
+#include <regex>
 #include <sstream>
 #include <stdexcept>
 #include <string>
@@ -346,11 +347,23 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.strPlotOutline = "";
     entry.startTime = static_cast<time_t>(iTmpStart);
     entry.endTime = static_cast<time_t>(iTmpEnd);
+    entry.iYear = 0;
+    entry.firstAired = 0;
 
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
     GetNodeValue(pChannelNode, "category", entry.strGenreString);
     GetNodeValue(pChannelNode, "sub-title", entry.strEpisodeName);
+
+    std::string dateString;
+    GetNodeValue(pChannelNode, "date", dateString);
+    if (!dateString.empty())
+    {
+      if (std::regex_match(dateString, std::regex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]")))
+        entry.firstAired = static_cast<time_t>(ParseDateTime(dateString));
+
+      std::sscanf(dateString.c_str(), "%04d", &entry.iYear);
+    }
 
     xml_node<>* pCreditsNode = pChannelNode->first_node("credits");
     if (pCreditsNode)
@@ -849,7 +862,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.strCast             = myTag->strCast.c_str();
       tag.strDirector         = myTag->strDirector.c_str();
       tag.strWriter           = myTag->strWriter.c_str();
-      tag.iYear               = 0;     /* not supported */
+      tag.iYear               = myTag->iYear;
       tag.strIMDBNumber       = NULL;  /* not supported */
       tag.strIconPath         = myTag->strIconPath.c_str();
       if (FindEpgGenre(myTag->strGenreString, iGenreType, iGenreSubType))
@@ -872,6 +885,7 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.iEpisodePartNumber  = 0;     /* not supported */
       tag.strEpisodeName      = myTag->strEpisodeName.c_str();
       tag.iFlags              = EPG_TAG_FLAG_UNDEFINED;
+      tag.firstAired          = myTag->firstAired;
 
       PVR->TransferEpgEntry(handle, &tag);
 

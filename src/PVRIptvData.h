@@ -35,8 +35,10 @@ struct PVRIptvEpgEntry
   int         iChannelId;
   int         iGenreType;
   int         iGenreSubType;
+  int         iYear;
   time_t      startTime;
   time_t      endTime;
+  time_t      firstAired;
   std::string strTitle;
   std::string strEpisodeName;
   std::string strPlotOutline;
@@ -115,7 +117,7 @@ protected:
   virtual PVRIptvEpgChannel*   FindEpgForChannel(PVRIptvChannel &channel);
   virtual bool                 FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
   virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
-  virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, 
+  virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath,
                                                      std::string &strContent, const bool bUseCache = false);
   virtual void                 ApplyChannelsLogos();
   virtual void                 ApplyChannelsLogosFromEPG();
