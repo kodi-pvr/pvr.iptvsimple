@@ -28,6 +28,7 @@
 #include "rapidxml/rapidxml.hpp"
 
 #include <cstdlib>
+#include <regex>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
@@ -46,7 +47,7 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   left.strCast             = m_cast.c_str();
   left.strDirector         = m_director.c_str();
   left.strWriter           = m_writer.c_str();
-  left.iYear               = 0;     /* not supported */
+  left.iYear               = m_year;
   left.strIMDBNumber       = nullptr;  /* not supported */
   left.strIconPath         = m_iconPath.c_str();
   if (SetEpgGenre(genres, m_genreString))
@@ -68,6 +69,7 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   left.iEpisodePartNumber  = 0;     /* not supported */
   left.strEpisodeName      = m_episodeName.c_str();
   left.iFlags              = EPG_TAG_FLAG_UNDEFINED;
+  left.firstAired          = m_firstAired;
 }
 
 bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genres, const std::string& genreToFind)
@@ -155,14 +157,25 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;
-  m_plotOutline= "";
+  m_plotOutline.clear();
   m_startTime = static_cast<time_t>(tmpStart);
   m_endTime = static_cast<time_t>(tmpEnd);
+  m_year = 0;
+  m_firstAired = 0;
 
   m_title = GetNodeValue(channelNode, "title");
   m_plot = GetNodeValue(channelNode, "desc");
   m_genreString = GetNodeValue(channelNode, "category");
   m_episodeName = GetNodeValue(channelNode, "sub-title");
+
+  const std::string dateString = GetNodeValue(channelNode, "date");
+  if (!dateString.empty())
+  {
+    if (std::regex_match(dateString, std::regex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]")))
+      m_firstAired = static_cast<time_t>(ParseDateTime(dateString));
+
+    std::sscanf(dateString.c_str(), "%04d", &m_year);
+  }
 
   xml_node<> *creditsNode = channelNode->first_node("credits");
   if (creditsNode)

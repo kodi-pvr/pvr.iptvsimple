@@ -49,11 +49,17 @@ namespace iptvsimple
       int GetGenreSubType() const { return m_genreSubType; }
       void SetGenreSubType(int value) { m_genreSubType = value; }
 
+      int GetYear() const { return m_year; }
+      void SetYear(int value) { m_year = value; }
+
       time_t GetStartTime() const { return m_startTime; }
       void SetStartTime(time_t value) { m_startTime = value; }
 
       time_t GetEndTime() const { return m_endTime; }
       void SetEndTime(time_t value) { m_endTime = value; }
+
+      time_t GetFirstAired() const { return m_firstAired; }
+      void SetFirstAired(time_t value) { m_firstAired = value; }
 
       const std::string& GetTitle() const { return m_title; }
       void SetTitle(const std::string& value) { m_title = value; }
@@ -93,8 +99,10 @@ namespace iptvsimple
       int m_channelId;
       int m_genreType;
       int m_genreSubType;
+      int m_year;
       time_t m_startTime;
       time_t m_endTime;
+      time_t m_firstAired;
       std::string m_title;
       std::string m_episodeName;
       std::string m_plotOutline;
