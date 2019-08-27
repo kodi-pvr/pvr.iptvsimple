@@ -1,3 +1,18 @@
+v3.8.0
+- Support multiple display-names and case insensitive tvg-id is always first, next tvg-name and then channel name find order
+- Support full timeshift range of -12 to +14 hours
+- Some providers incorrectly use tvg-ID instead of tvg-id
+- Channel groups not being clared when reading next channel
+- support episode-num for both xmltv_ns and onscreen systems in epg entry
+- Update readme for settings, supported M3U and XMLTV formats and genres
+- support star rating in epg entry
+- support firstAired and year in epg entry
+- Update OSX build scripts
+- support multiple actor/director/writers elements in epg entry
+- URLEncode and append .png ext for remote logos built from channel name
+- Timing for Playlist and EPG load
+- Removed channels loaded popup
+
 v3.7.2
 - Update build system version
 - Change header include way
