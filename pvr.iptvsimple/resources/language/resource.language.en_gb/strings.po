@@ -214,7 +214,7 @@ msgstr ""
 
 #help: EPG Settings - epgTimeShift
 msgctxt "#30625"
-msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +720 mins (+/- 12 hours)."
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours)."
 msgstr ""
 
 #help: EPG Settings - epgTSOverside
