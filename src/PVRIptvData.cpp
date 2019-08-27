@@ -593,6 +593,8 @@ bool PVRIptvData::LoadPlayList(void)
       std::string strGroupName = "";
       std::string strRadio     = "";
 
+      iCurrentGroupId.clear();
+
       // parse line
       int iColon = (int)strLine.find(':');
       int iComma = (int)strLine.rfind(',');
@@ -649,7 +651,6 @@ bool PVRIptvData::LoadPlayList(void)
         {
           std::stringstream streamGroups(strGroupName);
           PVRIptvChannelGroup * pGroup;
-          iCurrentGroupId.clear();
 
           while(std::getline(streamGroups, strGroupName, ';'))
           {
