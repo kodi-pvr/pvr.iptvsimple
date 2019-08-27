@@ -37,6 +37,9 @@ struct PVRIptvEpgEntry
   int         iGenreSubType;
   int         iYear;
   int         iStarRating;
+  int         iEpisodeNumber;
+  int         iEpisodePartNumber;
+  int         iSeasonNumber;
   time_t      startTime;
   time_t      endTime;
   time_t      firstAired;
@@ -129,6 +132,10 @@ protected:
   virtual void *Process(void);
 
 private:
+  static bool ParseEpisodeNumberInfo(const std::vector<std::pair<std::string, std::string>>& episodeNumbersList, PVRIptvEpgEntry& entry);
+  static bool ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
+  static bool ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
+
   bool                              m_bTSOverride;
   int                               m_iEPGTimeShift;
   int                               m_iLastStart;

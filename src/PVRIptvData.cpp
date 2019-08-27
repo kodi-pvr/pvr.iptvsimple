@@ -371,6 +371,9 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     entry.iYear = 0;
     entry.firstAired = 0;
     entry.iStarRating = 0;
+    entry.iSeasonNumber = 0;
+    entry.iEpisodeNumber = 0;
+    entry.iEpisodePartNumber = 0;
 
     GetNodeValue(pChannelNode, "title", entry.strTitle);
     GetNodeValue(pChannelNode, "desc", entry.strPlot);
@@ -397,6 +400,17 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
         entry.iStarRating = ParseStarRating(starRatingString);
     }
 
+    std::vector<std::pair<std::string, std::string>> episodeNumbersList;
+    for (xml_node<>* pEpisodeNumNode = pChannelNode->first_node("episode-num"); pEpisodeNumNode; pEpisodeNumNode = pEpisodeNumNode->next_sibling("episode-num"))
+    {
+      std::string strEpisodeNumberSystem;
+      if (GetAttributeValue(pEpisodeNumNode, "system", strEpisodeNumberSystem))
+        episodeNumbersList.push_back({strEpisodeNumberSystem, pEpisodeNumNode->value()});
+    }
+
+    if (!episodeNumbersList.empty())
+      ParseEpisodeNumberInfo(episodeNumbersList, entry);
+
     xml_node<>* pCreditsNode = pChannelNode->first_node("credits");
     if (pCreditsNode)
     {
@@ -421,6 +435,81 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     ApplyChannelsLogosFromEPG();
 
   return true;
+}
+
+bool PVRIptvData::ParseEpisodeNumberInfo(const std::vector<std::pair<std::string, std::string>>& episodeNumbersList, PVRIptvEpgEntry& entry)
+{
+  //First check xmltv_ns
+  for (const auto& pair : episodeNumbersList)
+  {
+    if (pair.first == "xmltv_ns" && ParseXmltvNsEpisodeNumberInfo(pair.second, entry))
+      return true;
+  }
+
+  //If not found try onscreen
+  for (const auto& pair : episodeNumbersList)
+  {
+    if (pair.first == "onscreen" && ParseOnScreenEpisodeNumberInfo(pair.second, entry))
+      return true;
+  }
+
+  return false;
+}
+
+bool PVRIptvData::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry)
+{
+  size_t found = episodeNumberString.find(".");
+  if (found != std::string::npos)
+  {
+    std::string seasonString = episodeNumberString.substr(0, found);
+    std::string episodeString = episodeNumberString.substr(found + 1);
+    std::string episodePartString;
+
+    found = episodeString.find(".");
+    if (found != std::string::npos)
+    {
+      episodePartString = episodeString.substr(found + 1);
+      episodeString = episodeString.substr(0, found);
+    }
+
+    if (std::sscanf(seasonString.c_str(), "%d", &entry.iSeasonNumber) == 1)
+      entry.iSeasonNumber++;
+
+    if (std::sscanf(episodeString.c_str(), "%d", &entry.iEpisodeNumber) == 1)
+      entry.iEpisodeNumber++;
+
+    if (!episodePartString.empty())
+    {
+      int totalNumberOfParts;
+      int numElementsParsed = std::sscanf(episodePartString.c_str(), "%d/%d", &entry.iEpisodePartNumber, &totalNumberOfParts);
+
+      if (numElementsParsed == 2)
+        entry.iEpisodePartNumber++;
+      else if (numElementsParsed == 1)
+        entry.iEpisodePartNumber = 0;
+    }
+  }
+
+  return entry.iEpisodeNumber != 0;
+}
+
+bool PVRIptvData::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry)
+{
+  const std::string text = std::regex_replace(episodeNumberString, std::regex("[ \\txX_\\.]"), "");
+
+  std::smatch match;
+  if (std::regex_match(text, match, std::regex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$")))
+  {
+    if (match.size() == 3)
+    {
+      entry.iSeasonNumber = std::atoi(match[1].str().c_str());
+      entry.iEpisodeNumber = std::atoi(match[2].str().c_str());
+
+      return true;
+    }
+  }
+
+  return false;
 }
 
 bool PVRIptvData::LoadPlayList(void)
@@ -912,9 +1001,9 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, const PVR_CHANNEL &
       tag.iParentalRating     = 0;     /* not supported */
       tag.iStarRating         = myTag->iStarRating;
       tag.bNotify             = false; /* not supported */
-      tag.iSeriesNumber       = 0;     /* not supported */
-      tag.iEpisodeNumber      = 0;     /* not supported */
-      tag.iEpisodePartNumber  = 0;     /* not supported */
+      tag.iSeriesNumber       = myTag->iSeasonNumber;
+      tag.iEpisodeNumber      = myTag->iEpisodeNumber;
+      tag.iEpisodePartNumber  = myTag->iEpisodePartNumber;
       tag.strEpisodeName      = myTag->strEpisodeName.c_str();
       tag.iFlags              = EPG_TAG_FLAG_UNDEFINED;
       tag.firstAired          = myTag->firstAired;
