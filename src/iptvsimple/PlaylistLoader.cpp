@@ -181,6 +181,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strTvgShift   = ReadMarkerValue(infoLine, TVG_INFO_SHIFT_MARKER);
 
     if (strTvgId.empty())
+      strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
+      
+    if (strTvgId.empty())
     {
       char buff[255];
       sprintf(buff, "%d", std::atoi(infoLine.c_str()));
