@@ -75,7 +75,7 @@ My default the addon will read the first `<category>` element of a `programme` a
 * **XMLTV Path**: If location is `Local Path` this setting should contain a valid path.
 * **XMLTV URL**: If location is `Remote Path` this setting should contain a valid URL.
 * **Cache XMLTV at local storage**: If location is `Remote path` select whether or not the the XMLTV file should be cached locally.
-* **EPG Time Shift (hours)**: Adjust the EPG times by this value in minutes, range is from -720 mins to +720 mins (+/- 12 hours).
+* **EPG Time Shift (hours)**: Adjust the EPG times by this value in minutes, range is from -12 hours to +14 hours.
 * **Apply Time Shift To All Channels**: Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used.
 
 ### Channel Logos
