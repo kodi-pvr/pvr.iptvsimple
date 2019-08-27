@@ -40,6 +40,7 @@
 #define M3U_START_MARKER        "#EXTM3U"
 #define M3U_INFO_MARKER         "#EXTINF"
 #define TVG_INFO_ID_MARKER      "tvg-id="
+#define TVG_INFO_ID_MARKER_UC   "tvg-ID=" //some providers incorrecty use an uppercase ID.
 #define TVG_INFO_NAME_MARKER    "tvg-name="
 #define TVG_INFO_LOGO_MARKER    "tvg-logo="
 #define TVG_INFO_SHIFT_MARKER   "tvg-shift="
@@ -618,6 +619,9 @@ bool PVRIptvData::LoadPlayList(void)
         strGroupName  = ReadMarkerValue(strInfoLine, GROUP_NAME_MARKER);
         strRadio      = ReadMarkerValue(strInfoLine, RADIO_MARKER);
         strTvgShift   = ReadMarkerValue(strInfoLine, TVG_INFO_SHIFT_MARKER);
+
+        if (strTvgId.empty())
+          ReadMarkerValue(strInfoLine, TVG_INFO_ID_MARKER_UC);
 
         if (strTvgId.empty())
         {
