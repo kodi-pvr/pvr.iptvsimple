@@ -26,6 +26,7 @@
 #include "../client.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
+#include "utilities/WebUtils.h"
 
 #include "p8-platform/util/StringUtils.h"
 
@@ -190,8 +191,12 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       strTvgId.append(buff);
     }
 
+    bool logoSetFromChannelName = false;
     if (strTvgLogo.empty())
+    {
       strTvgLogo = channelName;
+      logoSetFromChannelName = true;
+    }
 
     if (!strChnlNo.empty())
       channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
@@ -204,6 +209,11 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     channel.SetTvgLogo(XBMC->UnknownToUTF8(strTvgLogo.c_str()));
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
+
+    // urlencode channel logo when set from channel name and source is Remote Path
+    // append extension as channel name wouldn't have it
+    if (Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH && logoSetFromChannelName)
+      channel.SetTvgLogo(WebUtils::UrlEncode(channel.GetTvgLogo()) + CHANNEL_LOGO_EXTENSION);
 
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);

@@ -31,7 +31,8 @@ set(IPTV_SOURCES src/client.cpp
                  src/iptvsimple/data/EpgEntry.cpp
                  src/iptvsimple/data/EpgGenre.cpp
                  src/iptvsimple/utilities/FileUtils.cpp
-                 src/iptvsimple/utilities/Logger.cpp)
+                 src/iptvsimple/utilities/Logger.cpp
+                 src/iptvsimple/utilities/WebUtils.cpp)
 
 set(IPTV_HEADERS src/client.h
                  src/PVRIptvData.h
@@ -47,6 +48,7 @@ set(IPTV_HEADERS src/client.h
                  src/iptvsimple/data/EpgGenre.h
                  src/iptvsimple/utilities/FileUtils.h
                  src/iptvsimple/utilities/Logger.h
+                 src/iptvsimple/utilities/WebUtils.h
                  src/iptvsimple/utilities/XMLUtils.h)
 
 addon_version(pvr.iptvsimple IPTV)
