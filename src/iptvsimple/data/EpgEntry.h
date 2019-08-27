@@ -57,6 +57,15 @@ namespace iptvsimple
       int GetStarRating() const { return m_starRating; }
       void SetStarRating(int value) { m_starRating = value; }
 
+      int GetEpisodeNumber() const { return m_episodeNumber; }
+      void SetEpisodeNumber(int value) { m_episodeNumber = value; }
+
+      int GetEpisodePartNumber() const { return m_episodePartNumber; }
+      void SetEpisodePartNumber(int value) { m_episodePartNumber = value; }
+
+      int GetSeasonNumber() const { return m_seasonNumber; }
+      void SetSeasonNumber(int value) { m_seasonNumber = value; }      
+
       time_t GetStartTime() const { return m_startTime; }
       void SetStartTime(time_t value) { m_startTime = value; }
 
@@ -99,6 +108,9 @@ namespace iptvsimple
 
     private:
       bool SetEpgGenre(std::vector<EpgGenre> genres, const std::string& genreToFind);
+      bool ParseEpisodeNumberInfo(std::vector<std::pair<std::string, std::string>>& episodeNumbersList);
+      bool ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString);
+      bool ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString);
 
       int m_broadcastId;
       int m_channelId;
@@ -106,6 +118,9 @@ namespace iptvsimple
       int m_genreSubType;
       int m_year;
       int m_starRating;
+      int m_episodeNumber = 0;
+      int m_episodePartNumber = 0;
+      int m_seasonNumber = 0;      
       time_t m_startTime;
       time_t m_endTime;
       time_t m_firstAired;

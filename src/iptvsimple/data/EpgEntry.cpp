@@ -65,9 +65,9 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   }
   left.iParentalRating     = 0;     /* not supported */
   left.iStarRating         = m_starRating;
-  left.iSeriesNumber       = 0;     /* not supported */
-  left.iEpisodeNumber      = 0;     /* not supported */
-  left.iEpisodePartNumber  = 0;     /* not supported */
+  left.iSeriesNumber       = m_seasonNumber;
+  left.iEpisodeNumber      = m_episodeNumber;
+  left.iEpisodePartNumber  = m_episodePartNumber;  
   left.strEpisodeName      = m_episodeName.c_str();
   left.iFlags              = EPG_TAG_FLAG_UNDEFINED;
   left.firstAired          = m_firstAired;
@@ -183,7 +183,10 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   m_year = 0;
   m_firstAired = 0;
   m_starRating = 0;
-  
+  m_episodeNumber = 0;
+  m_episodePartNumber = 0;
+  m_seasonNumber = 0;  
+
   m_title = GetNodeValue(channelNode, "title");
   m_plot = GetNodeValue(channelNode, "desc");
   m_genreString = GetNodeValue(channelNode, "category");
@@ -202,6 +205,17 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   if (starRatingNode)
     m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
 
+  std::vector<std::pair<std::string, std::string>> episodeNumbersList;
+  for (xml_node<>* episodeNumNode = channelNode->first_node("episode-num"); episodeNumNode; episodeNumNode = episodeNumNode->next_sibling("episode-num"))
+  {
+    std::string episodeNumberSystem;
+    if (GetAttributeValue(episodeNumNode, "system", episodeNumberSystem))
+      episodeNumbersList.push_back({episodeNumberSystem, episodeNumNode->value()});
+  }
+
+  if (!episodeNumbersList.empty())
+    ParseEpisodeNumberInfo(episodeNumbersList);  
+
   xml_node<> *creditsNode = channelNode->first_node("credits");
   if (creditsNode)
   {
@@ -218,4 +232,79 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
     m_iconPath = iconPath;
 
   return true;
+}
+
+bool EpgEntry::ParseEpisodeNumberInfo(std::vector<std::pair<std::string, std::string>>& episodeNumbersList)
+{
+  //First check xmltv_ns
+  for (const auto& pair : episodeNumbersList)
+  {
+    if (pair.first == "xmltv_ns" && ParseXmltvNsEpisodeNumberInfo(pair.second))
+      return true;
+  }
+
+  //If not found try onscreen
+  for (const auto& pair : episodeNumbersList)
+  {
+    if (pair.first == "onscreen" && ParseOnScreenEpisodeNumberInfo(pair.second))
+      return true;
+  }
+
+  return false;
+}
+
+bool EpgEntry::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString)
+{
+  size_t found = episodeNumberString.find(".");
+  if (found != std::string::npos)
+  {
+    const std::string seasonString = episodeNumberString.substr(0, found);
+    std::string episodeString = episodeNumberString.substr(found + 1);
+    std::string episodePartString;
+
+    found = episodeString.find(".");
+    if (found != std::string::npos)
+    {
+      episodePartString = episodeString.substr(found + 1);
+      episodeString = episodeString.substr(0, found);
+    }
+
+    if (std::sscanf(seasonString.c_str(), "%d", &m_seasonNumber) == 1)
+      m_seasonNumber++;
+
+    if (std::sscanf(episodeString.c_str(), "%d", &m_episodeNumber) == 1)
+      m_episodeNumber++;
+
+    if (!episodePartString.empty())
+    {
+      int totalNumberOfParts;
+      int numElementsParsed = std::sscanf(episodePartString.c_str(), "%d/%d", &m_episodePartNumber, &totalNumberOfParts);
+
+      if (numElementsParsed == 2)
+        m_episodePartNumber++;
+      else if (numElementsParsed == 1)
+        m_episodePartNumber = 0;
+    }
+  }
+
+  return m_episodeNumber;
+}
+
+bool EpgEntry::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString)
+{
+  const std::string text = std::regex_replace(episodeNumberString, std::regex("[ \\txX_\\.]"), "");
+
+  std::smatch match;
+  if (std::regex_match(text, match, std::regex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$")))
+  {
+    if (match.size() == 3)
+    {
+      m_seasonNumber = std::atoi(match[1].str().c_str());
+      m_episodeNumber = std::atoi(match[2].str().c_str());
+
+      return true;
+    }
+  }
+
+  return false;
 }
