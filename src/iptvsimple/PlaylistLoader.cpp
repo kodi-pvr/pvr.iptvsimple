@@ -195,7 +195,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     double tvgShiftDecimal = std::atof(strTvgShift.c_str());
 
-    bool isRadio = !StringUtils::CompareNoCase(strRadio, "true");
+    bool isRadio = StringUtils::EqualsNoCase(strRadio, "true");
     channel.SetTvgId(strTvgId);
     channel.SetTvgName(XBMC->UnknownToUTF8(strTvgName.c_str()));
     channel.SetTvgLogo(XBMC->UnknownToUTF8(strTvgLogo.c_str()));

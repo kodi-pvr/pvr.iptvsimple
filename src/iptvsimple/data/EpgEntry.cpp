@@ -80,7 +80,7 @@ bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genres, const std::string& genr
 
   for (const auto& myGenre : genres)
   {
-    if (StringUtils::CompareNoCase(myGenre.GetGenreString(), genreToFind) == 0)
+    if (StringUtils::EqualsNoCase(myGenre.GetGenreString(), genreToFind))
     {
       m_genreType = myGenre.GetGenreType();
       m_genreSubType = myGenre.GetGenreSubType();

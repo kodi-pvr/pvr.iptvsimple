@@ -58,9 +58,8 @@ inline bool GetAttributeValue(const rapidxml::xml_node<Ch>* node, const char* at
 {
   rapidxml::xml_attribute<Ch>* attribute = node->first_attribute(attributeName);
   if (!attribute)
-  {
     return false;
-  }
+
   stringValue = attribute->value();
   return true;
 }

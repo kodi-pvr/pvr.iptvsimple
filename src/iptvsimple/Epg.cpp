@@ -241,7 +241,7 @@ void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
     if (!GetAttributeValue(channelNode, "channel", id))
       continue;
 
-    if (!channelEpg || StringUtils::CompareNoCase(channelEpg->GetId(), id) != 0)
+    if (!channelEpg || !StringUtils::EqualsNoCase(channelEpg->GetId(), id))
     {
       if (!(channelEpg = FindEpgForChannel(id)))
         continue;
@@ -324,7 +324,7 @@ ChannelEpg* Epg::FindEpgForChannel(const std::string& id)
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (StringUtils::CompareNoCase(myChannelEpg.GetId(), id) == 0)
+    if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), id))
       return &myChannelEpg;
   }
 
