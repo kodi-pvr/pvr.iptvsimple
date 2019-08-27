@@ -57,6 +57,7 @@ CHelper_libXBMC_pvr   *PVR  = NULL;
 std::string g_strTvgPath    = "";
 std::string g_strM3UPath    = "";
 std::string g_strLogoPath   = "";
+int         g_logoPathType  = 0;
 int         g_iEPGTimeShift = 0;
 int         g_iStartNumber  = 1;
 bool        g_bTSOverride   = true;
@@ -68,11 +69,11 @@ extern std::string PathCombine(const std::string &strPath, const std::string &st
 {
   std::string strResult = strPath;
   if (strResult.at(strResult.size() - 1) == '\\' ||
-      strResult.at(strResult.size() - 1) == '/') 
+      strResult.at(strResult.size() - 1) == '/')
   {
     strResult.append(strFileName);
   }
-  else 
+  else
   {
     strResult.append("/");
     strResult.append(strFileName);
@@ -97,13 +98,13 @@ void ADDON_ReadSettings(void)
 {
   char buffer[1024];
   int iPathType = 0;
-  if (!XBMC->GetSetting("m3uPathType", &iPathType)) 
+  if (!XBMC->GetSetting("m3uPathType", &iPathType))
   {
     iPathType = 1;
   }
   if (iPathType)
   {
-    if (XBMC->GetSetting("m3uUrl", &buffer)) 
+    if (XBMC->GetSetting("m3uUrl", &buffer))
     {
       g_strM3UPath = buffer;
     }
@@ -114,23 +115,23 @@ void ADDON_ReadSettings(void)
   }
   else
   {
-    if (XBMC->GetSetting("m3uPath", &buffer)) 
+    if (XBMC->GetSetting("m3uPath", &buffer))
     {
       g_strM3UPath = buffer;
     }
     g_bCacheM3U = false;
   }
-  if (!XBMC->GetSetting("startNum", &g_iStartNumber)) 
+  if (!XBMC->GetSetting("startNum", &g_iStartNumber))
   {
     g_iStartNumber = 1;
   }
-  if (!XBMC->GetSetting("epgPathType", &iPathType)) 
+  if (!XBMC->GetSetting("epgPathType", &iPathType))
   {
     iPathType = 1;
   }
   if (iPathType)
   {
-    if (XBMC->GetSetting("epgUrl", &buffer)) 
+    if (XBMC->GetSetting("epgUrl", &buffer))
     {
       g_strTvgPath = buffer;
     }
@@ -141,7 +142,7 @@ void ADDON_ReadSettings(void)
   }
   else
   {
-    if (XBMC->GetSetting("epgPath", &buffer)) 
+    if (XBMC->GetSetting("epgPath", &buffer))
     {
       g_strTvgPath = buffer;
     }
@@ -156,11 +157,12 @@ void ADDON_ReadSettings(void)
   {
     g_bTSOverride = true;
   }
-  if (!XBMC->GetSetting("logoPathType", &iPathType)) 
+  if (!XBMC->GetSetting("logoPathType", &iPathType))
   {
     iPathType = 1;
   }
-  if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer)) 
+  g_logoPathType = iPathType;
+  if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer))
   {
     g_strLogoPath = buffer;
   }
@@ -228,7 +230,7 @@ void ADDON_Destroy()
 
 ADDON_STATUS ADDON_SetSetting(const char *settingName, const void *settingValue)
 {
-  // reset cache and restart addon 
+  // reset cache and restart addon
 
   std::string strFile = GetUserFilePath(M3U_FILE_NAME);
   if (XBMC->FileExists(strFile.c_str(), false))
