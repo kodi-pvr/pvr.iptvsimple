@@ -52,6 +52,9 @@ void Epg::Clear()
 
 bool Epg::LoadEPG(time_t start, time_t end)
 {
+  auto started = std::chrono::high_resolution_clock::now();
+  Logger::Log(LEVEL_DEBUG, "%s EPG Load Start", __FUNCTION__);
+
   if (m_xmltvLocation.empty())
   {
     Logger::Log(LEVEL_NOTICE, "EPG file path is not configured. EPG not loaded.");
@@ -99,10 +102,13 @@ bool Epg::LoadEPG(time_t start, time_t end)
 
   LoadGenres();
 
-  Logger::Log(LEVEL_NOTICE, "EPG Loaded.");
-
   if (Settings::GetInstance().GetEpgLogosMode() != EpgLogosMode::IGNORE_XMLTV)
     ApplyChannelsLogosFromEPG();
+
+  int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
+                      std::chrono::high_resolution_clock::now() - started).count();
+
+  Logger::Log(LEVEL_NOTICE, "%s EPG Loaded - %d (ms)", __FUNCTION__, milliseconds);
 
   return true;
 }
@@ -389,7 +395,7 @@ void Epg::ApplyChannelsLogosFromEPG()
 }
 
 bool Epg::LoadGenres()
-{
+{  
   // try to load genres from userdata folder
   std::string filePath = FileUtils::GetUserFilePath(GENRES_MAP_FILENAME);
   if (!XBMC->FileExists(filePath.c_str(), false))

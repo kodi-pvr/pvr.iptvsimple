@@ -30,6 +30,7 @@
 
 #include "p8-platform/util/StringUtils.h"
 
+#include <chrono>
 #include <cstdlib>
 #include <map>
 #include <regex>
@@ -45,6 +46,9 @@ PlaylistLoader::PlaylistLoader(Channels& channels, ChannelGroups& channelGroups)
 
 bool PlaylistLoader::LoadPlayList()
 {
+  auto started = std::chrono::high_resolution_clock::now();
+  Logger::Log(LEVEL_DEBUG, "%s Playlist Load Start", __FUNCTION__);
+
   if (m_m3uLocation.empty())
   {
     Logger::Log(LEVEL_NOTICE, "Playlist file path is not configured. Channels not loaded.");
@@ -147,9 +151,14 @@ bool PlaylistLoader::LoadPlayList()
 
   stream.clear();
 
+  int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
+                      std::chrono::high_resolution_clock::now() - started).count();
+
+  Logger::Log(LEVEL_NOTICE, "%s Playlist Loaded - %d (ms)", __FUNCTION__, milliseconds);
+
   if (m_channels.GetChannelsAmount() == 0)
   {
-    Logger::Log(LEVEL_ERROR, "Unable to load channels from file '%s':  file is corrupted.", m_m3uLocation.c_str());
+    Logger::Log(LEVEL_ERROR, "Unable to load channels from file '%s'", m_m3uLocation.c_str());
     return false;
   }
 
