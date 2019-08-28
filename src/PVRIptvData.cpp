@@ -211,8 +211,7 @@ PVRIptvData::PVRIptvData(void)
   m_epg.clear();
   m_genres.clear();
 
-  if (LoadPlayList())
-    XBMC->QueueNotification(QUEUE_INFO, "%d channels loaded.", m_channels.size());
+  LoadPlayList();
 }
 
 void *PVRIptvData::Process(void)
