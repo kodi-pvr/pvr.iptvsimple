@@ -318,18 +318,24 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   xml_node<> *pChannelNode = NULL;
   for(pChannelNode = pRootElement->first_node("channel"); pChannelNode; pChannelNode = pChannelNode->next_sibling("channel"))
   {
-    std::string strName;
-    std::string strId;
-    if(!GetAttributeValue(pChannelNode, "id", strId))
-      continue;
-
-    GetNodeValue(pChannelNode, "display-name", strName);
-    if (FindChannel(strId, strName) == NULL)
-      continue;
-
     PVRIptvEpgChannel epgChannel;
-    epgChannel.strId = strId;
-    epgChannel.strName = strName;
+
+    if (!GetAttributeValue(pChannelNode, "id", epgChannel.strId))
+      continue;
+
+    bool foundChannel = false;
+    for (xml_node<> *pDisplayNameNode = pChannelNode->first_node("display-name"); pDisplayNameNode; pDisplayNameNode = pDisplayNameNode->next_sibling("display-name"))
+    {
+      const std::string strName = pDisplayNameNode->value();
+      if (FindChannel(epgChannel.strId, strName))
+      {
+        foundChannel = true;
+        epgChannel.strNames.emplace_back(strName);
+      }
+    }
+
+    if (!foundChannel)
+      continue;
 
     // get icon if available
     xml_node<> *pIconNode = pChannelNode->first_node("icon");
@@ -1074,26 +1080,30 @@ int PVRIptvData::GetFileContents(std::string& url, std::string &strContent)
 
 PVRIptvChannel * PVRIptvData::FindChannel(const std::string &strId, const std::string &strName)
 {
-  std::string strTvgName = strName;
-  StringUtils::Replace(strTvgName, ' ', '_');
-
-  std::vector<PVRIptvChannel>::iterator it;
-  for(it = m_channels.begin(); it < m_channels.end(); ++it)
+  for (auto& channel : m_channels)
   {
-    if (it->strTvgId == strId)
-      return &*it;
-
-    if (strTvgName == "")
-      continue;
-
-    if (it->strTvgName == strTvgName)
-      return &*it;
-
-    if (it->strChannelName == strName)
-      return &*it;
+    if (StringUtils::EqualsNoCase(channel.strTvgId, strId))
+      return &channel;
   }
 
-  return NULL;
+  if (strName.empty())
+    return nullptr;
+
+  const std::string strTvgName = std::regex_replace(strName, std::regex(" "), "_");
+  for (auto& channel : m_channels)
+  {
+    if (StringUtils::EqualsNoCase(channel.strTvgName, strTvgName) ||
+        StringUtils::EqualsNoCase(channel.strTvgName, strName))
+      return &channel;
+  }
+
+  for (auto& channel : m_channels)
+  {
+    if (StringUtils::EqualsNoCase(channel.strChannelName, strName))
+      return &channel;
+  }
+
+  return nullptr;
 }
 
 PVRIptvChannelGroup * PVRIptvData::FindGroup(const std::string &strName)
@@ -1122,20 +1132,32 @@ PVRIptvEpgChannel * PVRIptvData::FindEpg(const std::string &strId)
 
 PVRIptvEpgChannel * PVRIptvData::FindEpgForChannel(PVRIptvChannel &channel)
 {
-  std::vector<PVRIptvEpgChannel>::iterator it;
-  for(it = m_epg.begin(); it < m_epg.end(); ++it)
+  for (auto& epgChannel : m_epg)
   {
-    if (it->strId == channel.strTvgId)
-      return &*it;
+    if (StringUtils::EqualsNoCase(epgChannel.strId, channel.strTvgId))
+      return &epgChannel;
+  }
 
-    std::string strName = it->strName;
-    StringUtils::Replace(strName, ' ', '_');
-    if (strName == channel.strTvgName
-      || it->strName == channel.strTvgName)
-      return &*it;
+  std::string strName;
+  for (auto& epgChannel : m_epg)
+  {
+    for (const std::string& strOrigName : epgChannel.strNames)
+    {
+      strName = std::regex_replace(strOrigName, std::regex(" "), "_");
 
-    if (it->strName == channel.strChannelName)
-      return &*it;
+      if (StringUtils::EqualsNoCase(strName, channel.strTvgName) ||
+          StringUtils::EqualsNoCase(strOrigName, channel.strTvgName))
+        return &epgChannel;
+    }
+  }
+
+  for (auto& epgChannel : m_epg)
+  {
+    for (const std::string& strOrigName : epgChannel.strNames)
+    {
+      if (StringUtils::EqualsNoCase(strOrigName, channel.strChannelName))
+        return &epgChannel;
+    }
   }
 
   return NULL;

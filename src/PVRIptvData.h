@@ -57,7 +57,7 @@ struct PVRIptvEpgEntry
 struct PVRIptvEpgChannel
 {
   std::string                  strId;
-  std::string                  strName;
+  std::vector<std::string>     strNames;
   std::string                  strIcon;
   std::vector<PVRIptvEpgEntry> epg;
 };
