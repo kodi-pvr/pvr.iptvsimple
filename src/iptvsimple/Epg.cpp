@@ -335,15 +335,28 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel)
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (myChannelEpg.GetId() == channel.GetTvgId())
+    if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), channel.GetTvgId()))
       return &myChannelEpg;
+  }
 
-    const std::string name = std::regex_replace(myChannelEpg.GetName(), std::regex(" "), "_");
-    if (name == channel.GetTvgName() || myChannelEpg.GetName() == channel.GetTvgName())
-      return &myChannelEpg;
+  for (auto& myChannelEpg : m_channelEpgs)
+  {
+    for (const std::string& displayName : myChannelEpg.GetNames())
+    {
+      const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
+      if (StringUtils::EqualsNoCase(convertedDisplayName, channel.GetTvgName()) || 
+          StringUtils::EqualsNoCase(displayName, channel.GetTvgName()))
+        return &myChannelEpg; 
+    }
+  }
 
-    if (myChannelEpg.GetName() == channel.GetChannelName())
-      return &myChannelEpg;
+  for (auto& myChannelEpg : m_channelEpgs)
+  {
+    for (const std::string& displayName : myChannelEpg.GetNames())
+    {
+      if (StringUtils::EqualsNoCase(displayName, channel.GetChannelName()))
+        return &myChannelEpg;
+    }
   }
 
   return nullptr;

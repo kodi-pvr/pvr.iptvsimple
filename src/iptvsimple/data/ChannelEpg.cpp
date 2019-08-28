@@ -30,16 +30,22 @@ using namespace rapidxml;
 
 bool ChannelEpg::UpdateFrom(xml_node<>* channelNode, Channels& channels)
 {
-  std::string id;
-  if (!GetAttributeValue(channelNode, "id", id))
+  if (!GetAttributeValue(channelNode, "id", m_id))
     return false;
 
-  const std::string name = GetNodeValue(channelNode, "display-name");
-  if (!channels.FindChannel(id, name))
-    return false;
+  bool foundChannel = false;
+  for (xml_node<>* displayNameNode = channelNode->first_node("display-name"); displayNameNode; displayNameNode = displayNameNode->next_sibling("display-name"))
+  {
+    const std::string name = displayNameNode->value();
+    if (channels.FindChannel(m_id, name))
+    {
+      foundChannel = true;
+      m_names.emplace_back(name);
+    }
+  }
 
-  m_id = id;
-  m_name = name;
+  if (!foundChannel)
+    return false;    
 
   // get icon if available
   xml_node<>* iconNode = channelNode->first_node("icon");

@@ -28,6 +28,8 @@
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 
+#include "p8-platform/util/StringUtils.h"
+
 #include <regex>
 
 using namespace iptvsimple;
@@ -109,22 +111,28 @@ Channel* Channels::GetChannel(int uniqueId)
   return nullptr;
 }
 
-const Channel* Channels::FindChannel(const std::string& id, const std::string& name) const
+const Channel* Channels::FindChannel(const std::string& id, const std::string& displayName) const
 {
-  const std::string tvgName = std::regex_replace(name, std::regex(" "), "_");
+  for (const auto& myChannel : m_channels)
+  {
+    if (StringUtils::EqualsNoCase(myChannel.GetTvgId(), id))
+      return &myChannel;
+  }
+
+  if (displayName.empty())
+    return nullptr;
+
+  const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
+  for (const auto& myChannel : m_channels)
+  {
+    if (StringUtils::EqualsNoCase(myChannel.GetTvgName(), convertedDisplayName) ||
+        StringUtils::EqualsNoCase(myChannel.GetTvgName(), displayName))
+      return &myChannel;
+  }
 
   for (const auto& myChannel : m_channels)
   {
-    if (myChannel.GetTvgId() == id)
-      return &myChannel;
-
-    if (tvgName.empty())
-      continue;
-
-    if (myChannel.GetTvgName() == tvgName)
-      return &myChannel;
-
-    if (myChannel.GetChannelName() == name)
+    if (StringUtils::EqualsNoCase(myChannel.GetChannelName(), displayName))
       return &myChannel;
   }
 
