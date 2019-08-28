@@ -65,10 +65,10 @@ General settings required for the addon to function.
 * **Cache M3U at local storage**: If location is `Remote path` select whether or not the the M3U file should be cached locally.
 * **Start channel number**: The number to start numbering channels from.
 
-### EPG Settings
+### EPG
 Settings related to the EPG.
 
-My default the addon will read the first `<category>` element of a `programme` and use this as the genre string. It is also possible to supply a mapping file to convert the genre string to a genre ID, allowing colour coding of the EPG. Please see: [Using a mapping file for Genres](#using-a-mapping-file-for-genres) in the Appendix for details on how to set this up.
+For settings related to genres please see the next section.
 
 * **Location**: Select where to find the XMLTV resource. The options are:
     - `Local path` - A path to an XMLTV file whether it be on the device or the local network.
@@ -78,6 +78,18 @@ My default the addon will read the first `<category>` element of a `programme` a
 * **Cache XMLTV at local storage**: If location is `Remote path` select whether or not the the XMLTV file should be cached locally.
 * **EPG time shift**: Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours).
 * **Apply time shift to all channels**: Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used.
+
+### Genres
+Settings related to genres.
+
+The addon will read all the `<category>` elements of a `programme` and use this as the genre string. It is also possible to supply a mapping file to convert the genre string to a genre ID, allowing colour coding of the EPG. When using a mapping file each category will be checked in order until a match is found. Please see: [Using a mapping file for Genres](#using-a-mapping-file-for-genres) in the Appendix for details on how to set this up.
+
+* **Use genre text from XMLTV when mapping genres**: If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text. Only the genre type (and not the sub type) will be used if a mapping is found.
+* **Location**: Select where to find the genres XML resource. The options are:
+    - `Local path` - A path to a gernes XML file whether it be on the device or the local network.
+    - `Remote path` - A URL specifying the location of the genres XML file.
+* **Genres path**: If location is `Local Path` this setting should contain a valid path.
+* **Genres URL**: If location is `Remote Path` this setting should contain a valid URL.
 
 ### Channel Logos
 Settings realted to Channel Logos.
@@ -94,7 +106,15 @@ Settings realted to Channel Logos.
 
 ## Appendix
 
-### Supported M3U and XMLTV elements
+The various config files have examples allowing users to create their own, making it possible to support custom config, currently regarding genres. The best way to learn about them is to read the config files themselves. Each contains details of how the config file works.
+
+All of the files listed below are overwritten each time the addon starts (excluding genres.xml). Therefore if you are customising files please create new copies with different file names. Note: that only the files below are overwritten any new files you create will not be touched.
+
+After adding and selecting new config files you will need to clear the EPG cache `Settings->PVR & Live TV->Guide->Clear cache` for it to take effect in the case of EPG relatd config and for channel related config will need to clear the full cache `Settings->PVR & Live TV->General->Clear cache`.
+
+If you would like to support other formats/languages please raise an issue at the github project https://github.com/kodi-pvr/pvr.iptvsimple, where you can either create a PR or request your new configs be shipped with the addon.
+
+There is one config file located here: `userdata/addon_data/pvr.iptvsimple/genres/kodiDvbGenres.xml`. This simply contains the DVB genre IDs that Kodi supports and uses hex for the IDs. Can be a useful reference if creating your own configs. There is also `userdata/addon_data/pvr.iptvsimple/genres/kodiDvbGenresTypeSubtype.xml`, which uses two decimal values instead of hex. This file is also overwritten each time the addon restarts.
 
 ### Using a mapping file for Genres
 
@@ -102,24 +122,68 @@ Users can create there own genre mapping files to map their genre strings to gen
 
 Kodi uses the following standard for it's genre IDs: https://www.etsi.org/deliver/etsi_en/300400_300499/300468/01.11.01_60/en_300468v011101p.pdf
 
-The file created must be called `genres.xml` and be located here: `userdata/addon_data/pvr.iptvsimple`.
+By default the addon will try to load a file called `genres.xml` and expect it to be here: `userdata/addon_data/pvr.iptvsimple/genres/genreTextMappings/`. However any genres file can be chosen in the addon settings.
 
-Here is an exmaple of the file:
+The following files are currently available with the addon (this file uses hexadeciaml genreId's):
+    - `Rytec-UK-Ireland.xml`
+
+The file can specify either a hexadecimal `genreId` attribute (recommended) or separate integer values for `type` and `subType`. Mathematically `genreId` is equals to the logical OR or `type` and `subType`, i.e. `genreId = type | subType`.
+
+Note: Once mapped to genre IDs the text displayed can either be the DVB standard text or the genre string text supplied in the XML. If using the text supplied in the XML only the genre type will be passed and each value will correspond to a category and colour (depedning on skin) on the UI. Here are the categories (all examples have 0 for the sub type). It's imortant you map correctly as genres can be used for search.
+
+```
+- 0x10: General Movie / Drama
+- 0x20: News / Current Affairs
+- 0x30: Show / Game Show
+- 0x40: Sports
+- 0x50: Children's / Youth Programmes
+- 0x60: Music / Ballet / Dance
+- 0x70: Arts / Culture
+- 0x80: Social / Political / Economics
+- 0x90: Education / Science / Factual
+- 0xA0: Leisure / Hobbies
+- 0xB0: Special Characteristics
+```
+
+- `<name>`: There should be a single `<name>` element. The value should denote the purpose of this genre mapping file.
+- The value of the `<genre>` element is what is used to map from in order to get the genre IDs. Many mapping values are allowed to map to the same IDs.
+
+**Example using hexadecimal `genreId` attributes (recommended)**:
 
 ```
 <genres>
   <name>My Streams Genres Mappings</name>
-  <genre type="1" subtype="0">General Movie/Drama</genre> <!-- General Movie/Drama - 0x10 in DVB hex-->
-  <genre type="3" subtype="0">TV Show</genre>             <!-- Show/Game Show - 0x30 in DVB hex-->
-  <genre type="3" subtype="0">Game Show</genre>           <!-- Show/Game Show - 0x30 in DVB hex-->
-  <genre type="3" subtype="0">Show/Game Show</genre>      <!-- Show/Game Show - 0x30 in DVB hex-->
-  <genre type="10" subtype="0">Show/Game Show</genre>     <!-- Leisure/Hobbies - 0xA0 in DVB hex-->
+  <genre genreId="0x10">Movie</genre>               <!-- General Movie/Drama - 0x10 in DVB hex-->
+  <genre genreId="0x10">Movie - Comedy</genre>      <!-- General Movie/Drama - 0x10 in DVB hex-->
+  <genre genreId="0x10">Movie - Romance</genre>     <!-- General Movie/Drama - 0x10 in DVB hex-->
+  <genre genreId="0x30">TV Show</genre>             <!-- Show/Game Show - 0x30 in DVB hex-->
+  <genre genreId="0x30">Game Show</genre>           <!-- Show/Game Show - 0x30 in DVB hex-->
+  <genre genreId="0x30">Talk Show</genre>           <!-- Show/Game Show - 0x30 in DVB hex-->
+  <genre genreId="0xA0">Leisure</genre>             <!-- Leisure/Hobbies - 0xA0 in DVB hex-->
 </genres>
 ```
 
-- `<name>`: There should be a single `<name>` element. The value should denote the purpose of this genre mapping file.
-- `<genre>`: There can be many `genre` elements. Both the `type` and `subtype` attributes can contain a value from 0 to 15 (would be 0x0 to 0xF if in DVB hex). `subtype` is optional. The value of the `<genre>` element is what is used to map from in order to get the genre IDs. Many mapping values are allowed to map to the same IDs.
-Note: Once mapped to genre IDs the text displayed will be the DVB standard text and not the genre string text supplied in the XML.
+- The `genreId` attribute is a single hex value ranging from 0x10 to 0xFF.
+
+**Example using integer `type` and `subtype` attributes**:
+
+```
+<genres>
+  <name>My Streams Genres Mappings</name>
+  <genre type="16" subtype="0">Movie</genre>               <!-- General Movie/Drama - 0x10 in DVB hex-->
+  <genre type="16" subtype="0">Movie - Comedy</genre>      <!-- General Movie/Drama - 0x10 in DVB hex-->
+  <genre type="16" subtype="0">Movie - Romance</genre>     <!-- General Movie/Drama - 0x10 in DVB hex-->
+  <genre type="54" subtype="0">TV Show</genre>             <!-- Show/Game Show - 0x30 in DVB hex-->
+  <genre type="54" subtype="0">Game Show</genre>           <!-- Show/Game Show - 0x30 in DVB hex-->
+  <genre type="54" subtype="0">Talk Show</genre>           <!-- Show/Game Show - 0x30 in DVB hex-->
+  <genre type="160" subtype="0">Leisure</genre>            <!-- Leisure/Hobbies - 0xA0 in DVB hex-->
+</genres>
+```
+
+- The `type` attribute can contain a values ranging from 16 to 240 in multiples of 16 (would be 0x10 to 0xF0 if in hex) and the `subtype` attributes can contain a value from 0 to 15 (would be 0x00 to 0x0F if in hex). `subtype` is optional.
+
+
+### Supported M3U and XMLTV elements
 
 #### M3U format elemnents:
 
@@ -233,7 +297,7 @@ The following steps can be followed manually instead of using the `build-install
 **To rebuild the addon after changes**
 
 1. `rm tools/depends/target/binary-addons/.installed-macosx*`
-2. `make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.vuplus" ADDON_SRC_PREFIX=$HOME`
+2. `make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.iptvsimple" ADDON_SRC_PREFIX=$HOME`
 
 or
 
@@ -242,5 +306,5 @@ or
 
 **Copy the addon to the Kodi addon directory on Mac**
 
-1. `rm -rf "$HOME/Library/Application Support/Kodi/addons/pvr.vuplus"`
-2. `cp -rf $HOME/xbmc-addon/addons/pvr.vuplus "$HOME/Library/Application Support/Kodi/addons"`
+1. `rm -rf "$HOME/Library/Application Support/Kodi/addons/pvr.iptvsimple"`
+2. `cp -rf $HOME/xbmc-addon/addons/pvr.iptvsimple "$HOME/Library/Application Support/Kodi/addons"`

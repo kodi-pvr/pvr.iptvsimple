@@ -40,14 +40,28 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace rapidxml;
 
-Epg::Epg(Channels& channels) 
-  : m_channels(channels), m_xmltvLocation(Settings::GetInstance().GetEpgLocation()), m_epgTimeShift(Settings::GetInstance().GetEpgTimeshiftSecs()), 
-    m_tsOverride(Settings::GetInstance().GetTsOverride()), m_lastStart(0), m_lastEnd(0) {}
+#ifdef TARGET_WINDOWS
+#ifdef DeleteFile
+#undef DeleteFile
+#endif
+#endif
+
+Epg::Epg(Channels& channels)
+  : m_channels(channels), m_xmltvLocation(Settings::GetInstance().GetEpgLocation()), m_epgTimeShift(Settings::GetInstance().GetEpgTimeshiftSecs()),
+    m_tsOverride(Settings::GetInstance().GetTsOverride()), m_lastStart(0), m_lastEnd(0)
+{
+  FileUtils::CopyDirectory(FileUtils::GetResourceDataPath() + GENRE_DIR, GENRE_ADDON_DATA_BASE_DIR, true);
+
+  if (!FileUtils::FileExists(DEFAULT_GENRE_TEXT_MAP_FILE))
+  {
+    MoveOldGenresXMLFileToNewLocation();
+  }
+}
 
 void Epg::Clear()
 {
   m_channelEpgs.clear();
-  m_genres.clear();
+  m_genreMappings.clear();
 }
 
 bool Epg::LoadEPG(time_t start, time_t end)
@@ -312,7 +326,7 @@ PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t sta
 
       EPG_TAG tag = {0};
 
-      epgEntry.UpdateTo(tag, iChannelUid, shift, m_genres);
+      epgEntry.UpdateTo(tag, iChannelUid, shift, m_genreMappings);
 
       PVR->TransferEpgEntry(handle, &tag);
 
@@ -350,9 +364,9 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel)
     for (const std::string& displayName : myChannelEpg.GetNames())
     {
       const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
-      if (StringUtils::EqualsNoCase(convertedDisplayName, channel.GetTvgName()) || 
+      if (StringUtils::EqualsNoCase(convertedDisplayName, channel.GetTvgName()) ||
           StringUtils::EqualsNoCase(displayName, channel.GetTvgName()))
-        return &myChannelEpg; 
+        return &myChannelEpg;
     }
   }
 
@@ -395,24 +409,17 @@ void Epg::ApplyChannelsLogosFromEPG()
 }
 
 bool Epg::LoadGenres()
-{  
-  // try to load genres from userdata folder
-  std::string filePath = FileUtils::GetUserFilePath(GENRES_MAP_FILENAME);
-  if (!XBMC->FileExists(filePath.c_str(), false))
-  {
-    // try to load file from addom folder
-    filePath = FileUtils::GetClientFilePath(GENRES_MAP_FILENAME);
-    if (!XBMC->FileExists(filePath.c_str(), false))
-      return false;
-  }
+{
+  if (!FileUtils::FileExists(Settings::GetInstance().GetGenresLocation()))
+    return false;
 
   std::string data;
-  FileUtils::GetFileContents(filePath, data);
+  FileUtils::GetFileContents(Settings::GetInstance().GetGenresLocation(), data);
 
   if (data.empty())
     return false;
 
-  m_genres.clear();
+  m_genreMappings.clear();
 
   char* buffer = &(data[0]);
   xml_document<> xmlDoc;
@@ -431,12 +438,31 @@ bool Epg::LoadGenres()
 
   for (xml_node<>* pGenreNode = pRootElement->first_node("genre"); pGenreNode; pGenreNode = pGenreNode->next_sibling("genre"))
   {
-    EpgGenre genre;
+    EpgGenre genreMapping;
 
-    if (genre.UpdateFrom(pGenreNode))
-      m_genres.emplace_back(genre);
+    if (genreMapping.UpdateFrom(pGenreNode))
+      m_genreMappings.emplace_back(genreMapping);
   }
 
   xmlDoc.clear();
+
+  if (!m_genreMappings.empty())
+    Logger::Log(LEVEL_NOTICE, "%s Loaded %d genres", __FUNCTION__, m_genreMappings.size());
+
   return true;
+}
+
+void Epg::MoveOldGenresXMLFileToNewLocation()
+{
+  //If we don't have a genres.xml file yet copy it if it exists in any of the other old locations.
+  //If not copy a placeholder file that allows the settings dialog to function.
+  if (FileUtils::FileExists(ADDON_DATA_BASE_DIR + "/" + GENRES_MAP_FILENAME))
+    FileUtils::CopyFile(ADDON_DATA_BASE_DIR + "/" + GENRES_MAP_FILENAME, DEFAULT_GENRE_TEXT_MAP_FILE);
+  else if (FileUtils::FileExists(FileUtils::GetSystemAddonPath() + "/" + GENRES_MAP_FILENAME))
+    FileUtils::CopyFile(FileUtils::GetSystemAddonPath() + "/" + GENRES_MAP_FILENAME, DEFAULT_GENRE_TEXT_MAP_FILE);
+  else
+    FileUtils::CopyFile(FileUtils::GetResourceDataPath() + "/" + GENRES_MAP_FILENAME, DEFAULT_GENRE_TEXT_MAP_FILE);
+
+  XBMC->DeleteFile((ADDON_DATA_BASE_DIR + "/" + GENRES_MAP_FILENAME).c_str());
+  XBMC->DeleteFile((FileUtils::GetSystemAddonPath() + "/" + GENRES_MAP_FILENAME).c_str());
 }

@@ -34,18 +34,31 @@ using namespace rapidxml;
 bool EpgGenre::UpdateFrom(rapidxml::xml_node<>* genreNode)
 {
   std::string buffer;
-  if (!GetAttributeValue(genreNode, "type", buffer))
-    return false;
 
-  if (!StringUtils::IsNaturalNumber(buffer))
-    return false;
+  if (GetAttributeValue(genreNode, "genreId", buffer))
+  {
+    //Combined genre id read as a single hex value.
+    int genreId = std::strtol(buffer.c_str(), nullptr, 16);
 
-  m_genreString = genreNode->value();
-  m_genreType = std::atoi(buffer.c_str());
-  m_genreSubType = 0;
+    m_genreString = genreNode->value();
+    m_genreType = genreId & 0xF0;
+    m_genreSubType = genreId & 0x0F;    
+  }
+  else
+  {
+    if (!GetAttributeValue(genreNode, "type", buffer))
+      return false;
 
-  if (GetAttributeValue(genreNode, "subtype", buffer) && StringUtils::IsNaturalNumber(buffer))
-    m_genreSubType = std::atoi(buffer.c_str());
+    if (!StringUtils::IsNaturalNumber(buffer))
+      return false;
+
+    m_genreString = genreNode->value();
+    m_genreType = std::atoi(buffer.c_str());
+    m_genreSubType = 0;
+
+    if (GetAttributeValue(genreNode, "subtype", buffer) && StringUtils::IsNaturalNumber(buffer))
+      m_genreSubType = std::atoi(buffer.c_str());
+  }
 
   return true;
 }

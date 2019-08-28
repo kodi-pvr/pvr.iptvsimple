@@ -23,6 +23,7 @@
 
 #include "rapidxml/rapidxml.hpp"
 #include <string>
+#include <vector>
 
 template<class Ch>
 inline std::string GetNodeValue(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
@@ -51,6 +52,21 @@ inline std::string GetJoinedNodeValues(const rapidxml::xml_node<Ch>* rootNode, c
   }
 
   return stringValue;
+}
+
+template<class Ch>
+inline std::vector<std::string> GetNodeValuesList(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
+{
+  std::vector<std::string> stringValues;
+
+  rapidxml::xml_node<Ch>* childNode = nullptr;
+  for(childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
+  {
+    if (childNode)
+      stringValues.emplace_back(childNode->value());
+  }
+
+  return stringValues;
 }
 
 template<class Ch>

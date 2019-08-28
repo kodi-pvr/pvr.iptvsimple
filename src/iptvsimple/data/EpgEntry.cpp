@@ -22,6 +22,7 @@
 
 #include "EpgEntry.h"
 
+#include "../Settings.h"
 #include "../utilities/XMLUtils.h"
 
 #include "p8-platform/util/StringUtils.h"
@@ -35,7 +36,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace rapidxml;
 
-void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genres)
+void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genreMappings)
 {
   left.iUniqueBroadcastId  = m_broadcastId;
   left.strTitle            = m_title.c_str();
@@ -51,11 +52,21 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   left.iYear               = m_year;
   left.strIMDBNumber       = nullptr;  /* not supported */
   left.strIconPath         = m_iconPath.c_str();
-  if (SetEpgGenre(genres, m_genreString))
+  if (SetEpgGenre(genreMappings))
   {
-    left.iGenreType          = m_genreType;
-    left.iGenreSubType       = m_genreSubType;
-    left.strGenreDescription = nullptr;
+    left.iGenreType           = m_genreType;
+    if (Settings::GetInstance().UseEpgGenreTextWhenMapping())
+    {
+      //Setting this value in sub type allows custom text to be displayed
+      //while still sending the type used for EPG colour
+      left.iGenreSubType       = EPG_GENRE_USE_STRING;
+      left.strGenreDescription = m_genreString.c_str();
+    }
+    else
+    {
+      left.iGenreSubType       = m_genreSubType;
+      left.strGenreDescription = nullptr;
+    }
   }
   else
   {
@@ -67,24 +78,30 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   left.iStarRating         = m_starRating;
   left.iSeriesNumber       = m_seasonNumber;
   left.iEpisodeNumber      = m_episodeNumber;
-  left.iEpisodePartNumber  = m_episodePartNumber;  
+  left.iEpisodePartNumber  = m_episodePartNumber;
   left.strEpisodeName      = m_episodeName.c_str();
   left.iFlags              = EPG_TAG_FLAG_UNDEFINED;
   left.firstAired          = m_firstAired;
 }
 
-bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genres, const std::string& genreToFind)
+bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genreMappings)
 {
-  if (genres.empty())
+  if (genreMappings.empty())
     return false;
 
-  for (const auto& myGenre : genres)
+  for (const auto& genre : StringUtils::Split(m_genreString, EPG_STRING_TOKEN_SEPARATOR))
   {
-    if (StringUtils::EqualsNoCase(myGenre.GetGenreString(), genreToFind))
+    if (genre.empty())
+      continue;
+
+    for (const auto& genreMapping : genreMappings)
     {
-      m_genreType = myGenre.GetGenreType();
-      m_genreSubType = myGenre.GetGenreSubType();
-      return true;
+      if (StringUtils::EqualsNoCase(genreMapping.GetGenreString(), genre))
+      {
+        m_genreType = genreMapping.GetGenreType();
+        m_genreSubType = genreMapping.GetGenreSubType();
+        return true;
+      }
     }
   }
 
@@ -185,12 +202,13 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   m_starRating = 0;
   m_episodeNumber = 0;
   m_episodePartNumber = 0;
-  m_seasonNumber = 0;  
+  m_seasonNumber = 0;
 
   m_title = GetNodeValue(channelNode, "title");
   m_plot = GetNodeValue(channelNode, "desc");
-  m_genreString = GetNodeValue(channelNode, "category");
   m_episodeName = GetNodeValue(channelNode, "sub-title");
+
+  m_genreString = GetJoinedNodeValues(channelNode, "category");
 
   const std::string dateString = GetNodeValue(channelNode, "date");
   if (!dateString.empty())
@@ -214,7 +232,7 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   }
 
   if (!episodeNumbersList.empty())
-    ParseEpisodeNumberInfo(episodeNumbersList);  
+    ParseEpisodeNumberInfo(episodeNumbersList);
 
   xml_node<> *creditsNode = channelNode->first_node("credits");
   if (creditsNode)

@@ -31,6 +31,8 @@ namespace iptvsimple
 {
   static const std::string M3U_FILE_NAME = "iptv.m3u.cache";
   static const std::string TVG_FILE_NAME = "xmltv.xml.cache";
+  static const std::string ADDON_DATA_BASE_DIR = "special://userdata/addon_data/pvr.iptvsimple";
+  static const std::string DEFAULT_GENRE_TEXT_MAP_FILE = ADDON_DATA_BASE_DIR + "/genres/genreTextMappings/genres.xml";
 
   enum class PathType
     : int // same type as addon settings
@@ -80,6 +82,12 @@ namespace iptvsimple
     int GetEpgTimeshiftMins() const { return m_epgTimeShiftMins; }
     int GetEpgTimeshiftSecs() const { return m_epgTimeShiftMins * 60; }
     bool GetTsOverride() const { return m_tsOverride; }
+
+    const std::string& GetGenresLocation() const { return m_genresPathType == PathType::REMOTE_PATH ? m_genresUrl : m_genresPath; }
+    bool UseEpgGenreTextWhenMapping() const { return m_useEpgGenreTextWhenMapping; }
+    const PathType& GetGenresPathType() const { return m_genresPathType; }
+    const std::string& GetGenresPath() const { return m_genresPath; }
+    const std::string& GetGenresUrl() const { return m_genresUrl; }
 
     const std::string& GetLogoLocation() const { return m_logoPathType == PathType::REMOTE_PATH ? m_logoBaseUrl : m_logoPath; }
     const PathType& GetLogoPathType() const { return m_logoPathType; }
@@ -137,6 +145,11 @@ namespace iptvsimple
     bool m_cacheEPG = false;
     int m_epgTimeShiftMins = 0;
     bool m_tsOverride = true;
+
+    bool m_useEpgGenreTextWhenMapping = false;
+    PathType m_genresPathType = PathType::LOCAL_PATH;
+    std::string m_genresPath = "";
+    std::string m_genresUrl = "";
 
     PathType m_logoPathType = PathType::REMOTE_PATH;
     std::string m_logoPath = "";

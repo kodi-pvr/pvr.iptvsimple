@@ -25,6 +25,8 @@
 #include "../../client.h"
 #include "zlib.h"
 
+#include <kodi/kodi_vfs_types.h>
+
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;
 
@@ -191,4 +193,108 @@ int FileUtils::GetCachedFileContents(const std::string& cachedName, const std::s
   }
 
   return FileUtils::GetFileContents(cachedPath, contents);
+}
+
+bool FileUtils::FileExists(const std::string& file)
+{
+  return XBMC->FileExists(file.c_str(), false);
+}
+
+bool FileUtils::CopyFile(const std::string& sourceFile, const std::string& targetFile)
+{
+  bool copySuccessful = true;
+
+  Logger::Log(LEVEL_DEBUG, "%s Copying file: %s, to %s", __FUNCTION__, sourceFile.c_str(), targetFile.c_str());
+
+  void* sourceFileHandle = XBMC->OpenFile(sourceFile.c_str(), 0x08); //READ_NO_CACHE
+
+  if (sourceFileHandle)
+  {
+    const std::string fileContents = ReadFileContents(sourceFileHandle);
+
+    XBMC->CloseFile(sourceFileHandle);
+
+    void* targetFileHandle = XBMC->OpenFileForWrite(targetFile.c_str(), true);
+
+    if (targetFileHandle)
+    {
+      XBMC->WriteFile(targetFileHandle, fileContents.c_str(), fileContents.length());
+      XBMC->CloseFile(targetFileHandle);
+    }
+    else
+    {
+      Logger::Log(LEVEL_ERROR, "%s Could not open target file to copy to: %s", __FUNCTION__, targetFile.c_str());
+      copySuccessful = false;
+    }
+  }
+  else
+  {
+    Logger::Log(LEVEL_ERROR, "%s Could not open source file to copy: %s", __FUNCTION__, sourceFile.c_str());
+    copySuccessful = false;
+  }
+
+  return copySuccessful;
+}
+
+bool FileUtils::CopyDirectory(const std::string& sourceDir, const std::string& targetDir, bool recursiveCopy)
+{
+  bool copySuccessful = true;
+
+  XBMC->CreateDirectory(targetDir.c_str());
+
+  VFSDirEntry* entries;
+  unsigned int numEntries;
+
+  if (XBMC->GetDirectory(sourceDir.c_str(), "", &entries, &numEntries))
+  {
+    for (int i = 0; i < numEntries; i++)
+    {
+      if (entries[i].folder && recursiveCopy)
+      {
+        copySuccessful = CopyDirectory(sourceDir + "/" + entries[i].label, targetDir + "/" + entries[i].label, true);
+      }
+      else if (!entries[i].folder)
+      {
+        copySuccessful = CopyFile(sourceDir + "/" + entries[i].label, targetDir + "/" + entries[i].label);
+      }
+    }
+
+    XBMC->FreeDirectory(entries, numEntries);
+  }
+  else
+  {
+    Logger::Log(LEVEL_ERROR, "%s Could not copy directory: %s, to directory: %s", __FUNCTION__, sourceDir.c_str(), targetDir.c_str());
+    copySuccessful = false;
+  }
+  return copySuccessful;
+}
+
+std::string FileUtils::GetSystemAddonPath()
+{
+  char path[1024];
+  XBMC->GetSetting("__addonpath__", path);
+
+  return path;
+}
+
+std::string FileUtils::GetResourceDataPath()
+{
+  std::string resourcesDataPath = GetSystemAddonPath();
+  resourcesDataPath += "/resources/data";
+
+  return resourcesDataPath;
+}
+
+std::string FileUtils::ReadFileContents(void* fileHandle)
+{
+  std::string fileContents;
+
+  char buffer[1024];
+  int bytesRead = 0;
+
+  // Read until EOF or explicit error
+  while ((bytesRead = XBMC->ReadFile(fileHandle, buffer, sizeof(buffer) - 1)) > 0)
+    fileContents.append(buffer, bytesRead);
+
+  return fileContents;
 }

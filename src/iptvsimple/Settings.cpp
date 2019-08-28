@@ -71,6 +71,16 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
   if (!XBMC->GetSetting("epgTSOverride", &m_tsOverride))
     m_tsOverride = true;
 
+  //Genres
+  if (!XBMC->GetSetting("useEpgGenreText", &m_useEpgGenreTextWhenMapping))
+    m_useEpgGenreTextWhenMapping = false;
+  if (!XBMC->GetSetting("genresPathType", &m_genresPathType))
+    m_genresPathType = PathType::LOCAL_PATH;
+  if (XBMC->GetSetting("genresPath", &buffer))
+    m_genresPath = buffer;
+  if (XBMC->GetSetting("genresUrl", &buffer))
+    m_genresUrl = buffer;
+
   // Channel Logos
   if (!XBMC->GetSetting("logoPathType", &m_logoPathType))
     m_logoPathType = PathType::REMOTE_PATH;
@@ -119,6 +129,16 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_epgTimeShiftMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "epgTSOverride")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_tsOverride, ADDON_STATUS_OK, ADDON_STATUS_OK);
+
+  // Genres
+  if (settingName == "useEpgGenreText")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useEpgGenreTextWhenMapping, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "genresPathType")
+    return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_genresPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "genresPath")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "genresUrl")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   // Channel Logos
   if (settingName == "logoPathType")

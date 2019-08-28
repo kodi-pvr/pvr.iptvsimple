@@ -1,0 +1,134 @@
+<!--
+Note: the first 4 bits is genre and last is sub genre
+
+Kodi DVB Genres can be found here: usersdata/genres/kodiDVBGenres.xml
+
+Mapping Rytec Text Genres:
+ - The end result is to map to one of the DVB Genres for Kodi PVR.
+ - This enables Kodi PVR to colour the EPG entries accordingly.
+ - If a mapping cannot be found the text will be used but there will be no colouring (Genre Description only)
+ - All text will be matched in lowercase
+
+If you are creating yoru own text mappings make a copy of this file in the same directory so it's not overwritten and start from there.
+
+NOTE: IF YOU MODIFY THIS FILE IT WILL BE OVERWRITTEN NEXT TIME THE ADDON IS STARTED
+
+If you have changes either create a PR containing the changes or an issue with details at:
+  https://github.com/kodi-pvr/pvr.iptvsimple
+-->
+
+<genres>
+  <name>Rytec UK/Ireland</name>
+  <!-- MOVIE/DRAMA -->
+  <genre genreId="0x10">General Movie/Drama</genre> <!-- 0x10 Movie/Drama -->
+  <genre genreId="0x10">Film</genre> <!-- 0x10 Movie/Drama -->
+  <genre genreId="0x10">Animated Movie/Drama</genre> <!-- 0x10 Movie/Drama -->
+  <genre genreId="0x11">Thriller</genre> <!-- 0x11 Detective/Thriller -->
+  <genre genreId="0x11">Detective/Thriller</genre> <!-- 0x11 Detective/Thriller -->
+  <genre genreId="0x12">Action</genre> <!-- 0x12 Adventure/Western/War -->
+  <genre genreId="0x12">Adventure</genre> <!-- 0x12 Adventure/Western/War -->
+  <genre genreId="0x12">Adventure/War</genre> <!-- 0x12 Adventure/Western/War -->
+  <genre genreId="0x12">Western</genre> <!-- 0x12 Adventure/Western/War -->
+  <genre genreId="0x12">Gangster</genre> <!-- 0x12 Adventure/Western/War -->
+  <genre genreId="0x13">Fantasy</genre> <!-- 0x13 Science Fiction/Fantasy/Horror -->
+  <genre genreId="0x13">Science Fiction</genre> <!-- 0x13 Science Fiction/Fantasy/Horror -->
+  <genre genreId="0x14">Family</genre> <!-- 0x14 Comedy -->
+  <genre genreId="0x14">Sitcom</genre> <!-- 0x14 Comedy -->
+  <genre genreId="0x14">Comedy</genre> <!-- 0x14 Comedy -->
+  <genre genreId="0x14">TV Drama. Comedy</genre> <!-- 0x14 Comedy -->
+  <genre genreId="0x15">Drama</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">Soap/Melodrama/Folkloric</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">TV Drama</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">TV Drama. Melodrama</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">TV Drama. Factual</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">TV Drama. Crime</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">TV Drama. Period</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x15">Medical Drama</genre> <!-- 0x15 Soap/Melodrama/Folkloric -->
+  <genre genreId="0x16">Romance</genre> <!-- 0x16 Romance -->
+  <genre genreId="0x17">Crime drama</genre> <!-- 0x17 Serious/Classical/Religious/Historical Movie/Drama -->
+  <genre genreId="0x17">Historical/Period Drama</genre> <!-- 0x17 Serious/Classical/Religious/Historical Movie/Drama -->
+  <genre genreId="0x17">Police/Crime Drama</genre> <!-- 0x17 Serious/Classical/Religious/Historical Movie/Drama -->
+
+  <!-- NEWS/CURRENT AFFAIRS -->
+  <genre genreId="0x20">News</genre> <!-- 0x20 News/Current Affairs -->
+  <genre genreId="0x20">General News/Current Affairs</genre> <!-- 0x20 News/Current Affairs -->
+  <genre genreId="0x23">Documentary</genre> <!-- 0x23 Documentary -->
+  <genre genreId="0x23">Documentary. News</genre> <!-- 0x23 Documentary -->
+  <genre genreId="0x24">Discussion. News</genre> <!-- 0x24 Discussion/Interview/Debate -->
+
+  <!-- SHOW -->
+  <genre genreId="0x30">Series</genre> <!-- 0x30 Show/Game Show -->
+  <genre genreId="0x30">Show</genre> <!-- 0x30 Show/Game Show -->
+  <genre genreId="0x30">Vets/Pets</genre> <!-- 0x30 Show/Game Show -->
+  <genre genreId="0x30">Wildlife</genre> <!-- 0x30 Show/Game Show -->
+  <genre genreId="0x30">Property</genre> <!-- 0x30 Show/Game Show -->
+  <genre genreId="0x31">General Show/Game Show</genre> <!-- 0x31 Game Show/Quiz/Contest -->
+  <genre genreId="0x31">Game Show</genre> <!-- 0x31 Game Show/Quiz/Contest -->
+  <genre genreId="0x31">Challenge/Reality Show</genre> <!-- 0x31 Game Show/Quiz/Contest -->
+  <genre genreId="0x32">Show. Variety Show</genre> <!-- 0x32 Game Variety Show -->
+  <genre genreId="0x32">Variety Show</genre> <!-- 0x32 Variety Show -->
+  <genre genreId="0x32">Entertainment</genre> <!-- 0x32 Variety Show -->
+  <genre genreId="0x32">Miscellaneous</genre> <!-- 0x32 Variety Show -->
+  <genre genreId="0x33">Talk Show</genre> <!-- 0x33 Talk Show -->
+  <genre genreId="0x34">Show. Talk Show</genre> <!-- 0x33 Talk Show -->
+
+  <!-- SPORTS -->
+  <genre genreId="0x40">Sport</genre> <!-- 0x40 Sports -->
+  <genre genreId="0x40">Live/Sport</genre> <!-- 0x40 Sports -->
+  <genre genreId="0x40">General Sports</genre> <!-- 0x40 Sports -->
+  <genre genreId="0x43">Football. Sports</genre> <!-- 0x43 Football -->
+  <genre genreId="0x4B">Martial Sports</genre> <!-- 0x4B Martial Sports -->
+  <genre genreId="0x4B">Martial Sports. Sports</genre> <!-- 0x4B Martial Sports -->
+  <genre genreId="0x4B">Wrestling</genre> <!-- 0x4B Martial Sports -->
+
+  <!-- CHILDREN/YOUTH -->
+  <genre genreId="0x50">Children</genre> <!-- 0x50 Children's/Youth Programmes -->
+  <genre genreId="0x50">Educational/Schools Programmes</genre> <!-- 0x50 Children's/Youth Programmes -->
+  <genre genreId="0x55">Animation</genre> <!-- 0x55 Cartoons/Puppets -->
+  <genre genreId="0x55">Cartoons/Puppets</genre> <!-- 0x55 Cartoons/Puppets -->
+
+  <!-- //MUSIC/BALLET/DANCE -->
+  <genre genreId="0x60">Music</genre> <!-- 0x60 Music/Ballet/Dance -->
+  <genre genreId="0x60">General Music/Ballet/Dance</genre> <!-- 0x60 Music/Ballet/Dance -->
+  <genre genreId="0x63">Music. Folk</genre> <!-- 0x63 Folk/Traditional Music -->
+  <genre genreId="0x65">Musical</genre> <!-- 0x65 Musical/Opera -->
+
+  <!-- //ARTS/CULTURE -->
+  <genre genreId="0x70">General Arts/Culture</genre> <!-- 0x70 Arts/Culture -->
+  <genre genreId="0x70">Arts/Culture</genre> <!-- 0x70 Arts/Culture -->
+  <genre genreId="0x72">Arts/Culture. Fine Arts</genre> <!-- 0x72 Fine Arts -->
+  <genre genreId="0x73">Religion</genre> <!-- 0x73 Religion -->
+
+  <!-- SOCIAL/POLITICAL/ECONOMICS -->
+  <genre genreId="0x80">Social/Political</genre> <!-- 0x80 Social/Political/Economics -->
+  <genre genreId="0x83">Social/Political. Famous People</genre> <!-- 0x83 Remarkable People -->
+
+  <!-- EDUCATIONAL/SCIENCE -->
+  <genre genreId="0x90">Education</genre> <!-- 0x90 Education/Science/Factual -->
+  <genre genreId="0x90">Educational</genre> <!-- 0x90 Education/Science/Factual -->
+  <genre genreId="0x90">History"</genre> <!-- 0x90 Education/Science/Factual -->
+  <genre genreId="0x90">Factual"</genre> <!-- 0x90 Education/Science/Factual -->
+  <genre genreId="0x90">General Education/Science/Factual Topics</genre> <!-- 0x90 Education/Science/Factual -->
+  <genre genreId="0x90">Science</genre> <!-- 0x90 Education/Science/Factual -->
+  <genre genreId="0x91">Educational. Nature</genre> <!-- 0x91 Nature/Animals/Environment -->
+  <genre genreId="0x91">Environment</genre> <!-- 0x91 Nature/Animals/Environment -->
+  <genre genreId="0x92">Technology</genre> <!-- 0x92 Technology/Natural Sciences -->
+  <genre genreId="0x92">Computers/Internet/Gaming</genre> <!-- 0x92 Technology/Natural Sciences -->
+
+  <!-- LEISURE/HOBBIES -->
+  <genre genreId="0xA0">Leisure</genre> <!-- 0xA0 Leisure/Hobbies -->
+  <genre genreId="0xA0">Leisure. Lifestyle</genre> <!-- 0xA0 Leisure/Hobbies -->
+  <genre genreId="0xA1">Travel</genre> <!-- 0xA1 Tourism/Travel -->
+  <genre genreId="0xA4">Health</genre> <!-- 0xA4 Fitness & Health -->
+  <genre genreId="0xA4">Leisure. Health</genre> <!-- 0xA4 Fitness & Health -->
+  <genre genreId="0xA4">Medicine/Health</genre> <!-- 0xA4 Fitness & Health -->
+  <genre genreId="0xA5">Cookery</genre> <!-- 0xA5 Cooking -->
+  <genre genreId="0xA5">Leisure. Cooking</genre> <!-- 0xA5 Cooking -->
+  <genre genreId="0xA6">Leisure. Shopping</genre> <!-- 0xA6 Advertisement/Shopping -->
+  <genre genreId="0xA6">Advertisement/Shopping</genre> <!-- 0xA6 Advertisement/Shopping -->
+  <genre genreId="0xA6">Consumer</genre> <!-- 0xA6 Advertisement/Shopping -->
+  <!-- SPECIAL -->
+
+  <!-- USERDEFINED -->
+  <genre genreId="0xF1">Factual Crime</genre> <!-- 0xF1 Detective/Thriller -->
+</genres>
