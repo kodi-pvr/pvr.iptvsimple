@@ -23,6 +23,7 @@
  */
 
 #include <cctype>
+#include <chrono>
 #include <cmath>
 #include <ctime>
 #include <fstream>
@@ -229,6 +230,9 @@ PVRIptvData::~PVRIptvData(void)
 
 bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
 {
+  auto started = std::chrono::high_resolution_clock::now();
+  XBMC->Log(LOG_DEBUG, "%s EPG Load Start", __FUNCTION__);
+
   if (m_strXMLTVUrl.empty())
   {
     XBMC->Log(LOG_NOTICE, "EPG file path is not configured. EPG not loaded.");
@@ -460,12 +464,16 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   }
 
   xmlDoc.clear();
-  LoadGenres();
 
-  XBMC->Log(LOG_NOTICE, "EPG Loaded.");
+  LoadGenres();
 
   if (g_iEPGLogos > 0)
     ApplyChannelsLogosFromEPG();
+
+  int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
+                      std::chrono::high_resolution_clock::now() - started).count();
+
+  XBMC->Log(LOG_NOTICE, "%s EPG Loaded - %d (ms)", __FUNCTION__, milliseconds);
 
   return true;
 }
@@ -547,6 +555,9 @@ bool PVRIptvData::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumbe
 
 bool PVRIptvData::LoadPlayList(void)
 {
+  auto started = std::chrono::high_resolution_clock::now();
+  XBMC->Log(LOG_DEBUG, "%s PlayList Load Start", __FUNCTION__);
+
   if (m_strM3uUrl.empty())
   {
     XBMC->Log(LOG_NOTICE, "Playlist file path is not configured. Channels not loaded.");
@@ -793,6 +804,11 @@ bool PVRIptvData::LoadPlayList(void)
   }
 
   stream.clear();
+
+  int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
+                      std::chrono::high_resolution_clock::now() - started).count();
+
+  XBMC->Log(LOG_NOTICE, "%s PlayList Loaded - %d (ms)", __FUNCTION__, milliseconds);
 
   if (m_channels.size() == 0)
   {
