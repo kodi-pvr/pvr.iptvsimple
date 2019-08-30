@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.4.0"
+  version="4.5.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -19,7 +19,7 @@
     <summary lang="de_DE">Kodi PVR Addon für IPTV Unterstützung. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="el_GR">Πρόσθετο του Kodi για PVR, με υποστήριξη IPTV. Για λεπτομέρειες επισκεφθείτε το: https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="en_AU">Kodi PVR addon for IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="en_GB">Kodi PVR addon for IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="en_GB">Kodi PVR addon for IPTV support.</summary>
     <summary lang="en_NZ">Kodi PVR addon for IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="en_US">Kodi PVR addon for IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="es_AR">Addon Kodi PVR  para soporte IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -69,7 +69,7 @@
     <description lang="de_DE">IPTV Simple PVR Client unterstützt m3u Wiedergabelisten, Streaming von Live TV für Multicast/Unicast Quellen, Radiosender und EPG.</description>
     <description lang="el_GR">Απλός Πελάτης PVR του IPTV, με υποστήριξη λιστών αναπαραγωγής m3u, αναπαραγωγή ροών Live TV για πηγές πολλαπλής/μοναδικής διανομής, ακρόαση ραδιοφωνικών καναλιών και EPG.</description>
     <description lang="en_AU">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
-    <description lang="en_GB">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
+    <description lang="en_GB">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/master/README.md&#10;    </description>
     <description lang="en_NZ">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
     <description lang="en_US">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
     <description lang="es_AR">Cliente simple PVR IPTV.  Reproduce de TV en Vivo multicast/unicast y listas m3u8&#10; . reproduce tambien canales de radio y GEP</description>
@@ -158,5 +158,58 @@
     <disclaimer lang="zh_CN">这是不稳定版的软件！作者不对录像失败、错误定时造成时间浪费或其它不良影响负责。</disclaimer>
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
     <platform>@PLATFORM@</platform>
+    <news>
+v4.5.0
+- Fixed: Support full timeshift range of -12 to +14 hours
+- Fixed: Some providers incorrectly use tvg-ID instead of tvg-id
+- Fixed: Support multiple display-names and case insensitive tvg-id is always first, next tvg-name and then channel name find order
+- Added: support episode-num for both xmltv_ns and onscreen systems in epg entry
+- Added: Update readme for supported M3U and XMLTV formats and genres
+- Added: support star rating in epg entry
+- Added: support firstAired and year in epg entry
+- Added: Update OSX build script
+- Added: support multiple actor/director/writers elements in epg entry
+- Added: URLEncode and append .png ext for remote logos built from channel name
+- Added: Support for mapping by genre hex ID and added example files and settings
+- Added: Timing for Playlist and EPG Load
+- Added: Option to number channels by M3U order only
+- Update: Debug logging
+- Added: Channel group member order set to M3U order
+- Fixed: Fix segfault for compressed EPG files
+- Added: Add ordering for groups as per PVR API 6.1.0
+
+v4.4.0
+- Update: Recompile for 6.1.0 PVR Addon API compatibility
+
+v4.3.0
+- Added: Auto reload channels, groups and EPG on settings change
+- Added: Support for #EXTGRP tag in M3U file
+- Fixed: Channel with no groups inherit previous channels groups
+- Added: update new file kodi headers to start with kodi/
+
+v4.2.2
+- Update build system version
+- Change header include way
+- Add AppVeyor for Windows related build tests
+
+v4.2.1
+- Fix nullptr initialisation
+
+v4.2.0
+- Add support for sub-title/actor/director/writer in XML
+
+v4.1.0
+- Support EXTVCOPT in m3u8
+- Build helper script for OSX
+
+v4.0.2
+- Fix wrong EPG times due to DST on Windows
+
+v4.0.1
+- Remove channels loaded notification
+
+v4.0.0
+- Update to PVR addon API v6.0.0
+    </news>
   </extension>
 </addon>

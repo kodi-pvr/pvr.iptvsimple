@@ -1,3 +1,22 @@
+v4.5.0
+- Fixed: Support full timeshift range of -12 to +14 hours
+- Fixed: Some providers incorrectly use tvg-ID instead of tvg-id
+- Fixed: Support multiple display-names and case insensitive tvg-id is always first, next tvg-name and then channel name find order
+- Added: support episode-num for both xmltv_ns and onscreen systems in epg entry
+- Added: Update readme for supported M3U and XMLTV formats and genres
+- Added: support star rating in epg entry
+- Added: support firstAired and year in epg entry
+- Added: Update OSX build script
+- Added: support multiple actor/director/writers elements in epg entry
+- Added: URLEncode and append .png ext for remote logos built from channel name
+- Added: Support for mapping by genre hex ID and added example files and settings
+- Added: Timing for Playlist and EPG Load
+- Added: Option to number channels by M3U order only
+- Update: Debug logging
+- Added: Channel group member order set to M3U order
+- Fixed: Fix segfault for compressed EPG files
+- Added: Add ordering for groups as per PVR API 6.1.0
+
 v4.4.0
 - Update: Recompile for 6.1.0 PVR Addon API compatibility
 
