@@ -33,7 +33,7 @@ using namespace iptvsimple::utilities;
 std::string FileUtils::PathCombine(const std::string& path, const std::string& fileName)
 {
   std::string result = path;
-  
+
   if (!result.empty())
   {
     if (result.at(result.size() - 1) == '\\' ||
@@ -55,12 +55,7 @@ std::string FileUtils::PathCombine(const std::string& path, const std::string& f
   return result;
 }
 
-std::string FileUtils::GetClientFilePath(const std::string& fileName)
-{
-  return PathCombine(Settings::GetInstance().GetClientPath(), fileName);
-}
-
-std::string FileUtils::GetUserFilePath(const std::string& fileName)
+std::string FileUtils::GetUserDataAddonFilePath(const std::string& fileName)
 {
   return PathCombine(Settings::GetInstance().GetUserPath(), fileName);
 }
@@ -157,7 +152,7 @@ int FileUtils::GetCachedFileContents(const std::string& cachedName, const std::s
                                        std::string& contents, const bool useCache /* false */)
 {
   bool needReload = false;
-  const std::string cachedPath = FileUtils::GetUserFilePath(cachedName);
+  const std::string cachedPath = FileUtils::GetUserDataAddonFilePath(cachedName);
 
   // check cached file is exists
   if (useCache && XBMC->FileExists(cachedPath.c_str(), false))

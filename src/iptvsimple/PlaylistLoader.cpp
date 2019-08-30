@@ -56,7 +56,7 @@ bool PlaylistLoader::LoadPlayList()
   }
 
   std::string playlistContent;
-  if (!FileUtils::GetCachedFileContents(M3U_FILE_NAME, m_m3uLocation, playlistContent, Settings::GetInstance().UseM3UCache()))
+  if (!FileUtils::GetCachedFileContents(M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, Settings::GetInstance().UseM3UCache()))
   {
     Logger::Log(LEVEL_ERROR, "Unable to load playlist file '%s':  file is missing or empty.", m_m3uLocation.c_str());
     return false;
@@ -192,7 +192,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     if (strTvgId.empty())
       strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
-      
+
     if (strTvgId.empty())
     {
       char buff[255];

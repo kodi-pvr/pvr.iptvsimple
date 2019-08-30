@@ -29,8 +29,8 @@
 
 namespace iptvsimple
 {
-  static const std::string M3U_FILE_NAME = "iptv.m3u.cache";
-  static const std::string TVG_FILE_NAME = "xmltv.xml.cache";
+  static const std::string M3U_CACHE_FILENAME = "iptv.m3u.cache";
+  static const std::string XMLTV_CACHE_FILENAME = "xmltv.xml.cache";
   static const std::string ADDON_DATA_BASE_DIR = "special://userdata/addon_data/pvr.iptvsimple";
   static const std::string DEFAULT_GENRE_TEXT_MAP_FILE = ADDON_DATA_BASE_DIR + "/genres/genreTextMappings/genres.xml";
 

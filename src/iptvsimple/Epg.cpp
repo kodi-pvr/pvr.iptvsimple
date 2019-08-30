@@ -134,7 +134,7 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
 
   while (count < 3) // max 3 tries
   {
-    if ((bytesRead = FileUtils::GetCachedFileContents(TVG_FILE_NAME, m_xmltvLocation, data, Settings::GetInstance().UseEPGCache())) != 0)
+    if ((bytesRead = FileUtils::GetCachedFileContents(XMLTV_CACHE_FILENAME, m_xmltvLocation, data, Settings::GetInstance().UseEPGCache())) != 0)
       break;
 
     Logger::Log(LEVEL_ERROR, "Unable to load EPG file '%s':  file is missing or empty. :%dth try.", m_xmltvLocation.c_str(), ++count);

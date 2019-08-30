@@ -33,8 +33,7 @@ namespace iptvsimple
     {
     public:
       static std::string PathCombine(const std::string& path, const std::string& fileName);
-      static std::string GetClientFilePath(const std::string& fileName);
-      static std::string GetUserFilePath(const std::string& fileName);
+      static std::string GetUserDataAddonFilePath(const std::string& fileName);
       static int GetFileContents(const std::string& url, std::string& content);
       static bool GzipInflate(const std::string& compressedBytes, std::string& uncompressedBytes);
       static int GetCachedFileContents(const std::string& cachedName, const std::string& filePath,
