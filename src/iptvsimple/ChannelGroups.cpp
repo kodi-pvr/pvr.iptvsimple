@@ -67,6 +67,8 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_C
   const ChannelGroup* myGroup = FindChannelGroup(group.strGroupName);
   if (myGroup)
   {
+    int channelNumberInGroup = 1;
+
     for (int memberId : myGroup->GetMemberChannelIndexes())
     {
       if (memberId < 0 || memberId >= static_cast<int>(m_channels.GetChannelsAmount()))
@@ -77,12 +79,14 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_C
 
       strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
       xbmcGroupMember.iChannelUniqueId = channel.GetUniqueId();
-      xbmcGroupMember.iChannelNumber = channel.GetChannelNumber();
+      xbmcGroupMember.iChannelNumber = channelNumberInGroup; //Keep the channels in list order as per the M3U
 
       Logger::Log(LEVEL_DEBUG, "%s - Transfer channel group '%s' member '%s', ChannelId '%d', ChannelNumberInGroup: '%d'", __FUNCTION__,
                   myGroup->GetGroupName().c_str(), channel.GetChannelName().c_str(), channel.GetUniqueId(), channelNumberInGroup);
 
       PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
+
+      channelNumberInGroup++;
     }
   }
 
