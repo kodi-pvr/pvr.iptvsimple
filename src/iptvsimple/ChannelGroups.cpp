@@ -47,10 +47,10 @@ void ChannelGroups::GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannel
 
   for (const auto& channelGroup : m_channelGroups)
   {
-    Logger::Log(LEVEL_DEBUG, "%s - Transfer channelGroup '%s', ChannelGroupIndex '%d'", __FUNCTION__, channelGroup.GetGroupName().c_str(), channelGroup.GetUniqueId());
-
     if (channelGroup.IsRadio() == radio)
     {
+      Logger::Log(LEVEL_DEBUG, "%s - Transfer channelGroup '%s', ChannelGroupId '%d'", __FUNCTION__, channelGroup.GetGroupName().c_str(), channelGroup.GetUniqueId());
+
       PVR_CHANNEL_GROUP kodiChannelGroup = {0};
 
       channelGroup.UpdateTo(kodiChannelGroup);
@@ -78,6 +78,9 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_C
       strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
       xbmcGroupMember.iChannelUniqueId = channel.GetUniqueId();
       xbmcGroupMember.iChannelNumber = channel.GetChannelNumber();
+
+      Logger::Log(LEVEL_DEBUG, "%s - Transfer channel group '%s' member '%s', ChannelId '%d', ChannelNumberInGroup: '%d'", __FUNCTION__,
+                  myGroup->GetGroupName().c_str(), channel.GetChannelName().c_str(), channel.GetUniqueId(), channelNumberInGroup);
 
       PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
     }

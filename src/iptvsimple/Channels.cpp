@@ -36,8 +36,8 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-Channels::Channels() 
-  : m_logoLocation(Settings::GetInstance().GetLogoLocation()), 
+Channels::Channels()
+  : m_logoLocation(Settings::GetInstance().GetLogoLocation()),
     m_currentChannelNumber(Settings::GetInstance().GetStartChannelNumber()) {}
 
 void Channels::Clear()
@@ -58,8 +58,8 @@ void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) c
   {
     if (channel.IsRadio() == radio)
     {
-      Logger::Log(LEVEL_DEBUG, "%s - Transfer channel '%s', ChannelIndex '%d'", __FUNCTION__, channel.GetChannelName().c_str(),
-                  channel.GetUniqueId());
+      Logger::Log(LEVEL_DEBUG, "%s - Transfer channel '%s', ChannelId '%d', ChannelNumber: '%d'", __FUNCTION__, channel.GetChannelName().c_str(),
+                  channel.GetUniqueId(), channel.GetChannelNumber());
       PVR_CHANNEL kodiChannel = {0};
 
       channel.UpdateTo(kodiChannel);

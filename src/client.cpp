@@ -112,7 +112,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
 
   Logger::GetInstance().SetPrefix("pvr.iptvsimple");
 
-  Logger::Log(LogLevel::LEVEL_INFO, "%s Creating the PVR IPTV Simple add-on", __FUNCTION__);
+  Logger::Log(LogLevel::LEVEL_INFO, "%s - Creating the PVR IPTV Simple add-on", __FUNCTION__);
 
   m_currentStatus = ADDON_STATUS_UNKNOWN;
   const std::string userPath = pvrprops->strUserPath;

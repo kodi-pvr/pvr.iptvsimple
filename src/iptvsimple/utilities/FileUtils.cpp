@@ -199,7 +199,7 @@ bool FileUtils::CopyFile(const std::string& sourceFile, const std::string& targe
 {
   bool copySuccessful = true;
 
-  Logger::Log(LEVEL_DEBUG, "%s Copying file: %s, to %s", __FUNCTION__, sourceFile.c_str(), targetFile.c_str());
+  Logger::Log(LEVEL_DEBUG, "%s - Copying file: %s, to %s", __FUNCTION__, sourceFile.c_str(), targetFile.c_str());
 
   void* sourceFileHandle = XBMC->OpenFile(sourceFile.c_str(), 0x08); //READ_NO_CACHE
 
@@ -218,13 +218,13 @@ bool FileUtils::CopyFile(const std::string& sourceFile, const std::string& targe
     }
     else
     {
-      Logger::Log(LEVEL_ERROR, "%s Could not open target file to copy to: %s", __FUNCTION__, targetFile.c_str());
+      Logger::Log(LEVEL_ERROR, "%s - Could not open target file to copy to: %s", __FUNCTION__, targetFile.c_str());
       copySuccessful = false;
     }
   }
   else
   {
-    Logger::Log(LEVEL_ERROR, "%s Could not open source file to copy: %s", __FUNCTION__, sourceFile.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Could not open source file to copy: %s", __FUNCTION__, sourceFile.c_str());
     copySuccessful = false;
   }
 
@@ -258,7 +258,7 @@ bool FileUtils::CopyDirectory(const std::string& sourceDir, const std::string& t
   }
   else
   {
-    Logger::Log(LEVEL_ERROR, "%s Could not copy directory: %s, to directory: %s", __FUNCTION__, sourceDir.c_str(), targetDir.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Could not copy directory: %s, to directory: %s", __FUNCTION__, sourceDir.c_str(), targetDir.c_str());
     copySuccessful = false;
   }
   return copySuccessful;

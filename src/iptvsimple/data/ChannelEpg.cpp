@@ -45,7 +45,7 @@ bool ChannelEpg::UpdateFrom(xml_node<>* channelNode, Channels& channels)
   }
 
   if (!foundChannel)
-    return false;    
+    return false;
 
   // get icon if available
   xml_node<>* iconNode = channelNode->first_node("icon");

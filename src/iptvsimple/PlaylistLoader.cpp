@@ -47,18 +47,18 @@ PlaylistLoader::PlaylistLoader(Channels& channels, ChannelGroups& channelGroups)
 bool PlaylistLoader::LoadPlayList()
 {
   auto started = std::chrono::high_resolution_clock::now();
-  Logger::Log(LEVEL_DEBUG, "%s Playlist Load Start", __FUNCTION__);
+  Logger::Log(LEVEL_DEBUG, "%s - Playlist Load Start", __FUNCTION__);
 
   if (m_m3uLocation.empty())
   {
-    Logger::Log(LEVEL_NOTICE, "Playlist file path is not configured. Channels not loaded.");
+    Logger::Log(LEVEL_ERROR, "%s - Playlist file path is not configured. Channels not loaded.", __FUNCTION__);
     return false;
   }
 
   std::string playlistContent;
   if (!FileUtils::GetCachedFileContents(M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, Settings::GetInstance().UseM3UCache()))
   {
-    Logger::Log(LEVEL_ERROR, "Unable to load playlist file '%s':  file is missing or empty.", m_m3uLocation.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Unable to load playlist cache file '%s':  file is missing or empty.", __FUNCTION__, m_m3uLocation.c_str());
     return false;
   }
 
@@ -78,7 +78,7 @@ bool PlaylistLoader::LoadPlayList()
     line = StringUtils::TrimRight(line, " \t\r\n");
     line = StringUtils::TrimLeft(line, " \t");
 
-    Logger::Log(LEVEL_DEBUG, "Read line: '%s'", line.c_str());
+    Logger::Log(LEVEL_DEBUG, "%s - M3U line read: '%s'", __FUNCTION__, line.c_str());
 
     if (line.empty())
       continue;
@@ -98,8 +98,8 @@ bool PlaylistLoader::LoadPlayList()
       }
       else
       {
-        Logger::Log(LEVEL_ERROR, "URL '%s' missing %s descriptor on line 1, attempting to parse it anyway.",
-                    m_m3uLocation.c_str(), M3U_START_MARKER.c_str());
+        Logger::Log(LEVEL_ERROR, "%s - URL '%s' missing %s descriptor on line 1, attempting to parse it anyway.",
+                    __FUNCTION__, m_m3uLocation.c_str(), M3U_START_MARKER.c_str());
       }
     }
 
@@ -134,7 +134,7 @@ bool PlaylistLoader::LoadPlayList()
     }
     else if (line[0] != '#')
     {
-      Logger::Log(LEVEL_DEBUG, "Found URL: '%s' (current channel name: '%s')", line.c_str(), tmpChannel.GetChannelName().c_str());
+      Logger::Log(LEVEL_DEBUG, "%s - Adding channel '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
       if (isRealTime)
         tmpChannel.AddProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM, "true");
@@ -158,13 +158,13 @@ bool PlaylistLoader::LoadPlayList()
 
   if (m_channels.GetChannelsAmount() == 0)
   {
-    Logger::Log(LEVEL_ERROR, "Unable to load channels from file '%s'", m_m3uLocation.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Unable to load channels from file '%s'", __FUNCTION__, m_m3uLocation.c_str());
     return false;
   }
 
   m_channels.ApplyChannelLogos();
 
-  Logger::Log(LEVEL_NOTICE, "Loaded %d channels.", m_channels.GetChannelsAmount());
+  Logger::Log(LEVEL_NOTICE, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
   return true;
 }
 

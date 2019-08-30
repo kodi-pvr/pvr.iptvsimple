@@ -67,11 +67,11 @@ void Epg::Clear()
 bool Epg::LoadEPG(time_t start, time_t end)
 {
   auto started = std::chrono::high_resolution_clock::now();
-  Logger::Log(LEVEL_DEBUG, "%s EPG Load Start", __FUNCTION__);
+  Logger::Log(LEVEL_DEBUG, "%s - EPG Load Start", __FUNCTION__);
 
   if (m_xmltvLocation.empty())
   {
-    Logger::Log(LEVEL_NOTICE, "EPG file path is not configured. EPG not loaded.");
+    Logger::Log(LEVEL_NOTICE, "%s - EPG file path is not configured. EPG not loaded.", __FUNCTION__);
     return false;
   }
 
@@ -91,14 +91,14 @@ bool Epg::LoadEPG(time_t start, time_t end)
     }
     catch (parse_error p)
     {
-      Logger::Log(LEVEL_ERROR, "Unable parse EPG XML: %s", p.what());
+      Logger::Log(LEVEL_ERROR, "%s - Unable parse EPG XML: %s", __FUNCTION__, p.what());
       return false;
     }
 
     xml_node<>* rootElement = xmlDoc.first_node("tv");
     if (!rootElement)
     {
-      Logger::Log(LEVEL_ERROR, "Invalid EPG XML: no <tv> tag found");
+      Logger::Log(LEVEL_ERROR, "%s - Invalid EPG XML: no <tv> tag found", __FUNCTION__);
       return false;
     }
 
@@ -122,7 +122,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
   int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
                       std::chrono::high_resolution_clock::now() - started).count();
 
-  Logger::Log(LEVEL_NOTICE, "%s EPG Loaded - %d (ms)", __FUNCTION__, milliseconds);
+  Logger::Log(LEVEL_NOTICE, "%s - EPG Loaded - %d (ms)", __FUNCTION__, milliseconds);
 
   return true;
 }
@@ -137,7 +137,7 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
     if ((bytesRead = FileUtils::GetCachedFileContents(XMLTV_CACHE_FILENAME, m_xmltvLocation, data, Settings::GetInstance().UseEPGCache())) != 0)
       break;
 
-    Logger::Log(LEVEL_ERROR, "Unable to load EPG file '%s':  file is missing or empty. :%dth try.", m_xmltvLocation.c_str(), ++count);
+    Logger::Log(LEVEL_ERROR, "%s - Unable to load EPG file '%s':  file is missing or empty. :%dth try.", __FUNCTION__, m_xmltvLocation.c_str(), ++count);
 
     if (count < 3)
       std::this_thread::sleep_for(std::chrono::microseconds(2 * 1000 * 1000)); // sleep 2 sec before next try.
@@ -145,7 +145,7 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
 
   if (bytesRead == 0)
   {
-    Logger::Log(LEVEL_ERROR, "Unable to load EPG file '%s':  file is missing or empty. After %d tries.", m_xmltvLocation.c_str(), count);
+    Logger::Log(LEVEL_ERROR, "%s - Unable to load EPG file '%s':  file is missing or empty. After %d tries.", __FUNCTION__, m_xmltvLocation.c_str(), count);
     return false;
   }
 
@@ -162,7 +162,7 @@ char* Epg::FillBufferFromXMLTVData(std::string& data)
   {
     if (!FileUtils::GzipInflate(data, decompressed))
     {
-      Logger::Log(LEVEL_ERROR, "Invalid EPG file '%s': unable to decompress file.", m_xmltvLocation.c_str());
+      Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to decompress file.", __FUNCTION__, m_xmltvLocation.c_str());
       return nullptr;
     }
     buffer = &(decompressed[0]);
@@ -176,7 +176,7 @@ char* Epg::FillBufferFromXMLTVData(std::string& data)
 
   if (fileFormat == XmltvFileFormat::INVALID)
   {
-    Logger::Log(LEVEL_ERROR, "Invalid EPG file '%s': unable to parse file.", m_xmltvLocation.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to parse file.", __FUNCTION__, m_xmltvLocation.c_str());
     return nullptr;
   }
 
@@ -222,13 +222,21 @@ bool Epg::LoadChannelEpgs(xml_node<>* rootElement)
     ChannelEpg channelEpg;
 
     if (channelEpg.UpdateFrom(channelNode, m_channels))
+    {
+      Logger::Log(LEVEL_DEBUG, "%s - Loaded chanenl EPG with id '%s' with display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), StringUtils::Join(channelEpg.GetNames(), EPG_STRING_TOKEN_SEPARATOR).c_str());
+
       m_channelEpgs.emplace_back(channelEpg);
+    }
   }
 
   if (m_channelEpgs.size() == 0)
   {
-    Logger::Log(LEVEL_ERROR, "EPG channels not found.");
+    Logger::Log(LEVEL_ERROR, "%s - EPG channels not found.", __FUNCTION__);
     return false;
+  }
+  else
+  {
+    Logger::Log(LEVEL_NOTICE, "%s - Loaded '%d' EPG channels.", __FUNCTION__, m_channelEpgs.size());
   }
 
   return true;
@@ -275,6 +283,8 @@ void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
       channelEpg->AddEpgEntry(entry);
     }
   }
+
+  Logger::Log(LEVEL_NOTICE, "%s - Loaded '%d' EPG entries.", __FUNCTION__, broadcastId);
 }
 
 
@@ -447,7 +457,7 @@ bool Epg::LoadGenres()
   xmlDoc.clear();
 
   if (!m_genreMappings.empty())
-    Logger::Log(LEVEL_NOTICE, "%s Loaded %d genres", __FUNCTION__, m_genreMappings.size());
+    Logger::Log(LEVEL_NOTICE, "%s - Loaded %d genres", __FUNCTION__, m_genreMappings.size());
 
   return true;
 }
