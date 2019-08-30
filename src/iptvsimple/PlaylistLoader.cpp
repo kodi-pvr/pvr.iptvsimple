@@ -207,7 +207,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       logoSetFromChannelName = true;
     }
 
-    if (!strChnlNo.empty())
+    if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
       channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
 
     double tvgShiftDecimal = std::atof(strTvgShift.c_str());

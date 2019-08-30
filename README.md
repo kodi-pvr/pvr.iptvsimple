@@ -64,6 +64,7 @@ General settings required for the addon to function.
 * **M3U play list URL**: If location is `Remote path` this setting must contain a valid URL for the addon to function.
 * **Cache M3U at local storage**: If location is `Remote path` select whether or not the the M3U file should be cached locally.
 * **Start channel number**: The number to start numbering channels from.
+* **Only number by channel order in M3U**: Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'.
 
 ### EPG
 Settings related to the EPG.

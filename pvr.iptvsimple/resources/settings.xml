@@ -54,6 +54,11 @@
           <default>1</default>
           <control type="edit" format="integer" />
         </setting>
+        <setting id="numberByOrder" type="boolean" label="30014" help="30606">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
       </group>
     </category>
 

@@ -56,6 +56,8 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
       m_cacheM3U = true;
   if (!XBMC->GetSetting("startNum", &m_startChannelNumber))
     m_startChannelNumber = 1;
+  if (!XBMC->GetSetting("numberByOrder", &m_numberChannelsByM3uOrderOnly))
+    m_numberChannelsByM3uOrderOnly = false;
 
   // EPG
   if (!XBMC->GetSetting("epgPathType", &m_epgPathType))
@@ -115,6 +117,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_cacheM3U, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "startNum")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_startChannelNumber, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "numberByOrder")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_numberChannelsByM3uOrderOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   // EPG
   if (settingName == "epgPathType")

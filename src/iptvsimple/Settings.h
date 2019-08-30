@@ -73,6 +73,7 @@ namespace iptvsimple
     const std::string& GetM3UUrl() const { return m_m3uUrl; }
     bool UseM3UCache() const { return m_m3uPathType == PathType::REMOTE_PATH ? m_cacheM3U : false; }
     int GetStartChannelNumber() const { return m_startChannelNumber; }
+    bool NumberChannelsByM3uOrderOnly() const { return m_numberChannelsByM3uOrderOnly; }
 
     const std::string& GetEpgLocation() const { return m_epgPathType == PathType::REMOTE_PATH ? m_epgUrl : m_epgPath; }
     const PathType& GetEpgPathType() const { return m_epgPathType; }
@@ -138,6 +139,7 @@ namespace iptvsimple
     std::string m_m3uUrl = "";
     bool m_cacheM3U = false;
     int m_startChannelNumber = 1;
+    bool m_numberChannelsByM3uOrderOnly = false;
 
     PathType m_epgPathType = PathType::REMOTE_PATH;
     std::string m_epgPath = "";
