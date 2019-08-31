@@ -79,7 +79,8 @@ bool Epg::LoadEPG(time_t start, time_t end)
 
   if (GetXMLTVFileWithRetries(data))
   {
-    char* buffer = FillBufferFromXMLTVData(data);
+    std::string decompressedData;
+    char* buffer = FillBufferFromXMLTVData(data, decompressedData);
 
     if (!buffer)
       return false;
@@ -152,24 +153,23 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
   return true;
 }
 
-char* Epg::FillBufferFromXMLTVData(std::string& data)
+char* Epg::FillBufferFromXMLTVData(std::string& data, std::string& decompressedData)
 {
-  std::string decompressed;
   char* buffer = nullptr;
 
   // gzip packed
   if (data[0] == '\x1F' && data[1] == '\x8B' && data[2] == '\x08')
   {
-    if (!FileUtils::GzipInflate(data, decompressed))
+    if (!FileUtils::GzipInflate(data, decompressedData))
     {
       Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to decompress file.", __FUNCTION__, m_xmltvLocation.c_str());
       return nullptr;
     }
-    buffer = &(decompressed[0]);
+    buffer = &(decompressedData[0]);
   }
   else
   {
-   buffer = &(data[0]);
+    buffer = &(data[0]);
   }
 
   XmltvFileFormat fileFormat = GetXMLTVFileFormat(buffer);
