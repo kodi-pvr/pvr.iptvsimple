@@ -54,6 +54,10 @@ int Channels::GetChannelsAmount() const
 
 void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) const
 {
+  // We set a channel order here that applies to the 'Any channels' group in kodi-pvr
+  // This allows the users to use the 'Backend Order' sort option in the left to
+  // have the same order as the backend (regardles of the channel numbering used)
+  int channelOrder = 1;
   for (const auto& channel : m_channels)
   {
     if (channel.IsRadio() == radio)
@@ -63,6 +67,7 @@ void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) c
       PVR_CHANNEL kodiChannel = {0};
 
       channel.UpdateTo(kodiChannel);
+      kodiChannel.iOrder = channelOrder++; // Keep the channels in list order as per the M3U
 
       kodiChannels.emplace_back(kodiChannel);
     }
