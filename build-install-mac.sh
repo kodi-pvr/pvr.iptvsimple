@@ -16,7 +16,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 if [[ "$1" = /* ]]
 then
   #absolute path
-  SCRIPT_DIR=""  
+  SCRIPT_DIR=""
 else
   #relative
   SCRIPT_DIR="$SCRIPT_DIR/"
@@ -54,4 +54,6 @@ make
 
 XBMC_BUILD_ADDON_INSTALL_DIR=$(cd "$SCRIPT_DIR$1/addons/$ADDON_NAME" 2> /dev/null && pwd -P)
 rm -rf "$KODI_ADDONS_DIR/$ADDON_NAME"
+echo "Removed previous addon build from: $KODI_ADDONS_DIR"
 cp -rf "$XBMC_BUILD_ADDON_INSTALL_DIR" "$KODI_ADDONS_DIR"
+echo "Copied new addon build to: $KODI_ADDONS_DIR"

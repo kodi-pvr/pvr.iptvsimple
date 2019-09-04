@@ -35,8 +35,14 @@ struct PVRIptvEpgEntry
   int         iChannelId;
   int         iGenreType;
   int         iGenreSubType;
+  int         iYear;
+  int         iStarRating;
+  int         iEpisodeNumber;
+  int         iEpisodePartNumber;
+  int         iSeasonNumber;
   time_t      startTime;
   time_t      endTime;
+  time_t      firstAired;
   std::string strTitle;
   std::string strEpisodeName;
   std::string strPlotOutline;
@@ -51,7 +57,7 @@ struct PVRIptvEpgEntry
 struct PVRIptvEpgChannel
 {
   std::string                  strId;
-  std::string                  strName;
+  std::vector<std::string>     strNames;
   std::string                  strIcon;
   std::vector<PVRIptvEpgEntry> epg;
 };
@@ -115,7 +121,7 @@ protected:
   virtual PVRIptvEpgChannel*   FindEpgForChannel(PVRIptvChannel &channel);
   virtual bool                 FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
   virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
-  virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath, 
+  virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath,
                                                      std::string &strContent, const bool bUseCache = false);
   virtual void                 ApplyChannelsLogos();
   virtual void                 ApplyChannelsLogosFromEPG();
@@ -126,6 +132,10 @@ protected:
   virtual void *Process(void);
 
 private:
+  static bool ParseEpisodeNumberInfo(const std::vector<std::pair<std::string, std::string>>& episodeNumbersList, PVRIptvEpgEntry& entry);
+  static bool ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
+  static bool ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
+
   bool                              m_bTSOverride;
   int                               m_iEPGTimeShift;
   int                               m_iLastStart;
@@ -133,6 +143,7 @@ private:
   std::string                       m_strXMLTVUrl;
   std::string                       m_strM3uUrl;
   std::string                       m_strLogoPath;
+  int                               m_logoPathType;
   std::vector<PVRIptvChannelGroup>  m_groups;
   std::vector<PVRIptvChannel>       m_channels;
   std::vector<PVRIptvEpgChannel>    m_epg;
