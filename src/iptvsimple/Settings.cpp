@@ -29,12 +29,6 @@ using namespace ADDON;
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;
 
-#ifdef TARGET_WINDOWS
-#ifdef DeleteFile
-#undef DeleteFile
-#endif
-#endif
-
 /***************************************************************************
  * PVR settings
  **************************************************************************/
@@ -99,12 +93,12 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
   // reset cache and restart addon
 
   std::string strFile = FileUtils::GetUserDataAddonFilePath(M3U_CACHE_FILENAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-    XBMC->DeleteFile(strFile.c_str());
+  if (FileUtils::FileExists(strFile.c_str()))
+    FileUtils::DeleteFile(strFile);
 
   strFile = FileUtils::GetUserDataAddonFilePath(XMLTV_CACHE_FILENAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-    XBMC->DeleteFile(strFile.c_str());
+  if (FileUtils::FileExists(strFile.c_str()))
+    FileUtils::DeleteFile(strFile);
 
   // M3U
   if (settingName == "m3uPathType")

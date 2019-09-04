@@ -131,31 +131,31 @@ namespace iptvsimple
       return defaultReturnValue;
     }
 
-    std::string m_userPath = "";
-    std::string m_clientPath = "";
+    std::string m_userPath;
+    std::string m_clientPath;
 
     PathType m_m3uPathType = PathType::REMOTE_PATH;
-    std::string m_m3uPath = "";
-    std::string m_m3uUrl = "";
+    std::string m_m3uPath;
+    std::string m_m3uUrl;
     bool m_cacheM3U = false;
     int m_startChannelNumber = 1;
     bool m_numberChannelsByM3uOrderOnly = false;
 
     PathType m_epgPathType = PathType::REMOTE_PATH;
-    std::string m_epgPath = "";
-    std::string m_epgUrl = "";
+    std::string m_epgPath;
+    std::string m_epgUrl;
     bool m_cacheEPG = false;
     int m_epgTimeShiftMins = 0;
     bool m_tsOverride = true;
 
     bool m_useEpgGenreTextWhenMapping = false;
     PathType m_genresPathType = PathType::LOCAL_PATH;
-    std::string m_genresPath = "";
-    std::string m_genresUrl = "";
+    std::string m_genresPath;
+    std::string m_genresUrl;
 
     PathType m_logoPathType = PathType::REMOTE_PATH;
-    std::string m_logoPath = "";
-    std::string m_logoBaseUrl = "";
+    std::string m_logoPath;
+    std::string m_logoBaseUrl;
     EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
   };
 } //namespace iptvsimple

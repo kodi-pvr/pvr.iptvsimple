@@ -195,6 +195,11 @@ bool FileUtils::FileExists(const std::string& file)
   return XBMC->FileExists(file.c_str(), false);
 }
 
+bool FileUtils::DeleteFile(const std::string& file)
+{
+  return XBMC->DeleteFile(file.c_str());
+}
+
 bool FileUtils::CopyFile(const std::string& sourceFile, const std::string& targetFile)
 {
   bool copySuccessful = true;

@@ -40,8 +40,7 @@ inline std::string GetJoinedNodeValues(const rapidxml::xml_node<Ch>* rootNode, c
 {
   std::string stringValue;
 
-  rapidxml::xml_node<Ch>* childNode = nullptr;
-  for (childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
+  for (rapidxml::xml_node<Ch>* childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
   {
     if (childNode)
     {
@@ -59,8 +58,7 @@ inline std::vector<std::string> GetNodeValuesList(const rapidxml::xml_node<Ch>* 
 {
   std::vector<std::string> stringValues;
 
-  rapidxml::xml_node<Ch>* childNode = nullptr;
-  for(childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
+  for(rapidxml::xml_node<Ch>* childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
   {
     if (childNode)
       stringValues.emplace_back(childNode->value());

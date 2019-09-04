@@ -40,12 +40,6 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace rapidxml;
 
-#ifdef TARGET_WINDOWS
-#ifdef DeleteFile
-#undef DeleteFile
-#endif
-#endif
-
 Epg::Epg(Channels& channels)
   : m_channels(channels), m_xmltvLocation(Settings::GetInstance().GetEpgLocation()), m_epgTimeShift(Settings::GetInstance().GetEpgTimeshiftSecs()),
     m_tsOverride(Settings::GetInstance().GetTsOverride()), m_lastStart(0), m_lastEnd(0)
@@ -216,8 +210,7 @@ bool Epg::LoadChannelEpgs(xml_node<>* rootElement)
 
   m_channelEpgs.clear();
 
-  xml_node<>* channelNode = nullptr;
-  for (channelNode = rootElement->first_node("channel"); channelNode; channelNode = channelNode->next_sibling("channel"))
+  for (xml_node<>* channelNode = rootElement->first_node("channel"); channelNode; channelNode = channelNode->next_sibling("channel"))
   {
     ChannelEpg channelEpg;
 
@@ -473,6 +466,6 @@ void Epg::MoveOldGenresXMLFileToNewLocation()
   else
     FileUtils::CopyFile(FileUtils::GetResourceDataPath() + "/" + GENRES_MAP_FILENAME, DEFAULT_GENRE_TEXT_MAP_FILE);
 
-  XBMC->DeleteFile((ADDON_DATA_BASE_DIR + "/" + GENRES_MAP_FILENAME).c_str());
-  XBMC->DeleteFile((FileUtils::GetSystemAddonPath() + "/" + GENRES_MAP_FILENAME).c_str());
+  FileUtils::DeleteFile(ADDON_DATA_BASE_DIR + "/" + GENRES_MAP_FILENAME.c_str());
+  FileUtils::DeleteFile(FileUtils::GetSystemAddonPath() + "/" + GENRES_MAP_FILENAME.c_str());
 }

@@ -36,16 +36,6 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-#ifdef TARGET_WINDOWS
-#define snprintf _snprintf
-#ifdef CreateDirectory
-#undef CreateDirectory
-#endif
-#ifdef DeleteFile
-#undef DeleteFile
-#endif
-#endif
-
 bool m_created = false;
 ADDON_STATUS m_currentStatus = ADDON_STATUS_UNKNOWN;
 PVRIptvData* m_data = nullptr;
@@ -117,9 +107,6 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   m_currentStatus = ADDON_STATUS_UNKNOWN;
   const std::string userPath = pvrprops->strUserPath;
   const std::string clientPath = pvrprops->strClientPath;
-
-  if (!XBMC->DirectoryExists(settings.GetUserPath().c_str()))
-    XBMC->CreateDirectory(settings.GetUserPath().c_str());
 
   settings.ReadFromAddon(userPath, clientPath);
 

@@ -234,7 +234,7 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   if (!episodeNumbersList.empty())
     ParseEpisodeNumberInfo(episodeNumbersList);
 
-  xml_node<> *creditsNode = channelNode->first_node("credits");
+  xml_node<>* creditsNode = channelNode->first_node("credits");
   if (creditsNode)
   {
     m_cast = GetJoinedNodeValues(creditsNode, "actor");

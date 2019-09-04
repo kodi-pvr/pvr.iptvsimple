@@ -39,6 +39,7 @@ namespace iptvsimple
       static int GetCachedFileContents(const std::string& cachedName, const std::string& filePath,
                                        std::string& content, const bool useCache = false);
       static bool FileExists(const std::string& file);
+      static bool DeleteFile(const std::string& file);
       static bool CopyFile(const std::string& sourceFile, const std::string& targetFile);
       static bool CopyDirectory(const std::string& sourceDir, const std::string& targetDir, bool recursiveCopy);
       static std::string GetSystemAddonPath();
