@@ -28,14 +28,16 @@
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 
+#include "p8-platform/util/StringUtils.h"
+
 #include <regex>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-Channels::Channels() 
-  : m_logoLocation(Settings::GetInstance().GetLogoLocation()), 
+Channels::Channels()
+  : m_logoLocation(Settings::GetInstance().GetLogoLocation()),
     m_currentChannelNumber(Settings::GetInstance().GetStartChannelNumber()) {}
 
 void Channels::Clear()
@@ -52,15 +54,20 @@ int Channels::GetChannelsAmount() const
 
 void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) const
 {
+  // We set a channel order here that applies to the 'Any channels' group in kodi-pvr
+  // This allows the users to use the 'Backend Order' sort option in the left to
+  // have the same order as the backend (regardles of the channel numbering used)
+  int channelOrder = 1;
   for (const auto& channel : m_channels)
   {
     if (channel.IsRadio() == radio)
     {
-      Logger::Log(LEVEL_DEBUG, "%s - Transfer channel '%s', ChannelIndex '%d'", __FUNCTION__, channel.GetChannelName().c_str(),
-                  channel.GetUniqueId());
+      Logger::Log(LEVEL_DEBUG, "%s - Transfer channel '%s', ChannelId '%d', ChannelNumber: '%d'", __FUNCTION__, channel.GetChannelName().c_str(),
+                  channel.GetUniqueId(), channel.GetChannelNumber());
       PVR_CHANNEL kodiChannel = {0};
 
       channel.UpdateTo(kodiChannel);
+      kodiChannel.iOrder = channelOrder++; // Keep the channels in list order as per the M3U
 
       kodiChannels.emplace_back(kodiChannel);
     }
@@ -109,22 +116,28 @@ Channel* Channels::GetChannel(int uniqueId)
   return nullptr;
 }
 
-const Channel* Channels::FindChannel(const std::string& id, const std::string& name) const
+const Channel* Channels::FindChannel(const std::string& id, const std::string& displayName) const
 {
-  const std::string tvgName = std::regex_replace(name, std::regex(" "), "_");
+  for (const auto& myChannel : m_channels)
+  {
+    if (StringUtils::EqualsNoCase(myChannel.GetTvgId(), id))
+      return &myChannel;
+  }
+
+  if (displayName.empty())
+    return nullptr;
+
+  const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
+  for (const auto& myChannel : m_channels)
+  {
+    if (StringUtils::EqualsNoCase(myChannel.GetTvgName(), convertedDisplayName) ||
+        StringUtils::EqualsNoCase(myChannel.GetTvgName(), displayName))
+      return &myChannel;
+  }
 
   for (const auto& myChannel : m_channels)
   {
-    if (myChannel.GetTvgId() == id)
-      return &myChannel;
-
-    if (tvgName.empty())
-      continue;
-
-    if (myChannel.GetTvgName() == tvgName)
-      return &myChannel;
-
-    if (myChannel.GetChannelName() == name)
+    if (StringUtils::EqualsNoCase(myChannel.GetChannelName(), displayName))
       return &myChannel;
   }
 

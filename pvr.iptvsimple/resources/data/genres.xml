@@ -1,0 +1,9 @@
+<!--
+This file can be changed and will not be overwritten, it only forms as a placeholder.
+-->
+
+<genres>
+  <name>Placeholder Genres File</name>
+
+  <!-- <genre genreId="0x10">Some text</genre> --> <!-- 0x10 Movie/Drama -->
+</genres>

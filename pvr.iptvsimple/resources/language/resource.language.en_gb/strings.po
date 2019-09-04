@@ -28,6 +28,7 @@ msgstr ""
 #label-option: General - m3uPathType
 #label-option: General - epgPathType
 #label-option: General - logoPathType
+#label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (include local network)"
 msgstr ""
@@ -35,6 +36,7 @@ msgstr ""
 #label-option: General - m3uPathType
 #label-option: General - epgPathType
 #label-option: General - logoPathType
+#label-option: General - genresPathType
 msgctxt "#30002"
 msgid "Remote path (Internet address)"
 msgstr ""
@@ -57,16 +59,26 @@ msgctxt "#30012"
 msgid "M3U playlist URL"
 msgstr ""
 
+#label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
 msgstr ""
 
-#empty strings from id 30014 to 30019
+#label: General - numberByOrder
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr ""
+
+#empty strings from id 30015 to 30018
 
 #label-category: epgsettings
+msgctxt "#30019"
+msgid "EPG Settings"
+msgstr ""
+
 #label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
-msgid "EPG Settings"
+msgid "EPG"
 msgstr ""
 
 #label: EPG Settings - epgPath
@@ -144,7 +156,30 @@ msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr ""
 
-#empty strings from id 30045 to 30599
+#empty strings from id 30045 to 30549
+
+#label-category: genres
+#label-group: Genres - Genres
+msgctxt "#30050"
+msgid "Genres"
+msgstr ""
+
+#label: Genres - useEpgGenreText
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr ""
+
+#label: Genres - genresPath
+msgctxt "#30052"
+msgid "Genres path"
+msgstr ""
+
+#label: Genres - genresUrl
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr ""
+
+#empty strings from id 30054 to 30599
 
 #############
 # help info #
@@ -182,8 +217,12 @@ msgctxt "#30605"
 msgid "The number to start numbering channels from."
 msgstr ""
 
-#empty strings from id 30006 to 30619
+#help: General - numberByOrder
+msgctxt "#30606"
+msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
+msgstr ""
 
+#empty strings from id 30607 to 30619
 
 #help info - EPG Settings
 
@@ -214,7 +253,7 @@ msgstr ""
 
 #help: EPG Settings - epgTimeShift
 msgctxt "#30625"
-msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +720 mins (+/- 12 hours)."
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours)."
 msgstr ""
 
 #help: EPG Settings - epgTSOverside
@@ -222,13 +261,13 @@ msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
 msgstr ""
 
-#empty strings from id 30027 to 30639
+#empty strings from id 30627 to 30639
 
 #help info - Channel Logos
 
 #help-category: Channel Logos
 msgctxt "#30640"
-msgid "Settings realted to Channel Logos."
+msgid "Settings related to Channel Logos."
 msgstr ""
 
 #help: Channel Logos - logoPathType
@@ -249,4 +288,33 @@ msgstr ""
 #help: Channel Logos - logoFromEpg
 msgctxt "#30644"
 msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgstr ""
+
+#empty strings from id 30645 to 30659
+
+#help info - Genres
+
+#help-category: Genres
+msgctxt "#30660"
+msgid "Settings related to genres."
+msgstr ""
+
+#help: Genres - useEpgGenreText
+msgctxt "#30661"
+msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
+msgstr ""
+
+#help: Genres - genresPathType
+msgctxt "#30662"
+msgid "Select where to find the genres XML resource. The options are: [Local path] - A path to a genres XML file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the genres XML file."
+msgstr ""
+
+#help: Genres - genresPath
+msgctxt "#30663"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr ""
+
+#help: Genres - genresUrl
+msgctxt "#30664"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
 msgstr ""

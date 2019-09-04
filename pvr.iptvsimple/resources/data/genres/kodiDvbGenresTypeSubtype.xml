@@ -1,0 +1,138 @@
+<!--
+The following are the DVB Genre Types and Subtypes used for reference
+
+Source: https://www.etsi.org/deliver/etsi_en/300400_300499/300468/01.11.01_60/en_300468v011101p.pdf
+Page 40
+
+Note: Type represents the first 4 bits of an 8-bit genre ID and Subtyperepresents the last 4 bits
+
+Mapping DVB Genres:
+ - The content below is a reference for Genre Text Mappings
+
+There shoud be no reason to modify this file unless the DVB standard changes.
+
+NOTE: IF YOU MODIFY THIS FILE IT WILL BE OVERWRITTEN NEXT TIME THE ADDON IS STARTED
+
+If you have changes either create a PR containing the changes or an issue with details at:
+  https://github.com/kodi-pvr/pvr.iptvsimple
+-->
+
+<genres>
+  <name>Kodi DVB Genres using Integers for type and subtype</name>
+  <!-- UNDEFINED -->
+  <genre type="0" subtype="0">Undefined</genre>
+
+  <!-- MOVIE/DRAMA -->
+  <genre type="16" subtype="0">Movie / Drama</genre>
+  <genre type="16" subtype="1">Detective / Thriller</genre>
+  <genre type="16" subtype="2">Adventure / Western / War</genre>
+  <genre type="16" subtype="3">Science fiction / Fantasy / Horror</genre>
+  <genre type="16" subtype="4">Comedy</genre>
+  <genre type="16" subtype="5">Soap / Melodrama / Folkloric</genre>
+  <genre type="16" subtype="6">Romance</genre>
+  <genre type="16" subtype="7">Serious / Classical / Religious / Historical Movie / Drama</genre>
+  <genre type="16" subtype="8">Adult Movie / Drama</genre>
+
+  <!-- NEWS/CURRENT AFFAIRS -->
+  <genre type="32" subtype="0">News / Current Affairs</genre>
+  <genre type="32" subtype="1">News / Weather Report</genre>
+  <genre type="32" subtype="2">News Magazine</genre>
+  <genre type="32" subtype="3">Documentary</genre>
+  <genre type="32" subtype="4">Discussion / Interview / Debate</genre>
+
+  <!-- SHOW -->
+  <genre type="48" subtype="0">Show / Game Show</genre>
+  <genre type="48" subtype="1">Game Show / Quiz / Contest</genre>
+  <genre type="48" subtype="2">Variety show</genre>
+  <genre type="48" subtype="3">Talk Show</genre>
+
+  <!-- SPORTS -->
+  <genre type="64" subtype="0">Sports</genre>
+  <genre type="64" subtype="1">Special Event</genre>
+  <genre type="64" subtype="2">Sports Magazines</genre>
+  <genre type="64" subtype="3">Football / Soccer</genre>
+  <genre type="64" subtype="4">Tennis / Squash</genre>
+  <genre type="64" subtype="5">Team Sports</genre>
+  <genre type="64" subtype="6">Athletics</genre>
+  <genre type="64" subtype="7">Motor Sport</genre>
+  <genre type="64" subtype="8">Water Sport</genre>
+  <genre type="64" subtype="9">Winter Sports</genre>
+  <genre type="64" subtype="10">Equestrian</genre>
+  <genre type="64" subtype="11">Martial Sports</genre>
+
+  <!-- CHILDREN/YOUTH -->
+  <genre type="80" subtype="0">Children's / Youth Programs</genre>
+  <genre type="80" subtype="1">Pre-school Children's Programs</genre>
+  <genre type="80" subtype="2">Entertainment programs for 6 to 14</genre>
+  <genre type="80" subtype="3">Entertainment programs for 10 to 16</genre>
+  <genre type="80" subtype="4">Informational / Educational / School programs</genre>
+  <genre type="80" subtype="5">Cartoons / Puppets</genre>
+
+  <!-- MUSIC/BALLET/DANCE -->
+  <genre type="96" subtype="0">Music / Ballet / Dance</genre>
+  <genre type="96" subtype="1">Rock / Pop</genre>
+  <genre type="96" subtype="2">Serious music / Classical Music</genre>
+  <genre type="96" subtype="3">Folk / Traditional Music</genre>
+  <genre type="96" subtype="4">Jazz</genre>
+  <genre type="96" subtype="5">Musical / Opera</genre>
+  <genre type="96" subtype="6">Ballet</genre>
+
+  <!-- ARTS/CULTURE -->
+  <genre type="112" subtype="0">Arts / Culture</genre>
+  <genre type="112" subtype="1">Performing Arts</genre>
+  <genre type="112" subtype="2">Fine Arts</genre>
+  <genre type="112" subtype="3">Religion</genre>
+  <genre type="112" subtype="4">Popular Culture / Traditional Arts</genre>
+  <genre type="112" subtype="5">Literature</genre>
+  <genre type="112" subtype="6">Film / Cinema</genre>
+  <genre type="112" subtype="7">Experimental Film / Video</genre>
+  <genre type="112" subtype="8">Broadcasting / Press</genre>
+  <genre type="112" subtype="9">New Media</genre>
+  <genre type="112" subtype="10">Arts magazines / Culture Magazines</genre>
+  <genre type="112" subtype="11">Fashion</genre>
+
+  <!-- SOCIAL/POLITICAL/ECONOMICS -->
+  <genre type="128" subtype="0">Social / Political issues / Economics</genre>
+  <genre type="128" subtype="1">Magazines / Reports / Documentary</genre>
+  <genre type="128" subtype="2">Economics / Social Advisory</genre>
+  <genre type="128" subtype="3">Remarkable People</genre>
+
+  <!-- EDUCATIONAL/SCIENCE -->
+  <genre type="144" subtype="0">Education / Science / Factual topics</genre>
+  <genre type="144" subtype="1">Nature / Animals / Environment</genre>
+  <genre type="144" subtype="2">Technology / Natural sciences</genre>
+  <genre type="144" subtype="3">Medicine / Physiology / Psychology</genre>
+  <genre type="144" subtype="4">Foreign countries / Expeditions</genre>
+  <genre type="144" subtype="5">Social / Spiritual Sciences</genre>
+  <genre type="144" subtype="6">Further Education</genre>
+  <genre type="144" subtype="7">Languages</genre>
+
+  <!-- LEISURE/HOBBIES -->
+  <genre type="160" subtype="0">Leisure Hobbies</genre>
+  <genre type="160" subtype="1">Tourism / Travel</genre>
+  <genre type="160" subtype="2">Handicraft</genre>
+  <genre type="160" subtype="3">Motoring</genre>
+  <genre type="160" subtype="4">Fitness and Health</genre>
+  <genre type="160" subtype="5">Cooking</genre>
+  <genre type="160" subtype="6">Advertisement / Shopping</genre>
+  <genre type="160" subtype="7">Gardening</genre>
+
+   <!-- SPECIAL -->
+  <genre type="176" subtype="0">Special Characteristics</genre>
+  <genre type="176" subtype="1">Original Language</genre>
+  <genre type="176" subtype="2">Black &amp; White</genre>
+  <genre type="176" subtype="3">Unpublished</genre>
+  <genre type="176" subtype="4">Live Broadcast</genre>
+
+  <!-- USERDEFINED -->
+  <genre type="240" subtype="0">Drama</genre>
+  <genre type="240" subtype="1">Detective/Thriller</genre>
+  <genre type="240" subtype="2">Adventure/Western/War</genre>
+  <genre type="240" subtype="3">Science Fiction/Fantasy/Horror</genre>
+  <!-- below currently ignored by XBMC see http://trac.xbmc.org/ticket/13627 -->
+  <genre type="240" subtype="4">Comedy</genre>
+  <genre type="240" subtype="5">Soap/Melodrama/Folkloric</genre>
+  <genre type="240" subtype="6">Romance</genre>
+  <genre type="240" subtype="7">Serious/ClassicalReligion/Historical</genre>
+  <genre type="240" subtype="8">Adult</genre> 
+</genres>

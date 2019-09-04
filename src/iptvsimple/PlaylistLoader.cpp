@@ -26,9 +26,11 @@
 #include "../client.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
+#include "utilities/WebUtils.h"
 
 #include "p8-platform/util/StringUtils.h"
 
+#include <chrono>
 #include <cstdlib>
 #include <map>
 #include <regex>
@@ -44,16 +46,19 @@ PlaylistLoader::PlaylistLoader(Channels& channels, ChannelGroups& channelGroups)
 
 bool PlaylistLoader::LoadPlayList()
 {
+  auto started = std::chrono::high_resolution_clock::now();
+  Logger::Log(LEVEL_DEBUG, "%s - Playlist Load Start", __FUNCTION__);
+
   if (m_m3uLocation.empty())
   {
-    Logger::Log(LEVEL_NOTICE, "Playlist file path is not configured. Channels not loaded.");
+    Logger::Log(LEVEL_ERROR, "%s - Playlist file path is not configured. Channels not loaded.", __FUNCTION__);
     return false;
   }
 
   std::string playlistContent;
-  if (!FileUtils::GetCachedFileContents(M3U_FILE_NAME, m_m3uLocation, playlistContent, Settings::GetInstance().UseM3UCache()))
+  if (!FileUtils::GetCachedFileContents(M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, Settings::GetInstance().UseM3UCache()))
   {
-    Logger::Log(LEVEL_ERROR, "Unable to load playlist file '%s':  file is missing or empty.", m_m3uLocation.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Unable to load playlist cache file '%s':  file is missing or empty.", __FUNCTION__, m_m3uLocation.c_str());
     return false;
   }
 
@@ -73,7 +78,7 @@ bool PlaylistLoader::LoadPlayList()
     line = StringUtils::TrimRight(line, " \t\r\n");
     line = StringUtils::TrimLeft(line, " \t");
 
-    Logger::Log(LEVEL_DEBUG, "Read line: '%s'", line.c_str());
+    Logger::Log(LEVEL_DEBUG, "%s - M3U line read: '%s'", __FUNCTION__, line.c_str());
 
     if (line.empty())
       continue;
@@ -93,8 +98,8 @@ bool PlaylistLoader::LoadPlayList()
       }
       else
       {
-        Logger::Log(LEVEL_ERROR, "URL '%s' missing %s descriptor on line 1, attempting to parse it anyway.",
-                    m_m3uLocation.c_str(), M3U_START_MARKER.c_str());
+        Logger::Log(LEVEL_ERROR, "%s - URL '%s' missing %s descriptor on line 1, attempting to parse it anyway.",
+                    __FUNCTION__, m_m3uLocation.c_str(), M3U_START_MARKER.c_str());
       }
     }
 
@@ -129,7 +134,7 @@ bool PlaylistLoader::LoadPlayList()
     }
     else if (line[0] != '#')
     {
-      Logger::Log(LEVEL_DEBUG, "Found URL: '%s' (current channel name: '%s')", line.c_str(), tmpChannel.GetChannelName().c_str());
+      Logger::Log(LEVEL_DEBUG, "%s - Adding channel '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
       if (isRealTime)
         tmpChannel.AddProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM, "true");
@@ -146,15 +151,20 @@ bool PlaylistLoader::LoadPlayList()
 
   stream.clear();
 
+  int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
+                      std::chrono::high_resolution_clock::now() - started).count();
+
+  Logger::Log(LEVEL_NOTICE, "%s Playlist Loaded - %d (ms)", __FUNCTION__, milliseconds);
+
   if (m_channels.GetChannelsAmount() == 0)
   {
-    Logger::Log(LEVEL_ERROR, "Unable to load channels from file '%s':  file is corrupted.", m_m3uLocation.c_str());
+    Logger::Log(LEVEL_ERROR, "%s - Unable to load channels from file '%s'", __FUNCTION__, m_m3uLocation.c_str());
     return false;
   }
 
   m_channels.ApplyChannelLogos();
 
-  Logger::Log(LEVEL_NOTICE, "Loaded %d channels.", m_channels.GetChannelsAmount());
+  Logger::Log(LEVEL_NOTICE, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
   return true;
 }
 
@@ -181,26 +191,38 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strTvgShift   = ReadMarkerValue(infoLine, TVG_INFO_SHIFT_MARKER);
 
     if (strTvgId.empty())
+      strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
+
+    if (strTvgId.empty())
     {
       char buff[255];
       sprintf(buff, "%d", std::atoi(infoLine.c_str()));
       strTvgId.append(buff);
     }
 
+    bool logoSetFromChannelName = false;
     if (strTvgLogo.empty())
+    {
       strTvgLogo = channelName;
+      logoSetFromChannelName = true;
+    }
 
-    if (!strChnlNo.empty())
+    if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
       channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
 
     double tvgShiftDecimal = std::atof(strTvgShift.c_str());
 
-    bool isRadio = !StringUtils::CompareNoCase(strRadio, "true");
+    bool isRadio = StringUtils::EqualsNoCase(strRadio, "true");
     channel.SetTvgId(strTvgId);
     channel.SetTvgName(XBMC->UnknownToUTF8(strTvgName.c_str()));
     channel.SetTvgLogo(XBMC->UnknownToUTF8(strTvgLogo.c_str()));
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
+
+    // urlencode channel logo when set from channel name and source is Remote Path
+    // append extension as channel name wouldn't have it
+    if (Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH && logoSetFromChannelName)
+      channel.SetTvgLogo(WebUtils::UrlEncode(channel.GetTvgLogo()) + CHANNEL_LOGO_EXTENSION);
 
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);

@@ -48,7 +48,7 @@ namespace iptvsimple
 
     void AddChannel(iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups);
     iptvsimple::data::Channel* GetChannel(int uniqueId);
-    const iptvsimple::data::Channel* FindChannel(const std::string& id, const std::string& name) const;
+    const iptvsimple::data::Channel* FindChannel(const std::string& id, const std::string& displayName) const;
     const std::vector<data::Channel>& GetChannelsList() const { return m_channels; }
     void Clear();
     void ApplyChannelLogos();

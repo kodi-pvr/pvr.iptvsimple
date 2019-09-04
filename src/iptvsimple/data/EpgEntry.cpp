@@ -22,18 +22,21 @@
 
 #include "EpgEntry.h"
 
+#include "../Settings.h"
 #include "../utilities/XMLUtils.h"
 
 #include "p8-platform/util/StringUtils.h"
 #include "rapidxml/rapidxml.hpp"
 
+#include <cmath>
 #include <cstdlib>
+#include <regex>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace rapidxml;
 
-void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genres)
+void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genreMappings)
 {
   left.iUniqueBroadcastId  = m_broadcastId;
   left.strTitle            = m_title.c_str();
@@ -46,14 +49,24 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   left.strCast             = m_cast.c_str();
   left.strDirector         = m_director.c_str();
   left.strWriter           = m_writer.c_str();
-  left.iYear               = 0;     /* not supported */
+  left.iYear               = m_year;
   left.strIMDBNumber       = nullptr;  /* not supported */
   left.strIconPath         = m_iconPath.c_str();
-  if (SetEpgGenre(genres, m_genreString))
+  if (SetEpgGenre(genreMappings))
   {
-    left.iGenreType          = m_genreType;
-    left.iGenreSubType       = m_genreSubType;
-    left.strGenreDescription = nullptr;
+    left.iGenreType           = m_genreType;
+    if (Settings::GetInstance().UseEpgGenreTextWhenMapping())
+    {
+      //Setting this value in sub type allows custom text to be displayed
+      //while still sending the type used for EPG colour
+      left.iGenreSubType       = EPG_GENRE_USE_STRING;
+      left.strGenreDescription = m_genreString.c_str();
+    }
+    else
+    {
+      left.iGenreSubType       = m_genreSubType;
+      left.strGenreDescription = nullptr;
+    }
   }
   else
   {
@@ -62,26 +75,33 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
     left.strGenreDescription = m_genreString.c_str();
   }
   left.iParentalRating     = 0;     /* not supported */
-  left.iStarRating         = 0;     /* not supported */
-  left.iSeriesNumber       = 0;     /* not supported */
-  left.iEpisodeNumber      = 0;     /* not supported */
-  left.iEpisodePartNumber  = 0;     /* not supported */
+  left.iStarRating         = m_starRating;
+  left.iSeriesNumber       = m_seasonNumber;
+  left.iEpisodeNumber      = m_episodeNumber;
+  left.iEpisodePartNumber  = m_episodePartNumber;
   left.strEpisodeName      = m_episodeName.c_str();
   left.iFlags              = EPG_TAG_FLAG_UNDEFINED;
+  left.firstAired          = m_firstAired;
 }
 
-bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genres, const std::string& genreToFind)
+bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genreMappings)
 {
-  if (genres.empty())
+  if (genreMappings.empty())
     return false;
 
-  for (const auto& myGenre : genres)
+  for (const auto& genre : StringUtils::Split(m_genreString, EPG_STRING_TOKEN_SEPARATOR))
   {
-    if (StringUtils::CompareNoCase(myGenre.GetGenreString(), genreToFind) == 0)
+    if (genre.empty())
+      continue;
+
+    for (const auto& genreMapping : genreMappings)
     {
-      m_genreType = myGenre.GetGenreType();
-      m_genreSubType = myGenre.GetGenreSubType();
-      return true;
+      if (StringUtils::EqualsNoCase(genreMapping.GetGenreString(), genre))
+      {
+        m_genreType = genreMapping.GetGenreType();
+        m_genreSubType = genreMapping.GetGenreSubType();
+        return true;
+      }
     }
   }
 
@@ -127,13 +147,32 @@ long long ParseDateTime(const std::string& strDate)
   int offset_hours = 0;
   int offset_minutes = 0;
 
-  sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &year, &mon, &mday, &hour, &min, &sec, &offset_sign, &offset_hours, &offset_minutes);
+  std::sscanf(strDate.c_str(), "%04d%02d%02d%02d%02d%02d %c%02d%02d", &year, &mon, &mday, &hour, &min, &sec, &offset_sign, &offset_hours, &offset_minutes);
 
   long offset_of_date = (offset_hours * 60 + offset_minutes) * 60;
   if (offset_sign == '-')
     offset_of_date = -offset_of_date;
 
   return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
+}
+
+int ParseStarRating(const std::string& starRatingString)
+{
+  float starRating = 0;
+  float starRatingScale;
+
+  int ret = std::sscanf(starRatingString.c_str(), "%f/ %f", &starRating, &starRatingScale);
+
+  if (ret == 2 && starRatingScale != STAR_RATING_SCALE && starRatingScale != 0.0f)
+  {
+    starRating /= starRatingScale;
+    starRating *= 10;
+  }
+
+  if (ret >= 1 && starRating > STAR_RATING_SCALE)
+    starRating = STAR_RATING_SCALE;
+
+  return static_cast<int>(std::round(starRating));
 }
 
 } // unnamed namespace
@@ -155,21 +194,52 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;
-  m_plotOutline= "";
+  m_plotOutline.clear();
   m_startTime = static_cast<time_t>(tmpStart);
   m_endTime = static_cast<time_t>(tmpEnd);
+  m_year = 0;
+  m_firstAired = 0;
+  m_starRating = 0;
+  m_episodeNumber = 0;
+  m_episodePartNumber = 0;
+  m_seasonNumber = 0;
 
   m_title = GetNodeValue(channelNode, "title");
   m_plot = GetNodeValue(channelNode, "desc");
-  m_genreString = GetNodeValue(channelNode, "category");
   m_episodeName = GetNodeValue(channelNode, "sub-title");
 
-  xml_node<> *creditsNode = channelNode->first_node("credits");
-  if (creditsNode != NULL)
+  m_genreString = GetJoinedNodeValues(channelNode, "category");
+
+  const std::string dateString = GetNodeValue(channelNode, "date");
+  if (!dateString.empty())
   {
-    m_cast = GetNodeValue(creditsNode, "actor");
-    m_director = GetNodeValue(creditsNode, "director");
-    m_writer = GetNodeValue(creditsNode, "writer");
+    if (std::regex_match(dateString, std::regex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]")))
+      m_firstAired = static_cast<time_t>(ParseDateTime(dateString));
+
+    std::sscanf(dateString.c_str(), "%04d", &m_year);
+  }
+
+  xml_node<>* starRatingNode = channelNode->first_node("star-rating");
+  if (starRatingNode)
+    m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
+
+  std::vector<std::pair<std::string, std::string>> episodeNumbersList;
+  for (xml_node<>* episodeNumNode = channelNode->first_node("episode-num"); episodeNumNode; episodeNumNode = episodeNumNode->next_sibling("episode-num"))
+  {
+    std::string episodeNumberSystem;
+    if (GetAttributeValue(episodeNumNode, "system", episodeNumberSystem))
+      episodeNumbersList.push_back({episodeNumberSystem, episodeNumNode->value()});
+  }
+
+  if (!episodeNumbersList.empty())
+    ParseEpisodeNumberInfo(episodeNumbersList);
+
+  xml_node<>* creditsNode = channelNode->first_node("credits");
+  if (creditsNode)
+  {
+    m_cast = GetJoinedNodeValues(creditsNode, "actor");
+    m_director = GetJoinedNodeValues(creditsNode, "director");
+    m_writer = GetJoinedNodeValues(creditsNode, "writer");
   }
 
   xml_node<>* iconNode = channelNode->first_node("icon");
@@ -180,4 +250,79 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
     m_iconPath = iconPath;
 
   return true;
+}
+
+bool EpgEntry::ParseEpisodeNumberInfo(std::vector<std::pair<std::string, std::string>>& episodeNumbersList)
+{
+  //First check xmltv_ns
+  for (const auto& pair : episodeNumbersList)
+  {
+    if (pair.first == "xmltv_ns" && ParseXmltvNsEpisodeNumberInfo(pair.second))
+      return true;
+  }
+
+  //If not found try onscreen
+  for (const auto& pair : episodeNumbersList)
+  {
+    if (pair.first == "onscreen" && ParseOnScreenEpisodeNumberInfo(pair.second))
+      return true;
+  }
+
+  return false;
+}
+
+bool EpgEntry::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString)
+{
+  size_t found = episodeNumberString.find(".");
+  if (found != std::string::npos)
+  {
+    const std::string seasonString = episodeNumberString.substr(0, found);
+    std::string episodeString = episodeNumberString.substr(found + 1);
+    std::string episodePartString;
+
+    found = episodeString.find(".");
+    if (found != std::string::npos)
+    {
+      episodePartString = episodeString.substr(found + 1);
+      episodeString = episodeString.substr(0, found);
+    }
+
+    if (std::sscanf(seasonString.c_str(), "%d", &m_seasonNumber) == 1)
+      m_seasonNumber++;
+
+    if (std::sscanf(episodeString.c_str(), "%d", &m_episodeNumber) == 1)
+      m_episodeNumber++;
+
+    if (!episodePartString.empty())
+    {
+      int totalNumberOfParts;
+      int numElementsParsed = std::sscanf(episodePartString.c_str(), "%d/%d", &m_episodePartNumber, &totalNumberOfParts);
+
+      if (numElementsParsed == 2)
+        m_episodePartNumber++;
+      else if (numElementsParsed == 1)
+        m_episodePartNumber = 0;
+    }
+  }
+
+  return m_episodeNumber;
+}
+
+bool EpgEntry::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString)
+{
+  const std::string text = std::regex_replace(episodeNumberString, std::regex("[ \\txX_\\.]"), "");
+
+  std::smatch match;
+  if (std::regex_match(text, match, std::regex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$")))
+  {
+    if (match.size() == 3)
+    {
+      m_seasonNumber = std::atoi(match[1].str().c_str());
+      m_episodeNumber = std::atoi(match[2].str().c_str());
+
+      return true;
+    }
+  }
+
+  return false;
 }

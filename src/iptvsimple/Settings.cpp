@@ -29,12 +29,6 @@ using namespace ADDON;
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;
 
-#ifdef TARGET_WINDOWS
-#ifdef DeleteFile
-#undef DeleteFile
-#endif
-#endif
-
 /***************************************************************************
  * PVR settings
  **************************************************************************/
@@ -56,6 +50,8 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
       m_cacheM3U = true;
   if (!XBMC->GetSetting("startNum", &m_startChannelNumber))
     m_startChannelNumber = 1;
+  if (!XBMC->GetSetting("numberByOrder", &m_numberChannelsByM3uOrderOnly))
+    m_numberChannelsByM3uOrderOnly = false;
 
   // EPG
   if (!XBMC->GetSetting("epgPathType", &m_epgPathType))
@@ -70,6 +66,16 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_epgTimeShiftMins = 0;
   if (!XBMC->GetSetting("epgTSOverride", &m_tsOverride))
     m_tsOverride = true;
+
+  //Genres
+  if (!XBMC->GetSetting("useEpgGenreText", &m_useEpgGenreTextWhenMapping))
+    m_useEpgGenreTextWhenMapping = false;
+  if (!XBMC->GetSetting("genresPathType", &m_genresPathType))
+    m_genresPathType = PathType::LOCAL_PATH;
+  if (XBMC->GetSetting("genresPath", &buffer))
+    m_genresPath = buffer;
+  if (XBMC->GetSetting("genresUrl", &buffer))
+    m_genresUrl = buffer;
 
   // Channel Logos
   if (!XBMC->GetSetting("logoPathType", &m_logoPathType))
@@ -86,13 +92,13 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
 {
   // reset cache and restart addon
 
-  std::string strFile = FileUtils::GetUserFilePath(M3U_FILE_NAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-    XBMC->DeleteFile(strFile.c_str());
+  std::string strFile = FileUtils::GetUserDataAddonFilePath(M3U_CACHE_FILENAME);
+  if (FileUtils::FileExists(strFile.c_str()))
+    FileUtils::DeleteFile(strFile);
 
-  strFile = FileUtils::GetUserFilePath(TVG_FILE_NAME);
-  if (XBMC->FileExists(strFile.c_str(), false))
-    XBMC->DeleteFile(strFile.c_str());
+  strFile = FileUtils::GetUserDataAddonFilePath(XMLTV_CACHE_FILENAME);
+  if (FileUtils::FileExists(strFile.c_str()))
+    FileUtils::DeleteFile(strFile);
 
   // M3U
   if (settingName == "m3uPathType")
@@ -105,6 +111,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_cacheM3U, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "startNum")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_startChannelNumber, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "numberByOrder")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_numberChannelsByM3uOrderOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   // EPG
   if (settingName == "epgPathType")
@@ -119,6 +127,16 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_epgTimeShiftMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "epgTSOverride")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_tsOverride, ADDON_STATUS_OK, ADDON_STATUS_OK);
+
+  // Genres
+  if (settingName == "useEpgGenreText")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useEpgGenreTextWhenMapping, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "genresPathType")
+    return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_genresPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "genresPath")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "genresUrl")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   // Channel Logos
   if (settingName == "logoPathType")

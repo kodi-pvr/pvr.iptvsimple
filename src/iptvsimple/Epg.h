@@ -24,6 +24,7 @@
 #include "kodi/libXBMC_pvr.h"
 
 #include "Channels.h"
+#include "Settings.h"
 #include "data/ChannelEpg.h"
 #include "data/EpgGenre.h"
 
@@ -34,6 +35,8 @@ namespace iptvsimple
 {
   static const int SECONDS_IN_DAY = 86400;
   static const std::string GENRES_MAP_FILENAME = "genres.xml";
+  static const std::string GENRE_DIR = "/genres";
+  static const std::string GENRE_ADDON_DATA_BASE_DIR = ADDON_DATA_BASE_DIR + GENRE_DIR;
 
   enum class XmltvFileFormat
   {
@@ -53,10 +56,11 @@ namespace iptvsimple
 
   private:
     static const XmltvFileFormat GetXMLTVFileFormat(const char* buffer);
+    static void MoveOldGenresXMLFileToNewLocation();
 
     bool LoadEPG(time_t iStart, time_t iEnd);
     bool GetXMLTVFileWithRetries(std::string& data);
-    char* FillBufferFromXMLTVData(std::string& data);
+    char* FillBufferFromXMLTVData(std::string& data, std::string& decompressedData);
     bool LoadChannelEpgs(rapidxml::xml_node<>* rootElement);
     void LoadEpgEntries(rapidxml::xml_node<>* rootElement, int start, int end);
     bool LoadGenres();
@@ -73,6 +77,6 @@ namespace iptvsimple
 
     iptvsimple::Channels& m_channels;
     std::vector<data::ChannelEpg> m_channelEpgs;
-    std::vector<iptvsimple::data::EpgGenre> m_genres;
+    std::vector<iptvsimple::data::EpgGenre> m_genreMappings;
   };
 } //namespace iptvsimple

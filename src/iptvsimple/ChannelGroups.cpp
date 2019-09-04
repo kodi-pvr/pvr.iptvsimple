@@ -47,10 +47,10 @@ void ChannelGroups::GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannel
 
   for (const auto& channelGroup : m_channelGroups)
   {
-    Logger::Log(LEVEL_DEBUG, "%s - Transfer channelGroup '%s', ChannelGroupIndex '%d'", __FUNCTION__, channelGroup.GetGroupName().c_str(), channelGroup.GetUniqueId());
-
     if (channelGroup.IsRadio() == radio)
     {
+      Logger::Log(LEVEL_DEBUG, "%s - Transfer channelGroup '%s', ChannelGroupId '%d'", __FUNCTION__, channelGroup.GetGroupName().c_str(), channelGroup.GetUniqueId());
+
       PVR_CHANNEL_GROUP kodiChannelGroup = {0};
 
       channelGroup.UpdateTo(kodiChannelGroup);
@@ -67,6 +67,14 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_C
   const ChannelGroup* myGroup = FindChannelGroup(group.strGroupName);
   if (myGroup)
   {
+    // We set a channel order here that applies to this group in kodi-pvr
+    // This allows the users to use the 'Backend Order' sort option in the left to
+    // have the same order as the backend (regardles of the channel numbering used)
+    //
+    // We don't set a channel number within this group as different channel numbers
+    // per group are not supported in M3U files
+    int channelOrder = 1;
+
     for (int memberId : myGroup->GetMemberChannelIndexes())
     {
       if (memberId < 0 || memberId >= static_cast<int>(m_channels.GetChannelsAmount()))
@@ -77,7 +85,10 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_C
 
       strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
       xbmcGroupMember.iChannelUniqueId = channel.GetUniqueId();
-      xbmcGroupMember.iChannelNumber = channel.GetChannelNumber();
+      xbmcGroupMember.iOrder = channelOrder++; // Keep the channels in list order as per the M3U
+
+      Logger::Log(LEVEL_DEBUG, "%s - Transfer channel group '%s' member '%s', ChannelId '%d', ChannelOrder: '%d'", __FUNCTION__,
+                  myGroup->GetGroupName().c_str(), channel.GetChannelName().c_str(), channel.GetUniqueId(), channelOrder);
 
       PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
     }

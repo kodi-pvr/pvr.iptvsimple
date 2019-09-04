@@ -1,0 +1,138 @@
+<!--
+The following are the DVB Genre Id's used for reference
+
+Source: https://www.etsi.org/deliver/etsi_en/300400_300499/300468/01.11.01_60/en_300468v011101p.pdf
+Page 40
+
+Note: the first 4 bits is genre and last is sub genre
+
+Mapping DVB Genres:
+ - The content below is a reference for Genre Text Mappings
+
+There shoud be no reason to modify this file unless the DVB standard changes.
+
+NOTE: IF YOU MODIFY THIS FILE IT WILL BE OVERWRITTEN NEXT TIME THE ADDON IS STARTED
+
+If you have changes either create a PR containing the changes or an issue with details at:
+  https://github.com/kodi-pvr/pvr.iptvsimple
+-->
+
+<genres>
+  <name>Kodi DVB Genres using Hexadecimal for genreId</name>
+  <!-- UNDEFINED -->
+  <genre genreId="0x00">Undefined</genre>
+
+  <!-- MOVIE / DRAMA -->
+  <genre genreId="0x10">General Movie / Drama</genre>
+  <genre genreId="0x11">Detective / Thriller</genre>
+  <genre genreId="0x12">Adventure / Western / War</genre>
+  <genre genreId="0x13">Science Fiction / Fantasy / Horror</genre>
+  <genre genreId="0x14">Comedy</genre>
+  <genre genreId="0x15">Soap / Melodrama / Folkloric</genre>
+  <genre genreId="0x16">Romance</genre>
+  <genre genreId="0x17">Serious / Classical / Religious / Historical Movie / Drama</genre>
+  <genre genreId="0x18">Adult Movie / Drama</genre>
+
+  <!-- NEWS / CURRENT AFFAIRS -->
+  <genre genreId="0x20">News / Current Affairs</genre>
+  <genre genreId="0x21">News / Weather Report</genre>
+  <genre genreId="0x22">News Magazine</genre>
+  <genre genreId="0x23">Documentary</genre>
+  <genre genreId="0x24">Discussion / Interview / Debate</genre>
+
+  <!-- SHOW -->
+  <genre genreId="0x30">Show / Game Show</genre>
+  <genre genreId="0x31">Game Show / Quiz / Contest</genre>
+  <genre genreId="0x32">Variety Show</genre>
+  <genre genreId="0x33">Talk Show</genre>
+
+  <!-- SPORTS -->
+  <genre genreId="0x40">Sports</genre>
+  <genre genreId="0x41">Special Event</genre>
+  <genre genreId="0x42">Sport Magazine</genre>
+  <genre genreId="0x43">Football</genre>
+  <genre genreId="0x44">Tennis / Squash</genre>
+  <genre genreId="0x45">Team Sports</genre>
+  <genre genreId="0x46">Athletics</genre>
+  <genre genreId="0x47">Motor Sport</genre>
+  <genre genreId="0x48">Water Sport</genre>
+  <genre genreId="0x49">Winter Sports</genre>
+  <genre genreId="0x4A">Equestrian</genre>
+  <genre genreId="0x4B">Martial Sports</genre>
+
+  <!-- CHILDREN / YOUTH -->
+  <genre genreId="0x50">Children's / Youth Programmes</genre>
+  <genre genreId="0x51">Pre-school Children's Programmes</genre>
+  <genre genreId="0x52">Entertainment Programmes for 6 to 14</genre>
+  <genre genreId="0x53">Entertainment Programmes for 10 to 16</genre>
+  <genre genreId="0x54">Informational / Educational / School Programme</genre>
+  <genre genreId="0x55">Cartoons / Puppets</genre>
+
+  <!-- MUSIC / BALLET / DANCE -->
+  <genre genreId="0x60">Music / Ballet / Dance</genre>
+  <genre genreId="0x61">Rock / Pop</genre>
+  <genre genreId="0x62">Serious / Classical Music</genre>
+  <genre genreId="0x63">Folk / Traditional Music</genre>
+  <genre genreId="0x64">Jazz</genre>
+  <genre genreId="0x65">Musical / Opera</genre>
+  <genre genreId="0x66">Ballet</genre>
+
+  <!-- ARTS / CULTURE -->
+  <genre genreId="0x70">Arts / Culture</genre>
+  <genre genreId="0x71">Performing Arts</genre>
+  <genre genreId="0x72">Fine Arts</genre>
+  <genre genreId="0x73">Religion</genre>
+  <genre genreId="0x74">Popular Culture / Traditional Arts</genre>
+  <genre genreId="0x75">Literature</genre>
+  <genre genreId="0x76">Film / Cinema</genre>
+  <genre genreId="0x77">Experimental Film / Video</genre>
+  <genre genreId="0x78">Broadcasting / Press</genre>
+  <genre genreId="0x79">New Media</genre>
+  <genre genreId="0x7A">Arts / Culture Magazines</genre>
+  <genre genreId="0x7B">Fashion</genre>
+
+  <!-- SOCIAL / POLITICAL / ECONOMICS -->
+  <genre genreId="0x80">Social / Political / Economics</genre>
+  <genre genreId="0x81">Magazines / Reports / Documentary</genre>
+  <genre genreId="0x82">Economics / Social Advisory</genre>
+  <genre genreId="0x83">Remarkable People</genre>
+
+  <!-- EDUCATIONAL / SCIENCE -->
+  <genre genreId="0x90">Education / Science / Factual</genre>
+  <genre genreId="0x91">Nature / Animals / Environment</genre>
+  <genre genreId="0x92">Technology / Natural Sciences</genre>
+  <genre genreId="0x93">Medicine / Physiology / Psychology</genre>
+  <genre genreId="0x94">Foreign Countries / Expeditions</genre>
+  <genre genreId="0x95">Social / Spiritual Sciences</genre>
+  <genre genreId="0x96">Further Education</genre>
+  <genre genreId="0x97">Languages</genre>
+
+  <!-- LEISURE / HOBBIES -->
+  <genre genreId="0xA0">Leisure / Hobbies</genre>
+  <genre genreId="0xA1">Tourism / Travel</genre>
+  <genre genreId="0xA2">Handicraft</genre>
+  <genre genreId="0xA3">Motoring</genre>
+  <genre genreId="0xA4">Fitness and Health</genre>
+  <genre genreId="0xA5">Cooking</genre>
+  <genre genreId="0xA6">Advertisement / Shopping</genre>
+  <genre genreId="0xA7">Gardening</genre>
+
+  <!-- SPECIAL -->
+  <genre genreId="0xB0">Special Characteristics</genre>
+  <genre genreId="0xB1">Original Language</genre>
+  <genre genreId="0xB2">Black and White</genre>
+  <genre genreId="0xB3">Unpublished</genre>
+  <genre genreId="0xB4">Live Broadcast</genre>
+
+  <!-- USERDEFINED -->
+  <genre genreId="0xF0">Drama</genre>
+  <genre genreId="0xF1">Detective / Thriller</genre>
+  <genre genreId="0xF2">Adventure / Western / War</genre>
+  <genre genreId="0xF3">Science Fiction / Fantasy / Horror</genre>
+  <!-- below currently ignored by XBMC see http://trac.xbmc.org/ticket/13627 -->
+  <genre genreId="0xF4">Comedy</genre>
+  <genre genreId="0xF5">Soap / Melodrama / Folkloric</genre>
+  <genre genreId="0xF6">Romance</genre>
+  <genre genreId="0xF7">Serious / ClassicalReligion / Historical</genre>
+  <genre genreId="0xF8">Adult</genre>
+</genres>
