@@ -77,8 +77,7 @@ inline bool GetNodeValue(const xml_node<Ch> * pRootNode, const char* strTag, std
 template<class Ch>
 inline bool GetJoinedNodeValues(const xml_node<Ch>* pRootNode, const char* strTag, std::string& strStringValue)
 {
-  xml_node<Ch>* pChildNode = nullptr;
-  for (pChildNode = pRootNode->first_node(strTag); pChildNode; pChildNode = pChildNode->next_sibling(strTag))
+  for (xml_node<Ch>* pChildNode = pRootNode->first_node(strTag); pChildNode; pChildNode = pChildNode->next_sibling(strTag))
   {
     if (pChildNode)
     {
@@ -327,7 +326,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       continue;
 
     bool foundChannel = false;
-    for (xml_node<> *pDisplayNameNode = pChannelNode->first_node("display-name"); pDisplayNameNode; pDisplayNameNode = pDisplayNameNode->next_sibling("display-name"))
+    for (xml_node<>* pDisplayNameNode = pChannelNode->first_node("display-name"); pDisplayNameNode; pDisplayNameNode = pDisplayNameNode->next_sibling("display-name"))
     {
       const std::string strName = pDisplayNameNode->value();
       if (FindChannel(epgChannel.strId, strName))
