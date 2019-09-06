@@ -299,7 +299,7 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
   {
     xmlDoc.parse<0>(buffer);
   }
-  catch(parse_error p)
+  catch(parse_error& p)
   {
     XBMC->Log(LOG_ERROR, "Unable parse EPG XML: %s", p.what());
     return false;
@@ -847,7 +847,7 @@ bool PVRIptvData::LoadGenres(void)
   {
     xmlDoc.parse<0>(buffer);
   }
-  catch (parse_error p)
+  catch (parse_error& p)
   {
     return false;
   }
