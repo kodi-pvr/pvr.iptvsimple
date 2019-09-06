@@ -84,7 +84,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
     {
       xmlDoc.parse<0>(buffer);
     }
-    catch (parse_error p)
+    catch (parse_error& p)
     {
       Logger::Log(LEVEL_ERROR, "%s - Unable parse EPG XML: %s", __FUNCTION__, p.what());
       return false;
@@ -430,7 +430,7 @@ bool Epg::LoadGenres()
   {
     xmlDoc.parse<0>(buffer);
   }
-  catch (parse_error p)
+  catch (parse_error& p)
   {
     return false;
   }
