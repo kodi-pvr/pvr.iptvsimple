@@ -1,3 +1,6 @@
+v3.8.1
+- Fix compiler warnings
+
 v3.8.0
 - Support multiple display-names and case insensitive tvg-id is always first, next tvg-name and then channel name find order
 - Support full timeshift range of -12 to +14 hours
