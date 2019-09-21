@@ -41,7 +41,22 @@ msgctxt "#30002"
 msgid "Remote path (Internet address)"
 msgstr ""
 
-#empty strings from id 30003 to 30009
+#label-option: General - m3uRefreshMode
+msgctxt "#30003"
+msgid "Disabled"
+msgstr ""
+
+#label-option: General - m3uRefreshMode
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr ""
+
+#label-option: General - m3uRefreshMode
+msgctxt "#30005"
+msgid "Once per day"
+msgstr ""
+
+#empty strings from id 30006 to 30009
 
 #label-category: general
 #label-group: General - General
@@ -69,7 +84,22 @@ msgctxt "#30014"
 msgid "Only number by channel order in M3U"
 msgstr ""
 
-#empty strings from id 30015 to 30018
+#label: General - m3uRefreshMode
+msgctxt "#30015"
+msgid "M3U auto refresh mode"
+msgstr ""
+
+#label: General - m3uRefreshIntervalMins
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr ""
+
+#label: General - m3uRefreshHour
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr ""
+
+#empty string 30018
 
 #label-category: epgsettings
 msgctxt "#30019"
@@ -222,7 +252,22 @@ msgctxt "#30606"
 msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
 msgstr ""
 
-#empty strings from id 30607 to 30619
+#help: General - m3uRefreshMode
+msgctxt "#30607"
+msgid "Select the auto refresh mode for the M3U file. The options are: [Disabled] - Don't auto refresh the M3U file; [Repeated refresh] - Refresh the M3U on a minute based interval; [Once per day] - Refresh the M3U once per day."
+msgstr ""
+
+#help: General - m3uRefreshIntervalMins
+msgctxt "#30608"
+msgid "If M3U auto refresh mode is [Repeated refresh] refresh the M3U every time this number of minutes passes. Max 120 minutes."
+msgstr ""
+
+#help: General - m3uRefreshHour
+msgctxt "#30609"
+msgid "If M3U auto refresh mode is [Once per day] refresh the M3U every time this horu if the day is reached."
+msgstr ""
+
+#empty strings from id 30610 to 30619
 
 #help info - EPG Settings
 

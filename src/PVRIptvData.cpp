@@ -28,6 +28,7 @@
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/utilities/Logger.h"
 
+#include <ctime>
 #include <chrono>
 
 using namespace ADDON;
@@ -57,9 +58,26 @@ bool PVRIptvData::Start()
 
 void PVRIptvData::Process()
 {
+  unsigned int refreshTimer = 0;
+  time_t lastRefreshTimeSeconds = std::time(nullptr);
+  int lastRefreshHour = Settings::GetInstance().GetM3URefreshHour(); //ignore if we start during same hour
+
   while (m_running)
   {
     std::this_thread::sleep_for(std::chrono::milliseconds(PROCESS_LOOP_WAIT_SECS * 1000));
+
+    time_t currentRefreshTimeSeconds = std::time(nullptr);
+    std::tm timeInfo = *std::localtime(&currentRefreshTimeSeconds);
+    refreshTimer += static_cast<unsigned int>(currentRefreshTimeSeconds - lastRefreshTimeSeconds);
+    lastRefreshTimeSeconds = currentRefreshTimeSeconds;
+
+    if (Settings::GetInstance().GetM3URefreshMode() == RefreshMode::REPEATED_REFRESH &&
+        refreshTimer >= (Settings::GetInstance().GetM3URefreshIntervalMins() * 60))
+      m_reloadChannelsGroupsAndEPG = true;
+
+    if (Settings::GetInstance().GetM3URefreshMode() == RefreshMode::ONCE_PER_DAY &&
+        lastRefreshHour != timeInfo.tm_hour && timeInfo.tm_hour == Settings::GetInstance().GetM3URefreshHour())
+      m_reloadChannelsGroupsAndEPG = true;
 
     std::lock_guard<std::mutex> lock(m_mutex);
     if (m_running && m_reloadChannelsGroupsAndEPG)
@@ -71,6 +89,7 @@ void PVRIptvData::Process()
 
       m_reloadChannelsGroupsAndEPG = false;
     }
+    lastRefreshHour = timeInfo.tm_hour;
   }
 }
 

@@ -52,6 +52,12 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_startChannelNumber = 1;
   if (!XBMC->GetSetting("numberByOrder", &m_numberChannelsByM3uOrderOnly))
     m_numberChannelsByM3uOrderOnly = false;
+  if (!XBMC->GetSetting("m3uRefreshMode", &m_m3uRefreshMode))
+    m_m3uRefreshMode = RefreshMode::DISABLED;
+  if (!XBMC->GetSetting("m3uRefreshIntervalMins", &m_m3uRefreshIntervalMins))
+    m_m3uRefreshIntervalMins = 60;
+  if (!XBMC->GetSetting("m3uRefreshHour", &m_m3uRefreshHour))
+    m_m3uRefreshHour = 4;
 
   // EPG
   if (!XBMC->GetSetting("epgPathType", &m_epgPathType))
@@ -113,6 +119,12 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_startChannelNumber, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "numberByOrder")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_numberChannelsByM3uOrderOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "m3uRefreshMode")
+    return SetSetting<RefreshMode, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "m3uRefreshIntervalMins")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshIntervalMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "m3uRefreshHour")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshHour, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   // EPG
   if (settingName == "epgPathType")

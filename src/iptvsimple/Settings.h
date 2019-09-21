@@ -41,6 +41,14 @@ namespace iptvsimple
     REMOTE_PATH
   };
 
+  enum class RefreshMode
+    : int // same type as addon settings
+  {
+    DISABLED = 0,
+    REPEATED_REFRESH,
+    ONCE_PER_DAY
+  };
+
   enum class EpgLogosMode
     : int // same type as addon settings
   {
@@ -74,6 +82,9 @@ namespace iptvsimple
     bool UseM3UCache() const { return m_m3uPathType == PathType::REMOTE_PATH ? m_cacheM3U : false; }
     int GetStartChannelNumber() const { return m_startChannelNumber; }
     bool NumberChannelsByM3uOrderOnly() const { return m_numberChannelsByM3uOrderOnly; }
+    const RefreshMode& GetM3URefreshMode() const { return m_m3uRefreshMode; }
+    int GetM3URefreshIntervalMins() const { return m_m3uRefreshIntervalMins; }
+    int GetM3URefreshHour() const { return m_m3uRefreshHour; }
 
     const std::string& GetEpgLocation() const { return m_epgPathType == PathType::REMOTE_PATH ? m_epgUrl : m_epgPath; }
     const PathType& GetEpgPathType() const { return m_epgPathType; }
@@ -140,6 +151,9 @@ namespace iptvsimple
     bool m_cacheM3U = false;
     int m_startChannelNumber = 1;
     bool m_numberChannelsByM3uOrderOnly = false;
+    RefreshMode m_m3uRefreshMode = RefreshMode::DISABLED;
+    int m_m3uRefreshIntervalMins = 60;
+    int m_m3uRefreshHour = 4;
 
     PathType m_epgPathType = PathType::REMOTE_PATH;
     std::string m_epgPath;
