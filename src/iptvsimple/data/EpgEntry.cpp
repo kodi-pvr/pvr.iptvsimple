@@ -25,12 +25,12 @@
 #include "../Settings.h"
 #include "../utilities/XMLUtils.h"
 
-#include "p8-platform/util/StringUtils.h"
-#include "rapidxml/rapidxml.hpp"
-
 #include <cmath>
 #include <cstdlib>
 #include <regex>
+
+#include <p8-platform/util/StringUtils.h>
+#include <rapidxml/rapidxml.hpp>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

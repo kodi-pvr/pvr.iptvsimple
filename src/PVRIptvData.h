@@ -23,9 +23,6 @@
  *
  */
 
-#include "kodi/libXBMC_pvr.h"
-#include "p8-platform/threads/threads.h"
-
 #include "iptvsimple/Channels.h"
 #include "iptvsimple/ChannelGroups.h"
 #include "iptvsimple/Epg.h"
@@ -33,6 +30,9 @@
 #include "iptvsimple/data/Channel.h"
 
 #include <atomic>
+
+#include <kodi/libXBMC_pvr.h>
+#include <p8-platform/threads/threads.h>
 
 class PVRIptvData : public P8PLATFORM::CThread
 {

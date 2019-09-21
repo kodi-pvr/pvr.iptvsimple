@@ -28,9 +28,9 @@
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 
-#include "p8-platform/util/StringUtils.h"
-
 #include <regex>
+
+#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

@@ -28,14 +28,14 @@
 #include "utilities/Logger.h"
 #include "utilities/WebUtils.h"
 
-#include "p8-platform/util/StringUtils.h"
-
 #include <chrono>
 #include <cstdlib>
 #include <map>
 #include <regex>
 #include <sstream>
 #include <vector>
+
+#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

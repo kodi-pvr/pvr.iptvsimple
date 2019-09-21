@@ -21,11 +21,11 @@
  *
  */
 
-#include "kodi/xbmc_addon_types.h"
-
 #include "utilities/Logger.h"
 
 #include <string>
+
+#include <kodi/xbmc_addon_types.h>
 
 namespace iptvsimple
 {

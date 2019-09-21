@@ -21,7 +21,7 @@
  *
  */
 
-#include "p8-platform/os.h"
+#include <p8-platform/os.h> // Exception to header ordering, some strange quirk, don't know why
 
 #include <string>
 
