@@ -1,3 +1,9 @@
+v4.6.0
+- Added: M3U auto refresh
+- Update: update github links for Matrix
+- Update: Remove dependency on p8-platform util, thread and mutex
+- Added: Switch EPGTimeshift setting to hours instead of minutes
+
 v4.5.2
 - Speed up EPG loading
 
