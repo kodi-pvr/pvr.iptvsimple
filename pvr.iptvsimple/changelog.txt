@@ -1,3 +1,6 @@
+v3.8.2
+- Update github wiki link in addon.xml
+
 v3.8.1
 - Fix compiler warnings
 
