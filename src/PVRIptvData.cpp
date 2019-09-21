@@ -28,6 +28,8 @@
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/utilities/Logger.h"
 
+#include <chrono>
+
 using namespace ADDON;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
@@ -44,24 +46,25 @@ PVRIptvData::PVRIptvData()
 
 bool PVRIptvData::Start()
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
 
   XBMC->Log(LOG_INFO, "%s Starting separate client update thread...", __FUNCTION__);
-  CreateThread();
+  m_running = true;
+  m_thread = std::thread([&] { Process(); });
 
-  return IsRunning();
+  return m_running;
 }
 
-void* PVRIptvData::Process()
+void PVRIptvData::Process()
 {
-  while (!IsStopped())
+  while (m_running)
   {
-    Sleep(PROCESS_LOOP_WAIT_SECS * 1000);
+    std::this_thread::sleep_for(std::chrono::milliseconds(PROCESS_LOOP_WAIT_SECS * 1000));
 
-    P8PLATFORM::CLockObject lock(m_mutex);
-    if (m_reloadChannelsGroupsAndEPG)
+    std::lock_guard<std::mutex> lock(m_mutex);
+    if (m_running && m_reloadChannelsGroupsAndEPG)
     {
-      Sleep(1000);
+      std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
       m_playlistLoader.ReloadPlayList();
       m_epg.ReloadEPG();
@@ -69,16 +72,16 @@ void* PVRIptvData::Process()
       m_reloadChannelsGroupsAndEPG = false;
     }
   }
-
-  return nullptr;
 }
 
 PVRIptvData::~PVRIptvData()
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
   Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
-  StopThread();
+  m_running = false;
+  if (m_thread.joinable())
+    m_thread.join();
 
+  std::lock_guard<std::mutex> lock(m_mutex);
   m_channels.Clear();
   m_channelGroups.Clear();
   m_epg.Clear();
@@ -86,7 +89,7 @@ PVRIptvData::~PVRIptvData()
 
 int PVRIptvData::GetChannelsAmount()
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
   return m_channels.GetChannelsAmount();
 }
 
@@ -94,7 +97,7 @@ PVR_ERROR PVRIptvData::GetChannels(ADDON_HANDLE handle, bool bRadio)
 {
   std::vector<PVR_CHANNEL> channels;
   {
-    P8PLATFORM::CLockObject lock(m_mutex);
+    std::lock_guard<std::mutex> lock(m_mutex);
     m_channels.GetChannels(channels, bRadio);
   }
 
@@ -108,14 +111,14 @@ PVR_ERROR PVRIptvData::GetChannels(ADDON_HANDLE handle, bool bRadio)
 
 bool PVRIptvData::GetChannel(const PVR_CHANNEL& channel, Channel& myChannel)
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
 
   return m_channels.GetChannel(channel, myChannel);
 }
 
 int PVRIptvData::GetChannelGroupsAmount()
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
   return m_channelGroups.GetChannelGroupsAmount();
 }
 
@@ -123,7 +126,7 @@ PVR_ERROR PVRIptvData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
 {
   std::vector<PVR_CHANNEL_GROUP> channelGroups;
   {
-    P8PLATFORM::CLockObject lock(m_mutex);
+    std::lock_guard<std::mutex> lock(m_mutex);
     m_channelGroups.GetChannelGroups(channelGroups, bRadio);
   }
 
@@ -137,21 +140,21 @@ PVR_ERROR PVRIptvData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
 
 PVR_ERROR PVRIptvData::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& group)
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
 
   return m_channelGroups.GetChannelGroupMembers(handle, group);
 }
 
 PVR_ERROR PVRIptvData::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t iStart, time_t iEnd)
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
 
   return m_epg.GetEPGForChannel(handle, iChannelUid, iStart, iEnd);
 }
 
 ADDON_STATUS PVRIptvData::SetSetting(const char* settingName, const void* settingValue)
 {
-  P8PLATFORM::CLockObject lock(m_mutex);
+  std::lock_guard<std::mutex> lock(m_mutex);
 
   // When a number of settings change set this on the first one so it can be picked up
   // in the process call for a reload of channels, groups and EPG.

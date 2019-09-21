@@ -30,11 +30,12 @@
 #include "iptvsimple/data/Channel.h"
 
 #include <atomic>
+#include <mutex>
+#include <thread>
 
 #include <kodi/libXBMC_pvr.h>
-#include <p8-platform/threads/threads.h>
 
-class PVRIptvData : public P8PLATFORM::CThread
+class PVRIptvData
 {
 public:
   PVRIptvData();
@@ -51,7 +52,7 @@ public:
   ADDON_STATUS SetSetting(const char* settingName, const void* settingValue);
 
 protected:
-  void* Process() override;
+  void Process();
 
 private:
   static const int PROCESS_LOOP_WAIT_SECS = 2;
@@ -61,6 +62,8 @@ private:
   iptvsimple::PlaylistLoader m_playlistLoader{m_channels, m_channelGroups};
   iptvsimple::Epg m_epg{m_channels};
 
-  P8PLATFORM::CMutex m_mutex;
+  std::atomic<bool> m_running{false};
+  std::thread m_thread;
+  std::mutex m_mutex;
   std::atomic_bool m_reloadChannelsGroupsAndEPG{false};
 };
