@@ -1,3 +1,6 @@
+v4.5.2
+- Speed up EPG loading
+
 v4.5.1
 - Fix compiler warnings
 

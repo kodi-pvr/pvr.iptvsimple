@@ -213,7 +213,8 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
   const std::string dateString = GetNodeValue(channelNode, "date");
   if (!dateString.empty())
   {
-    if (std::regex_match(dateString, std::regex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]")))
+    static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]");
+    if (std::regex_match(dateString, dateRegex))
       m_firstAired = static_cast<time_t>(ParseDateTime(dateString));
 
     std::sscanf(dateString.c_str(), "%04d", &m_year);
@@ -310,10 +311,12 @@ bool EpgEntry::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberStr
 
 bool EpgEntry::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString)
 {
-  const std::string text = std::regex_replace(episodeNumberString, std::regex("[ \\txX_\\.]"), "");
+  static const std::regex numRegex("[ \\txX_\\.]");
+  const std::string text = std::regex_replace(episodeNumberString, numRegex, "");
 
   std::smatch match;
-  if (std::regex_match(text, match, std::regex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$")))
+  static const std::regex epRegex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$");
+  if (std::regex_match(text, match, epRegex))
   {
     if (match.size() == 3)
     {
