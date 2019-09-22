@@ -419,7 +419,8 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     GetNodeValue(pChannelNode, "date", dateString);
     if (!dateString.empty())
     {
-      if (std::regex_match(dateString, std::regex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]")))
+      static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]");
+      if (std::regex_match(dateString, dateRegex))
         entry.firstAired = static_cast<time_t>(ParseDateTime(dateString));
 
       std::sscanf(dateString.c_str(), "%04d", &entry.iYear);
@@ -534,10 +535,12 @@ bool PVRIptvData::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumber
 
 bool PVRIptvData::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry)
 {
-  const std::string text = std::regex_replace(episodeNumberString, std::regex("[ \\txX_\\.]"), "");
+  static const std::regex numRegex("[ \\txX_\\.]");
+  const std::string text = std::regex_replace(episodeNumberString, numRegex, "");
 
   std::smatch match;
-  if (std::regex_match(text, match, std::regex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$")))
+  static const std::regex epRegex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$");
+  if (std::regex_match(text, match, epRegex))
   {
     if (match.size() == 3)
     {
