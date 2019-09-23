@@ -244,7 +244,7 @@ msgstr ""
 
 #help: General - startNum
 msgctxt "#30605"
-msgid "The number to start numbering channels from."
+msgid "The number to start numbering channels from. Only used when [Use backend channel numbers] from PVR settings is enabled and a channel number is not supplied in the M3U file."
 msgstr ""
 
 #help: General - numberByOrder
