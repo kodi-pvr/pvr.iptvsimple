@@ -311,12 +311,12 @@ bool EpgEntry::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberStr
 
 bool EpgEntry::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString)
 {
-  static const std::regex numRegex("[ \\txX_\\.]");
-  const std::string text = std::regex_replace(episodeNumberString, numRegex, "");
+  static const std::regex unwantedCharsRegex("[ \\txX_\\.]");
+  const std::string text = std::regex_replace(episodeNumberString, unwantedCharsRegex, "");
 
   std::smatch match;
-  static const std::regex epRegex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$");
-  if (std::regex_match(text, match, epRegex))
+  static const std::regex seasonEpisodeRegex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$");
+  if (std::regex_match(text, match, seasonEpisodeRegex))
   {
     if (match.size() == 3)
     {
