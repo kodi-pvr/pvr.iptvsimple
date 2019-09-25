@@ -152,16 +152,16 @@
           </dependencies>
           <control type="toggle" />
         </setting>
-        <setting id="epgTimeShift" type="integer" label="30024" help="30625">
+        <setting id="epgTimeShift" type="number" label="30024" help="30625">
           <level>0</level>
           <default>0</default>
           <constraints>
-            <minimum>-720</minimum>
-            <step>30</step>
-            <maximum>840</maximum>
+            <minimum>-12</minimum>
+            <step>0.5</step>
+            <maximum>14</maximum>
           </constraints>
-          <control type="slider" format="integer">
-            <formatlabel>14044</formatlabel>
+          <control type="slider" format="number">
+            <formatlabel>30027</formatlabel>
           </control>
         </setting>
         <setting id="epgTSOverride" type="boolean" label="30023" help="30626">
@@ -239,6 +239,7 @@
           <constraints>
             <allowempty>true</allowempty>
             <writable>true</writable>
+            <editable>true</editable>
           </constraints>
           <dependencies>
             <dependency type="visible" setting="logoPathType" operator="is">0</dependency>

@@ -68,8 +68,8 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_epgUrl = buffer;
   if (!XBMC->GetSetting("epgCache", &m_cacheEPG))
     m_cacheEPG = true;
-  if (!XBMC->GetSetting("epgTimeShift", &m_epgTimeShiftMins))
-    m_epgTimeShiftMins = 0;
+  if (!XBMC->GetSetting("epgTimeShift", &m_epgTimeShiftHours))
+    m_epgTimeShiftHours = 0.0f;
   if (!XBMC->GetSetting("epgTSOverride", &m_tsOverride))
     m_tsOverride = true;
 
@@ -136,7 +136,7 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
   if (settingName == "epgCache")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_cacheEPG, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "epgTimeShift")
-    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_epgTimeShiftMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetSetting<float, ADDON_STATUS>(settingName, settingValue, m_epgTimeShiftHours, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "epgTSOverride")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_tsOverride, ADDON_STATUS_OK, ADDON_STATUS_OK);
 

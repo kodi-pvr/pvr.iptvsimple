@@ -141,7 +141,12 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr ""
 
-#empty strings from id 30027 to 30029
+#format-label: EPG Settings - epgTimeShift
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr ""
+
+#empty strings from id 30028 to 30029
 
 #label-category: channellogos
 #label-group: Channel Logos - Channel Logos

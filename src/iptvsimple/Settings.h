@@ -24,6 +24,7 @@
 #include "utilities/Logger.h"
 
 #include <string>
+#include <type_traits>
 
 #include <kodi/xbmc_addon_types.h>
 
@@ -91,8 +92,8 @@ namespace iptvsimple
     const std::string& GetEpgPath() const { return m_epgPath; }
     const std::string& GetEpgUrl() const { return m_epgUrl; }
     bool UseEPGCache() const { return m_epgPathType == PathType::REMOTE_PATH ? m_cacheEPG : false; }
-    int GetEpgTimeshiftMins() const { return m_epgTimeShiftMins; }
-    int GetEpgTimeshiftSecs() const { return m_epgTimeShiftMins * 60; }
+    float GetEpgTimeshiftHours() const { return m_epgTimeShiftHours; }
+    int GetEpgTimeshiftSecs() const { return static_cast<int>(m_epgTimeShiftHours * 60 * 60); }
     bool GetTsOverride() const { return m_tsOverride; }
 
     const std::string& GetGenresLocation() const { return m_genresPathType == PathType::REMOTE_PATH ? m_genresUrl : m_genresPath; }
@@ -119,7 +120,10 @@ namespace iptvsimple
       T newValue =  *static_cast<const T*>(settingValue);
       if (newValue != currentValue)
       {
-        utilities::Logger::Log(utilities::LogLevel::LEVEL_NOTICE, "%s - Changed Setting '%s' from %d to %d", __FUNCTION__, settingName.c_str(), currentValue, newValue);
+        std::string formatString = "%s - Changed Setting '%s' from %d to %d";
+        if (std::is_same<T, float>::value)
+          formatString = "%s - Changed Setting '%s' from %f to %f";
+        utilities::Logger::Log(utilities::LogLevel::LEVEL_NOTICE, formatString.c_str(), __FUNCTION__, settingName.c_str(), currentValue, newValue);
         currentValue = newValue;
         return returnValueIfChanged;
       }
@@ -159,7 +163,7 @@ namespace iptvsimple
     std::string m_epgPath;
     std::string m_epgUrl;
     bool m_cacheEPG = false;
-    int m_epgTimeShiftMins = 0;
+    float m_epgTimeShiftHours = 0;
     bool m_tsOverride = true;
 
     bool m_useEpgGenreTextWhenMapping = false;
