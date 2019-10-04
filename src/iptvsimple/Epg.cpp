@@ -28,12 +28,12 @@
 #include "utilities/Logger.h"
 #include "utilities/XMLUtils.h"
 
-#include "p8-platform/util/StringUtils.h"
-#include "rapidxml/rapidxml.hpp"
-
 #include <chrono>
 #include <regex>
 #include <thread>
+
+#include <p8-platform/util/StringUtils.h>
+#include <rapidxml/rapidxml.hpp>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

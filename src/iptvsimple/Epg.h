@@ -21,8 +21,6 @@
  *
  */
 
-#include "kodi/libXBMC_pvr.h"
-
 #include "Channels.h"
 #include "Settings.h"
 #include "data/ChannelEpg.h"
@@ -30,6 +28,8 @@
 
 #include <string>
 #include <vector>
+
+#include <kodi/libXBMC_pvr.h>
 
 namespace iptvsimple
 {

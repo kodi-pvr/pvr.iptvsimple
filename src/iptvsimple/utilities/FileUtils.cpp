@@ -21,11 +21,11 @@
 
 #include "FileUtils.h"
 
-#include "../Settings.h"
 #include "../../client.h"
-#include "zlib.h"
+#include "../Settings.h"
 
 #include <kodi/kodi_vfs_types.h>
+#include <zlib.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;

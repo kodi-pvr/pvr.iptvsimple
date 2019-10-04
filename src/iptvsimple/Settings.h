@@ -21,11 +21,12 @@
  *
  */
 
-#include "kodi/xbmc_addon_types.h"
-
 #include "utilities/Logger.h"
 
 #include <string>
+#include <type_traits>
+
+#include <kodi/xbmc_addon_types.h>
 
 namespace iptvsimple
 {
@@ -39,6 +40,14 @@ namespace iptvsimple
   {
     LOCAL_PATH = 0,
     REMOTE_PATH
+  };
+
+  enum class RefreshMode
+    : int // same type as addon settings
+  {
+    DISABLED = 0,
+    REPEATED_REFRESH,
+    ONCE_PER_DAY
   };
 
   enum class EpgLogosMode
@@ -74,14 +83,17 @@ namespace iptvsimple
     bool UseM3UCache() const { return m_m3uPathType == PathType::REMOTE_PATH ? m_cacheM3U : false; }
     int GetStartChannelNumber() const { return m_startChannelNumber; }
     bool NumberChannelsByM3uOrderOnly() const { return m_numberChannelsByM3uOrderOnly; }
+    const RefreshMode& GetM3URefreshMode() const { return m_m3uRefreshMode; }
+    int GetM3URefreshIntervalMins() const { return m_m3uRefreshIntervalMins; }
+    int GetM3URefreshHour() const { return m_m3uRefreshHour; }
 
     const std::string& GetEpgLocation() const { return m_epgPathType == PathType::REMOTE_PATH ? m_epgUrl : m_epgPath; }
     const PathType& GetEpgPathType() const { return m_epgPathType; }
     const std::string& GetEpgPath() const { return m_epgPath; }
     const std::string& GetEpgUrl() const { return m_epgUrl; }
     bool UseEPGCache() const { return m_epgPathType == PathType::REMOTE_PATH ? m_cacheEPG : false; }
-    int GetEpgTimeshiftMins() const { return m_epgTimeShiftMins; }
-    int GetEpgTimeshiftSecs() const { return m_epgTimeShiftMins * 60; }
+    float GetEpgTimeshiftHours() const { return m_epgTimeShiftHours; }
+    int GetEpgTimeshiftSecs() const { return static_cast<int>(m_epgTimeShiftHours * 60 * 60); }
     bool GetTsOverride() const { return m_tsOverride; }
 
     const std::string& GetGenresLocation() const { return m_genresPathType == PathType::REMOTE_PATH ? m_genresUrl : m_genresPath; }
@@ -108,7 +120,10 @@ namespace iptvsimple
       T newValue =  *static_cast<const T*>(settingValue);
       if (newValue != currentValue)
       {
-        utilities::Logger::Log(utilities::LogLevel::LEVEL_NOTICE, "%s - Changed Setting '%s' from %d to %d", __FUNCTION__, settingName.c_str(), currentValue, newValue);
+        std::string formatString = "%s - Changed Setting '%s' from %d to %d";
+        if (std::is_same<T, float>::value)
+          formatString = "%s - Changed Setting '%s' from %f to %f";
+        utilities::Logger::Log(utilities::LogLevel::LEVEL_NOTICE, formatString.c_str(), __FUNCTION__, settingName.c_str(), currentValue, newValue);
         currentValue = newValue;
         return returnValueIfChanged;
       }
@@ -140,12 +155,15 @@ namespace iptvsimple
     bool m_cacheM3U = false;
     int m_startChannelNumber = 1;
     bool m_numberChannelsByM3uOrderOnly = false;
+    RefreshMode m_m3uRefreshMode = RefreshMode::DISABLED;
+    int m_m3uRefreshIntervalMins = 60;
+    int m_m3uRefreshHour = 4;
 
     PathType m_epgPathType = PathType::REMOTE_PATH;
     std::string m_epgPath;
     std::string m_epgUrl;
     bool m_cacheEPG = false;
-    int m_epgTimeShiftMins = 0;
+    float m_epgTimeShiftHours = 0;
     bool m_tsOverride = true;
 
     bool m_useEpgGenreTextWhenMapping = false;

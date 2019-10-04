@@ -21,12 +21,12 @@
  *
  */
 
-#include "kodi/libXBMC_pvr.h"
-
 #include "Channels.h"
 #include "ChannelGroups.h"
 
 #include <string>
+
+#include <kodi/libXBMC_pvr.h>
 
 namespace iptvsimple
 {

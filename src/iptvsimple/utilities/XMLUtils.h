@@ -21,9 +21,10 @@
  *
  */
 
-#include "rapidxml/rapidxml.hpp"
 #include <string>
 #include <vector>
+
+#include <rapidxml/rapidxml.hpp>
 
 template<class Ch>
 inline std::string GetNodeValue(const rapidxml::xml_node<Ch>* rootNode, const char* tag)

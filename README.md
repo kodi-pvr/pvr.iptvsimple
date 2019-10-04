@@ -63,8 +63,14 @@ General settings required for the addon to function.
 * **M3U play list path**: If location is `Local path` this setting must contain a valid path for the addon to function.
 * **M3U play list URL**: If location is `Remote path` this setting must contain a valid URL for the addon to function.
 * **Cache M3U at local storage**: If location is `Remote path` select whether or not the the M3U file should be cached locally.
-* **Start channel number**: The number to start numbering channels from.
+* **Start channel number**: The number to start numbering channels from. Only used when `Use backend channel numbers` from PVR settings is enabled and a channel number is not supplied in the M3U file.
 * **Only number by channel order in M3U**: Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'.
+* **M3U auto refresh mode**: Select the auto refresh mode for the M3U file. The options are:
+    - `Disabled` - Don't auto refresh the M3U file.
+    - `Repeated refresh` - Refresh the M3U on a minute based interval.
+    - `Once per day` - Refresh the M3U once per day.
+* **Refresh interval"**: If M3U auto refresh mode is `Repeated refresh` refresh the M3U every time this number of minutes passes. Max 120 minutes.
+* **ORefresh hour (24h)**: If M3U auto refresh mode is `Once per day` refresh the M3U every time this horu if the day is reached.
 
 ### EPG
 Settings related to the EPG.

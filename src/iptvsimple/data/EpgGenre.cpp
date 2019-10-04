@@ -23,9 +23,10 @@
 #include "EpgGenre.h"
 
 #include "../utilities/XMLUtils.h"
-#include "p8-platform/util/StringUtils.h"
 
 #include <cstdlib>
+
+#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
@@ -42,7 +43,7 @@ bool EpgGenre::UpdateFrom(rapidxml::xml_node<>* genreNode)
 
     m_genreString = genreNode->value();
     m_genreType = genreId & 0xF0;
-    m_genreSubType = genreId & 0x0F;    
+    m_genreSubType = genreId & 0x0F;
   }
   else
   {

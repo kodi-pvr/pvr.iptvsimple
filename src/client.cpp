@@ -28,8 +28,8 @@
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/data/Channel.h"
 #include "iptvsimple/utilities/Logger.h"
-#include "kodi/xbmc_pvr_dll.h"
-#include "p8-platform/util/util.h"
+
+#include <kodi/xbmc_pvr_dll.h>
 
 using namespace ADDON;
 using namespace iptvsimple;
@@ -50,6 +50,15 @@ Settings& settings = Settings::GetInstance();
 CHelper_libXBMC_addon* XBMC = nullptr;
 CHelper_libXBMC_pvr* PVR = nullptr;
 
+template<typename T> void SafeDelete(T*& p)
+{
+  if (p)
+  {
+    delete p;
+    p = nullptr;
+  }
+}
+
 extern "C"
 {
 ADDON_STATUS ADDON_Create(void* hdl, void* props)
@@ -64,15 +73,15 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   XBMC = new CHelper_libXBMC_addon;
   if (!XBMC->RegisterMe(hdl))
   {
-    SAFE_DELETE(XBMC);
+    SafeDelete(XBMC);
     return ADDON_STATUS_PERMANENT_FAILURE;
   }
 
   PVR = new CHelper_libXBMC_pvr;
   if (!PVR->RegisterMe(hdl))
   {
-    SAFE_DELETE(PVR);
-    SAFE_DELETE(XBMC);
+    SafeDelete(PVR);
+    SafeDelete(XBMC);
     return ADDON_STATUS_PERMANENT_FAILURE;
   }
 
@@ -113,9 +122,9 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
   m_data = new PVRIptvData;
   if (!m_data->Start())
   {
-    SAFE_DELETE(m_data);
-    SAFE_DELETE(PVR);
-    SAFE_DELETE(XBMC);
+    SafeDelete(m_data);
+    SafeDelete(PVR);
+    SafeDelete(XBMC);
     m_currentStatus = ADDON_STATUS_LOST_CONNECTION;
     return m_currentStatus;
   }

@@ -21,14 +21,14 @@
  *
  */
 
-#include "kodi/libXBMC_pvr.h"
 
 #include "EpgGenre.h"
 
-#include "rapidxml/rapidxml.hpp"
-
 #include <string>
 #include <vector>
+
+#include <kodi/libXBMC_pvr.h>
+#include <rapidxml/rapidxml.hpp>
 
 namespace iptvsimple
 {
