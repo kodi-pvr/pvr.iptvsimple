@@ -694,7 +694,10 @@ bool PVRIptvData::LoadPlayList(void)
 
         // If remote type URL Encode and append as when built from channel name it would be missing
         if (m_logoPathType == REMOTE_PATH_TYPE && logoSetFromChannelName)
-          tmpChannel.strTvgLogo = UrlEncode(tmpChannel.strTvgLogo) + CHANNEL_LOGO_EXTENSION;
+          tmpChannel.strTvgLogo = UrlEncode(tmpChannel.strTvgLogo);
+
+        if (!StringUtils::EndsWithNoCase(tmpChannel.strTvgLogo, ".png"))
+          tmpChannel.strTvgLogo += CHANNEL_LOGO_EXTENSION;
 
         if (strTvgShift.empty())
         {
