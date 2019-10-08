@@ -51,14 +51,12 @@ namespace iptvsimple
     const iptvsimple::data::Channel* FindChannel(const std::string& id, const std::string& displayName) const;
     const std::vector<data::Channel>& GetChannelsList() const { return m_channels; }
     void Clear();
-    void ApplyChannelLogos();
 
     int GetCurrentChannelNumber() const { return m_currentChannelNumber; }
 
   private:
     int GenerateChannelId(const char* channelName, const char* streamUrl);
 
-    std::string m_logoLocation;
     int m_currentChannelNumber;
 
     std::vector<iptvsimple::data::Channel> m_channels;

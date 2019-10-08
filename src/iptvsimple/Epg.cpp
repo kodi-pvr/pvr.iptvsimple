@@ -392,17 +392,17 @@ void Epg::ApplyChannelsLogosFromEPG()
   for (const auto& channel : m_channels.GetChannelsList())
   {
     const ChannelEpg* channelEpg = FindEpgForChannel(channel);
-    if (!channelEpg || channelEpg->GetIcon().empty())
+    if (!channelEpg || channelEpg->GetIconPath().empty())
       continue;
 
-    // 1 - prefer logo from playlist
-    if (!channel.GetLogoPath().empty() && Settings::GetInstance().GetEpgLogosMode() == EpgLogosMode::PREFER_M3U)
+    // 1 - prefer icon from playlist
+    if (!channel.GetIconPath().empty() && Settings::GetInstance().GetEpgLogosMode() == EpgLogosMode::PREFER_M3U)
       continue;
 
-    // 2 - prefer logo from epg
-    if (!channelEpg->GetIcon().empty() && Settings::GetInstance().GetEpgLogosMode() == EpgLogosMode::PREFER_XMLTV)
+    // 2 - prefer icon from epg
+    if (!channelEpg->GetIconPath().empty() && Settings::GetInstance().GetEpgLogosMode() == EpgLogosMode::PREFER_XMLTV)
     {
-      m_channels.GetChannel(channel.GetUniqueId())->SetLogoPath(channelEpg->GetIcon());
+      m_channels.GetChannel(channel.GetUniqueId())->SetIconPath(channelEpg->GetIconPath());
       updated = true;
     }
   }

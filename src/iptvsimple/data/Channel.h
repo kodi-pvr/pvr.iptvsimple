@@ -30,15 +30,16 @@ namespace iptvsimple
 {
   namespace data
   {
+    static const std::string CHANNEL_LOGO_EXTENSION  = ".png";
+
     class Channel
     {
     public:
       Channel() = default;
       Channel(const Channel &c) : m_radio(c.IsRadio()), m_uniqueId(c.GetUniqueId()),
         m_channelNumber(c.GetChannelNumber()), m_encryptionSystem(c.GetEncryptionSystem()),
-        m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()), m_logoPath(c.GetLogoPath()),
-        m_streamURL(c.GetStreamURL()), m_tvgId(c.GetTvgId()),
-        m_tvgName(c.GetTvgName()), m_tvgLogo(c.GetTvgLogo()),
+        m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()), m_iconPath(c.GetIconPath()),
+        m_streamURL(c.GetStreamURL()), m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
         m_properties(c.GetProperties()) {};
       ~Channel() = default;
 
@@ -60,8 +61,8 @@ namespace iptvsimple
       const std::string& GetChannelName() const { return m_channelName; }
       void SetChannelName(const std::string& value) { m_channelName = value; }
 
-      const std::string& GetLogoPath() const { return m_logoPath; }
-      void SetLogoPath(const std::string& value) { m_logoPath = value; }
+      const std::string& GetIconPath() const { return m_iconPath; }
+      void SetIconPath(const std::string& value) { m_iconPath = value; }
 
       const std::string& GetStreamURL() const { return m_streamURL; }
       void SetStreamURL(const std::string& value) { m_streamURL = value; }
@@ -72,9 +73,6 @@ namespace iptvsimple
       const std::string& GetTvgName() const { return m_tvgName; }
       void SetTvgName(const std::string& value) { m_tvgName = value; }
 
-      const std::string& GetTvgLogo() const { return m_tvgLogo; }
-      void SetTvgLogo(const std::string& value) { m_tvgLogo = value; }
-
       const std::map<std::string, std::string>& GetProperties() const { return m_properties; }
       void SetProperties(std::map<std::string, std::string>& value) { m_properties = value; }
       void AddProperty(const std::string& prop, const std::string& value) { m_properties.insert({prop, value}); }
@@ -82,6 +80,7 @@ namespace iptvsimple
       void UpdateTo(Channel& left) const;
       void UpdateTo(PVR_CHANNEL& left) const;
       void Reset();
+      void SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName);
 
     private:
       bool m_radio = false;
@@ -90,11 +89,10 @@ namespace iptvsimple
       int m_encryptionSystem = 0;
       int m_tvgShift = 0;
       std::string m_channelName = "";
-      std::string m_logoPath = "";
+      std::string m_iconPath = "";
       std::string m_streamURL = "";
       std::string m_tvgId = "";
       std::string m_tvgName = "";
-      std::string m_tvgLogo = "";
       std::map<std::string, std::string> m_properties;
     };
   } //namespace data

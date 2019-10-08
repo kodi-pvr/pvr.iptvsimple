@@ -44,7 +44,6 @@ namespace iptvsimple
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
   static const std::string RADIO_MARKER            = "radio=";
   static const std::string PLAYLIST_TYPE_MARKER    = "#EXT-X-PLAYLIST-TYPE:";
-  static const std::string CHANNEL_LOGO_EXTENSION  = ".png";
 
   class PlaylistLoader
   {
@@ -62,6 +61,7 @@ namespace iptvsimple
     void ParseAndAddChannelGroups(const std::string& groupNamesListString, std::vector<int>& groupIdList, bool isRadio);
 
     std::string m_m3uLocation;
+    std::string m_logoLocation;
 
     iptvsimple::ChannelGroups& m_channelGroups;
     iptvsimple::Channels& m_channels;

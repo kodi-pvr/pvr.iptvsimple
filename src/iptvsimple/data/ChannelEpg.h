@@ -44,8 +44,8 @@ namespace iptvsimple
       const std::vector<std::string>& GetNames() const { return m_names; }
       void AddName(const std::string& value) { m_names.emplace_back(value); }
 
-      const std::string& GetIcon() const { return m_icon; }
-      void SetIcon(const std::string& value) { m_icon = value; }
+      const std::string& GetIconPath() const { return m_iconPath; }
+      void SetIconPath(const std::string& value) { m_iconPath = value; }
 
       std::vector<EpgEntry>& GetEpgEntries() { return m_epgEntries; }
       void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries.emplace_back(epgEntry); }
@@ -55,7 +55,7 @@ namespace iptvsimple
     private:
       std::string m_id;
       std::vector<std::string> m_names;
-      std::string m_icon;
+      std::string m_iconPath;
       std::vector<EpgEntry> m_epgEntries;
     };
   } //namespace data
