@@ -27,6 +27,8 @@
 #include "../utilities/FileUtils.h"
 #include "../../client.h"
 
+#include <p8-platform/util/StringUtils.h>
+
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 
@@ -86,8 +88,8 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
 
   // urlencode channel logo when set from channel name and source is Remote Path
   // append extension as channel name wouldn't have it
-  if (Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH && logoSetFromChannelName)
-    m_iconPath = utilities::WebUtils::UrlEncode(m_iconPath) + CHANNEL_LOGO_EXTENSION;
+  if (logoSetFromChannelName && Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH)
+    m_iconPath = utilities::WebUtils::UrlEncode(m_iconPath);
 
   if (m_iconPath.find("://") == std::string::npos)
   {
@@ -98,4 +100,7 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
       m_iconPath = utilities::FileUtils::PathCombine(logoLocation, m_iconPath);
     }
   }    
+
+  if (!StringUtils::EndsWithNoCase(m_iconPath, ".png"))
+    m_iconPath += CHANNEL_LOGO_EXTENSION;
 }
