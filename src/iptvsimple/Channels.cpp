@@ -37,13 +37,11 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
 Channels::Channels()
-  : m_logoLocation(Settings::GetInstance().GetLogoLocation()),
-    m_currentChannelNumber(Settings::GetInstance().GetStartChannelNumber()) {}
+  : m_currentChannelNumber(Settings::GetInstance().GetStartChannelNumber()) {}
 
 void Channels::Clear()
 {
   m_channels.clear();
-  m_logoLocation = Settings::GetInstance().GetLogoLocation();
   m_currentChannelNumber = Settings::GetInstance().GetStartChannelNumber();
 }
 
@@ -142,20 +140,6 @@ const Channel* Channels::FindChannel(const std::string& id, const std::string& d
   }
 
   return nullptr;
-}
-
-void Channels::ApplyChannelLogos()
-{
-  for (auto& channel : m_channels)
-  {
-    if (!channel.GetTvgLogo().empty())
-    {
-      if (!m_logoLocation.empty() && channel.GetTvgLogo().find("://") == std::string::npos) // special proto
-        channel.SetLogoPath(FileUtils::PathCombine(m_logoLocation, channel.GetTvgLogo()));
-      else
-        channel.SetLogoPath(channel.GetTvgLogo());
-    }
-  }
 }
 
 int Channels::GenerateChannelId(const char* channelName, const char* streamUrl)

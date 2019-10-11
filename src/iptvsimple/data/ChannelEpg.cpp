@@ -49,11 +49,11 @@ bool ChannelEpg::UpdateFrom(xml_node<>* channelNode, Channels& channels)
 
   // get icon if available
   xml_node<>* iconNode = channelNode->first_node("icon");
-  std::string icon = m_icon;
-  if (!iconNode || !GetAttributeValue(iconNode, "src", icon))
-    m_icon.clear();
+  std::string iconPath = m_iconPath;
+  if (!iconNode || !GetAttributeValue(iconNode, "src", iconPath))
+    m_iconPath.clear();
   else
-    m_icon = icon;
+    m_iconPath = iconPath;
 
   return true;
 }

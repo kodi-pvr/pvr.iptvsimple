@@ -42,7 +42,8 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
 PlaylistLoader::PlaylistLoader(Channels& channels, ChannelGroups& channelGroups)
-  : m_channels(channels), m_channelGroups(channelGroups), m_m3uLocation(Settings::GetInstance().GetM3ULocation()) {}
+  : m_channels(channels), m_channelGroups(channelGroups), m_m3uLocation(Settings::GetInstance().GetM3ULocation()),
+    m_logoLocation(Settings::GetInstance().GetLogoLocation()) {}
 
 bool PlaylistLoader::LoadPlayList()
 {
@@ -162,8 +163,6 @@ bool PlaylistLoader::LoadPlayList()
     return false;
   }
 
-  m_channels.ApplyChannelLogos();
-
   Logger::Log(LEVEL_NOTICE, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
   return true;
 }
@@ -200,13 +199,6 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       strTvgId.append(buff);
     }
 
-    bool logoSetFromChannelName = false;
-    if (strTvgLogo.empty())
-    {
-      strTvgLogo = channelName;
-      logoSetFromChannelName = true;
-    }
-
     if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
       channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
 
@@ -215,15 +207,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     bool isRadio = StringUtils::EqualsNoCase(strRadio, "true");
     channel.SetTvgId(strTvgId);
     channel.SetTvgName(XBMC->UnknownToUTF8(strTvgName.c_str()));
-    channel.SetTvgLogo(XBMC->UnknownToUTF8(strTvgLogo.c_str()));
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
-
-    // urlencode channel logo when set from channel name and source is Remote Path
-    // append extension as channel name wouldn't have it
-    if (Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH && logoSetFromChannelName)
-      channel.SetTvgLogo(WebUtils::UrlEncode(channel.GetTvgLogo()) + CHANNEL_LOGO_EXTENSION);
-
+    channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);
 
