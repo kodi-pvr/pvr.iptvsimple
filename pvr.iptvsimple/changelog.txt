@@ -1,3 +1,6 @@
+v3.8.4
+- Fix channel logos getting default extension
+
 v3.8.3
 - Speed up EPG loading
 
