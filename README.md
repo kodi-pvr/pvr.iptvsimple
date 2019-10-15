@@ -229,7 +229,7 @@ http://path-to-stream/live/channel-z.ts
   - `tvg-name`: A name for this channel in the EPG XMLTV data.
   - `group-title`: A semi-colon separted list of channel groups that this channel belongs to.
   - `tvg-chno`: The number to be used for this channel.
-  - `tvg-logo`: A URL pointing to the logo for this channel.
+  - `tvg-logo`: A URL pointing to the logo for this channel. For relative URLs `.png` will be appended if not provided, absolute URLs will not be modified.
   - `radio`: If the value matches "true" (case insensitive) this is a radio channel.
   - `tvg-shift`: Channel specific shift value in hours.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.

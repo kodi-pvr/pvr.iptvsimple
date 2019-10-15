@@ -96,11 +96,11 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
     const std::string& logoLocation = Settings::GetInstance().GetLogoLocation();
     if (!logoLocation.empty())
     {
-      // not absolute path
+      // not absolute path, only append .png in this case.
       m_iconPath = utilities::FileUtils::PathCombine(logoLocation, m_iconPath);
+
+      if (!StringUtils::EndsWithNoCase(m_iconPath, ".png"))
+        m_iconPath += CHANNEL_LOGO_EXTENSION;
     }
   }    
-
-  if (!StringUtils::EndsWithNoCase(m_iconPath, ".png"))
-    m_iconPath += CHANNEL_LOGO_EXTENSION;
 }

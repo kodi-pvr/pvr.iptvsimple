@@ -1,3 +1,6 @@
+v4.6.2
+- Fixed: Add channel logo extension for relative paths only
+
 v4.6.1
 - Fixed: Fix channel logos getting default extension
 
