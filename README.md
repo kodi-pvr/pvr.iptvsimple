@@ -99,7 +99,7 @@ The addon will read all the `<category>` elements of a `programme` and use this 
 * **Genres URL**: If location is `Remote Path` this setting should contain a valid URL.
 
 ### Channel Logos
-Settings realted to Channel Logos.
+Settings related to Channel Logos.
 
 * **Location**: Select where to find the channel logos. The options are:
     - `Local path` - A path to a folder whether it be on the device or the local network.
@@ -110,6 +110,13 @@ Settings realted to Channel Logos.
     - `Ignore` - Don't use channel logos from an XMLTV file.
     - `Prefer M3U` - Use the channel logo from the M3U if available otherwise use the XMLTV logo.
     - `Prefer XMLTV` - Use the channel logo from the XMLTV file if available otherwise use the M3U logo.
+
+### Advanced
+Advanced settings such as multicast relays.
+
+* **Transform multicast stream URLs**: Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like `udp://@239.239.3.38:5239` would get transformed to something like `http://192.168.1.1:4000/udp/239.239.3.38:5239`.
+* **Relay hostname or IP address**: The hostname or ip address of the multicast relay (`udpxy`) on the local network.
+* **Relay port**: The port of the multicast relay (`udpxy`) on the local network..
 
 ## Appendix
 

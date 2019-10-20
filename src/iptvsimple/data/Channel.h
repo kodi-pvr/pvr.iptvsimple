@@ -31,6 +31,8 @@ namespace iptvsimple
   namespace data
   {
     static const std::string CHANNEL_LOGO_EXTENSION  = ".png";
+    static const std::string UDP_MULTICAST_PREFIX = "udp://@";
+    static const std::string RTP_MULTICAST_PREFIX = "rtp://@";
 
     class Channel
     {
@@ -65,7 +67,7 @@ namespace iptvsimple
       void SetIconPath(const std::string& value) { m_iconPath = value; }
 
       const std::string& GetStreamURL() const { return m_streamURL; }
-      void SetStreamURL(const std::string& value) { m_streamURL = value; }
+      void SetStreamURL(const std::string& url);
 
       const std::string& GetTvgId() const { return m_tvgId; }
       void SetTvgId(const std::string& value) { m_tvgId = value; }

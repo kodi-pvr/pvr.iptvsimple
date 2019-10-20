@@ -23,14 +23,16 @@
 #include "Channel.h"
 
 #include "../Settings.h"
-#include "../utilities/WebUtils.h"
 #include "../utilities/FileUtils.h"
+#include "../utilities/Logger.h"
+#include "../utilities/WebUtils.h"
 #include "../../client.h"
 
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
+using namespace iptvsimple::utilities;
 
 void Channel::UpdateTo(Channel& left) const
 {
@@ -102,5 +104,20 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
       if (!StringUtils::EndsWithNoCase(m_iconPath, ".png"))
         m_iconPath += CHANNEL_LOGO_EXTENSION;
     }
-  }    
+  }
 }
+
+void Channel::SetStreamURL(const std::string& url)
+{
+  m_streamURL = url;
+
+  if (Settings::GetInstance().TransformMulticastStreamUrls() &&
+      (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX)))
+  {
+    const std::string typePath = StringUtils::StartsWith(url, "rtp") ? "/rtp/" : "/udp/";
+
+    m_streamURL = "http://" + Settings::GetInstance().GetUdpxyHost() + ":" + std::to_string(Settings::GetInstance().GetUdpxyPort()) + typePath + url.substr(UDP_MULTICAST_PREFIX.length());
+    Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
+  }
+}
+

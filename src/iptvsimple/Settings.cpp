@@ -92,6 +92,14 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_logoBaseUrl = buffer;
   if (!XBMC->GetSetting("logoFromEpg", &m_epgLogosMode))
     m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+
+  // Advanced
+  if (!XBMC->GetSetting("transformMulticastStreamUrls", &m_transformMulticastStreamUrls))
+    m_transformMulticastStreamUrls = false;
+  if (XBMC->GetSetting("udpxyHost", &buffer))
+    m_udpxyHost = buffer;
+  if (!XBMC->GetSetting("udpxyPort", &m_udpxyPort))
+    m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
 }
 
 ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* settingValue)
@@ -159,6 +167,14 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoBaseUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "logoFromEpg")
     return SetSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+
+  // Advanced
+  if (settingName == "transformMulticastStreamUrls")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_transformMulticastStreamUrls, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "udpxyHost")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_udpxyHost, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "udpxyPort")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_udpxyPort, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   return ADDON_STATUS_OK;
 }

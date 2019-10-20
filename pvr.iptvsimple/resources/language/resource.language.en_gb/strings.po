@@ -214,7 +214,34 @@ msgctxt "#30053"
 msgid "Genres URL"
 msgstr ""
 
-#empty strings from id 30054 to 30599
+#empty strings from id 30054 to 30559
+
+#label-category: advanced
+msgctxt "#30060"
+msgid "Advanced"
+msgstr ""
+
+#label-group: Advanced - Multicast relay
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr ""
+
+#label: Advanced - transformMulticastStreamUrls
+msgctxt "#30062"
+msgid "Transform multicast stream URLs"
+msgstr ""
+
+#label: Advanced - udpxyHost
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr ""
+
+#label: Advanced - udpxyPort
+msgctxt "#30064"
+msgid "Relay port"
+msgstr ""
+
+#empty strings from id 30065 to 30599
 
 #############
 # help info #
@@ -367,4 +394,28 @@ msgstr ""
 #help: Genres - genresUrl
 msgctxt "#30664"
 msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr ""
+
+#empty strings from id 30665 to 30679
+
+#help info - Advanced
+
+#help-category: Advanced
+msgctxt "#30680"
+msgid "Advanced settings including multicast relays etc."
+msgstr ""
+
+#help: Advanced - transformMulticastStreamUrls
+msgctxt "#30681"
+msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr ""
+
+#help: Advanced - udpxyHost
+msgctxt "#30682"
+msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
+msgstr ""
+
+#help: Advanced - udpxyPort
+msgctxt "#30683"
+msgid "The port of the multicast relay (udpxy) on the local network."
 msgstr ""
