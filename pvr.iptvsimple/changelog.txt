@@ -1,3 +1,7 @@
+v3.8.5
+- Fixed: Add channel logo extension for relative paths only
+- Update: update readme
+
 v3.8.4
 - Fix channel logos getting default extension
 
