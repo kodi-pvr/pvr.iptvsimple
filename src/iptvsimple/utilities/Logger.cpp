@@ -23,6 +23,8 @@
 
 #include <cstdarg>
 
+#include <p8-platform/util/StringUtils.h>
+
 using namespace iptvsimple::utilities;
 
 Logger::Logger()
@@ -43,20 +45,21 @@ void Logger::Log(LogLevel level, const char* message, ...)
 {
   auto& logger = GetInstance();
 
-  char buffer[MESSAGE_BUFFER_SIZE];
-  std::string logMessage = message;
-  const std::string prefix = logger.m_prefix;
+  std::string logMessage;
 
   // Prepend the prefix when set
+  const std::string prefix = logger.m_prefix;
   if (!prefix.empty())
-    logMessage = prefix + " - " + message;
+    logMessage = prefix + " - ";
+
+  logMessage += message;
 
   va_list arguments;
   va_start(arguments, message);
-  vsprintf(buffer, logMessage.c_str(), arguments);
+  logMessage = StringUtils::FormatV(logMessage.c_str(), arguments);
   va_end(arguments);
 
-  logger.m_implementation(level, buffer);
+  logger.m_implementation(level, logMessage.c_str());
 }
 
 void Logger::SetImplementation(LoggerImplementation implementation)

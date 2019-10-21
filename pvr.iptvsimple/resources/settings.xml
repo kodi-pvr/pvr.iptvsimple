@@ -276,5 +276,37 @@
       </group>
     </category>
 
+    <!-- Advanced -->
+    <category id="advanced" label="30060" help="30680">
+      <group id="1" label="30061">
+        <setting id="transformMulticastStreamUrls" type="boolean" label="30062" help="30681">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="udpxyHost" type="string" parent="transformMulticastStreamUrls" label="30063" help="30682">
+          <level>2</level>
+          <default>127.0.0.1</default>
+          <dependencies>
+            <dependency type="visible" setting="transformMulticastStreamUrls" operator="is">true</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="udpxyPort" type="integer" parent="transformMulticastStreamUrls" label="30064" help="30683">
+          <level>2</level>
+          <default>4022</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>65535</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="transformMulticastStreamUrls" operator="is">true</dependency>
+          </dependencies>
+          <control type="edit" format="integer" />
+        </setting>
+      </group>
+    </category>
+
   </section>
 </settings>

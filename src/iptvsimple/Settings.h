@@ -34,6 +34,7 @@ namespace iptvsimple
   static const std::string XMLTV_CACHE_FILENAME = "xmltv.xml.cache";
   static const std::string ADDON_DATA_BASE_DIR = "special://userdata/addon_data/pvr.iptvsimple";
   static const std::string DEFAULT_GENRE_TEXT_MAP_FILE = ADDON_DATA_BASE_DIR + "/genres/genreTextMappings/genres.xml";
+  static const int DEFAULT_UDPXY_MULTICAST_RELAY_PORT = 4022;
 
   enum class PathType
     : int // same type as addon settings
@@ -108,6 +109,10 @@ namespace iptvsimple
     const std::string& GetLogoBaseUrl() const { return m_logoBaseUrl; }
     const EpgLogosMode& GetEpgLogosMode() const { return m_epgLogosMode; }
 
+    bool TransformMulticastStreamUrls() const { return m_transformMulticastStreamUrls; }
+    const std::string& GetUdpxyHost() const { return m_udpxyHost; }
+    int GetUdpxyPort() const { return m_udpxyPort; }
+
   private:
     Settings() = default;
 
@@ -175,5 +180,9 @@ namespace iptvsimple
     std::string m_logoPath;
     std::string m_logoBaseUrl;
     EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+
+    bool m_transformMulticastStreamUrls = false;
+    std::string m_udpxyHost;
+    int m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
   };
 } //namespace iptvsimple

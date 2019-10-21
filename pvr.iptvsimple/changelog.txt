@@ -1,3 +1,9 @@
+v4.7.0
+- Fixed: Add channel logo extension for relative paths only
+- Fixed: Logger fix ported from pvr.hts
+- Update: update readme
+- Added: Transform UDP/RTP multicast stream URLs to local udpxy URLs
+
 v4.6.1
 - Fixed: Fix channel logos getting default extension
 

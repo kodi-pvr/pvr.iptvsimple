@@ -99,7 +99,7 @@ The addon will read all the `<category>` elements of a `programme` and use this 
 * **Genres URL**: If location is `Remote Path` this setting should contain a valid URL.
 
 ### Channel Logos
-Settings realted to Channel Logos.
+Settings related to Channel Logos.
 
 * **Location**: Select where to find the channel logos. The options are:
     - `Local path` - A path to a folder whether it be on the device or the local network.
@@ -110,6 +110,13 @@ Settings realted to Channel Logos.
     - `Ignore` - Don't use channel logos from an XMLTV file.
     - `Prefer M3U` - Use the channel logo from the M3U if available otherwise use the XMLTV logo.
     - `Prefer XMLTV` - Use the channel logo from the XMLTV file if available otherwise use the M3U logo.
+
+### Advanced
+Advanced settings such as multicast relays.
+
+* **Transform multicast stream URLs**: Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like `udp://@239.239.3.38:5239` would get transformed to something like `http://192.168.1.1:4000/udp/239.239.3.38:5239`.
+* **Relay hostname or IP address**: The hostname or ip address of the multicast relay (`udpxy`) on the local network.
+* **Relay port**: The port of the multicast relay (`udpxy`) on the local network..
 
 ## Appendix
 
@@ -229,14 +236,14 @@ http://path-to-stream/live/channel-z.ts
   - `tvg-name`: A name for this channel in the EPG XMLTV data.
   - `group-title`: A semi-colon separted list of channel groups that this channel belongs to.
   - `tvg-chno`: The number to be used for this channel.
-  - `tvg-logo`: A URL pointing to the logo for this channel.
+  - `tvg-logo`: A URL pointing to the logo for this channel. For relative URLs `.png` will be appended if not provided, absolute URLs will not be modified.
   - `radio`: If the value matches "true" (case insensitive) this is a radio channel.
   - `tvg-shift`: Channel specific shift value in hours.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
 - `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed.
 - `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed.
 - `#EXT-X-PLAYLIST-TYPE`: If this element is present with a value of `VOD` (Video on Demand) the stream is marked as not being live.
-- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|User-Agent=<agent-name>` will change the user agent.
+- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|User-Agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi).
 
 When processing an XMLTV file the addon will attempt to find a channel loaded from the M3U that matches the EPG channel. It will cycle through the full set of M3U channels checking for one condition on each pass. The first channel found to match is the channel chosen for this EPG channel data.
 
@@ -296,6 +303,18 @@ The `programme` element supports the attributes `start`/`stop` in the format `YY
   - For `episode-num` elements using the `onscreen` system only the `S01E02` format is supported.
 - `credits`: Only director, writer and actor are supported (multiple of each can be supplied).
 - `icon`: If multiple elements are provided only the first will be used.
+
+### HTTP header fields supported by Kodi
+
+HTTP header fields can be sent by appending the following format to the URL: `|name1=val1&name2=val2`. Note that kodi does not support sending not standard header fields.
+
+**Special fields**
+
+`cookie, cookies, seekable, user-agent`
+
+**Standard fields**
+
+`accept, accept-language, accept-datetime, authorization, cache-control, connection, content-md5, date, expect, forwarded, from, if-match, if-modified-since, if-none-match, if-range, if-unmodified-since, max-forwards, origin, pragma, range, referer, te, upgrade, via, warning, x-requested-with, dnt, x-forwarded-for, x-forwarded-host, x-forwarded-proto, front-end-https, x-http-method-override, x-att-deviceid, x-wap-profile, x-uidh, x-csrf-token, x-request-id, x-correlation-id`
 
 ### Manual Steps to rebuild the addon on MacOSX
 
