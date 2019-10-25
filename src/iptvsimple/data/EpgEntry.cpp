@@ -30,11 +30,11 @@
 #include <regex>
 
 #include <p8-platform/util/StringUtils.h>
-#include <rapidxml/rapidxml.hpp>
+#include <pugixml.hpp>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
-using namespace rapidxml;
+using namespace pugi;
 
 void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genreMappings)
 {
@@ -177,7 +177,7 @@ int ParseStarRating(const std::string& starRatingString)
 
 } // unnamed namespace
 
-bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& id, int broadcastId,
+bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id, int broadcastId,
                           int start, int end, int minShiftTime, int maxShiftTime)
 {
   std::string strStart, strStop;
@@ -220,22 +220,22 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
     std::sscanf(dateString.c_str(), "%04d", &m_year);
   }
 
-  xml_node<>* starRatingNode = channelNode->first_node("star-rating");
+  const auto& starRatingNode = channelNode.child("star-rating");
   if (starRatingNode)
     m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
 
   std::vector<std::pair<std::string, std::string>> episodeNumbersList;
-  for (xml_node<>* episodeNumNode = channelNode->first_node("episode-num"); episodeNumNode; episodeNumNode = episodeNumNode->next_sibling("episode-num"))
+  for (const auto& episodeNumNode : channelNode.children("episode-num"))
   {
     std::string episodeNumberSystem;
     if (GetAttributeValue(episodeNumNode, "system", episodeNumberSystem))
-      episodeNumbersList.push_back({episodeNumberSystem, episodeNumNode->value()});
+      episodeNumbersList.push_back({episodeNumberSystem, episodeNumNode.child_value()});
   }
 
   if (!episodeNumbersList.empty())
     ParseEpisodeNumberInfo(episodeNumbersList);
 
-  xml_node<>* creditsNode = channelNode->first_node("credits");
+  const auto& creditsNode = channelNode.child("credits");
   if (creditsNode)
   {
     m_cast = GetJoinedNodeValues(creditsNode, "actor");
@@ -243,7 +243,7 @@ bool EpgEntry::UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& 
     m_writer = GetJoinedNodeValues(creditsNode, "writer");
   }
 
-  xml_node<>* iconNode = channelNode->first_node("icon");
+  const auto& iconNode = channelNode.child("icon");
   std::string iconPath;
   if (!iconNode || !GetAttributeValue(iconNode, "src", iconPath))
     m_iconPath = "";

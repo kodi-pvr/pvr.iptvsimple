@@ -24,57 +24,78 @@
 #include <string>
 #include <vector>
 
-#include <rapidxml/rapidxml.hpp>
+#include <pugixml.hpp>
 
-template<class Ch>
-inline std::string GetNodeValue(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
+inline std::string GetNodeValue(const pugi::xml_node& rootNode, const char* tag)
 {
-  rapidxml::xml_node<Ch>* childNode = rootNode->first_node(tag);
+  const auto& childNode = rootNode.child(tag);
   if (!childNode)
     return "";
 
-  return childNode->value();
+  return childNode.child_value();
 }
 
-template<class Ch>
-inline std::string GetJoinedNodeValues(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
+inline std::string GetJoinedNodeValues(const pugi::xml_node& rootNode, const char* tag)
 {
   std::string stringValue;
 
-  for (rapidxml::xml_node<Ch>* childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
+  for (const auto& childNode : rootNode.children(tag))
   {
     if (childNode)
     {
       if (!stringValue.empty())
         stringValue += ",";
-      stringValue += childNode->value();
+      stringValue += childNode.child_value();
     }
   }
 
   return stringValue;
 }
 
-template<class Ch>
-inline std::vector<std::string> GetNodeValuesList(const rapidxml::xml_node<Ch>* rootNode, const char* tag)
+inline std::vector<std::string> GetNodeValuesList(const pugi::xml_node& rootNode, const char* tag)
 {
   std::vector<std::string> stringValues;
 
-  for(rapidxml::xml_node<Ch>* childNode = rootNode->first_node(tag); childNode; childNode = childNode->next_sibling(tag))
+  for(const auto& childNode : rootNode.children(tag))
   {
     if (childNode)
-      stringValues.emplace_back(childNode->value());
+      stringValues.emplace_back(childNode.child_value());
   }
 
   return stringValues;
 }
 
-template<class Ch>
-inline bool GetAttributeValue(const rapidxml::xml_node<Ch>* node, const char* attributeName, std::string& stringValue)
+inline bool GetAttributeValue(const pugi::xml_node& node, const char* attributeName, std::string& stringValue)
 {
-  rapidxml::xml_attribute<Ch>* attribute = node->first_attribute(attributeName);
+  const auto& attribute = node.attribute(attributeName);
   if (!attribute)
     return false;
 
-  stringValue = attribute->value();
+  stringValue = attribute.value();
   return true;
+}
+
+inline int GetParseErrorString(const char* buffer, int errorOffset, std::string& errorString)
+{
+  errorString = buffer;
+
+  // Try and start the error string two newlines before the error offset
+  int startOffset = errorOffset;
+  size_t found = errorString.rfind("\n", errorOffset);
+  if (found != std::string::npos)
+  {
+    startOffset = found;
+    found = errorString.rfind("\n", startOffset - 1);
+    if (found != std::string::npos && startOffset != 0)
+      startOffset = found;
+  }
+
+  // And end itone newline after
+  int endOffset = errorOffset;
+  found = errorString.find("\n", errorOffset);
+  if (found != std::string::npos)
+    endOffset = found;
+
+  errorString = errorString.substr(startOffset, endOffset - startOffset);
+  return errorOffset - startOffset;
 }

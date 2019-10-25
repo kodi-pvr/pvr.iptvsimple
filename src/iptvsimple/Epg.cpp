@@ -33,12 +33,12 @@
 #include <thread>
 
 #include <p8-platform/util/StringUtils.h>
-#include <rapidxml/rapidxml.hpp>
+#include <pugixml.hpp>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
-using namespace rapidxml;
+using namespace pugi;
 
 Epg::Epg(Channels& channels)
   : m_channels(channels), m_xmltvLocation(Settings::GetInstance().GetEpgLocation()), m_epgTimeShift(Settings::GetInstance().GetEpgTimeshiftSecs()),
@@ -79,18 +79,18 @@ bool Epg::LoadEPG(time_t start, time_t end)
     if (!buffer)
       return false;
 
-    xml_document<> xmlDoc;
-    try
+    xml_document xmlDoc;
+    xml_parse_result result = xmlDoc.load_string(buffer);
+
+    if (!result)
     {
-      xmlDoc.parse<0>(buffer);
-    }
-    catch (parse_error& p)
-    {
-      Logger::Log(LEVEL_ERROR, "%s - Unable parse EPG XML: %s", __FUNCTION__, p.what());
+      std::string errorString;
+      int offset = GetParseErrorString(buffer, result.offset, errorString);
+      Logger::Log(LEVEL_ERROR, "%s - Unable parse EPG XML: %s, offset: %d: \n[ %s \n]", __FUNCTION__, result.description(), offset, errorString.c_str());
       return false;
     }
 
-    xml_node<>* rootElement = xmlDoc.first_node("tv");
+    const auto& rootElement = xmlDoc.child("tv");
     if (!rootElement)
     {
       Logger::Log(LEVEL_ERROR, "%s - Invalid EPG XML: no <tv> tag found", __FUNCTION__);
@@ -102,7 +102,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
 
     LoadEpgEntries(rootElement, start, end);
 
-    xmlDoc.clear();
+    xmlDoc.reset();
   }
   else
   {
@@ -203,14 +203,14 @@ const XmltvFileFormat Epg::GetXMLTVFileFormat(const char* buffer)
   return XmltvFileFormat::NORMAL;
 }
 
-bool Epg::LoadChannelEpgs(xml_node<>* rootElement)
+bool Epg::LoadChannelEpgs(const xml_node& rootElement)
 {
   if (!rootElement)
     return false;
 
   m_channelEpgs.clear();
 
-  for (xml_node<>* channelNode = rootElement->first_node("channel"); channelNode; channelNode = channelNode->next_sibling("channel"))
+  for (const auto& channelNode : rootElement.children("channel"))
   {
     ChannelEpg channelEpg;
 
@@ -235,7 +235,7 @@ bool Epg::LoadChannelEpgs(xml_node<>* rootElement)
   return true;
 }
 
-void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
+void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
 {
   int minShiftTime = m_epgTimeShift;
   int maxShiftTime = m_epgTimeShift;
@@ -256,7 +256,7 @@ void Epg::LoadEpgEntries(xml_node<>* rootElement, int start, int end)
   ChannelEpg* channelEpg = nullptr;
   int broadcastId = 0;
 
-  for (xml_node<>* channelNode = rootElement->first_node("programme"); channelNode; channelNode = channelNode->next_sibling("programme"))
+  for (const auto& channelNode : rootElement.children("programme"))
   {
     std::string id;
     if (!GetAttributeValue(channelNode, "channel", id))
@@ -425,29 +425,30 @@ bool Epg::LoadGenres()
   m_genreMappings.clear();
 
   char* buffer = &(data[0]);
-  xml_document<> xmlDoc;
-  try
+  xml_document xmlDoc;
+  xml_parse_result result = xmlDoc.load_string(buffer);
+
+  if (!result)
   {
-    xmlDoc.parse<0>(buffer);
-  }
-  catch (parse_error& p)
-  {
+    std::string errorString;
+    int offset = GetParseErrorString(buffer, result.offset, errorString);
+    Logger::Log(LEVEL_ERROR, "%s - Unable parse EPG XML: %s, offset: %d: \n[ %s \n]", __FUNCTION__, result.description(), offset, errorString.c_str());
     return false;
   }
 
-  xml_node<>* pRootElement = xmlDoc.first_node("genres");
-  if (!pRootElement)
+  const auto& rootElement = xmlDoc.child("genres");
+  if (!rootElement)
     return false;
 
-  for (xml_node<>* pGenreNode = pRootElement->first_node("genre"); pGenreNode; pGenreNode = pGenreNode->next_sibling("genre"))
+  for (const auto& genreNode : rootElement.children("genre"))
   {
     EpgGenre genreMapping;
 
-    if (genreMapping.UpdateFrom(pGenreNode))
+    if (genreMapping.UpdateFrom(genreNode))
       m_genreMappings.emplace_back(genreMapping);
   }
 
-  xmlDoc.clear();
+  xmlDoc.reset();
 
   if (!m_genreMappings.empty())
     Logger::Log(LEVEL_NOTICE, "%s - Loaded %d genres", __FUNCTION__, m_genreMappings.size());

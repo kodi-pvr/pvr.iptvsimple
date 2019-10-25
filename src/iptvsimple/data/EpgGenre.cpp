@@ -30,9 +30,9 @@
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
-using namespace rapidxml;
+using namespace pugi;
 
-bool EpgGenre::UpdateFrom(rapidxml::xml_node<>* genreNode)
+bool EpgGenre::UpdateFrom(const xml_node& genreNode)
 {
   std::string buffer;
 
@@ -41,7 +41,7 @@ bool EpgGenre::UpdateFrom(rapidxml::xml_node<>* genreNode)
     //Combined genre id read as a single hex value.
     int genreId = std::strtol(buffer.c_str(), nullptr, 16);
 
-    m_genreString = genreNode->value();
+    m_genreString = genreNode.child_value();
     m_genreType = genreId & 0xF0;
     m_genreSubType = genreId & 0x0F;
   }
@@ -53,7 +53,7 @@ bool EpgGenre::UpdateFrom(rapidxml::xml_node<>* genreNode)
     if (!StringUtils::IsNaturalNumber(buffer))
       return false;
 
-    m_genreString = genreNode->value();
+    m_genreString = genreNode.child_value();
     m_genreType = std::atoi(buffer.c_str());
     m_genreSubType = 0;
 

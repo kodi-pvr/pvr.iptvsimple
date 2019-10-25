@@ -29,7 +29,7 @@
 #include <vector>
 
 #include <kodi/libXBMC_pvr.h>
-#include <rapidxml/rapidxml.hpp>
+#include <pugixml.hpp>
 
 namespace iptvsimple
 {
@@ -50,7 +50,7 @@ namespace iptvsimple
       std::vector<EpgEntry>& GetEpgEntries() { return m_epgEntries; }
       void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries.emplace_back(epgEntry); }
 
-      bool UpdateFrom(rapidxml::xml_node<>* channelNode, iptvsimple::Channels& channels);
+      bool UpdateFrom(const pugi::xml_node& channelNode, iptvsimple::Channels& channels);
 
     private:
       std::string m_id;
