@@ -1,0 +1,1 @@
+pugixml http://github.com/zeux/pugixml/releases/download/v1.10/pugixml-1.10.tar.gz
