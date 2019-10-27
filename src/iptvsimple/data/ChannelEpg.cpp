@@ -34,8 +34,11 @@ bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
     return false;
 
   bool foundChannel = false;
+  bool haveDisplayNames = false;
   for (const auto& displayNameNode : channelNode.children("display-name"))
   {
+    haveDisplayNames = true;
+
     const std::string name = displayNameNode.child_value();
     if (channels.FindChannel(m_id, name))
     {
@@ -43,6 +46,10 @@ bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
       m_names.emplace_back(name);
     }
   }
+
+  // If there are no display names just check if the id matches a channel
+  if (!haveDisplayNames && channels.FindChannel(m_id, ""))
+    foundChannel = true;
 
   if (!foundChannel)
     return false;
