@@ -326,8 +326,11 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       continue;
 
     bool foundChannel = false;
+    bool haveDisplayNames = false;
     for (xml_node<>* pDisplayNameNode = pChannelNode->first_node("display-name"); pDisplayNameNode; pDisplayNameNode = pDisplayNameNode->next_sibling("display-name"))
     {
+      haveDisplayNames = true;
+
       const std::string strName = pDisplayNameNode->value();
       if (FindChannel(epgChannel.strId, strName))
       {
@@ -335,6 +338,10 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
         epgChannel.strNames.emplace_back(strName);
       }
     }
+
+    // If there are no display names just check if the id matches a channel
+    if (!haveDisplayNames && FindChannel(epgChannel.strId, ""))
+      foundChannel = true;
 
     if (!foundChannel)
       continue;
