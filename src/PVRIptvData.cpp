@@ -351,6 +351,18 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     if (pIconNode == NULL || !GetAttributeValue(pIconNode, "src", epgChannel.strIcon))
       epgChannel.strIcon = "";
 
+    PVRIptvEpgChannel* existingEpgChannel = FindEpgForChannel(epgChannel.strId);
+    if (existingEpgChannel)
+    {
+      for (const std::string& displayName : epgChannel.strNames)
+        existingEpgChannel->strNames.emplace_back(displayName);
+
+      if (existingEpgChannel->strIcon.empty() && !epgChannel.strIcon.empty())
+        existingEpgChannel->strIcon = epgChannel.strIcon;
+
+      continue;
+    }
+
     m_epg.push_back(epgChannel);
   }
 
@@ -1155,6 +1167,17 @@ PVRIptvEpgChannel * PVRIptvData::FindEpg(const std::string &strId)
   }
 
   return NULL;
+}
+
+PVRIptvEpgChannel* PVRIptvData::FindEpgForChannel(const std::string& id)
+{
+  for (auto& epgChannel : m_epg)
+  {
+    if (StringUtils::EqualsNoCase(epgChannel.strId, id))
+      return &epgChannel;
+  }
+
+  return nullptr;
 }
 
 PVRIptvEpgChannel * PVRIptvData::FindEpgForChannel(PVRIptvChannel &channel)

@@ -118,6 +118,7 @@ protected:
   virtual PVRIptvChannel*      FindChannel(const std::string &strId, const std::string &strName);
   virtual PVRIptvChannelGroup* FindGroup(const std::string &strName);
   virtual PVRIptvEpgChannel*   FindEpg(const std::string &strId);
+  PVRIptvEpgChannel* FindEpgForChannel(const std::string& id);
   virtual PVRIptvEpgChannel*   FindEpgForChannel(PVRIptvChannel &channel);
   virtual bool                 FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
   virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
