@@ -64,3 +64,22 @@ bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
 
   return true;
 }
+
+bool ChannelEpg::CombineNamesAndIconPathFrom(const ChannelEpg& right)
+{
+  bool combined = false;
+
+  for (const std::string& name : right.m_names)
+  {
+    AddName(name);
+    combined = true;
+  }
+
+  if (m_iconPath.empty() && !right.m_iconPath.empty())
+  {
+    m_iconPath = right.m_iconPath;
+    combined = true;
+  }
+
+  return combined;
+}

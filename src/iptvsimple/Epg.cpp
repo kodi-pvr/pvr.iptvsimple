@@ -216,7 +216,16 @@ bool Epg::LoadChannelEpgs(const xml_node& rootElement)
 
     if (channelEpg.UpdateFrom(channelNode, m_channels))
     {
-      Logger::Log(LEVEL_DEBUG, "%s - Loaded chanenl EPG with id '%s' with display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), StringUtils::Join(channelEpg.GetNames(), EPG_STRING_TOKEN_SEPARATOR).c_str());
+      ChannelEpg* existingChannelEpg = FindEpgForChannel(channelEpg.GetId());
+      if (existingChannelEpg)
+      {
+        if (existingChannelEpg->CombineNamesAndIconPathFrom(channelEpg))
+          Logger::Log(LEVEL_DEBUG, "%s - Combined channel EPG with id '%s' now has display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), StringUtils::Join(channelEpg.GetNames(), EPG_STRING_TOKEN_SEPARATOR).c_str());
+
+        continue;
+      }
+
+      Logger::Log(LEVEL_DEBUG, "%s - Loaded channel EPG with id '%s' with display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), StringUtils::Join(channelEpg.GetNames(), EPG_STRING_TOKEN_SEPARATOR).c_str());
 
       m_channelEpgs.emplace_back(channelEpg);
     }

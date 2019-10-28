@@ -51,6 +51,7 @@ namespace iptvsimple
       void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries.emplace_back(epgEntry); }
 
       bool UpdateFrom(const pugi::xml_node& channelNode, iptvsimple::Channels& channels);
+      bool CombineNamesAndIconPathFrom(const ChannelEpg& right);
 
     private:
       std::string m_id;
