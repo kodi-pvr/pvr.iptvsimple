@@ -326,8 +326,11 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       continue;
 
     bool foundChannel = false;
+    bool haveDisplayNames = false;
     for (xml_node<>* pDisplayNameNode = pChannelNode->first_node("display-name"); pDisplayNameNode; pDisplayNameNode = pDisplayNameNode->next_sibling("display-name"))
     {
+      haveDisplayNames = true;
+
       const std::string strName = pDisplayNameNode->value();
       if (FindChannel(epgChannel.strId, strName))
       {
@@ -336,6 +339,10 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
       }
     }
 
+    // If there are no display names just check if the id matches a channel
+    if (!haveDisplayNames && FindChannel(epgChannel.strId, ""))
+      foundChannel = true;
+
     if (!foundChannel)
       continue;
 
@@ -343,6 +350,18 @@ bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
     xml_node<> *pIconNode = pChannelNode->first_node("icon");
     if (pIconNode == NULL || !GetAttributeValue(pIconNode, "src", epgChannel.strIcon))
       epgChannel.strIcon = "";
+
+    PVRIptvEpgChannel* existingEpgChannel = FindEpgForChannel(epgChannel.strId);
+    if (existingEpgChannel)
+    {
+      for (const std::string& displayName : epgChannel.strNames)
+        existingEpgChannel->strNames.emplace_back(displayName);
+
+      if (existingEpgChannel->strIcon.empty() && !epgChannel.strIcon.empty())
+        existingEpgChannel->strIcon = epgChannel.strIcon;
+
+      continue;
+    }
 
     m_epg.push_back(epgChannel);
   }
@@ -1148,6 +1167,17 @@ PVRIptvEpgChannel * PVRIptvData::FindEpg(const std::string &strId)
   }
 
   return NULL;
+}
+
+PVRIptvEpgChannel* PVRIptvData::FindEpgForChannel(const std::string& id)
+{
+  for (auto& epgChannel : m_epg)
+  {
+    if (StringUtils::EqualsNoCase(epgChannel.strId, id))
+      return &epgChannel;
+  }
+
+  return nullptr;
 }
 
 PVRIptvEpgChannel * PVRIptvData::FindEpgForChannel(PVRIptvChannel &channel)
