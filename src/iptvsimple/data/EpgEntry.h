@@ -28,7 +28,7 @@
 #include <vector>
 
 #include <kodi/libXBMC_pvr.h>
-#include <rapidxml/rapidxml.hpp>
+#include <pugixml.hpp>
 
 namespace iptvsimple
 {
@@ -103,7 +103,7 @@ namespace iptvsimple
       void SetWriter(const std::string& value) { m_writer = value; }
 
       void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genres);
-      bool UpdateFrom(rapidxml::xml_node<>* channelNode, const std::string& id, int broadcastId,
+      bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id, int broadcastId,
                       int start, int end, int minShiftTime, int maxShiftTime);
 
     private:

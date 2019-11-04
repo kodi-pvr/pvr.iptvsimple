@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.7.0"
+  version="4.7.1"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -159,6 +159,11 @@
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
     <platform>@PLATFORM@</platform>
     <news>
+v4.7.1
+- Update: Switch from rapixml to pugixml
+- Fixed: tvg-id does not match a channel if no display-names in xmltv
+- Fixed: Combine multiple XMLTV channels sharing same id
+
 v4.7.0
 - Fixed: Add channel logo extension for relative paths only
 - Fixed: Logger fix ported from pvr.hts

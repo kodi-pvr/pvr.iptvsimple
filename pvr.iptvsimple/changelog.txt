@@ -1,3 +1,8 @@
+v4.7.1
+- Update: Switch from rapixml to pugixml
+- Fixed: tvg-id does not match a channel if no display-names in xmltv
+- Fixed: Combine multiple XMLTV channels sharing same id
+
 v4.7.0
 - Fixed: Add channel logo extension for relative paths only
 - Fixed: Logger fix ported from pvr.hts

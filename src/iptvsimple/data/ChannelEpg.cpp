@@ -26,17 +26,20 @@
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
-using namespace rapidxml;
+using namespace pugi;
 
-bool ChannelEpg::UpdateFrom(xml_node<>* channelNode, Channels& channels)
+bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
 {
   if (!GetAttributeValue(channelNode, "id", m_id))
     return false;
 
   bool foundChannel = false;
-  for (xml_node<>* displayNameNode = channelNode->first_node("display-name"); displayNameNode; displayNameNode = displayNameNode->next_sibling("display-name"))
+  bool haveDisplayNames = false;
+  for (const auto& displayNameNode : channelNode.children("display-name"))
   {
-    const std::string name = displayNameNode->value();
+    haveDisplayNames = true;
+
+    const std::string name = displayNameNode.child_value();
     if (channels.FindChannel(m_id, name))
     {
       foundChannel = true;
@@ -44,11 +47,15 @@ bool ChannelEpg::UpdateFrom(xml_node<>* channelNode, Channels& channels)
     }
   }
 
+  // If there are no display names just check if the id matches a channel
+  if (!haveDisplayNames && channels.FindChannel(m_id, ""))
+    foundChannel = true;
+
   if (!foundChannel)
     return false;
 
   // get icon if available
-  xml_node<>* iconNode = channelNode->first_node("icon");
+  const auto& iconNode = channelNode.child("icon");
   std::string iconPath = m_iconPath;
   if (!iconNode || !GetAttributeValue(iconNode, "src", iconPath))
     m_iconPath.clear();
@@ -56,4 +63,23 @@ bool ChannelEpg::UpdateFrom(xml_node<>* channelNode, Channels& channels)
     m_iconPath = iconPath;
 
   return true;
+}
+
+bool ChannelEpg::CombineNamesAndIconPathFrom(const ChannelEpg& right)
+{
+  bool combined = false;
+
+  for (const std::string& name : right.m_names)
+  {
+    AddName(name);
+    combined = true;
+  }
+
+  if (m_iconPath.empty() && !right.m_iconPath.empty())
+  {
+    m_iconPath = right.m_iconPath;
+    combined = true;
+  }
+
+  return combined;
 }

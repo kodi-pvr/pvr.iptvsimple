@@ -61,8 +61,8 @@ namespace iptvsimple
     bool LoadEPG(time_t iStart, time_t iEnd);
     bool GetXMLTVFileWithRetries(std::string& data);
     char* FillBufferFromXMLTVData(std::string& data, std::string& decompressedData);
-    bool LoadChannelEpgs(rapidxml::xml_node<>* rootElement);
-    void LoadEpgEntries(rapidxml::xml_node<>* rootElement, int start, int end);
+    bool LoadChannelEpgs(const pugi::xml_node& rootElement);
+    void LoadEpgEntries(const pugi::xml_node& rootElement, int start, int end);
     bool LoadGenres();
 
     data::ChannelEpg* FindEpgForChannel(const std::string& id);
