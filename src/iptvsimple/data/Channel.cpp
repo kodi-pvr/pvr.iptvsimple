@@ -111,6 +111,12 @@ void Channel::SetStreamURL(const std::string& url)
 {
   m_streamURL = url;
 
+  if (StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX))
+  {
+    TryToAddPropertyAsHeader("http-user-agent", "user-agent");
+    TryToAddPropertyAsHeader("http-referrer", "referrer");
+  }
+
   if (Settings::GetInstance().TransformMulticastStreamUrls() &&
       (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, RTP_MULTICAST_PREFIX)))
   {
@@ -121,3 +127,46 @@ void Channel::SetStreamURL(const std::string& url)
   }
 }
 
+std::string Channel::GetProperty(const std::string& propName)
+{
+  auto propPair = m_properties.find(propName);
+  if (propPair != m_properties.end())
+    return propPair->second;
+
+  return {};
+}
+
+void Channel::RemoveProperty(const std::string& propName)
+{
+  m_properties.erase(propName);
+}
+
+void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const std::string& headerName)
+{
+  std::string value = GetProperty(propertyName);
+
+  if (!value.empty())
+  {
+    bool hasProtocolOptions = false;
+    bool addHeader = true;
+    size_t found = m_streamURL.find("|");
+
+    if (found != std::string::npos)
+    {
+      hasProtocolOptions = true;
+      addHeader = m_streamURL.find(headerName + "=", found + 1) == std::string::npos;
+    }
+
+    if (addHeader)
+    {
+      if (!hasProtocolOptions)
+        m_streamURL += "|";
+      else
+        m_streamURL += "&";
+
+      m_streamURL += headerName + "=" + value;
+    }
+
+    RemoveProperty(propertyName);
+  }
+}

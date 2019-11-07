@@ -240,10 +240,10 @@ http://path-to-stream/live/channel-z.ts
   - `radio`: If the value matches "true" (case insensitive) this is a radio channel.
   - `tvg-shift`: Channel specific shift value in hours.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
-- `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed.
-- `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed.
+- `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
+- `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
 - `#EXT-X-PLAYLIST-TYPE`: If this element is present with a value of `VOD` (Video on Demand) the stream is marked as not being live.
-- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|User-Agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi).
+- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|user-agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi).
 
 When processing an XMLTV file the addon will attempt to find a channel loaded from the M3U that matches the EPG channel. It will cycle through the full set of M3U channels checking for one condition on each pass. The first channel found to match is the channel chosen for this EPG channel data.
 
