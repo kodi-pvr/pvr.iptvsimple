@@ -112,7 +112,7 @@ void Channel::SetStreamURL(const std::string& url)
   m_streamURL = url;
 
   if (Settings::GetInstance().TransformMulticastStreamUrls() &&
-      (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX)))
+      (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, RTP_MULTICAST_PREFIX)))
   {
     const std::string typePath = StringUtils::StartsWith(url, "rtp") ? "/rtp/" : "/udp/";
 
