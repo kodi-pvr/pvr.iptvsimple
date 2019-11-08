@@ -28,8 +28,11 @@
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/data/Channel.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/StreamUtils.h"
+#include "iptvsimple/utilities/WebUtils.h"
 
 #include <kodi/xbmc_pvr_dll.h>
+#include <p8-platform/util/StringUtils.h>
 
 using namespace ADDON;
 using namespace iptvsimple;
@@ -245,18 +248,25 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
 
   if (m_data && m_data->GetChannel(*channel, m_currentChannel))
   {
-    strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
-    strncpy(properties[0].strValue, m_currentChannel.GetStreamURL().c_str(), sizeof(properties[0].strValue) - 1);
-    *iPropertiesCount = 1;
+    const std::string& streamURL = m_currentChannel.GetStreamURL();
+
+    StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
     if (!m_currentChannel.GetProperties().empty())
     {
       for (auto& prop : m_currentChannel.GetProperties())
-      {
-        strncpy(properties[*iPropertiesCount].strName, prop.first.c_str(), sizeof(properties[*iPropertiesCount].strName) - 1);
-        strncpy(properties[*iPropertiesCount].strValue, prop.second.c_str(), sizeof(properties[*iPropertiesCount].strName) - 1);
-        (*iPropertiesCount)++;
-      }
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, prop.first, prop.second);
     }
+
+    StreamType streamType = StreamUtils::GetStreamType(streamURL);
+    if (streamType == StreamType::OTHER_TYPE)
+      streamType = StreamUtils::InspectStreamType(streamURL);
+
+    if (streamType == StreamType::HLS)
+    {
+      Logger::Log(LogLevel::LEVEL_DEBUG, "%s - setting inputstream ffmpeg for stream URL: %s", __FUNCTION__, streamURL.c_str());
+      StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstreamclass", "inputstream.ffmpeg");
+    }
+
     return PVR_ERROR_NO_ERROR;
   }
 

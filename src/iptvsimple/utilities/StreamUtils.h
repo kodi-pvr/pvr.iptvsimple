@@ -23,15 +23,25 @@
 
 #include <string>
 
+#include <kodi/xbmc_pvr_types.h>
+
 namespace iptvsimple
 {
   namespace utilities
   {
-    class WebUtils
+    enum class StreamType
+      : int // same type as addon settings
+    {
+      HLS = 0,
+      OTHER_TYPE
+    };
+
+    class StreamUtils
     {
     public:
-      static const std::string UrlEncode(const std::string& value);
-      static std::string ReadFileContentsStartOnly(const std::string &url, int *httpCode);
+      static void SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string &name, const std::string &value);
+      static const StreamType GetStreamType(const std::string& url);
+      static const StreamType InspectStreamType(const std::string& url);
     };
   } // namespace utilities
 } // namespace iptvsimple
