@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.7.1"
+  version="4.8.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -159,6 +159,19 @@
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
     <platform>@PLATFORM@</platform>
     <news>
+v4.8.0
+- Added: Allow use of inputstream ffmpeg for m3u8 files missing correct extension
+- Added: Support for x-tvg-url in playlist header for XMLTV data
+- Added: Add EXTVLCOPT properties for headers
+- Fixed: Fix RTP multicast stream prefix
+- Added: Add support for Dash and Smooth streaming via inputstream.adaptive
+- Added: Add option to use inputsream.adaptive for m3u8/hls streams
+- Added: Support FFmpeg reconnect for http streams using inputstream ffmpeg
+- Fixed: Limit allowed EXTVLCOPT properties to known set
+- Fixed: Add extra stream properties as lower case only
+- Fixed: Support inputstreamaddon for overriding inputstream
+- Update: Readme
+
 v4.7.1
 - Update: Switch from rapixml to pugixml
 - Fixed: tvg-id does not match a channel if no display-names in xmltv
