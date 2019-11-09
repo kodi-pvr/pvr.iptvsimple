@@ -95,6 +95,7 @@ bool PlaylistLoader::LoadPlayList()
       {
         double tvgShiftDecimal = std::atof(ReadMarkerValue(line, TVG_INFO_SHIFT_MARKER).c_str());
         epgTimeShift = static_cast<int>(tvgShiftDecimal * 3600.0);
+        Settings::GetInstance().SetTvgUrl(ReadMarkerValue(line, TVG_URL_MARKER));
         continue;
       }
       else

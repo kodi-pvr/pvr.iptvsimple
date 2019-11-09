@@ -202,7 +202,7 @@ Note: Once mapped to genre IDs the text displayed can either be the DVB standard
 #### M3U format elemnents:
 
 ```
-#EXTM3U tvg-shift="-4.5"
+#EXTM3U tvg-shift="-4.5" x-tvg-url="http://path-to-xmltv/guide.xml"
 #EXTINF:0 tvg-id="channel-x" tvg-name="Channel_X" group-title="Entertainment" tvg-chno="10" tvg-logo="http://path-to-icons/channel-x.png" radio="true" tvg-shift="-3.5",Channel X
 #EXTVLCOPT:program=745
 #KODIPROP:key=val
@@ -230,7 +230,9 @@ http://path-to-stream/live/channel-y.ts
 http://path-to-stream/live/channel-z.ts
 ```
 
-- `#EXTM3U`: Marker for the start of an M3U file. Has an optional `tvg-shift` value that will be used for all channels if a `tvg-shift` value is not supplied per channel.
+- `#EXTM3U`: Marker for the start of an M3U file.
+  - `tvg-shift`: Value that will be used for all channels if a `tvg-shift` value is not supplied per channel.
+  - `x-tvg-url`: URL for the XMLTV data. Only used if the addon settings do not contain an EPG location for XMLTV data.
 - `#EXTINF`: Contains a set of values, ending with a comma followed by the `channel name`.
   - `tvg-id`: A unique identifier for this channel used to map to the EPG XMLTV data.
   - `tvg-name`: A name for this channel in the EPG XMLTV data.

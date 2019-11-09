@@ -88,7 +88,11 @@ namespace iptvsimple
     int GetM3URefreshIntervalMins() const { return m_m3uRefreshIntervalMins; }
     int GetM3URefreshHour() const { return m_m3uRefreshHour; }
 
-    const std::string& GetEpgLocation() const { return m_epgPathType == PathType::REMOTE_PATH ? m_epgUrl : m_epgPath; }
+    const std::string& GetEpgLocation() const
+    {
+      const std::string& epgLocation = m_epgPathType == PathType::REMOTE_PATH ? m_epgUrl : m_epgPath;
+      return epgLocation.empty() ? m_tvgUrl : epgLocation;
+    }
     const PathType& GetEpgPathType() const { return m_epgPathType; }
     const std::string& GetEpgPath() const { return m_epgPath; }
     const std::string& GetEpgUrl() const { return m_epgUrl; }
@@ -112,6 +116,9 @@ namespace iptvsimple
     bool TransformMulticastStreamUrls() const { return m_transformMulticastStreamUrls; }
     const std::string& GetUdpxyHost() const { return m_udpxyHost; }
     int GetUdpxyPort() const { return m_udpxyPort; }
+
+    std::string& GetTvgUrl() { return m_tvgUrl; }
+    void SetTvgUrl(const std::string& tvgUrl) { m_tvgUrl = tvgUrl; }
 
   private:
     Settings() = default;
@@ -184,5 +191,7 @@ namespace iptvsimple
     bool m_transformMulticastStreamUrls = false;
     std::string m_udpxyHost;
     int m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
+
+    std::string m_tvgUrl;
   };
 } //namespace iptvsimple
