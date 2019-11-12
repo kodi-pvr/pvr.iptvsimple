@@ -40,6 +40,13 @@ const StreamType StreamUtils::GetStreamType(const std::string& url)
   if (url.find(".m3u8") != std::string::npos)
     return StreamType::HLS;
 
+  if (url.find(".mpd") != std::string::npos)
+    return StreamType::DASH;
+
+  if (url.find(".ism") != std::string::npos &&
+      !(url.find(".ismv") != std::string::npos || url.find(".isma") != std::string::npos))
+    return StreamType::SMOOTH_STREAMING;
+
   return StreamType::OTHER_TYPE;
 }
 
@@ -52,7 +59,41 @@ const StreamType StreamUtils::InspectStreamType(const std::string& url)
   {
     if (StringUtils::StartsWith(source, "#EXTM3U") && source.find("#EXT-X-STREAM-INF") != std::string::npos)
       return StreamType::HLS;
+
+    if (source.find("<MPD") != std::string::npos)
+      return StreamType::DASH;
+
+    if (source.find("<SmoothStreamingMedia") != std::string::npos)
+      return StreamType::SMOOTH_STREAMING;
   }
 
   return StreamType::OTHER_TYPE;
+}
+
+const std::string StreamUtils::GetManifestType(const StreamType& streamType)
+{
+  switch (streamType)
+  {
+    case StreamType::HLS:
+      return "hls";
+    case StreamType::DASH:
+      return "mpd";
+    case StreamType::SMOOTH_STREAMING:
+      return "ism";
+    default:
+      return "";
+  }
+}
+
+const std::string StreamUtils::GetMimeType(const StreamType& streamType)
+{
+  switch (streamType)
+  {
+    case StreamType::HLS:
+      return "application/x-mpegURL";
+    case StreamType::DASH:
+      return "application/xml+dash";
+    default:
+      return "";
+  }
 }

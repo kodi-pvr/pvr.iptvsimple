@@ -272,8 +272,11 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
       {
         Logger::Log(LogLevel::LEVEL_DEBUG, "%s - setting inputstream adaptive for stream URL: %s", __FUNCTION__, streamURL.c_str());
         StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstreamclass", "inputstream.adaptive");
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_type", "hls");
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_MIMETYPE, "application/x-mpegURL");
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
+        if (streamType == StreamType::HLS || streamType == StreamType::DASH)
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+        if (streamType == StreamType::DASH)
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_update_parameter", "full");
       }
     }
 

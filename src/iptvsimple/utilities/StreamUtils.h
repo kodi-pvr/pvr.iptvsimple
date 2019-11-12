@@ -33,6 +33,8 @@ namespace iptvsimple
       : int // same type as addon settings
     {
       HLS = 0,
+      DASH,
+      SMOOTH_STREAMING,
       OTHER_TYPE
     };
 
@@ -42,6 +44,8 @@ namespace iptvsimple
       static void SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string &name, const std::string &value);
       static const StreamType GetStreamType(const std::string& url);
       static const StreamType InspectStreamType(const std::string& url);
+      static const std::string GetManifestType(const StreamType& streamType);
+      static const std::string GetMimeType(const StreamType& streamType);
     };
   } // namespace utilities
 } // namespace iptvsimple
