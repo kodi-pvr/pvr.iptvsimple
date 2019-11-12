@@ -241,7 +241,17 @@ msgctxt "#30064"
 msgid "Relay port"
 msgstr ""
 
-#empty strings from id 30065 to 30599
+#label-group: Advanced - Streaming
+msgctxt "#30065"
+msgid "Streaming"
+msgstr ""
+
+#label: Advanced - useInputstreamAdaptiveforHls
+msgctxt "#30066"
+msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
+msgstr ""
+
+#empty strings from id 30067 to 30599
 
 #############
 # help info #
@@ -418,4 +428,9 @@ msgstr ""
 #help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
+msgstr ""
+
+#help: Advanced - useInputstreamAdaptiveforHls
+msgctxt "#30684"
+msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
 msgstr ""

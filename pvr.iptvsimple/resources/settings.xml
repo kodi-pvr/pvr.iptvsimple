@@ -288,7 +288,7 @@
           <level>2</level>
           <default>127.0.0.1</default>
           <dependencies>
-            <dependency type="visible" setting="transformMulticastStreamUrls" operator="is">true</dependency>
+            <dependency type="enable" setting="transformMulticastStreamUrls" operator="is">true</dependency>
           </dependencies>
           <control type="edit" format="string" />
         </setting>
@@ -301,9 +301,16 @@
             <maximum>65535</maximum>
           </constraints>
           <dependencies>
-            <dependency type="visible" setting="transformMulticastStreamUrls" operator="is">true</dependency>
+            <dependency type="enable" setting="transformMulticastStreamUrls" operator="is">true</dependency>
           </dependencies>
           <control type="edit" format="integer" />
+        </setting>
+      </group>
+      <group id="2" label="30065">
+        <setting id="useInputstreamAdaptiveforHls" type="boolean" label="30066" help="30684">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
         </setting>
       </group>
     </category>

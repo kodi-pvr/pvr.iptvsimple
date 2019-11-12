@@ -261,10 +261,20 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
     if (streamType == StreamType::OTHER_TYPE)
       streamType = StreamUtils::InspectStreamType(streamURL);
 
-    if (streamType == StreamType::HLS)
+    if (streamType != StreamType::OTHER_TYPE)
     {
-      Logger::Log(LogLevel::LEVEL_DEBUG, "%s - setting inputstream ffmpeg for stream URL: %s", __FUNCTION__, streamURL.c_str());
-      StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstreamclass", "inputstream.ffmpeg");
+      if (streamType == StreamType::HLS && !settings.UseInputstreamAdaptiveforHls())
+      {
+        Logger::Log(LogLevel::LEVEL_DEBUG, "%s - setting inputstream ffmpeg for stream URL: %s", __FUNCTION__, streamURL.c_str());
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstreamclass", "inputstream.ffmpeg");
+      }
+      else
+      {
+        Logger::Log(LogLevel::LEVEL_DEBUG, "%s - setting inputstream adaptive for stream URL: %s", __FUNCTION__, streamURL.c_str());
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstreamclass", "inputstream.adaptive");
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_type", "hls");
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_MIMETYPE, "application/x-mpegURL");
+      }
     }
 
     return PVR_ERROR_NO_ERROR;
