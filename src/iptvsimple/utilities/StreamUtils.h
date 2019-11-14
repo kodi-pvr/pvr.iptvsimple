@@ -21,6 +21,9 @@
  *
  */
 
+#include "../data/Channel.h"
+
+#include <map>
 #include <string>
 
 #include <kodi/xbmc_pvr_types.h>
@@ -46,6 +49,12 @@ namespace iptvsimple
       static const StreamType InspectStreamType(const std::string& url);
       static const std::string GetManifestType(const StreamType& streamType);
       static const std::string GetMimeType(const StreamType& streamType);
+      static std::string GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel);
+      static std::string AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue);
+      static bool UseKodiInputstreams(const StreamType& streamType);
+
+    private:
+      static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);
     };
   } // namespace utilities
 } // namespace iptvsimple

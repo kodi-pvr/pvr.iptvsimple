@@ -251,7 +251,12 @@ msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
 msgstr ""
 
-#empty strings from id 30067 to 30599
+#label: Advanced - useFFmpegReconnect
+msgctxt "#30067"
+msgid "Use FFMpeg http reconnect options if possible"
+msgstr ""
+
+#empty strings from id 30068 to 30599
 
 #############
 # help info #
@@ -412,7 +417,7 @@ msgstr ""
 
 #help-category: Advanced
 msgctxt "#30680"
-msgid "Advanced settings including multicast relays etc."
+msgid "Advanced settings including multicast relays, streaming properties etc."
 msgstr ""
 
 #help: Advanced - transformMulticastStreamUrls
@@ -433,4 +438,9 @@ msgstr ""
 #help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
+msgstr ""
+
+#help: Advanced - useFFmpegReconnect
+msgctxt "#30685"
+msgid "Note this can only apply to http/https streams that are processed by libavformat (M3u8/HLS steram will use this by default). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` to `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`."
 msgstr ""

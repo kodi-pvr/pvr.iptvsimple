@@ -43,6 +43,7 @@ namespace iptvsimple
   static const std::string GROUP_NAME_MARKER       = "group-title=";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
+  static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";
   static const std::string RADIO_MARKER            = "radio=";
   static const std::string PLAYLIST_TYPE_MARKER    = "#EXT-X-PLAYLIST-TYPE:";
 

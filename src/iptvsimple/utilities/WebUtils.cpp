@@ -27,6 +27,8 @@
 #include <iomanip>
 #include <sstream>
 
+#include <p8-platform/util/StringUtils.h>
+
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;
 
@@ -71,4 +73,9 @@ std::string WebUtils::ReadFileContentsStartOnly(const std::string &url, int *htt
     *httpCode = 200;
 
   return strContent;
+}
+
+bool WebUtils::IsHttpUrl(const std::string& url)
+{
+  return StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX);
 }

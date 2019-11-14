@@ -21,11 +21,14 @@
 
 #include "StreamUtils.h"
 
+#include "../Settings.h"
+#include "Logger.h"
 #include "WebUtils.h"
 
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
+using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
 void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string &name, const std::string &value)
@@ -97,3 +100,63 @@ const std::string StreamUtils::GetMimeType(const StreamType& streamType)
       return "";
   }
 }
+
+std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel)
+{
+  std::string newStreamUrl = streamUrl;
+
+  if (WebUtils::IsHttpUrl(streamUrl) &&
+      channel.GetProperty("http-reconnect") == "true" &&
+      SupportsFFmpegReconnect(streamType, channel) &&
+      Settings::GetInstance().UseFFmpegReconnect())
+  {
+    newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect", "1");
+    if (streamType != StreamType::HLS)
+      newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_at_eof", "1");
+    newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_streamed", "1");
+    newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_delay_max", "4294");
+
+    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, newStreamUrl.c_str());
+  }
+
+  return newStreamUrl;
+}
+
+std::string StreamUtils::AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue)
+{
+  std::string newStreamUrl = streamUrl;
+
+  bool hasProtocolOptions = false;
+  bool addHeader = true;
+  size_t found = newStreamUrl.find("|");
+
+  if (found != std::string::npos)
+  {
+    hasProtocolOptions = true;
+    addHeader = newStreamUrl.find(headerName + "=", found + 1) == std::string::npos;
+  }
+
+  if (addHeader)
+  {
+    if (!hasProtocolOptions)
+      newStreamUrl += "|";
+    else
+      newStreamUrl += "&";
+
+    newStreamUrl += headerName + "=" + headerValue;
+  }
+
+  return newStreamUrl;
+}
+
+bool StreamUtils::UseKodiInputstreams(const StreamType& streamType)
+{
+  return streamType == StreamType::OTHER_TYPE || (streamType == StreamType::HLS && !Settings::GetInstance().UseInputstreamAdaptiveforHls());
+}
+
+bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel)
+{
+  return streamType == StreamType::HLS ||
+         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+}
+

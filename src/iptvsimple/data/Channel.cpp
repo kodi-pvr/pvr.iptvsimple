@@ -25,6 +25,7 @@
 #include "../Settings.h"
 #include "../utilities/FileUtils.h"
 #include "../utilities/Logger.h"
+#include "../utilities/StreamUtils.h"
 #include "../utilities/WebUtils.h"
 #include "../../client.h"
 
@@ -127,7 +128,7 @@ void Channel::SetStreamURL(const std::string& url)
   }
 }
 
-std::string Channel::GetProperty(const std::string& propName)
+std::string Channel::GetProperty(const std::string& propName) const
 {
   auto propPair = m_properties.find(propName);
   if (propPair != m_properties.end())
@@ -147,25 +148,7 @@ void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const st
 
   if (!value.empty())
   {
-    bool hasProtocolOptions = false;
-    bool addHeader = true;
-    size_t found = m_streamURL.find("|");
-
-    if (found != std::string::npos)
-    {
-      hasProtocolOptions = true;
-      addHeader = m_streamURL.find(headerName + "=", found + 1) == std::string::npos;
-    }
-
-    if (addHeader)
-    {
-      if (!hasProtocolOptions)
-        m_streamURL += "|";
-      else
-        m_streamURL += "&";
-
-      m_streamURL += headerName + "=" + value;
-    }
+    m_streamURL = StreamUtils::AddHeaderToStreamUrl(m_streamURL, headerName, value);
 
     RemoveProperty(propertyName);
   }

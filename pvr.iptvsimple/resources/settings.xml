@@ -307,6 +307,11 @@
         </setting>
       </group>
       <group id="2" label="30065">
+        <setting id="useFFmpegReconnect" type="boolean" label="30067" help="30685">
+          <level>2</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
         <setting id="useInputstreamAdaptiveforHls" type="boolean" label="30066" help="30684">
           <level>2</level>
           <default>false</default>

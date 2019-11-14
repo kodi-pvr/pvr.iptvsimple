@@ -123,6 +123,10 @@ bool PlaylistLoader::LoadPlayList()
     {
       ParseSinglePropertyIntoChannel(line, tmpChannel, EXTVLCOPT_MARKER);
     }
+    else if (StringUtils::StartsWith(line, EXTVLCOPT_DASH_MARKER)) //#EXTVLCOPT--
+    {
+      ParseSinglePropertyIntoChannel(line, tmpChannel, EXTVLCOPT_DASH_MARKER);
+    }
     else if (StringUtils::StartsWith(line, M3U_GROUP_MARKER)) //#EXTGRP:
     {
       const std::string groupNamesListString = ReadMarkerValue(line, M3U_GROUP_MARKER);

@@ -116,6 +116,7 @@ namespace iptvsimple
     bool TransformMulticastStreamUrls() const { return m_transformMulticastStreamUrls; }
     const std::string& GetUdpxyHost() const { return m_udpxyHost; }
     int GetUdpxyPort() const { return m_udpxyPort; }
+    bool UseFFmpegReconnect() const { return m_useFFmpegReconnect; }
     bool UseInputstreamAdaptiveforHls() const { return m_useInputstreamAdaptiveforHls; }
 
     std::string& GetTvgUrl() { return m_tvgUrl; }
@@ -192,6 +193,7 @@ namespace iptvsimple
     bool m_transformMulticastStreamUrls = false;
     std::string m_udpxyHost;
     int m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
+    bool m_useFFmpegReconnect = true;
     bool m_useInputstreamAdaptiveforHls = false;
 
     std::string m_tvgUrl;
