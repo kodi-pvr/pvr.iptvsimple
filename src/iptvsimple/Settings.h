@@ -119,7 +119,7 @@ namespace iptvsimple
     bool UseFFmpegReconnect() const { return m_useFFmpegReconnect; }
     bool UseInputstreamAdaptiveforHls() const { return m_useInputstreamAdaptiveforHls; }
 
-    std::string& GetTvgUrl() { return m_tvgUrl; }
+    const std::string& GetTvgUrl() const { return m_tvgUrl; }
     void SetTvgUrl(const std::string& tvgUrl) { m_tvgUrl = tvgUrl; }
 
   private:

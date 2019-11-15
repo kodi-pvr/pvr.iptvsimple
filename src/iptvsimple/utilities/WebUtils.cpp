@@ -55,7 +55,7 @@ const std::string WebUtils::UrlEncode(const std::string& value)
   return escaped.str();
 }
 
-std::string WebUtils::ReadFileContentsStartOnly(const std::string &url, int *httpCode)
+std::string WebUtils::ReadFileContentsStartOnly(const std::string& url, int* httpCode)
 {
   std::string strContent;
   void* fileHandle = XBMC->OpenFile(url.c_str(), 0x08); //READ_NO_CACHE

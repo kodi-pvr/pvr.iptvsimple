@@ -144,7 +144,7 @@ void Channel::RemoveProperty(const std::string& propName)
 
 void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const std::string& headerName)
 {
-  std::string value = GetProperty(propertyName);
+  const std::string value = GetProperty(propertyName);
 
   if (!value.empty())
   {

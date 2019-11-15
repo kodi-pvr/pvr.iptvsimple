@@ -30,7 +30,7 @@ namespace iptvsimple
 {
   namespace data
   {
-    static const std::string CHANNEL_LOGO_EXTENSION  = ".png";
+    static const std::string CHANNEL_LOGO_EXTENSION = ".png";
 
     class Channel
     {

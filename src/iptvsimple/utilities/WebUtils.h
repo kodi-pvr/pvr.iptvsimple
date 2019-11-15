@@ -36,7 +36,7 @@ namespace iptvsimple
     {
     public:
       static const std::string UrlEncode(const std::string& value);
-      static std::string ReadFileContentsStartOnly(const std::string &url, int *httpCode);
+      static std::string ReadFileContentsStartOnly(const std::string& url, int* httpCode);
       static bool IsHttpUrl(const std::string& url);
     };
   } // namespace utilities

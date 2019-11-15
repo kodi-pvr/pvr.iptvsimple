@@ -44,7 +44,7 @@ namespace iptvsimple
     class StreamUtils
     {
     public:
-      static void SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string &name, const std::string &value);
+      static void SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string& name, const std::string& value);
       static const StreamType GetStreamType(const std::string& url);
       static const StreamType InspectStreamType(const std::string& url);
       static const std::string GetManifestType(const StreamType& streamType);
