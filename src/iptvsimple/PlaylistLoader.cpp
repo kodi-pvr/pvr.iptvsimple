@@ -250,7 +250,8 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
   auto pos = value.find('=');
   if (pos != std::string::npos)
   {
-    const std::string prop = value.substr(0, pos);
+    std::string prop = value.substr(0, pos);
+    StringUtils::ToLower(prop);
     const std::string propValue = value.substr(pos + 1);
 
     bool addProperty = true;
