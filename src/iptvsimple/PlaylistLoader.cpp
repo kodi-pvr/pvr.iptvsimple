@@ -252,9 +252,21 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
   {
     const std::string prop = value.substr(0, pos);
     const std::string propValue = value.substr(pos + 1);
-    channel.AddProperty(prop, propValue);
 
-    Logger::Log(LEVEL_DEBUG, "%s - Found %s property: '%s' value: '%s'", __FUNCTION__, markerName.c_str(), prop.c_str(), propValue.c_str());
+    bool addProperty = true;
+    if (markerName == EXTVLCOPT_DASH_MARKER)
+    {
+      addProperty &= prop == "http-reconnect";
+    }
+    else if (markerName == EXTVLCOPT_MARKER)
+    {
+      addProperty &= prop == "http-user-agent" || prop == "http-referrer" || prop == "program";
+    }
+
+    if (addProperty)
+      channel.AddProperty(prop, propValue);
+
+    Logger::Log(LEVEL_DEBUG, "%s - Found %s property: '%s' value: '%s' added: %s", __FUNCTION__, markerName.c_str(), prop.c_str(), propValue.c_str(), addProperty ? "true" : "false");
   }
 }
 
