@@ -52,6 +52,7 @@ namespace iptvsimple
       static std::string GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel);
       static std::string AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue);
       static bool UseKodiInputstreams(const StreamType& streamType);
+      static bool ChannelSpecifiesInputstream(const iptvsimple::data::Channel& channe);
 
     private:
       static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);

@@ -154,6 +154,11 @@ bool StreamUtils::UseKodiInputstreams(const StreamType& streamType)
   return streamType == StreamType::OTHER_TYPE || (streamType == StreamType::HLS && !Settings::GetInstance().UseInputstreamAdaptiveforHls());
 }
 
+bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& channel)
+{
+  return !(channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS).empty() && channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON).empty());
+}
+
 bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel)
 {
   return streamType == StreamType::HLS ||
