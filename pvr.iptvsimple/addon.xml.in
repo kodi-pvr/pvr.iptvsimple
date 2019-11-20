@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.8.0"
+  version="4.8.1"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -159,6 +159,9 @@
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
     <platform>@PLATFORM@</platform>
     <news>
+v4.8.1
+- Fixed: Local channels logo with .jpg extension not working
+
 v4.8.0
 - Added: Allow use of inputstream ffmpeg for m3u8 files missing correct extension
 - Added: Support for x-tvg-url in playlist header for XMLTV data
