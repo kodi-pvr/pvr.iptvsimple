@@ -33,6 +33,7 @@ namespace iptvsimple
   static const std::string M3U_START_MARKER        = "#EXTM3U";
   static const std::string M3U_INFO_MARKER         = "#EXTINF";
   static const std::string M3U_GROUP_MARKER        = "#EXTGRP:";
+  static const std::string TVG_URL_MARKER          = "x-tvg-url=";
   static const std::string TVG_INFO_ID_MARKER      = "tvg-id=";
   static const std::string TVG_INFO_ID_MARKER_UC   = "tvg-ID="; //some provider incorrectly use an uppercase ID
   static const std::string TVG_INFO_NAME_MARKER    = "tvg-name=";
@@ -42,6 +43,7 @@ namespace iptvsimple
   static const std::string GROUP_NAME_MARKER       = "group-title=";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
+  static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";
   static const std::string RADIO_MARKER            = "radio=";
   static const std::string PLAYLIST_TYPE_MARKER    = "#EXT-X-PLAYLIST-TYPE:";
 

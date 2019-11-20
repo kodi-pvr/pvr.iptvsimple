@@ -25,6 +25,7 @@
 #include "../Settings.h"
 #include "../utilities/FileUtils.h"
 #include "../utilities/Logger.h"
+#include "../utilities/StreamUtils.h"
 #include "../utilities/WebUtils.h"
 #include "../../client.h"
 
@@ -111,8 +112,14 @@ void Channel::SetStreamURL(const std::string& url)
 {
   m_streamURL = url;
 
+  if (StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX))
+  {
+    TryToAddPropertyAsHeader("http-user-agent", "user-agent");
+    TryToAddPropertyAsHeader("http-referrer", "referrer");
+  }
+
   if (Settings::GetInstance().TransformMulticastStreamUrls() &&
-      (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX)))
+      (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, RTP_MULTICAST_PREFIX)))
   {
     const std::string typePath = StringUtils::StartsWith(url, "rtp") ? "/rtp/" : "/udp/";
 
@@ -121,3 +128,28 @@ void Channel::SetStreamURL(const std::string& url)
   }
 }
 
+std::string Channel::GetProperty(const std::string& propName) const
+{
+  auto propPair = m_properties.find(propName);
+  if (propPair != m_properties.end())
+    return propPair->second;
+
+  return {};
+}
+
+void Channel::RemoveProperty(const std::string& propName)
+{
+  m_properties.erase(propName);
+}
+
+void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const std::string& headerName)
+{
+  const std::string value = GetProperty(propertyName);
+
+  if (!value.empty())
+  {
+    m_streamURL = StreamUtils::AddHeaderToStreamUrl(m_streamURL, headerName, value);
+
+    RemoveProperty(propertyName);
+  }
+}

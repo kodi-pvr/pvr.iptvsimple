@@ -30,9 +30,7 @@ namespace iptvsimple
 {
   namespace data
   {
-    static const std::string CHANNEL_LOGO_EXTENSION  = ".png";
-    static const std::string UDP_MULTICAST_PREFIX = "udp://@";
-    static const std::string RTP_MULTICAST_PREFIX = "rtp://@";
+    static const std::string CHANNEL_LOGO_EXTENSION = ".png";
 
     class Channel
     {
@@ -78,6 +76,7 @@ namespace iptvsimple
       const std::map<std::string, std::string>& GetProperties() const { return m_properties; }
       void SetProperties(std::map<std::string, std::string>& value) { m_properties = value; }
       void AddProperty(const std::string& prop, const std::string& value) { m_properties.insert({prop, value}); }
+      std::string GetProperty(const std::string& propName) const;
 
       void UpdateTo(Channel& left) const;
       void UpdateTo(PVR_CHANNEL& left) const;
@@ -85,6 +84,9 @@ namespace iptvsimple
       void SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName);
 
     private:
+      void RemoveProperty(const std::string& propName);
+      void TryToAddPropertyAsHeader(const std::string& propertyName, const std::string& headerName);
+
       bool m_radio = false;
       int m_uniqueId = 0;
       int m_channelNumber = 0;

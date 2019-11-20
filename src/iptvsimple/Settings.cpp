@@ -100,6 +100,10 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_udpxyHost = buffer;
   if (!XBMC->GetSetting("udpxyPort", &m_udpxyPort))
     m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
+  if (!XBMC->GetSetting("useFFmpegReconnect", &m_useFFmpegReconnect))
+    m_useFFmpegReconnect = false;
+  if (!XBMC->GetSetting("useInputstreamAdaptiveforHls", &m_useInputstreamAdaptiveforHls))
+    m_useInputstreamAdaptiveforHls = false;
 }
 
 ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* settingValue)
@@ -175,6 +179,10 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_udpxyHost, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "udpxyPort")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_udpxyPort, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "useFFmpegReconnect")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useFFmpegReconnect, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "useInputstreamAdaptiveforHls")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useInputstreamAdaptiveforHls, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   return ADDON_STATUS_OK;
 }

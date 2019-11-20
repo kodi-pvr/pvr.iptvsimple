@@ -116,7 +116,9 @@ Advanced settings such as multicast relays.
 
 * **Transform multicast stream URLs**: Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like `udp://@239.239.3.38:5239` would get transformed to something like `http://192.168.1.1:4000/udp/239.239.3.38:5239`.
 * **Relay hostname or IP address**: The hostname or ip address of the multicast relay (`udpxy`) on the local network.
-* **Relay port**: The port of the multicast relay (`udpxy`) on the local network..
+* **Relay port**: The port of the multicast relay (`udpxy`) on the local network.
+* **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (M3u8/HLS steram will use this by default). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` to `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`.
+* **Use inputstream.adaptive for m3u8 (HLS) streams**: Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams.
 
 ## Appendix
 
@@ -202,7 +204,7 @@ Note: Once mapped to genre IDs the text displayed can either be the DVB standard
 #### M3U format elemnents:
 
 ```
-#EXTM3U tvg-shift="-4.5"
+#EXTM3U tvg-shift="-4.5" x-tvg-url="http://path-to-xmltv/guide.xml"
 #EXTINF:0 tvg-id="channel-x" tvg-name="Channel_X" group-title="Entertainment" tvg-chno="10" tvg-logo="http://path-to-icons/channel-x.png" radio="true" tvg-shift="-3.5",Channel X
 #EXTVLCOPT:program=745
 #KODIPROP:key=val
@@ -230,7 +232,9 @@ http://path-to-stream/live/channel-y.ts
 http://path-to-stream/live/channel-z.ts
 ```
 
-- `#EXTM3U`: Marker for the start of an M3U file. Has an optional `tvg-shift` value that will be used for all channels if a `tvg-shift` value is not supplied per channel.
+- `#EXTM3U`: Marker for the start of an M3U file.
+  - `tvg-shift`: Value that will be used for all channels if a `tvg-shift` value is not supplied per channel.
+  - `x-tvg-url`: URL for the XMLTV data. Only used if the addon settings do not contain an EPG location for XMLTV data.
 - `#EXTINF`: Contains a set of values, ending with a comma followed by the `channel name`.
   - `tvg-id`: A unique identifier for this channel used to map to the EPG XMLTV data.
   - `tvg-name`: A name for this channel in the EPG XMLTV data.
@@ -240,10 +244,10 @@ http://path-to-stream/live/channel-z.ts
   - `radio`: If the value matches "true" (case insensitive) this is a radio channel.
   - `tvg-shift`: Channel specific shift value in hours.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
-- `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed.
-- `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed.
+- `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
+- `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
 - `#EXT-X-PLAYLIST-TYPE`: If this element is present with a value of `VOD` (Video on Demand) the stream is marked as not being live.
-- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|User-Agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi).
+- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|user-agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi). If you want to pass custom headers that are not supported by kodi you need to prefix them with an `!`, for example: : `|!name1=val1&!name2=val2`.
 
 When processing an XMLTV file the addon will attempt to find a channel loaded from the M3U that matches the EPG channel. It will cycle through the full set of M3U channels checking for one condition on each pass. The first channel found to match is the channel chosen for this EPG channel data.
 
@@ -315,6 +319,10 @@ HTTP header fields can be sent by appending the following format to the URL: `|n
 **Standard fields**
 
 `accept, accept-language, accept-datetime, authorization, cache-control, connection, content-md5, date, expect, forwarded, from, if-match, if-modified-since, if-none-match, if-range, if-unmodified-since, max-forwards, origin, pragma, range, referer, te, upgrade, via, warning, x-requested-with, dnt, x-forwarded-for, x-forwarded-host, x-forwarded-proto, front-end-https, x-http-method-override, x-att-deviceid, x-wap-profile, x-uidh, x-csrf-token, x-request-id, x-correlation-id`
+
+**Other fields supported by ffmpeg**
+
+`reconnect_at_eof, reconnect_streamed, reconnect_delay_max, icy, icy_metadata_headers, icy_metadata_packet`
 
 ### Manual Steps to rebuild the addon on MacOSX
 

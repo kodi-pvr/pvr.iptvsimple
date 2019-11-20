@@ -21,9 +21,13 @@
 
 #include "WebUtils.h"
 
+#include "../../client.h"
+
 #include <cctype>
 #include <iomanip>
 #include <sstream>
+
+#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;
@@ -49,4 +53,29 @@ const std::string WebUtils::UrlEncode(const std::string& value)
   }
 
   return escaped.str();
+}
+
+std::string WebUtils::ReadFileContentsStartOnly(const std::string& url, int* httpCode)
+{
+  std::string strContent;
+  void* fileHandle = XBMC->OpenFile(url.c_str(), 0x08); //READ_NO_CACHE
+  if (fileHandle)
+  {
+    char buffer[1024];
+    if (int bytesRead = XBMC->ReadFile(fileHandle, buffer, 1024))
+      strContent.append(buffer, bytesRead);
+    XBMC->CloseFile(fileHandle);
+  }
+
+  if (strContent.empty())
+    *httpCode = 500;
+  else
+    *httpCode = 200;
+
+  return strContent;
+}
+
+bool WebUtils::IsHttpUrl(const std::string& url)
+{
+  return StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX);
 }

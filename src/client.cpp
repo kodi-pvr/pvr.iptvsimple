@@ -28,8 +28,11 @@
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/data/Channel.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/StreamUtils.h"
+#include "iptvsimple/utilities/WebUtils.h"
 
 #include <kodi/xbmc_pvr_dll.h>
+#include <p8-platform/util/StringUtils.h>
 
 using namespace ADDON;
 using namespace iptvsimple;
@@ -245,18 +248,48 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
 
   if (m_data && m_data->GetChannel(*channel, m_currentChannel))
   {
-    strncpy(properties[0].strName, PVR_STREAM_PROPERTY_STREAMURL, sizeof(properties[0].strName) - 1);
-    strncpy(properties[0].strValue, m_currentChannel.GetStreamURL().c_str(), sizeof(properties[0].strValue) - 1);
-    *iPropertiesCount = 1;
+    std::string streamURL = m_currentChannel.GetStreamURL();
+
+    if (StreamUtils::ChannelSpecifiesInputstream(m_currentChannel))
+    {
+      // Channel has an inputstream class set so we only set the stream URL
+      StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+    }
+    else
+    {
+      StreamType streamType = StreamUtils::GetStreamType(streamURL);
+      if (streamType == StreamType::OTHER_TYPE)
+        streamType = StreamUtils::InspectStreamType(streamURL);
+
+      // Using kodi's built in inputstreams
+      if (StreamUtils::UseKodiInputstreams(streamType))
+      {
+        std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, m_currentChannel);
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, ffmpegStreamURL);
+
+        if (streamType == StreamType::HLS)
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
+      }
+      else // inputstream.adpative
+      {
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, "inputstream.adaptive");
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
+        if (streamType == StreamType::HLS || streamType == StreamType::DASH)
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+        if (streamType == StreamType::DASH)
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_update_parameter", "full");
+      }
+    }
+
+    Logger::Log(LogLevel::LEVEL_DEBUG, "%s - inputstream URL: %s", __FUNCTION__, streamURL.c_str());
+
     if (!m_currentChannel.GetProperties().empty())
     {
       for (auto& prop : m_currentChannel.GetProperties())
-      {
-        strncpy(properties[*iPropertiesCount].strName, prop.first.c_str(), sizeof(properties[*iPropertiesCount].strName) - 1);
-        strncpy(properties[*iPropertiesCount].strValue, prop.second.c_str(), sizeof(properties[*iPropertiesCount].strName) - 1);
-        (*iPropertiesCount)++;
-      }
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, prop.first, prop.second);
     }
+
     return PVR_ERROR_NO_ERROR;
   }
 

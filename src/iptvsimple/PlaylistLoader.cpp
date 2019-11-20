@@ -95,6 +95,7 @@ bool PlaylistLoader::LoadPlayList()
       {
         double tvgShiftDecimal = std::atof(ReadMarkerValue(line, TVG_INFO_SHIFT_MARKER).c_str());
         epgTimeShift = static_cast<int>(tvgShiftDecimal * 3600.0);
+        Settings::GetInstance().SetTvgUrl(ReadMarkerValue(line, TVG_URL_MARKER));
         continue;
       }
       else
@@ -121,6 +122,10 @@ bool PlaylistLoader::LoadPlayList()
     else if (StringUtils::StartsWith(line, EXTVLCOPT_MARKER)) //#EXTVLCOPT:
     {
       ParseSinglePropertyIntoChannel(line, tmpChannel, EXTVLCOPT_MARKER);
+    }
+    else if (StringUtils::StartsWith(line, EXTVLCOPT_DASH_MARKER)) //#EXTVLCOPT--
+    {
+      ParseSinglePropertyIntoChannel(line, tmpChannel, EXTVLCOPT_DASH_MARKER);
     }
     else if (StringUtils::StartsWith(line, M3U_GROUP_MARKER)) //#EXTGRP:
     {
@@ -245,11 +250,24 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
   auto pos = value.find('=');
   if (pos != std::string::npos)
   {
-    const std::string prop = value.substr(0, pos);
+    std::string prop = value.substr(0, pos);
+    StringUtils::ToLower(prop);
     const std::string propValue = value.substr(pos + 1);
-    channel.AddProperty(prop, propValue);
 
-    Logger::Log(LEVEL_DEBUG, "%s - Found %s property: '%s' value: '%s'", __FUNCTION__, markerName.c_str(), prop.c_str(), propValue.c_str());
+    bool addProperty = true;
+    if (markerName == EXTVLCOPT_DASH_MARKER)
+    {
+      addProperty &= prop == "http-reconnect";
+    }
+    else if (markerName == EXTVLCOPT_MARKER)
+    {
+      addProperty &= prop == "http-user-agent" || prop == "http-referrer" || prop == "program";
+    }
+
+    if (addProperty)
+      channel.AddProperty(prop, propValue);
+
+    Logger::Log(LEVEL_DEBUG, "%s - Found %s property: '%s' value: '%s' added: %s", __FUNCTION__, markerName.c_str(), prop.c_str(), propValue.c_str(), addProperty ? "true" : "false");
   }
 }
 
