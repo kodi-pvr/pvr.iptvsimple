@@ -1,3 +1,6 @@
+v3.8.7
+- Fixed: Local channels logo with .jpg extension not working
+
 v3.8.6
 - Fixed: tvg-id does not match a channel if no display-names in xmltv
 - Fixed: Combine multiple XMLTV channels sharing same id
