@@ -715,7 +715,9 @@ bool PVRIptvData::LoadPlayList(void)
         if (m_logoPathType == REMOTE_PATH_TYPE && logoSetFromChannelName)
           tmpChannel.strTvgLogo = UrlEncode(tmpChannel.strTvgLogo);
 
-        if (tmpChannel.strTvgLogo.find("://") == std::string::npos && !StringUtils::EndsWithNoCase(tmpChannel.strTvgLogo, ".png"))
+        if (tmpChannel.strTvgLogo.find("://") == std::string::npos &&
+            !StringUtils::EndsWithNoCase(tmpChannel.strTvgLogo, ".png") &&
+            !StringUtils::EndsWithNoCase(tmpChannel.strTvgLogo, ".jpg"))
           tmpChannel.strTvgLogo += CHANNEL_LOGO_EXTENSION;
 
         if (strTvgShift.empty())
