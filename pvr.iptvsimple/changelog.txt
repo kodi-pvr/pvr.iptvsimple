@@ -1,3 +1,6 @@
+v4.8.1
+- Fixed: Local channels logo with .jpg extension not working
+
 v4.8.0
 - Added: Allow use of inputstream ffmpeg for m3u8 files missing correct extension
 - Added: Support for x-tvg-url in playlist header for XMLTV data
