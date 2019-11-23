@@ -250,10 +250,12 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
   {
     std::string streamURL = m_currentChannel.GetStreamURL();
 
+    unsigned int propertiesMax = *iPropertiesCount;
+    *iPropertiesCount = 0; // Need to initialise here as current value will be size of properties array
     if (StreamUtils::ChannelSpecifiesInputstream(m_currentChannel))
     {
       // Channel has an inputstream class set so we only set the stream URL
-      StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+      StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
     }
     else
     {
@@ -265,20 +267,20 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
       if (StreamUtils::UseKodiInputstreams(streamType))
       {
         std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, m_currentChannel);
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, ffmpegStreamURL);
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, ffmpegStreamURL);
 
         if (streamType == StreamType::HLS)
-          StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
       }
       else // inputstream.adpative
       {
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, "inputstream.adaptive");
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, "inputstream.adaptive");
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
         if (streamType == StreamType::HLS || streamType == StreamType::DASH)
-          StreamUtils::SetStreamProperty(properties, iPropertiesCount, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
         if (streamType == StreamType::DASH)
-          StreamUtils::SetStreamProperty(properties, iPropertiesCount, "inputstream.adaptive.manifest_update_parameter", "full");
+          StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, "inputstream.adaptive.manifest_update_parameter", "full");
       }
     }
 
@@ -287,7 +289,7 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
     if (!m_currentChannel.GetProperties().empty())
     {
       for (auto& prop : m_currentChannel.GetProperties())
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, prop.first, prop.second);
+        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, prop.first, prop.second);
     }
 
     return PVR_ERROR_NO_ERROR;

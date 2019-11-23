@@ -32,11 +32,18 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string& name, const std::string& value)
+void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const std::string& name, const std::string& value)
 {
-  strncpy(properties[*propertiesCount].strName, name.c_str(), sizeof(properties[*propertiesCount].strName) - 1);
-  strncpy(properties[*propertiesCount].strValue, value.c_str(), sizeof(properties[*propertiesCount].strValue) - 1);
-  (*propertiesCount)++;
+  if (*propertiesCount < propertiesMax)
+  {
+    strncpy(properties[*propertiesCount].strName, name.c_str(), sizeof(properties[*propertiesCount].strName) - 1);
+    strncpy(properties[*propertiesCount].strValue, value.c_str(), sizeof(properties[*propertiesCount].strValue) - 1);
+    (*propertiesCount)++;
+  }
+  else
+  {
+    Logger::Log(LogLevel::LEVEL_ERROR, "%s - Could not add property as max number reached: %s=%s - count : %u", __FUNCTION__, name.c_str(), value.c_str(), propertiesMax);
+  }
 }
 
 const StreamType StreamUtils::GetStreamType(const std::string& url)
