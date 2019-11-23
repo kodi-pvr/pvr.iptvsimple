@@ -115,7 +115,7 @@ void Channel::SetStreamURL(const std::string& url)
   if (StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX))
   {
     TryToAddPropertyAsHeader("http-user-agent", "user-agent");
-    TryToAddPropertyAsHeader("http-referrer", "referrer");
+    TryToAddPropertyAsHeader("http-referrer", "referer"); // spelling differences are correct
   }
 
   if (Settings::GetInstance().TransformMulticastStreamUrls() &&
