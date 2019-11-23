@@ -442,5 +442,5 @@ msgstr ""
 
 #help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
-msgid "Note this can only apply to http/https streams that are processed by libavformat (M3u8/HLS steram will use this by default). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` to `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`."
+msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` as `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`. If this opton is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
 msgstr ""
