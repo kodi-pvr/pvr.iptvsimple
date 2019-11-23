@@ -105,10 +105,8 @@ std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& str
 {
   std::string newStreamUrl = streamUrl;
 
-  if (WebUtils::IsHttpUrl(streamUrl) &&
-      channel.GetProperty("http-reconnect") == "true" &&
-      SupportsFFmpegReconnect(streamType, channel) &&
-      Settings::GetInstance().UseFFmpegReconnect())
+  if (WebUtils::IsHttpUrl(streamUrl) && SupportsFFmpegReconnect(streamType, channel) &&
+      (channel.GetProperty("http-reconnect") == "true" || Settings::GetInstance().UseFFmpegReconnect()))
   {
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect", "1");
     if (streamType != StreamType::HLS)
@@ -116,7 +114,7 @@ std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& str
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_streamed", "1");
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_delay_max", "4294");
 
-    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, newStreamUrl.c_str());
+    Logger::Log(LogLevel::LEVEL_DEBUG, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, newStreamUrl.c_str());
   }
 
   return newStreamUrl;
