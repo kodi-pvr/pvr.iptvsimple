@@ -22,6 +22,7 @@
 #include "StreamUtils.h"
 
 #include "../Settings.h"
+#include "FileUtils.h"
 #include "Logger.h"
 #include "WebUtils.h"
 
@@ -31,11 +32,18 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, const std::string& name, const std::string& value)
+void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const std::string& name, const std::string& value)
 {
-  strncpy(properties[*propertiesCount].strName, name.c_str(), sizeof(properties[*propertiesCount].strName) - 1);
-  strncpy(properties[*propertiesCount].strValue, value.c_str(), sizeof(properties[*propertiesCount].strValue) - 1);
-  (*propertiesCount)++;
+  if (*propertiesCount < propertiesMax)
+  {
+    strncpy(properties[*propertiesCount].strName, name.c_str(), sizeof(properties[*propertiesCount].strName) - 1);
+    strncpy(properties[*propertiesCount].strValue, value.c_str(), sizeof(properties[*propertiesCount].strValue) - 1);
+    (*propertiesCount)++;
+  }
+  else
+  {
+    Logger::Log(LogLevel::LEVEL_ERROR, "%s - Could not add property as max number reached: %s=%s - count : %u", __FUNCTION__, name.c_str(), value.c_str(), propertiesMax);
+  }
 }
 
 const StreamType StreamUtils::GetStreamType(const std::string& url)
@@ -55,6 +63,9 @@ const StreamType StreamUtils::GetStreamType(const std::string& url)
 
 const StreamType StreamUtils::InspectStreamType(const std::string& url)
 {
+  if (!FileUtils::FileExists(url))
+    return StreamType::OTHER_TYPE;
+
   int httpCode = 0;
   const std::string source = WebUtils::ReadFileContentsStartOnly(url, &httpCode);
 
@@ -105,10 +116,8 @@ std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& str
 {
   std::string newStreamUrl = streamUrl;
 
-  if (WebUtils::IsHttpUrl(streamUrl) &&
-      channel.GetProperty("http-reconnect") == "true" &&
-      SupportsFFmpegReconnect(streamType, channel) &&
-      Settings::GetInstance().UseFFmpegReconnect())
+  if (WebUtils::IsHttpUrl(streamUrl) && SupportsFFmpegReconnect(streamType, channel) &&
+      (channel.GetProperty("http-reconnect") == "true" || Settings::GetInstance().UseFFmpegReconnect()))
   {
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect", "1");
     if (streamType != StreamType::HLS)
@@ -116,7 +125,7 @@ std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& str
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_streamed", "1");
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_delay_max", "4294");
 
-    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, newStreamUrl.c_str());
+    Logger::Log(LogLevel::LEVEL_DEBUG, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, newStreamUrl.c_str());
   }
 
   return newStreamUrl;
@@ -162,6 +171,6 @@ bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& c
 bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel)
 {
   return streamType == StreamType::HLS ||
-         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG ||
+         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
 }
-

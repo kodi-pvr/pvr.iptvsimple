@@ -1,3 +1,11 @@
+v4.8.2
+- Fixed: Initialise properties size and check max
+- Fixed: Playing a channel will crash if file/URL does not exist
+- Fixed: Support both input stream class and addon properties
+- Fixed: Allow override of ffmpeg reconnect option
+- Fixed: Fix header property spelling
+- Update: Readme
+
 v4.8.1
 - Fixed: Local channels logo with .jpg extension not working
 

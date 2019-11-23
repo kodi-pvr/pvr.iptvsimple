@@ -69,8 +69,8 @@ General settings required for the addon to function.
     - `Disabled` - Don't auto refresh the M3U file.
     - `Repeated refresh` - Refresh the M3U on a minute based interval.
     - `Once per day` - Refresh the M3U once per day.
-* **Refresh interval"**: If M3U auto refresh mode is `Repeated refresh` refresh the M3U every time this number of minutes passes. Max 120 minutes.
-* **ORefresh hour (24h)**: If M3U auto refresh mode is `Once per day` refresh the M3U every time this horu if the day is reached.
+* **Refresh interval**: If M3U auto refresh mode is `Repeated refresh` refresh the M3U every time this number of minutes passes. Max 120 minutes.
+* **Refresh hour (24h)**: If M3U auto refresh mode is `Once per day` refresh the M3U every time this horu if the day is reached.
 
 ### EPG
 Settings related to the EPG.
@@ -117,7 +117,7 @@ Advanced settings such as multicast relays.
 * **Transform multicast stream URLs**: Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like `udp://@239.239.3.38:5239` would get transformed to something like `http://192.168.1.1:4000/udp/239.239.3.38:5239`.
 * **Relay hostname or IP address**: The hostname or ip address of the multicast relay (`udpxy`) on the local network.
 * **Relay port**: The port of the multicast relay (`udpxy`) on the local network.
-* **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (M3u8/HLS steram will use this by default). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` to `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`.
+* **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` as `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`. If this opton is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`.
 * **Use inputstream.adaptive for m3u8 (HLS) streams**: Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams.
 
 ## Appendix
