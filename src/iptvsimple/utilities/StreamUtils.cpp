@@ -22,6 +22,7 @@
 #include "StreamUtils.h"
 
 #include "../Settings.h"
+#include "FileUtils.h"
 #include "Logger.h"
 #include "WebUtils.h"
 
@@ -55,6 +56,9 @@ const StreamType StreamUtils::GetStreamType(const std::string& url)
 
 const StreamType StreamUtils::InspectStreamType(const std::string& url)
 {
+  if (!FileUtils::FileExists(url))
+    return StreamType::OTHER_TYPE;
+
   int httpCode = 0;
   const std::string source = WebUtils::ReadFileContentsStartOnly(url, &httpCode);
 
