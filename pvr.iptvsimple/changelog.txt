@@ -1,3 +1,6 @@
+v4.8.3
+- Fixed: Channel and epg refresh infinite loop
+
 v4.8.2
 - Fixed: Initialise properties size and check max
 - Fixed: Playing a channel will crash if file/URL does not exist
