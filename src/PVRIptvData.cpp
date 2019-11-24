@@ -88,6 +88,7 @@ void PVRIptvData::Process()
       m_epg.ReloadEPG();
 
       m_reloadChannelsGroupsAndEPG = false;
+      refreshTimer = 0;
     }
     lastRefreshHour = timeInfo.tm_hour;
   }
