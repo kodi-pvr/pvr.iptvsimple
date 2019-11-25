@@ -55,12 +55,14 @@
           <control type="edit" format="integer" />
         </setting>
         <setting id="numberByOrder" type="boolean" label="30014" help="30606">
-          <level>0</level>
+          <level>2</level>
           <default>false</default>
           <control type="toggle" />
         </setting>
+      </group>
+      <group id="2" label="30018">
         <setting id="m3uRefreshMode" type="integer" label="30015" help="30607">
-          <level>0</level>
+          <level>1</level>
           <default>0</default>
           <constraints>
             <options>
@@ -72,7 +74,7 @@
           <control type="list" format="integer" />
         </setting>
         <setting id="m3uRefreshIntervalMins" type="integer" parent="m3uRefreshMode" label="30016" help="30608">
-          <level>0</level>
+          <level>1</level>
           <default>60</default>
           <constraints>
             <minimum>0</minimum>
@@ -87,7 +89,7 @@
           </control>
         </setting>
         <setting id="m3uRefreshHour" type="integer" parent="m3uRefreshMode" label="30017" help="30609">
-          <level>2</level>
+          <level>1</level>
           <default>4</default>
           <constraints>
             <minimum>0</minimum>

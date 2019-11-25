@@ -99,7 +99,10 @@ msgctxt "#30017"
 msgid "Refresh hour (24h)"
 msgstr ""
 
-#empty string 30018
+#label-group: General - Refresh
+msgctxt "#30018"
+msgid "Refresh"
+msgstr ""
 
 #label-category: epgsettings
 msgctxt "#30019"
