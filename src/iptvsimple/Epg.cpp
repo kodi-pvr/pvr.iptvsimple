@@ -127,9 +127,12 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
   int bytesRead = 0;
   int count = 0;
 
+  // Cache is only allowed if refresh mode is disabled
+  bool useEPGCache = Settings::GetInstance().GetM3URefreshMode() != RefreshMode::DISABLED ? false : Settings::GetInstance().UseEPGCache();
+
   while (count < 3) // max 3 tries
   {
-    if ((bytesRead = FileUtils::GetCachedFileContents(XMLTV_CACHE_FILENAME, m_xmltvLocation, data, Settings::GetInstance().UseEPGCache())) != 0)
+    if ((bytesRead = FileUtils::GetCachedFileContents(XMLTV_CACHE_FILENAME, m_xmltvLocation, data, useEPGCache)) != 0)
       break;
 
     Logger::Log(LEVEL_ERROR, "%s - Unable to load EPG file '%s':  file is missing or empty. :%dth try.", __FUNCTION__, m_xmltvLocation.c_str(), ++count);

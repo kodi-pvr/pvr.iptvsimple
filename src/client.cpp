@@ -259,7 +259,7 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
     }
     else
     {
-      StreamType streamType = StreamUtils::GetStreamType(streamURL);
+      StreamType streamType = StreamUtils::GetStreamType(streamURL, m_currentChannel);
       if (streamType == StreamType::OTHER_TYPE)
         streamType = StreamUtils::InspectStreamType(streamURL);
 

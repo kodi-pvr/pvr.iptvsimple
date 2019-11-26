@@ -56,8 +56,11 @@ bool PlaylistLoader::LoadPlayList()
     return false;
   }
 
+  // Cache is only allowed if refresh mode is disabled
+  bool useM3UCache = Settings::GetInstance().GetM3URefreshMode() != RefreshMode::DISABLED ? false : Settings::GetInstance().UseM3UCache();
+
   std::string playlistContent;
-  if (!FileUtils::GetCachedFileContents(M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, Settings::GetInstance().UseM3UCache()))
+  if (!FileUtils::GetCachedFileContents(M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, useM3UCache))
   {
     Logger::Log(LEVEL_ERROR, "%s - Unable to load playlist cache file '%s':  file is missing or empty.", __FUNCTION__, m_m3uLocation.c_str());
     return false;

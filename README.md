@@ -65,12 +65,12 @@ General settings required for the addon to function.
 * **Cache M3U at local storage**: If location is `Remote path` select whether or not the the M3U file should be cached locally.
 * **Start channel number**: The number to start numbering channels from. Only used when `Use backend channel numbers` from PVR settings is enabled and a channel number is not supplied in the M3U file.
 * **Only number by channel order in M3U**: Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'.
-* **M3U auto refresh mode**: Select the auto refresh mode for the M3U file. The options are:
-    - `Disabled` - Don't auto refresh the M3U file.
-    - `Repeated refresh` - Refresh the M3U on a minute based interval.
-    - `Once per day` - Refresh the M3U once per day.
-* **Refresh interval**: If M3U auto refresh mode is `Repeated refresh` refresh the M3U every time this number of minutes passes. Max 120 minutes.
-* **Refresh hour (24h)**: If M3U auto refresh mode is `Once per day` refresh the M3U every time this horu if the day is reached.
+* **Auto refresh mode**: Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are:
+    - `Disabled` - Don't auto refresh the files.
+    - `Repeated refresh` - Refresh the files on a minute based interval.
+    - `Once per day` - Refresh the files once per day.
+* **Refresh interval**: If auto refresh mode is `Repeated refresh` refresh the files every time this number of minutes passes. Max 120 minutes.
+* **Refresh hour (24h)**: If auto refresh mode is `Once per day` refresh the files every time this hour of the day is reached.
 
 ### EPG
 Settings related to the EPG.
