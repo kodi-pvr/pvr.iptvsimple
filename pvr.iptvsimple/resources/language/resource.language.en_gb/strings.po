@@ -86,7 +86,7 @@ msgstr ""
 
 #label: General - m3uRefreshMode
 msgctxt "#30015"
-msgid "M3U auto refresh mode"
+msgid "Auto refresh mode"
 msgstr ""
 
 #label: General - m3uRefreshIntervalMins
@@ -304,17 +304,17 @@ msgstr ""
 
 #help: General - m3uRefreshMode
 msgctxt "#30607"
-msgid "Select the auto refresh mode for the M3U file. The options are: [Disabled] - Don't auto refresh the M3U file; [Repeated refresh] - Refresh the M3U on a minute based interval; [Once per day] - Refresh the M3U once per day."
+msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [Disabled] - Don't auto refresh the files; [Repeated refresh] - Refresh the files on a minute based interval; [Once per day] - Refresh the files once per day."
 msgstr ""
 
 #help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
-msgid "If M3U auto refresh mode is [Repeated refresh] refresh the M3U every time this number of minutes passes. Max 120 minutes."
+msgid "If M3U auto refresh mode is [Repeated refresh] refresh the files every time this number of minutes passes. Max 120 minutes."
 msgstr ""
 
 #help: General - m3uRefreshHour
 msgctxt "#30609"
-msgid "If M3U auto refresh mode is [Once per day] refresh the M3U every time this horu if the day is reached."
+msgid "If auto refresh mode is [Once per day] refresh the files every time this hour of the day is reached"
 msgstr ""
 
 #empty strings from id 30610 to 30619
