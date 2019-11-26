@@ -46,12 +46,15 @@ void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* p
   }
 }
 
-const StreamType StreamUtils::GetStreamType(const std::string& url)
+const StreamType StreamUtils::GetStreamType(const std::string& url, const Channel& channel)
 {
-  if (url.find(".m3u8") != std::string::npos)
+  if (url.find(".m3u8") != std::string::npos ||
+      channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "application/x-mpegURL" ||
+      channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "application/vnd.apple.mpegurl")
     return StreamType::HLS;
 
-  if (url.find(".mpd") != std::string::npos)
+  if (url.find(".mpd") != std::string::npos ||
+      channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "application/xml+dash")
     return StreamType::DASH;
 
   if (url.find(".ism") != std::string::npos &&
