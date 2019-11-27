@@ -83,7 +83,7 @@ For settings related to genres please see the next section.
 * **XMLTV path**: If location is `Local Path` this setting should contain a valid path.
 * **XMLTV URL**: If location is `Remote Path` this setting should contain a valid URL.
 * **Cache XMLTV at local storage**: If location is `Remote path` select whether or not the the XMLTV file should be cached locally.
-* **EPG time shift**: Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours).
+* **EPG time shift**: Adjust the EPG times by this value, from -12 hours to +14 hours.
 * **Apply time shift to all channels**: Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used.
 
 ### Genres
