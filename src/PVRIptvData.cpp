@@ -684,7 +684,7 @@ bool PVRIptvData::LoadPlayList(void)
         strTvgShift   = ReadMarkerValue(strInfoLine, TVG_INFO_SHIFT_MARKER);
 
         if (strTvgId.empty())
-          ReadMarkerValue(strInfoLine, TVG_INFO_ID_MARKER_UC);
+          strTvgId = ReadMarkerValue(strInfoLine, TVG_INFO_ID_MARKER_UC);
 
         if (strTvgId.empty())
         {
