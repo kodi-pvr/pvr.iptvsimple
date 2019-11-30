@@ -74,7 +74,7 @@ const StreamType StreamUtils::InspectStreamType(const std::string& url)
 
   if (httpCode == 200)
   {
-    if (StringUtils::StartsWith(source, "#EXTM3U") && source.find("#EXT-X-STREAM-INF") != std::string::npos)
+    if (StringUtils::StartsWith(source, "#EXTM3U") && (source.find("#EXT-X-STREAM-INF") != std::string::npos || source.find("#EXT-X-VERSION") != std::string::npos))
       return StreamType::HLS;
 
     if (source.find("<MPD") != std::string::npos)
