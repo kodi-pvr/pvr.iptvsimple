@@ -16,6 +16,14 @@ msgstr ""
 "Language: eo\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Disabled"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Generalo"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Ĝenroj"

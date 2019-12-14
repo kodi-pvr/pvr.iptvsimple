@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Location"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Выключана"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "General"
@@ -27,3 +31,11 @@ msgstr "General"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Ігнараваць"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Жанры"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Дадаткова"

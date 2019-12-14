@@ -19,3 +19,7 @@ msgstr ""
 msgctxt "#30010"
 msgid "General"
 msgstr "సాధారణం"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "కళలు"

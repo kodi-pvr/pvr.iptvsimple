@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Sijainti"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Paikallinen sijainti (sisältää lähiverkon)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Ulkoinen sijainti (Internet-osoite)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Ei käytössä"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Yleiset"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "M3U-soittolistan polku"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "M3U-soittolistan URL-osoite"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Ensimmäisen kanavan numero"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Ohjelmaopas"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "XMLTV-tiedoston polku"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "Ohjelmaopas"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV-tiedoston URL-osoite"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Siirrä kaikkien kanavien aikoja"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Ohjelmaoppaan aikojen siirto (tunteina)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Tallenna XMLTV-tiedostot paikalliselle levylle"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Kanavalogot"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Kanavalogojen kansio"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Kanavalogojen URL-osoite"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "XMLTV-logojen asetukset"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "XMLTV:n kanavalogot"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Suosi M3U:ta"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Suosi XMLTV:tä"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Lajityypit"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Edistynyt"

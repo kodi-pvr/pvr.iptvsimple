@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Tauwāhi"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Kua mono"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Āhuawhānui"
@@ -27,3 +31,11 @@ msgstr "Āhuawhānui"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Waihotia"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Momo"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Arā Atu Anō"

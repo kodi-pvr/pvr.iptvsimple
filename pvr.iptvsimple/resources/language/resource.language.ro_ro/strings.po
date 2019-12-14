@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Locație"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Cale locală (include rețea locală)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Cale la distanță (adresă Internet)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Dezactivat"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "General"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Cale listă de redare M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL listă de redare M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Numerotarea canalelor începe de la"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Stabiliri EPG"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Cale XMLTV"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "Ghid program electronic"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Aplică decalaj temporal la toate canalele"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Decalaj temporal pentru ghidul tv (ore)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Preîncarcă XMLTV în stocarea locală"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Embleme canale"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Dosar embleme canale"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr " URL de bază pentru sigle canale"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Opțiuni sigle XMLTV"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Sigle canale din XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Preferă M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Preferă XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Genuri"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Avansat"

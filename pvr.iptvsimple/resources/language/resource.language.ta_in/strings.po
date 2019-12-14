@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "இருப்பிடம்"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "முடக்கப்பட்டன"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "பொதுவானது"
@@ -27,3 +31,11 @@ msgstr "பொதுவானது"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "புறக்கணி"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "பிரிவுகள்"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "மேம்பட்ட"

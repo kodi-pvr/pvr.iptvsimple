@@ -20,38 +20,30 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Đường dẫn"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Đã tắt"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Tổng Quan"
 
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "Danh sách đường dẫn M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Bắt đầu tại kênh"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Tùy chọn Thông tin kênh"
-
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Biểu tượng kênh"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Thư mục biểu tượng kênh"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Cài đặt biểu tượng XMLTV"
 
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Biểu tượng kênh từ XMLTV"
-
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Bỏ qua"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Thể loại"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Nâng cao"

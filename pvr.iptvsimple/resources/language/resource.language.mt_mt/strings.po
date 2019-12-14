@@ -20,49 +20,21 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Post"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Path Lokali (Inkludi n-Network Lokali)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Path Remot (Indirizz fuq l-Internet)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Mhux attiv"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Ġenerali"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Path tal-playlist M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL tal-playlist M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "In-Numerazzjoni tal-istazzjonijiet tibda minn"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Settings tal-EPG"
-
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Path tat-TV XML"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL tat-TV XML"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Applika Ċaqliqa fil-Ħin għall-iStazzjonijiet Kollha"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Ċaqliqa fil-ħin għall-EPG (siegħat)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +44,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Żomm cache ta' XMLTV lokalment"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Armi tal-istazzjonijiet"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Fowlder bl-armi tal-istazzjonijiet"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL Bażi tal-Armi tal-iStazzjonijiet"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Għażliet tal-Armi tal-iStazzjonijiet"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Armi tal-iStazzjonijiet minn XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +59,11 @@ msgstr "Ippreferi M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Ippreferi XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Ġeneru"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Avvanzat"

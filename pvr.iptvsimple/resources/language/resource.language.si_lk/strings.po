@@ -20,38 +20,26 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "පරිස්ථානය"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "ස්ථානීය පෙත (ස්ථානීය ජාලය අන්තර්ගතයි)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "දුරස්ථ පෙත (අන්තර්ජාල ලිපිනය)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "අක්‍රිය කර ඇත."
 
 msgctxt "#30010"
 msgid "General"
 msgstr "සාමාන්‍ය"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "M3U වාදන ලැයිස්තු පෙත"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "M3U වාදන ලැයිස්තු ලින්කුව"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "EPG කට්ටල අංග"
-
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "XMLTV පෙත"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV ලිනුකුව"
 
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "EPG කාල-මාරු (පැයවලින්)"
+msgctxt "#30050"
+msgid "Genres"
+msgstr "ප්‍රබේද"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "උසස්"

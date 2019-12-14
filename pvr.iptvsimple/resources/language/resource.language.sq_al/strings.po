@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Lokalizimi"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Deaktivuar"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Të përgjithshëm"
@@ -27,3 +31,11 @@ msgstr "Të përgjithshëm"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Injoroni"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Zhanret"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Të shtuar"

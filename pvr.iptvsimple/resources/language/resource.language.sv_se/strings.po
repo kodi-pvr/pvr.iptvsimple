@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Plats"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Lokal sökväg (inklusive lokalt nätverk)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Fjärrsökväg (Internet adress)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Avaktiverad"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Allmänt"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Sökväg till M3U-spellista"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL till M3U-spellista"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Börja kanalnumrering på"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "EPG-inställningar"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Sökväg till XMLTV"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL till XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Aktivera tidsförskjutning för alla kanaler"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Tidsförskjutning för EPG (timmar)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Cacha XMLTV på lokalt utrymme"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Kanalloggor"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Mapp för kanalloggor"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Bas-URL för kanalloggor"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "XMLTV-logoalternativ"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Kanalloggor från XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Föredra M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Föredra XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Genrer"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Avancerat"

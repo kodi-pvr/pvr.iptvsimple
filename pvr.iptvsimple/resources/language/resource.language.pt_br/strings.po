@@ -21,48 +21,76 @@ msgid "Location"
 msgstr "Local"
 
 msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Caminho local (inclui Rede local)"
+msgid "Local path (include local network)"
+msgstr "Caminho local (inclui rede local)"
 
 msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Caminho remoto (endereço de Internet)"
+msgid "Remote path (Internet address)"
+msgstr "Caminho remoto (endereço internet)"
+
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Desativado"
+
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "Atualização repetida"
+
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "Uma vez por dia"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Geral"
 
 msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Caminho para lista de reprodução M3U"
+msgid "M3U playlist path"
+msgstr "Caminho da lista de reprodução M3U"
 
 msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL para lista de reprodução M3U"
+msgid "M3U playlist URL"
+msgstr "URL da lista de reprodução M3U"
 
 msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Numeração dos canais inicia em"
+msgid "Start channel number"
+msgstr "Iniciar número canal"
 
-msgctxt "#30020"
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr "Somente número por ordem de canal no M3U"
+
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "Intervalo de atualização"
+
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "Hora de atualização (24h)"
+
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Configurações de EPG"
 
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
+
 msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Caminho para XMLTV"
+msgid "XMLTV path"
+msgstr "Caminho XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL para XMLTV"
 
 msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Aplicar correção de horário a todos os canais"
+msgid "Apply time shift to all channels"
+msgstr "Aplicar mudança de horário em todos os canais"
 
 msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Alterar horário do EPG (horas)"
+msgid "EPG time shift"
+msgstr "Mudança de horário EPG"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +100,29 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Armazenar XMLTV em cache localmente"
 
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} horas"
+
 msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logotipos dos canais"
+msgid "Channel Logos"
+msgstr "Logos dos Canais"
 
 msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Pasta com os logotipos dos canais"
+msgid "Channel logos folder"
+msgstr "Pasta com os logos do canais"
 
 msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL básica com os logotipos do canais"
+msgid "Channel logos base URL"
+msgstr "URL base dos logotipos do canal"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Opções de Logos XMLTV"
 
 msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logos dos Canais via XMLTV"
+msgid "Channels logos from XMLTV"
+msgstr "Logos de canais do XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +135,147 @@ msgstr "Preferir M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Preferir XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Gêneros"
+
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "Use texto de gênero do XMLTV ao mapear gêneros"
+
+msgctxt "#30052"
+msgid "Genres path"
+msgstr "Caminho Gêneros"
+
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr "URL Gêneros"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Avançado"
+
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr "Relé de difusão seletiva (udpxy)"
+
+msgctxt "#30062"
+msgid "Transform multicast stream URLs"
+msgstr "Transformar URLs de fluxo multicast"
+
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr "Nome do host ou endereço IP de retransmissão"
+
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "Porta de relé"
+
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr "Ajustes gerais necessárias para o complemento funcionar."
+
+msgctxt "#30601"
+msgid "Select where to find the M3U resource. The options are: [Local path] - A path to an M3U file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the M3U file."
+msgstr "Selecione onde encontrar o recurso M3U. As opções são: [Caminho local] - Um caminho para um arquivo M3U, seja no dispositivo ou na rede local; [Caminho remoto] - Uma URL que especifica a localização do arquivo M3U."
+
+msgctxt "#30602"
+msgid "If location is [Local path] this setting must contain a valid path for the addon to function."
+msgstr "Se o local for [Caminho local], esse ajuste deverá conter um caminho válido para o add-on funcionar."
+
+msgctxt "#30603"
+msgid "If location is [Remote path] this setting must contain a valid URL for the addon to function."
+msgstr "Se o local for [Caminho remoto], esse ajuste deverá conter uma URL válida para o add-on funcionar."
+
+msgctxt "#30604"
+msgid "If location is [Remote path] select whether or not the the M3U file should be cached locally."
+msgstr "Se o local for [Caminho remoto], selecione se o arquivo M3U deve ou não ser armazenado em cache localmente."
+
+msgctxt "#30605"
+msgid "The number to start numbering channels from. Only used when [Use backend channel numbers] from PVR settings is enabled and a channel number is not supplied in the M3U file."
+msgstr "O número para iniciar a numeração dos canais. Usado apenas quando [Usar números de canal de backend] nas configurações de PVR está ativado e um número de canal não é fornecido no arquivo M3U."
+
+msgctxt "#30606"
+msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
+msgstr "Ignore as tags 'tvg-chno' e apenas os canais numéricos pela ordem no M3U, começando em 'Iniciar número do canal'."
+
+msgctxt "#30620"
+msgid "Settings related to the EPG."
+msgstr "Ajustes relacionados ao EPG."
+
+msgctxt "#30621"
+msgid "Select where to find the XMLTV resource. The options are: [Local path] - A path to an XMLTV file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the XMLTV file."
+msgstr "Selecione onde encontrar o recurso XMLTV. As opções são: [Caminho local] - Um caminho para um arquivo XMLTV, seja no dispositivo ou na rede local; [Caminho remoto] - Uma URL que especifica a localização do arquivo XMLTV."
+
+msgctxt "#30622"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "Se o local for [Caminho local], esse ajuste deverá conter um caminho válido."
+
+msgctxt "#30623"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "Se o local for [Caminho remoto], esse ajuste deverá conter um caminho de URL válido."
+
+msgctxt "#30624"
+msgid "If location is [Remote path] select whether or not the the XMLTV file should be cached locally."
+msgstr "Se o local for [Caminho remoto], selecione se o arquivo XMLTV deve ou não ser armazenado em cache localmente."
+
+msgctxt "#30625"
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours)."
+msgstr "Ajuste os tempos do EPG por esse valor em minutos, o intervalo é de -720 minutos a +840 minutos (- 12 horas a +14 horas)."
+
+msgctxt "#30626"
+msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr "Substituir ou não a mudança de horário para todos os canais com `EPG time shift '. Se não estiver ativado, será utilizado o `EPG time shift 'mais o time shift individual por canal (se disponível)."
+
+msgctxt "#30640"
+msgid "Settings related to Channel Logos."
+msgstr "Ajustes relacionados aos logos do canais."
+
+msgctxt "#30641"
+msgid "Select where to find the channel logos. The options are: [Local path] - A path to a folder whether it be on the device or the local network; [Remote path] - A base URL specifying the location of the logos."
+msgstr "Selecione onde encontrar os logotipos do canal. As opções são: [Caminho local] - Um caminho para uma pasta, seja no dispositivo ou na rede local; [Caminho remoto] - Uma URL que especifique a localização dos logotipos."
+
+msgctxt "#30642"
+msgid "If location is [Local Path] this setting should contain a valid folder."
+msgstr "Se o local for [Caminho local], esse ajuste deverá conter uma pasta válida."
+
+msgctxt "#30643"
+msgid "If location is [Remote Path] this setting should contain a valid base URL."
+msgstr "Se o local for [Caminho remoto], esse ajuste deverá conter uma URL  válida."
+
+msgctxt "#30644"
+msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgstr "Preferência sobre como lidar com logotipos de canais. As opções são: [Ignorar] - não use logotipos de canais de um arquivo XMLTV; [Preferir M3U] - Use o logotipo do canal do M3U, se disponível, caso contrário, use o logotipo XMLTV; [Preferir XMLTV] - Use o logotipo do canal no arquivo XMLTV, se disponível, caso contrário, use o logotipo M3U."
+
+msgctxt "#30660"
+msgid "Settings related to genres."
+msgstr "Ajustes relacionados a gêneros."
+
+msgctxt "#30661"
+msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
+msgstr "Se ativado, e um arquivo de mapeamento de gênero for usado para obter um tipo e subtipo de gênero, use o texto de gênero do EPG (ou seja, texto de 'categoria') para o gênero, em vez do texto padrão do kodi."
+
+msgctxt "#30662"
+msgid "Select where to find the genres XML resource. The options are: [Local path] - A path to a genres XML file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the genres XML file."
+msgstr "Selecione onde encontrar o recurso XML de gêneros. As opções são: [Caminho local] - Um caminho para um arquivo XML de gênero, seja no dispositivo ou na rede local; [Caminho remoto] - Uma URL que especifica a localização do arquivo XML de gêneros."
+
+msgctxt "#30663"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "Se o local for [Caminho local], esse ajuste deverá conter um caminho válido."
+
+msgctxt "#30664"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "Se o local for [Caminho remoto], esse ajuste deverá conter um caminho válido."
+
+msgctxt "#30681"
+msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr "Os fluxos de difusão seletiva (UDP / RTP) não funcionam bem em redes Wi-Fi. Um relé multicast pode converter o fluxo de multicast UDP / RTP para HTTP. A ativação dessa opção transformará os URLs de fluxo multicast do arquivo M3U em endereços HTTP, para que possam ser acessados ​​por meio de um relé 'udpxy' na rede local. Por exemplo. um URL de fluxo UDP multicast como 'udp: //@239.239.3.38: 5239' seria transformado em algo como 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+
+msgctxt "#30682"
+msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
+msgstr "O nome do host ou o endereço IP do relé multicast (udpxy) na rede local."
+
+msgctxt "#30683"
+msgid "The port of the multicast relay (udpxy) on the local network."
+msgstr "A porta do relé multicast (udpxy) na rede local."

@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Ubicación"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Ruta local (incluye red local)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Ruta remota (dirección de Internet)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Deshabilitado"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "General"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Ruta de la lista de reproducción M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL de la lista de reproducción M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Numerando canales empieza en"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Configuración de EPG"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Ruta XMLTV"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Aplicar tiempo de desplazamiento a todos los canales"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "EPG Cambio de hora (horas)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Caché XLMTV en el almacenamiento local"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logos de canal"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Carpeta de Logos de Canales"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL de los logotipos de los canales"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "XMLTV Opciones de logos"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logos de canales de XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "M3U Prefiero"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "XMLTV preferido"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Generos"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Avanzado"

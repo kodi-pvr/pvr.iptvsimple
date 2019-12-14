@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "位置"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "本地路徑 (包括區域網路)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "遠端路徑 (網址)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "關閉"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "一般設定"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "M3U 播放列表路徑"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "M3U 播放列表網址"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "編號頻道開始自"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "電子節目表設定"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "XMLTV 路徑"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "電子節目表"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV 網址"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "套用時間憑移至所有頻道"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "電子節目表時間平移 (小時)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "在本地端儲存XMLTV快取"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "頻道商標"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "頻道商標資料夾"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "頻道商標基礎網址"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "XMLTV商標選項"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "來自XMLTV的頻道商標"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "M3U優先"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "XMLTV優先"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "類別"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "進階"

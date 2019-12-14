@@ -20,6 +20,18 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "स्थान"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "विकलांग"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "सामान्य"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "तरीका "
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "उन्नत"

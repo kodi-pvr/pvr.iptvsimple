@@ -20,49 +20,21 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Локација"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Локална патека (локална мрежа)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Друга локација (интернет адреса)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Исклучено"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Општо"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Патека до M3U Play List"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "Адреса до M3U Play List"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Нумерирањето на каналите започнува од"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "EPG поставки"
-
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Патека до XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "Адреса до XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Примени корекција на сите канали"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Корекција на EPG (часови)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,18 +44,14 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Кеширај XMLTV локално"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Логоа на каналите"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Фолдер за логоа на каналите"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL Адреса за логоа на каналите"
-
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Игнорирај"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Жанрови"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Напредно"

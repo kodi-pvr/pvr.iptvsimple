@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Umístění"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Místní cesta (včetně místní sítě)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Cesta vzdáleného umístění (Internetová adresa)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Zakázáno"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Obecné"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Cesta umístění M3U seznamu stop"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL seznamu stop M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Číslování kanálů začíná od"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Nastavení televizního programu"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Cesta k XMLTV"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "Televizní program"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Použít časový posun na všechny kanály"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Časový posun televizního programu (hodiny)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Zapisovat XMLTV do mezipaměti na místním úložišti."
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Loga kanálů"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Složka pro loga kanálů"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Základ URL adres log kanálů"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Možnosti log XMLTV"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Loga kanálů z XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Upřednostňovat M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Upřednostňovat XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Žánry"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Rozšířené"

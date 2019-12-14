@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Lokasi"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Laluan Setempat (termasuklah Rangkaian Setempat)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Laluan Jauh (Alamat Internet)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Dilumpuhkan"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Am"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Laluan Senarai Main M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL Senarai Main M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Saluran bernombor bermula pada"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Tetapan EPG"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Laluan TV XML"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Laksana Anjak Masa Ke Semua Saluran"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Anjak Masa EPG (jam)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Cache TV XML pada storan setempat"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logo Saluran"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Folder Logo Saluran"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL Asas Logo Saluran"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Pilihan Logo XMLTV"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logo Saluran dari XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Utamakan M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Utamakan XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Genre"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Lanjutan"

@@ -21,48 +21,76 @@ msgid "Location"
 msgstr "Lokacija"
 
 msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Lokalna putanja (uključuje lokalnu mrežu)"
+msgid "Local path (include local network)"
+msgstr "Lokalni put (uključuje lokalnu mrežu)"
 
 msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Udaljena putanja (Internet adresa)"
+msgid "Remote path (Internet address)"
+msgstr "Udaljeni put (internetska adresa)"
+
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Onemogućeno"
+
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "Ponovljeno osvježavanje"
+
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "Jednom dnevno"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Općenito"
 
 msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "M3U putanja popisa izvođenja"
+msgid "M3U playlist path"
+msgstr "Put do M3U liste"
 
 msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "M3U URL popisa izvođenja"
+msgid "M3U playlist URL"
+msgstr "URL M3U liste"
 
 msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Brojanje programa počinje kod"
+msgid "Start channel number"
+msgstr "Početni broj kanala"
 
-msgctxt "#30020"
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr "Numeriraj kanale po poretku u M3U listi"
+
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "Interval osvježavanja"
+
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "Sat osvježavanja (24 sata)"
+
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "EPG postavke"
 
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG vodič"
+
 msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "XMLTV putanja"
+msgid "XMLTV path"
+msgstr "Put XMLTV-a"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV URL"
 
 msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Primjeni premotavanje na sve programe"
+msgid "Apply time shift to all channels"
+msgstr "Primijeni vremenski pomak na sve kanale"
 
 msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "EPG vremensko premotavanje (sati)"
+msgid "EPG time shift"
+msgstr "Vremenski pomak EPG-a"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +100,29 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "XMLTV predmemorija na lokalnoj pohrani"
 
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} sati"
+
 msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logotipovi programa"
+msgid "Channel Logos"
+msgstr "Logotipi kanala"
 
 msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Mapa logotipova programa"
+msgid "Channel logos folder"
+msgstr "Mapa logotipa kanala"
 
 msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Osnovni URL logotipova programa"
+msgid "Channel logos base URL"
+msgstr "Osnovni URL logotipa kanala"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Mogućnosti XMLTV logotipa"
 
 msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logotipovi programa s XMLTV-a"
+msgid "Channels logos from XMLTV"
+msgstr "Logotipi kanala iz XMLTV-a"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +135,143 @@ msgstr "Preferiraj M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Preferiraj XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Žanrovi"
+
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "Upotrijebi tekst žanra iz XMLTV-a kod mapiranja žanrova"
+
+msgctxt "#30052"
+msgid "Genres path"
+msgstr "Put žanrova"
+
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr "URL žanrova"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Napredno"
+
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr "Multicast prijenosnik (udpxy)"
+
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr "Ime ili IP adresa prijenosnika"
+
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "Port prijenosnika"
+
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr "Opće postavke potrebne za funkcioniranje dodatka"
+
+msgctxt "#30601"
+msgid "Select where to find the M3U resource. The options are: [Local path] - A path to an M3U file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the M3U file."
+msgstr "Odaberite mjesto M3U resursa. Mogućnosti su: [Lokalni put] - Put do M3U datoteke na uređaju ili lokalnoj mreži; [Udaljeni put] - URL lokacije M3U datoteke."
+
+msgctxt "#30602"
+msgid "If location is [Local path] this setting must contain a valid path for the addon to function."
+msgstr "Ako je mjesto [Lokalni put] ova postavka mora sadržavati put do dodatka da bi radila."
+
+msgctxt "#30603"
+msgid "If location is [Remote path] this setting must contain a valid URL for the addon to function."
+msgstr "Ako je mjesto [Udaljeni put] ova postavka mora sadržavati URL dodatka da bi radila."
+
+msgctxt "#30604"
+msgid "If location is [Remote path] select whether or not the the M3U file should be cached locally."
+msgstr "Ako je mjesto [Udaljeni put] odaberite da li će se M3U datoteka lokalno predmemorirati."
+
+msgctxt "#30605"
+msgid "The number to start numbering channels from. Only used when [Use backend channel numbers] from PVR settings is enabled and a channel number is not supplied in the M3U file."
+msgstr "Broj od kojeg će se numerirati kanali. Koristi se samo kad je omogućeno [Koristi brojeve kanala pozadinskog programa] u postavkama PVR-a i kad brojevi kanala nisu sadržani u M3U datoteci."
+
+msgctxt "#30606"
+msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
+msgstr "Zanemari bilo koju 'tgv-chno' oznaku i samo numeriraj kanale po redoslijedu u M3U datoteci počevši od 'Početni broj kanala'."
+
+msgctxt "#30620"
+msgid "Settings related to the EPG."
+msgstr "Postavke vezane uz EPG."
+
+msgctxt "#30621"
+msgid "Select where to find the XMLTV resource. The options are: [Local path] - A path to an XMLTV file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the XMLTV file."
+msgstr "Odaberi gdje pronaći XMLTV izvor. Mogućnosti su: [Lokalni put] - Put do XMLTV datoteke bilo na uređaju ili lokalnoj mreži; [Udaljeni put] - URL do mjesta XMLTV datoteke."
+
+msgctxt "#30622"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "Ako je mjesto [Lokalni put] ova postavka mora sadržavati ispravan put do datoteke."
+
+msgctxt "#30623"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "Ako je mjesto [Udaljeni put] ova postavka mora sadržavati ispravan URL."
+
+msgctxt "#30624"
+msgid "If location is [Remote path] select whether or not the the XMLTV file should be cached locally."
+msgstr "Ako je mjesto [Udaljeni put] odaberite da li će se XMLTV datoteka lokalno predmemorirati."
+
+msgctxt "#30625"
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours)."
+msgstr "Podesite vrijeme u EPG-u za ovu vrijednost u minutama, raspon je od -720 minuta do +840 minuta (-12 sati do +14 sati)."
+
+msgctxt "#30626"
+msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr "Da li zamijeniti vremenski pomak za sve kanale opcijom `EPG vremenski pomak`. Ako nije omogućeno koristit će se `EPG vremenski pomak` plus individualni vremenski pomak po kanalu (ako je dostupan)."
+
+msgctxt "#30640"
+msgid "Settings related to Channel Logos."
+msgstr "Postavke vezane uz Logotipe Kanala."
+
+msgctxt "#30641"
+msgid "Select where to find the channel logos. The options are: [Local path] - A path to a folder whether it be on the device or the local network; [Remote path] - A base URL specifying the location of the logos."
+msgstr "Odaberite gdje pronaći logotipe kanala. Mogućnosti su: [Lokalni put] - Put do mape na uređaju ili lokalnoj mreži; [Udaljeni put] - Osnovni URL mjesta logotipova."
+
+msgctxt "#30642"
+msgid "If location is [Local Path] this setting should contain a valid folder."
+msgstr "Ako je mjesto [Lokalni put] ova postavka mora sadržavati ispravnu mapu."
+
+msgctxt "#30643"
+msgid "If location is [Remote Path] this setting should contain a valid base URL."
+msgstr "Ako je mjesto [Udaljeni put] ova postavka mora sadržavati ispravan osnovni URL."
+
+msgctxt "#30644"
+msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgstr "Postavke za odabir logotipova kanala. Mogućnosti su: [Zanemari] - Ne koristi logotipove kanala iz XMLTV datoteke; [Prednost M3U] - Koristi logotip kanala iz M3U datoteke ako postoji, inače koristi XMLTV logotip; [Prednost XMLTV] -  Koristi logotip iz XMLTV datoteke ako postoji, inače koristi M3U logotip."
+
+msgctxt "#30660"
+msgid "Settings related to genres."
+msgstr "Postavke vezane uz žanrove."
+
+msgctxt "#30661"
+msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
+msgstr "Ako je omogućeno, i koristi se datoteka za mapiranje žanrova za pribavljanje vrste i podvrste žanra, koristi tekst žanra iz EPG-a (npr 'kategorija') za žanr umjesto zadanog kodi teksta."
+
+msgctxt "#30662"
+msgid "Select where to find the genres XML resource. The options are: [Local path] - A path to a genres XML file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the genres XML file."
+msgstr "Odaberite mjesto XML izvora žanrova. Mogućnosti su: [Lokalni put] - Put do XML datoteke na uređaju ili lokalnoj mreži; [Udaljeni put] - URL do mjesta XML datoteke."
+
+msgctxt "#30663"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "Ako je mjesto [Lokalni put] ova postavka mora sadržavati ispravan put do datoteke."
+
+msgctxt "#30664"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "Ako je mjesto [Udaljeni put] ova postavka mora sadržavati ispravan URL."
+
+msgctxt "#30681"
+msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr "Multicast (UDP/RTP) streamovi ne rade dobro na bežičnim mrežama. Multicast prijenosnik može pretvoriti stream iz UDP/RTP multicasta u HTTP. Omogučujući tu postavku će pretvoriti multicast URL iz M3U datoteke  u HTTP adrese do kojih se može pristupiti putem 'udpxy' prijenosnika na lokalnoj mreži.Npr. UDP multicast stream URL kao 'udp://@239.239.3.38:5239' će biti pretvoreno u nešto kao 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+
+msgctxt "#30682"
+msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
+msgstr "Ime ili IP adresa multicast prijenosnika (udpxy) na lokalnoj mreži."
+
+msgctxt "#30683"
+msgid "The port of the multicast relay (udpxy) on the local network."
+msgstr "Port multicast prijenosnika (udpxy) na lokalnoj mreži."

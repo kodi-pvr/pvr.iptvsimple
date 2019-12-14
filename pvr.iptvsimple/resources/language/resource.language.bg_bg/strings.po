@@ -21,76 +21,108 @@ msgid "Location"
 msgstr "Местоположение"
 
 msgctxt "#30001"
-msgid "Local Path (include Local Network)"
+msgid "Local path (include local network)"
 msgstr "Локален път (включва локалната мрежа)"
 
 msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Отдалечен път (интернет адрес)"
+msgid "Remote path (Internet address)"
+msgstr "Отдалечен път (адрес в Интернет)"
+
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Изключено"
+
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "Периодично опресняване"
+
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "Веднъж дневно"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Основни"
 
 msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Път до M3U плейлист"
+msgid "M3U playlist path"
+msgstr "Път до списък във формат M3U"
 
 msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "Връзка до M3U плейлист"
+msgid "M3U playlist URL"
+msgstr "Адрес на списък във формат M3U"
 
 msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Започни номерирането на каналите от"
+msgid "Start channel number"
+msgstr "Начален номер на канал"
 
-msgctxt "#30020"
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr "Да се номерира само по реда на каналите във файла M3U"
+
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "Интервал на опресняване"
+
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "Час за опресняване (24ч)"
+
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Настройки на справочника"
 
+msgctxt "#30020"
+msgid "EPG"
+msgstr "Справочник"
+
 msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Път до XMLTV"
+msgid "XMLTV path"
+msgstr "Път за XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "Връзка до XMLTV"
+msgstr "Адрес за XMLTV"
 
 msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Приложи времевото отместване за всички канали"
+msgid "Apply time shift to all channels"
+msgstr "Прилагане на времевото отместване за всички канали"
 
 msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Времево отместване в справочника (часове)"
+msgid "EPG time shift"
+msgstr "Времево отместване в справочника"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Кеширай m3u в локално хранилище"
+msgstr "Кеширане на файловете m3u в локалното хранилище"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Кеширай XMLTV в локално хранилище"
+msgstr "Кеширане на XMLTV в локалното хранилище"
+
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} часа"
 
 msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Лога на каналите"
+msgid "Channel Logos"
+msgstr "Емблеми на каналите"
 
 msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Папка с логата на каналите"
+msgid "Channel logos folder"
+msgstr "Папка с емблемите на каналите"
 
 msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Връзка към базата  с логата на каналите"
+msgid "Channel logos base URL"
+msgstr "Общ адрес за емблеми на каналите"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "XMLTV настройки за Лога"
+msgstr "Настройки за емблемите от XMLTV"
 
 msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Лога на каналите от XMLTV"
+msgid "Channels logos from XMLTV"
+msgstr "Емблеми на каналите от XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -98,8 +130,152 @@ msgstr "Игнорирай"
 
 msgctxt "#30043"
 msgid "Prefer M3U"
-msgstr "Предпочитай M3U"
+msgstr "Да се предпочита M3U"
 
 msgctxt "#30044"
 msgid "Prefer XMLTV"
-msgstr "Предпочитай XMLTV"
+msgstr "Да се предпочита XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Жанрове"
+
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "Използване на текстовете за жанровете от XMLTV при свързване на жанровете"
+
+msgctxt "#30052"
+msgid "Genres path"
+msgstr "Път до жанровете"
+
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr "Адрес на жанровете"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Допълнителни"
+
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr "Мултикастово препредаване (udpxy)"
+
+msgctxt "#30062"
+msgid "Transform multicast stream URLs"
+msgstr "Преобразуване на адресите за мултикастови потоци"
+
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr "Препредаване на името на сървъра или IP адреса"
+
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "Препредаване на порта"
+
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr "Общи настройки, необходими за работата на добавката."
+
+msgctxt "#30601"
+msgid "Select where to find the M3U resource. The options are: [Local path] - A path to an M3U file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the M3U file."
+msgstr "Изберете къде да се търси файлът M3U. Възможностите са: [Локален път] – Път до файл във формат M3U – на самото устройство или в локалната мрежа; [Отдалечен път] – Адрес до местоположението на файла M3U."
+
+msgctxt "#30602"
+msgid "If location is [Local path] this setting must contain a valid path for the addon to function."
+msgstr "Ако е избран [Локален път], то тази настройка трябва да съдържа реален път, за да работи добавката."
+
+msgctxt "#30603"
+msgid "If location is [Remote path] this setting must contain a valid URL for the addon to function."
+msgstr "Ако е избран [Отдалечен път], то тази настройка трябва да съдържа реален адрес, за да работи добавката."
+
+msgctxt "#30604"
+msgid "If location is [Remote path] select whether or not the the M3U file should be cached locally."
+msgstr "Ако е избран [Отдалечен път], изберете дали искате файлът M3U да бъде кеширан локално."
+
+msgctxt "#30605"
+msgid "The number to start numbering channels from. Only used when [Use backend channel numbers] from PVR settings is enabled and a channel number is not supplied in the M3U file."
+msgstr "Число, от което да започне номерирането на каналите. Това се използва само ако [Използване на номерирането на каналите от сървъра] е включено в настройките на ПВР и номерът не се ползва във файла M3U."
+
+msgctxt "#30606"
+msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
+msgstr "Пренебрегване на всякакви етикети от вида „tvg-chno“; каналите да се номерират по реда във файла M3U, започвайки с „Началния номер на канал“."
+
+msgctxt "#30620"
+msgid "Settings related to the EPG."
+msgstr "Настройки за справочника"
+
+msgctxt "#30621"
+msgid "Select where to find the XMLTV resource. The options are: [Local path] - A path to an XMLTV file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the XMLTV file."
+msgstr "Изберете къде да се търси файлът XMLTV. Възможностите са: [Локален път] – Път до файл във формат XMLTV – на самото устройство или в локалната мрежа; [Отдалечен път] – Адрес до местоположението на файла XMLTV."
+
+msgctxt "#30622"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "Ако е избран [Локален път], то тази настройка трябва да съдържа реален път."
+
+msgctxt "#30623"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "Ако е избран [Отдалечен път], то тази настройка трябва да съдържа реален адрес."
+
+msgctxt "#30624"
+msgid "If location is [Remote path] select whether or not the the XMLTV file should be cached locally."
+msgstr "Ако е избран [Отдалечен път], изберете дали искате файлът XMLTV да бъде кеширан локално."
+
+msgctxt "#30625"
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours)."
+msgstr "Отместване на времената в справочника с тази стойност. Позволеният интервал е от -720 минути до +840 минути (- 12 часа до +14 часа)."
+
+msgctxt "#30626"
+msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr "Дали времевото отместване на всички канали да се замени от `Времевото отместване в справочника`. Ако `Времевото отместване в справочника` не е включено, ще се използват отделните времеви отмествания на всеки канал (ако има такива)."
+
+msgctxt "#30640"
+msgid "Settings related to Channel Logos."
+msgstr "Настройки за емблемите на каналите."
+
+msgctxt "#30641"
+msgid "Select where to find the channel logos. The options are: [Local path] - A path to a folder whether it be on the device or the local network; [Remote path] - A base URL specifying the location of the logos."
+msgstr "Изберете къде да се търсят емблеми за каналите. Възможностите са: [Локален път] – Път до папка – на самото устройство или в локалната мрежа; [Отдалечен път] – Базов адрес до местоположението на емблемите."
+
+msgctxt "#30642"
+msgid "If location is [Local Path] this setting should contain a valid folder."
+msgstr "Ако е избран [Локален път], то тази настройка трябва да съдържа реална папка."
+
+msgctxt "#30643"
+msgid "If location is [Remote Path] this setting should contain a valid base URL."
+msgstr "Ако е избран [Отдалечен път], то тази настройка трябва да съдържа реален базов адрес."
+
+msgctxt "#30644"
+msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgstr "Предпочитание за това как да се ползват емблемите за каналите. Възможностите са: [Пренебрегване] – Да не се ползват емблемите от файл XMLTV; [Да се предпочита M3U] – Да се използват емблемите от файла M3U, ако има такива, иначе да се ползват емблемите от XMLTV; [Да се предпочита XMLTV] – Да се ползват емблемите от файла XMLTV, ако това е възможно, иначе да се ползват емблемите от M3U."
+
+msgctxt "#30660"
+msgid "Settings related to genres."
+msgstr "Настройки за жанровете"
+
+msgctxt "#30661"
+msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
+msgstr "Ако това е включено, и за типа и подтипа на жанра се използва файл за свързване на жанровете, от ще се използва текстът за жанра от справочника (тоест текста за „категория“), вместо текстът по подразбиране."
+
+msgctxt "#30662"
+msgid "Select where to find the genres XML resource. The options are: [Local path] - A path to a genres XML file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the genres XML file."
+msgstr "Изберете къде да се търси файлът с жанровете (XML). Възможностите са: [Локален път] – Път до файл с жанрове във формат XML – на самото устройство или в локалната мрежа; [Отдалечен път] – Адрес до местоположението на файла с жанровете."
+
+msgctxt "#30663"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "Ако е избран [Локален път], то тази настройка трябва да съдържа реален път."
+
+msgctxt "#30664"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "Ако е избран [Отдалечен път], то тази настройка трябва да съдържа реален адрес."
+
+msgctxt "#30681"
+msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr "Мултикастовите потоци (UDP/RTP) не работят добре при ползване на безжична мрежа. Мултикастовото препредаване може да преобразува потока от мултикаст UDP/RTP до HTTP. Включването на тази възможност ще преобразува адресите за мултикастови потоци от файла M3U в адреси по протокола HTTP, така че да могат да бъдат достъпни чрез препредаване с „udpxy“ в локалната мрежа. Например: мултикастов поток през UDP с адрес от вида „udp://@239.239.3.38:5239“ ще бъде преобразуван до нещо като „http://192.168.1.1:4000/udp/239.239.3.38:5239“."
+
+msgctxt "#30682"
+msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
+msgstr "Името на сървъра или IP адреса за мултикастово препредаване (udpxy) в локалната мрежа."
+
+msgctxt "#30683"
+msgid "The port of the multicast relay (udpxy) on the local network."
+msgstr "Порта за мултикастово препредаване (udpxy) в локалната мрежа."

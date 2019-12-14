@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Ubicació"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Camí local (inclou xarxa local)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Camí remot (Adreça d'Internet)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Inhabilitat"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "General"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Camí a la llista de reproducció M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL de llista de reproducció M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "La numeració de canals comença al"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Opcions de l'EPG"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Camí a XMLTV"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL de XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Aplica Time Shift a tots els canals"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Time Shift d'EPG (hores)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Fer servir el disc local com a memòria cau per a XMLTV"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logos dels canals"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Carpeta dels logos dels canals"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL base dels logos dels canals"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Opcions dels logos de XMLTV"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logos dels canals des de XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Prefereix M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Prefereix XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Gèneres"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Avançat"

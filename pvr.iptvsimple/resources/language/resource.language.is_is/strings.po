@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Staðsetning"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Staðvær slóð (nærnet innifalið)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Fjarlæg slóð (Internet netfang)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Óvirkt"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Almennt"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Slóð að M3U spilunarlista"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "Veffang á M3U spilunarlista"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Númeraðar stöðvar byrja á"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Stillingar fyrir rafræna dagskrárvísa (EPG)"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "XMLTV Slóð"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "Rafrænn EPG-sjónvarpsvísir"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV Netfang"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Setja tímahliðrun á allar rásir"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Tímahliðrun rafrænna dagskrárvísa (klukkutímar)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Setja XMLTV í staðvært flýtiminni"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Merki Rása"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Mappa fyrir Merki Rása"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Netfang fyrir Merki Rása"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Valkostir XMLTV táknmynda"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Rása-táknmyndir frá XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Kjósa M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Kjósa XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Flokkar"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Ítarlegt"

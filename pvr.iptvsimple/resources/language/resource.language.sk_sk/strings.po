@@ -21,35 +21,55 @@ msgid "Location"
 msgstr "Umiestnenie"
 
 msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Miestna cesta (vrátane miestnej LAN siete)"
+msgid "Local path (include local network)"
+msgstr "Lokálna cesta (vrátane miestnej LAN siete)"
 
 msgctxt "#30002"
-msgid "Remote Path (Internet address)"
+msgid "Remote path (Internet address)"
 msgstr "Vzdialená cesta (internetový prístup)"
+
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Zakázané"
+
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "Opakované obnovenie"
+
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "Raz za deň"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Hlavné"
 
 msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Cesta k M3U zoznamu skladieb"
+msgid "M3U playlist path"
+msgstr "Cesta k M3U playlistu"
 
 msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL adresa M3U zoznamu skladieb"
+msgid "M3U playlist URL"
+msgstr "URL k M3U playlistu "
 
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Číslovanie kanálov začína na"
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "Interval obnovenia"
 
-msgctxt "#30020"
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "Obnovovacia hodina (24h)"
+
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Nastavenia EPG"
 
+msgctxt "#30020"
+msgid "EPG"
+msgstr "Televízny program"
+
 msgctxt "#30021"
-msgid "XMLTV Path"
+msgid "XMLTV path"
 msgstr "Cesta k XMLTV"
 
 msgctxt "#30022"
@@ -57,12 +77,12 @@ msgid "XMLTV URL"
 msgstr "URL adresa XMLTV"
 
 msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Použiť časový posun pre všetky kanály"
+msgid "Apply time shift to all channels"
+msgstr "Použiť Time Shift pre všetky kanály"
 
 msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Časový posun EPG (hodiny)"
+msgid "EPG time shift"
+msgstr "EPG time shift"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +92,29 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Ukladať do vyrovnávacej pamäte XMLTV v lokálnom úložisku"
 
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} hodín"
+
 msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logá staníc"
+msgid "Channel Logos"
+msgstr "Logá stanice"
 
 msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Priečinok s logami staníc"
+msgid "Channel logos folder"
+msgstr "Priečinok s logami stanice"
 
 msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Základná URL adresa log staníc"
+msgid "Channel logos base URL"
+msgstr "Základná URL adresa lôg stanice"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Možnosti pre logá XMLTV"
 
 msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logá kanálov z XMLTV"
+msgid "Channels logos from XMLTV"
+msgstr "Logá staníc z XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +127,27 @@ msgstr "Uprednostniť M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Prednostný XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Žánre"
+
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "Pri mapovaní žánrov použite žánerový text z XMLTV"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Rozšírené"
+
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "Relay port"
+
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr "Pre fungovanie doplnku sú potrebné všeobecné nastavenia."
+
+msgctxt "#30620"
+msgid "Settings related to the EPG."
+msgstr "Nastavenia týkajúce sa EPG."

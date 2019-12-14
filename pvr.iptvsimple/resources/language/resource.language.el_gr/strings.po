@@ -20,49 +20,25 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Τοποθεσία"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Τοπική Διαδρομή (περιλαμβάνεται το Τοπικό Δίκτυο)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Απομακρυσμένη Διαδρομή (διαδίκτυο)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Ανενεργή"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Γενικά"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Διαδρομή Λιστών Αναπ/γής M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL Λιστών Αναπ/γής M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Η αρίθμηση των καναλιών αρχίζει από το"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Ρυθμίσεις EPG"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Διαδρομή XMLTV"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Εφαρμογή TimeShift Σε Όλα Τα Κανάλια"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "TimeShift του EPG (ώρες)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +48,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Προσωρινή αποθήκευση αρχείων XMLTV τοπικά"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Λογότυπα Καναλιών"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Φάκελος Λογότυπων Καναλιών"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Βασική URL Λογότυπων Καναλιών"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Επιλογές Λογότυπων XMLTV"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Λογότυπα καναλιών από XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "Προτίμηση M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Προτίμηση XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Είδη"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Για Προχωρημένους"

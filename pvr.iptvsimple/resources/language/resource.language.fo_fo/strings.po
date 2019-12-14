@@ -20,6 +20,14 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Stað"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Sløkt"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Vanligt"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Evni"

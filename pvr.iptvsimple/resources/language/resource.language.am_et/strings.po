@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "አካባቢ "
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "ተሰናክሏል "
+
 msgctxt "#30010"
 msgid "General"
 msgstr "ባጠቃላይ"
@@ -27,3 +31,7 @@ msgstr "ባጠቃላይ"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "መተው"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "የረቀቀ"

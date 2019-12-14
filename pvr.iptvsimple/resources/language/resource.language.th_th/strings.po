@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "ที่ตั้ง"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "ปิดการใช้งาน"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "ทั่วไป"
@@ -27,3 +31,11 @@ msgstr "ทั่วไป"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "ไม่สนใจ"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "ประเภท"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "ขั้นสูง"

@@ -20,6 +20,18 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "مکان"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "غیر فعال"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "عمومی"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "نوع"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "پیشرفته"

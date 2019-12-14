@@ -20,77 +20,37 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Ort"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Lokaler Pfad (einschließlich lokales Netzwerk)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Entfernter Pfad (Internetadresse)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Ausschalten"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Allgemein"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "M3U Wiedergabelistenpfad"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "M3U Wiedergabelisten-URL"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Kanalnummerierung beginnt bei"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "EPG-Einstellungen"
 
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "XMLTV-Pfad"
+msgctxt "#30020"
+msgid "EPG"
+msgstr "EPG"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV URL"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Zeitversetzung für alle Kanäle übernehmen"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "EPG Zeitversetzung (Stunden)"
+msgstr "XMLTV-URL"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "M3U auf lokalen Speicher cachen"
+msgstr "M3U lokal zwischenspeichern"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "XMLTV auf lokalen Speicher cachen"
-
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Senderlogos"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Senderlogo-Ordner"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Basis-URL der Senderlogos"
+msgstr "XMLTV lokal zwischenspeichern"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "Einstellungen für XMLTV Logos"
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Senderlogos von XMLTV"
+msgstr "Einstellungen für XMLTV-Logos"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +63,11 @@ msgstr "M3U bevorzugen"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "XMLTV bevorzugen"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Genre"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Fortgeschritten"

@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Kokalekua"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Desgaituta"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Orokorra"
@@ -27,3 +31,11 @@ msgstr "Orokorra"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Baztertu"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Generoak"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Aurreratua"

@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "တည်နေရာ"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "ပိတ်ထားမည်"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "ယေဘုယျ"
@@ -27,3 +31,11 @@ msgstr "ယေဘုယျ"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "လစ်လျူရှု့"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "အမျိုးအစား"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "အဆင့်မြင့်သော"

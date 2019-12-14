@@ -20,49 +20,21 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Lleoliad"
 
-msgctxt "#30001"
-msgid "Local Path (include Local Network)"
-msgstr "Llwybr Lleol (gan gynnwys y Rhwydwaith Lleol)"
-
-msgctxt "#30002"
-msgid "Remote Path (Internet address)"
-msgstr "Llwybr Pell (cyfeiriad rhyngrwyd)"
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Analluogwyd"
 
 msgctxt "#30010"
 msgid "General"
 msgstr "Cyffredinol"
 
-msgctxt "#30011"
-msgid "M3U Play List Path"
-msgstr "Llwybr Rhestr Chwarae M3U"
-
-msgctxt "#30012"
-msgid "M3U Play List URL"
-msgstr "URL Llwybr Rhestr Chwarae M3U"
-
-msgctxt "#30013"
-msgid "Numbering channels starts at"
-msgstr "Mae rhifo'r sianel yn cychwyn yn"
-
-msgctxt "#30020"
+msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Gosodiadau'r Amserlenydd"
-
-msgctxt "#30021"
-msgid "XMLTV Path"
-msgstr "Llwybr XMLTV"
 
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "URL XMLTV"
-
-msgctxt "#30023"
-msgid "Apply Time Shift To All Channels"
-msgstr "Gosod Symud Amser i Bob Sianel"
-
-msgctxt "#30024"
-msgid "EPG Time Shift (hours)"
-msgstr "Amserlenydd Symud Amser (oriau)"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
@@ -72,25 +44,9 @@ msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Storio'r XMLTV mewn storfa leol"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Logos y Sianeli"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Ffolder Logos Sianeli"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "URL Sail Logos y Sianeli"
-
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Dewisiadau Logos XMLTV "
-
-msgctxt "#30041"
-msgid "Channels Logos from XMLTV"
-msgstr "Logos Sianeli oddi ar XMLTV"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -103,3 +59,11 @@ msgstr "Ffafrio M3U"
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Ffafrio XMLTV"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Mathau"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Uwch"

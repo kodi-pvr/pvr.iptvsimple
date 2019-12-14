@@ -20,6 +20,10 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Ҷойгиршавӣ"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Ғайрифаъол"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Умумӣ"
@@ -27,3 +31,11 @@ msgstr "Умумӣ"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Рад кардан"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Жанрҳо"
+
+msgctxt "#30060"
+msgid "Advanced"
+msgstr "Иловагӣ"

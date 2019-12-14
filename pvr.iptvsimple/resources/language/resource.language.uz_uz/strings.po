@@ -23,3 +23,7 @@ msgstr "Umumiy"
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "E'tiborsiz qoldirish"
+
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Uslublar"

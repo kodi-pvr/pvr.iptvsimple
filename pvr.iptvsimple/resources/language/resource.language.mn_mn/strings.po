@@ -20,18 +20,14 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "Байрлал"
 
+msgctxt "#30003"
+msgid "Disabled"
+msgstr "Идвэхгүй болсон"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "Ерөнхий"
 
-msgctxt "#30030"
-msgid "Channels Logos"
-msgstr "Сувгуудын лого"
-
-msgctxt "#30031"
-msgid "Channels Logos Folder"
-msgstr "Сувгуудын логоны хавтас"
-
-msgctxt "#30032"
-msgid "Channels Logos Base URL"
-msgstr "Сувгуудын логоны суурь URL"
+msgctxt "#30050"
+msgid "Genres"
+msgstr "Жанр"
