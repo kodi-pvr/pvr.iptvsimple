@@ -1,3 +1,12 @@
+v4.9.0
+- Added: Catchup support (a.k.a Archive)
+- Added: Missing check for HLS stream type
+- Update: Readme
+- Fixed: strings.po comments
+
+v4.8.5
+- Update: Transifix language files
+
 v4.8.4
 - Fixed: Disable caching when using refresh M3U/XMLTV modes
 - Fixed: Also check channel mime type property when determinig stream type
