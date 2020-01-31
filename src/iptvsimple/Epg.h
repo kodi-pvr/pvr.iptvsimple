@@ -54,6 +54,9 @@ namespace iptvsimple
     void Clear();
     void ReloadEPG();
 
+    data::EpgEntry* GetLiveEPGEntry(const data::Channel& myChannel) const;
+    data::EpgEntry* GetEPGEntry(const data::Channel& myChannel, time_t lookupTime) const;
+
   private:
     static const XmltvFileFormat GetXMLTVFileFormat(const char* buffer);
     static void MoveOldGenresXMLFileToNewLocation();
@@ -65,8 +68,8 @@ namespace iptvsimple
     void LoadEpgEntries(const pugi::xml_node& rootElement, int start, int end);
     bool LoadGenres();
 
-    data::ChannelEpg* FindEpgForChannel(const std::string& id);
-    data::ChannelEpg* FindEpgForChannel(const data::Channel& channel);
+    data::ChannelEpg* FindEpgForChannel(const std::string& id) const;
+    data::ChannelEpg* FindEpgForChannel(const data::Channel& channel) const;
     void ApplyChannelsLogosFromEPG();
 
     std::string m_xmltvLocation;

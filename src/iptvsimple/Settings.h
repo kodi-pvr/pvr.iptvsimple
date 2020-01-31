@@ -113,6 +113,18 @@ namespace iptvsimple
     const std::string& GetLogoBaseUrl() const { return m_logoBaseUrl; }
     const EpgLogosMode& GetEpgLogosMode() const { return m_epgLogosMode; }
 
+    bool IsCatchupEnabled() const { return m_catchupEnabled; }
+    const std::string& GetCatchupQueryFormat() const { return m_catchupQueryFormat; }
+    int GetCatchupDays() const { return m_catchupDays; }
+    time_t GetCatchupDaysInSeconds() const { return static_cast<time_t>(m_catchupDays) * 24 * 60 * 60; }
+    bool AllChannelsSupportCatchup() const { return m_allChannelsSupportCatchup; }
+    bool CatchupPlayEpgAsLive() const { return m_catchupPlayEpgAsLive; }
+    int GetCatchupWatchEpgBeginBufferMins() const { return m_catchupWatchEpgBeginBufferMins; }
+    time_t GetCatchupWatchEpgBeginBufferSecs() const { return static_cast<time_t>(m_catchupWatchEpgBeginBufferMins) * 60; }
+    int GetCatchupWatchEpgEndBufferMins() const { return m_catchupWatchEpgEndBufferMins; }
+    time_t GetCatchupWatchEpgEndBufferSecs() const { return static_cast<time_t>(m_catchupWatchEpgEndBufferMins) * 60; }
+    bool CatchupOnlyOnFinishedProgrammes() const { return m_catchupOnlyOnFinishedProgrammes; }
+
     bool TransformMulticastStreamUrls() const { return m_transformMulticastStreamUrls; }
     const std::string& GetUdpxyHost() const { return m_udpxyHost; }
     int GetUdpxyPort() const { return m_udpxyPort; }
@@ -189,6 +201,15 @@ namespace iptvsimple
     std::string m_logoPath;
     std::string m_logoBaseUrl;
     EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+
+    bool m_catchupEnabled = false;
+    std::string m_catchupQueryFormat;
+    int m_catchupDays = 3;
+    bool m_allChannelsSupportCatchup = false;
+    bool m_catchupPlayEpgAsLive = false;
+    int m_catchupWatchEpgBeginBufferMins = 5;
+    int m_catchupWatchEpgEndBufferMins = 15;
+    bool m_catchupOnlyOnFinishedProgrammes = false;
 
     bool m_transformMulticastStreamUrls = false;
     std::string m_udpxyHost;

@@ -102,7 +102,7 @@ namespace iptvsimple
       const std::string& GetWriter() const { return m_writer; }
       void SetWriter(const std::string& value) { m_writer = value; }
 
-      void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genres);
+      void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id, int broadcastId,
                       int start, int end, int minShiftTime, int maxShiftTime);
 

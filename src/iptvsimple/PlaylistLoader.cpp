@@ -196,6 +196,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strChnlNo     = ReadMarkerValue(infoLine, TVG_INFO_CHNO_MARKER);
     std::string strRadio      = ReadMarkerValue(infoLine, RADIO_MARKER);
     std::string strTvgShift   = ReadMarkerValue(infoLine, TVG_INFO_SHIFT_MARKER);
+    std::string strCatchup       = ReadMarkerValue(infoLine, CATCHUP);
+    std::string strCatchupDays   = ReadMarkerValue(infoLine, CATCHUP_DAYS);
+    std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
 
     if (strTvgId.empty())
       strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
@@ -215,11 +218,25 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     bool isRadio = StringUtils::EqualsNoCase(strRadio, "true");
     channel.SetTvgId(strTvgId);
     channel.SetTvgName(XBMC->UnknownToUTF8(strTvgName.c_str()));
+    channel.SetCatchupSource(XBMC->UnknownToUTF8(strCatchupSource.c_str()));
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
     channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);
+    if (!strCatchupDays.empty())
+      channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
+    else
+      channel.SetCatchupDays(Settings::GetInstance().GetCatchupDays());
+
+    if (StringUtils::EqualsNoCase(strCatchup, "default") || StringUtils::EqualsNoCase(strCatchup, "append") ||
+        !strCatchupDays.empty() || !strCatchupSource.empty())
+      channel.SetHasCatchup(true);
+
+    if (StringUtils::EqualsNoCase(strCatchup, "default"))
+      channel.SetCatchupMode(CatchupMode::DEFAULT);
+    else if (StringUtils::EqualsNoCase(strCatchup, "append"))
+      channel.SetCatchupMode(CatchupMode::APPEND);
 
     return ReadMarkerValue(infoLine, GROUP_NAME_MARKER);
   }
