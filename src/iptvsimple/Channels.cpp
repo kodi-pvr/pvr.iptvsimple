@@ -72,11 +72,16 @@ void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) c
   }
 }
 
-bool Channels::GetChannel(const PVR_CHANNEL& channel, Channel& myChannel)
+bool Channels::GetChannel(const PVR_CHANNEL& channel, Channel& myChannel) const
+{
+  return GetChannel(static_cast<int>(channel.iUniqueId), myChannel);
+}
+
+bool Channels::GetChannel(int uniqueId, Channel& myChannel) const
 {
   for (const auto& thisChannel : m_channels)
   {
-    if (thisChannel.GetUniqueId() == static_cast<int>(channel.iUniqueId))
+    if (thisChannel.GetUniqueId() == uniqueId)
     {
       thisChannel.UpdateTo(myChannel);
 

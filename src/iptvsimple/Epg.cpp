@@ -355,23 +355,23 @@ PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t sta
   return PVR_ERROR_NO_ERROR;
 }
 
-ChannelEpg* Epg::FindEpgForChannel(const std::string& id)
+ChannelEpg* Epg::FindEpgForChannel(const std::string& id) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
     if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), id))
-      return &myChannelEpg;
+      return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
   return nullptr;
 }
 
-ChannelEpg* Epg::FindEpgForChannel(const Channel& channel)
+ChannelEpg* Epg::FindEpgForChannel(const Channel& channel) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
     if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), channel.GetTvgId()))
-      return &myChannelEpg;
+      return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
   for (auto& myChannelEpg : m_channelEpgs)
@@ -381,7 +381,7 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel)
       const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
       if (StringUtils::EqualsNoCase(convertedDisplayName, channel.GetTvgName()) ||
           StringUtils::EqualsNoCase(displayName, channel.GetTvgName()))
-        return &myChannelEpg;
+        return const_cast<ChannelEpg*>(&myChannelEpg);
     }
   }
 
@@ -390,7 +390,7 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel)
     for (const std::string& displayName : myChannelEpg.GetNames())
     {
       if (StringUtils::EqualsNoCase(displayName, channel.GetChannelName()))
-        return &myChannelEpg;
+        return const_cast<ChannelEpg*>(&myChannelEpg);
     }
   }
 
@@ -481,4 +481,30 @@ void Epg::MoveOldGenresXMLFileToNewLocation()
 
   FileUtils::DeleteFile(ADDON_DATA_BASE_DIR + "/" + GENRES_MAP_FILENAME.c_str());
   FileUtils::DeleteFile(FileUtils::GetSystemAddonPath() + "/" + GENRES_MAP_FILENAME.c_str());
+}
+
+EpgEntry* Epg::GetLiveEPGEntry(const Channel& myChannel) const
+{
+  return GetEPGEntry(myChannel, time(nullptr));
+}
+
+EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
+{
+  ChannelEpg* channelEpg = FindEpgForChannel(myChannel);
+  if (!channelEpg || channelEpg->GetEpgEntries().size() == 0)
+    return nullptr;
+
+  int shift = m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
+
+  for (auto& epgEntry : channelEpg->GetEpgEntries())
+  {
+    time_t startTime = epgEntry.GetStartTime() + shift;
+    time_t endTime = epgEntry.GetEndTime() + shift;
+    if (startTime <= lookupTime && endTime > lookupTime)
+      return &epgEntry;
+    else if (startTime > lookupTime)
+      break;
+  }
+
+  return nullptr;
 }

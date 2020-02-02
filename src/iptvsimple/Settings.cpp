@@ -93,6 +93,24 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
   if (!XBMC->GetSetting("logoFromEpg", &m_epgLogosMode))
     m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
 
+  // Catchup
+  if (!XBMC->GetSetting("catchupEnabled", &m_catchupEnabled))
+    m_catchupEnabled = false;
+  if (XBMC->GetSetting("catchupQueryFormat", &buffer))
+    m_catchupQueryFormat = buffer;
+  if (!XBMC->GetSetting("catchupDays", &m_catchupDays))
+    m_catchupDays = 5;
+  if (!XBMC->GetSetting("allChannelSupportCatchup", &m_allChannelsSupportCatchup))
+    m_allChannelsSupportCatchup = false;
+  if (!XBMC->GetSetting("catchupPlayEpgAsLive", &m_catchupPlayEpgAsLive))
+    m_catchupPlayEpgAsLive = false;
+  if (!XBMC->GetSetting("catchupWatchEpgBeginBufferMins", &m_catchupWatchEpgBeginBufferMins))
+    m_catchupWatchEpgBeginBufferMins = 5;
+  if (!XBMC->GetSetting("catchupWatchEpgEndBufferMins", &m_catchupWatchEpgEndBufferMins))
+    m_catchupWatchEpgEndBufferMins = 15;
+  if (!XBMC->GetSetting("catchupOnlyOnFinishedProgrammes", &m_catchupOnlyOnFinishedProgrammes))
+    m_catchupOnlyOnFinishedProgrammes = false;
+
   // Advanced
   if (!XBMC->GetSetting("transformMulticastStreamUrls", &m_transformMulticastStreamUrls))
     m_transformMulticastStreamUrls = false;
@@ -171,6 +189,24 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoBaseUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "logoFromEpg")
     return SetSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+
+  // Catchup
+  if (settingName == "catchupEnabled")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "catchupQueryFormat")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_catchupQueryFormat, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "catchupDays")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupDays, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "allChannelSupportCatchup")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_allChannelsSupportCatchup, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "catchupPlayEpgAsLive")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayEpgAsLive, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "catchupWatchEpgBeginBufferMins")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupWatchEpgBeginBufferMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "catchupWatchEpgEndBufferMins")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupWatchEpgEndBufferMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "catchupOnlyOnFinishedProgrammes")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupOnlyOnFinishedProgrammes, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   // Advanced
   if (settingName == "transformMulticastStreamUrls")

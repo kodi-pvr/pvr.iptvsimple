@@ -136,6 +136,13 @@ bool PVRIptvData::GetChannel(const PVR_CHANNEL& channel, Channel& myChannel)
   return m_channels.GetChannel(channel, myChannel);
 }
 
+bool PVRIptvData::GetChannel(unsigned int uniqueChannelId, iptvsimple::data::Channel& myChannel)
+{
+  std::lock_guard<std::mutex> lock(m_mutex);
+
+  return m_channels.GetChannel(uniqueChannelId, myChannel);
+}
+
 int PVRIptvData::GetChannelGroupsAmount()
 {
   std::lock_guard<std::mutex> lock(m_mutex);

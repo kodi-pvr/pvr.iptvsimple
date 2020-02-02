@@ -31,6 +31,8 @@
 #include "iptvsimple/utilities/StreamUtils.h"
 #include "iptvsimple/utilities/WebUtils.h"
 
+#include <algorithm>
+
 #include <kodi/xbmc_pvr_dll.h>
 #include <p8-platform/util/StringUtils.h>
 
@@ -44,6 +46,7 @@ ADDON_STATUS m_currentStatus = ADDON_STATUS_UNKNOWN;
 PVRIptvData* m_data = nullptr;
 Channel m_currentChannel;
 Settings& settings = Settings::GetInstance();
+CatchupController* m_catchupController = nullptr;
 
 /* User adjustable settings are saved here.
  * Default values are defined inside client.h
@@ -131,6 +134,7 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
     m_currentStatus = ADDON_STATUS_LOST_CONNECTION;
     return m_currentStatus;
   }
+  m_catchupController = &m_data->GetCatchupController();
 
   m_currentStatus = ADDON_STATUS_OK;
   m_created = true;
@@ -240,57 +244,33 @@ PVR_ERROR GetChannels(ADDON_HANDLE handle, bool bRadio)
 
 PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE* properties, unsigned int* iPropertiesCount)
 {
-  if (!channel || !properties || !iPropertiesCount)
+  if (!m_data || !channel || !properties || !iPropertiesCount)
     return PVR_ERROR_SERVER_ERROR;
 
   if (*iPropertiesCount < 1)
     return PVR_ERROR_INVALID_PARAMETERS;
 
-  if (m_data && m_data->GetChannel(*channel, m_currentChannel))
+  if (m_data->GetChannel(*channel, m_currentChannel))
   {
-    std::string streamURL = m_currentChannel.GetStreamURL();
-
     unsigned int propertiesMax = *iPropertiesCount;
     *iPropertiesCount = 0; // Need to initialise here as current value will be size of properties array
-    if (StreamUtils::ChannelSpecifiesInputstream(m_currentChannel))
-    {
-      // Channel has an inputstream class set so we only set the stream URL
-      StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
-    }
-    else
-    {
-      StreamType streamType = StreamUtils::GetStreamType(streamURL, m_currentChannel);
-      if (streamType == StreamType::OTHER_TYPE)
-        streamType = StreamUtils::InspectStreamType(streamURL);
 
-      // Using kodi's built in inputstreams
-      if (StreamUtils::UseKodiInputstreams(streamType))
-      {
-        std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, m_currentChannel);
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, ffmpegStreamURL);
+    std::string streamURL = m_currentChannel.GetStreamURL();
 
-        if (streamType == StreamType::HLS)
-          StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
-      }
-      else // inputstream.adpative
-      {
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, "inputstream.adaptive");
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
-        if (streamType == StreamType::HLS || streamType == StreamType::DASH)
-          StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
-        if (streamType == StreamType::DASH)
-          StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, "inputstream.adaptive.manifest_update_parameter", "full");
-      }
-    }
+    m_catchupController->ResetCatchupState(); // TODO: we need this currently until we have a way to know the stream stops.
 
-    Logger::Log(LogLevel::LEVEL_DEBUG, "%s - inputstream URL: %s", __FUNCTION__, streamURL.c_str());
+    // We always call the catchup controller regardless so it can cleanup state
+    // whether or not it supports catchup in case there is any houskeeping to do
+    std::map<std::string, std::string> catchupProperties;
+    m_catchupController->ProcessChannelForPlayback(m_currentChannel, catchupProperties);
 
-    if (!m_currentChannel.GetProperties().empty())
-    {
-      for (auto& prop : m_currentChannel.GetProperties())
-        StreamUtils::SetStreamProperty(properties, iPropertiesCount, propertiesMax, prop.first, prop.second);
-    }
+    const std::string catchupUrl = m_catchupController->GetCatchupUrl(m_currentChannel);
+    if (!catchupUrl.empty())
+      streamURL = catchupUrl;
+
+    StreamUtils::SetAllStreamProperties(properties, iPropertiesCount, propertiesMax, m_currentChannel, streamURL, catchupProperties);
+
+    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - Live %s URL: %s", __FUNCTION__, !catchupUrl.empty() ? "Stream" : "Catchup", streamURL.c_str());
 
     return PVR_ERROR_NO_ERROR;
   }
@@ -324,10 +304,73 @@ PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& g
 
 PVR_ERROR SignalStatus(PVR_SIGNAL_STATUS& signalStatus)
 {
-  snprintf(signalStatus.strAdapterName, sizeof(signalStatus.strAdapterName), "IPTV Simple Adapter 1");
-  snprintf(signalStatus.strAdapterStatus, sizeof(signalStatus.strAdapterStatus), "OK");
+  strncpy(signalStatus.strAdapterName, "IPTV Simple Adapter 1", sizeof(signalStatus.strAdapterName) - 1);
+  strncpy(signalStatus.strAdapterStatus, "OK", sizeof(signalStatus.strAdapterStatus) - 1);
 
   return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR IsEPGTagPlayable(const EPG_TAG* tag, bool* bIsPlayable)
+{
+  if (!m_data)
+    return PVR_ERROR_SERVER_ERROR;
+  if (!settings.IsCatchupEnabled())
+    return PVR_ERROR_NOT_IMPLEMENTED;
+
+  const time_t now = std::time(nullptr);
+  Channel channel;
+
+  // Get the channel and set the current tag on it if found
+  *bIsPlayable = m_data->GetChannel(static_cast<int>(tag->iUniqueChannelId), channel);
+
+  *bIsPlayable = *bIsPlayable &&
+                 settings.IsCatchupEnabled() &&
+                 tag->startTime < now &&
+                 channel.IsCatchupSupported() &&
+                 tag->startTime >= (now - static_cast<time_t>(channel.GetCatchupDaysInSeconds())) &&
+                 (!settings.CatchupOnlyOnFinishedProgrammes() || tag->endTime < now);
+
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG* tag, PVR_NAMED_VALUE* properties, unsigned int* iPropertiesCount)
+{
+  Logger::Log(LEVEL_DEBUG, "%s - Tag startTime: %ld \tendTime: %ld", __FUNCTION__, tag->startTime, tag->endTime);
+
+  if (!m_data || !tag || !properties || !iPropertiesCount)
+    return PVR_ERROR_SERVER_ERROR;
+
+  if (*iPropertiesCount < 1)
+    return PVR_ERROR_INVALID_PARAMETERS;
+
+  if (m_data->GetChannel(static_cast<int>(tag->iUniqueChannelId), m_currentChannel))
+  {
+    unsigned int propertiesMax = *iPropertiesCount;
+    *iPropertiesCount = 0;
+    Logger::Log(LEVEL_DEBUG, "%s - GetPlayEpgAsLive is %s", __FUNCTION__, settings.CatchupPlayEpgAsLive() ? "enabled" : "disabled");
+
+    std::map<std::string, std::string> catchupProperties;
+    if (settings.CatchupPlayEpgAsLive())
+    {
+      m_catchupController->ProcessEPGTagForTimeshiftedPlayback(*tag, m_currentChannel, catchupProperties);
+    }
+    else
+    {
+      m_catchupController->ResetCatchupState(); // TODO: we need this currently until we have a way to know the stream stops.
+      m_catchupController->ProcessEPGTagForVideoPlayback(*tag, m_currentChannel, catchupProperties);
+    }
+
+    const std::string catchupUrl = m_catchupController->GetCatchupUrl(m_currentChannel);
+    if (!catchupUrl.empty())
+    {
+      StreamUtils::SetAllStreamProperties(properties, iPropertiesCount, propertiesMax, m_currentChannel, catchupUrl, catchupProperties);
+
+      Logger::Log(LEVEL_NOTICE, "%s - EPG Catchup URL: %s", __FUNCTION__, catchupUrl.c_str());
+      return PVR_ERROR_NO_ERROR;
+    }
+  }
+
+  return PVR_ERROR_FAILED;
 }
 
 /** UNUSED API FUNCTIONS */
@@ -381,8 +424,6 @@ PVR_ERROR SetRecordingLifetime(const PVR_RECORDING*) { return PVR_ERROR_NOT_IMPL
 PVR_ERROR GetStreamTimes(PVR_STREAM_TIMES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetStreamProperties(PVR_STREAM_PROPERTIES*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR IsEPGTagRecordable(const EPG_TAG*, bool*) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR IsEPGTagPlayable(const EPG_TAG*, bool*) { return PVR_ERROR_NOT_IMPLEMENTED; }
-PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG*, PVR_NAMED_VALUE*, unsigned int*) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetEPGTagEdl(const EPG_TAG* epgTag, PVR_EDL_ENTRY edl[], int* size) { return PVR_ERROR_NOT_IMPLEMENTED; }
 PVR_ERROR GetStreamReadChunkSize(int* chunksize) { return PVR_ERROR_NOT_IMPLEMENTED; }
 } // extern "C"

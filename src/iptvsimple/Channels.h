@@ -44,7 +44,8 @@ namespace iptvsimple
 
     int GetChannelsAmount() const;
     void GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) const;
-    bool GetChannel(const PVR_CHANNEL& channel, iptvsimple::data::Channel& myChannel);
+    bool GetChannel(const PVR_CHANNEL& channel, iptvsimple::data::Channel& myChannel) const;
+    bool GetChannel(int uniqueId, iptvsimple::data::Channel& myChannel) const;
 
     void AddChannel(iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups);
     iptvsimple::data::Channel* GetChannel(int uniqueId);

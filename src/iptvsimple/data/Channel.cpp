@@ -45,9 +45,14 @@ void Channel::UpdateTo(Channel& left) const
   left.m_channelName      = m_channelName;
   left.m_iconPath         = m_iconPath;
   left.m_streamURL        = m_streamURL;
+  left.m_hasCatchup       = m_hasCatchup;
+  left.m_catchupMode      = m_catchupMode;
+  left.m_catchupDays      = m_catchupDays;
+  left.m_catchupSource    = m_catchupSource;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
+  left.m_inputStreamClass = m_inputStreamClass;
 }
 
 void Channel::UpdateTo(PVR_CHANNEL& left) const
@@ -59,6 +64,7 @@ void Channel::UpdateTo(PVR_CHANNEL& left) const
   left.iEncryptionSystem = m_encryptionSystem;
   strncpy(left.strIconPath, m_iconPath.c_str(), sizeof(left.strIconPath) - 1);
   left.bIsHidden = false;
+  left.bHasArchive = IsCatchupSupported();
 }
 
 void Channel::Reset()
@@ -71,9 +77,14 @@ void Channel::Reset()
   m_channelName.clear();
   m_iconPath.clear();
   m_streamURL.clear();
+  m_hasCatchup = false;
+  m_catchupMode = CatchupMode::DEFAULT;
+  m_catchupDays = 0;
+  m_catchupSource.clear();
   m_tvgId.clear();
   m_tvgName.clear();
   m_properties.clear();
+  m_inputStreamClass.clear();
 }
 
 void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName)
@@ -126,6 +137,10 @@ void Channel::SetStreamURL(const std::string& url)
     m_streamURL = "http://" + Settings::GetInstance().GetUdpxyHost() + ":" + std::to_string(Settings::GetInstance().GetUdpxyPort()) + typePath + url.substr(UDP_MULTICAST_PREFIX.length());
     Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
   }
+
+  m_inputStreamClass = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS);
+  if (m_inputStreamClass.empty())
+    m_inputStreamClass = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON);
 }
 
 std::string Channel::GetProperty(const std::string& propName) const
@@ -152,4 +167,19 @@ void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const st
 
     RemoveProperty(propertyName);
   }
+}
+
+void Channel::SetCatchupDays(int catchupDays)
+{
+  if (catchupDays != 0)
+    m_catchupDays = catchupDays;
+  else
+    m_catchupDays = Settings::GetInstance().GetCatchupDays();
+}
+
+bool Channel::IsCatchupSupported() const
+{
+  return Settings::GetInstance().IsCatchupEnabled() &&
+         (m_hasCatchup || Settings::GetInstance().AllChannelsSupportCatchup()) &&
+         !(m_catchupSource.empty() && Settings::GetInstance().GetCatchupQueryFormat().empty());
 }

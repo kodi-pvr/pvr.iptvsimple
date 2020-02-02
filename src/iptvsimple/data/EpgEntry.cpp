@@ -36,7 +36,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace pugi;
 
-void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vector<EpgGenre>& genreMappings)
+void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genreMappings)
 {
   left.iUniqueBroadcastId  = m_broadcastId;
   left.strTitle            = m_title.c_str();
@@ -84,7 +84,7 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, std::vect
   left.firstAired          = m_firstAired;
 }
 
-bool EpgEntry::SetEpgGenre(std::vector<EpgGenre> genreMappings)
+bool EpgEntry::SetEpgGenre(const std::vector<EpgGenre> genreMappings)
 {
   if (genreMappings.empty())
     return false;

@@ -28,6 +28,13 @@
 
 namespace iptvsimple
 {
+  enum class CatchupMode
+    : int // same type as addon settings
+  {
+    DEFAULT = 0,
+    APPEND
+  };
+
   namespace data
   {
     static const std::string CHANNEL_LOGO_EXTENSION = ".png";
@@ -39,8 +46,10 @@ namespace iptvsimple
       Channel(const Channel &c) : m_radio(c.IsRadio()), m_uniqueId(c.GetUniqueId()),
         m_channelNumber(c.GetChannelNumber()), m_encryptionSystem(c.GetEncryptionSystem()),
         m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()), m_iconPath(c.GetIconPath()),
-        m_streamURL(c.GetStreamURL()), m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
-        m_properties(c.GetProperties()) {};
+        m_streamURL(c.GetStreamURL()), m_hasCatchup(c.HasCatchup()), m_catchupMode(c.GetCatchupMode()),
+        m_catchupDays(c.GetCatchupDays()), m_catchupSource(c.GetCatchupSource()),
+        m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()), m_properties(c.GetProperties()),
+        m_inputStreamClass(c.GetInputStreamClass()) {};
       ~Channel() = default;
 
       bool IsRadio() const { return m_radio; }
@@ -67,6 +76,19 @@ namespace iptvsimple
       const std::string& GetStreamURL() const { return m_streamURL; }
       void SetStreamURL(const std::string& url);
 
+      bool IsCatchupSupported() const; // Does the M3U entry or default settings denote catchup support
+      bool HasCatchup() const { return m_hasCatchup; } // Does the M3U entry denote catchup support
+      void SetHasCatchup(bool value) { m_hasCatchup = value; }
+      const CatchupMode& GetCatchupMode() const { return m_catchupMode; }
+      void SetCatchupMode(const CatchupMode& value) { m_catchupMode = value; }
+
+      int GetCatchupDays() const { return m_catchupDays; }
+      void SetCatchupDays(int catchupDays);
+      int GetCatchupDaysInSeconds() const { return m_catchupDays * 24 * 60 * 60; }
+
+      const std::string& GetCatchupSource() const { return m_catchupSource; }
+      void SetCatchupSource(const std::string& value) { m_catchupSource = value; }
+
       const std::string& GetTvgId() const { return m_tvgId; }
       void SetTvgId(const std::string& value) { m_tvgId = value; }
 
@@ -77,6 +99,9 @@ namespace iptvsimple
       void SetProperties(std::map<std::string, std::string>& value) { m_properties = value; }
       void AddProperty(const std::string& prop, const std::string& value) { m_properties.insert({prop, value}); }
       std::string GetProperty(const std::string& propName) const;
+
+      const std::string& GetInputStreamClass() const { return m_inputStreamClass; };
+      void SetInputStreamClass(const std::string& value) { m_inputStreamClass = value; }
 
       void UpdateTo(Channel& left) const;
       void UpdateTo(PVR_CHANNEL& left) const;
@@ -95,9 +120,14 @@ namespace iptvsimple
       std::string m_channelName = "";
       std::string m_iconPath = "";
       std::string m_streamURL = "";
+      bool m_hasCatchup = false;
+      CatchupMode m_catchupMode = CatchupMode::DEFAULT;
+      int m_catchupDays = 0;
+      std::string m_catchupSource = "";
       std::string m_tvgId = "";
       std::string m_tvgName = "";
       std::map<std::string, std::string> m_properties;
+      std::string m_inputStreamClass;
     };
   } //namespace data
 } //namespace iptvsimple

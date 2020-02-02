@@ -278,6 +278,106 @@
       </group>
     </category>
 
+    <!-- Catchup -->
+    <category id="catchup" label="30100" help="30700">
+      <group id="1" label="30100">
+        <setting id="catchupEnabled" type="boolean" label="30101" help="30701">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="catchupQueryFormat" type="string" parent="catchupEnabled" label="30102" help="30702">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="catchupDays" type="integer" parent="catchupEnabled" label="30103" help="30703">
+          <level>0</level>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>7</maximum>
+          </constraints>
+          <default>5</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="spinner" format="string">
+            <formatlabel>17999</formatlabel>
+          </control>
+        </setting>
+        <setting id="allChannelSupportCatchup" type="boolean" parent="catchupEnabled" label="30104" help="30704">
+          <level>2</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+      </group>
+      <group id="2" label="30105">
+        <setting id="catchupPlayEpgAsLive" type="boolean" label="30106" help="30705">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="catchupWatchEpgBeginBufferMins" type="integer" parent="catchupPlayEpgAsLive" label="30107" help="30706">
+          <level>0</level>
+          <default>5</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>60</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="catchupEnabled" operator="is">true</condition>
+                <condition setting="catchupPlayEpgAsLive" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="spinner" format="string">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+        <setting id="catchupWatchEpgEndBufferMins" type="integer" parent="catchupPlayEpgAsLive" label="30108" help="30707">
+          <level>0</level>
+          <default>15</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>60</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="catchupEnabled" operator="is">true</condition>
+                <condition setting="catchupPlayEpgAsLive" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="spinner" format="string">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+        <setting id="catchupOnlyOnFinishedProgrammes" type="boolean" label="30109" help="30708">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+
     <!-- Advanced -->
     <category id="advanced" label="30060" help="30680">
       <group id="1" label="30061">

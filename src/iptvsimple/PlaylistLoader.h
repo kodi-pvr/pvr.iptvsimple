@@ -41,6 +41,9 @@ namespace iptvsimple
   static const std::string TVG_INFO_SHIFT_MARKER   = "tvg-shift=";
   static const std::string TVG_INFO_CHNO_MARKER    = "tvg-chno=";
   static const std::string GROUP_NAME_MARKER       = "group-title=";
+  static const std::string CATCHUP                 = "catchup=";
+  static const std::string CATCHUP_DAYS            = "catchup-days=";
+  static const std::string CATCHUP_SOURCE          = "catchup-source=";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
   static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";
