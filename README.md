@@ -150,7 +150,7 @@ The format specifiers are substitution based and work as follows:
 - `{lutc}`: Current time in UTC format.
 - `{utcend}`: The start time of the programme in UTC format + `${duration}`.
 - `${end}`: Same as `{utcend}`.
-- `${duration}`: The programme duration + any start and end buffer (if set).
+- `{duration}`: The programme duration + any start and end buffer (if set).
 - `{Y}`: The 4-digit year (YYYY) of the start date\time.
 - `{m}`: The month (01-12) of the start date\time.
 - `{d}`: The day (01-31) of the start date\time.
@@ -181,7 +181,18 @@ http://path-to-stream/live/channel-x-hd.ts
 http://path-to-stream/live/channel-y.ts
 #EXTINF:0,Channel Z
 http://path-to-stream/live/channel-z.ts
+#EXTINF:0 catchup="default",Channel A
+http://path-to-stream/live/channel-a.ts
+#EXTINF:0 catchup="default" catchup-source="http://path-to-stream/live/catchup-b.ts&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel B
+http://path-to-stream/live/channel-b.ts
+#EXTINF:0 catchup="append" catchup-source="&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel C
+http://path-to-stream/live/channel-c.ts
 ```
+
+*Explanation for Catchup entries*
+- For `Channel A` the stream URL will be used and the Query format string from the addon settings will be appended to construct the  catchup URL.
+- For `Channel B` the stream URL will not be used, instead using catchup-source as the catchup URL.
+- For `Channel C` the stream URL will be used and catchup-source will be appended to form the catchup URL.
 
 Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the exmaple file above would be:
 
