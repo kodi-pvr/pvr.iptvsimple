@@ -79,6 +79,7 @@ namespace iptvsimple
     std::string m_programmeTitle;
     unsigned int m_programmeUniqueChannelId = 0;
     int m_programmeChannelTvgShift = 0;
+    std::string m_programmeCatchupId;
 
     bool m_controlsLiveStream = false;
     iptvsimple::Epg& m_epg;

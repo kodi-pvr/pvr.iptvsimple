@@ -158,6 +158,7 @@ The format specifiers are substitution based and work as follows:
 - `{M}`: The minute (00-59) of the start date\time.
 - `{S}`: The second (00-59) of the start date\time.
 - `{offset:X}`: The current offset (now - start time) divided by X seconds. Allows conversion to minutes and other time units. The minimum divider is 1, it must be an integer (not 1.5 or 2.25 etc.) and it must be a positive value. E.g. If you need an offset of 720 for a start time of 2 hours ago (2 hours is 7200 seconds), it means your divider is 10: `{offset:10}`. If you need minutes for the same offset you could use: `{offset:60}` which would result in a value of 120.
+- `{catchup-id}`: A programme specific identifier required in the catchup URL, value loaded from XMLTV programme entries. 
 
 Here’s some examples of how the different formats would look:
 - `?utc={utc}&lutc={lutc}`
@@ -253,7 +254,7 @@ General information on the XMLTV format can be found [here](http://wiki.xmltv.or
 
 **Programme elements**
 ```
-  <programme start="20080715003000 -0600" stop="20080715010000 -0600" channel="channel-x">
+  <programme start="20080715003000 -0600" stop="20080715010000 -0600" channel="channel-x" catchup-id="34534590">
     <title>My Show</title>
     <desc>Description of My Show</desc>
     <category>Drama</category>
@@ -273,7 +274,7 @@ General information on the XMLTV format can be found [here](http://wiki.xmltv.or
     <icon src="http://path-to-icons/my-show.png"/>
   </programme>
 ```
-The `programme` element supports the attributes `start`/`stop` in the format `YYYmmddHHMMSS +/-HHMM` and the attribute `channel` which needs to match the `channel` element's attribute `id`.
+The `programme` element supports the attributes `start`/`stop` in the format `YYYmmddHHMMSS +/-HHMM` and the attribute `channel` which needs to match the `channel` element's attribute `id`. There is an extra attribute which is not part of the XMLTV specification called `catchup-id`. Some providers require a programme specific id, this value can be used as part of the [catchup query format string specifiers](#catchup-format-specifiers).
 
 - `title`: The title of the prgramme.
 - `desc`: A descption of the programme.

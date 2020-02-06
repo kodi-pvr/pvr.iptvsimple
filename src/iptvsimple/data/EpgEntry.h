@@ -102,6 +102,9 @@ namespace iptvsimple
       const std::string& GetWriter() const { return m_writer; }
       void SetWriter(const std::string& value) { m_writer = value; }
 
+      const std::string& GetCatchupId() const { return m_catchupId; }
+      void SetCatchupId(const std::string& value) { m_catchupId = value; }
+
       void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id, int broadcastId,
                       int start, int end, int minShiftTime, int maxShiftTime);
@@ -133,6 +136,7 @@ namespace iptvsimple
       std::string m_cast;
       std::string m_director;
       std::string m_writer;
+      std::string m_catchupId;
     };
   } //namespace data
 } //namespace iptvsimple

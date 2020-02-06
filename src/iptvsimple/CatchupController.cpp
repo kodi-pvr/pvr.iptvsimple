@@ -73,6 +73,7 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
     if (m_resetCatchupState)
     {
       m_resetCatchupState = false;
+      m_programmeCatchupId.clear();
       if (channel.IsCatchupSupported())
       {
         m_timeshiftBufferOffset = Settings::GetInstance().GetCatchupDaysInSeconds(); //offset from now to start of catchup window
@@ -102,6 +103,11 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
 
 void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, Channel& channel, std::map<std::string, std::string>& catchupProperties) // TODO: should be a const channel, create a StreamManager instead
 {
+  m_programmeCatchupId.clear();
+  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.startTime);
+  if (epgEntry)
+    m_programmeCatchupId = epgEntry->GetCatchupId();
+
   TestAndStoreStreamType(channel); // TODO: StreamManager
 
   if (m_controlsLiveStream)
@@ -140,6 +146,11 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTa
 
 void CatchupController::ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, Channel& channel, std::map<std::string, std::string>& catchupProperties) // TODO: should be a const channel, create a StreamManager instead
 {
+  m_programmeCatchupId.clear();
+  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.startTime);
+  if (epgEntry)
+    m_programmeCatchupId = epgEntry->GetCatchupId();
+
   TestAndStoreStreamType(channel); // TODO: StreamManager
 
   if (m_controlsLiveStream)
@@ -195,6 +206,8 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_end_time", std::to_string(m_catchupEndTime)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_offset", std::to_string(m_timeshiftBufferOffset)});
   catchupProperties.insert({"inputstream.ffmpegdirect.timezone_shift", std::to_string(channel.GetTvgShift())});
+  if (!m_programmeCatchupId.empty())
+    catchupProperties.insert({"inputstream.ffmpegdirect.programme_catchup_id", m_programmeCatchupId});
 
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
@@ -207,6 +220,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_end_time - %s", std::to_string(m_catchupEndTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
   Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(channel.GetTvgShift()).c_str());
+  Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
 }
 
 void CatchupController::TestAndStoreStreamType(Channel& channel)
@@ -378,7 +392,7 @@ std::string BuildUrlFormatString(const Channel& channel)
   return urlFormatString;
 }
 
-std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset)
+std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset, const std::string& programmeCatchupId)
 {
   std::string startTimeUrl;
   time_t timeNow = time(0);
@@ -388,6 +402,10 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
     startTimeUrl = FormatDateTime(offset - channel.GetTvgShift(), duration, BuildUrlFormatString(channel));
   else
     startTimeUrl = channel.GetStreamURL();
+
+  static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
+  if (!programmeCatchupId.empty())
+    startTimeUrl = std::regex_replace(startTimeUrl, CATCHUP_ID_REGEX, programmeCatchupId);
 
   Logger::Log(LEVEL_DEBUG, "%s - %s", __FUNCTION__, startTimeUrl.c_str());
 
@@ -413,7 +431,7 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
     if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)
       duration += Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
 
-    return BuildEpgTagUrl(m_catchupStartTime, duration, channel, m_timeshiftBufferOffset);
+    return BuildEpgTagUrl(m_catchupStartTime, duration, channel, m_timeshiftBufferOffset, m_programmeCatchupId);
   }
 
   return "";
@@ -422,7 +440,7 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
 std::string CatchupController::GetStreamTestUrl(const Channel& channel) const
 {
   // Test URL from 2 hours ago for 1 hour duration.
-  return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60),  60 * 60, channel, 0);
+  return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60),  60 * 60, channel, 0, m_programmeCatchupId);
 }
 
 EpgEntry* CatchupController::GetLiveEPGEntry(const Channel& myChannel)
