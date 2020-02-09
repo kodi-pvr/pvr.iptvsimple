@@ -188,12 +188,15 @@ http://path-to-stream/live/channel-a.ts
 http://path-to-stream/live/channel-b.ts
 #EXTINF:0 catchup="append" catchup-source="&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel C
 http://path-to-stream/live/channel-c.ts
+#EXTINF:0 tvg-id="channel-d" tvg-name="Channel-D" catchup="default" catchup-days="1" catchup-source="http://yoururl/channeld/video-{utc}-{duration}.m3u8",Channel D
+http://yoururl/channeld/video.m3u8
 ```
 
 *Explanation for Catchup entries*
 - For `Channel A` the stream URL will be used and the Query format string from the addon settings will be appended to construct the  catchup URL.
 - For `Channel B` the stream URL will not be used, instead using catchup-source as the catchup URL.
 - For `Channel C` the stream URL will be used and catchup-source will be appended to form the catchup URL.
+- For `Channel D` this is example of a flussonic style entry.
 
 Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the exmaple file above would be:
 
