@@ -329,29 +329,29 @@ void FormatUtc(const char *str, time_t tTime, std::string &urlFormatString)
 
 std::string FormatDateTime(time_t dateTimeEpg, time_t duration, const std::string &urlFormatString)
 {
-  std::string fomrattedUrl = urlFormatString;
+  std::string formattedUrl = urlFormatString;
 
   const time_t dateTimeNow = std::time(0);
   tm* dateTime = std::localtime(&dateTimeEpg);
 
-  FormatTime('Y', dateTime, fomrattedUrl);
-  FormatTime('m', dateTime, fomrattedUrl);
-  FormatTime('d', dateTime, fomrattedUrl);
-  FormatTime('H', dateTime, fomrattedUrl);
-  FormatTime('M', dateTime, fomrattedUrl);
-  FormatTime('S', dateTime, fomrattedUrl);
-  FormatUtc("{utc}", dateTimeEpg, fomrattedUrl);
-  FormatUtc("${start}", dateTimeEpg, fomrattedUrl);
-  FormatUtc("{utcend}", dateTimeEpg + duration, fomrattedUrl);
-  FormatUtc("${end}", dateTimeEpg + duration, fomrattedUrl);
-  FormatUtc("{lutc}", dateTimeNow, fomrattedUrl);
-  FormatUtc("${timestamp}", dateTimeNow, fomrattedUrl);
-  FormatUtc("{duration}", duration, fomrattedUrl);
-  FormatOffset(dateTimeNow - dateTimeEpg, fomrattedUrl);
+  FormatTime('Y', dateTime, formattedUrl);
+  FormatTime('m', dateTime, formattedUrl);
+  FormatTime('d', dateTime, formattedUrl);
+  FormatTime('H', dateTime, formattedUrl);
+  FormatTime('M', dateTime, formattedUrl);
+  FormatTime('S', dateTime, formattedUrl);
+  FormatUtc("{utc}", dateTimeEpg, formattedUrl);
+  FormatUtc("${start}", dateTimeEpg, formattedUrl);
+  FormatUtc("{utcend}", dateTimeEpg + duration, formattedUrl);
+  FormatUtc("${end}", dateTimeEpg + duration, formattedUrl);
+  FormatUtc("{lutc}", dateTimeNow, formattedUrl);
+  FormatUtc("${timestamp}", dateTimeNow, formattedUrl);
+  FormatUtc("{duration}", duration, formattedUrl);
+  FormatOffset(dateTimeNow - dateTimeEpg, formattedUrl);
 
-  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, fomrattedUrl.c_str());
+  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, formattedUrl.c_str());
 
-  return fomrattedUrl;
+  return formattedUrl;
 }
 
 std::string AppendQueryStringAndPreserveOptions(const std::string &url, const std::string &postfixQueryString)
