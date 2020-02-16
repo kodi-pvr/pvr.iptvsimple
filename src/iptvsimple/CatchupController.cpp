@@ -345,6 +345,7 @@ std::string FormatDateTime(time_t dateTimeEpg, time_t duration, const std::strin
   FormatUtc("{utcend}", dateTimeEpg + duration, fomrattedUrl);
   FormatUtc("${end}", dateTimeEpg + duration, fomrattedUrl);
   FormatUtc("{lutc}", dateTimeNow, fomrattedUrl);
+  FormatUtc("${timestamp}", dateTimeNow, fomrattedUrl);
   FormatUtc("{duration}", duration, fomrattedUrl);
   FormatOffset(dateTimeNow - dateTimeEpg, fomrattedUrl);
 

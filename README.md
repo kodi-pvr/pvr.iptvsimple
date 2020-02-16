@@ -148,6 +148,7 @@ The format specifiers are substitution based and work as follows:
 - `{utc}`: The start time of the programme in UTC format.
 - `${start}`: Same as `{utc}`.
 - `{lutc}`: Current time in UTC format.
+- `${timestamp}`: Same as `{lutc}`.
 - `{utcend}`: The start time of the programme in UTC format + `${duration}`.
 - `${end}`: Same as `{utcend}`.
 - `{duration}`: The programme duration + any start and end buffer (if set).
