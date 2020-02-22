@@ -58,7 +58,7 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
       m_catchupEndTime = liveEpgEntry->GetEndTime();
     }
     else if (m_controlsLiveStream || !channel.IsCatchupSupported() ||
-             (channel.IsCatchupSupported() && Settings::GetInstance().CatchupOnlyOnFinishedProgrammes()))
+             (!m_controlsLiveStream && channel.IsCatchupSupported()))
     {
       // Live without EPG entry
       ClearProgramme();
