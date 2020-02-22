@@ -270,7 +270,7 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
 
     StreamUtils::SetAllStreamProperties(properties, iPropertiesCount, propertiesMax, m_currentChannel, streamURL, catchupProperties);
 
-    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - Live %s URL: %s", __FUNCTION__, !catchupUrl.empty() ? "Stream" : "Catchup", streamURL.c_str());
+    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", streamURL.c_str());
 
     return PVR_ERROR_NO_ERROR;
   }

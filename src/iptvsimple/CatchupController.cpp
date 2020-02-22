@@ -433,8 +433,11 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
 
 std::string CatchupController::GetStreamTestUrl(const Channel& channel) const
 {
-  // Test URL from 2 hours ago for 1 hour duration.
-  return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60),  60 * 60, channel, 0, m_programmeCatchupId);
+  if (m_catchupStartTime > 0)
+    // Test URL from 2 hours ago for 1 hour duration.
+    return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId);
+  else
+    return channel.GetStreamURL();
 }
 
 EpgEntry* CatchupController::GetLiveEPGEntry(const Channel& myChannel)
