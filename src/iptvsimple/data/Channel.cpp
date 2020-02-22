@@ -29,11 +29,33 @@
 #include "../utilities/WebUtils.h"
 #include "../../client.h"
 
+#include <regex>
+
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
+
+const std::string Channel::GetCatchupModeText(const CatchupMode& catchupMode)
+{
+  switch (catchupMode)
+  {
+    case CatchupMode::DISABLED:
+      return "Disabled";
+    case CatchupMode::DEFAULT:
+      return "Default";
+    case CatchupMode::APPEND:
+      return "Append";
+    case CatchupMode::TIMESHIFT:
+    case CatchupMode::SHIFT:
+      return "Shift (SIPTV)";
+    case CatchupMode::FLUSSONIC:
+      return "Flussonic";
+    case CatchupMode::XTREAM_CODES:
+      return "Xtream codes";
+  }
+}
 
 void Channel::UpdateTo(Channel& left) const
 {
@@ -49,6 +71,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupMode      = m_catchupMode;
   left.m_catchupDays      = m_catchupDays;
   left.m_catchupSource    = m_catchupSource;
+  left.m_isCatchupTSStream = m_isCatchupTSStream;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
@@ -78,9 +101,10 @@ void Channel::Reset()
   m_iconPath.clear();
   m_streamURL.clear();
   m_hasCatchup = false;
-  m_catchupMode = CatchupMode::DEFAULT;
+  m_catchupMode = CatchupMode::DISABLED;
   m_catchupDays = 0;
   m_catchupSource.clear();
+  m_isCatchupTSStream = false;
   m_tvgId.clear();
   m_tvgName.clear();
   m_properties.clear();
@@ -182,7 +206,187 @@ void Channel::SetCatchupDays(int catchupDays)
 
 bool Channel::IsCatchupSupported() const
 {
-  return Settings::GetInstance().IsCatchupEnabled() &&
-         (m_hasCatchup || Settings::GetInstance().AllChannelsSupportCatchup()) &&
-         !(m_catchupSource.empty() && Settings::GetInstance().GetCatchupQueryFormat().empty());
+  return Settings::GetInstance().IsCatchupEnabled() && m_hasCatchup && !m_catchupSource.empty();
+}
+
+void Channel::ConfigureCatchupMode()
+{
+  bool invalidCatchupSource = false;
+  bool appendProtocolOptions = true;
+
+  // preserve any kodi protocol options after "|"
+  std::string url = m_streamURL;
+  std::string protocolOptions;
+  size_t found = m_streamURL.find_first_of('|');
+  if (found != std::string::npos)
+  {
+    url = m_streamURL.substr(0, found);
+    protocolOptions = m_streamURL.substr(found, m_streamURL.length());
+  }
+
+  if (Settings::GetInstance().GetAllChannelsCatchupMode() != CatchupMode::DISABLED &&
+      (m_catchupMode == CatchupMode::DISABLED || m_catchupMode == CatchupMode::TIMESHIFT))
+  {
+    // As CatchupMode::TIMESHIFT is obsolete and some providers use it
+    // incorrectly we allow this setting to override it
+    m_catchupMode = Settings::GetInstance().GetAllChannelsCatchupMode();
+    m_hasCatchup = true;
+  }
+
+  switch (m_catchupMode)
+  {
+    case CatchupMode::DISABLED:
+      invalidCatchupSource = true;
+      break;
+    case CatchupMode::DEFAULT:
+      if (!m_catchupSource.empty())
+      {
+        if (m_catchupSource.find_first_of('|') != std::string::npos)
+          appendProtocolOptions = false;
+        break;
+      }
+      if (!GenerateAppendCatchupSource(url))
+        invalidCatchupSource = true;
+      break;
+    case CatchupMode::APPEND:
+      if (!GenerateAppendCatchupSource(url))
+        invalidCatchupSource = true;
+      break;
+    case CatchupMode::TIMESHIFT:
+    case CatchupMode::SHIFT:
+      GenerateShiftCatchupSource(url);
+      break;
+    case CatchupMode::FLUSSONIC:
+      if (!GenerateFlussonicCatchupSource(url))
+        invalidCatchupSource = true;
+      break;
+    case CatchupMode::XTREAM_CODES:
+      if (!GenerateXtreamCodesCatchupSource(url))
+        invalidCatchupSource = true;
+      break;
+  }
+
+  if (invalidCatchupSource)
+  {
+    m_catchupMode = CatchupMode::DISABLED;
+    m_hasCatchup = false;
+    m_catchupSource.clear();
+  }
+  else
+  {
+    if (!protocolOptions.empty() && appendProtocolOptions)
+      m_catchupSource += protocolOptions;
+  }
+
+  if (m_catchupMode != CatchupMode::DISABLED)
+    Logger::Log(LEVEL_DEBUG, "%s - %s - %s: %s", __FUNCTION__, GetCatchupModeText(m_catchupMode).c_str(), m_channelName.c_str(), m_catchupSource.c_str());
+}
+
+bool Channel::GenerateAppendCatchupSource(const std::string& url)
+{
+  if (!m_catchupSource.empty())
+  {
+    m_catchupSource = url + m_catchupSource;
+    return true;
+  }
+  else
+  {
+    if (!Settings::GetInstance().GetCatchupQueryFormat().empty())
+    {
+      m_catchupSource = url + Settings::GetInstance().GetCatchupQueryFormat();
+      return true;
+    }
+  }
+
+  return false;
+}
+
+void Channel::GenerateShiftCatchupSource(const std::string& url)
+{
+  if (m_streamURL.find('?') != std::string::npos)
+    m_catchupSource = url + "&utc={utc}&lutc={lutc}";
+  else
+    m_catchupSource = url + "?utc={utc}&lutc={lutc}";
+}
+
+bool Channel::GenerateFlussonicCatchupSource(const std::string& url)
+{
+  // Example stream and catchup URLs
+  // stream:  http://ch01.spr24.net/151/mpegts?token=my_token
+  // catchup: http://ch01.spr24.net/151/timeshift_abs-{utc}.ts?token=my_token
+  // stream:  http://list.tv:8888/325/index.m3u8?token=secret
+  // catchup: http://list.tv:8888/325/timeshift_rel-{offset:1}.m3u8?token=secret
+  // stream:  http://list.tv:8888/325/mono.m3u8?token=secret
+  // catchup: http://list.tv:8888/325/mono-timeshift_rel-{offset:1}.m3u8?token=secret
+
+  static std::regex fsRegex("^(http[s]?://[^/]+)/([^/]+)/([^/]*)(mpegts|\\.m3u8)(\\?.+=.+)?$");
+  std::smatch matches;
+
+  if (std::regex_match(m_streamURL, matches, fsRegex))
+  {
+    if (matches.size() == 6)
+    {
+      const std::string fsHost = matches[1].str();
+      const std::string fsChannelId = matches[2].str();
+      const std::string fsListType = matches[3].str();
+      const std::string fsStreamType = matches[4].str();
+      const std::string fsUrlAppend = matches[5].str();
+
+      m_isCatchupTSStream = fsStreamType == "mpegts";
+      if (m_isCatchupTSStream)
+      {
+        m_catchupSource = fsHost + "/" + fsChannelId + "/timeshift_abs-${start}.ts" + fsUrlAppend;
+      }
+      else
+      {
+        if (fsListType == "index")
+          m_catchupSource = fsHost + "/" + fsChannelId + "/timeshift_rel-{offset:1}.m3u8" + fsUrlAppend;
+        else
+          m_catchupSource = fsHost + "/" + fsChannelId + "/" + fsListType + "-timeshift_rel-{offset:1}.m3u8" + fsUrlAppend;
+      }
+
+      return true;
+    }
+  }
+
+  return false;
+}
+
+bool Channel::GenerateXtreamCodesCatchupSource(const std::string& url)
+{
+  // Example stream and catchup URLs
+  // stream:  http://list.tv:8080/my@account.xc/my_password/1477
+  // catchup: http://list.tv:8080/timeshift/my@account.xc/my_password/{duration}/{Y}-{m}-{d}:{H}-{M}/1477.ts
+  // stream:  http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
+  // catchup: http://list.tv:8080/timeshift/my@account.xc/my_password/{duration}/{Y}-{m}-{d}:{H}-{M}/1477.m3u8
+
+  static std::regex xcRegex("^(http[s]?://[^/]+)/(?:live/)?([^/]+)/([^/]+)/([^/\\.]+)(\\.m3u[8]?)?$");
+  std::smatch matches;
+
+  if (std::regex_match(m_streamURL, matches, xcRegex))
+  {
+    if (matches.size() == 6)
+    {
+      const std::string xcHost = matches[1].str();
+      const std::string xcUsername = matches[2].str();
+      const std::string xcPasssword = matches[3].str();
+      const std::string xcChannelId = matches[4].str();
+      std::string xcExtension;
+      if (matches[5].matched)
+        xcExtension = matches[5].str();
+
+      if (xcExtension.empty())
+      {
+        m_isCatchupTSStream = true;
+        xcExtension = ".ts";
+      }
+
+      m_catchupSource = xcHost + "/timeshift/" + xcUsername + "/" + xcPasssword +
+                        "/{duration:60}/{Y}-{m}-{d}:{H}-{M}/" + xcChannelId + xcExtension;
+
+      return true;
+    }
+  }
+
+  return false;
 }

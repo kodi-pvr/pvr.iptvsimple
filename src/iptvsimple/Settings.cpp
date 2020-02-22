@@ -100,8 +100,8 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_catchupQueryFormat = buffer;
   if (!XBMC->GetSetting("catchupDays", &m_catchupDays))
     m_catchupDays = 5;
-  if (!XBMC->GetSetting("allChannelSupportCatchup", &m_allChannelsSupportCatchup))
-    m_allChannelsSupportCatchup = false;
+  if (!XBMC->GetSetting("allChannelsCatchupMode", &m_allChannelsCatchupMode))
+    m_allChannelsCatchupMode = CatchupMode::DISABLED;
   if (!XBMC->GetSetting("catchupPlayEpgAsLive", &m_catchupPlayEpgAsLive))
     m_catchupPlayEpgAsLive = false;
   if (!XBMC->GetSetting("catchupWatchEpgBeginBufferMins", &m_catchupWatchEpgBeginBufferMins))
@@ -199,8 +199,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_catchupQueryFormat, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "catchupDays")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupDays, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "allChannelSupportCatchup")
-    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_allChannelsSupportCatchup, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "allChannelsCatchupMode")
+    return SetSetting<CatchupMode, ADDON_STATUS>(settingName, settingValue, m_allChannelsCatchupMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "catchupPlayEpgAsLive")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayEpgAsLive, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "catchupWatchEpgBeginBufferMins")

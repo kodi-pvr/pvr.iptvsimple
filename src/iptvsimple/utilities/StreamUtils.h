@@ -38,6 +38,7 @@ namespace iptvsimple
       HLS = 0,
       DASH,
       SMOOTH_STREAMING,
+      TS,
       OTHER_TYPE
     };
 

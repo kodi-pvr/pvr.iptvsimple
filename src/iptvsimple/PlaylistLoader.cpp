@@ -150,6 +150,7 @@ bool PlaylistLoader::LoadPlayList()
 
       Channel channel(tmpChannel);
       channel.SetStreamURL(line);
+      channel.ConfigureCatchupMode();
 
       m_channels.AddChannel(channel, currentChannelGroupIdList, m_channelGroups);
 
@@ -199,6 +200,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strCatchup       = ReadMarkerValue(infoLine, CATCHUP);
     std::string strCatchupDays   = ReadMarkerValue(infoLine, CATCHUP_DAYS);
     std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
+    std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
 
     if (strTvgId.empty())
       strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
@@ -224,19 +226,41 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);
+
+    int siptvTimeshiftDays = 0;
+    if (!strCatchupSiptv.empty())
+      siptvTimeshiftDays = atoi(strCatchupSiptv.c_str());
     if (!strCatchupDays.empty())
       channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
+    else if (siptvTimeshiftDays > 0)
+      channel.SetCatchupDays(siptvTimeshiftDays);
     else
       channel.SetCatchupDays(Settings::GetInstance().GetCatchupDays());
 
     if (StringUtils::EqualsNoCase(strCatchup, "default") || StringUtils::EqualsNoCase(strCatchup, "append") ||
-        !strCatchupDays.empty() || !strCatchupSource.empty())
+        StringUtils::EqualsNoCase(strCatchup, "shift") || StringUtils::EqualsNoCase(strCatchup, "flussonic") ||
+        StringUtils::EqualsNoCase(strCatchup, "fs") || StringUtils::EqualsNoCase(strCatchup, "xc"))
       channel.SetHasCatchup(true);
 
     if (StringUtils::EqualsNoCase(strCatchup, "default"))
       channel.SetCatchupMode(CatchupMode::DEFAULT);
     else if (StringUtils::EqualsNoCase(strCatchup, "append"))
       channel.SetCatchupMode(CatchupMode::APPEND);
+    else if (StringUtils::EqualsNoCase(strCatchup, "shift"))
+      channel.SetCatchupMode(CatchupMode::SHIFT);
+    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "fs"))
+      channel.SetCatchupMode(CatchupMode::FLUSSONIC);
+    else if (StringUtils::EqualsNoCase(strCatchup, "xc"))
+      channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
+
+    // We also need to support the timeshift="days" tag from siptv
+    // this was used before the catchup tags were introduced
+    // it is the same as catchup="shift" except it also includes days
+    if (!channel.HasCatchup() && siptvTimeshiftDays > 0)
+    {
+      channel.SetCatchupMode(CatchupMode::TIMESHIFT);
+      channel.SetHasCatchup(true);
+    }
 
     return ReadMarkerValue(infoLine, GROUP_NAME_MARKER);
   }
