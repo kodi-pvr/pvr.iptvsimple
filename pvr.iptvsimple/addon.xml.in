@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.10.0"
+  version="4.11.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -159,6 +159,15 @@
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
     <platform>@PLATFORM@</platform>
     <news>
+v4.11.0
+- Added: Support new catchup providers, shift, xc and fs including TS stream support
+- Added: Support for timestamp catchup format specifier
+- Added: Optional catchup-id per programme from XMLTV
+- Added: Add catchup M3U8 examples to README
+- Fixed: Live catchup streams that don't support timeshift
+- Fixed: Don't build test catchup url for non catchup streams
+- Added: Support for offset catchup format specifier
+- Update: Add p8-platform to addon depends instead of from kodi
 
 v4.10.0
 - Added: User-Agent support from advanced addon setting
