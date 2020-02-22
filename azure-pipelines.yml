@@ -1,0 +1,65 @@
+variables:
+  app_id: 'pvr.iptvsimple'
+
+trigger:
+  branches:
+    include:
+    - Leia
+    - releases/*
+  paths:
+    include:
+    - '*'
+    exclude:
+    - 'debian/*'
+
+jobs:
+  - job: Windows
+
+    pool:
+      vmImage: 'VS2017-Win2016'
+
+    strategy:
+      matrix:
+        Win32:
+          GENERATOR: "Visual Studio 15 2017"
+          ARCHITECTURE: Win32
+          CONFIGURATION: Release
+        Win64:
+          GENERATOR: "Visual Studio 15 2017"
+          ARCHITECTURE: x64
+          CONFIGURATION: Release
+        Win64-UWP:
+          GENERATOR: "Visual Studio 15 2017"
+          ARCHITECTURE: x64
+          CONFIGURATION: Release
+          WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.16299.0"
+        ARM64-UWP:
+          GENERATOR: "Visual Studio 15 2017"
+          ARCHITECTURE: ARM64
+          CONFIGURATION: Release
+          WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.16299.0"
+
+    workspace:
+      clean: all
+
+    steps:
+
+    - script: |
+        cd ..
+        git clone --branch Leia --depth=1 https://github.com/xbmc/xbmc.git kodi
+        cd $(Build.SourcesDirectory)
+        mkdir build
+        cd build
+        mkdir "definition/$(app_id)"
+        echo $(app_id) . . > definition/$(app_id)/$(app_id).txt
+        mklink /J "$(Pipeline.Workspace)/$(app_id)" "$(Build.SourcesDirectory)"
+
+    - task: CMake@1
+      inputs:
+        workingDirectory: 'build'
+        cmakeArgs: '-T host=x64 -G "$(GENERATOR)" -A $(ARCHITECTURE) $(WINSTORE) -DADDONS_TO_BUILD=$(app_id) -DCMAKE_BUILD_TYPE=$(CONFIGURATION) -DADDONS_DEFINITION_DIR=$(Pipeline.Workspace)/$(app_id)/build/definition -DADDON_SRC_PREFIX=../.. -DCMAKE_INSTALL_PREFIX=../../kodi/addons -DPACKAGE_ZIP=1 ../../kodi/cmake/addons'
+
+    - task: CMake@1
+      inputs:
+        workingDirectory: 'build'
+        cmakeArgs: '--build . --config $(CONFIGURATION) --target $(app_id)'
