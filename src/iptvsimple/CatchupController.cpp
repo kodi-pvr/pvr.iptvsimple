@@ -348,6 +348,7 @@ std::string FormatDateTime(time_t dateTimeEpg, time_t duration, const std::strin
   FormatUtc("${timestamp}", dateTimeNow, formattedUrl);
   FormatUtc("{duration}", duration, formattedUrl);
   FormatUnits(duration, "duration", formattedUrl);
+  FormatUtc("${offset}", dateTimeNow - dateTimeEpg, formattedUrl);
   FormatUnits(dateTimeNow - dateTimeEpg, "offset", formattedUrl);
 
   Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, formattedUrl.c_str());
