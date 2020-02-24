@@ -259,7 +259,12 @@ msgctxt "#30067"
 msgid "Use FFMpeg http reconnect options if possible"
 msgstr ""
 
-#empty strings from id 30068 to 30099
+#. label: Advanced - userAgent
+msgctxt "#30068"
+msgid "User-Agent"
+msgstr ""
+
+#empty strings from id 30069 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -501,7 +506,12 @@ msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
 msgstr ""
 
-#empty strings from id 30686 to 30699
+#. help: Advanced - userAgent
+msgctxt "#30686"
+msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
+msgstr ""
+
+#empty strings from id 30687 to 30699
 
 #. help info - Catchup
 
