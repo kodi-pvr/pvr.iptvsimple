@@ -802,7 +802,21 @@ bool PVRIptvData::LoadPlayList(void)
       channel.iTvgShift         = tmpChannel.iTvgShift;
       channel.bRadio            = tmpChannel.bRadio;
       channel.properties        = tmpChannel.properties;
-      channel.strStreamURL      = strLine;
+      
+      auto propPair = channel.properties.find("http-user-agent");
+      if (propPair != channel.properties.end())
+      {
+        channel.strStreamURL = AddHeaderToStreamUrl(strLine, "user-agent", propPair->second);
+      }
+      else if (!g_userAgent.empty())
+      {
+        channel.strStreamURL = AddHeaderToStreamUrl(strLine, "user-agent", g_userAgent);
+      }
+      else
+      {
+        channel.strStreamURL = strLine;
+      }
+      
       channel.iEncryptionSystem = 0;
 
       iChannelNum++;
@@ -1481,4 +1495,24 @@ int PVRIptvData::GetChannelId(const char * strChannelName, const char * strStrea
     iId = ((iId << 5) + iId) + c; /* iId * 33 + c */
 
   return abs(iId);
+}
+
+std::string PVRIptvData::AddHeaderToStreamUrl (const std::string& url, const std::string& header, const std::string& value) const
+{
+  char separator = '|';
+  size_t found = url.find('|');
+
+  if (found != std::string::npos)
+  {
+    if (url.find(header + '=', found + 1) != std::string::npos)
+    {
+      return url;
+    }
+    else
+    {
+      separator = '&';
+    }
+  }
+
+  return url + separator + header + '=' + value;
 }
