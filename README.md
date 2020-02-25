@@ -137,6 +137,7 @@ Advanced settings such as multicast relays.
 * **Relay port**: The port of the multicast relay (`udpxy`) on the local network.
 * **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` as `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`. If this opton is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`.
 * **Use inputstream.adaptive for m3u8 (HLS) streams**: Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams.
+* **User-Agent**: Select which User-Agent to use if there is not one supplied as a property or as part of the channel stream URL.
 
 ## Appendix
 
