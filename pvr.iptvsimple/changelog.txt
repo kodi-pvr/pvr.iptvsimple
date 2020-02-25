@@ -1,3 +1,6 @@
+v4.10.0
+- Added: User-Agent support from advanced addon setting
+
 v4.9.0
 - Added: Catchup support (a.k.a Archive)
 - Added: Missing check for HLS stream type
