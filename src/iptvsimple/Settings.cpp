@@ -47,7 +47,7 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
   if (XBMC->GetSetting("m3uUrl", &buffer))
     m_m3uUrl = buffer;
   if (!XBMC->GetSetting("m3uCache", &m_cacheM3U))
-      m_cacheM3U = true;
+    m_cacheM3U = true;
   if (!XBMC->GetSetting("startNum", &m_startChannelNumber))
     m_startChannelNumber = 1;
   if (!XBMC->GetSetting("numberByOrder", &m_numberChannelsByM3uOrderOnly))
@@ -122,6 +122,8 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_useFFmpegReconnect = false;
   if (!XBMC->GetSetting("useInputstreamAdaptiveforHls", &m_useInputstreamAdaptiveforHls))
     m_useInputstreamAdaptiveforHls = false;
+  if (XBMC->GetSetting("userAgent", &buffer))
+    m_userAgent = buffer;
 }
 
 ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* settingValue)
@@ -219,6 +221,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useFFmpegReconnect, ADDON_STATUS_OK, ADDON_STATUS_OK);
   if (settingName == "useInputstreamAdaptiveforHls")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useInputstreamAdaptiveforHls, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "userAgent")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_userAgent, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   return ADDON_STATUS_OK;
 }

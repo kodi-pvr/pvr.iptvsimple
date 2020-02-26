@@ -419,6 +419,13 @@
           <default>false</default>
           <control type="toggle" />
         </setting>
+        <setting id="userAgent" type="string" label="30068" help="30686">
+          <level>3</level>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+          </setting>
       </group>
     </category>
 
