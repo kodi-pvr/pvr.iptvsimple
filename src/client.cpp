@@ -57,6 +57,7 @@ CHelper_libXBMC_pvr   *PVR  = NULL;
 std::string g_strTvgPath    = "";
 std::string g_strM3UPath    = "";
 std::string g_strLogoPath   = "";
+std::string g_userAgent     = "";
 int         g_logoPathType  = 0;
 int         g_iEPGTimeShift = 0;
 int         g_iStartNumber  = 1;
@@ -165,6 +166,10 @@ void ADDON_ReadSettings(void)
   if (XBMC->GetSetting(iPathType ? "logoBaseUrl" : "logoPath", &buffer))
   {
     g_strLogoPath = buffer;
+  }
+  if (XBMC->GetSetting("userAgent", &buffer))
+  {
+    g_userAgent = buffer;
   }
 
   // Logos from EPG

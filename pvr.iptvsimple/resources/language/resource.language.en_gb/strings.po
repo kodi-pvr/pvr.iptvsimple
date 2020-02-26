@@ -113,3 +113,7 @@ msgstr ""
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr ""
+
+msgctxt "#30045"
+msgid "Change User-Agent"
+msgstr ""

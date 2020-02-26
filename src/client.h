@@ -44,6 +44,7 @@ extern CHelper_libXBMC_pvr          *PVR;
 extern std::string g_strM3UPath;
 extern std::string g_strTvgPath;
 extern std::string g_strLogoPath;
+extern std::string g_userAgent;
 extern int         g_logoPathType;
 extern int         g_iEPGTimeShift;
 extern int         g_iStartNumber;

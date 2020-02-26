@@ -121,13 +121,14 @@ protected:
   PVRIptvEpgChannel* FindEpgForChannel(const std::string& id);
   virtual PVRIptvEpgChannel*   FindEpgForChannel(PVRIptvChannel &channel);
   virtual bool                 FindEpgGenre(const std::string& strGenre, int& iType, int& iSubType);
-  virtual bool                 GzipInflate( const std::string &compressedBytes, std::string &uncompressedBytes);
+  virtual bool                 GzipInflate(const std::string &compressedBytes, std::string &uncompressedBytes);
   virtual int                  GetCachedFileContents(const std::string &strCachedName, const std::string &strFilePath,
                                                      std::string &strContent, const bool bUseCache = false);
   virtual void                 ApplyChannelsLogos();
   virtual void                 ApplyChannelsLogosFromEPG();
   virtual std::string          ReadMarkerValue(std::string &strLine, const char * strMarkerName);
   virtual int                  GetChannelId(const char * strChannelName, const char * strStreamUrl);
+  virtual std::string          AddHeaderToStreamUrl(const std::string& url, const std::string& header, const std::string& value) const;
 
 protected:
   virtual void *Process(void);

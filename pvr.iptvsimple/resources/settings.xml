@@ -8,6 +8,7 @@
     <setting id="m3uUrl" type="text" label="30012" default="" visible="eq(-2,1)"/>
     <setting id="m3uCache" type="bool" label="30025" default="true" visible="eq(-3,1)"/>
     <setting id="startNum" type="number" label="30013" default="1" />
+    <setting id="userAgent" type="text" label="30045" />
   </category>
 
   <!-- EPG -->
