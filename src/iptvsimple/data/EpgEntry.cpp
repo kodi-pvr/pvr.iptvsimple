@@ -187,6 +187,9 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id, in
   long long tmpStart = ParseDateTime(strStart);
   long long tmpEnd = ParseDateTime(strStop);
 
+  GetAttributeValue(channelNode, "catchup-id", m_catchupId);
+  m_catchupId = StringUtils::Trim(m_catchupId);
+
   if ((tmpEnd + maxShiftTime < start) || (tmpStart + minShiftTime > end))
     return false;
 

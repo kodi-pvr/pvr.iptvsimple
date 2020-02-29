@@ -287,9 +287,9 @@ msgctxt "#30103"
 msgid "Catchup window"
 msgstr ""
 
-#. label: Catchup - allChannelsSupportCatchup
+#. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
-msgid "All channels support catchup"
+msgid "All channels support catchup using mode"
 msgstr ""
 
 #. label-group: Catchup - Watch From EPG
@@ -317,7 +317,37 @@ msgctxt "#30109"
 msgid "Catchup only available on finished programmes"
 msgstr ""
 
-#empty strings from id 30110 to 30599
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30110"
+msgid "Disabled"
+msgstr ""
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30111"
+msgid "Default"
+msgstr ""
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30112"
+msgid "Append"
+msgstr ""
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30113"
+msgid "Shift (SIPTV)"
+msgstr ""
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30114"
+msgid "Flussonic"
+msgstr ""
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30115"
+msgid "Xtream codes"
+msgstr ""
+
+#empty strings from id 30116 to 30599
 
 #. ############
 #. help info #
@@ -535,9 +565,9 @@ msgctxt "#30703"
 msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
 msgstr ""
 
-#. help: Catchup - allChannelsSupportCatchup
+#. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
-msgid "If enabled it is assumed that all channels support catchup. If there are no catchup specific tags in the M3U entries then the stream URL will be used as the source, and the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then a M3U entry must have at least a 'catchup=\"default\"' or 'catchup=\"append\"' tag to enable catchup."
+msgid "If enabled it is assumed that all channels support catchup using the selected mode if they do not have catchup tags. In this case the 'Query format string' and 'Catchup window' number of days will come from the addon settings if needed. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [Disabled] - Do not assume all channel support catchup; [Default] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [Append] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [Shift (SIPTV)] - Append the standard SIPTV catchup string to the channel URL; [Flussonic] - Build a flussonic URL from the channel URL; [Xtream codes] - Build an Xtream codes URL from the channel URL."
 msgstr ""
 
 #. help: Catchup - catchupPlayEpgAsLive

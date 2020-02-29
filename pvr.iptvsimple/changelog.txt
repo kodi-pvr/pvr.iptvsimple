@@ -1,3 +1,13 @@
+v4.11.0
+- Added: Support new catchup providers, shift, xc and fs including TS stream support
+- Added: Support for timestamp catchup format specifier
+- Added: Optional catchup-id per programme from XMLTV
+- Added: Add catchup M3U8 examples to README
+- Fixed: Live catchup streams that don't support timeshift
+- Fixed: Don't build test catchup url for non catchup streams
+- Added: Support for offset catchup format specifier
+- Update: Add p8-platform to addon depends instead of from kodi
+
 v4.10.0
 - Added: User-Agent support from advanced addon setting
 

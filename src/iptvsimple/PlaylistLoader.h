@@ -44,6 +44,7 @@ namespace iptvsimple
   static const std::string CATCHUP                 = "catchup=";
   static const std::string CATCHUP_DAYS            = "catchup-days=";
   static const std::string CATCHUP_SOURCE          = "catchup-source=";
+  static const std::string CATCHUP_SIPTV           = "timeshift=";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
   static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";

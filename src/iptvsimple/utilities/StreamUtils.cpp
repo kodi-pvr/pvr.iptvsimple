@@ -66,7 +66,7 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
 
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
-      if (streamType == StreamType::HLS)
+      if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
         if (channel.IsCatchupSupported())
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, CATCHUP_INPUTSTREAMCLASS);
@@ -107,7 +107,7 @@ std::string StreamUtils::GetEffectiveInputStreamClass(const StreamType& streamTy
   {
     if (StreamUtils::UseKodiInputstreams(streamType))
     {
-      if (streamType == StreamType::HLS)
+      if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
         if (channel.IsCatchupSupported())
           inputStreamClass = CATCHUP_INPUTSTREAMCLASS;
@@ -138,6 +138,10 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const Channe
   if (url.find(".ism") != std::string::npos &&
       !(url.find(".ismv") != std::string::npos || url.find(".isma") != std::string::npos))
     return StreamType::SMOOTH_STREAMING;
+
+  if (channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "video/mp2t" ||
+      channel.IsCatchupTSStream())
+    return StreamType::TS;
 
   return StreamType::OTHER_TYPE;
 }
@@ -188,6 +192,8 @@ const std::string StreamUtils::GetMimeType(const StreamType& streamType)
       return "application/x-mpegURL";
     case StreamType::DASH:
       return "application/xml+dash";
+    case StreamType::TS:
+      return "video/mp2t";
     default:
       return "";
   }
@@ -241,7 +247,8 @@ std::string StreamUtils::AddHeaderToStreamUrl(const std::string& streamUrl, cons
 
 bool StreamUtils::UseKodiInputstreams(const StreamType& streamType)
 {
-  return streamType == StreamType::OTHER_TYPE || (streamType == StreamType::HLS && !Settings::GetInstance().UseInputstreamAdaptiveforHls());
+  return streamType == StreamType::OTHER_TYPE || streamType == StreamType::TS ||
+        (streamType == StreamType::HLS && !Settings::GetInstance().UseInputstreamAdaptiveforHls());
 }
 
 bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& channel)

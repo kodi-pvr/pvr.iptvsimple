@@ -58,7 +58,7 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
       m_catchupEndTime = liveEpgEntry->GetEndTime();
     }
     else if (m_controlsLiveStream || !channel.IsCatchupSupported() ||
-             (channel.IsCatchupSupported() && Settings::GetInstance().CatchupOnlyOnFinishedProgrammes()))
+             (!m_controlsLiveStream && channel.IsCatchupSupported()))
     {
       // Live without EPG entry
       ClearProgramme();
@@ -73,6 +73,7 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
     if (m_resetCatchupState)
     {
       m_resetCatchupState = false;
+      m_programmeCatchupId.clear();
       if (channel.IsCatchupSupported())
       {
         m_timeshiftBufferOffset = Settings::GetInstance().GetCatchupDaysInSeconds(); //offset from now to start of catchup window
@@ -102,6 +103,11 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
 
 void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, Channel& channel, std::map<std::string, std::string>& catchupProperties) // TODO: should be a const channel, create a StreamManager instead
 {
+  m_programmeCatchupId.clear();
+  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.startTime);
+  if (epgEntry)
+    m_programmeCatchupId = epgEntry->GetCatchupId();
+
   TestAndStoreStreamType(channel); // TODO: StreamManager
 
   if (m_controlsLiveStream)
@@ -140,6 +146,11 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTa
 
 void CatchupController::ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, Channel& channel, std::map<std::string, std::string>& catchupProperties) // TODO: should be a const channel, create a StreamManager instead
 {
+  m_programmeCatchupId.clear();
+  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.startTime);
+  if (epgEntry)
+    m_programmeCatchupId = epgEntry->GetCatchupId();
+
   TestAndStoreStreamType(channel); // TODO: StreamManager
 
   if (m_controlsLiveStream)
@@ -195,6 +206,8 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_end_time", std::to_string(m_catchupEndTime)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_offset", std::to_string(m_timeshiftBufferOffset)});
   catchupProperties.insert({"inputstream.ffmpegdirect.timezone_shift", std::to_string(channel.GetTvgShift())});
+  if (!m_programmeCatchupId.empty())
+    catchupProperties.insert({"inputstream.ffmpegdirect.programme_catchup_id", m_programmeCatchupId});
 
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
@@ -207,6 +220,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_end_time - %s", std::to_string(m_catchupEndTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
   Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(channel.GetTvgShift()).c_str());
+  Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
 }
 
 void CatchupController::TestAndStoreStreamType(Channel& channel)
@@ -262,16 +276,16 @@ void CatchupController::ClearProgramme()
 
 namespace
 {
-void FormatOffset(time_t tTime, std::string &urlFormatString)
+void FormatUnits(time_t tTime, const std::string& name, std::string &urlFormatString)
 {
-  static const std::regex OFFSET_REGEX(".*(\\{offset:(\\d+)\\}).*");
+  const std::regex timeSecondsRegex(".*(\\{" + name + ":(\\d+)\\}).*");
   std::cmatch mr;
-  if (std::regex_match(urlFormatString.c_str(), mr, OFFSET_REGEX) && mr.length() >= 3)
+  if (std::regex_match(urlFormatString.c_str(), mr, timeSecondsRegex) && mr.length() >= 3)
   {
-    std::string offsetExp = mr[1].first;
+    std::string timeSecondsExp = mr[1].first;
     std::string second = mr[1].second;
     if (second.length() > 0)
-      offsetExp = offsetExp.erase(offsetExp.find(second));
+      timeSecondsExp = timeSecondsExp.erase(timeSecondsExp.find(second));
     std::string dividerStr = mr[2].first;
     second = mr[2].second;
     if (second.length() > 0)
@@ -280,10 +294,10 @@ void FormatOffset(time_t tTime, std::string &urlFormatString)
     const time_t divider = stoi(dividerStr);
     if (divider != 0)
     {
-      time_t offset = tTime / divider;
-      if (offset < 0)
-        offset = 0;
-      urlFormatString.replace(urlFormatString.find(offsetExp), offsetExp.length(), std::to_string(offset));
+      time_t units = tTime / divider;
+      if (units < 0)
+        units = 0;
+      urlFormatString.replace(urlFormatString.find(timeSecondsExp), timeSecondsExp.length(), std::to_string(units));
     }
   }
 }
@@ -315,28 +329,31 @@ void FormatUtc(const char *str, time_t tTime, std::string &urlFormatString)
 
 std::string FormatDateTime(time_t dateTimeEpg, time_t duration, const std::string &urlFormatString)
 {
-  std::string fomrattedUrl = urlFormatString;
+  std::string formattedUrl = urlFormatString;
 
   const time_t dateTimeNow = std::time(0);
   tm* dateTime = std::localtime(&dateTimeEpg);
 
-  FormatTime('Y', dateTime, fomrattedUrl);
-  FormatTime('m', dateTime, fomrattedUrl);
-  FormatTime('d', dateTime, fomrattedUrl);
-  FormatTime('H', dateTime, fomrattedUrl);
-  FormatTime('M', dateTime, fomrattedUrl);
-  FormatTime('S', dateTime, fomrattedUrl);
-  FormatUtc("{utc}", dateTimeEpg, fomrattedUrl);
-  FormatUtc("${start}", dateTimeEpg, fomrattedUrl);
-  FormatUtc("{utcend}", dateTimeEpg + duration, fomrattedUrl);
-  FormatUtc("${end}", dateTimeEpg + duration, fomrattedUrl);
-  FormatUtc("{lutc}", dateTimeNow, fomrattedUrl);
-  FormatUtc("{duration}", duration, fomrattedUrl);
-  FormatOffset(dateTimeNow - dateTimeEpg, fomrattedUrl);
+  FormatTime('Y', dateTime, formattedUrl);
+  FormatTime('m', dateTime, formattedUrl);
+  FormatTime('d', dateTime, formattedUrl);
+  FormatTime('H', dateTime, formattedUrl);
+  FormatTime('M', dateTime, formattedUrl);
+  FormatTime('S', dateTime, formattedUrl);
+  FormatUtc("{utc}", dateTimeEpg, formattedUrl);
+  FormatUtc("${start}", dateTimeEpg, formattedUrl);
+  FormatUtc("{utcend}", dateTimeEpg + duration, formattedUrl);
+  FormatUtc("${end}", dateTimeEpg + duration, formattedUrl);
+  FormatUtc("{lutc}", dateTimeNow, formattedUrl);
+  FormatUtc("${timestamp}", dateTimeNow, formattedUrl);
+  FormatUtc("{duration}", duration, formattedUrl);
+  FormatUnits(duration, "duration", formattedUrl);
+  FormatUtc("${offset}", dateTimeNow - dateTimeEpg, formattedUrl);
+  FormatUnits(dateTimeNow - dateTimeEpg, "offset", formattedUrl);
 
-  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, fomrattedUrl.c_str());
+  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, formattedUrl.c_str());
 
-  return fomrattedUrl;
+  return formattedUrl;
 }
 
 std::string AppendQueryStringAndPreserveOptions(const std::string &url, const std::string &postfixQueryString)
@@ -359,35 +376,20 @@ std::string AppendQueryStringAndPreserveOptions(const std::string &url, const st
   return urlFormatString;
 }
 
-std::string BuildUrlFormatString(const Channel& channel)
-{
-  std::string urlFormatString;
-
-  if (!channel.GetCatchupSource().empty())
-  {
-    if (channel.GetCatchupMode() == CatchupMode::DEFAULT)
-      urlFormatString = channel.GetCatchupSource();
-    else // source is query to be appended
-      urlFormatString = AppendQueryStringAndPreserveOptions(channel.GetStreamURL(), channel.GetCatchupSource());
-  }
-  else
-  {
-    urlFormatString = AppendQueryStringAndPreserveOptions(channel.GetStreamURL(), Settings::GetInstance().GetCatchupQueryFormat());
-  }
-
-  return urlFormatString;
-}
-
-std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset)
+std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset, const std::string& programmeCatchupId)
 {
   std::string startTimeUrl;
   time_t timeNow = time(0);
   time_t offset = startTime + timeOffset;
 
   if (startTime > 0 && offset < (timeNow - 5))
-    startTimeUrl = FormatDateTime(offset - channel.GetTvgShift(), duration, BuildUrlFormatString(channel));
+    startTimeUrl = FormatDateTime(offset - channel.GetTvgShift(), duration, channel.GetCatchupSource());
   else
     startTimeUrl = channel.GetStreamURL();
+
+  static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
+  if (!programmeCatchupId.empty())
+    startTimeUrl = std::regex_replace(startTimeUrl, CATCHUP_ID_REGEX, programmeCatchupId);
 
   Logger::Log(LEVEL_DEBUG, "%s - %s", __FUNCTION__, startTimeUrl.c_str());
 
@@ -399,7 +401,7 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
 std::string CatchupController::GetCatchupUrlFormatString(const Channel& channel) const
 {
   if (m_catchupStartTime > 0)
-    return BuildUrlFormatString(channel);
+    return channel.GetCatchupSource();
 
   return "";
 }
@@ -408,12 +410,23 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
 {
   if (m_catchupStartTime > 0)
   {
-    time_t duration = static_cast<time_t>(m_programmeEndTime - m_programmeStartTime);
+    time_t duration = 60 * 60; // default one hour
 
-    if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)
-      duration += Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
+    // // use the programme duration if it's valid
+    if (m_programmeStartTime > 0 && m_programmeStartTime < m_programmeEndTime)
+    {
+      duration = static_cast<time_t>(m_programmeEndTime - m_programmeStartTime);
 
-    return BuildEpgTagUrl(m_catchupStartTime, duration, channel, m_timeshiftBufferOffset);
+      if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)
+        duration += Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
+
+      time_t timeNow = time(0);
+      // cap duration to timeNow
+      if (m_programmeStartTime + duration > timeNow)
+        duration = timeNow - m_programmeStartTime;
+    }
+
+    return BuildEpgTagUrl(m_catchupStartTime, duration, channel, m_timeshiftBufferOffset, m_programmeCatchupId);
   }
 
   return "";
@@ -421,8 +434,11 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
 
 std::string CatchupController::GetStreamTestUrl(const Channel& channel) const
 {
-  // Test URL from 2 hours ago for 1 hour duration.
-  return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60),  60 * 60, channel, 0);
+  if (m_catchupStartTime > 0)
+    // Test URL from 2 hours ago for 1 hour duration.
+    return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId);
+  else
+    return channel.GetStreamURL();
 }
 
 EpgEntry* CatchupController::GetLiveEPGEntry(const Channel& myChannel)

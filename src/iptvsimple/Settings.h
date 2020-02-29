@@ -21,6 +21,7 @@
  *
  */
 
+#include "data/Channel.h"
 #include "utilities/Logger.h"
 
 #include <string>
@@ -117,7 +118,7 @@ namespace iptvsimple
     const std::string& GetCatchupQueryFormat() const { return m_catchupQueryFormat; }
     int GetCatchupDays() const { return m_catchupDays; }
     time_t GetCatchupDaysInSeconds() const { return static_cast<time_t>(m_catchupDays) * 24 * 60 * 60; }
-    bool AllChannelsSupportCatchup() const { return m_allChannelsSupportCatchup; }
+    const CatchupMode& GetAllChannelsCatchupMode() const { return m_allChannelsCatchupMode; }
     bool CatchupPlayEpgAsLive() const { return m_catchupPlayEpgAsLive; }
     int GetCatchupWatchEpgBeginBufferMins() const { return m_catchupWatchEpgBeginBufferMins; }
     time_t GetCatchupWatchEpgBeginBufferSecs() const { return static_cast<time_t>(m_catchupWatchEpgBeginBufferMins) * 60; }
@@ -206,7 +207,7 @@ namespace iptvsimple
     bool m_catchupEnabled = false;
     std::string m_catchupQueryFormat;
     int m_catchupDays = 3;
-    bool m_allChannelsSupportCatchup = false;
+    CatchupMode m_allChannelsCatchupMode = CatchupMode::DISABLED;
     bool m_catchupPlayEpgAsLive = false;
     int m_catchupWatchEpgBeginBufferMins = 5;
     int m_catchupWatchEpgEndBufferMins = 15;

@@ -124,7 +124,13 @@ Addon settings for catchup:
 * **Query format string**: A format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of `default` or `append` and a `catchup-source` tag is provided in the M3U entry this setting will be ignored.
 * **Catchup window**: The number of days into the past in which it is possible to catchup on a show. Can be overidden in an M3U entry using a 'catchup-days' tag.
 * **All channels support catchup**: If enabled it is assumed that all channels support catchup. If there are no catchup specific tags in the M3U entries then the stream URL will be used as the source, and the URL format and catchup days will come from the addon settings. If this option is disabled then a M3U entry must have at least a `catchup="true"` or `catchup="default"` tag to enable catchup.
-* **All channels support catchup**: If enabled it is assumed that all channels support catchup. If there are no catchup specific tags in the M3U entries then the stream URL will be used as the source, and the `Query format string` and `Catchup window` number of days will come from the addon settings. If this option is disabled then a M3U entry must have at least a `catchup="default"` or `catchup="append"` tag to enable catchup.
+* **All channels support catchup using mode**: If enabled it is assumed that all channels support catchup using the selected mode if they do not have catchup tags. In this case the 'Query format string' and 'Catchup window' number of days will come from the addon settings if needed. If this option is disabled then an M3U entry must have at least a `catchup=` tag to enable catchup. The options for how to build the catch URL are:
+    - `Disabled` - Do not assume all channel support catchup.
+    - `Default` - Use catchup source as the full catchup URL, if there is no catchup source use Append mode.
+    - `Append` - Append the catchup source to the channel URL, if there is no catchup source append the `Query format string` instead.
+    - `Shift (SIPTV)` - Append the standard SIPTV catchup string to the channel URL.
+    - `Flussonic` - Build a flussonic URL from the channel URL.
+    - `Xtream codes` - Build an Xtream codes URL from the channel URL.
 * **Play from EPG in Live TV mode (using timeshift)**: When disabled any catchup show from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes.
 * **Buffer before programme start**: The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video.
 * **Buffer after programme end**: The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video.
@@ -148,16 +154,19 @@ The format specifiers are substitution based and work as follows:
 - `{utc}`: The start time of the programme in UTC format.
 - `${start}`: Same as `{utc}`.
 - `{lutc}`: Current time in UTC format.
+- `${timestamp}`: Same as `{lutc}`.
 - `{utcend}`: The start time of the programme in UTC format + `${duration}`.
 - `${end}`: Same as `{utcend}`.
-- `${duration}`: The programme duration + any start and end buffer (if set).
 - `{Y}`: The 4-digit year (YYYY) of the start date\time.
 - `{m}`: The month (01-12) of the start date\time.
 - `{d}`: The day (01-31) of the start date\time.
 - `{H}`: The hour (00-23) of the start date\time.
 - `{M}`: The minute (00-59) of the start date\time.
 - `{S}`: The second (00-59) of the start date\time.
+- `{duration}`: The programme duration + any start and end buffer (if set).
+- `{duration:X}`: The programme duration (as above) divided by X seconds. Allows conversion to minutes and other time units. The minimum divider is 1, it must be an integer (not 1.5 or 2.25 etc.) and it must be a positive value. E.g. If you have a duration of 7200 seconds and you need 2 hours (2 hours is 7200 seconds), it means your divider is 3600: `{offset:3600}`. If you need minutes for the same duration you could use: `{offset:60}` which would result in a value of 120.
 - `{offset:X}`: The current offset (now - start time) divided by X seconds. Allows conversion to minutes and other time units. The minimum divider is 1, it must be an integer (not 1.5 or 2.25 etc.) and it must be a positive value. E.g. If you need an offset of 720 for a start time of 2 hours ago (2 hours is 7200 seconds), it means your divider is 10: `{offset:10}`. If you need minutes for the same offset you could use: `{offset:60}` which would result in a value of 120.
+- `{catchup-id}`: A programme specific identifier required in the catchup URL, value loaded from XMLTV programme entries.
 
 Here’s some examples of how the different formats would look:
 - `?utc={utc}&lutc={lutc}`
@@ -181,7 +190,36 @@ http://path-to-stream/live/channel-x-hd.ts
 http://path-to-stream/live/channel-y.ts
 #EXTINF:0,Channel Z
 http://path-to-stream/live/channel-z.ts
+#EXTINF:0 catchup="default",Channel A
+http://path-to-stream/live/channel-a.ts
+#EXTINF:0 catchup="default" catchup-source="http://path-to-stream/live/catchup-b.ts&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel B
+http://path-to-stream/live/channel-b.ts
+#EXTINF:0 catchup="append" catchup-source="&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel C
+http://path-to-stream/live/channel-c.ts
+#EXTINF:0 tvg-id="channel-d" tvg-name="Channel-D" catchup="shift" catchup-days="3",Channel D
+http://path-to-stream/live/channel-d.ts
+#EXTINF:0 tvg-id="channel-e" tvg-name="Channel-E" timeshift="3",Channel E
+http://path-to-stream/live/channel-e.ts
+#EXTINF:0 tvg-id="channel-f" tvg-name="Channel-F" catchup="default" catchup-days="1" catchup-source="http://yoururl/channeld/video-{utc}-{duration}.m3u8",Channel F
+http://yoururl/channeld/video.m3u8
+#EXTINF:-1 catchup="fs",Channel G
+http://list.tv:8888/325/mono.m3u8?token=secret
+#EXTINF:-1 catchup="fs",Channel H
+http://list.tv:8080/my@account.xc/my_password/1477
+#EXTINF:-1 catchup="fs",Channel I
+http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
 ```
+
+*Explanation for Catchup entries*
+- For `Channel A` the stream URL will be used and the Query format string from the addon settings will be appended to construct the catchup URL.
+- For `Channel B` the stream URL will not be used, instead using catchup-source as the catchup URL.
+- For `Channel C` the stream URL will be used and catchup-source will be appended to form the catchup URL.
+- For `Channel D` this is an example of a siptv style entry which auto generates the catchup-source by appending `?utc={utc}&lutc={lutc}` or `&utc={utc}&lutc={lutc}` to the channel URL.
+- For `Channel E` this is an example of the old siptv style entry which uses a `timeshift` tag to combine shift and days into one field. The catchup-source output will be the same as channel D.
+- For `Channel F` this is an example of a flussonic style entry manually specifying the catcup-source. Note that the mode is still `default`.
+- For `Channel G` this is an example of a flussonic style entry which auto generates the catchup-source.
+- For `Channel H` this is an example of a xtream codes style entry which auto generates the catchup-source for `ts` streams.
+- For `Channel I` this is an example of a xtream codes style entry which auto generates the catchup-source for `m3u8` streams.
 
 Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the exmaple file above would be:
 
@@ -242,7 +280,7 @@ General information on the XMLTV format can be found [here](http://wiki.xmltv.or
 
 **Programme elements**
 ```
-  <programme start="20080715003000 -0600" stop="20080715010000 -0600" channel="channel-x">
+  <programme start="20080715003000 -0600" stop="20080715010000 -0600" channel="channel-x" catchup-id="34534590">
     <title>My Show</title>
     <desc>Description of My Show</desc>
     <category>Drama</category>
@@ -262,7 +300,7 @@ General information on the XMLTV format can be found [here](http://wiki.xmltv.or
     <icon src="http://path-to-icons/my-show.png"/>
   </programme>
 ```
-The `programme` element supports the attributes `start`/`stop` in the format `YYYmmddHHMMSS +/-HHMM` and the attribute `channel` which needs to match the `channel` element's attribute `id`.
+The `programme` element supports the attributes `start`/`stop` in the format `YYYmmddHHMMSS +/-HHMM` and the attribute `channel` which needs to match the `channel` element's attribute `id`. There is an extra attribute which is not part of the XMLTV specification called `catchup-id`. Some providers require a programme specific id, this value can be used as part of the [catchup query format string specifiers](#catchup-format-specifiers).
 
 - `title`: The title of the prgramme.
 - `desc`: A descption of the programme.
