@@ -1,3 +1,8 @@
+v4.11.1
+- Fixed: Also check for ffmpegdirect mime type when checking stream type
+- Fixed: Pass mime type to ffmpegdirect if available
+- Fixed: Inspecting stream type for catchup mode shift should default to TS
+
 v4.11.0
 - Added: Support new catchup providers, shift, xc and fs including TS stream support
 - Added: Support for timestamp catchup format specifier
