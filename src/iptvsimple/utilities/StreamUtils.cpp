@@ -57,7 +57,7 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
   {
     StreamType streamType = StreamUtils::GetStreamType(streamURL, channel);
     if (streamType == StreamType::OTHER_TYPE)
-      streamType = StreamUtils::InspectStreamType(streamURL);
+      streamType = StreamUtils::InspectStreamType(streamURL, channel);
 
     // Using kodi's built in inputstreams
     if (StreamUtils::UseKodiInputstreams(streamType))
@@ -148,7 +148,7 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const Channe
   return StreamType::OTHER_TYPE;
 }
 
-const StreamType StreamUtils::InspectStreamType(const std::string& url)
+const StreamType StreamUtils::InspectStreamType(const std::string& url, const Channel& channel)
 {
   if (!FileUtils::FileExists(url))
     return StreamType::OTHER_TYPE;
@@ -167,6 +167,11 @@ const StreamType StreamUtils::InspectStreamType(const std::string& url)
     if (source.find("<SmoothStreamingMedia") != std::string::npos)
       return StreamType::SMOOTH_STREAMING;
   }
+
+  // If we can't inspect the stream type the only option left for shift mode is TS
+  if (channel.GetCatchupMode() == CatchupMode::SHIFT ||
+      channel.GetCatchupMode() == CatchupMode::TIMESHIFT)
+    return StreamType::TS;
 
   return StreamType::OTHER_TYPE;
 }

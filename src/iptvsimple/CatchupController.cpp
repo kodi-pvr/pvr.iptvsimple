@@ -234,7 +234,7 @@ void CatchupController::TestAndStoreStreamType(Channel& channel)
   const std::string streamTestUrl = GetStreamTestUrl(channel);
   StreamType streamType = StreamUtils::GetStreamType(streamTestUrl, channel);
   if (streamType == StreamType::OTHER_TYPE)
-    streamType = StreamUtils::InspectStreamType(streamTestUrl);
+    streamType = StreamUtils::InspectStreamType(streamTestUrl, channel);
 
   // TODO: we really want to store this in a file and load it on any restart
   // using channel doesn't make sense as it's otherwise immutable.
