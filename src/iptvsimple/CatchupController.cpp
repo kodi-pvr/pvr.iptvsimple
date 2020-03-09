@@ -209,6 +209,10 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   if (!m_programmeCatchupId.empty())
     catchupProperties.insert({"inputstream.ffmpegdirect.programme_catchup_id", m_programmeCatchupId});
 
+  const std::string mimeType = channel.GetProperty("mimetype");
+  if (!mimeType.empty() && channel.GetProperty("inputstream.ffmpegdirect.mime_type").empty())
+    catchupProperties.insert({"inputstream.ffmpegdirect.mime_type", mimeType});
+
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
   // if in video playbacl mode from epg, i.e. if if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
@@ -221,6 +225,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
   Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(channel.GetTvgShift()).c_str());
   Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
+  Logger::Log(LEVEL_DEBUG, "mime_type - '%s'", mimeType.c_str());
 }
 
 void CatchupController::TestAndStoreStreamType(Channel& channel)
@@ -229,7 +234,7 @@ void CatchupController::TestAndStoreStreamType(Channel& channel)
   const std::string streamTestUrl = GetStreamTestUrl(channel);
   StreamType streamType = StreamUtils::GetStreamType(streamTestUrl, channel);
   if (streamType == StreamType::OTHER_TYPE)
-    streamType = StreamUtils::InspectStreamType(streamTestUrl);
+    streamType = StreamUtils::InspectStreamType(streamTestUrl, channel);
 
   // TODO: we really want to store this in a file and load it on any restart
   // using channel doesn't make sense as it's otherwise immutable.

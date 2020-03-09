@@ -57,7 +57,7 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
   {
     StreamType streamType = StreamUtils::GetStreamType(streamURL, channel);
     if (streamType == StreamType::OTHER_TYPE)
-      streamType = StreamUtils::InspectStreamType(streamURL);
+      streamType = StreamUtils::InspectStreamType(streamURL, channel);
 
     // Using kodi's built in inputstreams
     if (StreamUtils::UseKodiInputstreams(streamType))
@@ -126,27 +126,29 @@ std::string StreamUtils::GetEffectiveInputStreamClass(const StreamType& streamTy
 
 const StreamType StreamUtils::GetStreamType(const std::string& url, const Channel& channel)
 {
+  std::string mimeType = channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE);
+  if (mimeType.empty())
+    mimeType = channel.GetProperty("inputstream.ffmpegdirect.mime_type");
+
   if (url.find(".m3u8") != std::string::npos ||
-      channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "application/x-mpegURL" ||
-      channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "application/vnd.apple.mpegurl")
+      mimeType == "application/x-mpegURL" ||
+      mimeType == "application/vnd.apple.mpegurl")
     return StreamType::HLS;
 
-  if (url.find(".mpd") != std::string::npos ||
-      channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "application/xml+dash")
+  if (url.find(".mpd") != std::string::npos || mimeType == "application/xml+dash")
     return StreamType::DASH;
 
   if (url.find(".ism") != std::string::npos &&
       !(url.find(".ismv") != std::string::npos || url.find(".isma") != std::string::npos))
     return StreamType::SMOOTH_STREAMING;
 
-  if (channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE) == "video/mp2t" ||
-      channel.IsCatchupTSStream())
+  if (mimeType == "video/mp2t" || channel.IsCatchupTSStream())
     return StreamType::TS;
 
   return StreamType::OTHER_TYPE;
 }
 
-const StreamType StreamUtils::InspectStreamType(const std::string& url)
+const StreamType StreamUtils::InspectStreamType(const std::string& url, const Channel& channel)
 {
   if (!FileUtils::FileExists(url))
     return StreamType::OTHER_TYPE;
@@ -165,6 +167,11 @@ const StreamType StreamUtils::InspectStreamType(const std::string& url)
     if (source.find("<SmoothStreamingMedia") != std::string::npos)
       return StreamType::SMOOTH_STREAMING;
   }
+
+  // If we can't inspect the stream type the only option left for shift mode is TS
+  if (channel.GetCatchupMode() == CatchupMode::SHIFT ||
+      channel.GetCatchupMode() == CatchupMode::TIMESHIFT)
+    return StreamType::TS;
 
   return StreamType::OTHER_TYPE;
 }
