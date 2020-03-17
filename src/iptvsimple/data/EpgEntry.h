@@ -72,8 +72,8 @@ namespace iptvsimple
       time_t GetEndTime() const { return m_endTime; }
       void SetEndTime(time_t value) { m_endTime = value; }
 
-      time_t GetFirstAired() const { return m_firstAired; }
-      void SetFirstAired(time_t value) { m_firstAired = value; }
+      const std::string& GetFirstAired() const { return m_firstAired; }
+      void SetFirstAired(const std::string& value) { m_firstAired = value; }
 
       const std::string& GetTitle() const { return m_title; }
       void SetTitle(const std::string& value) { m_title = value; }
@@ -105,6 +105,9 @@ namespace iptvsimple
       const std::string& GetCatchupId() const { return m_catchupId; }
       void SetCatchupId(const std::string& value) { m_catchupId = value; }
 
+      bool IsNew() const { return m_new; }
+      void SetNew(int value) { m_new = value; }      
+
       void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id, int broadcastId,
                       int start, int end, int minShiftTime, int maxShiftTime);
@@ -121,12 +124,12 @@ namespace iptvsimple
       int m_genreSubType;
       int m_year;
       int m_starRating;
-      int m_episodeNumber = 0;
-      int m_episodePartNumber = 0;
-      int m_seasonNumber = 0;
+      int m_episodeNumber = EPG_TAG_INVALID_SERIES_EPISODE;
+      int m_episodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
+      int m_seasonNumber = EPG_TAG_INVALID_SERIES_EPISODE;
       time_t m_startTime;
       time_t m_endTime;
-      time_t m_firstAired;
+      std::string m_firstAired;
       std::string m_title;
       std::string m_episodeName;
       std::string m_plotOutline;
@@ -137,6 +140,7 @@ namespace iptvsimple
       std::string m_director;
       std::string m_writer;
       std::string m_catchupId;
+      bool m_new = false;
     };
   } //namespace data
 } //namespace iptvsimple

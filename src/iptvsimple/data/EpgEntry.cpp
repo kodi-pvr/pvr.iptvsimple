@@ -80,8 +80,10 @@ void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std
   left.iEpisodeNumber      = m_episodeNumber;
   left.iEpisodePartNumber  = m_episodePartNumber;
   left.strEpisodeName      = m_episodeName.c_str();
+  left.strFirstAired       = m_firstAired.empty() ? "" : m_firstAired.c_str();
   left.iFlags              = EPG_TAG_FLAG_UNDEFINED;
-  left.firstAired          = m_firstAired;
+  if (m_new)
+    left.iFlags |= EPG_TAG_FLAG_IS_NEW;
 }
 
 bool EpgEntry::SetEpgGenre(const std::vector<EpgGenre> genreMappings)
@@ -156,6 +158,26 @@ long long ParseDateTime(const std::string& strDate)
   return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
 }
 
+std::string ParseAsW3CDateString(const std::string& strDate)
+{
+  int year = 2000;
+  int mon = 1;
+  int mday = 1;
+
+  std::sscanf(strDate.c_str(), "%04d%02d%02d", &year, &mon, &mday);
+
+  return StringUtils::Format("%04d%-02d%-02d", year, mon, mday);
+}
+
+std::string ParseAsW3CDateString(time_t time)
+{
+  std::tm* tm = std::localtime(&time);
+  char buffer[16];
+  std::strftime(buffer, 16, "%Y-%m-%d", tm);
+
+  return buffer;
+}
+
 int ParseStarRating(const std::string& starRatingString)
 {
   float starRating = 0;
@@ -201,11 +223,10 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id, in
   m_startTime = static_cast<time_t>(tmpStart);
   m_endTime = static_cast<time_t>(tmpEnd);
   m_year = 0;
-  m_firstAired = 0;
   m_starRating = 0;
-  m_episodeNumber = 0;
-  m_episodePartNumber = 0;
-  m_seasonNumber = 0;
+  m_episodeNumber = EPG_TAG_INVALID_SERIES_EPISODE;
+  m_episodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
+  m_seasonNumber = EPG_TAG_INVALID_SERIES_EPISODE;
 
   m_title = GetNodeValue(channelNode, "title");
   m_plot = GetNodeValue(channelNode, "desc");
@@ -216,9 +237,13 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id, in
   const std::string dateString = GetNodeValue(channelNode, "date");
   if (!dateString.empty())
   {
-    static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][1-9][0-9][1-9]");
+    static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0s-9]");
     if (std::regex_match(dateString, dateRegex))
-      m_firstAired = static_cast<time_t>(ParseDateTime(dateString));
+    {
+      m_firstAired = ParseAsW3CDateString(dateString);
+      if (m_firstAired == ParseAsW3CDateString(m_startTime))
+        m_new = true;
+    }
 
     std::sscanf(dateString.c_str(), "%04d", &m_year);
   }
@@ -305,7 +330,7 @@ bool EpgEntry::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberStr
       if (numElementsParsed == 2)
         m_episodePartNumber++;
       else if (numElementsParsed == 1)
-        m_episodePartNumber = 0;
+        m_episodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
     }
   }
 
