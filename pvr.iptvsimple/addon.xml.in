@@ -158,6 +158,9 @@
     <disclaimer lang="zh_CN">这是不稳定版的软件！作者不对录像失败、错误定时造成时间浪费或其它不良影响负责。</disclaimer>
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
     <platform>@PLATFORM@</platform>
+    <license>GPL-2.0</license>
+    <source>https://github.com/kodi-pvr/pvr.hts</source>
+    <forum>https://forum.kodi.tv/forumdisplay.php?fid=215</forum>
     <assets>
       <icon>icon.png</icon>
     </assets>
