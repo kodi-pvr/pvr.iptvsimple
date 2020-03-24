@@ -27,7 +27,7 @@
 #include <string>
 #include <type_traits>
 
-#include <kodi/xbmc_addon_types.h>
+#include <kodi/AddonBase.h>
 
 namespace iptvsimple
 {
