@@ -1,3 +1,10 @@
+v4.11.3
+- Add: GPL2 license file and show GPL2 on README.md
+- Update: Add source url, forum url and license name to addon.xml
+- Update: Copyright year to 2020 and use Kodi / kodi.tv
+- Update: Debian build code
+- Update: Some minor cleanups
+
 v4.11.2
 - Update: PVR API 6.2.0
 
