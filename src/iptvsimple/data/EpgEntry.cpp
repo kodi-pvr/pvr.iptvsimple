@@ -199,7 +199,7 @@ int ParseStarRating(const std::string& starRatingString)
 
 } // unnamed namespace
 
-bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id, int broadcastId,
+bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
                           int start, int end, int minShiftTime, int maxShiftTime)
 {
   std::string strStart, strStop;
@@ -215,7 +215,7 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id, in
   if ((tmpEnd + maxShiftTime < start) || (tmpStart + minShiftTime > end))
     return false;
 
-  m_broadcastId = broadcastId;
+  m_broadcastId = static_cast<int>(tmpStart);;
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;

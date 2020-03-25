@@ -266,7 +266,7 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
   }
 
   ChannelEpg* channelEpg = nullptr;
-  int broadcastId = 0;
+  int count = 0;
 
   for (const auto& channelNode : rootElement.children("programme"))
   {
@@ -281,15 +281,15 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
     }
 
     EpgEntry entry;
-    if (entry.UpdateFrom(channelNode, id, broadcastId + 1, start, end, minShiftTime, maxShiftTime))
+    if (entry.UpdateFrom(channelNode, id, start, end, minShiftTime, maxShiftTime))
     {
-      broadcastId++;
+      count++;
 
       channelEpg->AddEpgEntry(entry);
     }
   }
 
-  Logger::Log(LEVEL_NOTICE, "%s - Loaded '%d' EPG entries.", __FUNCTION__, broadcastId);
+  Logger::Log(LEVEL_NOTICE, "%s - Loaded '%d' EPG entries.", __FUNCTION__, count);
 }
 
 
@@ -334,8 +334,9 @@ PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t sta
 
     int shift = m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
 
-    for (auto& epgEntry : channelEpg->GetEpgEntries())
+    for (auto& epgEntryPair : channelEpg->GetEpgEntries())
     {
+      auto& epgEntry = epgEntryPair.second;
       if ((epgEntry.GetEndTime() + shift) < start)
         continue;
 
@@ -496,8 +497,9 @@ EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
 
   int shift = m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
 
-  for (auto& epgEntry : channelEpg->GetEpgEntries())
+  for (auto& epgEntryPair : channelEpg->GetEpgEntries())
   {
+    auto& epgEntry = epgEntryPair.second;
     time_t startTime = epgEntry.GetStartTime() + shift;
     time_t endTime = epgEntry.GetEndTime() + shift;
     if (startTime <= lookupTime && endTime > lookupTime)

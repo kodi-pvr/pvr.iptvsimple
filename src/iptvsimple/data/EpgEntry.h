@@ -106,10 +106,10 @@ namespace iptvsimple
       void SetCatchupId(const std::string& value) { m_catchupId = value; }
 
       bool IsNew() const { return m_new; }
-      void SetNew(int value) { m_new = value; }      
+      void SetNew(int value) { m_new = value; }
 
       void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
-      bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id, int broadcastId,
+      bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id,
                       int start, int end, int minShiftTime, int maxShiftTime);
 
     private:

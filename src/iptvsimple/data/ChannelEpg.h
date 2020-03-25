@@ -47,8 +47,8 @@ namespace iptvsimple
       const std::string& GetIconPath() const { return m_iconPath; }
       void SetIconPath(const std::string& value) { m_iconPath = value; }
 
-      std::vector<EpgEntry>& GetEpgEntries() { return m_epgEntries; }
-      void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries.emplace_back(epgEntry); }
+      std::map<time_t, EpgEntry>& GetEpgEntries() { return m_epgEntries; }
+      void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries[epgEntry.GetStartTime()] = epgEntry; }
 
       bool UpdateFrom(const pugi::xml_node& channelNode, iptvsimple::Channels& channels);
       bool CombineNamesAndIconPathFrom(const ChannelEpg& right);
@@ -57,7 +57,7 @@ namespace iptvsimple
       std::string m_id;
       std::vector<std::string> m_names;
       std::string m_iconPath;
-      std::vector<EpgEntry> m_epgEntries;
+      std::map<time_t, EpgEntry> m_epgEntries;
     };
   } //namespace data
 } //namespace iptvsimple
