@@ -1,24 +1,50 @@
 # build artifacts
 build/
-cmake-build-debug/
+pvr.*/addon.xml
+
+# Debian build files
 debian/changelog
 debian/files
-debian/kodi-pvr-iptvsimple-dbg.debhelper.log
-debian/kodi-pvr-iptvsimple-dbg.substvars
-debian/kodi-pvr-iptvsimple-dbg/
-debian/kodi-pvr-iptvsimple.debhelper.log
-debian/kodi-pvr-iptvsimple.postinst.debhelper
-debian/kodi-pvr-iptvsimple.postrm.debhelper
-debian/kodi-pvr-iptvsimple.substvars
-debian/kodi-pvr-iptvsimple/
+debian/*.log
+debian/*.substvars
+debian/.debhelper/
 debian/tmp/
+debian/kodi-pvr-*/
 obj-x86_64-linux-gnu/
-pvr.iptvsimple/addon.xml
+
+# commonly used editors
+# vim
+*.swp
+
+# Eclipse
+*.project
+*.cproject
+.classpath
+*.sublime-*
+.settings/
+
+# KDevelop 4
+*.kdev4
+
+# gedit
+*~
+
+# CLion
+/.idea
 
 # clion
 .idea/
 
-# Eclipse/CDT
-.cproject
-.project
-.settings/
+# to prevent add after a "git format-patch VALUE" and "git add ." call
+/*.patch
+
+# Visual Studio Code
+.vscode
+
+# to prevent add if project code opened by Visual Studio over CMake file
+.vs/
+
+# General MacOS
+.DS_Store
+.AppleDouble
+.LSOverride
