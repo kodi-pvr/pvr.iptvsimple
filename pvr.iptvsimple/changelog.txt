@@ -1,3 +1,9 @@
+v4.11.4
+- Fixed: EPG performance
+- Update: PVR API 6.3.0
+- Added: GPLv2+ badge on README
+- Update: SPDX in copyright header for for GPLv2 or later
+
 v4.11.3
 - Add: GPL2 license file and show GPL2 on README.md
 - Update: Add source url, forum url and license name to addon.xml
