@@ -223,7 +223,7 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   const std::string dateString = GetNodeValue(channelNode, "date");
   if (!dateString.empty())
   {
-    static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0s-9]");
+    static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
     if (std::regex_match(dateString, dateRegex))
     {
       m_firstAired = ParseAsW3CDateString(dateString);

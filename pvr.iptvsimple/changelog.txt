@@ -1,3 +1,6 @@
+v4.11.5
+- Fixed: Typo in date regex, caused failure to load EPG on some platforms
+
 v4.11.4
 - Fixed: EPG performance
 - Update: PVR API 6.3.0
