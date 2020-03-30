@@ -116,7 +116,7 @@ Settings related to Channel Logos.
 ### Catchup
 Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info. Only works if your provider supports catchup.
 
-Note that catchup functionality can work one of two ways. The first is where a standard inputstream is used, allowing the use of the EPG to view a programme from within the catchup window like a video. The second is where the `inputstream.ffmpegdirect` addon is installed which allows timeshift, either as a video or with playback as live. When playback as live is enabled it's possible to skip back/forward programme by programme and jump to other channel and programmes via the OSD menus.
+Note that catchup functionality can work one of two ways. The first is where a standard inputstream is used, allowing the use of the EPG to view a programme from within the catchup window like a video. The second is where the `inputstream.ffmpegdirect` addon is installed which allows timeshift, either as a video or with playback as live. When playback as live is enabled it's possible to skip back/forward programme by programme and jump to other channel and programmes via the OSD menus. Also note that using `inputstream.ffmpegdirect` is automatic if using TS/M3U8 streams that support catchup. If this inputstream is incorrectly chosen it's possible to override this by adding a `#KODIPROP:inputstreamclass=inputstream.ffmpeg` line before the channel's M3U entry (or any alternative inputstream instead).
 
 Catchup tags can be specified in the M3U entries and these tags override any values configured in the Catchup settings. The supported M3U catchup tags are `catchup`, `catchup-source` and `catchup-days`. See the [Supported M3U elements section](#m3u-format-elements) below for further details. The full catchup URL or a query to be appended to the stream URL is either provided in the `catchup-source` tag (i.e. complete with format specifiers) or in the case this is not provided the `Query format string` setting is appended to stream URL. See the [Catchup format specifiers section](#catchup-format-specifiers) below for a more detailed explanation and further examples.
 
@@ -133,9 +133,10 @@ Addon settings for catchup:
     - `Shift (SIPTV)` - Append the standard SIPTV catchup string to the channel URL.
     - `Flussonic` - Build a flussonic URL from the channel URL.
     - `Xtream codes` - Build an Xtream codes URL from the channel URL.
-* **Play from EPG in Live TV mode (using timeshift)**: When disabled any catchup show from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes.
+* **Play from EPG in Live TV mode (using timeshift)**: When disabled any catchup show from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer.
 * **Buffer before programme start**: The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video.
 * **Buffer after programme end**: The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video.
+* **Catchup only available on finished programmes**: When selected from the EPG the current live programme cannot be watched as catchup until finished.
 
 ### Advanced
 Advanced settings such as multicast relays.

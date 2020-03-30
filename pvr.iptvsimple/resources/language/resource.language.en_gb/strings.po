@@ -572,7 +572,7 @@ msgstr ""
 
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
-msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes."
+msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
 msgstr ""
 
 #. help: Catchup - catchupWatchEpgBeginBuffer

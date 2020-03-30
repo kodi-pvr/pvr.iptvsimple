@@ -35,7 +35,6 @@ namespace iptvsimple
 
     std::string GetCatchupUrlFormatString(const data::Channel& channel) const;
     std::string GetCatchupUrl(const data::Channel& channel) const;
-    std::string GetStreamTestUrl(const data::Channel& channel) const;
 
     bool ControlsLiveStream() const { return m_controlsLiveStream; }
     void ResetCatchupState() { m_resetCatchupState = true; }
@@ -44,7 +43,8 @@ namespace iptvsimple
     data::EpgEntry* GetLiveEPGEntry(const iptvsimple::data::Channel& myChannel);
     data::EpgEntry* GetEPGEntry(const iptvsimple::data::Channel& myChannel, time_t lookupTime);
     void SetCatchupInputStreamProperties(bool playbackAsLive, const iptvsimple::data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
-    void TestAndStoreStreamType(data::Channel& channel);
+    void TestAndStoreStreamType(data::Channel& channel, bool fromEpg = false);
+    std::string GetStreamTestUrl(const data::Channel& channel, bool fromEpg) const;
 
     // Programme helpers
     void UpdateProgrammeFrom(const EPG_TAG& epgTag, int tvgShift);

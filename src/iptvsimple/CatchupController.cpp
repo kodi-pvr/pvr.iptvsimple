@@ -36,9 +36,9 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
   if (!m_fromEpgTag || m_controlsLiveStream)
   {
     EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
-    if (liveEpgEntry && !Settings::GetInstance().CatchupOnlyOnFinishedProgrammes())
+    if (m_controlsLiveStream && liveEpgEntry && !Settings::GetInstance().CatchupOnlyOnFinishedProgrammes())
     {
-      // Live with EPG entry
+      // Live timeshifting support with EPG entry
       UpdateProgrammeFrom(*liveEpgEntry, channel.GetTvgShift());
       m_catchupStartTime = liveEpgEntry->GetStartTime();
       m_catchupEndTime = liveEpgEntry->GetEndTime();
@@ -46,8 +46,8 @@ void CatchupController::ProcessChannelForPlayback(Channel& channel, std::map<std
     else if (m_controlsLiveStream || !channel.IsCatchupSupported() ||
              (!m_controlsLiveStream && channel.IsCatchupSupported()))
     {
-      // Live without EPG entry
       ClearProgramme();
+      m_programmeCatchupId.clear();
       m_catchupStartTime = 0;
       m_catchupEndTime = 0;
     }
@@ -94,7 +94,7 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTa
   if (epgEntry)
     m_programmeCatchupId = epgEntry->GetCatchupId();
 
-  TestAndStoreStreamType(channel); // TODO: StreamManager
+  TestAndStoreStreamType(channel, true); // TODO: StreamManager
 
   if (m_controlsLiveStream)
   {
@@ -137,7 +137,7 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, Cha
   if (epgEntry)
     m_programmeCatchupId = epgEntry->GetCatchupId();
 
-  TestAndStoreStreamType(channel); // TODO: StreamManager
+  TestAndStoreStreamType(channel, true); // TODO: StreamManager
 
   if (m_controlsLiveStream)
   {
@@ -214,10 +214,10 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "mime_type - '%s'", mimeType.c_str());
 }
 
-void CatchupController::TestAndStoreStreamType(Channel& channel)
+void CatchupController::TestAndStoreStreamType(Channel& channel, bool fromEpg /* false */)
 {
   // We need to find out what type of stream this is, so let's construct a catchup URL to test with
-  const std::string streamTestUrl = GetStreamTestUrl(channel);
+  const std::string streamTestUrl = GetStreamTestUrl(channel, fromEpg);
   StreamType streamType = StreamUtils::GetStreamType(streamTestUrl, channel);
   if (streamType == StreamType::OTHER_TYPE)
     streamType = StreamUtils::InspectStreamType(streamTestUrl, channel);
@@ -423,9 +423,9 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
   return "";
 }
 
-std::string CatchupController::GetStreamTestUrl(const Channel& channel) const
+std::string CatchupController::GetStreamTestUrl(const Channel& channel, bool fromEpg) const
 {
-  if (m_catchupStartTime > 0)
+ if (m_catchupStartTime > 0 || fromEpg)
     // Test URL from 2 hours ago for 1 hour duration.
     return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId);
   else

@@ -96,7 +96,7 @@ std::string StreamUtils::GetEffectiveInputStreamClass(const StreamType& streamTy
     {
       if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
-        if (channel.IsCatchupSupported())
+        if (channel.IsCatchupSupported() && channel.CatchupSupportsTimeshifting())
           inputStreamClass = CATCHUP_INPUTSTREAMCLASS;
         else
           inputStreamClass = PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
