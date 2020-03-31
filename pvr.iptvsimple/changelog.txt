@@ -1,3 +1,7 @@
+v4.11.6
+- Fixed: Fix incorrect live URL selection and inputstream for standard (no timeshift) catchup streams
+- Fixed: Correctly cache mime_type for streams
+
 v4.11.5
 - Fixed: Typo in date regex, caused failure to load EPG on some platforms
 
