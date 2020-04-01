@@ -40,6 +40,8 @@ const std::string Channel::GetCatchupModeText(const CatchupMode& catchupMode)
       return "Flussonic";
     case CatchupMode::XTREAM_CODES:
       return "Xtream codes";
+    default:
+      return "";
   }
 }
 
