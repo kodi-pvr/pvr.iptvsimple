@@ -225,8 +225,8 @@ void CatchupController::TestAndStoreStreamType(Channel& channel, bool fromEpg /*
   // TODO: we really want to store this in a file and load it on any restart
   // using channel doesn't make sense as it's otherwise immutable.
 
-  // If we find a mimetype store it so we don't have to look it up again
-  if (!channel.GetProperty("mimetype").empty() && (streamType == StreamType::HLS || streamType == StreamType::DASH))
+  // If we find a mimetype store it so we don't have to look it up again (Other and Smoothing streaming don't have one)
+  if (channel.GetProperty("mimetype").empty() && (streamType != StreamType::OTHER_TYPE && streamType != StreamType::SMOOTH_STREAMING))
   {
     std::lock_guard<std::mutex> lock(*m_mutex);
     channel.AddProperty("mimetype", StreamUtils::GetMimeType(streamType));
