@@ -201,7 +201,7 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   if ((tmpEnd + maxShiftTime < start) || (tmpStart + minShiftTime > end))
     return false;
 
-  m_broadcastId = static_cast<int>(tmpStart);;
+  m_broadcastId = static_cast<int>(tmpStart);
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;

@@ -58,6 +58,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupDays      = m_catchupDays;
   left.m_catchupSource    = m_catchupSource;
   left.m_isCatchupTSStream = m_isCatchupTSStream;
+  left.m_catchupSupportsTimeshifting = m_catchupSupportsTimeshifting;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
@@ -90,6 +91,7 @@ void Channel::Reset()
   m_catchupMode = CatchupMode::DISABLED;
   m_catchupDays = 0;
   m_catchupSource.clear();
+  m_catchupSupportsTimeshifting = false;
   m_isCatchupTSStream = false;
   m_tvgId.clear();
   m_tvgName.clear();
@@ -195,6 +197,31 @@ bool Channel::IsCatchupSupported() const
   return Settings::GetInstance().IsCatchupEnabled() && m_hasCatchup && !m_catchupSource.empty();
 }
 
+namespace
+{
+bool IsValidTimeshiftingCatchupSource(const std::string& formatString)
+{
+  // match any specifier, i.e. anything inside curly braces
+  std::regex const specifierRegex("\\{[^{]+\\}");
+
+  std::ptrdiff_t const numSpecifiers(std::distance(
+    std::sregex_iterator(formatString.begin(), formatString.end(), specifierRegex),
+    std::sregex_iterator()));
+
+  if (numSpecifiers > 0)
+  {
+    // If we only have a catchup-id specifier and nothing else then we can't timeshift
+    if (formatString.find("{catchup-id}") != std::string::npos && numSpecifiers == 1)
+      return false;
+
+    return true;
+  }
+
+  return false;
+}
+
+} // unnamed namespace
+
 void Channel::ConfigureCatchupMode()
 {
   bool invalidCatchupSource = false;
@@ -262,6 +289,8 @@ void Channel::ConfigureCatchupMode()
   {
     if (!protocolOptions.empty() && appendProtocolOptions)
       m_catchupSource += protocolOptions;
+
+    m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
   }
 
   if (m_catchupMode != CatchupMode::DISABLED)
