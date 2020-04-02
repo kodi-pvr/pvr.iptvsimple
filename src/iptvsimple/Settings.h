@@ -164,6 +164,7 @@ namespace iptvsimple
     std::string m_userPath;
     std::string m_clientPath;
 
+    // M3U
     PathType m_m3uPathType = PathType::REMOTE_PATH;
     std::string m_m3uPath;
     std::string m_m3uUrl;
@@ -174,6 +175,7 @@ namespace iptvsimple
     int m_m3uRefreshIntervalMins = 60;
     int m_m3uRefreshHour = 4;
 
+    // EPG
     PathType m_epgPathType = PathType::REMOTE_PATH;
     std::string m_epgPath;
     std::string m_epgUrl;
@@ -181,16 +183,19 @@ namespace iptvsimple
     float m_epgTimeShiftHours = 0;
     bool m_tsOverride = true;
 
+    // Genres
     bool m_useEpgGenreTextWhenMapping = false;
     PathType m_genresPathType = PathType::LOCAL_PATH;
     std::string m_genresPath;
     std::string m_genresUrl;
 
+    // Channel Logos
     PathType m_logoPathType = PathType::REMOTE_PATH;
     std::string m_logoPath;
     std::string m_logoBaseUrl;
     EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
 
+    // Catchup
     bool m_catchupEnabled = false;
     std::string m_catchupQueryFormat;
     int m_catchupDays = 3;
@@ -200,6 +205,7 @@ namespace iptvsimple
     int m_catchupWatchEpgEndBufferMins = 15;
     bool m_catchupOnlyOnFinishedProgrammes = false;
 
+    // Advanced
     bool m_transformMulticastStreamUrls = false;
     std::string m_udpxyHost;
     int m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
