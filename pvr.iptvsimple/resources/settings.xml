@@ -432,7 +432,20 @@
             <allowempty>true</allowempty>
           </constraints>
           <control type="edit" format="string" />
-          </setting>
+        </setting>
+        <setting id="streamReadChunkSizeKb" type="integer" label="30069" help="30687">
+          <level>3</level>
+          <default>0</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>4</step>
+            <maximum>128</maximum>
+          </constraints>
+          <control type="slider" format="integer">
+            <popup>true</popup>
+            <formatlabel>14049</formatlabel>
+          </control>
+        </setting>          
       </group>
     </category>
 

@@ -119,6 +119,7 @@ namespace iptvsimple
     bool UseFFmpegReconnect() const { return m_useFFmpegReconnect; }
     bool UseInputstreamAdaptiveforHls() const { return m_useInputstreamAdaptiveforHls; }
     const std::string& GetUserAgent() const { return m_userAgent; }
+    int GetStreamReadChunkSizeKb() const { return m_streamReadChunkSizeKb; }
 
     const std::string& GetTvgUrl() const { return m_tvgUrl; }
     void SetTvgUrl(const std::string& tvgUrl) { m_tvgUrl = tvgUrl; }
@@ -212,6 +213,7 @@ namespace iptvsimple
     bool m_useFFmpegReconnect = true;
     bool m_useInputstreamAdaptiveforHls = false;
     std::string m_userAgent;
+    int m_streamReadChunkSizeKb = 0;
 
     std::string m_tvgUrl;
   };

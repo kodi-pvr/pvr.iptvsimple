@@ -110,6 +110,8 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_useInputstreamAdaptiveforHls = false;
   if (XBMC->GetSetting("userAgent", &buffer))
     m_userAgent = buffer;
+  if (!XBMC->GetSetting("streamReadChunkSizeKb", &m_streamReadChunkSizeKb))
+    m_streamReadChunkSizeKb = 0;
 }
 
 ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* settingValue)
@@ -204,6 +206,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useInputstreamAdaptiveforHls, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "userAgent")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_userAgent, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "streamReadChunkSizeKb")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_streamReadChunkSizeKb, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   return ADDON_STATUS_OK;
 }

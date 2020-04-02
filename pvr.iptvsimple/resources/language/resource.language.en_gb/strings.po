@@ -264,7 +264,12 @@ msgctxt "#30068"
 msgid "User-Agent"
 msgstr ""
 
-#empty strings from id 30069 to 30099
+#. label: Advanced - streamReadChunkSizeKb
+msgctxt "#30069"
+msgid "Stream read chunk size"
+msgstr ""
+
+#empty strings from id 30070 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -541,7 +546,12 @@ msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
 msgstr ""
 
-#empty strings from id 30687 to 30699
+#. help: Advanced - streamReadChunkSizeKb
+msgctxt "#30687"
+msgid "The chunk size used by inputstream.ffmpegdirect for streams. Default at 0 to leave it to Kodi to decide. Can be useful to set manually when viewing streams remotely where buffering can occur as PVR is optimised for a local network."
+msgstr ""
+
+#empty strings from id 30688 to 30699
 
 #. help info - Catchup
 

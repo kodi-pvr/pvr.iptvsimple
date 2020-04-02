@@ -199,6 +199,10 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   if (!mimeType.empty() && channel.GetProperty("inputstream.ffmpegdirect.mime_type").empty())
     catchupProperties.insert({"inputstream.ffmpegdirect.mime_type", mimeType});
 
+  int chunkSizeKb = Settings::GetInstance().GetStreamReadChunkSizeKb();
+  if (chunkSizeKb > 0)
+    catchupProperties.insert({"inputstream.ffmpegdirect.chunk_size_kb", std::to_string(chunkSizeKb)});
+
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
   // if in video playbacl mode from epg, i.e. if if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
@@ -212,6 +216,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(channel.GetTvgShift()).c_str());
   Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
   Logger::Log(LEVEL_DEBUG, "mime_type - '%s'", mimeType.c_str());
+  Logger::Log(LEVEL_DEBUG, "chunk_size_kb - '%d'", chunkSizeKb);
 }
 
 void CatchupController::TestAndStoreStreamType(Channel& channel, bool fromEpg /* false */)
