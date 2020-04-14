@@ -41,10 +41,11 @@ namespace iptvsimple
       static const std::string GetManifestType(const StreamType& streamType);
       static const std::string GetMimeType(const StreamType& streamType);
       static std::string GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel);
+      static std::string AddHeader(const std::string& headerTarget, const std::string& headerName, const std::string& headerValue, bool encodeHeaderValue);
       static std::string AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue);
       static bool UseKodiInputstreams(const StreamType& streamType);
       static bool ChannelSpecifiesInputstream(const iptvsimple::data::Channel& channe);
-
+      static std::string GetUrlEncodedProtocolOptions(const std::string& protocolOptions);
       static std::string GetEffectiveInputStreamClass(const StreamType& streamType, const iptvsimple::data::Channel& channel);
 
     private:
