@@ -61,9 +61,35 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
       }
     }
-    else // inputstream.adpative
+    else // inputstream.adaptive
     {
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+      bool streamUrlSet = false;
+
+      // If no media headers are explicitly set for inputstream.adaptive,
+      // strip the headers from streamURL and put it to media headers property
+
+      if (channel.GetProperty("inputstream.adaptive.stream_headers").empty())
+      {
+        // No stream headers declared by property, check if stream URL has any
+        size_t found = streamURL.find_first_of('|');
+        if (found != std::string::npos)
+        {
+          // Headers found, split and url-encode them
+          const std::string& url = streamURL.substr(0, found);
+          const std::string& protocolOptions = streamURL.substr(found + 1, streamURL.length());
+          const std::string& encodedProtocolOptions = StreamUtils::GetUrlEncodedProtocolOptions(protocolOptions);
+
+          // Set stream URL without headers and encoded headers as property
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, url);
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.stream_headers", encodedProtocolOptions);
+          streamUrlSet = true;
+        }
+      }
+
+      // Set intact stream URL if not previously set
+      if (!streamUrlSet)
+        StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, "inputstream.adaptive");
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
       if (streamType == StreamType::HLS || streamType == StreamType::DASH)
@@ -214,29 +240,34 @@ std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& str
 
 std::string StreamUtils::AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue)
 {
-  std::string newStreamUrl = streamUrl;
+  return StreamUtils::AddHeader(streamUrl, headerName, headerValue, false);
+}
+
+std::string StreamUtils::AddHeader(const std::string& headerTarget, const std::string& headerName, const std::string& headerValue, bool encodeHeaderValue)
+{
+  std::string newHeaderTarget = headerTarget;
 
   bool hasProtocolOptions = false;
   bool addHeader = true;
-  size_t found = newStreamUrl.find("|");
+  size_t found = newHeaderTarget.find("|");
 
   if (found != std::string::npos)
   {
     hasProtocolOptions = true;
-    addHeader = newStreamUrl.find(headerName + "=", found + 1) == std::string::npos;
+    addHeader = newHeaderTarget.find(headerName + "=", found + 1) == std::string::npos;
   }
 
   if (addHeader)
   {
     if (!hasProtocolOptions)
-      newStreamUrl += "|";
+      newHeaderTarget += "|";
     else
-      newStreamUrl += "&";
+      newHeaderTarget += "&";
 
-    newStreamUrl += headerName + "=" + headerValue;
+    newHeaderTarget += headerName + "=" + (encodeHeaderValue ? WebUtils::UrlEncode(headerValue) : headerValue);
   }
 
-  return newStreamUrl;
+  return newHeaderTarget;
 }
 
 bool StreamUtils::UseKodiInputstreams(const StreamType& streamType)
@@ -255,4 +286,25 @@ bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const ip
   return streamType == StreamType::HLS ||
          channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG ||
          channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+}
+
+std::string StreamUtils::GetUrlEncodedProtocolOptions(const std::string& protocolOptions)
+{
+  std::string encodedProtocolOptions = "";
+
+  std::vector<std::string> headers = StringUtils::Split(protocolOptions, "&");
+  for (std::string header : headers)
+  {
+    std::string::size_type pos(header.find('='));
+    if(pos == std::string::npos)
+      continue;
+
+    encodedProtocolOptions = StreamUtils::AddHeader(encodedProtocolOptions, header.substr(0, pos), header.substr(pos + 1), true);
+  }
+
+  // We'll return the protocol options without the leading '|'
+  if (!encodedProtocolOptions.empty() && encodedProtocolOptions[0] == '|')
+    encodedProtocolOptions.erase(0, 1);
+
+  return encodedProtocolOptions;
 }
