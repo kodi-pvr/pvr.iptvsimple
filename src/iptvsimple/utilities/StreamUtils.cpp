@@ -56,7 +56,7 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
         if (channel.IsCatchupSupported())
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, CATCHUP_INPUTSTREAMCLASS);
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, CATCHUP_INPUTSTREAM_NAME);
         else
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
       }
@@ -112,29 +112,29 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
   }
 }
 
-std::string StreamUtils::GetEffectiveInputStreamClass(const StreamType& streamType, const iptvsimple::data::Channel& channel)
+std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel)
 {
-  std::string inputStreamClass = channel.GetInputStreamClass();
+  std::string inputStreamName = channel.GetInputStreamName();
 
-  if (inputStreamClass.empty())
+  if (inputStreamName.empty())
   {
     if (StreamUtils::UseKodiInputstreams(streamType))
     {
       if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
         if (channel.IsCatchupSupported() && channel.CatchupSupportsTimeshifting())
-          inputStreamClass = CATCHUP_INPUTSTREAMCLASS;
+          inputStreamName = CATCHUP_INPUTSTREAM_NAME;
         else
-          inputStreamClass = PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+          inputStreamName = PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
       }
     }
     else // inputstream.adpative
     {
-      inputStreamClass = "inputstream.adaptive";
+      inputStreamName = "inputstream.adaptive";
     }
   }
 
-  return inputStreamClass;
+  return inputStreamName;
 }
 
 const StreamType StreamUtils::GetStreamType(const std::string& url, const Channel& channel)
@@ -278,7 +278,7 @@ bool StreamUtils::UseKodiInputstreams(const StreamType& streamType)
 
 bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& channel)
 {
-  return !channel.GetInputStreamClass().empty();
+  return !channel.GetInputStreamName().empty();
 }
 
 bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel)

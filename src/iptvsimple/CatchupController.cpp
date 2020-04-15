@@ -234,7 +234,7 @@ void CatchupController::TestAndStoreStreamType(Channel& channel, bool fromEpg /*
     channel.AddProperty("mimetype", StreamUtils::GetMimeType(streamType));
   }
 
-  if (StreamUtils::GetEffectiveInputStreamClass(streamType, channel) == "inputstream.ffmpegdirect")
+  if (StreamUtils::GetEffectiveInputStreamName(streamType, channel) == "inputstream.ffmpegdirect")
     m_controlsLiveStream = true;
   else
     m_controlsLiveStream = false;

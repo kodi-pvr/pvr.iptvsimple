@@ -29,7 +29,7 @@ namespace iptvsimple
       OTHER_TYPE
     };
 
-    static const std::string CATCHUP_INPUTSTREAMCLASS = "inputstream.ffmpegdirect";
+    static const std::string CATCHUP_INPUTSTREAM_NAME = "inputstream.ffmpegdirect";
 
     class StreamUtils
     {
@@ -46,7 +46,7 @@ namespace iptvsimple
       static bool UseKodiInputstreams(const StreamType& streamType);
       static bool ChannelSpecifiesInputstream(const iptvsimple::data::Channel& channe);
       static std::string GetUrlEncodedProtocolOptions(const std::string& protocolOptions);
-      static std::string GetEffectiveInputStreamClass(const StreamType& streamType, const iptvsimple::data::Channel& channel);
+      static std::string GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel);
 
     private:
       static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);

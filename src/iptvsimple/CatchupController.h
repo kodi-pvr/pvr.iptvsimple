@@ -31,8 +31,6 @@ namespace iptvsimple
     void ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, data::Channel& channel, std::map<std::string, std::string>& catchupProperties); //should be const channel
     void ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, data::Channel& channel, std::map<std::string, std::string>& catchupProperties); //should be const channel
 
-    std::string GetTimeshiftInputStreamClass(const utilities::StreamType& streamType);
-
     std::string GetCatchupUrlFormatString(const data::Channel& channel) const;
     std::string GetCatchupUrl(const data::Channel& channel) const;
 

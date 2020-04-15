@@ -63,7 +63,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
-  left.m_inputStreamClass = m_inputStreamClass;
+  left.m_inputStreamName = m_inputStreamName;
 }
 
 void Channel::UpdateTo(PVR_CHANNEL& left) const
@@ -98,7 +98,7 @@ void Channel::Reset()
   m_tvgId.clear();
   m_tvgName.clear();
   m_properties.clear();
-  m_inputStreamClass.clear();
+  m_inputStreamName.clear();
 }
 
 void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName)
@@ -155,9 +155,9 @@ void Channel::SetStreamURL(const std::string& url)
     Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
   }
 
-  m_inputStreamClass = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS);
-  if (m_inputStreamClass.empty())
-    m_inputStreamClass = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON);
+  m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS);
+  if (m_inputStreamName.empty())
+    m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON);
 }
 
 std::string Channel::GetProperty(const std::string& propName) const
