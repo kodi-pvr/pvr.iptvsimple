@@ -194,6 +194,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.timezone_shift", std::to_string(channel.GetTvgShift())});
   if (!m_programmeCatchupId.empty())
     catchupProperties.insert({"inputstream.ffmpegdirect.programme_catchup_id", m_programmeCatchupId});
+  catchupProperties.insert({"inputstream.ffmpegdirect.catchup_terminates", channel.CatchupSourceTerminates() ? "true" : "false"});
 
   const std::string mimeType = channel.GetProperty("mimetype");
   if (!mimeType.empty() && channel.GetProperty("inputstream.ffmpegdirect.mime_type").empty())
@@ -211,6 +212,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
   Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(channel.GetTvgShift()).c_str());
   Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
+  Logger::Log(LEVEL_DEBUG, "catchup_terminates - %s", channel.CatchupSourceTerminates() ? "true" : "false");
   Logger::Log(LEVEL_DEBUG, "mime_type - '%s'", mimeType.c_str());
 }
 
