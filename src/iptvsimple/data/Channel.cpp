@@ -59,10 +59,11 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupSource    = m_catchupSource;
   left.m_isCatchupTSStream = m_isCatchupTSStream;
   left.m_catchupSupportsTimeshifting = m_catchupSupportsTimeshifting;
+  left.m_catchupSourceTerminates = m_catchupSourceTerminates;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
-  left.m_inputStreamClass = m_inputStreamClass;
+  left.m_inputStreamName = m_inputStreamName;
 }
 
 void Channel::UpdateTo(PVR_CHANNEL& left) const
@@ -92,11 +93,12 @@ void Channel::Reset()
   m_catchupDays = 0;
   m_catchupSource.clear();
   m_catchupSupportsTimeshifting = false;
+  m_catchupSourceTerminates = false;
   m_isCatchupTSStream = false;
   m_tvgId.clear();
   m_tvgName.clear();
   m_properties.clear();
-  m_inputStreamClass.clear();
+  m_inputStreamName.clear();
 }
 
 void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName)
@@ -153,9 +155,9 @@ void Channel::SetStreamURL(const std::string& url)
     Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
   }
 
-  m_inputStreamClass = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS);
-  if (m_inputStreamClass.empty())
-    m_inputStreamClass = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON);
+  m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS);
+  if (m_inputStreamName.empty())
+    m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON);
 }
 
 std::string Channel::GetProperty(const std::string& propName) const
@@ -216,6 +218,19 @@ bool IsValidTimeshiftingCatchupSource(const std::string& formatString)
 
     return true;
   }
+
+  return false;
+}
+
+bool IsTerminatingCatchupSource(const std::string& formatString)
+{
+  // A catchup stream terminates if it has an end time specifier
+  if (formatString.find("{duration}") != std::string::npos ||
+      formatString.find("{lutc}") != std::string::npos ||
+      formatString.find("${timestamp}") != std::string::npos ||
+      formatString.find("{utcend}") != std::string::npos ||
+      formatString.find("${end}") != std::string::npos)
+    return true;
 
   return false;
 }
@@ -291,6 +306,7 @@ void Channel::ConfigureCatchupMode()
       m_catchupSource += protocolOptions;
 
     m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
+    m_catchupSourceTerminates = IsTerminatingCatchupSource(m_catchupSource);
   }
 
   if (m_catchupMode != CatchupMode::DISABLED)

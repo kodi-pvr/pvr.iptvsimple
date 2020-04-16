@@ -1,3 +1,7 @@
+v4.12.0
+- Added: Add support for terminating catchup streams property for ffmpegdirect
+- Update: Convert kodiprop names inputstreamaddon and inputstreamclass to inputstream on load
+
 v4.11.7
 - Fixed: stream media headers not set when inputstream.adaptive is used for HLS streams
 

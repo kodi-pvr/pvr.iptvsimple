@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.11.7"
+  version="4.12.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik">
   <requires>@ADDON_DEPENDS@</requires>
@@ -165,6 +165,10 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v4.12.0
+- Added: Add support for terminating catchup streams property for ffmpegdirect
+- Update: Convert kodiprop names inputstreamaddon and inputstreamclass to inputstream on load
+
 v4.11.7
 - Fixed: stream media headers not set when inputstream.adaptive is used for HLS streams
 

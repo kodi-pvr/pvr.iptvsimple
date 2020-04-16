@@ -293,6 +293,10 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
     {
       addProperty &= prop == "http-user-agent" || prop == "http-referrer" || prop == "program";
     }
+    else if (markerName == KODIPROP_MARKER && (prop == "inputstreamaddon" || prop == "inputstreamclass"))
+    {
+      prop = "inputstream";
+    }    
 
     if (addProperty)
       channel.AddProperty(prop, propValue);
