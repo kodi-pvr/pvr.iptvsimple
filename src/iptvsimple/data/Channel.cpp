@@ -60,6 +60,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_isCatchupTSStream = m_isCatchupTSStream;
   left.m_catchupSupportsTimeshifting = m_catchupSupportsTimeshifting;
   left.m_catchupSourceTerminates = m_catchupSourceTerminates;
+  left.m_catchupGranularitySeconds = m_catchupGranularitySeconds;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
@@ -94,6 +95,7 @@ void Channel::Reset()
   m_catchupSource.clear();
   m_catchupSupportsTimeshifting = false;
   m_catchupSourceTerminates = false;
+  m_catchupGranularitySeconds = 1;
   m_isCatchupTSStream = false;
   m_tvgId.clear();
   m_tvgName.clear();
@@ -226,6 +228,7 @@ bool IsTerminatingCatchupSource(const std::string& formatString)
 {
   // A catchup stream terminates if it has an end time specifier
   if (formatString.find("{duration}") != std::string::npos ||
+      formatString.find("{duration:") != std::string::npos ||
       formatString.find("{lutc}") != std::string::npos ||
       formatString.find("${timestamp}") != std::string::npos ||
       formatString.find("{utcend}") != std::string::npos ||
@@ -233,6 +236,17 @@ bool IsTerminatingCatchupSource(const std::string& formatString)
     return true;
 
   return false;
+}
+
+int FindCatchupSourceGranularitySeconds(const std::string& formatString)
+{
+  // A catchup stream terminates if it has an end time specifier
+  if (formatString.find("{utc}") != std::string::npos ||
+      formatString.find("${start}") != std::string::npos ||
+      formatString.find("{S}") != std::string::npos)
+    return 1;
+
+  return 60;
 }
 
 } // unnamed namespace
@@ -307,6 +321,9 @@ void Channel::ConfigureCatchupMode()
 
     m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
     m_catchupSourceTerminates = IsTerminatingCatchupSource(m_catchupSource);
+    m_catchupGranularitySeconds = FindCatchupSourceGranularitySeconds(m_catchupSource);
+    Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s, granularity secs: %d", 
+                m_channelName.c_str(), m_catchupSupportsTimeshifting ? "true" : "false", m_catchupSourceTerminates ? "true" : "false", m_catchupGranularitySeconds);
   }
 
   if (m_catchupMode != CatchupMode::DISABLED)
