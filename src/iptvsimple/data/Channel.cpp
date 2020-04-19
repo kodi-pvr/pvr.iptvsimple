@@ -226,6 +226,7 @@ bool IsTerminatingCatchupSource(const std::string& formatString)
 {
   // A catchup stream terminates if it has an end time specifier
   if (formatString.find("{duration}") != std::string::npos ||
+      formatString.find("{duration:") != std::string::npos ||
       formatString.find("{lutc}") != std::string::npos ||
       formatString.find("${timestamp}") != std::string::npos ||
       formatString.find("{utcend}") != std::string::npos ||
@@ -307,6 +308,8 @@ void Channel::ConfigureCatchupMode()
 
     m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
     m_catchupSourceTerminates = IsTerminatingCatchupSource(m_catchupSource);
+    Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s", 
+                m_channelName.c_str(), m_catchupSupportsTimeshifting ? "true" : "false", m_catchupSourceTerminates ? "true" : "false");
   }
 
   if (m_catchupMode != CatchupMode::DISABLED)
