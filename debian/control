@@ -2,7 +2,8 @@ Source: kodi-pvr-iptvsimple
 Priority: extra
 Maintainer: Anton Fedchin <anightik@gmail.com>
 Build-Depends: debhelper (>= 9.0.0), cmake, libp8-platform-dev,
-               kodi-addon-dev, zlib1g-dev, libpugixml-dev
+               kodi-addon-dev, zlib1g-dev, libpugixml-dev,
+               kodi-inputstream-ffmpegdirect
 Standards-Version: 4.1.2
 Section: libs
 Homepage: <http://kodi.tv>

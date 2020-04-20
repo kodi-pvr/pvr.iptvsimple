@@ -1,3 +1,6 @@
+v4.13.1
+- Fixed: Install ffmpegdirect dependency by default.
+
 v4.13.0
 - Added: Add support for catchup stream granularity property for ffmpegdirect
 - Fixed: Terminating catchup stream check missing use case
