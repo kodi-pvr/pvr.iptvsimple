@@ -295,8 +295,8 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
     }
     else if (markerName == KODIPROP_MARKER && (prop == "inputstreamaddon" || prop == "inputstreamclass"))
     {
-      prop = "inputstream";
-    }    
+      prop = PVR_STREAM_PROPERTY_INPUTSTREAM;
+    }
 
     if (addProperty)
       channel.AddProperty(prop, propValue);

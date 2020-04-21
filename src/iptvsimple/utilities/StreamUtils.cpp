@@ -56,9 +56,9 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
         if (channel.IsCatchupSupported())
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, CATCHUP_INPUTSTREAM_NAME);
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
         else
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
       }
     }
     else // inputstream.adaptive
@@ -90,7 +90,7 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       if (!streamUrlSet)
         StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAMCLASS, "inputstream.adaptive");
+      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, "inputstream.adaptive");
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
       if (streamType == StreamType::HLS || streamType == StreamType::DASH)
         StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
@@ -284,8 +284,7 @@ bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& c
 bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel)
 {
   return streamType == StreamType::HLS ||
-         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG ||
-         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
 }
 
 std::string StreamUtils::GetUrlEncodedProtocolOptions(const std::string& protocolOptions)
