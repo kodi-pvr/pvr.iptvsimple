@@ -1,3 +1,7 @@
+v4.13.2
+- Fixed: Install all inputstream dependencies by default.
+- Fixed: Debian control files for run-time dependencies.
+
 v4.13.1
 - Fixed: Install ffmpegdirect dependency by default.
 

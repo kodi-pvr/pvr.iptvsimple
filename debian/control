@@ -1,17 +1,19 @@
 Source: kodi-pvr-iptvsimple
 Priority: extra
-Maintainer: Anton Fedchin <anightik@gmail.com>
+Maintainer: Ross Nicholson <phunkyfish@gmail.com>
 Build-Depends: debhelper (>= 9.0.0), cmake, libp8-platform-dev,
-               kodi-addon-dev, zlib1g-dev, libpugixml-dev,
-               kodi-inputstream-ffmpegdirect
+               kodi-addon-dev, zlib1g-dev, libpugixml-dev
 Standards-Version: 4.1.2
 Section: libs
-Homepage: <http://kodi.tv>
+Homepage: <https://kodi.tv>
 
 Package: kodi-pvr-iptvsimple
 Section: libs
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends}
+Recommends: kodi-inputstream-adaptive,
+            kodi-inputstream-ffmpegdirect,
+            kodi-inputstream-rtmp
 Description: Simple IPTV PVR for Kodi
  Simple IPTV PVR for Kodi
 
