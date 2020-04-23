@@ -20,11 +20,11 @@ namespace iptvsimple
      */
     enum LogLevel
     {
-      LEVEL_ERROR,
-      LEVEL_NOTICE,
-      LEVEL_INFO,
       LEVEL_DEBUG,
-      LEVEL_TRACE
+      LEVEL_INFO,
+      LEVEL_WARNING,
+      LEVEL_ERROR,
+      LEVEL_FATAL
     };
 
     /**

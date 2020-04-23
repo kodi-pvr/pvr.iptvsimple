@@ -138,7 +138,7 @@ namespace iptvsimple
         std::string formatString = "%s - Changed Setting '%s' from %d to %d";
         if (std::is_same<T, float>::value)
           formatString = "%s - Changed Setting '%s' from %f to %f";
-        utilities::Logger::Log(utilities::LogLevel::LEVEL_NOTICE, formatString.c_str(), __FUNCTION__, settingName.c_str(), currentValue, newValue);
+        utilities::Logger::Log(utilities::LogLevel::LEVEL_INFO, formatString.c_str(), __FUNCTION__, settingName.c_str(), currentValue, newValue);
         currentValue = newValue;
         return returnValueIfChanged;
       }
@@ -153,7 +153,7 @@ namespace iptvsimple
 
       if (strSettingValue != currentValue)
       {
-        utilities::Logger::Log(utilities::LogLevel::LEVEL_NOTICE, "%s - Changed Setting '%s' from '%s' to '%s'", __FUNCTION__, settingName.c_str(), currentValue.c_str(), strSettingValue.c_str());
+        utilities::Logger::Log(utilities::LogLevel::LEVEL_INFO, "%s - Changed Setting '%s' from '%s' to '%s'", __FUNCTION__, settingName.c_str(), currentValue.c_str(), strSettingValue.c_str());
         currentValue = strSettingValue;
         return returnValueIfChanged;
       }
