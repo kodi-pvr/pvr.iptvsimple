@@ -83,14 +83,17 @@ ADDON_STATUS ADDON_Create(void* hdl, void* props)
 
     switch (level)
     {
+      case LogLevel::LEVEL_FATAL:
+        addonLevel = addon_log_t::LOG_FATAL;
+        break;
       case LogLevel::LEVEL_ERROR:
         addonLevel = addon_log_t::LOG_ERROR;
         break;
+      case LogLevel::LEVEL_WARNING:
+        addonLevel = addon_log_t::LOG_WARNING;
+        break;
       case LogLevel::LEVEL_INFO:
         addonLevel = addon_log_t::LOG_INFO;
-        break;
-      case LogLevel::LEVEL_NOTICE:
-        addonLevel = addon_log_t::LOG_NOTICE;
         break;
       default:
         addonLevel = addon_log_t::LOG_DEBUG;
@@ -254,7 +257,7 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
 
     StreamUtils::SetAllStreamProperties(properties, iPropertiesCount, propertiesMax, m_currentChannel, streamURL, catchupProperties);
 
-    Logger::Log(LogLevel::LEVEL_NOTICE, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", streamURL.c_str());
+    Logger::Log(LogLevel::LEVEL_INFO, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", streamURL.c_str());
 
     return PVR_ERROR_NO_ERROR;
   }
@@ -349,7 +352,7 @@ PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG* tag, PVR_NAMED_VALUE* propert
     {
       StreamUtils::SetAllStreamProperties(properties, iPropertiesCount, propertiesMax, m_currentChannel, catchupUrl, catchupProperties);
 
-      Logger::Log(LEVEL_NOTICE, "%s - EPG Catchup URL: %s", __FUNCTION__, catchupUrl.c_str());
+      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, catchupUrl.c_str());
       return PVR_ERROR_NO_ERROR;
     }
   }

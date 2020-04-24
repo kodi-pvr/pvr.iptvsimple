@@ -11,7 +11,7 @@
 #include "../../client.h"
 #include "../Settings.h"
 
-#include <kodi/kodi_vfs_types.h>
+#include <kodi/libXBMC_addon.h>
 #include <zlib.h>
 
 using namespace iptvsimple;

@@ -150,7 +150,7 @@ bool PlaylistLoader::LoadPlayList()
   int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
                       std::chrono::high_resolution_clock::now() - started).count();
 
-  Logger::Log(LEVEL_NOTICE, "%s Playlist Loaded - %d (ms)", __FUNCTION__, milliseconds);
+  Logger::Log(LEVEL_INFO, "%s Playlist Loaded - %d (ms)", __FUNCTION__, milliseconds);
 
   if (m_channels.GetChannelsAmount() == 0)
   {
@@ -158,7 +158,7 @@ bool PlaylistLoader::LoadPlayList()
     return false;
   }
 
-  Logger::Log(LEVEL_NOTICE, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
+  Logger::Log(LEVEL_INFO, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
   return true;
 }
 
@@ -295,8 +295,8 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
     }
     else if (markerName == KODIPROP_MARKER && (prop == "inputstreamaddon" || prop == "inputstreamclass"))
     {
-      prop = "inputstream";
-    }    
+      prop = PVR_STREAM_PROPERTY_INPUTSTREAM;
+    }
 
     if (addProperty)
       channel.AddProperty(prop, propValue);

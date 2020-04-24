@@ -1,3 +1,7 @@
+v4.13.3
+- Update: PVR API 6.4.0
+- Update: Minor cleanups
+
 v4.13.2
 - Fixed: Install all inputstream dependencies by default.
 - Fixed: Debian control files for run-time dependencies.

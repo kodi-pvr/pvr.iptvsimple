@@ -51,7 +51,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
 
   if (m_xmltvLocation.empty())
   {
-    Logger::Log(LEVEL_NOTICE, "%s - EPG file path is not configured. EPG not loaded.", __FUNCTION__);
+    Logger::Log(LEVEL_INFO, "%s - EPG file path is not configured. EPG not loaded.", __FUNCTION__);
     return false;
   }
 
@@ -103,7 +103,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
   int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
                       std::chrono::high_resolution_clock::now() - started).count();
 
-  Logger::Log(LEVEL_NOTICE, "%s - EPG Loaded - %d (ms)", __FUNCTION__, milliseconds);
+  Logger::Log(LEVEL_INFO, "%s - EPG Loaded - %d (ms)", __FUNCTION__, milliseconds);
 
   return true;
 }
@@ -227,7 +227,7 @@ bool Epg::LoadChannelEpgs(const xml_node& rootElement)
   }
   else
   {
-    Logger::Log(LEVEL_NOTICE, "%s - Loaded '%d' EPG channels.", __FUNCTION__, m_channelEpgs.size());
+    Logger::Log(LEVEL_INFO, "%s - Loaded '%d' EPG channels.", __FUNCTION__, m_channelEpgs.size());
   }
 
   return true;
@@ -275,7 +275,7 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
     }
   }
 
-  Logger::Log(LEVEL_NOTICE, "%s - Loaded '%d' EPG entries.", __FUNCTION__, count);
+  Logger::Log(LEVEL_INFO, "%s - Loaded '%d' EPG entries.", __FUNCTION__, count);
 }
 
 
@@ -450,7 +450,7 @@ bool Epg::LoadGenres()
   xmlDoc.reset();
 
   if (!m_genreMappings.empty())
-    Logger::Log(LEVEL_NOTICE, "%s - Loaded %d genres", __FUNCTION__, m_genreMappings.size());
+    Logger::Log(LEVEL_INFO, "%s - Loaded %d genres", __FUNCTION__, m_genreMappings.size());
 
   return true;
 }

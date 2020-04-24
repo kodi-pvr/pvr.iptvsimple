@@ -40,6 +40,8 @@ const std::string Channel::GetCatchupModeText(const CatchupMode& catchupMode)
       return "Flussonic";
     case CatchupMode::XTREAM_CODES:
       return "Xtream codes";
+    default:
+      return "";
   }
 }
 
@@ -157,9 +159,7 @@ void Channel::SetStreamURL(const std::string& url)
     Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
   }
 
-  m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMCLASS);
-  if (m_inputStreamName.empty())
-    m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAMADDON);
+  m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM);
 }
 
 std::string Channel::GetProperty(const std::string& propName) const
