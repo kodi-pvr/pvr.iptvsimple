@@ -337,7 +337,7 @@ PVR_ERROR GetEPGTagStreamProperties(const EPG_TAG* tag, PVR_NAMED_VALUE* propert
     Logger::Log(LEVEL_DEBUG, "%s - GetPlayEpgAsLive is %s", __FUNCTION__, settings.CatchupPlayEpgAsLive() ? "enabled" : "disabled");
 
     std::map<std::string, std::string> catchupProperties;
-    if (settings.CatchupPlayEpgAsLive())
+    if (settings.CatchupPlayEpgAsLive() && m_currentChannel.CatchupSupportsTimeshifting())
     {
       m_catchupController->ProcessEPGTagForTimeshiftedPlayback(*tag, m_currentChannel, catchupProperties);
     }
