@@ -203,7 +203,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
 
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
-  // if in video playbacl mode from epg, i.e. if if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
+  // if in video playback mode from epg, i.e. if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
 
   Logger::Log(LEVEL_DEBUG, "default_url - %s", channel.GetStreamURL().c_str());
   Logger::Log(LEVEL_DEBUG, "playback_as_live - %s", playbackAsLive ? "true" : "false");
@@ -407,7 +407,7 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
   {
     time_t duration = 60 * 60; // default one hour
 
-    // // use the programme duration if it's valid
+    // use the programme duration if it's valid
     if (m_programmeStartTime > 0 && m_programmeStartTime < m_programmeEndTime)
     {
       duration = static_cast<time_t>(m_programmeEndTime - m_programmeStartTime);
