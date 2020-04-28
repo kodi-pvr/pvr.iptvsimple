@@ -120,6 +120,8 @@ Note that catchup functionality can work one of two ways. The first is where a s
 
 Catchup tags can be specified in the M3U entries and these tags override any values configured in the Catchup settings. The supported M3U catchup tags are `catchup`, `catchup-source` and `catchup-days`. See the [Supported M3U elements section](#m3u-format-elements) below for further details. The full catchup URL or a query to be appended to the stream URL is either provided in the `catchup-source` tag (i.e. complete with format specifiers) or in the case this is not provided the `Query format string` setting is appended to stream URL. See the [Catchup format specifiers section](#catchup-format-specifiers) below for a more detailed explanation and further examples.
 
+Note that some modes/providers only permit catchup streams that terminate, i.e. the stream will play for a time and then stop. If using `inputstream.ffmpegdirect` for timeshifting then these streams will restart when they end if they are close to live (within 4 hours). If order for this to work seeking near live is limited to not closer than 1 minute for streams with a 1 second precision and 2 minutes for streams will a 60 second precision.
+
 Addon settings for catchup:
 
 * **Enable catchup**: Should be enabled if there are channels supporting catchup in your M3U list.

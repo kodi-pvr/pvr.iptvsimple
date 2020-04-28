@@ -26,6 +26,7 @@ namespace iptvsimple
       DASH,
       SMOOTH_STREAMING,
       TS,
+      PLUGIN,
       OTHER_TYPE
     };
 

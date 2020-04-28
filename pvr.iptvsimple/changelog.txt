@@ -1,3 +1,7 @@
+v4.13.5
+- Fixed: Fix plugin URLs for channels by disabling stream type URL tests
+- Update: Update readme concerning terminating catchup streams
+
 v4.13.4
 - Fixed: Only allow timeshifting catchup from EPG if channel supports it
 

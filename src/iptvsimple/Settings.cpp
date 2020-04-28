@@ -127,87 +127,82 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
   // M3U
   if (settingName == "m3uPathType")
     return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_m3uPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "m3uPath")
+  else if (settingName == "m3uPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_m3uPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "m3uUrl")
+  else if (settingName == "m3uUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_m3uUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "m3uCache")
+  else if (settingName == "m3uCache")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_cacheM3U, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "startNum")
+  else if (settingName == "startNum")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_startChannelNumber, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "numberByOrder")
+  else if (settingName == "numberByOrder")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_numberChannelsByM3uOrderOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "m3uRefreshMode")
+  else if (settingName == "m3uRefreshMode")
     return SetSetting<RefreshMode, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "m3uRefreshIntervalMins")
+  else if (settingName == "m3uRefreshIntervalMins")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshIntervalMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "m3uRefreshHour")
+  else if (settingName == "m3uRefreshHour")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshHour, ADDON_STATUS_OK, ADDON_STATUS_OK);
-
   // EPG
-  if (settingName == "epgPathType")
+  else if (settingName == "epgPathType")
     return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_epgPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "epgPath")
+  else if (settingName == "epgPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_epgPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "epgUrl")
+  else if (settingName == "epgUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_epgUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "epgCache")
+  else if (settingName == "epgCache")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_cacheEPG, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "epgTimeShift")
+  else if (settingName == "epgTimeShift")
     return SetSetting<float, ADDON_STATUS>(settingName, settingValue, m_epgTimeShiftHours, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "epgTSOverride")
+  else if (settingName == "epgTSOverride")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_tsOverride, ADDON_STATUS_OK, ADDON_STATUS_OK);
-
   // Genres
-  if (settingName == "useEpgGenreText")
+  else if (settingName == "useEpgGenreText")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useEpgGenreTextWhenMapping, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "genresPathType")
+  else if (settingName == "genresPathType")
     return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_genresPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "genresPath")
+  else if (settingName == "genresPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "genresUrl")
+  else if (settingName == "genresUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
-
   // Channel Logos
-  if (settingName == "logoPathType")
+  else if (settingName == "logoPathType")
     return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_logoPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "logoPath")
+  else if (settingName == "logoPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "logoBaseUrl")
+  else if (settingName == "logoBaseUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoBaseUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "logoFromEpg")
+  else if (settingName == "logoFromEpg")
     return SetSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
-
   // Catchup
-  if (settingName == "catchupEnabled")
+  else if (settingName == "catchupEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "catchupQueryFormat")
+  else if (settingName == "catchupQueryFormat")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_catchupQueryFormat, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "catchupDays")
+  else if (settingName == "catchupDays")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupDays, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "allChannelsCatchupMode")
+  else if (settingName == "allChannelsCatchupMode")
     return SetSetting<CatchupMode, ADDON_STATUS>(settingName, settingValue, m_allChannelsCatchupMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "catchupPlayEpgAsLive")
+  else if (settingName == "catchupPlayEpgAsLive")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayEpgAsLive, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "catchupWatchEpgBeginBufferMins")
+  else if (settingName == "catchupWatchEpgBeginBufferMins")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupWatchEpgBeginBufferMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "catchupWatchEpgEndBufferMins")
+  else if (settingName == "catchupWatchEpgEndBufferMins")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupWatchEpgEndBufferMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "catchupOnlyOnFinishedProgrammes")
+  else if (settingName == "catchupOnlyOnFinishedProgrammes")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupOnlyOnFinishedProgrammes, ADDON_STATUS_OK, ADDON_STATUS_OK);
-
   // Advanced
-  if (settingName == "transformMulticastStreamUrls")
+  else if (settingName == "transformMulticastStreamUrls")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_transformMulticastStreamUrls, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "udpxyHost")
+  else if (settingName == "udpxyHost")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_udpxyHost, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "udpxyPort")
+  else if (settingName == "udpxyPort")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_udpxyPort, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "useFFmpegReconnect")
+  else if (settingName == "useFFmpegReconnect")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useFFmpegReconnect, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "useInputstreamAdaptiveforHls")
+  else if (settingName == "useInputstreamAdaptiveforHls")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useInputstreamAdaptiveforHls, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  if (settingName == "userAgent")
+  else if (settingName == "userAgent")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_userAgent, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   return ADDON_STATUS_OK;
