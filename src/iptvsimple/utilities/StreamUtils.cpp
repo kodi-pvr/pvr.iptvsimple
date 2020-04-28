@@ -139,6 +139,9 @@ std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamTyp
 
 const StreamType StreamUtils::GetStreamType(const std::string& url, const Channel& channel)
 {
+  if (StringUtils::StartsWith(url, "plugin://"))
+    return StreamType::PLUGIN;
+
   std::string mimeType = channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE);
   if (mimeType.empty())
     mimeType = channel.GetProperty("inputstream.ffmpegdirect.mime_type");
