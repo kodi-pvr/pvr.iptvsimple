@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.13.5"
+  version="4.13.6"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v4.13.6
+- Update: PVR API 6.5.0
+
 v4.13.5
 - Fixed: Fix plugin URLs for channels by disabling stream type URL tests
 - Update: Update readme concerning terminating catchup streams
