@@ -197,10 +197,6 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_terminates", channel.CatchupSourceTerminates() ? "true" : "false"});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_granularity", std::to_string(channel.GetCatchupGranularitySeconds())});
 
-  const std::string mimeType = channel.GetProperty("mimetype");
-  if (!mimeType.empty() && channel.GetProperty("inputstream.ffmpegdirect.mime_type").empty())
-    catchupProperties.insert({"inputstream.ffmpegdirect.mime_type", mimeType});
-
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
   // if in video playback mode from epg, i.e. if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
@@ -215,7 +211,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_terminates - %s", channel.CatchupSourceTerminates() ? "true" : "false");
   Logger::Log(LEVEL_DEBUG, "catchup_granularity - %s", std::to_string(channel.GetCatchupGranularitySeconds()).c_str());
-  Logger::Log(LEVEL_DEBUG, "mime_type - '%s'", mimeType.c_str());
+  Logger::Log(LEVEL_DEBUG, "mime_type - '%s'", channel.GetProperty("mimetype").c_str());
 }
 
 void CatchupController::TestAndStoreStreamType(Channel& channel, bool fromEpg /* false */)

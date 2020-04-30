@@ -143,8 +143,6 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const Channe
     return StreamType::PLUGIN;
 
   std::string mimeType = channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE);
-  if (mimeType.empty())
-    mimeType = channel.GetProperty("inputstream.ffmpegdirect.mime_type");
 
   if (url.find(".m3u8") != std::string::npos ||
       mimeType == "application/x-mpegURL" ||
