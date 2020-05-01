@@ -44,7 +44,7 @@ namespace iptvsimple
         m_catchupDays(c.GetCatchupDays()), m_catchupSource(c.GetCatchupSource()),
         m_isCatchupTSStream(c.IsCatchupTSStream()), m_catchupSupportsTimeshifting(c.CatchupSupportsTimeshifting()),
         m_catchupSourceTerminates(c.CatchupSourceTerminates()), m_catchupGranularitySeconds(c.GetCatchupGranularitySeconds()),
-        m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
+        m_catchupCorrectionSecs(c.GetCatchupCorrectionSecs()), m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
         m_properties(c.GetProperties()), m_inputStreamName(c.GetInputStreamName()) {};
       ~Channel() = default;
 
@@ -97,6 +97,9 @@ namespace iptvsimple
       int GetCatchupGranularitySeconds() const { return m_catchupGranularitySeconds; }
       void SetCatchupGranularitySeconds(int value) { m_catchupGranularitySeconds = value; }
 
+      int GetCatchupCorrectionSecs() const { return m_catchupCorrectionSecs; }
+      void SetCatchupCorrectionSecs(int value) { m_catchupCorrectionSecs = value; }
+
       const std::string& GetTvgId() const { return m_tvgId; }
       void SetTvgId(const std::string& value) { m_tvgId = value; }
 
@@ -144,6 +147,7 @@ namespace iptvsimple
       bool m_catchupSupportsTimeshifting = false;
       bool m_catchupSourceTerminates = false;
       int m_catchupGranularitySeconds = 1;
+      int m_catchupCorrectionSecs = 0;
       std::string m_tvgId = "";
       std::string m_tvgName = "";
       std::map<std::string, std::string> m_properties;

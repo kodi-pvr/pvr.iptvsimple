@@ -63,6 +63,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupSupportsTimeshifting = m_catchupSupportsTimeshifting;
   left.m_catchupSourceTerminates = m_catchupSourceTerminates;
   left.m_catchupGranularitySeconds = m_catchupGranularitySeconds;
+  left.m_catchupCorrectionSecs = m_catchupCorrectionSecs;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
@@ -99,6 +100,7 @@ void Channel::Reset()
   m_catchupSourceTerminates = false;
   m_catchupGranularitySeconds = 1;
   m_isCatchupTSStream = false;
+  m_catchupCorrectionSecs = 0;
   m_tvgId.clear();
   m_tvgName.clear();
   m_properties.clear();
