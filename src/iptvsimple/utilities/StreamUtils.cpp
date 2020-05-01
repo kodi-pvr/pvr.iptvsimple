@@ -159,6 +159,10 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const Channe
   if (mimeType == "video/mp2t" || channel.IsCatchupTSStream())
     return StreamType::TS;
 
+  // it has a MIME type but not one we recognise
+  if (!mimeType.empty())
+    return StreamType::MIME_TYPE_UNRECOGNISED;
+
   return StreamType::OTHER_TYPE;
 }
 
@@ -218,6 +222,11 @@ const std::string StreamUtils::GetMimeType(const StreamType& streamType)
     default:
       return "";
   }
+}
+
+bool StreamUtils::HasMimeType(const StreamType& streamType)
+{
+  return streamType != StreamType::OTHER_TYPE && streamType != StreamType::SMOOTH_STREAMING;
 }
 
 std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel)

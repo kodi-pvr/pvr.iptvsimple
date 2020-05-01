@@ -13,6 +13,7 @@
 #include "data/Channel.h"
 #include "data/EpgEntry.h"
 #include "utilities/StreamUtils.h"
+#include "StreamManager.h"
 
 #include <mutex>
 
@@ -27,9 +28,9 @@ namespace iptvsimple
   public:
     CatchupController(iptvsimple::Epg& epg, std::mutex* mutex);
 
-    void ProcessChannelForPlayback(data::Channel& channel, std::map<std::string, std::string>& catchupProperties); //should be const channel
-    void ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, data::Channel& channel, std::map<std::string, std::string>& catchupProperties); //should be const channel
-    void ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, data::Channel& channel, std::map<std::string, std::string>& catchupProperties); //should be const channel
+    void ProcessChannelForPlayback(const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
+    void ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
+    void ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
 
     std::string GetCatchupUrlFormatString(const data::Channel& channel) const;
     std::string GetCatchupUrl(const data::Channel& channel) const;
@@ -40,9 +41,10 @@ namespace iptvsimple
   private:
     data::EpgEntry* GetLiveEPGEntry(const iptvsimple::data::Channel& myChannel);
     data::EpgEntry* GetEPGEntry(const iptvsimple::data::Channel& myChannel, time_t lookupTime);
-    void SetCatchupInputStreamProperties(bool playbackAsLive, const iptvsimple::data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
-    void TestAndStoreStreamType(data::Channel& channel, bool fromEpg = false);
+    void SetCatchupInputStreamProperties(bool playbackAsLive, const iptvsimple::data::Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType);
+    StreamType StreamTypeLookup(const data::Channel& channel, bool fromEpg = false);
     std::string GetStreamTestUrl(const data::Channel& channel, bool fromEpg) const;
+    std::string GetStreamKey(const data::Channel& channel, bool fromEpg) const;
 
     // Programme helpers
     void UpdateProgrammeFrom(const EPG_TAG& epgTag, int tvgShift);
@@ -69,5 +71,7 @@ namespace iptvsimple
     bool m_controlsLiveStream = false;
     iptvsimple::Epg& m_epg;
     std::mutex* m_mutex = nullptr;
+
+    StreamManager m_streamManager;
   };
 } //namespace iptvsimple

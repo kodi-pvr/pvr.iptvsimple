@@ -28,6 +28,7 @@ set(IPTV_SOURCES src/client.cpp
                  src/iptvsimple/Epg.cpp
                  src/iptvsimple/PlaylistLoader.cpp
                  src/iptvsimple/Settings.cpp
+                 src/iptvsimple/StreamManager.cpp
                  src/iptvsimple/data/Channel.cpp
                  src/iptvsimple/data/ChannelEpg.cpp
                  src/iptvsimple/data/ChannelGroup.cpp
@@ -46,11 +47,13 @@ set(IPTV_HEADERS src/client.h
                  src/iptvsimple/Epg.h
                  src/iptvsimple/PlaylistLoader.h
                  src/iptvsimple/Settings.h
+                 src/iptvsimple/StreamManager.h
                  src/iptvsimple/data/Channel.h
                  src/iptvsimple/data/ChannelEpg.h
                  src/iptvsimple/data/ChannelGroup.h
                  src/iptvsimple/data/EpgEntry.h
                  src/iptvsimple/data/EpgGenre.h
+                 src/iptvsimple/data/StreamEntry.h
                  src/iptvsimple/utilities/FileUtils.h
                  src/iptvsimple/utilities/Logger.h
                  src/iptvsimple/utilities/StreamUtils.h
