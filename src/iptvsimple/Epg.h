@@ -43,6 +43,7 @@ namespace iptvsimple
 
     data::EpgEntry* GetLiveEPGEntry(const data::Channel& myChannel) const;
     data::EpgEntry* GetEPGEntry(const data::Channel& myChannel, time_t lookupTime) const;
+    int GetEPGTimezoneShiftSecs(const data::Channel& myChannel) const;
 
   private:
     static const XmltvFileFormat GetXMLTVFileFormat(const char* buffer);

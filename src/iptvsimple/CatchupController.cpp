@@ -191,7 +191,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_start_time", std::to_string(m_catchupStartTime)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_end_time", std::to_string(m_catchupEndTime)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_offset", std::to_string(m_timeshiftBufferOffset)});
-  catchupProperties.insert({"inputstream.ffmpegdirect.timezone_shift", std::to_string(channel.GetTvgShift())});
+  catchupProperties.insert({"inputstream.ffmpegdirect.timezone_shift", std::to_string(m_epg.GetEPGTimezoneShiftSecs(channel))});
   if (!m_programmeCatchupId.empty())
     catchupProperties.insert({"inputstream.ffmpegdirect.programme_catchup_id", m_programmeCatchupId});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_terminates", channel.CatchupSourceTerminates() ? "true" : "false"});
@@ -210,7 +210,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_start_time - %s", std::to_string(m_catchupStartTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_end_time - %s", std::to_string(m_catchupEndTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
-  Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(channel.GetTvgShift()).c_str());
+  Logger::Log(LEVEL_DEBUG, "timezone_shift - %s", std::to_string(m_epg.GetEPGTimezoneShiftSecs(channel)).c_str());
   Logger::Log(LEVEL_DEBUG, "programme_catchup_id - '%s'", m_programmeCatchupId.c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_terminates - %s", channel.CatchupSourceTerminates() ? "true" : "false");
   Logger::Log(LEVEL_DEBUG, "catchup_granularity - %s", std::to_string(channel.GetCatchupGranularitySeconds()).c_str());
@@ -355,14 +355,14 @@ std::string AppendQueryStringAndPreserveOptions(const std::string &url, const st
   return urlFormatString;
 }
 
-std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset, const std::string& programmeCatchupId)
+std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset, const std::string& programmeCatchupId, int epgTimezoneShiftSecs)
 {
   std::string startTimeUrl;
   time_t timeNow = std::time(nullptr);
   time_t offset = startTime + timeOffset;
 
   if (startTime > 0 && offset < (timeNow - 5))
-    startTimeUrl = FormatDateTime(offset - channel.GetTvgShift(), duration, channel.GetCatchupSource());
+    startTimeUrl = FormatDateTime(offset - epgTimezoneShiftSecs, duration, channel.GetCatchupSource());
   else
     startTimeUrl = channel.GetStreamURL();
 
@@ -405,7 +405,7 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
         duration = timeNow - m_programmeStartTime;
     }
 
-    return BuildEpgTagUrl(m_catchupStartTime, duration, channel, m_timeshiftBufferOffset, m_programmeCatchupId);
+    return BuildEpgTagUrl(m_catchupStartTime, duration, channel, m_timeshiftBufferOffset, m_programmeCatchupId, m_epg.GetEPGTimezoneShiftSecs(channel));
   }
 
   return "";
@@ -415,7 +415,7 @@ std::string CatchupController::GetStreamTestUrl(const Channel& channel, bool fro
 {
  if (m_catchupStartTime > 0 || fromEpg)
     // Test URL from 2 hours ago for 1 hour duration.
-    return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId);
+    return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId, m_epg.GetEPGTimezoneShiftSecs(channel));
   else
     return channel.GetStreamURL();
 }
