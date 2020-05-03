@@ -58,6 +58,7 @@ bool PlaylistLoader::LoadPlayList()
   bool isFirstLine = true;
   bool isRealTime = true;
   int epgTimeShift = 0;
+  int catchupCorrectionSecs = 0;
   std::vector<int> currentChannelGroupIdList;
 
   Channel tmpChannel;
@@ -84,6 +85,8 @@ bool PlaylistLoader::LoadPlayList()
       {
         double tvgShiftDecimal = std::atof(ReadMarkerValue(line, TVG_INFO_SHIFT_MARKER).c_str());
         epgTimeShift = static_cast<int>(tvgShiftDecimal * 3600.0);
+        double catchupCorrectionDecimal = std::atof(ReadMarkerValue(line, CATCHUP_CORRECTION).c_str());
+        catchupCorrectionSecs = static_cast<int>(catchupCorrectionDecimal * 3600.0);
         Settings::GetInstance().SetTvgUrl(ReadMarkerValue(line, TVG_URL_MARKER));
         continue;
       }
@@ -99,7 +102,7 @@ bool PlaylistLoader::LoadPlayList()
       tmpChannel.SetChannelNumber(m_channels.GetCurrentChannelNumber());
       currentChannelGroupIdList.clear();
 
-      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, currentChannelGroupIdList, epgTimeShift);
+      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs);
 
       if (!groupNamesListString.empty())
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
@@ -162,7 +165,7 @@ bool PlaylistLoader::LoadPlayList()
   return true;
 }
 
-std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, std::vector<int>& groupIdList, int epgTimeShift)
+std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs)
 {
   // parse line
   size_t colonIndex = line.find(':');
@@ -187,6 +190,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strCatchupDays   = ReadMarkerValue(infoLine, CATCHUP_DAYS);
     std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
     std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
+    std::string strCatchupCorrection = ReadMarkerValue(infoLine, CATCHUP_CORRECTION);
 
     if (strTvgId.empty())
       strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
@@ -212,6 +216,11 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);
+
+    double catchupCorrectionDecimal = std::atof(strCatchupCorrection.c_str());
+    channel.SetCatchupCorrectionSecs(static_cast<int>(catchupCorrectionDecimal * 3600.0));
+    if (strCatchupCorrection.empty())
+      channel.SetCatchupCorrectionSecs(catchupCorrectionSecs);
 
     int siptvTimeshiftDays = 0;
     if (!strCatchupSiptv.empty())

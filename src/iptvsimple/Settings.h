@@ -118,7 +118,9 @@ namespace iptvsimple
     int GetUdpxyPort() const { return m_udpxyPort; }
     bool UseFFmpegReconnect() const { return m_useFFmpegReconnect; }
     bool UseInputstreamAdaptiveforHls() const { return m_useInputstreamAdaptiveforHls; }
-    const std::string& GetUserAgent() const { return m_userAgent; }
+    const std::string& GetDefaultUserAgent() const { return m_defaultUserAgent; }
+    const std::string& GetDefaultInputstream() const { return m_defaultInputstream; }
+    const std::string& GetDefaultMimeType() const { return m_defaultMimeType; }
 
     const std::string& GetTvgUrl() const { return m_tvgUrl; }
     void SetTvgUrl(const std::string& tvgUrl) { m_tvgUrl = tvgUrl; }
@@ -211,7 +213,9 @@ namespace iptvsimple
     int m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
     bool m_useFFmpegReconnect = true;
     bool m_useInputstreamAdaptiveforHls = false;
-    std::string m_userAgent;
+    std::string m_defaultUserAgent;
+    std::string m_defaultInputstream;
+    std::string m_defaultMimeType;
 
     std::string m_tvgUrl;
   };

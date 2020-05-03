@@ -426,13 +426,29 @@
           <default>false</default>
           <control type="toggle" />
         </setting>
-        <setting id="userAgent" type="string" label="30068" help="30686">
+      </group>
+      <group id="3" label="30071">
+        <setting id="defaultUserAgent" type="string" label="30068" help="30686">
           <level>3</level>
           <constraints>
             <allowempty>true</allowempty>
           </constraints>
           <control type="edit" format="string" />
-          </setting>
+        </setting>
+        <setting id="defaultInputstream" type="string" label="30069" help="30687">
+          <level>3</level>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="defaultMimeType" type="string" label="30070" help="30688">
+          <level>3</level>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
       </group>
     </category>
 

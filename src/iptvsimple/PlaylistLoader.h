@@ -32,6 +32,7 @@ namespace iptvsimple
   static const std::string CATCHUP_DAYS            = "catchup-days=";
   static const std::string CATCHUP_SOURCE          = "catchup-source=";
   static const std::string CATCHUP_SIPTV           = "timeshift=";
+  static const std::string CATCHUP_CORRECTION      = "catchup-correction=";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
   static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";
@@ -50,7 +51,7 @@ namespace iptvsimple
     static std::string ReadMarkerValue(const std::string& line, const std::string& markerName);
     static void ParseSinglePropertyIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, const std::string& markerName);
 
-    std::string ParseIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, int epgTimeShift);
+    std::string ParseIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs);
     void ParseAndAddChannelGroups(const std::string& groupNamesListString, std::vector<int>& groupIdList, bool isRadio);
 
     std::string m_m3uLocation;

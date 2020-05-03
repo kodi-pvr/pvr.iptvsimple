@@ -318,7 +318,7 @@ PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t sta
     if (!channelEpg || channelEpg->GetEpgEntries().size() == 0)
       return PVR_ERROR_NO_ERROR;
 
-    int shift = m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
+    int shift = GetEPGTimezoneShiftSecs(myChannel);
 
     for (auto& epgEntryPair : channelEpg->GetEpgEntries())
     {
@@ -481,7 +481,7 @@ EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
   if (!channelEpg || channelEpg->GetEpgEntries().size() == 0)
     return nullptr;
 
-  int shift = m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
+  int shift = GetEPGTimezoneShiftSecs(myChannel);
 
   for (auto& epgEntryPair : channelEpg->GetEpgEntries())
   {
@@ -495,4 +495,9 @@ EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
   }
 
   return nullptr;
+}
+
+int Epg::GetEPGTimezoneShiftSecs(const Channel& myChannel) const
+{
+  return m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
 }

@@ -32,11 +32,6 @@ Channel m_currentChannel;
 Settings& settings = Settings::GetInstance();
 CatchupController* m_catchupController = nullptr;
 
-/* User adjustable settings are saved here.
- * Default values are defined inside client.h
- * and exported to the other source files.
- */
-
 CHelper_libXBMC_addon* XBMC = nullptr;
 CHelper_libXBMC_pvr* PVR = nullptr;
 
@@ -248,6 +243,7 @@ PVR_ERROR GetChannelStreamProperties(const PVR_CHANNEL* channel, PVR_NAMED_VALUE
 
     // We always call the catchup controller regardless so it can cleanup state
     // whether or not it supports catchup in case there is any houskeeping to do
+    // This also allows us to check if this is a catchup stream or not when we try to get the URL.
     std::map<std::string, std::string> catchupProperties;
     m_catchupController->ProcessChannelForPlayback(m_currentChannel, catchupProperties);
 

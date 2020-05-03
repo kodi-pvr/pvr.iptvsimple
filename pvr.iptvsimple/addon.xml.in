@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.13.6"
+  version="4.14.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
-    <import addon="inputstream.ffmpegdirect" minversion="1.9.0" optional="true"/>
+    <import addon="inputstream.ffmpegdirect" minversion="1.9.2" optional="true"/>
     <import addon="inputstream.adaptive" minversion="2.5.5" optional="true"/>
     <import addon="inputstream.rtmp" minversion="3.0.3" optional="true"/>
   </requires>
@@ -169,6 +169,13 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v4.14.0
+- Added: Stream Manager for runtime caching of stream/mime types for speeding up channel switches
+- Added: Deprecate use of inputstream.ffmpegdirect.mime_type and use mimetype property instead
+- Added: Support advanced setting to set a default inputstream and/or MIME type for channels without them
+- Fixed: Fix full timeshift calc not being applied to catchup streams
+- Added: Suppport catchup-correction value in M3U file for catchup streams geo mismatched to wrong time
+
 v4.13.6
 - Update: PVR API 6.5.0
 

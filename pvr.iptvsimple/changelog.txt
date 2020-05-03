@@ -1,3 +1,10 @@
+v4.14.0
+- Added: Stream Manager for runtime caching of stream/mime types for speeding up channel switches
+- Added: Deprecate use of inputstream.ffmpegdirect.mime_type and use mimetype property instead
+- Added: Support advanced setting to set a default inputstream and/or MIME type for channels without them
+- Fixed: Fix full timeshift calc not being applied to catchup streams
+- Added: Suppport catchup-correction value in M3U file for catchup streams geo mismatched to wrong time
+
 v4.13.6
 - Update: PVR API 6.5.0
 

@@ -63,6 +63,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupSupportsTimeshifting = m_catchupSupportsTimeshifting;
   left.m_catchupSourceTerminates = m_catchupSourceTerminates;
   left.m_catchupGranularitySeconds = m_catchupGranularitySeconds;
+  left.m_catchupCorrectionSecs = m_catchupCorrectionSecs;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
   left.m_properties       = m_properties;
@@ -99,6 +100,7 @@ void Channel::Reset()
   m_catchupSourceTerminates = false;
   m_catchupGranularitySeconds = 1;
   m_isCatchupTSStream = false;
+  m_catchupCorrectionSecs = 0;
   m_tvgId.clear();
   m_tvgName.clear();
   m_properties.clear();
@@ -143,8 +145,8 @@ void Channel::SetStreamURL(const std::string& url)
 
   if (StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX))
   {
-    if (!Settings::GetInstance().GetUserAgent().empty() && GetProperty("http-user-agent").empty())
-      AddProperty("http-user-agent", Settings::GetInstance().GetUserAgent());
+    if (!Settings::GetInstance().GetDefaultUserAgent().empty() && GetProperty("http-user-agent").empty())
+      AddProperty("http-user-agent", Settings::GetInstance().GetDefaultUserAgent());
 
     TryToAddPropertyAsHeader("http-user-agent", "user-agent");
     TryToAddPropertyAsHeader("http-referrer", "referer"); // spelling differences are correct
@@ -158,6 +160,12 @@ void Channel::SetStreamURL(const std::string& url)
     m_streamURL = "http://" + Settings::GetInstance().GetUdpxyHost() + ":" + std::to_string(Settings::GetInstance().GetUdpxyPort()) + typePath + url.substr(UDP_MULTICAST_PREFIX.length());
     Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
   }
+
+  if (!Settings::GetInstance().GetDefaultInputstream().empty() && GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM).empty())
+    AddProperty(PVR_STREAM_PROPERTY_INPUTSTREAM, Settings::GetInstance().GetDefaultInputstream());
+
+  if (!Settings::GetInstance().GetDefaultMimeType().empty() && GetProperty(PVR_STREAM_PROPERTY_MIMETYPE).empty())
+    AddProperty(PVR_STREAM_PROPERTY_MIMETYPE, Settings::GetInstance().GetDefaultMimeType());
 
   m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM);
 }

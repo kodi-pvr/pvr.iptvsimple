@@ -9,6 +9,7 @@
 #pragma once
 
 #include "../data/Channel.h"
+#include "../data/StreamEntry.h"
 
 #include <map>
 #include <string>
@@ -19,17 +20,6 @@ namespace iptvsimple
 {
   namespace utilities
   {
-    enum class StreamType
-      : int // same type as addon settings
-    {
-      HLS = 0,
-      DASH,
-      SMOOTH_STREAMING,
-      TS,
-      PLUGIN,
-      OTHER_TYPE
-    };
-
     static const std::string CATCHUP_INPUTSTREAM_NAME = "inputstream.ffmpegdirect";
 
     class StreamUtils
@@ -41,6 +31,7 @@ namespace iptvsimple
       static const StreamType InspectStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
       static const std::string GetManifestType(const StreamType& streamType);
       static const std::string GetMimeType(const StreamType& streamType);
+      static bool HasMimeType(const StreamType& streamType);
       static std::string GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel);
       static std::string AddHeader(const std::string& headerTarget, const std::string& headerName, const std::string& headerValue, bool encodeHeaderValue);
       static std::string AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue);

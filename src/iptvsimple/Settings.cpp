@@ -108,8 +108,12 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
     m_useFFmpegReconnect = false;
   if (!XBMC->GetSetting("useInputstreamAdaptiveforHls", &m_useInputstreamAdaptiveforHls))
     m_useInputstreamAdaptiveforHls = false;
-  if (XBMC->GetSetting("userAgent", &buffer))
-    m_userAgent = buffer;
+  if (XBMC->GetSetting("defaultUserAgent", &buffer))
+    m_defaultUserAgent = buffer;
+  if (XBMC->GetSetting("defaultInputstream", &buffer))
+    m_defaultInputstream = buffer;
+  if (XBMC->GetSetting("defaultMimeType", &buffer))
+    m_defaultMimeType = buffer;
 }
 
 ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* settingValue)
@@ -202,8 +206,12 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useFFmpegReconnect, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "useInputstreamAdaptiveforHls")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useInputstreamAdaptiveforHls, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  else if (settingName == "userAgent")
-    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_userAgent, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "defaultUserAgent")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_defaultUserAgent, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "defaultInputstream")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_defaultInputstream, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  if (settingName == "defaultMimeType")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_defaultMimeType, ADDON_STATUS_OK, ADDON_STATUS_OK);
 
   return ADDON_STATUS_OK;
 }

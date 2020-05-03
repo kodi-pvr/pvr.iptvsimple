@@ -149,6 +149,8 @@ Advanced settings such as multicast relays.
 * **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstreamclass` as `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstreamclass=inputstream.ffmpeg`. If this opton is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`.
 * **Use inputstream.adaptive for m3u8 (HLS) streams**: Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams.
 * **User-Agent**: Select which User-Agent to use if there is not one supplied as a property or as part of the channel stream URL.
+* **Inputstream name**: Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour.
+* **MIME type**: Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour.
 
 ## Appendix
 
@@ -183,7 +185,7 @@ Here’s some examples of how the different formats would look:
 #### M3U format elements:
 
 ```
-#EXTM3U tvg-shift="-4.5" x-tvg-url="http://path-to-xmltv/guide.xml"
+#EXTM3U tvg-shift="-4.5" x-tvg-url="http://path-to-xmltv/guide.xml catchup-correction="-2.5"
 #EXTINF:0 tvg-id="channel-x" tvg-name="Channel_X" group-title="Entertainment" tvg-chno="10" tvg-logo="http://path-to-icons/channel-x.png" radio="true" tvg-shift="-3.5",Channel X
 #EXTVLCOPT:program=745
 #KODIPROP:key=val
@@ -199,7 +201,7 @@ http://path-to-stream/live/channel-z.ts
 http://path-to-stream/live/channel-a.ts
 #EXTINF:0 catchup="default" catchup-source="http://path-to-stream/live/catchup-b.ts&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel B
 http://path-to-stream/live/channel-b.ts
-#EXTINF:0 catchup="append" catchup-source="&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel C
+#EXTINF:0 catchup="append" catchup-source="&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3" catchup-correction="-4.0",Channel C
 http://path-to-stream/live/channel-c.ts
 #EXTINF:0 tvg-id="channel-d" tvg-name="Channel-D" catchup="shift" catchup-days="3",Channel D
 http://path-to-stream/live/channel-d.ts
@@ -218,7 +220,7 @@ http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
 *Explanation for Catchup entries*
 - For `Channel A` the stream URL will be used and the Query format string from the addon settings will be appended to construct the catchup URL.
 - For `Channel B` the stream URL will not be used, instead using catchup-source as the catchup URL.
-- For `Channel C` the stream URL will be used and catchup-source will be appended to form the catchup URL.
+- For `Channel C` the stream URL will be used and catchup-source will be appended to form the catchup URL. The time used for the URL generation will corrected by -4.0 hours.
 - For `Channel D` this is an example of a siptv style entry which auto generates the catchup-source by appending `?utc={utc}&lutc={lutc}` or `&utc={utc}&lutc={lutc}` to the channel URL.
 - For `Channel E` this is an example of the old siptv style entry which uses a `timeshift` tag to combine shift and days into one field. The catchup-source output will be the same as channel D.
 - For `Channel F` this is an example of a flussonic style entry manually specifying the catcup-source. Note that the mode is still `default`.
@@ -243,6 +245,7 @@ http://path-to-stream/live/channel-z.ts
 - `#EXTM3U`: Marker for the start of an M3U file.
   - `tvg-shift`: Value that will be used for all channels if a `tvg-shift` value is not supplied per channel.
   - `x-tvg-url`: URL for the XMLTV data. Only used if the addon settings do not contain an EPG location for XMLTV data.
+  - `catchup-correction`: Value that will be used for all channels if a `catchup-correction` value is not supplied per channel.
 - `#EXTINF`: Contains a set of values, ending with a comma followed by the `channel name`.
   - `tvg-id`: A unique identifier for this channel used to map to the EPG XMLTV data.
   - `tvg-name`: A name for this channel in the EPG XMLTV data.
@@ -250,10 +253,11 @@ http://path-to-stream/live/channel-z.ts
   - `tvg-chno`: The number to be used for this channel.
   - `tvg-logo`: A URL pointing to the logo for this channel. For relative URLs `.png` will be appended if not provided, absolute URLs will not be modified.
   - `radio`: If the value matches "true" (case insensitive) this is a radio channel.
-  - `tvg-shift`: Channel specific shift value in hours.
+  - `tvg-shift`: Channel specific timezone shift value in hours for epg entries.
   - `catchup`: Which mode of catchup to use. Supported modes of `default` and `append`. Required unless the setting `All channels support catchup` is enabled.
   - `catchup-source`: Can contain the full catchup URL (complete with format specifiers) if in `default` mode. Or if the mode is `append` just the query string with format specifiers which will be appended to the channel URL. If omitted the `Query format string` from settings will be appended.
   - `catchup-days`: The number of days in the past catchup is available for.
+  - `catchup-correction`: A correction to the time used for catchup stream URL generation. Useful for catchup streams which are geo mis-matched to the wrong time.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
 - `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
 - `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
