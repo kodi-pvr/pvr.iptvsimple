@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.14.0"
+  version="4.14.1"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v4.14.1
+- Fixed: Send manifest type property to ffmpegdirect so it can recognise Smooth Streaming
+
 v4.14.0
 - Added: Stream Manager for runtime caching of stream/mime types for speeding up channel switches
 - Added: Deprecate use of inputstream.ffmpegdirect.mime_type and use mimetype property instead
