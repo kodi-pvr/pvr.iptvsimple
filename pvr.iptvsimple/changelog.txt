@@ -1,3 +1,6 @@
+v4.14.1
+- Fixed: Send manifest type property to ffmpegdirect so it can recognise Smooth Streaming
+
 v4.14.0
 - Added: Stream Manager for runtime caching of stream/mime types for speeding up channel switches
 - Added: Deprecate use of inputstream.ffmpegdirect.mime_type and use mimetype property instead

@@ -200,6 +200,12 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
     catchupProperties.insert({PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType)});
 
+  std::string manifestType = channel.GetProperty("inputstream.ffmpegdirect.manifest_type");
+  if (manifestType.empty())
+     manifestType = StreamUtils::GetManifestType(streamType);
+  if (!manifestType.empty())
+    catchupProperties.insert({"inputstream.ffmpegdirect.manifest_type", manifestType});
+
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
   // if in video playback mode from epg, i.e. if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
@@ -215,6 +221,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_terminates - %s", channel.CatchupSourceTerminates() ? "true" : "false");
   Logger::Log(LEVEL_DEBUG, "catchup_granularity - %s", std::to_string(channel.GetCatchupGranularitySeconds()).c_str());
   Logger::Log(LEVEL_DEBUG, "mimetype - '%s'", channel.HasMimeType() ? channel.GetProperty("mimetype").c_str() : StreamUtils::GetMimeType(streamType).c_str());
+  Logger::Log(LEVEL_DEBUG, "manifest_type - '%s'", manifestType.c_str());
 }
 
 StreamType CatchupController::StreamTypeLookup(const Channel& channel, bool fromEpg /* false */)
