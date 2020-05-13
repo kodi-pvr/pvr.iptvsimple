@@ -1,3 +1,7 @@
+v4.14.2
+- Check to make sure catchup streams support timeshifting before letting them do so
+- Fix catchup streams for fs, xc and shift being passed URL with possible protocol options
+
 v4.14.1
 - Fixed: Send manifest type property to ffmpegdirect so it can recognise Smooth Streaming
 
