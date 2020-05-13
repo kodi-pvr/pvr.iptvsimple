@@ -228,7 +228,7 @@ StreamType CatchupController::StreamTypeLookup(const Channel& channel, bool from
 {
   StreamType streamType = m_streamManager.StreamTypeLookup(channel, GetStreamTestUrl(channel, fromEpg), GetStreamKey(channel, fromEpg));
 
-  m_controlsLiveStream = StreamUtils::GetEffectiveInputStreamName(streamType, channel) == "inputstream.ffmpegdirect";
+  m_controlsLiveStream = StreamUtils::GetEffectiveInputStreamName(streamType, channel) == "inputstream.ffmpegdirect" && channel.CatchupSupportsTimeshifting();
 
   return streamType;
 }

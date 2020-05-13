@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="4.14.1"
+  version="4.14.2"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,10 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v4.14.2
+- Check to make sure catchup streams support timeshifting before letting them do so
+- Fix catchup streams for fs, xc and shift being passed URL with possible protocol options
+
 v4.14.1
 - Fixed: Send manifest type property to ffmpegdirect so it can recognise Smooth Streaming
 

@@ -359,7 +359,7 @@ bool Channel::GenerateAppendCatchupSource(const std::string& url)
 
 void Channel::GenerateShiftCatchupSource(const std::string& url)
 {
-  if (m_streamURL.find('?') != std::string::npos)
+  if (url.find('?') != std::string::npos)
     m_catchupSource = url + "&utc={utc}&lutc={lutc}";
   else
     m_catchupSource = url + "?utc={utc}&lutc={lutc}";
@@ -378,7 +378,7 @@ bool Channel::GenerateFlussonicCatchupSource(const std::string& url)
   static std::regex fsRegex("^(http[s]?://[^/]+)/([^/]+)/([^/]*)(mpegts|\\.m3u8)(\\?.+=.+)?$");
   std::smatch matches;
 
-  if (std::regex_match(m_streamURL, matches, fsRegex))
+  if (std::regex_match(url, matches, fsRegex))
   {
     if (matches.size() == 6)
     {
@@ -419,7 +419,7 @@ bool Channel::GenerateXtreamCodesCatchupSource(const std::string& url)
   static std::regex xcRegex("^(http[s]?://[^/]+)/(?:live/)?([^/]+)/([^/]+)/([^/\\.]+)(\\.m3u[8]?)?$");
   std::smatch matches;
 
-  if (std::regex_match(m_streamURL, matches, xcRegex))
+  if (std::regex_match(url, matches, xcRegex))
   {
     if (matches.size() == 6)
     {
