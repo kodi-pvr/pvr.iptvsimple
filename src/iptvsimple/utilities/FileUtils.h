@@ -12,6 +12,16 @@
 
 #include <string>
 
+// Prevent conflicts with Windows macros where have this names.
+#ifdef _WIN32 // windows
+#ifdef CreateDirectory
+#undef CreateDirectory
+#endif // CreateDirectory
+#ifdef DeleteFile
+#undef DeleteFile
+#endif // DeleteFile
+#endif // _WIN32
+
 namespace iptvsimple
 {
   namespace utilities
