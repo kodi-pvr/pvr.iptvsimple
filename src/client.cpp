@@ -46,7 +46,8 @@ template<typename T> void SafeDelete(T*& p)
 
 extern "C"
 {
-ADDON_STATUS ADDON_Create(void* hdl, void* props)
+
+ADDON_STATUS ADDON_Create(void* hdl, const char* globalApiVersion, void* props)
 {
   if (!hdl || !props)
   {
