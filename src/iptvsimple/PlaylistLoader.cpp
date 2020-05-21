@@ -192,6 +192,10 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
     std::string strCatchupCorrection = ReadMarkerValue(infoLine, CATCHUP_CORRECTION);
 
+    // Some providers use a 'catchup-type' tag instead of 'catchup'
+    if (strCatchup.empty())
+      strCatchup = ReadMarkerValue(infoLine, CATCHUP_TYPE);
+
     if (strTvgId.empty())
       strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
 
@@ -243,7 +247,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetCatchupMode(CatchupMode::APPEND);
     else if (StringUtils::EqualsNoCase(strCatchup, "shift"))
       channel.SetCatchupMode(CatchupMode::SHIFT);
-    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "fs"))
+    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
       channel.SetCatchupMode(CatchupMode::FLUSSONIC);
     else if (StringUtils::EqualsNoCase(strCatchup, "xc"))
       channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
