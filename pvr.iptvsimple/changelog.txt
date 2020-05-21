@@ -1,3 +1,9 @@
+v5.1.0
+- Added: Support catchup-type M3U property
+- Added: Set MIME type and manifest on stream types if required
+- Added: Support multiple occurrences of year, month and day in catchup format specifiers
+- Update: Change docs to use inputstream instead of inputstreamclass
+
 v5.0.0
 - Update PVR API 6.5.1
 - Update Global API 1.2.0
