@@ -39,6 +39,9 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
   {
     // Channel has an inputstream class set so we only set the stream URL
     StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+
+    if (channel.GetInputStreamName() == INPUTSTREAM_FFMPEGDIRECT)
+      InspectAndSetFFmpegDirectStreamProperties(properties, propertiesCount, propertiesMax, channel, streamURL);
   }
   else
   {
@@ -52,13 +55,20 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, channel);
 
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+      if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
+        StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
 
       if (streamType == StreamType::HLS || streamType == StreamType::TS)
       {
         if (channel.IsCatchupSupported())
+        {
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
+          SetFFmpegDirectManifestTypeStreamProperty(properties, propertiesCount, propertiesMax, channel, streamURL, streamType);
+        }
         else
+        {
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
+        }
       }
     }
     else // inputstream.adaptive
@@ -110,6 +120,31 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
     for (auto& prop : catchupProperties)
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, prop.first, prop.second);
   }
+}
+
+void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL)
+{
+  // If there is no MIME type and no manifest type (BOTH!) set then potentially inspect the stream and set them
+  if (!channel.HasMimeType() && !channel.GetProperty("inputstream.ffmpegdirect.manifest_type").empty())
+  {
+    StreamType streamType = StreamUtils::GetStreamType(streamURL, channel);
+    if (streamType == StreamType::OTHER_TYPE)
+      streamType = StreamUtils::InspectStreamType(streamURL, channel);
+
+    if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
+      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+
+    SetFFmpegDirectManifestTypeStreamProperty(properties, propertiesCount, propertiesMax, channel, streamURL, streamType);
+  }
+}
+
+void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType)
+{
+  std::string manifestType = channel.GetProperty("inputstream.ffmpegdirect.manifest_type");
+  if (manifestType.empty())
+    manifestType = StreamUtils::GetManifestType(streamType);
+  if (!manifestType.empty())
+    StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.manifest_type", manifestType);
 }
 
 std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel)

@@ -558,7 +558,7 @@ msgstr ""
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
-msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
+msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
 msgstr ""
 
 #. help: Advanced - defaultMimeType
