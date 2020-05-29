@@ -197,15 +197,6 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_terminates", channel.CatchupSourceTerminates() ? "true" : "false"});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_granularity", std::to_string(channel.GetCatchupGranularitySeconds())});
 
-  if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
-    catchupProperties.insert({PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType)});
-
-  std::string manifestType = channel.GetProperty("inputstream.ffmpegdirect.manifest_type");
-  if (manifestType.empty())
-     manifestType = StreamUtils::GetManifestType(streamType);
-  if (!manifestType.empty())
-    catchupProperties.insert({"inputstream.ffmpegdirect.manifest_type", manifestType});
-
   // TODO: Should also send programme start and duration potentially
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
   // if in video playback mode from epg, i.e. if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
@@ -221,7 +212,6 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   Logger::Log(LEVEL_DEBUG, "catchup_terminates - %s", channel.CatchupSourceTerminates() ? "true" : "false");
   Logger::Log(LEVEL_DEBUG, "catchup_granularity - %s", std::to_string(channel.GetCatchupGranularitySeconds()).c_str());
   Logger::Log(LEVEL_DEBUG, "mimetype - '%s'", channel.HasMimeType() ? channel.GetProperty("mimetype").c_str() : StreamUtils::GetMimeType(streamType).c_str());
-  Logger::Log(LEVEL_DEBUG, "manifest_type - '%s'", manifestType.c_str());
 }
 
 StreamType CatchupController::StreamTypeLookup(const Channel& channel, bool fromEpg /* false */)
@@ -291,14 +281,16 @@ void FormatUnits(time_t tTime, const std::string& name, std::string &urlFormatSt
 void FormatTime(const char ch, const struct tm *pTime, std::string &urlFormatString)
 {
   char str[] = { '{', ch, '}', 0 };
-  auto pos = urlFormatString.find(str);
-  if (pos != std::string::npos)
+  size_t pos = urlFormatString.find(str);
+  while (pos != std::string::npos)
   {
     char buff[256], timeFmt[3];
     std::snprintf(timeFmt, sizeof(timeFmt), "%%%c", ch);
     std::strftime(buff, sizeof(buff), timeFmt, pTime);
     if (std::strlen(buff) > 0)
       urlFormatString.replace(pos, 3, buff);
+
+    pos = urlFormatString.find(str);
   }
 }
 
