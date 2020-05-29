@@ -281,14 +281,16 @@ void FormatUnits(time_t tTime, const std::string& name, std::string &urlFormatSt
 void FormatTime(const char ch, const struct tm *pTime, std::string &urlFormatString)
 {
   char str[] = { '{', ch, '}', 0 };
-  auto pos = urlFormatString.find(str);
-  if (pos != std::string::npos)
+  size_t pos = urlFormatString.find(str);
+  while (pos != std::string::npos)
   {
     char buff[256], timeFmt[3];
     std::snprintf(timeFmt, sizeof(timeFmt), "%%%c", ch);
     std::strftime(buff, sizeof(buff), timeFmt, pTime);
     if (std::strlen(buff) > 0)
       urlFormatString.replace(pos, 3, buff);
+
+    pos = urlFormatString.find(str);
   }
 }
 
