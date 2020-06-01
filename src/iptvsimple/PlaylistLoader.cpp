@@ -238,7 +238,8 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     if (StringUtils::EqualsNoCase(strCatchup, "default") || StringUtils::EqualsNoCase(strCatchup, "append") ||
         StringUtils::EqualsNoCase(strCatchup, "shift") || StringUtils::EqualsNoCase(strCatchup, "flussonic") ||
-        StringUtils::EqualsNoCase(strCatchup, "fs") || StringUtils::EqualsNoCase(strCatchup, "xc"))
+        StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs") ||
+        StringUtils::EqualsNoCase(strCatchup, "xc"))
       channel.SetHasCatchup(true);
 
     if (StringUtils::EqualsNoCase(strCatchup, "default"))
