@@ -248,10 +248,11 @@ bool IsTerminatingCatchupSource(const std::string& formatString)
 
 int FindCatchupSourceGranularitySeconds(const std::string& formatString)
 {
-  // A catchup stream terminates if it has an end time specifier
+  // A catchup stream has one second granularity if it supports these specifiers
   if (formatString.find("{utc}") != std::string::npos ||
       formatString.find("${start}") != std::string::npos ||
-      formatString.find("{S}") != std::string::npos)
+      formatString.find("{S}") != std::string::npos ||
+      formatString.find("{offset:1}") != std::string::npos)
     return 1;
 
   return 60;
@@ -330,7 +331,7 @@ void Channel::ConfigureCatchupMode()
     m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
     m_catchupSourceTerminates = IsTerminatingCatchupSource(m_catchupSource);
     m_catchupGranularitySeconds = FindCatchupSourceGranularitySeconds(m_catchupSource);
-    Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s, granularity secs: %d", 
+    Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s, granularity secs: %d",
                 m_channelName.c_str(), m_catchupSupportsTimeshifting ? "true" : "false", m_catchupSourceTerminates ? "true" : "false", m_catchupGranularitySeconds);
   }
 
