@@ -211,6 +211,12 @@ bool Channel::IsCatchupSupported() const
   return Settings::GetInstance().IsCatchupEnabled() && m_hasCatchup && !m_catchupSource.empty();
 }
 
+bool Channel::SupportsLiveStreamTimeshifting() const
+{
+  return Settings::GetInstance().IsTimeshiftEnabled() && Settings::GetInstance().IsTimeshiftEnabledHttp() &&
+         GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM) == "true" && StringUtils::StartsWith(m_streamURL, "http");
+}
+
 namespace
 {
 bool IsValidTimeshiftingCatchupSource(const std::string& formatString, const CatchupMode& catchupMode)

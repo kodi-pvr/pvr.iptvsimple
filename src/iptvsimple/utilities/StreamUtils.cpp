@@ -58,14 +58,20 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
         StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
 
-      if (streamType == StreamType::HLS || streamType == StreamType::TS)
+      if (streamType == StreamType::HLS || streamType == StreamType::TS || streamType == StreamType::OTHER_TYPE)
       {
         if (channel.IsCatchupSupported())
         {
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
           SetFFmpegDirectManifestTypeStreamProperty(properties, propertiesCount, propertiesMax, channel, streamURL, streamType);
         }
-        else
+        else if (channel.SupportsLiveStreamTimeshifting())
+        {
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.stream_mode", "timeshift");
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.is_realtime_stream", "true");
+        }
+        else if (streamType == StreamType::HLS || streamType == StreamType::TS)
         {
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
         }

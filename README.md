@@ -113,6 +113,26 @@ Settings related to Channel Logos.
     - `Prefer M3U` - Use the channel logo from the M3U if available otherwise use the XMLTV logo.
     - `Prefer XMLTV` - Use the channel logo from the XMLTV file if available otherwise use the M3U logo.
 
+### Timeshift
+Timeshift settings for pausing/rewinding and fast-forwarding live streams.
+
+Note that if your stream does is not using a supported protocol you can still enable timeshift by adding some `KODIPROP`'s to the M3U file. The following three properties can be added before each channel/stream you wish to enable it for.
+
+```
+#KODIPROP:inputstream=inputstream.ffmpegdirect
+#KODIPROP:inputstream.ffmpegdirect.stream_mode=timeshift
+#KODIPROP:inputstream.ffmpegdirect.is_realtime_stream=true
+```
+
+For any TS stream an additional property should be added to every M3U entry using timeshift. This will speed up initial load time:
+
+```
+#KODIPROP:mimetype=video/mp2t
+```
+
+* **Enable timeshift**: Enable the timeshift feature.
+* **Enable timeshift for HTTP based streams**: Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The `inputstream.ffmpegdirect` addon will be used for tiemshift."
+
 ### Catchup
 Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info. Only works if your provider supports catchup.
 

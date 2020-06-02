@@ -101,6 +101,9 @@ namespace iptvsimple
     const std::string& GetLogoBaseUrl() const { return m_logoBaseUrl; }
     const EpgLogosMode& GetEpgLogosMode() const { return m_epgLogosMode; }
 
+    bool IsTimeshiftEnabled() const { return m_timeshiftEnabled; }
+    bool IsTimeshiftEnabledHttp() const { return m_timeshiftEnabledHttp; }
+
     bool IsCatchupEnabled() const { return m_catchupEnabled; }
     const std::string& GetCatchupQueryFormat() const { return m_catchupQueryFormat; }
     int GetCatchupDays() const { return m_catchupDays; }
@@ -196,6 +199,10 @@ namespace iptvsimple
     std::string m_logoPath;
     std::string m_logoBaseUrl;
     EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+
+    // Timeshift
+    bool m_timeshiftEnabled = false;
+    bool m_timeshiftEnabledHttp = false;
 
     // Catchup
     bool m_catchupEnabled = false;

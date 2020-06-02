@@ -110,6 +110,8 @@ namespace iptvsimple
       const std::string& GetTvgName() const { return m_tvgName; }
       void SetTvgName(const std::string& value) { m_tvgName = value; }
 
+      bool SupportsLiveStreamTimeshifting() const;
+
       const std::map<std::string, std::string>& GetProperties() const { return m_properties; }
       void SetProperties(std::map<std::string, std::string>& value) { m_properties = value; }
       void AddProperty(const std::string& prop, const std::string& value) { m_properties.insert({prop, value}); }

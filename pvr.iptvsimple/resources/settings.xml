@@ -278,6 +278,25 @@
       </group>
     </category>
 
+    <!-- Timeshift -->
+    <category id="timeshift" label="30120" help="30720">
+      <group id="1" label="30120">
+        <setting id="timeshiftEnabled" type="boolean" label="30121" help="30721">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledHttp" type="boolean"  parent="timeshiftEnabled" label="30122" help="30722">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="timeshiftEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+
     <!-- Catchup -->
     <category id="catchup" label="30100" help="30700">
       <group id="1" label="30100">
