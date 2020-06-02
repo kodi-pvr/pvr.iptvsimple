@@ -40,6 +40,8 @@ const std::string Channel::GetCatchupModeText(const CatchupMode& catchupMode)
       return "Flussonic";
     case CatchupMode::XTREAM_CODES:
       return "Xtream codes";
+    case CatchupMode::VOD:
+      return "VOD";
     default:
       return "";
   }
@@ -198,7 +200,7 @@ void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const st
 
 void Channel::SetCatchupDays(int catchupDays)
 {
-  if (catchupDays != 0)
+  if (catchupDays > 0 || catchupDays == IGNORE_CATCHUP_DAYS)
     m_catchupDays = catchupDays;
   else
     m_catchupDays = Settings::GetInstance().GetCatchupDays();
@@ -211,7 +213,7 @@ bool Channel::IsCatchupSupported() const
 
 namespace
 {
-bool IsValidTimeshiftingCatchupSource(const std::string& formatString)
+bool IsValidTimeshiftingCatchupSource(const std::string& formatString, const CatchupMode& catchupMode)
 {
   // match any specifier, i.e. anything inside curly braces
   std::regex const specifierRegex("\\{[^{]+\\}");
@@ -223,7 +225,8 @@ bool IsValidTimeshiftingCatchupSource(const std::string& formatString)
   if (numSpecifiers > 0)
   {
     // If we only have a catchup-id specifier and nothing else then we can't timeshift
-    if (formatString.find("{catchup-id}") != std::string::npos && numSpecifiers == 1)
+    if ((formatString.find("{catchup-id}") != std::string::npos && numSpecifiers == 1) ||
+        catchupMode == CatchupMode::VOD)
       return false;
 
     return true;
@@ -315,6 +318,15 @@ void Channel::ConfigureCatchupMode()
       if (!GenerateXtreamCodesCatchupSource(url))
         invalidCatchupSource = true;
       break;
+    case CatchupMode::VOD:
+      if (!m_catchupSource.empty())
+      {
+        if (m_catchupSource.find_first_of('|') != std::string::npos)
+          appendProtocolOptions = false;
+        break;
+      }
+      m_catchupSource = "{catchup-id}";
+      break;
   }
 
   if (invalidCatchupSource)
@@ -328,7 +340,7 @@ void Channel::ConfigureCatchupMode()
     if (!protocolOptions.empty() && appendProtocolOptions)
       m_catchupSource += protocolOptions;
 
-    m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
+    m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource, m_catchupMode);
     m_catchupSourceTerminates = IsTerminatingCatchupSource(m_catchupSource);
     m_catchupGranularitySeconds = FindCatchupSourceGranularitySeconds(m_catchupSource);
     Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s, granularity secs: %d",

@@ -360,7 +360,7 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
   time_t timeNow = std::time(nullptr);
   time_t offset = startTime + timeOffset;
 
-  if (startTime > 0 && offset < (timeNow - 5))
+  if ((startTime > 0 && offset < (timeNow - 5)) || (channel.IgnoreCatchupDays() && !programmeCatchupId.empty()))
     startTimeUrl = FormatDateTime(offset - timezoneShiftSecs, duration, channel.GetCatchupSource());
   else
     startTimeUrl = channel.GetStreamURL();

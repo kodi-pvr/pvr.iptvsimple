@@ -226,20 +226,10 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (strCatchupCorrection.empty())
       channel.SetCatchupCorrectionSecs(catchupCorrectionSecs);
 
-    int siptvTimeshiftDays = 0;
-    if (!strCatchupSiptv.empty())
-      siptvTimeshiftDays = atoi(strCatchupSiptv.c_str());
-    if (!strCatchupDays.empty())
-      channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
-    else if (siptvTimeshiftDays > 0)
-      channel.SetCatchupDays(siptvTimeshiftDays);
-    else
-      channel.SetCatchupDays(Settings::GetInstance().GetCatchupDays());
-
     if (StringUtils::EqualsNoCase(strCatchup, "default") || StringUtils::EqualsNoCase(strCatchup, "append") ||
         StringUtils::EqualsNoCase(strCatchup, "shift") || StringUtils::EqualsNoCase(strCatchup, "flussonic") ||
         StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs") ||
-        StringUtils::EqualsNoCase(strCatchup, "xc"))
+        StringUtils::EqualsNoCase(strCatchup, "xc") || StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetHasCatchup(true);
 
     if (StringUtils::EqualsNoCase(strCatchup, "default"))
@@ -252,6 +242,20 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetCatchupMode(CatchupMode::FLUSSONIC);
     else if (StringUtils::EqualsNoCase(strCatchup, "xc"))
       channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
+    else if (StringUtils::EqualsNoCase(strCatchup, "vod"))
+      channel.SetCatchupMode(CatchupMode::VOD);
+
+    int siptvTimeshiftDays = 0;
+    if (!strCatchupSiptv.empty())
+      siptvTimeshiftDays = atoi(strCatchupSiptv.c_str());
+    if (!strCatchupDays.empty())
+      channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
+    else if (channel.GetCatchupMode() == CatchupMode::VOD)
+      channel.SetCatchupDays(IGNORE_CATCHUP_DAYS);
+    else if (siptvTimeshiftDays > 0)
+      channel.SetCatchupDays(siptvTimeshiftDays);
+    else
+      channel.SetCatchupDays(Settings::GetInstance().GetCatchupDays());
 
     // We also need to support the timeshift="days" tag from siptv
     // this was used before the catchup tags were introduced
