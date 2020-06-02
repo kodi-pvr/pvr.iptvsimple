@@ -317,7 +317,7 @@ std::string StreamUtils::AddHeader(const std::string& headerTarget, const std::s
 
 bool StreamUtils::UseKodiInputstreams(const StreamType& streamType)
 {
-  return streamType == StreamType::OTHER_TYPE || streamType == StreamType::TS ||
+  return streamType == StreamType::OTHER_TYPE || streamType == StreamType::TS || streamType == StreamType::PLUGIN ||
         (streamType == StreamType::HLS && !Settings::GetInstance().UseInputstreamAdaptiveforHls());
 }
 
