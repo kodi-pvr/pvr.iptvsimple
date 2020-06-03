@@ -294,6 +294,16 @@
           </dependencies>
           <control type="toggle" />
         </setting>
+        <setting id="test123" type="action" label="30123" help="30723">
+          <level>0</level>
+          <data>Addon.OpenSettings(inputstream.ffmpegdirect)</data>
+          <dependencies>
+            <dependency type="enable" setting="timeshiftEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="button" format="action">
+            <close>true</close>
+          </control>
+        </setting>
       </group>
     </category>
 
