@@ -113,6 +113,26 @@ Settings related to Channel Logos.
     - `Prefer M3U` - Use the channel logo from the M3U if available otherwise use the XMLTV logo.
     - `Prefer XMLTV` - Use the channel logo from the XMLTV file if available otherwise use the M3U logo.
 
+### Timeshift
+Timeshift settings for pausing/rewinding and fast-forwarding live streams.
+
+Note that if your stream does is not using a supported protocol you can still enable timeshift by adding some `KODIPROP`'s to the M3U file. The following three properties can be added before each channel/stream you wish to enable it for.
+
+```
+#KODIPROP:inputstream=inputstream.ffmpegdirect
+#KODIPROP:inputstream.ffmpegdirect.stream_mode=timeshift
+#KODIPROP:inputstream.ffmpegdirect.is_realtime_stream=true
+```
+
+For any TS stream an additional property should be added to every M3U entry using timeshift. This will speed up initial load time:
+
+```
+#KODIPROP:mimetype=video/mp2t
+```
+
+* **Enable timeshift**: Enable the timeshift feature.
+* **Enable timeshift for HTTP based streams**: Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The `inputstream.ffmpegdirect` addon will be used for tiemshift."
+
 ### Catchup
 Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info. Only works if your provider supports catchup.
 
@@ -215,6 +235,10 @@ http://list.tv:8888/325/mono.m3u8?token=secret
 http://list.tv:8080/my@account.xc/my_password/1477
 #EXTINF:-1 catchup="fs",Channel I
 http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
+#EXTINF:-1 catchup="vod" catchup-source="http://path-to-stream/live/catchup-j.ts&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel J
+http://path-to-stream/live/channel-j.ts
+#EXTINF:-1 catchup="vod",Channel K
+plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c-e31d8d15696b
 ```
 
 *Explanation for Catchup entries*
@@ -227,6 +251,8 @@ http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
 - For `Channel G` this is an example of a flussonic style entry which auto generates the catchup-source.
 - For `Channel H` this is an example of a xtream codes style entry which auto generates the catchup-source for `ts` streams.
 - For `Channel I` this is an example of a xtream codes style entry which auto generates the catchup-source for `m3u8` streams.
+- For `Channel J` this is an example of an VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
+- For `Channel K` this is an example of an VOD style entry which use a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
 
 Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the exmaple file above would be:
 

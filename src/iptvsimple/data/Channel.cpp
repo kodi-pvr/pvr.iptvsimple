@@ -40,6 +40,8 @@ const std::string Channel::GetCatchupModeText(const CatchupMode& catchupMode)
       return "Flussonic";
     case CatchupMode::XTREAM_CODES:
       return "Xtream codes";
+    case CatchupMode::VOD:
+      return "VOD";
     default:
       return "";
   }
@@ -198,7 +200,7 @@ void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const st
 
 void Channel::SetCatchupDays(int catchupDays)
 {
-  if (catchupDays != 0)
+  if (catchupDays > 0 || catchupDays == IGNORE_CATCHUP_DAYS)
     m_catchupDays = catchupDays;
   else
     m_catchupDays = Settings::GetInstance().GetCatchupDays();
@@ -209,9 +211,15 @@ bool Channel::IsCatchupSupported() const
   return Settings::GetInstance().IsCatchupEnabled() && m_hasCatchup && !m_catchupSource.empty();
 }
 
+bool Channel::SupportsLiveStreamTimeshifting() const
+{
+  return Settings::GetInstance().IsTimeshiftEnabled() && Settings::GetInstance().IsTimeshiftEnabledHttp() &&
+         GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM) == "true" && StringUtils::StartsWith(m_streamURL, "http");
+}
+
 namespace
 {
-bool IsValidTimeshiftingCatchupSource(const std::string& formatString)
+bool IsValidTimeshiftingCatchupSource(const std::string& formatString, const CatchupMode& catchupMode)
 {
   // match any specifier, i.e. anything inside curly braces
   std::regex const specifierRegex("\\{[^{]+\\}");
@@ -223,7 +231,8 @@ bool IsValidTimeshiftingCatchupSource(const std::string& formatString)
   if (numSpecifiers > 0)
   {
     // If we only have a catchup-id specifier and nothing else then we can't timeshift
-    if (formatString.find("{catchup-id}") != std::string::npos && numSpecifiers == 1)
+    if ((formatString.find("{catchup-id}") != std::string::npos && numSpecifiers == 1) ||
+        catchupMode == CatchupMode::VOD)
       return false;
 
     return true;
@@ -248,10 +257,11 @@ bool IsTerminatingCatchupSource(const std::string& formatString)
 
 int FindCatchupSourceGranularitySeconds(const std::string& formatString)
 {
-  // A catchup stream terminates if it has an end time specifier
+  // A catchup stream has one second granularity if it supports these specifiers
   if (formatString.find("{utc}") != std::string::npos ||
       formatString.find("${start}") != std::string::npos ||
-      formatString.find("{S}") != std::string::npos)
+      formatString.find("{S}") != std::string::npos ||
+      formatString.find("{offset:1}") != std::string::npos)
     return 1;
 
   return 60;
@@ -314,6 +324,15 @@ void Channel::ConfigureCatchupMode()
       if (!GenerateXtreamCodesCatchupSource(url))
         invalidCatchupSource = true;
       break;
+    case CatchupMode::VOD:
+      if (!m_catchupSource.empty())
+      {
+        if (m_catchupSource.find_first_of('|') != std::string::npos)
+          appendProtocolOptions = false;
+        break;
+      }
+      m_catchupSource = "{catchup-id}";
+      break;
   }
 
   if (invalidCatchupSource)
@@ -327,10 +346,10 @@ void Channel::ConfigureCatchupMode()
     if (!protocolOptions.empty() && appendProtocolOptions)
       m_catchupSource += protocolOptions;
 
-    m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource);
+    m_catchupSupportsTimeshifting = IsValidTimeshiftingCatchupSource(m_catchupSource, m_catchupMode);
     m_catchupSourceTerminates = IsTerminatingCatchupSource(m_catchupSource);
     m_catchupGranularitySeconds = FindCatchupSourceGranularitySeconds(m_catchupSource);
-    Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s, granularity secs: %d", 
+    Logger::Log(LEVEL_DEBUG, "Channel Catchup Format string properties: %s, valid timeshifting source: %s, terminating source: %s, granularity secs: %d",
                 m_channelName.c_str(), m_catchupSupportsTimeshifting ? "true" : "false", m_catchupSourceTerminates ? "true" : "false", m_catchupGranularitySeconds);
   }
 

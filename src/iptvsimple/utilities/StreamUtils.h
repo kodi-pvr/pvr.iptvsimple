@@ -20,6 +20,7 @@ namespace iptvsimple
 {
   namespace utilities
   {
+    static const std::string INPUTSTREAM_ADAPTIVE = "inputstream.adaptive";
     static const std::string INPUTSTREAM_FFMPEGDIRECT = "inputstream.ffmpegdirect";
     static const std::string CATCHUP_INPUTSTREAM_NAME = INPUTSTREAM_FFMPEGDIRECT;
 
@@ -45,6 +46,7 @@ namespace iptvsimple
       static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);
       static void InspectAndSetFFmpegDirectStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamUrl);
       static void SetFFmpegDirectManifestTypeStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType);
+      static bool CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName);
 
     };
   } // namespace utilities

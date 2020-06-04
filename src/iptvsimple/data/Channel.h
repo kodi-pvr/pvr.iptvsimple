@@ -24,8 +24,11 @@ namespace iptvsimple
     SHIFT,
     FLUSSONIC,
     XTREAM_CODES,
-    TIMESHIFT // Obsolete but still used by some providers, predates SHIFT
+    TIMESHIFT, // Obsolete but still used by some providers, predates SHIFT
+    VOD
   };
+
+  constexpr int IGNORE_CATCHUP_DAYS = -1;
 
   namespace data
   {
@@ -79,6 +82,7 @@ namespace iptvsimple
       void SetCatchupMode(const CatchupMode& value) { m_catchupMode = value; }
 
       int GetCatchupDays() const { return m_catchupDays; }
+      bool IgnoreCatchupDays() const { return m_catchupDays == IGNORE_CATCHUP_DAYS; }
       void SetCatchupDays(int catchupDays);
       int GetCatchupDaysInSeconds() const { return m_catchupDays * 24 * 60 * 60; }
 
@@ -105,6 +109,8 @@ namespace iptvsimple
 
       const std::string& GetTvgName() const { return m_tvgName; }
       void SetTvgName(const std::string& value) { m_tvgName = value; }
+
+      bool SupportsLiveStreamTimeshifting() const;
 
       const std::map<std::string, std::string>& GetProperties() const { return m_properties; }
       void SetProperties(std::map<std::string, std::string>& value) { m_properties = value; }

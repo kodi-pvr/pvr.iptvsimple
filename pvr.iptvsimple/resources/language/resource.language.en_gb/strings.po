@@ -362,7 +362,47 @@ msgctxt "#30115"
 msgid "Xtream codes"
 msgstr ""
 
-#empty strings from id 30116 to 30599
+#empty strings from id 30116 to 30119
+
+#. label-category: timeshift
+#. label-group: Timeshift - Timeshift
+msgctxt "#30120"
+msgid "Timeshift"
+msgstr ""
+
+#. label: Timeshift - timeshiftEnabled
+msgctxt "#30121"
+msgid "Enable timeshift"
+msgstr ""
+
+#. label: Timeshift - timeshiftHttp
+msgctxt "#30122"
+msgid "Enable timeshift for HTTP based streams"
+msgstr ""
+
+#. label: Timeshift - timeshiftFFmpegdirectSettings
+msgctxt "#30123"
+msgid "- Modify inputstream.ffmpegdirect settings..."
+msgstr ""
+
+#empty strings from id 30123 to 30499
+
+#. notification: Inputstreams
+msgctxt "#30500"
+msgid "Inputstream error"
+msgstr ""
+
+#. notification: Inputstreams
+msgctxt "#30501"
+msgid "The %s addon is not installed."
+msgstr ""
+
+#. notification: Inputstreams
+msgctxt "#30502"
+msgid "The %s addon is not enabled."
+msgstr ""
+
+#empty strings from id 30503 to 30599
 
 #. ############
 #. help info #
@@ -613,4 +653,28 @@ msgstr ""
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"
 msgid "When selected from the EPG the current live programme cannot be watched as catchup until finished."
+msgstr ""
+
+#empty strings from id 30709 to 307199
+
+#. help info - Timeshift
+
+#. help-category: Timeshift
+msgctxt "#30720"
+msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
+msgstr ""
+
+#. help: Timeshift - timeshiftEnabled
+msgctxt "#30721"
+msgid "Enable the timeshift feature."
+msgstr ""
+
+#. help: Timeshift - timeshiftHttp
+msgctxt "#30722"
+msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The `inputstream.ffmpegdirect` addon will be used for tiemshift."
+msgstr ""
+
+#. help: Timeshift - timeshiftFFmpegdirectSettings
+msgctxt "#30723"
+msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
 msgstr ""

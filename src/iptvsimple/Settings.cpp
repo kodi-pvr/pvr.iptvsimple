@@ -79,6 +79,12 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string clie
   if (!XBMC->GetSetting("logoFromEpg", &m_epgLogosMode))
     m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
 
+  // Timeshift
+  if (!XBMC->GetSetting("timeshiftEnabled", &m_timeshiftEnabled))
+    m_timeshiftEnabled = false;
+  if (!XBMC->GetSetting("timeshiftEnabledHttp", &m_timeshiftEnabledHttp))
+    m_timeshiftEnabledHttp = false;
+
   // Catchup
   if (!XBMC->GetSetting("catchupEnabled", &m_catchupEnabled))
     m_catchupEnabled = false;
@@ -178,6 +184,11 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoBaseUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "logoFromEpg")
     return SetSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  // Timeshift
+  else if (settingName == "timeshiftEnabled")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "timeshiftEnabledHttp")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabledHttp, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Catchup
   else if (settingName == "catchupEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);

@@ -305,14 +305,26 @@ PVR_ERROR IsEPGTagPlayable(const EPG_TAG* tag, bool* bIsPlayable)
   Channel channel;
 
   // Get the channel and set the current tag on it if found
-  *bIsPlayable = m_data->GetChannel(static_cast<int>(tag->iUniqueChannelId), channel);
+  *bIsPlayable = m_data->GetChannel(static_cast<int>(tag->iUniqueChannelId), channel) &&
+                 settings.IsCatchupEnabled() && channel.IsCatchupSupported();
 
-  *bIsPlayable = *bIsPlayable &&
-                 settings.IsCatchupEnabled() &&
-                 tag->startTime < now &&
-                 channel.IsCatchupSupported() &&
-                 tag->startTime >= (now - static_cast<time_t>(channel.GetCatchupDaysInSeconds())) &&
-                 (!settings.CatchupOnlyOnFinishedProgrammes() || tag->endTime < now);
+  if (channel.IgnoreCatchupDays())
+  {
+    // If we ignore catchup days then any tag can be played but only if it has a catchup ID
+    bool hasCatchupId = false;
+    EpgEntry* epgEntry = m_catchupController->GetEPGEntry(channel, tag->startTime);
+    if (epgEntry)
+      hasCatchupId = !epgEntry->GetCatchupId().empty();
+
+    *bIsPlayable = *bIsPlayable && hasCatchupId;
+  }
+  else
+  {
+    *bIsPlayable = *bIsPlayable &&
+                   tag->startTime < now &&
+                   tag->startTime >= (now - static_cast<time_t>(channel.GetCatchupDaysInSeconds())) &&
+                   (!settings.CatchupOnlyOnFinishedProgrammes() || tag->endTime < now);
+  }
 
   return PVR_ERROR_NO_ERROR;
 }

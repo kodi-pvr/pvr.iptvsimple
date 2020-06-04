@@ -13,6 +13,8 @@
 #include "Logger.h"
 #include "WebUtils.h"
 
+// TODO: inlcude when C++ API happens
+// #include <kodi/General.h>
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
@@ -58,14 +60,20 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
         StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
 
-      if (streamType == StreamType::HLS || streamType == StreamType::TS)
+      if (streamType == StreamType::HLS || streamType == StreamType::TS || streamType == StreamType::OTHER_TYPE)
       {
-        if (channel.IsCatchupSupported())
+        if (channel.IsCatchupSupported() && CheckInputstreamInstalledAndEnabled(CATCHUP_INPUTSTREAM_NAME))
         {
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
           SetFFmpegDirectManifestTypeStreamProperty(properties, propertiesCount, propertiesMax, channel, streamURL, streamType);
         }
-        else
+        else if (channel.SupportsLiveStreamTimeshifting() && CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
+        {
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.stream_mode", "timeshift");
+          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.is_realtime_stream", "true");
+        }
+        else if (streamType == StreamType::HLS || streamType == StreamType::TS)
         {
           StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
         }
@@ -73,6 +81,8 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
     }
     else // inputstream.adaptive
     {
+      CheckInputstreamInstalledAndEnabled(INPUTSTREAM_ADAPTIVE);
+
       bool streamUrlSet = false;
 
       // If no media headers are explicitly set for inputstream.adaptive,
@@ -100,7 +110,7 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
       if (!streamUrlSet)
         StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, "inputstream.adaptive");
+      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
       if (streamType == StreamType::HLS || streamType == StreamType::DASH)
         StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
@@ -120,6 +130,29 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
     for (auto& prop : catchupProperties)
       StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, prop.first, prop.second);
   }
+}
+bool StreamUtils::CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName)
+{
+  // TODO: uncomment when C++ API happens
+
+  // std::string version;
+  // bool enabled;
+
+  // if (kodi::IsAddonAvailable(inputstreamName, version, enabled))
+  // {
+  //   if (!enabled)
+  //   {
+  //     std::string message = StringUtils::Format(kodi::LocalizedString(30502).c_str(), inputstreamName.c_str());
+  //     kodi::QueueNotification(QueueMsg::QUEUE_ERROR, kodi::LocalizedString(30500), message);
+  //   }
+  // }
+  // else // Not installed
+  // {
+  //   std::string message = StringUtils::Format(kodi::LocalizedString(30501).c_str(), inputstreamName.c_str());
+  //   kodi::QueueNotification(QueueMsg::QUEUE_ERROR, kodi::LocalizedString(30500), message);
+  // }
+
+  return true;
 }
 
 void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL)

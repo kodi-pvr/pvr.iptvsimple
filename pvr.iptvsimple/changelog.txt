@@ -1,3 +1,11 @@
+v5.2.0
+- Added: Enable timeshift feature from inputstream.ffmpegdirect
+- Added: Support VOD catchup streams including those via plugin URLs
+- Added: Access to ffmpegdirect settings and inputstream checks (C++ API)
+- Fixed: Fix flussonic ts detected as wrong type
+- Fixed: Use kodis built in inputstreams for plugin urls
+- Fixed: Fix incorrect catchup granularity for flussonic stream
+
 v5.1.0
 - Added: Support catchup-type M3U property
 - Added: Set MIME type and manifest on stream types if required
