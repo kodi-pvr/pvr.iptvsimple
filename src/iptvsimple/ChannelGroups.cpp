@@ -8,7 +8,6 @@
 
 #include "ChannelGroups.h"
 
-#include "../client.h"
 #include "utilities/Logger.h"
 
 using namespace iptvsimple;
@@ -27,7 +26,7 @@ int ChannelGroups::GetChannelGroupsAmount() const
   return m_channelGroups.size();
 }
 
-void ChannelGroups::GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannelGroups, bool radio) const
+PVR_ERROR ChannelGroups::GetChannelGroups(kodi::addon::PVRChannelGroupsResultSet& results, bool radio) const
 {
   Logger::Log(LEVEL_DEBUG, "%s - Starting to get ChannelGroups for PVR", __FUNCTION__);
 
@@ -37,20 +36,22 @@ void ChannelGroups::GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannel
     {
       Logger::Log(LEVEL_DEBUG, "%s - Transfer channelGroup '%s', ChannelGroupId '%d'", __FUNCTION__, channelGroup.GetGroupName().c_str(), channelGroup.GetUniqueId());
 
-      PVR_CHANNEL_GROUP kodiChannelGroup = {0};
+      kodi::addon::PVRChannelGroup kodiChannelGroup;
 
       channelGroup.UpdateTo(kodiChannelGroup);
 
-      kodiChannelGroups.emplace_back(kodiChannelGroup);
+      results.Add(kodiChannelGroup);
     }
   }
 
-  Logger::Log(LEVEL_DEBUG, "%s - Finished getting ChannelGroups for PVR", __FUNCTION__);
+  Logger::Log(LEVEL_DEBUG, "%s - channel groups available '%d'", __FUNCTION__, m_channelGroups.size());
+
+  return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& group)
+PVR_ERROR ChannelGroups::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& group, kodi::addon::PVRChannelGroupMembersResultSet& results)
 {
-  const ChannelGroup* myGroup = FindChannelGroup(group.strGroupName);
+  const ChannelGroup* myGroup = FindChannelGroup(group.GetGroupName());
   if (myGroup)
   {
     // We set a channel order here that applies to this group in kodi-pvr
@@ -67,16 +68,16 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_C
         continue;
 
       const Channel& channel = m_channels.GetChannelsList().at(memberId);
-      PVR_CHANNEL_GROUP_MEMBER xbmcGroupMember = {0};
+      kodi::addon::PVRChannelGroupMember kodiGroupMember;
 
-      strncpy(xbmcGroupMember.strGroupName, group.strGroupName, sizeof(xbmcGroupMember.strGroupName) - 1);
-      xbmcGroupMember.iChannelUniqueId = channel.GetUniqueId();
-      xbmcGroupMember.iOrder = channelOrder++; // Keep the channels in list order as per the M3U
+      kodiGroupMember.SetGroupName(group.GetGroupName());
+      kodiGroupMember.SetChannelUniqueId(channel.GetUniqueId());
+      kodiGroupMember.SetOrder(channelOrder++); // Keep the channels in list order as per the M3U
 
       Logger::Log(LEVEL_DEBUG, "%s - Transfer channel group '%s' member '%s', ChannelId '%d', ChannelOrder: '%d'", __FUNCTION__,
                   myGroup->GetGroupName().c_str(), channel.GetChannelName().c_str(), channel.GetUniqueId(), channelOrder);
 
-      PVR->TransferChannelGroupMember(handle, &xbmcGroupMember);
+      results.Add(kodiGroupMember);
     }
   }
 

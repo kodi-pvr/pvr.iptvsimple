@@ -13,10 +13,10 @@
 #include "../utilities/Logger.h"
 #include "../utilities/StreamUtils.h"
 #include "../utilities/WebUtils.h"
-#include "../../client.h"
 
 #include <regex>
 
+#include <kodi/General.h>
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
@@ -72,16 +72,16 @@ void Channel::UpdateTo(Channel& left) const
   left.m_inputStreamName = m_inputStreamName;
 }
 
-void Channel::UpdateTo(PVR_CHANNEL& left) const
+void Channel::UpdateTo(kodi::addon::PVRChannel& left) const
 {
-  left.iUniqueId = m_uniqueId;
-  left.bIsRadio = m_radio;
-  left.iChannelNumber = m_channelNumber;
-  strncpy(left.strChannelName, m_channelName.c_str(), sizeof(left.strChannelName) - 1);
-  left.iEncryptionSystem = m_encryptionSystem;
-  strncpy(left.strIconPath, m_iconPath.c_str(), sizeof(left.strIconPath) - 1);
-  left.bIsHidden = false;
-  left.bHasArchive = IsCatchupSupported();
+  left.SetUniqueId(m_uniqueId);
+  left.SetIsRadio(m_radio);
+  left.SetChannelNumber(m_channelNumber);
+  left.SetChannelName(m_channelName);
+  left.SetEncryptionSystem(m_encryptionSystem);
+  left.SetIconPath(m_iconPath);
+  left.SetIsHidden(false);
+  left.SetHasArchive(IsCatchupSupported());
 }
 
 void Channel::Reset()
@@ -120,7 +120,7 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
     logoSetFromChannelName = true;
   }
 
-  m_iconPath = XBMC->UnknownToUTF8(m_iconPath.c_str());
+  kodi::UnknownToUTF8(m_iconPath, m_iconPath);
 
   // urlencode channel logo when set from channel name and source is Remote Path
   // append extension as channel name wouldn't have it

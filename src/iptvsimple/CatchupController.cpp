@@ -8,7 +8,6 @@
 
 #include "CatchupController.h"
 
-#include "../client.h"
 #include "Channels.h"
 #include "Epg.h"
 #include "Settings.h"
@@ -87,10 +86,10 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
   }
 }
 
-void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, const Channel& channel, std::map<std::string, std::string>& catchupProperties)
+void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::PVREPGTag& epgTag, const Channel& channel, std::map<std::string, std::string>& catchupProperties)
 {
   m_programmeCatchupId.clear();
-  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.startTime);
+  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.GetStartTime());
   if (epgEntry)
     m_programmeCatchupId = epgEntry->GetCatchupId();
 
@@ -99,8 +98,8 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTa
   if (m_controlsLiveStream)
   {
     UpdateProgrammeFrom(epgTag, channel.GetTvgShift());
-    m_catchupStartTime = epgTag.startTime;
-    m_catchupEndTime = epgTag.endTime;
+    m_catchupStartTime = epgTag.GetStartTime();
+    m_catchupEndTime = epgTag.GetEndTime();
 
     time_t timeNow = time(0);
     time_t programmeOffset = timeNow - m_catchupStartTime;
@@ -120,8 +119,8 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTa
   else
   {
     UpdateProgrammeFrom(epgTag, channel.GetTvgShift());
-    m_catchupStartTime = epgTag.startTime;
-    m_catchupEndTime = epgTag.endTime;
+    m_catchupStartTime = epgTag.GetStartTime();
+    m_catchupEndTime = epgTag.GetEndTime();
 
     m_timeshiftBufferStartTime = 0;
     m_timeshiftBufferOffset = 0;
@@ -130,10 +129,10 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTa
   }
 }
 
-void CatchupController::ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, const Channel& channel, std::map<std::string, std::string>& catchupProperties)
+void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGTag& epgTag, const Channel& channel, std::map<std::string, std::string>& catchupProperties)
 {
   m_programmeCatchupId.clear();
-  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.startTime);
+  EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.GetStartTime());
   if (epgEntry)
     m_programmeCatchupId = epgEntry->GetCatchupId();
 
@@ -144,8 +143,8 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, con
     if (m_resetCatchupState)
     {
       UpdateProgrammeFrom(epgTag, channel.GetTvgShift());
-      m_catchupStartTime = epgTag.startTime;
-      m_catchupEndTime = epgTag.endTime;
+      m_catchupStartTime = epgTag.GetStartTime();
+      m_catchupEndTime = epgTag.GetEndTime();
 
       const time_t beginBuffer = Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs();
       const time_t endBuffer = Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
@@ -165,8 +164,8 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, con
   else
   {
     UpdateProgrammeFrom(epgTag, channel.GetTvgShift());
-    m_catchupStartTime = epgTag.startTime;
-    m_catchupEndTime = epgTag.endTime;
+    m_catchupStartTime = epgTag.GetStartTime();
+    m_catchupEndTime = epgTag.GetEndTime();
 
     m_timeshiftBufferStartTime = 0;
     m_timeshiftBufferOffset = 0;
@@ -223,12 +222,12 @@ StreamType CatchupController::StreamTypeLookup(const Channel& channel, bool from
   return streamType;
 }
 
-void CatchupController::UpdateProgrammeFrom(const EPG_TAG& epgTag, int tvgShift)
+void CatchupController::UpdateProgrammeFrom(const kodi::addon::PVREPGTag& epgTag, int tvgShift)
 {
-  m_programmeStartTime = epgTag.startTime;
-  m_programmeEndTime = epgTag.endTime;
-  m_programmeTitle = epgTag.strTitle;
-  m_programmeUniqueChannelId = epgTag.iUniqueChannelId;
+  m_programmeStartTime = epgTag.GetStartTime();
+  m_programmeEndTime = epgTag.GetEndTime();
+  m_programmeTitle = epgTag.GetTitle();
+  m_programmeUniqueChannelId = epgTag.GetUniqueChannelId();
   m_programmeChannelTvgShift = tvgShift;
 }
 

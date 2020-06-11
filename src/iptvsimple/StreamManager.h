@@ -21,7 +21,7 @@ namespace iptvsimple
   {
   public:
     StreamManager();
-    
+
     StreamType StreamTypeLookup(const data::Channel& channel, const std::string& streamTestUrl, const std::string& streamKey);
     void Clear();
 

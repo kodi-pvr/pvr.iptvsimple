@@ -16,7 +16,7 @@
 #include <string>
 #include <vector>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/PVR.h>
 
 namespace iptvsimple
 {
@@ -35,9 +35,11 @@ namespace iptvsimple
   class Epg
   {
   public:
-    Epg(iptvsimple::Channels& channels);
+    Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels);
 
-    PVR_ERROR GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t start, time_t end);
+    bool Init();
+
+    PVR_ERROR GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results);
     void Clear();
     void ReloadEPG();
 
@@ -69,5 +71,7 @@ namespace iptvsimple
     iptvsimple::Channels& m_channels;
     std::vector<data::ChannelEpg> m_channelEpgs;
     std::vector<iptvsimple::data::EpgGenre> m_genreMappings;
+
+    kodi::addon::CInstancePVRClient* m_client;
   };
 } //namespace iptvsimple

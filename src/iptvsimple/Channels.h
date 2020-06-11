@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/pvr/Channels.h>
 
 namespace iptvsimple
 {
@@ -27,11 +27,13 @@ namespace iptvsimple
   class Channels
   {
   public:
-    Channels();
+    Channels() = default;
+
+    bool Init();
 
     int GetChannelsAmount() const;
-    void GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) const;
-    bool GetChannel(const PVR_CHANNEL& channel, iptvsimple::data::Channel& myChannel) const;
+    PVR_ERROR GetChannels(kodi::addon::PVRChannelsResultSet& results, bool radio) const;
+    bool GetChannel(const kodi::addon::PVRChannel& channel, iptvsimple::data::Channel& myChannel) const;
     bool GetChannel(int uniqueId, iptvsimple::data::Channel& myChannel) const;
 
     void AddChannel(iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups);

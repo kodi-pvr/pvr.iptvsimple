@@ -11,7 +11,7 @@
 #include <string>
 #include <vector>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/pvr/ChannelGroups.h>
 
 namespace iptvsimple
 {
@@ -32,7 +32,7 @@ namespace iptvsimple
       const std::vector<int>& GetMemberChannelIndexes() const { return m_memberChannelIndexes; }
       void AddMemberChannelIndex(int channelIndex) { m_memberChannelIndexes.emplace_back(channelIndex); }
 
-      void UpdateTo(PVR_CHANNEL_GROUP& left) const;
+      void UpdateTo(kodi::addon::PVRChannelGroup& left) const;
 
     private:
       bool m_radio;

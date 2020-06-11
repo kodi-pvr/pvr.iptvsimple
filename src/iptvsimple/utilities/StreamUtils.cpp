@@ -13,37 +13,22 @@
 #include "Logger.h"
 #include "WebUtils.h"
 
-// TODO: inlcude when C++ API happens
-// #include <kodi/General.h>
+#include <kodi/General.h>
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-void StreamUtils::SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const std::string& name, const std::string& value)
-{
-  if (*propertiesCount < propertiesMax)
-  {
-    strncpy(properties[*propertiesCount].strName, name.c_str(), sizeof(properties[*propertiesCount].strName) - 1);
-    strncpy(properties[*propertiesCount].strValue, value.c_str(), sizeof(properties[*propertiesCount].strValue) - 1);
-    (*propertiesCount)++;
-  }
-  else
-  {
-    Logger::Log(LogLevel::LEVEL_ERROR, "%s - Could not add property as max number reached: %s=%s - count : %u", __FUNCTION__, name.c_str(), value.c_str(), propertiesMax);
-  }
-}
-
-void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL, std::map<std::string, std::string>& catchupProperties)
+void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, std::map<std::string, std::string>& catchupProperties)
 {
   if (ChannelSpecifiesInputstream(channel))
   {
     // Channel has an inputstream class set so we only set the stream URL
-    StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+    properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
     if (channel.GetInputStreamName() == INPUTSTREAM_FFMPEGDIRECT)
-      InspectAndSetFFmpegDirectStreamProperties(properties, propertiesCount, propertiesMax, channel, streamURL);
+      InspectAndSetFFmpegDirectStreamProperties(properties, channel, streamURL);
   }
   else
   {
@@ -56,26 +41,26 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
     {
       std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, channel);
 
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+      properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
       if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
-        StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+        properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
 
       if (streamType == StreamType::HLS || streamType == StreamType::TS || streamType == StreamType::OTHER_TYPE)
       {
         if (channel.IsCatchupSupported() && CheckInputstreamInstalledAndEnabled(CATCHUP_INPUTSTREAM_NAME))
         {
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
-          SetFFmpegDirectManifestTypeStreamProperty(properties, propertiesCount, propertiesMax, channel, streamURL, streamType);
+          properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
+          SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
         }
         else if (channel.SupportsLiveStreamTimeshifting() && CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
         {
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.stream_mode", "timeshift");
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.is_realtime_stream", "true");
+          properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
+          properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
+          properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
         }
         else if (streamType == StreamType::HLS || streamType == StreamType::TS)
         {
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
+          properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
         }
       }
     }
@@ -100,62 +85,60 @@ void StreamUtils::SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned i
           const std::string& encodedProtocolOptions = StreamUtils::GetUrlEncodedProtocolOptions(protocolOptions);
 
           // Set stream URL without headers and encoded headers as property
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, url);
-          StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.stream_headers", encodedProtocolOptions);
+          properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, url);
+          properties.emplace_back("inputstream.adaptive.stream_headers", encodedProtocolOptions);
           streamUrlSet = true;
         }
       }
 
       // Set intact stream URL if not previously set
       if (!streamUrlSet)
-        StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+        properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
+      properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
+      properties.emplace_back("inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
       if (streamType == StreamType::HLS || streamType == StreamType::DASH)
-        StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+        properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
       if (streamType == StreamType::DASH)
-        StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.adaptive.manifest_update_parameter", "full");
+        properties.emplace_back("inputstream.adaptive.manifest_update_parameter", "full");
     }
   }
 
   if (!channel.GetProperties().empty())
   {
     for (auto& prop : channel.GetProperties())
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, prop.first, prop.second);
+      properties.emplace_back(prop.first, prop.second);
   }
 
   if (!catchupProperties.empty())
   {
     for (auto& prop : catchupProperties)
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, prop.first, prop.second);
+      properties.emplace_back(prop.first, prop.second);
   }
 }
 bool StreamUtils::CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName)
 {
-  // TODO: uncomment when C++ API happens
+  std::string version;
+  bool enabled;
 
-  // std::string version;
-  // bool enabled;
-
-  // if (kodi::IsAddonAvailable(inputstreamName, version, enabled))
-  // {
-  //   if (!enabled)
-  //   {
-  //     std::string message = StringUtils::Format(kodi::LocalizedString(30502).c_str(), inputstreamName.c_str());
-  //     kodi::QueueNotification(QueueMsg::QUEUE_ERROR, kodi::LocalizedString(30500), message);
-  //   }
-  // }
-  // else // Not installed
-  // {
-  //   std::string message = StringUtils::Format(kodi::LocalizedString(30501).c_str(), inputstreamName.c_str());
-  //   kodi::QueueNotification(QueueMsg::QUEUE_ERROR, kodi::LocalizedString(30500), message);
-  // }
+  if (kodi::IsAddonAvailable(inputstreamName, version, enabled))
+  {
+    if (!enabled)
+    {
+      std::string message = StringUtils::Format(kodi::GetLocalizedString(30502).c_str(), inputstreamName.c_str());
+      kodi::QueueNotification(QueueMsg::QUEUE_ERROR, kodi::GetLocalizedString(30500), message);
+    }
+  }
+  else // Not installed
+  {
+    std::string message = StringUtils::Format(kodi::GetLocalizedString(30501).c_str(), inputstreamName.c_str());
+    kodi::QueueNotification(QueueMsg::QUEUE_ERROR, kodi::GetLocalizedString(30500), message);
+  }
 
   return true;
 }
 
-void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL)
+void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL)
 {
   // If there is no MIME type and no manifest type (BOTH!) set then potentially inspect the stream and set them
   if (!channel.HasMimeType() && !channel.GetProperty("inputstream.ffmpegdirect.manifest_type").empty())
@@ -165,19 +148,19 @@ void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(PVR_NAMED_VALUE* pro
       streamType = StreamUtils::InspectStreamType(streamURL, channel);
 
     if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
-      StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+      properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
 
-    SetFFmpegDirectManifestTypeStreamProperty(properties, propertiesCount, propertiesMax, channel, streamURL, streamType);
+    SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
   }
 }
 
-void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType)
+void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType)
 {
   std::string manifestType = channel.GetProperty("inputstream.ffmpegdirect.manifest_type");
   if (manifestType.empty())
     manifestType = StreamUtils::GetManifestType(streamType);
   if (!manifestType.empty())
-    StreamUtils::SetStreamProperty(properties, propertiesCount, propertiesMax, "inputstream.ffmpegdirect.manifest_type", manifestType);
+    properties.emplace_back("inputstream.ffmpegdirect.manifest_type", manifestType);
 }
 
 std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel)
