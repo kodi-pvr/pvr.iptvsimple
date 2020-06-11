@@ -1,3 +1,7 @@
+v6.0.0
+- Update PVR API 7.0.0
+- Rework addon to support new API interface
+
 v5.2.0
 - Added: Enable timeshift feature from inputstream.ffmpegdirect
 - Added: Support VOD catchup streams including those via plugin URLs
