@@ -8,135 +8,90 @@
 
 #include "Settings.h"
 
-#include "../client.h"
 #include "utilities/FileUtils.h"
 
-using namespace ADDON;
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;
 
 /***************************************************************************
  * PVR settings
  **************************************************************************/
-void Settings::ReadFromAddon(const std::string& userPath, const std::string clientPath)
+void Settings::ReadFromAddon(const std::string& userPath, const std::string& clientPath)
 {
   m_userPath = userPath;
   m_clientPath = clientPath;
 
-  char buffer[1024];
-
   // M3U
-  if (!XBMC->GetSetting("m3uPathType", &m_m3uPathType))
-    m_m3uPathType = PathType::REMOTE_PATH;
-  if (XBMC->GetSetting("m3uPath", &buffer))
-    m_m3uPath = buffer;
-  if (XBMC->GetSetting("m3uUrl", &buffer))
-    m_m3uUrl = buffer;
-  if (!XBMC->GetSetting("m3uCache", &m_cacheM3U))
-    m_cacheM3U = true;
-  if (!XBMC->GetSetting("startNum", &m_startChannelNumber))
-    m_startChannelNumber = 1;
-  if (!XBMC->GetSetting("numberByOrder", &m_numberChannelsByM3uOrderOnly))
-    m_numberChannelsByM3uOrderOnly = false;
-  if (!XBMC->GetSetting("m3uRefreshMode", &m_m3uRefreshMode))
-    m_m3uRefreshMode = RefreshMode::DISABLED;
-  if (!XBMC->GetSetting("m3uRefreshIntervalMins", &m_m3uRefreshIntervalMins))
-    m_m3uRefreshIntervalMins = 60;
-  if (!XBMC->GetSetting("m3uRefreshHour", &m_m3uRefreshHour))
-    m_m3uRefreshHour = 4;
+  m_m3uPathType = kodi::GetSettingEnum<PathType>("m3uPathType", PathType::REMOTE_PATH);
+  m_m3uPath = kodi::GetSettingString("m3uPath");
+  m_m3uUrl = kodi::GetSettingString("m3uUrl");
+  m_cacheM3U = kodi::GetSettingBoolean("m3uCache");
+  m_startChannelNumber = kodi::GetSettingInt("startNum", 1);
+  m_numberChannelsByM3uOrderOnly = kodi::GetSettingBoolean("numberByOrder", false);
+  m_m3uRefreshMode = kodi::GetSettingEnum<RefreshMode>("m3uRefreshMode", RefreshMode::DISABLED);
+  m_m3uRefreshIntervalMins = kodi::GetSettingInt("m3uRefreshIntervalMins", 60);
+  m_m3uRefreshHour = kodi::GetSettingInt("m3uRefreshHour", 4);
 
   // EPG
-  if (!XBMC->GetSetting("epgPathType", &m_epgPathType))
-    m_epgPathType = PathType::REMOTE_PATH;
-  if (XBMC->GetSetting("epgPath", &buffer))
-    m_epgPath = buffer;
-  if (XBMC->GetSetting("epgUrl", &buffer))
-    m_epgUrl = buffer;
-  if (!XBMC->GetSetting("epgCache", &m_cacheEPG))
-    m_cacheEPG = true;
-  if (!XBMC->GetSetting("epgTimeShift", &m_epgTimeShiftHours))
-    m_epgTimeShiftHours = 0.0f;
-  if (!XBMC->GetSetting("epgTSOverride", &m_tsOverride))
-    m_tsOverride = true;
+  m_epgPathType = kodi::GetSettingEnum<PathType>("epgPathType", PathType::REMOTE_PATH);
+  m_epgPath = kodi::GetSettingString("epgPath");
+  m_epgUrl = kodi::GetSettingString("epgUrl");
+  m_cacheEPG = kodi::GetSettingBoolean("epgCache", true);
+  m_epgTimeShiftHours = kodi::GetSettingFloat("epgTimeShift", 0.0f);
+  m_tsOverride = kodi::GetSettingBoolean("epgTSOverride", true);
 
   //Genres
-  if (!XBMC->GetSetting("useEpgGenreText", &m_useEpgGenreTextWhenMapping))
-    m_useEpgGenreTextWhenMapping = false;
-  if (!XBMC->GetSetting("genresPathType", &m_genresPathType))
-    m_genresPathType = PathType::LOCAL_PATH;
-  if (XBMC->GetSetting("genresPath", &buffer))
-    m_genresPath = buffer;
-  if (XBMC->GetSetting("genresUrl", &buffer))
-    m_genresUrl = buffer;
+  m_useEpgGenreTextWhenMapping = kodi::GetSettingBoolean("useEpgGenreText", false);
+  m_genresPathType = kodi::GetSettingEnum<PathType>("genresPathType", PathType::LOCAL_PATH);
+  m_genresPath = kodi::GetSettingString("genresPath");
+  m_genresUrl = kodi::GetSettingString("genresUrl");
 
   // Channel Logos
-  if (!XBMC->GetSetting("logoPathType", &m_logoPathType))
-    m_logoPathType = PathType::REMOTE_PATH;
-  if (XBMC->GetSetting("logoPath", &buffer))
-    m_logoPath = buffer;
-  if (XBMC->GetSetting("logoBaseUrl", &buffer))
-    m_logoBaseUrl = buffer;
-  if (!XBMC->GetSetting("logoFromEpg", &m_epgLogosMode))
-    m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+  m_logoPathType = kodi::GetSettingEnum<PathType>("logoPathType", PathType::REMOTE_PATH);
+  m_logoPath = kodi::GetSettingString("logoPath");
+  m_logoBaseUrl = kodi::GetSettingString("logoBaseUrl");
+  m_epgLogosMode = kodi::GetSettingEnum<EpgLogosMode>("logoFromEpg", EpgLogosMode::IGNORE_XMLTV);
 
   // Timeshift
-  if (!XBMC->GetSetting("timeshiftEnabled", &m_timeshiftEnabled))
-    m_timeshiftEnabled = false;
-  if (!XBMC->GetSetting("timeshiftEnabledHttp", &m_timeshiftEnabledHttp))
-    m_timeshiftEnabledHttp = false;
+  m_timeshiftEnabled = kodi::GetSettingBoolean("timeshiftEnabled", false);
+  m_timeshiftEnabledHttp = kodi::GetSettingBoolean("timeshiftEnabledHttp", false);
 
   // Catchup
-  if (!XBMC->GetSetting("catchupEnabled", &m_catchupEnabled))
-    m_catchupEnabled = false;
-  if (XBMC->GetSetting("catchupQueryFormat", &buffer))
-    m_catchupQueryFormat = buffer;
-  if (!XBMC->GetSetting("catchupDays", &m_catchupDays))
-    m_catchupDays = 5;
-  if (!XBMC->GetSetting("allChannelsCatchupMode", &m_allChannelsCatchupMode))
-    m_allChannelsCatchupMode = CatchupMode::DISABLED;
-  if (!XBMC->GetSetting("catchupPlayEpgAsLive", &m_catchupPlayEpgAsLive))
-    m_catchupPlayEpgAsLive = false;
-  if (!XBMC->GetSetting("catchupWatchEpgBeginBufferMins", &m_catchupWatchEpgBeginBufferMins))
-    m_catchupWatchEpgBeginBufferMins = 5;
-  if (!XBMC->GetSetting("catchupWatchEpgEndBufferMins", &m_catchupWatchEpgEndBufferMins))
-    m_catchupWatchEpgEndBufferMins = 15;
-  if (!XBMC->GetSetting("catchupOnlyOnFinishedProgrammes", &m_catchupOnlyOnFinishedProgrammes))
-    m_catchupOnlyOnFinishedProgrammes = false;
+  m_catchupEnabled = kodi::GetSettingBoolean("catchupEnabled", false);
+  m_catchupQueryFormat = kodi::GetSettingString("catchupQueryFormat");
+  m_catchupDays = kodi::GetSettingInt("catchupDays", 5);
+  m_allChannelsCatchupMode = kodi::GetSettingEnum<CatchupMode>("allChannelsCatchupMode", CatchupMode::DISABLED);
+  m_catchupPlayEpgAsLive = kodi::GetSettingBoolean("catchupPlayEpgAsLive", false);
+  m_catchupWatchEpgBeginBufferMins = kodi::GetSettingInt("catchupWatchEpgBeginBufferMins", 5);
+  m_catchupWatchEpgEndBufferMins = kodi::GetSettingInt("catchupWatchEpgEndBufferMins", 15);
+  m_catchupOnlyOnFinishedProgrammes = kodi::GetSettingBoolean("catchupOnlyOnFinishedProgrammes", false);
 
   // Advanced
-  if (!XBMC->GetSetting("transformMulticastStreamUrls", &m_transformMulticastStreamUrls))
-    m_transformMulticastStreamUrls = false;
-  if (XBMC->GetSetting("udpxyHost", &buffer))
-    m_udpxyHost = buffer;
-  if (!XBMC->GetSetting("udpxyPort", &m_udpxyPort))
-    m_udpxyPort = DEFAULT_UDPXY_MULTICAST_RELAY_PORT;
-  if (!XBMC->GetSetting("useFFmpegReconnect", &m_useFFmpegReconnect))
-    m_useFFmpegReconnect = false;
-  if (!XBMC->GetSetting("useInputstreamAdaptiveforHls", &m_useInputstreamAdaptiveforHls))
-    m_useInputstreamAdaptiveforHls = false;
-  if (XBMC->GetSetting("defaultUserAgent", &buffer))
-    m_defaultUserAgent = buffer;
-  if (XBMC->GetSetting("defaultInputstream", &buffer))
-    m_defaultInputstream = buffer;
-  if (XBMC->GetSetting("defaultMimeType", &buffer))
-    m_defaultMimeType = buffer;
+  m_transformMulticastStreamUrls = kodi::GetSettingBoolean("transformMulticastStreamUrls", false);
+  m_udpxyHost = kodi::GetSettingString("udpxyHost");
+  m_udpxyPort = kodi::GetSettingInt("udpxyPort", DEFAULT_UDPXY_MULTICAST_RELAY_PORT);
+  m_useFFmpegReconnect = kodi::GetSettingBoolean("useFFmpegReconnect");
+  m_useInputstreamAdaptiveforHls = kodi::GetSettingBoolean("useInputstreamAdaptiveforHls", false);
+  m_defaultUserAgent = kodi::GetSettingString("defaultUserAgent");
+  m_defaultInputstream = kodi::GetSettingString("defaultInputstream");
+  m_defaultMimeType = kodi::GetSettingString("defaultMimeType");
 }
 
-ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* settingValue)
+ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue)
 {
   // reset cache and restart addon
 
   std::string strFile = FileUtils::GetUserDataAddonFilePath(M3U_CACHE_FILENAME);
-  if (FileUtils::FileExists(strFile.c_str()))
+  if (FileUtils::FileExists(strFile))
     FileUtils::DeleteFile(strFile);
 
   strFile = FileUtils::GetUserDataAddonFilePath(XMLTV_CACHE_FILENAME);
-  if (FileUtils::FileExists(strFile.c_str()))
+  if (FileUtils::FileExists(strFile))
     FileUtils::DeleteFile(strFile);
 
   // M3U
   if (settingName == "m3uPathType")
-    return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_m3uPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_m3uPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_m3uPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uUrl")
@@ -148,14 +103,14 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
   else if (settingName == "numberByOrder")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_numberChannelsByM3uOrderOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uRefreshMode")
-    return SetSetting<RefreshMode, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<RefreshMode, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uRefreshIntervalMins")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshIntervalMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uRefreshHour")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshHour, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // EPG
   else if (settingName == "epgPathType")
-    return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_epgPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_epgPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "epgPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_epgPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "epgUrl")
@@ -170,20 +125,20 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
   else if (settingName == "useEpgGenreText")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useEpgGenreTextWhenMapping, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "genresPathType")
-    return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_genresPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_genresPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "genresPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "genresUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_genresUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Channel Logos
   else if (settingName == "logoPathType")
-    return SetSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_logoPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<PathType, ADDON_STATUS>(settingName, settingValue, m_logoPathType, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "logoPath")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "logoBaseUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoBaseUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "logoFromEpg")
-    return SetSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Timeshift
   else if (settingName == "timeshiftEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
@@ -197,7 +152,7 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const void* sett
   else if (settingName == "catchupDays")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupDays, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "allChannelsCatchupMode")
-    return SetSetting<CatchupMode, ADDON_STATUS>(settingName, settingValue, m_allChannelsCatchupMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+    return SetEnumSetting<CatchupMode, ADDON_STATUS>(settingName, settingValue, m_allChannelsCatchupMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupPlayEpgAsLive")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayEpgAsLive, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupWatchEpgBeginBufferMins")

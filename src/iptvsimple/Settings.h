@@ -59,8 +59,8 @@ namespace iptvsimple
       return settings;
     }
 
-    void ReadFromAddon(const std::string& userPath, const std::string clientPath);
-    ADDON_STATUS SetValue(const std::string& settingName, const void* settingValue);
+    void ReadFromAddon(const std::string& userPath, const std::string& clientPath);
+    ADDON_STATUS SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue);
 
     const std::string& GetUserPath() const { return m_userPath; }
     const std::string& GetClientPath() const { return m_clientPath; }
@@ -134,10 +134,19 @@ namespace iptvsimple
     Settings(Settings const&) = delete;
     void operator=(Settings const&) = delete;
 
-    template <typename T, typename V>
-    V SetSetting(const std::string& settingName, const void* settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
+    template<typename T, typename V>
+    V SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
     {
-      T newValue =  *static_cast<const T*>(settingValue);
+      T newValue;
+      if (std::is_same<T, float>::value)
+        newValue = static_cast<T>(settingValue.GetFloat());
+      else if (std::is_same<T, bool>::value)
+        newValue = static_cast<T>(settingValue.GetBoolean());
+      else if (std::is_same<T, unsigned int>::value)
+        newValue = static_cast<T>(settingValue.GetUInt());
+      else
+        newValue = static_cast<T>(settingValue.GetInt());
+
       if (newValue != currentValue)
       {
         std::string formatString = "%s - Changed Setting '%s' from %d to %d";
@@ -149,12 +158,26 @@ namespace iptvsimple
       }
 
       return defaultReturnValue;
-    };
+    }
 
-    template <typename V>
-    V SetStringSetting(const std::string &settingName, const void* settingValue, std::string &currentValue, V returnValueIfChanged, V defaultReturnValue)
+    template<typename T, typename V>
+    V SetEnumSetting(const std::string& settingName, const kodi::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
     {
-      const std::string strSettingValue = static_cast<const char*>(settingValue);
+      T newValue = settingValue.GetEnum<T>();
+      if (newValue != currentValue)
+      {
+        utilities::Logger::Log(utilities::LogLevel::LEVEL_INFO, "%s - Changed Setting '%s' from %d to %d", __FUNCTION__, settingName.c_str(), currentValue, newValue);
+        currentValue = newValue;
+        return returnValueIfChanged;
+      }
+
+      return defaultReturnValue;
+    }
+
+    template<typename V>
+    V SetStringSetting(const std::string& settingName, const kodi::CSettingValue& settingValue, std::string& currentValue, V returnValueIfChanged, V defaultReturnValue)
+    {
+      const std::string strSettingValue = settingValue.GetString();
 
       if (strSettingValue != currentValue)
       {

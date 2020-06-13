@@ -9,7 +9,6 @@
 #include "PlaylistLoader.h"
 
 #include "Settings.h"
-#include "../client.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/WebUtils.h"
@@ -21,15 +20,22 @@
 #include <sstream>
 #include <vector>
 
+#include <kodi/General.h>
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-PlaylistLoader::PlaylistLoader(Channels& channels, ChannelGroups& channelGroups)
-  : m_channels(channels), m_channelGroups(channelGroups), m_m3uLocation(Settings::GetInstance().GetM3ULocation()),
-    m_logoLocation(Settings::GetInstance().GetLogoLocation()) {}
+PlaylistLoader::PlaylistLoader(kodi::addon::CInstancePVRClient* client, Channels& channels, ChannelGroups& channelGroups)
+  : m_channelGroups(channelGroups), m_channels(channels), m_client(client) { }
+
+bool PlaylistLoader::Init()
+{
+  m_m3uLocation = Settings::GetInstance().GetM3ULocation();
+  m_logoLocation = Settings::GetInstance().GetLogoLocation();
+  return true;
+}
 
 bool PlaylistLoader::LoadPlayList()
 {
@@ -175,7 +181,8 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     // parse name
     std::string channelName = line.substr(commaIndex + 1);
     channelName = StringUtils::Trim(channelName);
-    channel.SetChannelName(XBMC->UnknownToUTF8(channelName.c_str()));
+    kodi::UnknownToUTF8(channelName, channelName);
+    channel.SetChannelName(channelName);
 
     // parse info line containng the attributes for a channel
     const std::string infoLine = line.substr(colonIndex + 1, commaIndex - colonIndex - 1);
@@ -191,6 +198,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
     std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
     std::string strCatchupCorrection = ReadMarkerValue(infoLine, CATCHUP_CORRECTION);
+
+    kodi::UnknownToUTF8(strTvgName, strTvgName);
+    kodi::UnknownToUTF8(strCatchupSource, strCatchupSource);
 
     // Some providers use a 'catchup-type' tag instead of 'catchup'
     if (strCatchup.empty())
@@ -213,8 +223,8 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     bool isRadio = StringUtils::EqualsNoCase(strRadio, "true");
     channel.SetTvgId(strTvgId);
-    channel.SetTvgName(XBMC->UnknownToUTF8(strTvgName.c_str()));
-    channel.SetCatchupSource(XBMC->UnknownToUTF8(strCatchupSource.c_str()));
+    channel.SetTvgName(strTvgName);
+    channel.SetCatchupSource(strCatchupSource);
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
     channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
@@ -281,7 +291,7 @@ void PlaylistLoader::ParseAndAddChannelGroups(const std::string& groupNamesListS
 
   while (std::getline(streamGroups, groupName, ';'))
   {
-    groupName = XBMC->UnknownToUTF8(groupName.c_str());
+    kodi::UnknownToUTF8(groupName, groupName);
 
     ChannelGroup group;
     group.SetGroupName(groupName);
@@ -332,8 +342,8 @@ void PlaylistLoader::ReloadPlayList()
 
   if (LoadPlayList())
   {
-    PVR->TriggerChannelUpdate();
-    PVR->TriggerChannelGroupsUpdate();
+    m_client->TriggerChannelUpdate();
+    m_client->TriggerChannelGroupsUpdate();
   }
 }
 

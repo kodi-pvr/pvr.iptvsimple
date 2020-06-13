@@ -9,7 +9,6 @@
 #include "Epg.h"
 
 #include "Settings.h"
-#include "../client.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/XMLUtils.h"
@@ -26,9 +25,8 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace pugi;
 
-Epg::Epg(Channels& channels)
-  : m_channels(channels), m_xmltvLocation(Settings::GetInstance().GetEpgLocation()), m_epgTimeShift(Settings::GetInstance().GetEpgTimeshiftSecs()),
-    m_tsOverride(Settings::GetInstance().GetTsOverride()), m_lastStart(0), m_lastEnd(0)
+Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels)
+  : m_lastStart(0), m_lastEnd(0), m_channels(channels), m_client(client)
 {
   FileUtils::CopyDirectory(FileUtils::GetResourceDataPath() + GENRE_DIR, GENRE_ADDON_DATA_BASE_DIR, true);
 
@@ -36,6 +34,14 @@ Epg::Epg(Channels& channels)
   {
     MoveOldGenresXMLFileToNewLocation();
   }
+}
+
+bool Epg::Init()
+{
+  m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
+  m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
+  m_tsOverride = Settings::GetInstance().GetTsOverride();
+  return true;
 }
 
 void Epg::Clear()
@@ -292,15 +298,15 @@ void Epg::ReloadEPG()
   if (LoadEPG(m_lastStart, m_lastEnd))
   {
     for (const auto& myChannel : m_channels.GetChannelsList())
-      PVR->TriggerEpgUpdate(myChannel.GetUniqueId());
+      m_client->TriggerEpgUpdate(myChannel.GetUniqueId());
   }
 }
 
-PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t start, time_t end)
+PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results)
 {
   for (const auto& myChannel : m_channels.GetChannelsList())
   {
-    if (myChannel.GetUniqueId() != iChannelUid)
+    if (myChannel.GetUniqueId() != channelUid)
       continue;
 
     if (start > m_lastStart || end > m_lastEnd)
@@ -326,11 +332,11 @@ PVR_ERROR Epg::GetEPGForChannel(ADDON_HANDLE handle, int iChannelUid, time_t sta
       if ((epgEntry.GetEndTime() + shift) < start)
         continue;
 
-      EPG_TAG tag = {0};
+      kodi::addon::PVREPGTag tag;
 
-      epgEntry.UpdateTo(tag, iChannelUid, shift, m_genreMappings);
+      epgEntry.UpdateTo(tag, channelUid, shift, m_genreMappings);
 
-      PVR->TransferEpgEntry(handle, &tag);
+      results.Add(tag);
 
       if ((epgEntry.GetStartTime() + shift) > end)
         break;
@@ -407,7 +413,7 @@ void Epg::ApplyChannelsLogosFromEPG()
   }
 
   if (updated)
-    PVR->TriggerChannelUpdate();
+    m_client->TriggerChannelUpdate();
 }
 
 bool Epg::LoadGenres()

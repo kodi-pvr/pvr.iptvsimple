@@ -17,7 +17,7 @@
 
 #include <mutex>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/pvr/EPG.h>
 
 namespace iptvsimple
 {
@@ -29,8 +29,8 @@ namespace iptvsimple
     CatchupController(iptvsimple::Epg& epg, std::mutex* mutex);
 
     void ProcessChannelForPlayback(const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
-    void ProcessEPGTagForTimeshiftedPlayback(const EPG_TAG& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
-    void ProcessEPGTagForVideoPlayback(const EPG_TAG& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
+    void ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::PVREPGTag& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
+    void ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGTag& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
 
     std::string GetCatchupUrlFormatString(const data::Channel& channel) const;
     std::string GetCatchupUrl(const data::Channel& channel) const;
@@ -47,7 +47,7 @@ namespace iptvsimple
     std::string GetStreamKey(const data::Channel& channel, bool fromEpg) const;
 
     // Programme helpers
-    void UpdateProgrammeFrom(const EPG_TAG& epgTag, int tvgShift);
+    void UpdateProgrammeFrom(const kodi::addon::PVREPGTag& epgTag, int tvgShift);
     void UpdateProgrammeFrom(const data::EpgEntry& epgEntry, int tvgShift);
     void ClearProgramme();
 

@@ -83,8 +83,8 @@ StreamEntry StreamManager::StreamEntryLookup(const Channel& channel, const std::
 
   // If a channel has a MIME Type we always override with that
   if (channel.HasMimeType())
-    streamEntry->SetMimeType(channel.GetMimeType());  
-  
+    streamEntry->SetMimeType(channel.GetMimeType());
+
   AddUpdateStreamEntry(streamEntry->GetStreamKey(), streamEntry->GetStreamType(), streamEntry->GetMimeType());
 
   return *streamEntry;

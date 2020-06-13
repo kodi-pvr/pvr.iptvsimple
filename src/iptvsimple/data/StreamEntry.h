@@ -33,7 +33,7 @@ namespace iptvsimple
       void SetStreamKey(const std::string& value) { m_streamKey = value; }
 
       const StreamType& GetStreamType() const { return m_streamType; }
-      void SetStreamType(const StreamType& value) { m_streamType = value; }      
+      void SetStreamType(const StreamType& value) { m_streamType = value; }
 
       const std::string& GetMimeType() const { return m_mimeType; }
       void SetMimeType(const std::string& value) { m_mimeType = value; }

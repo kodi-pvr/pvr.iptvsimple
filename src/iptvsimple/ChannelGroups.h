@@ -14,7 +14,7 @@
 #include <string>
 #include <vector>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/pvr/ChannelGroups.h>
 
 namespace iptvsimple
 {
@@ -24,8 +24,8 @@ namespace iptvsimple
     ChannelGroups(const iptvsimple::Channels& channels);
 
     int GetChannelGroupsAmount() const;
-    void GetChannelGroups(std::vector<PVR_CHANNEL_GROUP>& kodiChannelGroups, bool radio) const;
-    PVR_ERROR GetChannelGroupMembers(ADDON_HANDLE handle, const PVR_CHANNEL_GROUP& group);
+    PVR_ERROR GetChannelGroups(kodi::addon::PVRChannelGroupsResultSet& results, bool radio) const;
+    PVR_ERROR GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& group, kodi::addon::PVRChannelGroupMembersResultSet& results);
 
     int AddChannelGroup(iptvsimple::data::ChannelGroup& channelGroup);
     iptvsimple::data::ChannelGroup* GetChannelGroup(int uniqueId);

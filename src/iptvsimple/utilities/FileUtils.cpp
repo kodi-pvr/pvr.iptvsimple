@@ -8,10 +8,8 @@
 
 #include "FileUtils.h"
 
-#include "../../client.h"
 #include "../Settings.h"
 
-#include <kodi/libXBMC_addon.h>
 #include <zlib.h>
 
 using namespace iptvsimple;
@@ -50,13 +48,12 @@ std::string FileUtils::GetUserDataAddonFilePath(const std::string& fileName)
 int FileUtils::GetFileContents(const std::string& url, std::string& content)
 {
   content.clear();
-  void* fileHandle = XBMC->OpenFile(url.c_str(), 0);
-  if (fileHandle)
+  kodi::vfs::CFile file;
+  if (file.OpenFile(url))
   {
     char buffer[1024];
-    while (int bytesRead = XBMC->ReadFile(fileHandle, buffer, 1024))
+    while (int bytesRead = file.Read(buffer, 1024))
       content.append(buffer, bytesRead);
-    XBMC->CloseFile(fileHandle);
   }
 
   return content.length();
@@ -142,15 +139,15 @@ int FileUtils::GetCachedFileContents(const std::string& cachedName, const std::s
   const std::string cachedPath = FileUtils::GetUserDataAddonFilePath(cachedName);
 
   // check cached file is exists
-  if (useCache && XBMC->FileExists(cachedPath.c_str(), false))
+  if (useCache && kodi::vfs::FileExists(cachedPath, false))
   {
-    struct __stat64 statCached;
-    struct __stat64 statOrig;
+    kodi::vfs::FileStatus statCached;
+    kodi::vfs::FileStatus statOrig;
 
-    XBMC->StatFile(cachedPath.c_str(), &statCached);
-    XBMC->StatFile(filePath.c_str(), &statOrig);
+    kodi::vfs::StatFile(cachedPath, statCached);
+    kodi::vfs::StatFile(filePath, statOrig);
 
-    needReload = statCached.st_mtime < statOrig.st_mtime || statOrig.st_mtime == 0;
+    needReload = statCached.GetModificationTime() < statOrig.GetModificationTime() || statOrig.GetModificationTime() == 0;
   }
   else
   {
@@ -164,11 +161,10 @@ int FileUtils::GetCachedFileContents(const std::string& cachedName, const std::s
     // write to cache
     if (useCache && contents.length() > 0)
     {
-      void* fileHandle = XBMC->OpenFileForWrite(cachedPath.c_str(), true);
-      if (fileHandle)
+      kodi::vfs::CFile file;
+      if (file.OpenFileForWrite(cachedPath, true))
       {
-        XBMC->WriteFile(fileHandle, contents.c_str(), contents.length());
-        XBMC->CloseFile(fileHandle);
+        file.Write(contents.c_str(), contents.length());
       }
     }
     return contents.length();
@@ -179,34 +175,30 @@ int FileUtils::GetCachedFileContents(const std::string& cachedName, const std::s
 
 bool FileUtils::FileExists(const std::string& file)
 {
-  return XBMC->FileExists(file.c_str(), false);
+  return kodi::vfs::FileExists(file, false);
 }
 
 bool FileUtils::DeleteFile(const std::string& file)
 {
-  return XBMC->DeleteFile(file.c_str());
+  return kodi::vfs::DeleteFile(file);
 }
 
 bool FileUtils::CopyFile(const std::string& sourceFile, const std::string& targetFile)
 {
+  kodi::vfs::CFile file;
   bool copySuccessful = true;
 
   Logger::Log(LEVEL_DEBUG, "%s - Copying file: %s, to %s", __FUNCTION__, sourceFile.c_str(), targetFile.c_str());
 
-  void* sourceFileHandle = XBMC->OpenFile(sourceFile.c_str(), 0x08); //READ_NO_CACHE
-
-  if (sourceFileHandle)
+  if (file.OpenFile(sourceFile, ADDON_READ_NO_CACHE))
   {
-    const std::string fileContents = ReadFileContents(sourceFileHandle);
+    const std::string fileContents = ReadFileContents(file);
 
-    XBMC->CloseFile(sourceFileHandle);
+    file.Close();
 
-    void* targetFileHandle = XBMC->OpenFileForWrite(targetFile.c_str(), true);
-
-    if (targetFileHandle)
+    if (file.OpenFileForWrite(targetFile, true))
     {
-      XBMC->WriteFile(targetFileHandle, fileContents.c_str(), fileContents.length());
-      XBMC->CloseFile(targetFileHandle);
+      file.Write(fileContents.c_str(), fileContents.length());
     }
     else
     {
@@ -227,26 +219,22 @@ bool FileUtils::CopyDirectory(const std::string& sourceDir, const std::string& t
 {
   bool copySuccessful = true;
 
-  XBMC->CreateDirectory(targetDir.c_str());
+  kodi::vfs::CreateDirectory(targetDir);
 
-  VFSDirEntry* entries;
-  unsigned int numEntries;
-
-  if (XBMC->GetDirectory(sourceDir.c_str(), "", &entries, &numEntries))
+  std::vector<kodi::vfs::CDirEntry> entries;
+  if (kodi::vfs::GetDirectory(sourceDir, "", entries))
   {
-    for (int i = 0; i < numEntries; i++)
+    for (const auto& entry : entries)
     {
-      if (entries[i].folder && recursiveCopy)
+      if (entry.IsFolder() && recursiveCopy)
       {
-        copySuccessful = CopyDirectory(sourceDir + "/" + entries[i].label, targetDir + "/" + entries[i].label, true);
+        copySuccessful = CopyDirectory(sourceDir + "/" + entry.Label(), targetDir + "/" + entry.Label(), true);
       }
-      else if (!entries[i].folder)
+      else if (!entry.IsFolder())
       {
-        copySuccessful = CopyFile(sourceDir + "/" + entries[i].label, targetDir + "/" + entries[i].label);
+        copySuccessful = CopyFile(sourceDir + "/" + entry.Label(), targetDir + "/" + entry.Label());
       }
     }
-
-    XBMC->FreeDirectory(entries, numEntries);
   }
   else
   {
@@ -258,21 +246,15 @@ bool FileUtils::CopyDirectory(const std::string& sourceDir, const std::string& t
 
 std::string FileUtils::GetSystemAddonPath()
 {
-  char path[1024];
-  XBMC->GetSetting("__addonpath__", path);
-
-  return path;
+  return kodi::GetAddonPath();
 }
 
 std::string FileUtils::GetResourceDataPath()
 {
-  std::string resourcesDataPath = GetSystemAddonPath();
-  resourcesDataPath += "/resources/data";
-
-  return resourcesDataPath;
+  return kodi::GetAddonPath("/resources/data");
 }
 
-std::string FileUtils::ReadFileContents(void* fileHandle)
+std::string FileUtils::ReadFileContents(kodi::vfs::CFile& file)
 {
   std::string fileContents;
 
@@ -280,7 +262,7 @@ std::string FileUtils::ReadFileContents(void* fileHandle)
   int bytesRead = 0;
 
   // Read until EOF or explicit error
-  while ((bytesRead = XBMC->ReadFile(fileHandle, buffer, sizeof(buffer) - 1)) > 0)
+  while ((bytesRead = file.Read(buffer, sizeof(buffer) - 1)) > 0)
     fileContents.append(buffer, bytesRead);
 
   return fileContents;

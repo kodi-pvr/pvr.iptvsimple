@@ -14,7 +14,7 @@
 #include <map>
 #include <string>
 
-#include <kodi/xbmc_pvr_types.h>
+#include <kodi/addon-instance/pvr/General.h>
 
 namespace iptvsimple
 {
@@ -27,8 +27,7 @@ namespace iptvsimple
     class StreamUtils
     {
     public:
-      static void SetAllStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamUrl, std::map<std::string, std::string>& catchupProperties);
-      static void SetStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const std::string& name, const std::string& value);
+      static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, std::map<std::string, std::string>& catchupProperties);
       static const StreamType GetStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
       static const StreamType InspectStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
       static const std::string GetManifestType(const StreamType& streamType);
@@ -44,8 +43,8 @@ namespace iptvsimple
 
     private:
       static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);
-      static void InspectAndSetFFmpegDirectStreamProperties(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamUrl);
-      static void SetFFmpegDirectManifestTypeStreamProperty(PVR_NAMED_VALUE* properties, unsigned int* propertiesCount, unsigned int propertiesMax, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType);
+      static void InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl);
+      static void SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType);
       static bool CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName);
 
     };

@@ -13,7 +13,7 @@
 #include <string>
 #include <vector>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/pvr/EPG.h>
 #include <pugixml.hpp>
 
 namespace iptvsimple
@@ -94,7 +94,7 @@ namespace iptvsimple
       bool IsNew() const { return m_new; }
       void SetNew(int value) { m_new = value; }
 
-      void UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
+      void UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id,
                       int start, int end, int minShiftTime, int maxShiftTime);
 

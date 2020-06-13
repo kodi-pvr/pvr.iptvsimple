@@ -22,54 +22,50 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace pugi;
 
-void EpgEntry::UpdateTo(EPG_TAG& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genreMappings)
+void EpgEntry::UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genreMappings)
 {
-  left.iUniqueBroadcastId  = m_broadcastId;
-  left.strTitle            = m_title.c_str();
-  left.iUniqueChannelId    = iChannelUid;
-  left.startTime           = m_startTime + timeShift;
-  left.endTime             = m_endTime + timeShift;
-  left.strPlotOutline      = m_plotOutline.c_str();
-  left.strPlot             = m_plot.c_str();
-  left.strOriginalTitle    = nullptr;  /* not supported */
-  left.strCast             = m_cast.c_str();
-  left.strDirector         = m_director.c_str();
-  left.strWriter           = m_writer.c_str();
-  left.iYear               = m_year;
-  left.strIMDBNumber       = nullptr;  /* not supported */
-  left.strIconPath         = m_iconPath.c_str();
+  left.SetUniqueBroadcastId(m_broadcastId);
+  left.SetTitle(m_title);
+  left.SetUniqueChannelId(iChannelUid);
+  left.SetStartTime(m_startTime + timeShift);
+  left.SetEndTime(m_endTime + timeShift);
+  left.SetPlotOutline(m_plotOutline);
+  left.SetPlot(m_plot);
+  left.SetCast(m_cast);
+  left.SetDirector(m_director);
+  left.SetWriter(m_writer);
+  left.SetYear(m_year);
+  left.SetIconPath(m_iconPath);
   if (SetEpgGenre(genreMappings))
   {
-    left.iGenreType           = m_genreType;
+    left.SetGenreType(m_genreType);
     if (Settings::GetInstance().UseEpgGenreTextWhenMapping())
     {
       //Setting this value in sub type allows custom text to be displayed
       //while still sending the type used for EPG colour
-      left.iGenreSubType       = EPG_GENRE_USE_STRING;
-      left.strGenreDescription = m_genreString.c_str();
+      left.SetGenreSubType(EPG_GENRE_USE_STRING);
+      left.SetGenreDescription(m_genreString);
     }
     else
     {
-      left.iGenreSubType       = m_genreSubType;
-      left.strGenreDescription = nullptr;
+      left.SetGenreSubType(m_genreSubType);
     }
   }
   else
   {
-    left.iGenreType          = EPG_GENRE_USE_STRING;
-    left.iGenreSubType       = 0;     /* not supported */
-    left.strGenreDescription = m_genreString.c_str();
+    left.SetGenreType(EPG_GENRE_USE_STRING);
+    left.SetGenreDescription(m_genreString);
   }
-  left.iParentalRating     = 0;     /* not supported */
-  left.iStarRating         = m_starRating;
-  left.iSeriesNumber       = m_seasonNumber;
-  left.iEpisodeNumber      = m_episodeNumber;
-  left.iEpisodePartNumber  = m_episodePartNumber;
-  left.strEpisodeName      = m_episodeName.c_str();
-  left.strFirstAired       = m_firstAired.empty() ? "" : m_firstAired.c_str();
-  left.iFlags              = EPG_TAG_FLAG_UNDEFINED;
+  left.SetStarRating(m_starRating);
+  left.SetSeriesNumber(m_seasonNumber);
+  left.SetEpisodeNumber(m_episodeNumber);
+  left.SetEpisodePartNumber(m_episodePartNumber);
+  left.SetEpisodeName(m_episodeName);
+  left.SetFirstAired(m_firstAired);
+  int iFlags = EPG_TAG_FLAG_UNDEFINED;
   if (m_new)
-    left.iFlags |= EPG_TAG_FLAG_IS_NEW;
+    iFlags |= EPG_TAG_FLAG_IS_NEW;
+  left.SetFlags(iFlags);
 }
 
 bool EpgEntry::SetEpgGenre(const std::vector<EpgGenre> genreMappings)

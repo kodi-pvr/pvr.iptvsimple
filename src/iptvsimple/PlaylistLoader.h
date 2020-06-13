@@ -13,7 +13,7 @@
 
 #include <string>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/PVR.h>
 
 namespace iptvsimple
 {
@@ -43,7 +43,9 @@ namespace iptvsimple
   class PlaylistLoader
   {
   public:
-    PlaylistLoader(iptvsimple::Channels& channels, iptvsimple::ChannelGroups& channelGroups);
+    PlaylistLoader(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::ChannelGroups& channelGroups);
+
+    bool Init();
 
     bool LoadPlayList();
     void ReloadPlayList();
@@ -60,5 +62,6 @@ namespace iptvsimple
 
     iptvsimple::ChannelGroups& m_channelGroups;
     iptvsimple::Channels& m_channels;
+    kodi::addon::CInstancePVRClient* m_client;
   };
 } //namespace iptvsimple

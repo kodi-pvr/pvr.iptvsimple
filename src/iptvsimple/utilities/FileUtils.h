@@ -8,19 +8,8 @@
 
 #pragma once
 
-#include <p8-platform/os.h> // Exception to header ordering, some strange quirk, don't know why
-
+#include <kodi/Filesystem.h>
 #include <string>
-
-// Prevent conflicts with Windows macros where have this names.
-#ifdef _WIN32 // windows
-#ifdef CreateDirectory
-#undef CreateDirectory
-#endif // CreateDirectory
-#ifdef DeleteFile
-#undef DeleteFile
-#endif // DeleteFile
-#endif // _WIN32
 
 namespace iptvsimple
 {
@@ -43,7 +32,7 @@ namespace iptvsimple
       static std::string GetResourceDataPath();
 
     private:
-      static std::string ReadFileContents(void* fileHandle);
+      static std::string ReadFileContents(kodi::vfs::CFile& fileHandle);
     };
   } // namespace utilities
 } // namespace iptvsimple

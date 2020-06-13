@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="5.2.0"
+  version="6.0.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -10,7 +10,7 @@
     <import addon="inputstream.rtmp" minversion="3.0.3" optional="true"/>
   </requires>
   <extension
-    point="xbmc.pvrclient"
+    point="kodi.pvrclient"
     library_@PLATFORM@="@LIBRARY_FILENAME@"/>
   <extension point="xbmc.addon.metadata">
     <summary lang="af_ZA">Kodi PVR byvoegsel vir IPTV ondersteuning. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -169,23 +169,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
-v5.2.0
-- Added: Enable timeshift feature from inputstream.ffmpegdirect
-- Added: Support VOD catchup streams including those via plugin URLs
-- Added: Access to ffmpegdirect settings and inputstream checks (C++ API)
-- Fixed: Fix flussonic ts detected as wrong type
-- Fixed: Use kodis built in inputstreams for plugin urls
-- Fixed: Fix incorrect catchup granularity for flussonic stream
-
-v5.1.0
-- Added: Support catchup-type M3U property
-- Added: Set MIME type and manifest on stream types if required
-- Added: Support multiple occurrences of year, month and day in catchup format specifiers
-- Update: Change docs to use inputstream instead of inputstreamclass
-
-v5.0.0
-- Update PVR API 6.5.1
-- Update Global API 1.2.0
+v6.0.0
+- Update PVR API 7.0.0
+- Rework addon to support new API interface
 
 Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.iptvsimple/changelog.txt
     </news>

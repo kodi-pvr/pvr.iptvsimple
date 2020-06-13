@@ -8,12 +8,11 @@
 
 #include "WebUtils.h"
 
-#include "../../client.h"
-
 #include <cctype>
 #include <iomanip>
 #include <sstream>
 
+#include <kodi/Filesystem.h>
 #include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
@@ -45,13 +44,13 @@ const std::string WebUtils::UrlEncode(const std::string& value)
 std::string WebUtils::ReadFileContentsStartOnly(const std::string& url, int* httpCode)
 {
   std::string strContent;
-  void* fileHandle = XBMC->OpenFile(url.c_str(), 0x08); //READ_NO_CACHE
-  if (fileHandle)
+  kodi::vfs::CFile file;
+
+  if (file.OpenFile(url, ADDON_READ_NO_CACHE))
   {
     char buffer[1024];
-    if (int bytesRead = XBMC->ReadFile(fileHandle, buffer, 1024))
+    if (int bytesRead = file.Read(buffer, 1024))
       strContent.append(buffer, bytesRead);
-    XBMC->CloseFile(fileHandle);
   }
 
   if (strContent.empty())

@@ -11,7 +11,7 @@
 #include <map>
 #include <string>
 
-#include <kodi/libXBMC_pvr.h>
+#include <kodi/addon-instance/pvr/Channels.h>
 
 namespace iptvsimple
 {
@@ -123,7 +123,7 @@ namespace iptvsimple
       void SetInputStreamName(const std::string& value) { m_inputStreamName = value; }
 
       void UpdateTo(Channel& left) const;
-      void UpdateTo(PVR_CHANNEL& left) const;
+      void UpdateTo(kodi::addon::PVRChannel& left) const;
       void Reset();
       void SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName);
       void ConfigureCatchupMode();

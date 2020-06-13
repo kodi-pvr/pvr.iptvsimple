@@ -8,7 +8,6 @@
 
 #include "Channels.h"
 
-#include "../client.h"
 #include "ChannelGroups.h"
 #include "Settings.h"
 #include "utilities/FileUtils.h"
@@ -22,8 +21,11 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-Channels::Channels()
-  : m_currentChannelNumber(Settings::GetInstance().GetStartChannelNumber()) {}
+bool Channels::Init()
+{
+  Clear();
+  return true;
+}
 
 void Channels::Clear()
 {
@@ -36,7 +38,7 @@ int Channels::GetChannelsAmount() const
   return m_channels.size();
 }
 
-void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) const
+PVR_ERROR Channels::GetChannels(kodi::addon::PVRChannelsResultSet& results, bool radio) const
 {
   // We set a channel order here that applies to the 'Any channels' group in kodi-pvr
   // This allows the users to use the 'Backend Order' sort option in the left to
@@ -48,19 +50,23 @@ void Channels::GetChannels(std::vector<PVR_CHANNEL>& kodiChannels, bool radio) c
     {
       Logger::Log(LEVEL_DEBUG, "%s - Transfer channel '%s', ChannelId '%d', ChannelNumber: '%d'", __FUNCTION__, channel.GetChannelName().c_str(),
                   channel.GetUniqueId(), channel.GetChannelNumber());
-      PVR_CHANNEL kodiChannel = {0};
+      kodi::addon::PVRChannel kodiChannel;
 
       channel.UpdateTo(kodiChannel);
-      kodiChannel.iOrder = channelOrder++; // Keep the channels in list order as per the M3U
+      kodiChannel.SetOrder(channelOrder++); // Keep the channels in list order as per the M3U
 
-      kodiChannels.emplace_back(kodiChannel);
+      results.Add(kodiChannel);
     }
   }
+
+  Logger::Log(LEVEL_DEBUG, "%s - channels available '%d', radio = %d", __FUNCTION__, m_channels.size(), radio);
+
+  return PVR_ERROR_NO_ERROR;
 }
 
-bool Channels::GetChannel(const PVR_CHANNEL& channel, Channel& myChannel) const
+bool Channels::GetChannel(const kodi::addon::PVRChannel& channel, Channel& myChannel) const
 {
-  return GetChannel(static_cast<int>(channel.iUniqueId), myChannel);
+  return GetChannel(static_cast<int>(channel.GetUniqueId()), myChannel);
 }
 
 bool Channels::GetChannel(int uniqueId, Channel& myChannel) const
