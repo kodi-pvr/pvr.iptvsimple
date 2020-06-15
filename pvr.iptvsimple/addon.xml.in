@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="6.0.0"
+  version="6.0.1"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v6.0.1
+- Update PVR API 7.0.1
+
 v6.0.0
 - Update PVR API 7.0.0
 - Rework addon to support new API interface
