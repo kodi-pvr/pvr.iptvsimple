@@ -27,6 +27,9 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
     // Channel has an inputstream class set so we only set the stream URL
     properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
+    if (channel.GetInputStreamName() != PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG)
+      CheckInputstreamInstalledAndEnabled(channel.GetInputStreamName());
+
     if (channel.GetInputStreamName() == INPUTSTREAM_FFMPEGDIRECT)
       InspectAndSetFFmpegDirectStreamProperties(properties, channel, streamURL);
   }

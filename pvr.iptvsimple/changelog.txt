@@ -1,3 +1,6 @@
+v6.1.0
+- Added: Check inputstream is installed or enabled if a custom inputstream is provided in M3U
+
 v6.0.1
 - Update PVR API 7.0.1
 
