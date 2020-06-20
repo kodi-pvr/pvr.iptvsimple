@@ -155,6 +155,15 @@ void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::ad
 
     SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
   }
+
+  if (channel.SupportsLiveStreamTimeshifting() &&
+      channel.GetProperty("inputstream.ffmpegdirect.stream_mode").empty() &&
+      Settings::GetInstance().AlwaysEnableTimeshiftModeIfMissing())
+  {
+    properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
+    if (channel.GetProperty("inputstream.ffmpegdirect.is_realtime_stream").empty())
+      properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
+  }
 }
 
 void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType)

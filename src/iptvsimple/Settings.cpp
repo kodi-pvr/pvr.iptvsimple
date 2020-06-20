@@ -55,6 +55,7 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   // Timeshift
   m_timeshiftEnabled = kodi::GetSettingBoolean("timeshiftEnabled", false);
   m_timeshiftEnabledHttp = kodi::GetSettingBoolean("timeshiftEnabledHttp", false);
+  m_timeshiftEnabledCustom = kodi::GetSettingBoolean("timeshiftEnabledCustom", false);
 
   // Catchup
   m_catchupEnabled = kodi::GetSettingBoolean("catchupEnabled", false);
@@ -144,6 +145,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSet
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "timeshiftEnabledHttp")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabledHttp, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "timeshiftEnabledCustom")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabledCustom, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Catchup
   else if (settingName == "catchupEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);

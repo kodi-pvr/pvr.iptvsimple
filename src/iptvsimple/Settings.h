@@ -103,6 +103,7 @@ namespace iptvsimple
 
     bool IsTimeshiftEnabled() const { return m_timeshiftEnabled; }
     bool IsTimeshiftEnabledHttp() const { return m_timeshiftEnabledHttp; }
+    bool AlwaysEnableTimeshiftModeIfMissing() const { return m_timeshiftEnabledCustom; }
 
     bool IsCatchupEnabled() const { return m_catchupEnabled; }
     const std::string& GetCatchupQueryFormat() const { return m_catchupQueryFormat; }
@@ -226,6 +227,7 @@ namespace iptvsimple
     // Timeshift
     bool m_timeshiftEnabled = false;
     bool m_timeshiftEnabledHttp = false;
+    bool m_timeshiftEnabledCustom = false;
 
     // Catchup
     bool m_catchupEnabled = false;
