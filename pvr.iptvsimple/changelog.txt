@@ -1,3 +1,6 @@
+v6.2.0
+- Added: Add advanced option to always enabled timeshift for supported streams using custom M3U properties
+
 v6.1.0
 - Added: Check inputstream is installed or enabled if a custom inputstream is provided in M3U
 
