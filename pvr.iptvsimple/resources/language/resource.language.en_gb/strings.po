@@ -385,7 +385,17 @@ msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
 msgstr ""
 
-#empty strings from id 30123 to 30499
+#. label-group: Timeshift - Inputstream Settings
+msgctxt "#30124"
+msgid "Inputstream Settings"
+msgstr ""
+
+#. label: Timeshift - timeshiftCustom
+msgctxt "#30125"
+msgid "Always enable timeshift stream mode if missing"
+msgstr ""
+
+#empty strings from id 30126 to 30499
 
 #. notification: Inputstreams
 msgctxt "#30500"
@@ -669,12 +679,17 @@ msgctxt "#30721"
 msgid "Enable the timeshift feature."
 msgstr ""
 
-#. help: Timeshift - timeshiftHttp
+#. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
-msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The `inputstream.ffmpegdirect` addon will be used for tiemshift."
+msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The `inputstream.ffmpegdirect` addon will be used for timeshift."
 msgstr ""
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
+msgstr ""
+
+#. help: Timeshift - timeshiftEnabledCustom
+msgctxt "#30724"
+msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types."
 msgstr ""
