@@ -50,7 +50,8 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
 
       if (streamType == StreamType::HLS || streamType == StreamType::TS || streamType == StreamType::OTHER_TYPE)
       {
-        if (channel.IsCatchupSupported() && CheckInputstreamInstalledAndEnabled(CATCHUP_INPUTSTREAM_NAME))
+        if (channel.IsCatchupSupported() && channel.CatchupSupportsTimeshifting() &&
+            CheckInputstreamInstalledAndEnabled(CATCHUP_INPUTSTREAM_NAME))
         {
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
           SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
@@ -58,6 +59,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
         else if (channel.SupportsLiveStreamTimeshifting() && CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
         {
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
+          SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
           properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
           properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
         }
