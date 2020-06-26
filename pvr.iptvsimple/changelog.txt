@@ -1,3 +1,6 @@
+v6.2.1
+- Fixed: Fix timeshift not working for catchup streams without timestamp
+
 v6.2.0
 - Added: Add advanced option to always enabled timeshift for supported streams using custom M3U properties
 
