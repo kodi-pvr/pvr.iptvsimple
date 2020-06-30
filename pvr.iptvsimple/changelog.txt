@@ -1,3 +1,6 @@
+v6.2.2
+- Fixed: Correctly pass realtime stream information to inputstream.ffmpegdirect addon
+
 v6.2.1
 - Fixed: Fix timeshift not working for catchup streams without timestamp
 
