@@ -181,7 +181,8 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
 {
   catchupProperties.insert({"epgplaybackaslive", playbackAsLive ? "true" : "false"});
 
-  catchupProperties.insert({"inputstream.ffmpegdirect.is_realtime_stream", "true"});
+  catchupProperties.insert({"inputstream.ffmpegdirect.is_realtime_stream",
+  	StringUtils::EqualsNoCase(channel.GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM), "true") ? "true" : "false"});
   catchupProperties.insert({"inputstream.ffmpegdirect.stream_mode", "catchup"});
 
   catchupProperties.insert({"inputstream.ffmpegdirect.default_url", channel.GetStreamURL()});
