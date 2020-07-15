@@ -56,7 +56,9 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
           SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
         }
-        else if (channel.SupportsLiveStreamTimeshifting() && CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
+        else if (channel.SupportsLiveStreamTimeshifting() &&
+                 channel.GetCatchupMode() != CatchupMode::VOD &&
+                 CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
         {
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
           SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
