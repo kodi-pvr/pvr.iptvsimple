@@ -1,3 +1,6 @@
+v6.2.3
+- Fixed: Don't allow timeshift mode on catchup VOD stream
+
 v6.2.2
 - Fixed: Correctly pass realtime stream information to inputstream.ffmpegdirect addon
 
