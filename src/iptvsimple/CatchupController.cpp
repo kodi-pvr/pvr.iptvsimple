@@ -13,10 +13,9 @@
 #include "Settings.h"
 #include "data/Channel.h"
 #include "utilities/Logger.h"
+#include "utilities/StringUtils.h"
 
 #include <regex>
-
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

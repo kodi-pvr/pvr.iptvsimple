@@ -7,10 +7,9 @@
  */
 
 #include "Logger.h"
+#include "StringUtils.h"
 
 #include <cstdarg>
-
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple::utilities;
 

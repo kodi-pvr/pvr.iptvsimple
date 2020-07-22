@@ -9,13 +9,13 @@
 #include "EpgEntry.h"
 
 #include "../Settings.h"
+#include "../utilities/StringUtils.h"
 #include "../utilities/XMLUtils.h"
 
 #include <cmath>
 #include <cstdlib>
 #include <regex>
 
-#include <p8-platform/util/StringUtils.h>
 #include <pugixml.hpp>
 
 using namespace iptvsimple;

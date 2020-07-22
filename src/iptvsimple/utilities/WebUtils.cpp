@@ -6,6 +6,7 @@
  *  See LICENSE.md for more information.
  */
 
+#include "StringUtils.h"
 #include "WebUtils.h"
 
 #include <cctype>
@@ -13,7 +14,6 @@
 #include <sstream>
 
 #include <kodi/Filesystem.h>
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::utilities;

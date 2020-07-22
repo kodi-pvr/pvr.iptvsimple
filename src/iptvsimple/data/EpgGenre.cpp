@@ -8,11 +8,10 @@
 
 #include "EpgGenre.h"
 
+#include "../utilities/StringUtils.h"
 #include "../utilities/XMLUtils.h"
 
 #include <cstdlib>
-
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

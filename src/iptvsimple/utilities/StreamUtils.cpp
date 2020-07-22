@@ -7,6 +7,7 @@
  */
 
 #include "StreamUtils.h"
+#include "StringUtils.h"
 
 #include "../Settings.h"
 #include "FileUtils.h"
@@ -14,7 +15,6 @@
 #include "WebUtils.h"
 
 #include <kodi/General.h>
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
