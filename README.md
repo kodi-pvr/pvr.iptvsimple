@@ -132,7 +132,7 @@ For any TS stream an additional property should be added to every M3U entry usin
 
 * **Enable timeshift**: Enable the timeshift feature.
 * **Enable timeshift for HTTP based streams**: Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The `inputstream.ffmpegdirect` addon will be used for timeshift."
-* **Always enable timeshift stream mode if missing**: If a `stream_mode` property is not specified along with an `inputstream.ffmpegdirect` property always add it for any supported stream types.
+* **Always enable timeshift stream mode if missing**: If a `stream_mode` property is not specified along with an `inputstream.ffmpegdirect` property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live.
 * **Modify inputstream.ffmpegdirect settings..**: Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings.
 
 ### Catchup

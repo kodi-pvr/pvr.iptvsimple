@@ -691,5 +691,5 @@ msgstr ""
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
-msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types."
+msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
 msgstr ""
