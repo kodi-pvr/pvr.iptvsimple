@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="6.2.4"
+  version="6.3.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,10 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v6.3.0
+- Update: Allow max catchup of 15 days
+- Added: Support premiere and new tag from XMLTV
+
 v6.2.4
 - Fixed: Only allow timeshift on streams that are live
 
