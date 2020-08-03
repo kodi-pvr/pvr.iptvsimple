@@ -65,6 +65,8 @@ void EpgEntry::UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeS
   int iFlags = EPG_TAG_FLAG_UNDEFINED;
   if (m_new)
     iFlags |= EPG_TAG_FLAG_IS_NEW;
+  if (m_premiere)
+    iFlags |= EPG_TAG_FLAG_IS_PREMIERE;
   left.SetFlags(iFlags);
 }
 
@@ -233,6 +235,10 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   const auto& starRatingNode = channelNode.child("star-rating");
   if (starRatingNode)
     m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
+
+  const auto& premiereNode = channelNode.child("premiere");
+  if (premiereNode)
+    m_premiere = true;
 
   std::vector<std::pair<std::string, std::string>> episodeNumbersList;
   for (const auto& episodeNumNode : channelNode.children("episode-num"))
