@@ -9,7 +9,7 @@ Mapping Rytec Text Genres:
  - If a mapping cannot be found the text will be used but there will be no colouring (Genre Description only)
  - All text will be matched in lowercase
 
-If you are creating yoru own text mappings make a copy of this file in the same directory so it's not overwritten and start from there.
+If you are creating your own text mappings make a copy of this file in the same directory so it's not overwritten and start from there.
 
 NOTE: IF YOU MODIFY THIS FILE IT WILL BE OVERWRITTEN NEXT TIME THE ADDON IS STARTED
 
