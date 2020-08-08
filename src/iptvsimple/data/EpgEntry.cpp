@@ -236,6 +236,10 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   if (starRatingNode)
     m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
 
+  const auto& newNode = channelNode.child("new");
+  if (newNode)
+    m_new = true;
+
   const auto& premiereNode = channelNode.child("premiere");
   if (premiereNode)
     m_premiere = true;
