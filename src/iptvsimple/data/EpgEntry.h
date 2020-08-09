@@ -94,6 +94,9 @@ namespace iptvsimple
       bool IsNew() const { return m_new; }
       void SetNew(int value) { m_new = value; }
 
+      bool IsPremiere() const { return m_premiere; }
+      void SetPremiere(int value) { m_premiere = value; }
+
       void UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& channelNode, const std::string& id,
                       int start, int end, int minShiftTime, int maxShiftTime);
@@ -127,6 +130,7 @@ namespace iptvsimple
       std::string m_writer;
       std::string m_catchupId;
       bool m_new = false;
+      bool m_premiere = false;
     };
   } //namespace data
 } //namespace iptvsimple

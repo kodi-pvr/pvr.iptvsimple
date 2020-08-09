@@ -341,7 +341,7 @@
           <constraints>
             <minimum>1</minimum>
             <step>1</step>
-            <maximum>7</maximum>
+            <maximum>15</maximum>
           </constraints>
           <default>5</default>
           <dependencies>
