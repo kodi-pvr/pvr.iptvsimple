@@ -26,6 +26,17 @@ For a listing of the supported M3U and XMLTV elements see the appendix [here](#s
 
 In order to build the addon on mac the steps are different to Linux and Windows as the cmake command above will not produce an addon that will run in kodi. Instead using make directly as per the supported build steps for kodi on mac we can build the tools and just the addon on it's own. Following this we copy the addon into kodi. Note that we checkout kodi to a separate directory as this repo will only only be used to build the addon and nothing else.
 
+#### AppVeyour
+Steps
+1. * `cd`
+2. * `git clone --depth=1 https://github.com/xbmc/xbmc.git'
+3. * `cd %app_id%'
+4. * `mkdir build'
+5. * `cd build'
+6. * `mkdir -p definition\%app_id%
+7. * `echo %app_id% %APPVEYOR_BUILD_FOLDER% %APPVEYOR_REPO_COMMIT% > definition\%app_id%\%app_id%.txt'
+8. * `cmake -T host=x64 -G "%GENERATOR%" %WINSTORE% -DADDONS_TO_BUILD=%app_id% -DCMAKE_BUILD_TYPE=%CONFIG% -DADDONS_DEFINITION_DIR=%APPVEYOR_BUILD_FOLDER%/build/definition -           DADDON_SRC_PREFIX=../.. -DCMAKE_INSTALL_PREFIX=../../xbmc/addons -DPACKAGE_ZIP=1 ../../xbmc/cmake/addons`
+
 #### Build tools and initial addon build
 
 1. Get the repos
