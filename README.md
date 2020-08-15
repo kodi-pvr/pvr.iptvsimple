@@ -3,7 +3,7 @@
 [![Build Status](https://dev.azure.com/teamkodi/kodi-pvr/_apis/build/status/kodi-pvr.pvr.iptvsimple?branchName=Matrix)](https://dev.azure.com/teamkodi/kodi-pvr/_build/latest?definitionId=57&branchName=Matrix)
 [![Build Status](https://jenkins.kodi.tv/view/Addons/job/kodi-pvr/job/pvr.iptvsimple/job/Matrix/badge/icon)](https://jenkins.kodi.tv/blue/organizations/jenkins/kodi-pvr%2Fpvr.iptvsimple/branches/)
 [![Coverity Scan Build Status](https://scan.coverity.com/projects/5120/badge.svg)](https://scan.coverity.com/projects/5120)
-[![Build status](https://ci.appveyor.com/api/projects/status/uyf7c799ac864gmg?svg=true)](https://ci.appveyor.com/project/I-Cat/pvr-iptvsimple)
+[![Build status](https://ci.appveyor.com/api/projects/status/uyf7c799ac864gmg/branch/patch-1?svg=true)](https://ci.appveyor.com/project/I-Cat/pvr-iptvsimple/branch/patch-1)
 
 
 # IPTV Simple PVR
