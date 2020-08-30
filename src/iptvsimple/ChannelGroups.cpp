@@ -10,6 +10,8 @@
 
 #include "utilities/Logger.h"
 
+#include <kodi/General.h>
+
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
@@ -87,6 +89,19 @@ PVR_ERROR ChannelGroups::GetChannelGroupMembers(const kodi::addon::PVRChannelGro
 int ChannelGroups::AddChannelGroup(iptvsimple::data::ChannelGroup& channelGroup)
 {
   const ChannelGroup* existingChannelGroup = FindChannelGroup(channelGroup.GetGroupName());
+
+  if (existingChannelGroup && channelGroup.IsRadio() != existingChannelGroup->IsRadio())
+  {
+    // Ok, we have the same channel group name for both TV and Radio which is not allowed
+    // so let's add ' (Radio)' or ' (TV)' depending on which group was added first.
+
+    if (existingChannelGroup->IsRadio())
+      channelGroup.SetGroupName(channelGroup.GetGroupName() + " (" + kodi::GetLocalizedString(30450) + ")"); // ' (TV)';
+    else
+      channelGroup.SetGroupName(channelGroup.GetGroupName() + " (" + kodi::GetLocalizedString(30451) + ")"); // ' (Radio)';
+
+    existingChannelGroup = FindChannelGroup(channelGroup.GetGroupName());
+  }
 
   if (!existingChannelGroup)
   {
