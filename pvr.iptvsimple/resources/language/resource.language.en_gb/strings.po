@@ -395,7 +395,19 @@ msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
 msgstr ""
 
-#empty strings from id 30126 to 30499
+#empty strings from id 30126 to 30449
+
+#. label: TV
+msgctxt "#30450"
+msgid "TV"
+msgstr ""
+
+#. label: Radio
+msgctxt "#30451"
+msgid "Radio"
+msgstr ""
+
+#empty strings from id 30452 to 30499
 
 #. notification: Inputstreams
 msgctxt "#30500"
