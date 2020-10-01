@@ -1,3 +1,6 @@
+v6.3.2
+- Update: Remove p8-platforms and add local StringUtils for cpp17
+
 v6.3.1
 - Fixed: Append TV/Radio to group name if the same group name is used for both channel types
 
