@@ -12,6 +12,7 @@
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/WebUtils.h"
+#include "utilities/StringUtils.h"
 
 #include <chrono>
 #include <cstdlib>
@@ -21,7 +22,6 @@
 #include <vector>
 
 #include <kodi/General.h>
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;

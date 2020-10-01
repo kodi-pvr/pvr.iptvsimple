@@ -8,9 +8,9 @@
 
 #include "Logger.h"
 
-#include <cstdarg>
+#include "StringUtils.h"
 
-#include <p8-platform/util/StringUtils.h>
+#include <cstdarg>
 
 using namespace iptvsimple::utilities;
 

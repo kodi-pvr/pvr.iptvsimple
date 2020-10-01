@@ -12,12 +12,12 @@
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/XMLUtils.h"
+#include "utilities/StringUtils.h"
 
 #include <chrono>
 #include <regex>
 #include <thread>
 
-#include <p8-platform/util/StringUtils.h>
 #include <pugixml.hpp>
 
 using namespace iptvsimple;

@@ -12,12 +12,12 @@
 #include "../utilities/FileUtils.h"
 #include "../utilities/Logger.h"
 #include "../utilities/StreamUtils.h"
+#include "../utilities/StringUtils.h"
 #include "../utilities/WebUtils.h"
 
 #include <regex>
 
 #include <kodi/General.h>
-#include <p8-platform/util/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
