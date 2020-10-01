@@ -375,7 +375,7 @@ msgctxt "#30121"
 msgid "Enable timeshift"
 msgstr ""
 
-#. label: Timeshift - timeshiftHttp
+#. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
 msgstr ""
@@ -395,7 +395,17 @@ msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
 msgstr ""
 
-#empty strings from id 30126 to 30449
+#. label: Timeshift - timeshiftEnabledAll
+msgctxt "#30126"
+msgid "Enable timeshift for all streams"
+msgstr ""
+
+#. label: Timeshift - timeshiftEnabledUdp
+msgctxt "#30127"
+msgid "Enable timeshift for UDP based streams"
+msgstr ""
+
+#empty strings from id 30128 to 30449
 
 #. label: TV
 msgctxt "#30450"
@@ -693,7 +703,7 @@ msgstr ""
 
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
-msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The `inputstream.ffmpegdirect` addon will be used for timeshift."
+msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
 msgstr ""
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
@@ -704,4 +714,14 @@ msgstr ""
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
 msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
+msgstr ""
+
+#. help: Timeshift - timeshiftEnabledAll
+msgctxt "#30725"
+msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr ""
+
+#. help: Timeshift - timeshiftEnabledUdp
+msgctxt "#30726"
+msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
 msgstr ""

@@ -286,11 +286,37 @@
           <default>false</default>
           <control type="toggle" />
         </setting>
-        <setting id="timeshiftEnabledHttp" type="boolean"  parent="timeshiftEnabled" label="30122" help="30722">
+        <setting id="timeshiftEnabledAll" type="boolean"  parent="timeshiftEnabled" label="30126" help="30725">
           <level>0</level>
           <default>true</default>
           <dependencies>
             <dependency type="enable" setting="timeshiftEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledHttp" type="boolean"  parent="timeshiftEnabledAll" label="30122" help="30722">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="timeshiftEnabled" operator="is">true</condition>
+                <condition setting="timeshiftEnabledAll" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledUdp" type="boolean"  parent="timeshiftEnabledAll" label="30127" help="30726">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="timeshiftEnabled" operator="is">true</condition>
+                <condition setting="timeshiftEnabledAll" operator="!is">true</condition>
+              </and>
+            </dependency>
           </dependencies>
           <control type="toggle" />
         </setting>
