@@ -22,7 +22,7 @@ For a listing of the supported M3U and XMLTV elements see the appendix [here](#s
 
 ### Mac OSX
 
-In order to build the addon on mac the steps are different to Linux and Windows as the cmake command above will not produce an addon that will run in kodi. Instead using make directly as per the supported build steps for kodi on mac we can build the tools and just the addon on it's own. Following this we copy the addon into kodi. Note that we checkout kodi to a separate directory as this repo will only only be used to build the addon and nothing else.
+In order to build the addon on mac the steps are different to Linux and Windows as the cmake command above will not produce an addon that will run in Kodi. Instead using make directly as per the supported build steps for Kodi on mac we can build the tools and just the addon on its own. Following this we copy the addon into Kodi. Note that we checkout Kodi to a separate directory as this repo will only only be used to build the addon and nothing else.
 
 #### Build tools and initial addon build
 
@@ -30,7 +30,7 @@ In order to build the addon on mac the steps are different to Linux and Windows 
  * `cd $HOME`
  * `git clone https://github.com/xbmc/xbmc xbmc-addon`
  * `git clone https://github.com/kodi-pvr/pvr.iptvsimple`
-2. Build the kodi tools
+2. Build the Kodi tools
  * `cd $HOME/xbmc-addon/tools/depends`
  * `./bootstrap`
  * `./configure --host=x86_64-apple-darwin`
@@ -41,7 +41,7 @@ In order to build the addon on mac the steps are different to Linux and Windows 
 
 Note that the steps in the following section need to be performed before the addon is installed and you can run it in Kodi.
 
-#### To rebuild the addon and copy to kodi after changes (after the initial addon build)
+#### To rebuild the addon and copy to Kodi after changes (after the initial addon build)
 
 1. `cd $HOME/pvr.iptvsimple`
 2. `./build-install-mac.sh ../xbmc-addon`
@@ -54,7 +54,7 @@ If you would prefer to run the rebuild steps manually instead of using the above
 * [Kodi's PVR development support](https://forum.kodi.tv/forumdisplay.php?fid=136)
 
 ### Settings Levels
-In Kodi 18.2 the level of settings shown will correspond to the level set in the main kodi settings UI: `Basic`, `Standard`, `Advanced` and `Expert`. From Kodi 19 it will be possible to change the settingds level from within the addon settings itself.
+In Kodi 18.2 the level of settings shown will correspond to the level set in the main Kodi settings UI: `Basic`, `Standard`, `Advanced` and `Expert`. From Kodi 19 it will be possible to change the settings level from within the addon settings itself.
 
 ### General
 General settings required for the addon to function.
@@ -93,7 +93,7 @@ Settings related to genres.
 
 The addon will read all the `<category>` elements of a `programme` and use this as the genre string. It is also possible to supply a mapping file to convert the genre string to a genre ID, allowing colour coding of the EPG. When using a mapping file each category will be checked in order until a match is found. Please see: [Using a mapping file for Genres](#using-a-mapping-file-for-genres) in the Appendix for details on how to set this up.
 
-* **Use genre text from XMLTV when mapping genres**: If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text. Only the genre type (and not the sub type) will be used if a mapping is found.
+* **Use genre text from XMLTV when mapping genres**: If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the Kodi default text. Only the genre type (and not the sub type) will be used if a mapping is found.
 * **Location**: Select where to find the genres XML resource. The options are:
     - `Local path` - A path to a gernes XML file whether it be on the device or the local network.
     - `Remote path` - A URL specifying the location of the genres XML file.
@@ -168,7 +168,7 @@ Advanced settings such as multicast relays.
 * **Transform multicast stream URLs**: Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like `udp://@239.239.3.38:5239` would get transformed to something like `http://192.168.1.1:4000/udp/239.239.3.38:5239`.
 * **Relay hostname or IP address**: The hostname or ip address of the multicast relay (`udpxy`) on the local network.
 * **Relay port**: The port of the multicast relay (`udpxy`) on the local network.
-* **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this opton is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`.
+* **Use FFMpeg http reconnect options if possible**: Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg`. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this opton is not enabled it can still be enabled per stream/channel by adding a Kodi property, i.e.: `#KODIPROP:http-reconnect=true`.
 * **Use inputstream.adaptive for m3u8 (HLS) streams**: Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams.
 * **User-Agent**: Select which User-Agent to use if there is not one supplied as a property or as part of the channel stream URL.
 * **Inputstream name**: Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required.
@@ -290,7 +290,7 @@ http://path-to-stream/live/channel-z.ts
 - `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
 - `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
 - `#EXT-X-PLAYLIST-TYPE`: If this element is present with a value of `VOD` (Video on Demand) the stream is marked as not being live.
-- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|user-agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi). If you want to pass custom headers that are not supported by kodi you need to prefix them with an `!`, for example: : `|!name1=val1&!name2=val2`.
+- `URL`: The final line in each channel stanza is the URL used for the stream. Appending `|user-agent=<agent-name>` will change the user agent. Other HTTP header fields can be set in the same fashion: `|name1=val1&name2=val2` etc. The header fields supported in this way by Kodi can be found [here](#http-header-fields-supported-by-kodi). If you want to pass custom headers that are not supported by Kodi you need to prefix them with an `!`, for example: : `|!name1=val1&!name2=val2`.
 
 When processing an XMLTV file the addon will attempt to find a channel loaded from the M3U that matches the EPG channel. It will cycle through the full set of M3U channels checking for one condition on each pass. The first channel found to match is the channel chosen for this EPG channel data.
 
@@ -367,16 +367,16 @@ There is one config file located here: `userdata/addon_data/pvr.iptvsimple/genre
 
 Users can create there own genre mapping files to map their genre strings to genre IDs. This allows the EPG UI to be colour coded per genre.
 
-Kodi uses the following standard for it's genre IDs: https://www.etsi.org/deliver/etsi_en/300400_300499/300468/01.11.01_60/en_300468v011101p.pdf
+Kodi uses the following standard for its genre IDs: https://www.etsi.org/deliver/etsi_en/300400_300499/300468/01.11.01_60/en_300468v011101p.pdf
 
 By default the addon will try to load a file called `genres.xml` and expect it to be here: `userdata/addon_data/pvr.iptvsimple/genres/genreTextMappings/`. However any genres file can be chosen in the addon settings.
 
-The following files are currently available with the addon (this file uses hexadeciaml genreId's):
+The following files are currently available with the addon (this file uses hexadeciaml `genreId` attributes):
     - `Rytec-UK-Ireland.xml`
 
 The file can specify either a hexadecimal `genreId` attribute (recommended) or separate integer values for `type` and `subType`. Mathematically `genreId` is equals to the logical OR or `type` and `subType`, i.e. `genreId = type | subType`.
 
-Note: Once mapped to genre IDs the text displayed can either be the DVB standard text or the genre string text supplied in the XML. If using the text supplied in the XML only the genre type will be passed and each value will correspond to a category and colour (depedning on skin) on the UI. Here are the categories (all examples have 0 for the sub type). It's imortant you map correctly as genres can be used for search.
+Note: Once mapped to genre IDs the text displayed can either be the DVB standard text or the genre string text supplied in the XML. If using the text supplied in the XML only the genre type will be passed and each value will correspond to a category and colour (depedning on skin) on the UI. Here are the categories (all examples have 0 for the sub type). It's important you map correctly as genres can be used for search.
 
 ```
 - 0x10: General Movie / Drama
@@ -432,7 +432,7 @@ Note: Once mapped to genre IDs the text displayed can either be the DVB standard
 
 ### HTTP header fields supported by Kodi
 
-HTTP header fields can be sent by appending the following format to the URL: `|name1=val1&name2=val2`. Note that kodi does not support sending not standard header fields.
+HTTP header fields can be sent by appending the following format to the URL: `|name1=val1&name2=val2`. Note that Kodi does not support sending not standard header fields.
 
 **Special fields**
 
