@@ -12,10 +12,12 @@
 #include "Settings.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
-#include "utilities/StringUtils.h"
 
 #include <regex>
 
+#include <kodi/tools/StringUtils.h>
+
+using namespace kodi::tools;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;

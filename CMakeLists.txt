@@ -33,7 +33,6 @@ set(IPTV_SOURCES src/PVRIptvData.cpp
                  src/iptvsimple/utilities/FileUtils.cpp
                  src/iptvsimple/utilities/Logger.cpp
                  src/iptvsimple/utilities/StreamUtils.cpp
-                 src/iptvsimple/utilities/StringUtils.cpp
                  src/iptvsimple/utilities/WebUtils.cpp)
 
 set(IPTV_HEADERS src/PVRIptvData.h
@@ -53,7 +52,6 @@ set(IPTV_HEADERS src/PVRIptvData.h
                  src/iptvsimple/utilities/FileUtils.h
                  src/iptvsimple/utilities/Logger.h
                  src/iptvsimple/utilities/StreamUtils.h
-                 src/iptvsimple/utilities/StringUtils.h
                  src/iptvsimple/utilities/WebUtils.h
                  src/iptvsimple/utilities/XMLUtils.h)
 

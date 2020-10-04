@@ -12,14 +12,15 @@
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/XMLUtils.h"
-#include "utilities/StringUtils.h"
 
 #include <chrono>
 #include <regex>
 #include <thread>
 
+#include <kodi/tools/StringUtils.h>
 #include <pugixml.hpp>
 
+using namespace kodi::tools;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;

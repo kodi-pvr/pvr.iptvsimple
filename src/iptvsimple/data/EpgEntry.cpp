@@ -9,15 +9,16 @@
 #include "EpgEntry.h"
 
 #include "../Settings.h"
-#include "../utilities/StringUtils.h"
 #include "../utilities/XMLUtils.h"
 
 #include <cmath>
 #include <cstdlib>
 #include <regex>
 
+#include <kodi/tools/StringUtils.h>
 #include <pugixml.hpp>
 
+using namespace kodi::tools;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace pugi;
