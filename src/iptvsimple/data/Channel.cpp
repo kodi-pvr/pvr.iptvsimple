@@ -12,13 +12,14 @@
 #include "../utilities/FileUtils.h"
 #include "../utilities/Logger.h"
 #include "../utilities/StreamUtils.h"
-#include "../utilities/StringUtils.h"
 #include "../utilities/WebUtils.h"
 
 #include <regex>
 
 #include <kodi/General.h>
+#include <kodi/tools/StringUtils.h>
 
+using namespace kodi::tools;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
@@ -213,8 +214,11 @@ bool Channel::IsCatchupSupported() const
 
 bool Channel::SupportsLiveStreamTimeshifting() const
 {
-  return Settings::GetInstance().IsTimeshiftEnabled() && Settings::GetInstance().IsTimeshiftEnabledHttp() &&
-         GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM) == "true" && StringUtils::StartsWith(m_streamURL, "http");
+  return Settings::GetInstance().IsTimeshiftEnabled() && GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM) == "true" &&
+         (Settings::GetInstance().IsTimeshiftEnabledAll() ||
+          (Settings::GetInstance().IsTimeshiftEnabledHttp() && StringUtils::StartsWith(m_streamURL, "http")) ||
+          (Settings::GetInstance().IsTimeshiftEnabledUdp() && StringUtils::StartsWith(m_streamURL, "udp"))
+         );
 }
 
 namespace

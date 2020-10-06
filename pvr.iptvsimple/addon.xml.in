@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="6.3.2"
+  version="6.4.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,11 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v6.4.0
+- Added: Add options to support both UDP and all stream types when using timeshift feature
+- Fixed: README spelling corrections
+- Update: Use add-on supplied StringUtils and remove local version
+
 v6.3.2
 - Update: Remove p8-platforms and add local StringUtils for cpp17
 

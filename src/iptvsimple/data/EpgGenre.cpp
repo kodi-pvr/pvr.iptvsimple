@@ -9,10 +9,12 @@
 #include "EpgGenre.h"
 
 #include "../utilities/XMLUtils.h"
-#include "../utilities/StringUtils.h"
 
 #include <cstdlib>
 
+#include <kodi/tools/StringUtils.h>
+
+using namespace kodi::tools;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace pugi;

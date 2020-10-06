@@ -8,10 +8,12 @@
 
 #include "Logger.h"
 
-#include "StringUtils.h"
 
 #include <cstdarg>
 
+#include <kodi/tools/StringUtils.h>
+
+using namespace kodi::tools;
 using namespace iptvsimple::utilities;
 
 Logger::Logger()

@@ -102,7 +102,9 @@ namespace iptvsimple
     const EpgLogosMode& GetEpgLogosMode() const { return m_epgLogosMode; }
 
     bool IsTimeshiftEnabled() const { return m_timeshiftEnabled; }
+    bool IsTimeshiftEnabledAll() const { return m_timeshiftEnabledAll; }
     bool IsTimeshiftEnabledHttp() const { return m_timeshiftEnabledHttp; }
+    bool IsTimeshiftEnabledUdp() const { return m_timeshiftEnabledUdp; }
     bool AlwaysEnableTimeshiftModeIfMissing() const { return m_timeshiftEnabledCustom; }
 
     bool IsCatchupEnabled() const { return m_catchupEnabled; }
@@ -226,7 +228,9 @@ namespace iptvsimple
 
     // Timeshift
     bool m_timeshiftEnabled = false;
+    bool m_timeshiftEnabledAll = false;
     bool m_timeshiftEnabledHttp = false;
+    bool m_timeshiftEnabledUdp = false;
     bool m_timeshiftEnabledCustom = false;
 
     // Catchup
