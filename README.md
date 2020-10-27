@@ -255,8 +255,8 @@ plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c
 - For `Channel G` this is an example of a flussonic style entry which auto generates the catchup-source.
 - For `Channel H` this is an example of a xtream codes style entry which auto generates the catchup-source for `ts` streams.
 - For `Channel I` this is an example of a xtream codes style entry which auto generates the catchup-source for `m3u8` streams.
-- For `Channel J` this is an example of an VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
-- For `Channel K` this is an example of an VOD style entry which use a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL. 
+- For `Channel J` this is an example of a VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
+- For `Channel K` this is an example of a VOD style entry which uses a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
 
 *Channel k Plugin example:*
 

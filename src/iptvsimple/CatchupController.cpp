@@ -180,7 +180,7 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
 
 void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, const Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType)
 {
-  catchupProperties.insert({"epgplaybackaslive", playbackAsLive ? "true" : "false"});
+  catchupProperties.insert({PVR_STREAM_PROPERTY_EPGPLAYBACKASLIVE, playbackAsLive ? "true" : "false"});
 
   catchupProperties.insert({"inputstream.ffmpegdirect.is_realtime_stream",
   	StringUtils::EqualsNoCase(channel.GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM), "true") ? "true" : "false"});
