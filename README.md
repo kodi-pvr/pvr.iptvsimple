@@ -256,9 +256,25 @@ plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c
 - For `Channel H` this is an example of a xtream codes style entry which auto generates the catchup-source for `ts` streams.
 - For `Channel I` this is an example of a xtream codes style entry which auto generates the catchup-source for `m3u8` streams.
 - For `Channel J` this is an example of an VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
-- For `Channel K` this is an example of an VOD style entry which use a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
+- For `Channel K` this is an example of an VOD style entry which use a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL. 
 
-Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the exmaple file above would be:
+*Channel k Plugin example:*
+
+-*m3u*
+```
+#EXTINF:-1 tvg-chno="131" tvg-id="131@footv" tvg-name="FooBar" tvg-logo="https://images.provider.iptv/channels/foobar/logo.png" group-title="Drama" radio="false" catchup="vod",FooBar TV
+https://service.provider.iptv/hls/channel/foobar/master.m3u8
+```
+-*programme*
+```
+<programme start="20201021230000" channel="131@footv" catchup-id="plugin://plugin.video.footv/?mode=vod&amp;&amp;catchupid=episode1" stop="20201022010000">
+    <title lang="en">All Aboard: Foo Bar</title>
+</programme>
+```
+
+------------
+
+Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the example file above would be:
 
 ```
 #EXTM3U
