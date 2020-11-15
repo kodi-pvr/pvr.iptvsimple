@@ -1,3 +1,6 @@
+v7.1.0
+- Added: Set minimum inputstream ffmpegdirect, rtmp and adaptive versions to API stable version for Matrix
+
 v7.0.0
 - Update: PVR API 7.0.2
 
