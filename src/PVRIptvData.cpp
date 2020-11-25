@@ -10,6 +10,7 @@
 
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/WebUtils.h"
 
 #include <ctime>
 #include <chrono>
@@ -190,7 +191,7 @@ PVR_ERROR PVRIptvData::GetChannelStreamProperties(const kodi::addon::PVRChannel&
 
     StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamURL, catchupProperties);
 
-    Logger::Log(LogLevel::LEVEL_INFO, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", streamURL.c_str());
+    Logger::Log(LogLevel::LEVEL_INFO, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", WebUtils::RedactUrl(streamURL).c_str());
 
     return PVR_ERROR_NO_ERROR;
   }
@@ -264,7 +265,7 @@ PVR_ERROR PVRIptvData::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& t
     {
       StreamUtils::SetAllStreamProperties(properties, m_currentChannel, catchupUrl, catchupProperties);
 
-      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, catchupUrl.c_str());
+      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
       return PVR_ERROR_NO_ERROR;
     }
   }

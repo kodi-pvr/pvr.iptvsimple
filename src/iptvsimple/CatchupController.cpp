@@ -13,6 +13,7 @@
 #include "Settings.h"
 #include "data/Channel.h"
 #include "utilities/Logger.h"
+#include "utilities/WebUtils.h"
 
 #include <regex>
 
@@ -202,7 +203,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
   // if in video playback mode from epg, i.e. if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
 
-  Logger::Log(LEVEL_DEBUG, "default_url - %s", channel.GetStreamURL().c_str());
+  Logger::Log(LEVEL_DEBUG, "default_url - %s", WebUtils::RedactUrl(channel.GetStreamURL()).c_str());
   Logger::Log(LEVEL_DEBUG, "playback_as_live - %s", playbackAsLive ? "true" : "false");
   Logger::Log(LEVEL_DEBUG, "catchup_url_format_string - %s", GetCatchupUrlFormatString(channel).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_start_time - %s", std::to_string(m_catchupStartTime).c_str());
@@ -330,7 +331,7 @@ std::string FormatDateTime(time_t dateTimeEpg, time_t duration, const std::strin
   FormatUtc("${offset}", dateTimeNow - dateTimeEpg, formattedUrl);
   FormatUnits(dateTimeNow - dateTimeEpg, "offset", formattedUrl);
 
-  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, formattedUrl.c_str());
+  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, WebUtils::RedactUrl(formattedUrl).c_str());
 
   return formattedUrl;
 }
@@ -370,7 +371,7 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
   if (!programmeCatchupId.empty())
     startTimeUrl = std::regex_replace(startTimeUrl, CATCHUP_ID_REGEX, programmeCatchupId);
 
-  Logger::Log(LEVEL_DEBUG, "%s - %s", __FUNCTION__, startTimeUrl.c_str());
+  Logger::Log(LEVEL_DEBUG, "%s - %s", __FUNCTION__, WebUtils::RedactUrl(startTimeUrl).c_str());
 
   return startTimeUrl;
 }

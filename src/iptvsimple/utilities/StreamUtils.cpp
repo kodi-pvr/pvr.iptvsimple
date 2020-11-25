@@ -311,7 +311,7 @@ std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& str
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_streamed", "1");
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect_delay_max", "4294");
 
-    Logger::Log(LogLevel::LEVEL_DEBUG, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, newStreamUrl.c_str());
+    Logger::Log(LogLevel::LEVEL_DEBUG, "%s - FFmpeg Reconnect Stream URL: %s", __FUNCTION__, WebUtils::RedactUrl(newStreamUrl).c_str());
   }
 
   return newStreamUrl;
