@@ -449,27 +449,27 @@ msgstr ""
 
 #. help: General - m3uPathType
 msgctxt "#30601"
-msgid "Select where to find the M3U resource. The options are: [Local path] - A path to an M3U file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the M3U file."
+msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
 msgstr ""
 
 #. help: General - m3uPath
 msgctxt "#30602"
-msgid "If location is [Local path] this setting must contain a valid path for the addon to function."
+msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
 msgstr ""
 
 #. help: General - m3uUrl
 msgctxt "#30603"
-msgid "If location is [Remote path] this setting must contain a valid URL for the addon to function."
+msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
 msgstr ""
 
 #. help: General - m3uCache
 msgctxt "#30604"
-msgid "If location is [Remote path] select whether or not the the M3U file should be cached locally."
+msgid "If location is [B]Remote path[/B] select whether or not the the M3U file should be cached locally."
 msgstr ""
 
 #. help: General - startNum
 msgctxt "#30605"
-msgid "The number to start numbering channels from. Only used when [Use backend channel numbers] from PVR settings is enabled and a channel number is not supplied in the M3U file."
+msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
 msgstr ""
 
 #. help: General - numberByOrder
@@ -479,17 +479,17 @@ msgstr ""
 
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
-msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [Disabled] - Don't auto refresh the files; [Repeated refresh] - Refresh the files on a minute based interval; [Once per day] - Refresh the files once per day."
+msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
 msgstr ""
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
-msgid "If M3U auto refresh mode is [Repeated refresh] refresh the files every time this number of minutes passes. Max 120 minutes."
+msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
 msgstr ""
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
-msgid "If auto refresh mode is [Once per day] refresh the files every time this hour of the day is reached"
+msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached"
 msgstr ""
 
 #empty strings from id 30610 to 30619
@@ -503,22 +503,22 @@ msgstr ""
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
-msgid "Select where to find the XMLTV resource. The options are: [Local path] - A path to an XMLTV file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the XMLTV file."
+msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
 msgstr ""
 
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
-msgid "If location is [Local Path] this setting should contain a valid path."
+msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
 msgstr ""
 
 #. help: EPG Settings - epgUrl
 msgctxt "#30623"
-msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
 msgstr ""
 
 #. help: EPG Settings - epgCache
 msgctxt "#30624"
-msgid "If location is [Remote path] select whether or not the the XMLTV file should be cached locally."
+msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
 msgstr ""
 
 #. help: EPG Settings - epgTimeShift
@@ -542,22 +542,22 @@ msgstr ""
 
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
-msgid "Select where to find the channel logos. The options are: [Local path] - A path to a folder whether it be on the device or the local network; [Remote path] - A base URL specifying the location of the logos."
+msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
 msgstr ""
 
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
-msgid "If location is [Local Path] this setting should contain a valid folder."
+msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
 msgstr ""
 
 #. help: Channel Logos - logoBaseUrl
 msgctxt "#30643"
-msgid "If location is [Remote Path] this setting should contain a valid base URL."
+msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
 msgstr ""
 
 #. help: Channel Logos - logoFromEpg
 msgctxt "#30644"
-msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
 msgstr ""
 
 #empty strings from id 30645 to 30659
@@ -576,17 +576,17 @@ msgstr ""
 
 #. help: Genres - genresPathType
 msgctxt "#30662"
-msgid "Select where to find the genres XML resource. The options are: [Local path] - A path to a genres XML file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the genres XML file."
+msgid "Select where to find the genres XML resource. The options are: [B]Local path[/B] - A path to a genres XML file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the genres XML file."
 msgstr ""
 
 #. help: Genres - genresPath
 msgctxt "#30663"
-msgid "If location is [Local Path] this setting should contain a valid path."
+msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
 msgstr ""
 
 #. help: Genres - genresUrl
 msgctxt "#30664"
-msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
 msgstr ""
 
 #empty strings from id 30665 to 30679
@@ -664,7 +664,7 @@ msgstr ""
 
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
-msgid "If enabled it is assumed that all channels support catchup using the selected mode if they do not have catchup tags. In this case the 'Query format string' and 'Catchup window' number of days will come from the addon settings if needed. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [Disabled] - Do not assume all channel support catchup; [Default] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [Append] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [Shift (SIPTV)] - Append the standard SIPTV catchup string to the channel URL; [Flussonic] - Build a flussonic URL from the channel URL; [Xtream codes] - Build an Xtream codes URL from the channel URL."
+msgid "If enabled it is assumed that all channels support catchup using the selected mode if they do not have catchup tags. In this case the 'Query format string' and 'Catchup window' number of days will come from the addon settings if needed. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [B]Disabled[/B] - Do not assume all channel support catchup; [B]Default[/B] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [B]Append[/B] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [B]Shift (SIPTV)[/B] - Append the standard SIPTV catchup string to the channel URL; [B]Flussonic[/B] - Build a flussonic URL from the channel URL; [B]Xtream codes[/B] - Build an Xtream codes URL from the channel URL."
 msgstr ""
 
 #. help: Catchup - catchupPlayEpgAsLive
