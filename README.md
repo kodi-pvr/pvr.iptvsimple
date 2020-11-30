@@ -48,10 +48,12 @@ Note that the steps in the following section need to be performed before the add
 
 If you would prefer to run the rebuild steps manually instead of using the above helper script check the appendix [here](#manual-steps-to-rebuild-the-addon-on-macosx)
 
-##### Useful links
+## Useful links
 
 * [Kodi's PVR user support](https://forum.kodi.tv/forumdisplay.php?fid=167)
 * [Kodi's PVR development support](https://forum.kodi.tv/forumdisplay.php?fid=136)
+
+## Configuring the addon
 
 ### Settings Levels
 In Kodi 18.2 the level of settings shown will correspond to the level set in the main Kodi settings UI: `Basic`, `Standard`, `Advanced` and `Expert`. From Kodi 19 it will be possible to change the settings level from within the addon settings itself.
