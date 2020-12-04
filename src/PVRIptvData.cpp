@@ -10,6 +10,7 @@
 
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/TimeUtils.h"
 #include "iptvsimple/utilities/WebUtils.h"
 
 #include <ctime>
@@ -117,7 +118,7 @@ void PVRIptvData::Process()
     std::this_thread::sleep_for(std::chrono::milliseconds(PROCESS_LOOP_WAIT_SECS * 1000));
 
     time_t currentRefreshTimeSeconds = std::time(nullptr);
-    std::tm timeInfo = *std::localtime(&currentRefreshTimeSeconds);
+    std::tm timeInfo = SafeLocaltime(currentRefreshTimeSeconds);
     refreshTimer += static_cast<unsigned int>(currentRefreshTimeSeconds - lastRefreshTimeSeconds);
     lastRefreshTimeSeconds = currentRefreshTimeSeconds;
 
