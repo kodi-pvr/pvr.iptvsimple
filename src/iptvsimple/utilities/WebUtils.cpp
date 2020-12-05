@@ -67,3 +67,18 @@ bool WebUtils::IsHttpUrl(const std::string& url)
 {
   return StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX);
 }
+
+std::string WebUtils::RedactUrl(const std::string& url)
+{
+  std::string redactedUrl = url;
+  static const std::regex regex("^(http:|https:)//[^@/]+:[^@/]+@.*$");
+  if (std::regex_match(url, regex))
+  {
+    std::string protocol = url.substr(0, url.find_first_of(":"));
+    std::string fullPrefix = url.substr(url.find_first_of("@") + 1);
+
+    redactedUrl = protocol + "://USERNAME:PASSWORD@" + fullPrefix;
+  }
+
+  return redactedUrl;
+}
