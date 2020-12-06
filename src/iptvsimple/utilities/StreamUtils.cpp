@@ -21,7 +21,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, std::map<std::string, std::string>& catchupProperties)
+void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties)
 {
   if (ChannelSpecifiesInputstream(channel))
   {
@@ -32,7 +32,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       CheckInputstreamInstalledAndEnabled(channel.GetInputStreamName());
 
     if (channel.GetInputStreamName() == INPUTSTREAM_FFMPEGDIRECT)
-      InspectAndSetFFmpegDirectStreamProperties(properties, channel, streamURL);
+      InspectAndSetFFmpegDirectStreamProperties(properties, channel, streamURL, isChannelURL);
   }
   else
   {
@@ -57,8 +57,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
           SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
         }
-        else if (channel.SupportsLiveStreamTimeshifting() &&
-                 channel.GetStreamURL() == streamURL &&
+        else if (channel.SupportsLiveStreamTimeshifting() && isChannelURL &&
                  CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
         {
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
@@ -146,7 +145,7 @@ bool StreamUtils::CheckInputstreamInstalledAndEnabled(const std::string& inputst
   return true;
 }
 
-void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL)
+void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL)
 {
   // If there is no MIME type and no manifest type (BOTH!) set then potentially inspect the stream and set them
   if (!channel.HasMimeType() && !channel.GetProperty("inputstream.ffmpegdirect.manifest_type").empty())
@@ -161,8 +160,7 @@ void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::ad
     SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
   }
 
-  if (channel.SupportsLiveStreamTimeshifting() &&
-      channel.GetStreamURL() == streamURL &&
+  if (channel.SupportsLiveStreamTimeshifting() && isChannelURL &&
       channel.GetProperty("inputstream.ffmpegdirect.stream_mode").empty() &&
       Settings::GetInstance().AlwaysEnableTimeshiftModeIfMissing())
   {

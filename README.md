@@ -204,6 +204,8 @@ The format specifiers are substitution based and work as follows:
 
 Note that all timestamp specifiers (`{utc}`, `${start}`, `${end}` etc.) also support an optional extra argument which is a format string. The format string can contain `Y`, `m`, `d`, `H`, `M`, `S` which will represent that numeric value in the curent locale. Examples are provided below.
 
+There are 3 specifiers that are also valid for use in the channel URL as there are some providers that require a now timestamp even for the live stream. These are `{lutc}`, `${now}` and `${timestamp}`. Their variants that also allow a format string are also permitted.
+
 Here’s some examples of how the different formats would look:
 - `?utc={utc}&lutc={lutc}`
 - `&t={Y}-{m}-{d}-{H}-{M}-{S}`
