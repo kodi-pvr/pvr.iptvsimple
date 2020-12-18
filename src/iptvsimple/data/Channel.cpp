@@ -358,7 +358,7 @@ void Channel::ConfigureCatchupMode()
   }
 
   if (m_catchupMode != CatchupMode::DISABLED)
-    Logger::Log(LEVEL_DEBUG, "%s - %s - %s: %s", __FUNCTION__, GetCatchupModeText(m_catchupMode).c_str(), m_channelName.c_str(), m_catchupSource.c_str());
+    Logger::Log(LEVEL_DEBUG, "%s - %s - %s: %s", __FUNCTION__, GetCatchupModeText(m_catchupMode).c_str(), m_channelName.c_str(), WebUtils::RedactUrl(m_catchupSource).c_str());
 }
 
 bool Channel::GenerateAppendCatchupSource(const std::string& url)
