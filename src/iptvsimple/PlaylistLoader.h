@@ -27,6 +27,7 @@ namespace iptvsimple
   static const std::string TVG_INFO_LOGO_MARKER    = "tvg-logo=";
   static const std::string TVG_INFO_SHIFT_MARKER   = "tvg-shift=";
   static const std::string TVG_INFO_CHNO_MARKER    = "tvg-chno=";
+  static const std::string TVG_INFO_REC            = "tvg-rec="; // some providers use 'tvg-rec' instead of 'catchup-days'
   static const std::string GROUP_NAME_MARKER       = "group-title=";
   static const std::string CATCHUP                 = "catchup=";
   static const std::string CATCHUP_TYPE            = "catchup-type=";

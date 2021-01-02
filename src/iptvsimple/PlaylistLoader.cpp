@@ -196,6 +196,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strTvgShift   = ReadMarkerValue(infoLine, TVG_INFO_SHIFT_MARKER);
     std::string strCatchup       = ReadMarkerValue(infoLine, CATCHUP);
     std::string strCatchupDays   = ReadMarkerValue(infoLine, CATCHUP_DAYS);
+    std::string strTvgRec        = ReadMarkerValue(infoLine, TVG_INFO_REC);
     std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
     std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
     std::string strCatchupCorrection = ReadMarkerValue(infoLine, CATCHUP_CORRECTION);
@@ -261,6 +262,8 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       siptvTimeshiftDays = atoi(strCatchupSiptv.c_str());
     if (!strCatchupDays.empty())
       channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
+    else if (!strTvgRec.empty())
+      channel.SetCatchupDays(atoi(strTvgRec.c_str()));
     else if (channel.GetCatchupMode() == CatchupMode::VOD)
       channel.SetCatchupDays(IGNORE_CATCHUP_DAYS);
     else if (siptvTimeshiftDays > 0)
