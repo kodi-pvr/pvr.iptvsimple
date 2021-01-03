@@ -138,6 +138,8 @@ private:
   static bool ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
   static bool ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
 
+  virtual void ProcessGroupLine(std::string groupsLine, bool bRadio, std::vector<int>& iCurrentGroupId);
+
   bool                              m_bTSOverride;
   int                               m_iEPGTimeShift;
   int                               m_iLastStart;
