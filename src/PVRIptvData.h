@@ -72,6 +72,7 @@ struct PVRIptvChannel
   std::string strChannelName;
   std::string strLogoPath;
   std::string strStreamURL;
+  std::string strGroupName;
   std::string strTvgId;
   std::string strTvgName;
   std::string strTvgLogo;
@@ -137,6 +138,8 @@ private:
   static bool ParseEpisodeNumberInfo(const std::vector<std::pair<std::string, std::string>>& episodeNumbersList, PVRIptvEpgEntry& entry);
   static bool ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
   static bool ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberString, PVRIptvEpgEntry& entry);
+
+  virtual void ProcessGroupLine(std::string groupsLine, bool bRadio, std::vector<int>& iCurrentGroupId);
 
   bool                              m_bTSOverride;
   int                               m_iEPGTimeShift;
