@@ -1,3 +1,6 @@
+v7.2.0
+- Test revert all since alpha2
+
 v7.1.0
 - Added: Set minimum inputstream ffmpegdirect, rtmp and adaptive versions to API stable version for Matrix
 - Added: Redact URLs when logged

@@ -48,12 +48,10 @@ Note that the steps in the following section need to be performed before the add
 
 If you would prefer to run the rebuild steps manually instead of using the above helper script check the appendix [here](#manual-steps-to-rebuild-the-addon-on-macosx)
 
-## Useful links
+##### Useful links
 
 * [Kodi's PVR user support](https://forum.kodi.tv/forumdisplay.php?fid=167)
 * [Kodi's PVR development support](https://forum.kodi.tv/forumdisplay.php?fid=136)
-
-## Configuring the addon
 
 ### Settings Levels
 In Kodi 18.2 the level of settings shown will correspond to the level set in the main Kodi settings UI: `Basic`, `Standard`, `Advanced` and `Expert`. From Kodi 19 it will be possible to change the settings level from within the addon settings itself.
@@ -257,26 +255,10 @@ plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c
 - For `Channel G` this is an example of a flussonic style entry which auto generates the catchup-source.
 - For `Channel H` this is an example of a xtream codes style entry which auto generates the catchup-source for `ts` streams.
 - For `Channel I` this is an example of a xtream codes style entry which auto generates the catchup-source for `m3u8` streams.
-- For `Channel J` this is an example of a VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
-- For `Channel K` this is an example of a VOD style entry which uses a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
+- For `Channel J` this is an example of an VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
+- For `Channel K` this is an example of an VOD style entry which use a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
 
-*Channel k Plugin example:*
-
--*m3u*
-```
-#EXTINF:-1 tvg-chno="131" tvg-id="131@footv" tvg-name="FooBar" tvg-logo="https://images.provider.iptv/channels/foobar/logo.png" group-title="Drama" radio="false" catchup="vod",FooBar TV
-https://service.provider.iptv/hls/channel/foobar/master.m3u8
-```
--*programme*
-```
-<programme start="20201021230000" channel="131@footv" catchup-id="plugin://plugin.video.footv/?mode=vod&amp;&amp;catchupid=episode1" stop="20201022010000">
-    <title lang="en">All Aboard: Foo Bar</title>
-</programme>
-```
-
-------------
-
-Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the example file above would be:
+Note: The minimum required for a channel/stream is an `#EXTINF` line with a channel name and the `URL` line. E.g. a minimal version of the exmaple file above would be:
 
 ```
 #EXTM3U
