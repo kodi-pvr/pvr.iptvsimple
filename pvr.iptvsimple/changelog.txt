@@ -1,3 +1,6 @@
+v3.10.0
+- Added: Support for EXTGRP markers for channel groups
+
 v3.9.8
 - Added: User-Agent support from advanced addon setting
 
