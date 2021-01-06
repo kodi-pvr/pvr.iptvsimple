@@ -187,8 +187,9 @@ The format specifiers are substitution based and work as follows:
 - `{utc}`: The start time of the programme in UTC format.
 - `${start}`: Same as `{utc}`.
 - `{lutc}`: Current time in UTC format.
+- `${now}`: Same as `{lutc}`.
 - `${timestamp}`: Same as `{lutc}`.
-- `{utcend}`: The start time of the programme in UTC format + `${duration}`.
+- `{utcend}`: The start time of the programme in UTC format + `{duration}`.
 - `${end}`: Same as `{utcend}`.
 - `{Y}`: The 4-digit year (YYYY) of the start date\time.
 - `{m}`: The month (01-12) of the start date\time.
@@ -197,14 +198,20 @@ The format specifiers are substitution based and work as follows:
 - `{M}`: The minute (00-59) of the start date\time.
 - `{S}`: The second (00-59) of the start date\time.
 - `{duration}`: The programme duration + any start and end buffer (if set).
-- `{duration:X}`: The programme duration (as above) divided by X seconds. Allows conversion to minutes and other time units. The minimum divider is 1, it must be an integer (not 1.5 or 2.25 etc.) and it must be a positive value. E.g. If you have a duration of 7200 seconds and you need 2 hours (2 hours is 7200 seconds), it means your divider is 3600: `{offset:3600}`. If you need minutes for the same duration you could use: `{offset:60}` which would result in a value of 120.
+- `{duration:X}`: The programme duration (as above) divided by X seconds. Allows conversion to minutes and other time units. The minimum divider is 1, it must be an integer (not 1.5 or 2.25 etc.) and it must be a positive value. E.g. If you have a duration of 7200 seconds and you need 2 hours (2 hours is 7200 seconds), it means your divider is 3600: `{duration:3600}`. If you need minutes for the same duration you could use: `{duration:60}` which would result in a value of 120.
 - `{offset:X}`: The current offset (now - start time) divided by X seconds. Allows conversion to minutes and other time units. The minimum divider is 1, it must be an integer (not 1.5 or 2.25 etc.) and it must be a positive value. E.g. If you need an offset of 720 for a start time of 2 hours ago (2 hours is 7200 seconds), it means your divider is 10: `{offset:10}`. If you need minutes for the same offset you could use: `{offset:60}` which would result in a value of 120.
 - `{catchup-id}`: A programme specific identifier required in the catchup URL, value loaded from XMLTV programme entries.
+
+Note that all timestamp specifiers (`{utc}`, `${start}`, `${end}` etc.) also support an optional extra argument which is a format string. The format string can contain `Y`, `m`, `d`, `H`, `M`, `S` which will represent that numeric value in the curent locale. Examples are provided below.
+
+There are 3 specifiers that are also valid for use in the channel URL as there are some providers that require a now timestamp even for the live stream. These are `{lutc}`, `${now}` and `${timestamp}`. Their variants that also allow a format string are also permitted.
 
 Here’s some examples of how the different formats would look:
 - `?utc={utc}&lutc={lutc}`
 - `&t={Y}-{m}-{d}-{H}-{M}-{S}`
 - `?offset={offset:60}`
+- `?start={utc:YmdHM}&end=${end:YmdHM}`
+- `?start={utc:Ymd-H-M}&end=${end:Ymd-H-M}`
 
 ### Supported M3U and XMLTV elements
 

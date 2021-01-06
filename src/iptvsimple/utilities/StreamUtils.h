@@ -27,7 +27,7 @@ namespace iptvsimple
     class StreamUtils
     {
     public:
-      static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, std::map<std::string, std::string>& catchupProperties);
+      static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, bool isChannelURL, std::map<std::string, std::string>& catchupProperties);
       static const StreamType GetStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
       static const StreamType InspectStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
       static const std::string GetManifestType(const StreamType& streamType);
@@ -43,7 +43,7 @@ namespace iptvsimple
 
     private:
       static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);
-      static void InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl);
+      static void InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, bool isChannelURL);
       static void SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType);
       static bool CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName);
 

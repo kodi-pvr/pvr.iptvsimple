@@ -13,8 +13,10 @@
 #include "Settings.h"
 #include "data/Channel.h"
 #include "utilities/Logger.h"
+#include "utilities/TimeUtils.h"
 #include "utilities/WebUtils.h"
 
+#include <iomanip>
 #include <regex>
 
 #include <kodi/tools/StringUtils.h>
@@ -205,7 +207,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
 
   Logger::Log(LEVEL_DEBUG, "default_url - %s", WebUtils::RedactUrl(channel.GetStreamURL()).c_str());
   Logger::Log(LEVEL_DEBUG, "playback_as_live - %s", playbackAsLive ? "true" : "false");
-  Logger::Log(LEVEL_DEBUG, "catchup_url_format_string - %s", GetCatchupUrlFormatString(channel).c_str());
+  Logger::Log(LEVEL_DEBUG, "catchup_url_format_string - %s", WebUtils::RedactUrl(GetCatchupUrlFormatString(channel)).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_start_time - %s", std::to_string(m_catchupStartTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_end_time - %s", std::to_string(m_catchupEndTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
@@ -254,7 +256,7 @@ void CatchupController::ClearProgramme()
 
 namespace
 {
-void FormatUnits(time_t tTime, const std::string& name, std::string &urlFormatString)
+void FormatUnits(const std::string& name, time_t tTime, std::string &urlFormatString)
 {
   const std::regex timeSecondsRegex(".*(\\{" + name + ":(\\d+)\\}).*");
   std::cmatch mr;
@@ -282,54 +284,112 @@ void FormatUnits(time_t tTime, const std::string& name, std::string &urlFormatSt
 
 void FormatTime(const char ch, const struct tm *pTime, std::string &urlFormatString)
 {
-  char str[] = { '{', ch, '}', 0 };
+  std::string str = {'{', ch, '}'};
   size_t pos = urlFormatString.find(str);
   while (pos != std::string::npos)
   {
-    char buff[256], timeFmt[3];
-    std::snprintf(timeFmt, sizeof(timeFmt), "%%%c", ch);
-    std::strftime(buff, sizeof(buff), timeFmt, pTime);
-    if (std::strlen(buff) > 0)
-      urlFormatString.replace(pos, 3, buff);
+    std::ostringstream os;
+    os << std::put_time(pTime, StringUtils::Format("%%%c", ch).c_str());
+    std::string timeString = os.str();
+
+    if (timeString.size() > 0)
+      urlFormatString.replace(pos, str.size(), timeString);
 
     pos = urlFormatString.find(str);
   }
 }
 
-void FormatUtc(const char *str, time_t tTime, std::string &urlFormatString)
+void FormatTime(const std::string name, const struct tm *pTime, std::string &urlFormatString, bool hasVarPrefix)
+{
+  std::string qualifier = hasVarPrefix ? "$" : "";
+  qualifier += "{" + name + ":";
+  size_t found = urlFormatString.find(qualifier);
+  if (found != std::string::npos)
+  {
+    size_t foundStart = found + qualifier.size();
+    size_t foundEnd = urlFormatString.find("}", foundStart + 1);
+    if (foundEnd != std::string::npos)
+    {
+      std::string formatString = urlFormatString.substr(foundStart, foundEnd - foundStart);
+      const std::regex timeSpecifiers("([YmdHMS])");
+      formatString = std::regex_replace(formatString, timeSpecifiers, R"(%$&)");
+
+      std::ostringstream os;
+      os << std::put_time(pTime, formatString.c_str());
+      std::string timeString = os.str();
+
+      if (timeString.size() > 0)
+        urlFormatString.replace(found, foundEnd - found + 1, timeString);
+    }
+  }
+}
+
+void FormatUtc(const std::string& str, time_t tTime, std::string &urlFormatString)
 {
   auto pos = urlFormatString.find(str);
   if (pos != std::string::npos)
   {
-    char buff[256];
-    std::snprintf(buff, sizeof(buff), "%lu", tTime);
-    urlFormatString.replace(pos, std::strlen(str), buff);
+    std::string utcTimeAsString = StringUtils::Format("%lu", tTime);
+    urlFormatString.replace(pos, str.size(), utcTimeAsString);
   }
 }
 
-std::string FormatDateTime(time_t dateTimeEpg, time_t duration, const std::string &urlFormatString)
+std::string FormatDateTime(time_t timeStart, time_t duration, const std::string &urlFormatString)
 {
   std::string formattedUrl = urlFormatString;
 
-  const time_t dateTimeNow = std::time(0);
-  tm* dateTime = std::localtime(&dateTimeEpg);
+  const time_t timeEnd = timeStart + duration;
+  const time_t timeNow = std::time(0);
 
-  FormatTime('Y', dateTime, formattedUrl);
-  FormatTime('m', dateTime, formattedUrl);
-  FormatTime('d', dateTime, formattedUrl);
-  FormatTime('H', dateTime, formattedUrl);
-  FormatTime('M', dateTime, formattedUrl);
-  FormatTime('S', dateTime, formattedUrl);
-  FormatUtc("{utc}", dateTimeEpg, formattedUrl);
-  FormatUtc("${start}", dateTimeEpg, formattedUrl);
-  FormatUtc("{utcend}", dateTimeEpg + duration, formattedUrl);
-  FormatUtc("${end}", dateTimeEpg + duration, formattedUrl);
-  FormatUtc("{lutc}", dateTimeNow, formattedUrl);
-  FormatUtc("${timestamp}", dateTimeNow, formattedUrl);
+  std::tm dateTimeStart = SafeLocaltime(timeStart);
+  std::tm dateTimeEnd = SafeLocaltime(timeEnd);
+  std::tm dateTimeNow = SafeLocaltime(timeNow);
+
+  FormatTime('Y', &dateTimeStart, formattedUrl);
+  FormatTime('m', &dateTimeStart, formattedUrl);
+  FormatTime('d', &dateTimeStart, formattedUrl);
+  FormatTime('H', &dateTimeStart, formattedUrl);
+  FormatTime('M', &dateTimeStart, formattedUrl);
+  FormatTime('S', &dateTimeStart, formattedUrl);
+  FormatUtc("{utc}", timeStart, formattedUrl);
+  FormatUtc("${start}", timeStart, formattedUrl);
+  FormatUtc("{utcend}", timeStart + duration, formattedUrl);
+  FormatUtc("${end}", timeStart + duration, formattedUrl);
+  FormatUtc("{lutc}", timeNow, formattedUrl);
+  FormatUtc("${now}", timeNow, formattedUrl);
+  FormatUtc("${timestamp}", timeNow, formattedUrl);
   FormatUtc("{duration}", duration, formattedUrl);
-  FormatUnits(duration, "duration", formattedUrl);
-  FormatUtc("${offset}", dateTimeNow - dateTimeEpg, formattedUrl);
-  FormatUnits(dateTimeNow - dateTimeEpg, "offset", formattedUrl);
+  FormatUnits("duration", duration, formattedUrl);
+  FormatUtc("${offset}", timeNow - timeStart, formattedUrl);
+  FormatUnits("offset", timeNow - timeStart, formattedUrl);
+
+  FormatTime("utc", &dateTimeStart, formattedUrl, false);
+  FormatTime("start", &dateTimeStart, formattedUrl, true);
+
+  FormatTime("utcend", &dateTimeEnd, formattedUrl, false);
+  FormatTime("end", &dateTimeEnd, formattedUrl, true);
+
+  FormatTime("lutc", &dateTimeNow, formattedUrl, false);
+  FormatTime("now", &dateTimeNow, formattedUrl, true);
+  FormatTime("timestamp", &dateTimeNow, formattedUrl, true);
+
+  Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, WebUtils::RedactUrl(formattedUrl).c_str());
+
+  return formattedUrl;
+}
+
+std::string FormatDateTimeNowOnly(const std::string &urlFormatString)
+{
+  std::string formattedUrl = urlFormatString;
+  const time_t timeNow = std::time(0);
+  std::tm dateTimeNow = SafeLocaltime(timeNow);
+
+  FormatUtc("{lutc}", timeNow, formattedUrl);
+  FormatUtc("${now}", timeNow, formattedUrl);
+  FormatUtc("${timestamp}", timeNow, formattedUrl);
+  FormatTime("lutc", &dateTimeNow, formattedUrl, false);
+  FormatTime("now", &dateTimeNow, formattedUrl, true);
+  FormatTime("timestamp", &dateTimeNow, formattedUrl, true);
 
   Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, WebUtils::RedactUrl(formattedUrl).c_str());
 
@@ -365,7 +425,7 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
   if ((startTime > 0 && offset < (timeNow - 5)) || (channel.IgnoreCatchupDays() && !programmeCatchupId.empty()))
     startTimeUrl = FormatDateTime(offset - timezoneShiftSecs, duration, channel.GetCatchupSource());
   else
-    startTimeUrl = channel.GetStreamURL();
+    startTimeUrl = FormatDateTimeNowOnly(channel.GetStreamURL());
 
   static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
   if (!programmeCatchupId.empty())
@@ -412,13 +472,19 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
   return "";
 }
 
+std::string CatchupController::ProcessStreamUrl(const std::string& streamUrl) const
+{
+  //We only process  current time timestamps specifiers in this case
+  return FormatDateTimeNowOnly(streamUrl);
+}
+
 std::string CatchupController::GetStreamTestUrl(const Channel& channel, bool fromEpg) const
 {
  if (m_catchupStartTime > 0 || fromEpg)
     // Test URL from 2 hours ago for 1 hour duration.
     return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId, m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs());
   else
-    return channel.GetStreamURL();
+    return ProcessStreamUrl(channel.GetStreamURL());
 }
 
 std::string CatchupController::GetStreamKey(const Channel& channel, bool fromEpg) const

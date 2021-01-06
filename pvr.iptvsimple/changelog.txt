@@ -1,3 +1,10 @@
+v7.2.0
+- Added: Safe localtime and format strings for timestamps in catchup
+- Added: Allow now/current time format specifiers in live stream URLs
+- Added: Redact catchup source and url format string
+- Added: Some providers use 'tvg-rec' instead of 'catchup-days'
+- Added: Set min ffmpegdirect version to 1.19.0 so it supports timestamp format
+
 v7.1.0
 - Added: Set minimum inputstream ffmpegdirect, rtmp and adaptive versions to API stable version for Matrix
 - Added: Redact URLs when logged

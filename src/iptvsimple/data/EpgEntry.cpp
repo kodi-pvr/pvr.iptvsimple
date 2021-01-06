@@ -9,6 +9,7 @@
 #include "EpgEntry.h"
 
 #include "../Settings.h"
+#include "../utilities/TimeUtils.h"
 #include "../utilities/XMLUtils.h"
 
 #include <cmath>
@@ -156,9 +157,9 @@ std::string ParseAsW3CDateString(const std::string& strDate)
 
 std::string ParseAsW3CDateString(time_t time)
 {
-  std::tm* tm = std::localtime(&time);
+  std::tm tm = SafeLocaltime(time); 
   char buffer[16];
-  std::strftime(buffer, 16, "%Y-%m-%d", tm);
+  std::strftime(buffer, 16, "%Y-%m-%d", &tm);
 
   return buffer;
 }

@@ -10,6 +10,7 @@
 
 #include "iptvsimple/Settings.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/TimeUtils.h"
 #include "iptvsimple/utilities/WebUtils.h"
 
 #include <ctime>
@@ -117,7 +118,7 @@ void PVRIptvData::Process()
     std::this_thread::sleep_for(std::chrono::milliseconds(PROCESS_LOOP_WAIT_SECS * 1000));
 
     time_t currentRefreshTimeSeconds = std::time(nullptr);
-    std::tm timeInfo = *std::localtime(&currentRefreshTimeSeconds);
+    std::tm timeInfo = SafeLocaltime(currentRefreshTimeSeconds);
     refreshTimer += static_cast<unsigned int>(currentRefreshTimeSeconds - lastRefreshTimeSeconds);
     lastRefreshTimeSeconds = currentRefreshTimeSeconds;
 
@@ -188,8 +189,10 @@ PVR_ERROR PVRIptvData::GetChannelStreamProperties(const kodi::addon::PVRChannel&
     const std::string catchupUrl = m_catchupController.GetCatchupUrl(m_currentChannel);
     if (!catchupUrl.empty())
       streamURL = catchupUrl;
+    else
+      streamURL = m_catchupController.ProcessStreamUrl(streamURL);
 
-    StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamURL, catchupProperties);
+    StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamURL, catchupUrl.empty(), catchupProperties);
 
     Logger::Log(LogLevel::LEVEL_INFO, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", WebUtils::RedactUrl(streamURL).c_str());
 
@@ -263,7 +266,7 @@ PVR_ERROR PVRIptvData::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& t
     const std::string catchupUrl = m_catchupController.GetCatchupUrl(m_currentChannel);
     if (!catchupUrl.empty())
     {
-      StreamUtils::SetAllStreamProperties(properties, m_currentChannel, catchupUrl, catchupProperties);
+      StreamUtils::SetAllStreamProperties(properties, m_currentChannel, catchupUrl, false, catchupProperties);
 
       Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
       return PVR_ERROR_NO_ERROR;

@@ -34,6 +34,7 @@ namespace iptvsimple
 
     std::string GetCatchupUrlFormatString(const data::Channel& channel) const;
     std::string GetCatchupUrl(const data::Channel& channel) const;
+    std::string ProcessStreamUrl(const std::string& streamUrl) const;
 
     bool ControlsLiveStream() const { return m_controlsLiveStream; }
     void ResetCatchupState() { m_resetCatchupState = true; }
