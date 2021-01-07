@@ -70,6 +70,7 @@ void Epg::SetEPGTimeFrame(int epgMaxDays)
 bool Epg::LoadEPG(time_t start, time_t end)
 {
   auto started = std::chrono::high_resolution_clock::now();
+    Logger::Log(LEVEL_ERROR, "%s - XXX Load EPG start: %lld, end: %lld", __FUNCTION__, static_cast<long long>(start), static_cast<long long>(end));
   Logger::Log(LEVEL_DEBUG, "%s - EPG Load Start", __FUNCTION__);
 
   if (m_xmltvLocation.empty())
@@ -501,8 +502,20 @@ EpgEntry* Epg::GetLiveEPGEntry(const Channel& myChannel) const
 EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
 {
   ChannelEpg* channelEpg = FindEpgForChannel(myChannel);
+  if (!channelEpg)
+    Logger::Log(LEVEL_ERROR, "%s - XXX no channel EPG found: %lld", __FUNCTION__, static_cast<long long>(lookupTime));
+  else
+    Logger::Log(LEVEL_ERROR, "%s - XXX channel EPG FOUND: %lld", __FUNCTION__, static_cast<long long>(lookupTime));
+
   if (!channelEpg || channelEpg->GetEpgEntries().size() == 0)
+  {
     return nullptr;
+  }
+  else
+  {
+    Logger::Log(LEVEL_ERROR, "%s - XXX FOUND EPG entry: %lld", __FUNCTION__, static_cast<long long>(lookupTime));
+  }
+
 
   int shift = GetEPGTimezoneShiftSecs(myChannel);
 
@@ -516,6 +529,8 @@ EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
     else if (startTime > lookupTime)
       break;
   }
+
+  Logger::Log(LEVEL_ERROR, "%s - XXX returning nullptr", __FUNCTION__);
 
   return nullptr;
 }

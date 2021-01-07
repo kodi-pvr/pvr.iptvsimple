@@ -241,6 +241,8 @@ PVR_ERROR PVRIptvData::GetEPGForChannel(int channelUid, time_t start, time_t end
 {
   std::lock_guard<std::mutex> lock(m_mutex);
 
+  Logger::Log(LEVEL_ERROR, "%s - XXX Load EPG for channel uid: %d", __FUNCTION__, channelUid);
+
   return m_epg.GetEPGForChannel(channelUid, start, end, results);
 }
 

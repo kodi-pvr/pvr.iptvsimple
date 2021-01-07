@@ -38,47 +38,61 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
 
   if (!m_fromEpgTag || m_controlsLiveStream)
   {
+    Logger::Log(LEVEL_DEBUG, "%s - XXX1 - Not from EPG or controls live stream", __FUNCTION__);
     EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
+    Logger::Log(LEVEL_DEBUG, "%s - XXX2 - Found live EPG entry: %d", __FUNCTION__, liveEpgEntry != nullptr);
     if (m_controlsLiveStream && liveEpgEntry && !Settings::GetInstance().CatchupOnlyOnFinishedProgrammes())
     {
+      Logger::Log(LEVEL_DEBUG, "%s - XXX3 - Starting controls live stream with live entry and not only finished programmes", __FUNCTION__);
       // Live timeshifting support with EPG entry
       UpdateProgrammeFrom(*liveEpgEntry, channel.GetTvgShift());
       m_catchupStartTime = liveEpgEntry->GetStartTime();
       m_catchupEndTime = liveEpgEntry->GetEndTime();
+      Logger::Log(LEVEL_DEBUG, "%s - XXX4 - CatchupStartTimes: %lld, CatchupEndTime: %lld", __FUNCTION__, static_cast<long long>(m_catchupStartTime), static_cast<long long>(m_catchupEndTime));
     }
     else if (m_controlsLiveStream || !channel.IsCatchupSupported() ||
              (!m_controlsLiveStream && channel.IsCatchupSupported()))
     {
+      Logger::Log(LEVEL_DEBUG, "%s - XXX3b - controls live stream or not catchup supported or (not controls live and catchup supported)", __FUNCTION__);
       ClearProgramme();
       m_programmeCatchupId.clear();
       m_catchupStartTime = 0;
       m_catchupEndTime = 0;
+      Logger::Log(LEVEL_DEBUG, "%s - XXX4b - CatchupStartTimes: %lld, CatchupEndTime: %lld", __FUNCTION__, static_cast<long long>(m_catchupStartTime), static_cast<long long>(m_catchupEndTime));
     }
     m_fromEpgTag = false;
+    Logger::Log(LEVEL_DEBUG, "%s - XXX5 - Ending Not from EPG or controls live stream", __FUNCTION__);
   }
 
   if (m_controlsLiveStream)
   {
     if (m_resetCatchupState)
     {
+      Logger::Log(LEVEL_DEBUG, "%s - XXX6 - Starting reset catchup stream", __FUNCTION__);
       m_resetCatchupState = false;
       m_programmeCatchupId.clear();
       if (channel.IsCatchupSupported())
       {
+        Logger::Log(LEVEL_DEBUG, "%s - XXX7 - Catchup supported", __FUNCTION__);
         m_timeshiftBufferOffset = Settings::GetInstance().GetCatchupDaysInSeconds(); //offset from now to start of catchup window
         m_timeshiftBufferStartTime = std::time(nullptr) - Settings::GetInstance().GetCatchupDaysInSeconds(); // now - the window size
       }
       else
       {
+        Logger::Log(LEVEL_DEBUG, "%s - XXX7 - Catchup not supported", __FUNCTION__);
         m_timeshiftBufferOffset = 0;
         m_timeshiftBufferStartTime = 0;
       }
     }
     else
     {
+      Logger::Log(LEVEL_DEBUG, "%s - XXX6b - Starting get current EPG entry", __FUNCTION__);
       EpgEntry* currentEpgEntry = GetEPGEntry(channel, m_timeshiftBufferStartTime + m_timeshiftBufferOffset);
       if (currentEpgEntry)
+      {
+        Logger::Log(LEVEL_DEBUG, "%s - XXX7b - Found current EPG entry: %d, timestamp: %lld", __FUNCTION__, currentEpgEntry != nullptr, m_timeshiftBufferStartTime + m_timeshiftBufferOffset);
         UpdateProgrammeFrom(*currentEpgEntry, channel.GetTvgShift());
+      }
     }
 
     m_catchupStartTime = m_timeshiftBufferStartTime;
