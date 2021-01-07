@@ -45,6 +45,9 @@ bool Epg::Init(int epgMaxDays)
 
   SetEPGTimeFrame(epgMaxDays);
 
+  time_t now = std::time(nullptr);
+  LoadEPG(now - m_epgMaxDaysSeconds, now + m_epgMaxDaysSeconds);
+
   return true;
 }
 

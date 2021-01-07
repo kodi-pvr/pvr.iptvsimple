@@ -65,9 +65,9 @@ ADDON_STATUS PVRIptvData::Create()
   Settings::GetInstance().ReadFromAddon(kodi::GetBaseUserPath(), kodi::GetAddonPath());
 
   m_channels.Init();
-  m_epg.Init(EpgMaxDays());
   m_playlistLoader.Init();
   m_playlistLoader.LoadPlayList();
+  m_epg.Init(EpgMaxDays());
 
   kodi::Log(ADDON_LOG_INFO, "%s Starting separate client update thread...", __FUNCTION__);
 
