@@ -24,6 +24,7 @@ namespace iptvsimple
   static const std::string GENRES_MAP_FILENAME = "genres.xml";
   static const std::string GENRE_DIR = "/genres";
   static const std::string GENRE_ADDON_DATA_BASE_DIR = ADDON_DATA_BASE_DIR + GENRE_DIR;
+  static const int DEFAULT_EPG_MAX_DAYS = 3;
 
   enum class XmltvFileFormat
   {
@@ -37,9 +38,10 @@ namespace iptvsimple
   public:
     Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels);
 
-    bool Init();
+    bool Init(int epgMaxDays);
 
     PVR_ERROR GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results);
+    void SetEPGTimeFrame(int epgMaxDays);
     void Clear();
     void ReloadEPG();
 
@@ -67,6 +69,8 @@ namespace iptvsimple
     bool m_tsOverride;
     int m_lastStart;
     int m_lastEnd;
+    int m_epgMaxDays;
+    long m_epgMaxDaysSeconds;
 
     iptvsimple::Channels& m_channels;
     std::vector<data::ChannelEpg> m_channelEpgs;

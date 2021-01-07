@@ -37,11 +37,14 @@ Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels)
   }
 }
 
-bool Epg::Init()
+bool Epg::Init(int epgMaxDays)
 {
   m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
   m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
   m_tsOverride = Settings::GetInstance().GetTsOverride();
+
+  SetEPGTimeFrame(epgMaxDays);
+
   return true;
 }
 
@@ -49,6 +52,16 @@ void Epg::Clear()
 {
   m_channelEpgs.clear();
   m_genreMappings.clear();
+}
+
+void Epg::SetEPGTimeFrame(int epgMaxDays)
+{
+  m_epgMaxDays = epgMaxDays;
+
+  if (m_epgMaxDays > EPG_TIMEFRAME_UNLIMITED)
+    m_epgMaxDaysSeconds = m_epgMaxDays * 24 * 60 * 60;
+  else
+    m_epgMaxDaysSeconds = DEFAULT_EPG_MAX_DAYS * 24 * 60 * 60;
 }
 
 bool Epg::LoadEPG(time_t start, time_t end)
