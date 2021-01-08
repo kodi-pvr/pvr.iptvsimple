@@ -37,11 +37,18 @@ Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels)
   }
 }
 
-bool Epg::Init()
+bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
 {
   m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
   m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
   m_tsOverride = Settings::GetInstance().GetTsOverride();
+
+  SetEPGMaxPastDays(epgMaxPastDays);
+  SetEPGMaxFutureDays(epgMaxFutureDays);
+
+  time_t now = std::time(nullptr);
+  LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+
   return true;
 }
 
@@ -49,6 +56,26 @@ void Epg::Clear()
 {
   m_channelEpgs.clear();
   m_genreMappings.clear();
+}
+
+void Epg::SetEPGMaxPastDays(int epgMaxPastDays)
+{
+  m_epgMaxPastDays = epgMaxPastDays;
+
+  if (m_epgMaxPastDays > EPG_TIMEFRAME_UNLIMITED)
+    m_epgMaxPastDaysSeconds = m_epgMaxPastDays * 24 * 60 * 60;
+  else
+    m_epgMaxPastDaysSeconds = DEFAULT_EPG_MAX_DAYS * 24 * 60 * 60;
+}
+
+void Epg::SetEPGMaxFutureDays(int epgMaxFutureDays)
+{
+  m_epgMaxFutureDays = epgMaxFutureDays;
+
+  if (m_epgMaxFutureDays > EPG_TIMEFRAME_UNLIMITED)
+    m_epgMaxFutureDaysSeconds = m_epgMaxFutureDays * 24 * 60 * 60;
+  else
+    m_epgMaxFutureDaysSeconds = DEFAULT_EPG_MAX_DAYS * 24 * 60 * 60;
 }
 
 bool Epg::LoadEPG(time_t start, time_t end)
