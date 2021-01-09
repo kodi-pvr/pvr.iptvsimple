@@ -1,3 +1,7 @@
+v7.3.0
+- Update: PVR API 7.1.0
+- Added: support past and future max epg days and always load EPG data on start
+
 v7.2.0
 - Added: Safe localtime and format strings for timestamps in catchup
 - Added: Allow now/current time format specifiers in live stream URLs

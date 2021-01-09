@@ -65,9 +65,9 @@ ADDON_STATUS PVRIptvData::Create()
   Settings::GetInstance().ReadFromAddon(kodi::GetBaseUserPath(), kodi::GetAddonPath());
 
   m_channels.Init();
-  m_epg.Init();
   m_playlistLoader.Init();
   m_playlistLoader.LoadPlayList();
+  m_epg.Init(EpgMaxPastDays(), EpgMaxFutureDays());
 
   kodi::Log(ADDON_LOG_INFO, "%s Starting separate client update thread...", __FUNCTION__);
 
@@ -306,6 +306,18 @@ PVR_ERROR PVRIptvData::IsEPGTagPlayable(const kodi::addon::PVREPGTag& tag, bool&
                   (!Settings::GetInstance().CatchupOnlyOnFinishedProgrammes() || tag.GetEndTime() < now);
   }
 
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR PVRIptvData::SetEPGMaxPastDays(int epgMaxPastDays)
+{
+  m_epg.SetEPGMaxPastDays(epgMaxPastDays);
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR PVRIptvData::SetEPGMaxFutureDays(int epgMaxFutureDays)
+{
+  m_epg.SetEPGMaxFutureDays(epgMaxFutureDays);
   return PVR_ERROR_NO_ERROR;
 }
 
