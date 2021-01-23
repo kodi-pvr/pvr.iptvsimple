@@ -46,8 +46,8 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
   SetEPGMaxPastDays(epgMaxPastDays);
   SetEPGMaxFutureDays(epgMaxFutureDays);
 
-  time_t now = std::time(nullptr);
-  LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+  // time_t now = std::time(nullptr);
+  // LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
 
   return true;
 }
