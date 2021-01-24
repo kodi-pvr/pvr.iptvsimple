@@ -19,7 +19,7 @@ using namespace pugi;
 
 bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
 {
-  if (!GetAttributeValue(channelNode, "id", m_id))
+  if (!GetAttributeValue(channelNode, "id", m_id) || m_id.empty())
     return false;
 
   bool foundChannel = false;
