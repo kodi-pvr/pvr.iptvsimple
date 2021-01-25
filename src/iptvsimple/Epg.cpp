@@ -46,8 +46,14 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
   SetEPGMaxPastDays(epgMaxPastDays);
   SetEPGMaxFutureDays(epgMaxFutureDays);
 
-  time_t now = std::time(nullptr);
-  LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+  if (Settings::GetInstance().IsCatchupEnabled())
+  {
+    // For catchup we need a local store of the EPG data. Kodi may not load the
+    // data on each startup so we need to make sure it's loaded whether or not
+    // kodi considers it necessary.
+    time_t now = std::time(nullptr);
+    LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+  }
 
   return true;
 }
