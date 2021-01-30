@@ -149,7 +149,15 @@ msgctxt "#30027"
 msgid "{0:.1f} hours"
 msgstr ""
 
-#empty strings from id 30028 to 30029
+#. label: General - tvChannelGroupsOnly
+msgctxt "#30028"
+msgid "Only load TV channels in groups"
+msgstr ""
+
+#. label-group: General - TV Groups
+msgctxt "#30029"
+msgid "TV Groups"
+msgstr ""
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
@@ -167,7 +175,43 @@ msgctxt "#30032"
 msgid "Channel logos base URL"
 msgstr ""
 
-#empty strings from id 30033 to 30039
+#. label-group: General - Radio Groups
+msgctxt "#30033"
+msgid "Radio Groups"
+msgstr ""
+
+#. label: General - tvGroupMoade
+msgctxt "#30034"
+msgid "TV group mode"
+msgstr ""
+
+#. label: General - radioGroupMoade
+msgctxt "#30035"
+msgid "Radio group mode"
+msgstr ""
+
+#. label-option: Channels - tvGroupmode
+#. label-option: Channels - radioGroupGode
+msgctxt "#30036"
+msgid "All groups"
+msgstr ""
+
+#. label-option: Channels - tvGroupMode
+#. label-option: Channels - radioGroupGode
+msgctxt "#30037"
+msgid "Some groups"
+msgstr ""
+
+#. label-option: General - tvGroupMode
+#. label-option: General - radioGroupGode
+msgctxt "#30038"
+msgid "Custom groups"
+msgstr ""
+
+#. label: Channels - numTvGroups
+msgctxt "#30039"
+msgid "Number of TV groups"
+msgstr ""
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
@@ -194,7 +238,30 @@ msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr ""
 
-#empty strings from id 30045 to 30049
+#. label: General - oneTvGroup
+msgctxt "#30045"
+msgid "TV group 1"
+msgstr ""
+
+#. label: General - twoTvGroup
+msgctxt "#30046"
+msgid "TV group 2"
+msgstr ""
+
+#. label: General - threeTvGroup
+msgctxt "#30047"
+msgid "TV group 3"
+msgstr ""
+
+#. label: General - fourTvGroup
+msgctxt "#30048"
+msgid "TV group 4"
+msgstr ""
+
+#. label: General - fiveTvGroup
+msgctxt "#30049"
+msgid "TV group 5"
+msgstr ""
 
 #. label-category: genres
 #. label-group: Genres - Genres
@@ -217,7 +284,35 @@ msgctxt "#30053"
 msgid "Genres URL"
 msgstr ""
 
-#empty strings from id 30054 to 30059
+#. label: Channels - customTvGroupsFile
+msgctxt "#30054"
+msgid "Custom TV groups file"
+msgstr ""
+
+#. label: General - oneRadioGroup
+msgctxt "#30055"
+msgid "Radio group 1"
+msgstr ""
+
+#. label: General - twoRadioGroup
+msgctxt "#30056"
+msgid "Radio group 2"
+msgstr ""
+
+#. label: General - threeRadioGroup
+msgctxt "#30057"
+msgid "Radio group 3"
+msgstr ""
+
+#. label: General - fourRadioGroup
+msgctxt "#30058"
+msgid "Radio group 4"
+msgstr ""
+
+#. label: General - fiveRadioGroup
+msgctxt "#30059"
+msgid "Radio group 5"
+msgstr ""
 
 #. label-category: advanced
 msgctxt "#30060"
@@ -279,7 +374,22 @@ msgctxt "#30071"
 msgid "Channel defaults"
 msgstr ""
 
-#empty strings from id 30072 to 30099
+#. label: General - numRadioGroups
+msgctxt "#30072"
+msgid "Number of Radio groups"
+msgstr ""
+
+#. label: Channels - customRadioGroupsFile
+msgctxt "#30073"
+msgid "Custom Radio groups file"
+msgstr ""
+
+#. label: General - radioChannelGroupsOnly
+msgctxt "#30074"
+msgid "Only load Radio channels in groups"
+msgstr ""
+
+#empty strings from id 30075 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -489,10 +599,66 @@ msgstr ""
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
-msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached"
+msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
 msgstr ""
 
-#empty strings from id 30610 to 30619
+#. help: General - tvChannelGroupsOnly
+msgctxt "#30610"
+msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
+msgstr ""
+
+#. help: Channels - tvGroupMode
+msgctxt "#30611"
+msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
+msgstr ""
+
+#. help: Channels - oneTvGroup
+#. help: Channels - twoTvGroup
+#. help: Channels - threeTvGroup
+#. help: Channels - fourTvGroup
+#. help: Channels - fiveTvGroup
+msgctxt "#30612"
+msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
+msgstr ""
+
+#. help: Channels - radioGroupMode
+msgctxt "#30613"
+msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
+msgstr ""
+
+#. help: Channels - oneRadioGroup
+#. help: Channels - twoRadioGroup
+#. help: Channels - threeRadioGroup
+#. help: Channels - fourRadioGroup
+#. help: Channels - fiveRadioGroup
+msgctxt "#30614"
+msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
+msgstr ""
+
+#. help: Channels - customTvGroupsFile
+msgctxt "#30615"
+msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
+msgstr ""
+
+#. help: Channels - customRadioGroupsFile
+msgctxt "#30616"
+msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
+msgstr ""
+
+#. help: Channels - numTvGroups
+msgctxt "#30617"
+msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
+msgstr ""
+
+#. help: Channels - numRadioGroups
+msgctxt "#30618"
+msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
+msgstr ""
+
+#. help: General - radioChannelGroupsOnly
+msgctxt "#30619"
+msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
+msgstr ""
 
 #. help info - EPG Settings
 

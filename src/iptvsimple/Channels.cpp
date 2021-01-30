@@ -85,20 +85,36 @@ bool Channels::GetChannel(int uniqueId, Channel& myChannel) const
   return false;
 }
 
-void Channels::AddChannel(Channel& channel, std::vector<int>& groupIdList, ChannelGroups& channelGroups)
+bool Channels::AddChannel(Channel& channel, std::vector<int>& groupIdList, ChannelGroups& channelGroups, bool channelHadGroups)
 {
+  // If we have no groups set for this channel check it that's ok before adding it.
+  if (channel.ChannelTypeAllowsGroupsOnly() && groupIdList.empty())
+    return false;
+
   m_currentChannelNumber = channel.GetChannelNumber();
   channel.SetUniqueId(GenerateChannelId(channel.GetChannelName().c_str(), channel.GetStreamURL().c_str()));
 
+  bool belongsToGroup = false;
   for (int myGroupId : groupIdList)
   {
-    channel.SetRadio(channelGroups.GetChannelGroup(myGroupId)->IsRadio());
-    channelGroups.GetChannelGroup(myGroupId)->AddMemberChannelIndex(m_channels.size());
+    if (channelGroups.GetChannelGroup(myGroupId) != nullptr)
+    {
+      channel.SetRadio(channelGroups.GetChannelGroup(myGroupId)->IsRadio());
+      channelGroups.GetChannelGroup(myGroupId)->AddMemberChannelIndex(m_channels.size());
+      belongsToGroup = true;
+    }
   }
+
+  // We only care if a channel belongs to a group if it had groups to begin with
+  // Note that a channel can have had groups but no have no groups valid currently.
+  if (!belongsToGroup && channelHadGroups)
+    return false;
 
   m_channels.emplace_back(channel);
 
   m_currentChannelNumber++;
+
+  return true;
 }
 
 Channel* Channels::GetChannel(int uniqueId)

@@ -1,0 +1,17 @@
+<!--
+
+Custom Channel Groups:
+ - Allows users to create a bespoke list of groups to load.
+ - For each name that matches a group/bouquet name from the set top box include it in the channels loaded
+ - If no names match the addon will load last scanned by default.
+ - channelGroupName is the only value to be set
+
+If you are creating your own Custom Channel Groups file make a copy of this file in the same directory so it's not overwritten and start from there.
+
+NOTE: IF YOU MODIFY THIS FILE IT WILL BE OVERWRITTEN NEXT TIME THE ADDON IS STARTED
+-->
+
+<customChannelGroups>
+  <channelGroupName>My 1st Provder - Radio Channels</channelGroupName>
+  <channelGroupName>My 2nd Provider - Radio Channels</channelGroupName>
+</customChannelGroups>

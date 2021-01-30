@@ -128,6 +128,8 @@ namespace iptvsimple
       void SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName);
       void ConfigureCatchupMode();
 
+      bool ChannelTypeAllowsGroupsOnly() const;
+
     private:
       void RemoveProperty(const std::string& propName);
       void TryToAddPropertyAsHeader(const std::string& propertyName, const std::string& headerName);

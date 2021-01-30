@@ -8,6 +8,7 @@
 
 #include "ChannelGroups.h"
 
+#include "Settings.h"
 #include "utilities/Logger.h"
 
 #include <kodi/General.h>
@@ -139,4 +140,32 @@ ChannelGroup* ChannelGroups::FindChannelGroup(const std::string& name)
   }
 
   return nullptr;
+}
+
+bool ChannelGroups::CheckChannelGroupAllowed(iptvsimple::data::ChannelGroup& newChannelGroup)
+{
+  std::vector<std::string> customNameList;
+
+  if (newChannelGroup.IsRadio())
+  {
+    if (Settings::GetInstance().GetRadioChannelGroupMode() == ChannelGroupMode::ALL_GROUPS)
+      return true;
+
+    customNameList = Settings::GetInstance().GetCustomRadioChannelGroupNameList();
+  }
+  else
+  {
+    if (Settings::GetInstance().GetTVChannelGroupMode() == ChannelGroupMode::ALL_GROUPS)
+      return true;
+
+    customNameList = Settings::GetInstance().GetCustomTVChannelGroupNameList();
+  }
+
+  for (const std::string& groupName : customNameList)
+  {
+    if (groupName == newChannelGroup.GetGroupName())
+      return true;
+  }
+
+  return false;
 }

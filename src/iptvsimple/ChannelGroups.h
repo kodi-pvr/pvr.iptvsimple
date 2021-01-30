@@ -32,6 +32,7 @@ namespace iptvsimple
     iptvsimple::data::ChannelGroup* FindChannelGroup(const std::string& name);
     const std::vector<data::ChannelGroup>& GetChannelGroupsList() const { return m_channelGroups; }
     void Clear();
+    bool CheckChannelGroupAllowed(iptvsimple::data::ChannelGroup& newChannelGroup);
 
   private:
     const iptvsimple::Channels& m_channels;
