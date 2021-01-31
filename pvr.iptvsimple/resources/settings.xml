@@ -330,7 +330,7 @@
         </setting>
       </group>
       <group id="2" label="30124">
-        <setting id="test123" type="action" label="30123" help="30723">
+        <setting id="ffmpegdirectSettings" type="action" label="30123" help="30723">
           <level>0</level>
           <data>Addon.OpenSettings(inputstream.ffmpegdirect)</data>
           <dependencies>
