@@ -140,6 +140,11 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_defaultMimeType = kodi::GetSettingString("defaultMimeType");
 }
 
+void Settings::ReloadAddonSettings()
+{
+  ReadFromAddon(m_userPath, m_clientPath);
+}
+
 ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue)
 {
   // reset cache and restart addon

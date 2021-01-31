@@ -74,6 +74,7 @@ namespace iptvsimple
     }
 
     void ReadFromAddon(const std::string& userPath, const std::string& clientPath);
+    void ReloadAddonSettings();
     ADDON_STATUS SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue);
 
     const std::string& GetUserPath() const { return m_userPath; }

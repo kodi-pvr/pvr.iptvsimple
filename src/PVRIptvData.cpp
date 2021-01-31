@@ -135,6 +135,7 @@ void PVRIptvData::Process()
     {
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
+      Settings::GetInstance().ReloadAddonSettings();
       m_playlistLoader.ReloadPlayList();
       m_epg.ReloadEPG();
 
