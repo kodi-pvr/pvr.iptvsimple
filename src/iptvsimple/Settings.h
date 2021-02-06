@@ -24,6 +24,12 @@ namespace iptvsimple
   static const std::string DEFAULT_GENRE_TEXT_MAP_FILE = ADDON_DATA_BASE_DIR + "/genres/genreTextMappings/genres.xml";
   static const int DEFAULT_UDPXY_MULTICAST_RELAY_PORT = 4022;
 
+  static const int DEFAULT_NUM_GROUPS = 1;
+  static const std::string CHANNEL_GROUPS_DIR = "/channelGroups";
+  static const std::string DEFAULT_CUSTOM_TV_GROUPS_FILE = ADDON_DATA_BASE_DIR + "/channelGroups/customTVGroups-example.xml";
+  static const std::string DEFAULT_CUSTOM_RADIO_GROUPS_FILE = ADDON_DATA_BASE_DIR + "/channelGroups/customRadioGroups-example.xml";
+  static const std::string CHANNEL_GROUPS_ADDON_DATA_BASE_DIR = ADDON_DATA_BASE_DIR + CHANNEL_GROUPS_DIR;
+
   enum class PathType
     : int // same type as addon settings
   {
@@ -37,6 +43,14 @@ namespace iptvsimple
     DISABLED = 0,
     REPEATED_REFRESH,
     ONCE_PER_DAY
+  };
+
+  enum class ChannelGroupMode
+    : int // same type as addon settings
+  {
+    ALL_GROUPS = 0,
+    SOME_GROUPS,
+    CUSTOM_GROUPS
   };
 
   enum class EpgLogosMode
@@ -60,6 +74,7 @@ namespace iptvsimple
     }
 
     void ReadFromAddon(const std::string& userPath, const std::string& clientPath);
+    void ReloadAddonSettings();
     ADDON_STATUS SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue);
 
     const std::string& GetUserPath() const { return m_userPath; }
@@ -75,6 +90,12 @@ namespace iptvsimple
     const RefreshMode& GetM3URefreshMode() const { return m_m3uRefreshMode; }
     int GetM3URefreshIntervalMins() const { return m_m3uRefreshIntervalMins; }
     int GetM3URefreshHour() const { return m_m3uRefreshHour; }
+    bool AllowTVChannelGroupsOnly() const { return m_allowTVChannelGroupsOnly; }
+    const ChannelGroupMode& GetTVChannelGroupMode() const { return m_tvChannelGroupMode; }
+    const std::string& GetCustomTVGroupsFile() const { return m_customTVGroupsFile; }
+    bool AllowRadioChannelGroupsOnly() const { return m_allowRadioChannelGroupsOnly; }
+    const ChannelGroupMode& GetRadioChannelGroupMode() const { return m_radioChannelGroupMode; }
+    const std::string& GetCustomRadioGroupsFile() const { return m_customRadioGroupsFile; }
 
     const std::string& GetEpgLocation() const
     {
@@ -130,6 +151,9 @@ namespace iptvsimple
 
     const std::string& GetTvgUrl() const { return m_tvgUrl; }
     void SetTvgUrl(const std::string& tvgUrl) { m_tvgUrl = tvgUrl; }
+
+    std::vector<std::string>& GetCustomTVChannelGroupNameList() { return m_customTVChannelGroupNameList; }
+    std::vector<std::string>& GetCustomRadioChannelGroupNameList() { return m_customRadioChannelGroupNameList; }
 
   private:
     Settings() = default;
@@ -192,6 +216,8 @@ namespace iptvsimple
       return defaultReturnValue;
     }
 
+    static bool LoadCustomChannelGroupFile(std::string& file, std::vector<std::string>& channelGroupNameList);
+
     std::string m_userPath;
     std::string m_clientPath;
 
@@ -205,6 +231,24 @@ namespace iptvsimple
     RefreshMode m_m3uRefreshMode = RefreshMode::DISABLED;
     int m_m3uRefreshIntervalMins = 60;
     int m_m3uRefreshHour = 4;
+    bool m_allowTVChannelGroupsOnly = false;
+    ChannelGroupMode m_tvChannelGroupMode = ChannelGroupMode::ALL_GROUPS;
+    unsigned int m_numTVGroups = DEFAULT_NUM_GROUPS;
+    std::string m_oneTVGroup = "";
+    std::string m_twoTVGroup = "";
+    std::string m_threeTVGroup = "";
+    std::string m_fourTVGroup = "";
+    std::string m_fiveTVGroup = "";
+    std::string m_customTVGroupsFile = "";
+    bool m_allowRadioChannelGroupsOnly = false;
+    ChannelGroupMode m_radioChannelGroupMode = ChannelGroupMode::ALL_GROUPS;
+    unsigned int m_numRadioGroups = DEFAULT_NUM_GROUPS;
+    std::string m_oneRadioGroup = "";
+    std::string m_twoRadioGroup = "";
+    std::string m_threeRadioGroup = "";
+    std::string m_fourRadioGroup = "";
+    std::string m_fiveRadioGroup = "";
+    std::string m_customRadioGroupsFile = "";
 
     // EPG
     PathType m_epgPathType = PathType::REMOTE_PATH;
@@ -252,6 +296,9 @@ namespace iptvsimple
     std::string m_defaultUserAgent;
     std::string m_defaultInputstream;
     std::string m_defaultMimeType;
+
+    std::vector<std::string> m_customTVChannelGroupNameList;
+    std::vector<std::string> m_customRadioChannelGroupNameList;
 
     std::string m_tvgUrl;
   };

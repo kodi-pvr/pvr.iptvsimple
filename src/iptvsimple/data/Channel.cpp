@@ -199,6 +199,12 @@ void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const st
   }
 }
 
+bool Channel::ChannelTypeAllowsGroupsOnly() const
+{
+  return ((m_radio && Settings::GetInstance().AllowRadioChannelGroupsOnly()) ||
+          (!m_radio && Settings::GetInstance().AllowTVChannelGroupsOnly()));
+}
+
 void Channel::SetCatchupDays(int catchupDays)
 {
   if (catchupDays > 0 || catchupDays == IGNORE_CATCHUP_DAYS)

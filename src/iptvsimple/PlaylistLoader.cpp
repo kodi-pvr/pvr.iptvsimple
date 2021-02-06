@@ -67,6 +67,7 @@ bool PlaylistLoader::LoadPlayList()
   int epgTimeShift = 0;
   int catchupCorrectionSecs = 0;
   std::vector<int> currentChannelGroupIdList;
+  bool channelHadGroups = false;
 
   Channel tmpChannel;
 
@@ -112,7 +113,10 @@ bool PlaylistLoader::LoadPlayList()
       const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs);
 
       if (!groupNamesListString.empty())
+      {
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
+        channelHadGroups = true;
+      }
     }
     else if (StringUtils::StartsWith(line, KODIPROP_MARKER)) //#KODIPROP:
     {
@@ -130,7 +134,10 @@ bool PlaylistLoader::LoadPlayList()
     {
       const std::string groupNamesListString = ReadMarkerValue(line, M3U_GROUP_MARKER);
       if (!groupNamesListString.empty())
+      {
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
+        channelHadGroups = true;
+      }
     }
     else if (StringUtils::StartsWith(line, PLAYLIST_TYPE_MARKER)) //#EXT-X-PLAYLIST-TYPE:
     {
@@ -148,10 +155,12 @@ bool PlaylistLoader::LoadPlayList()
       channel.SetStreamURL(line);
       channel.ConfigureCatchupMode();
 
-      m_channels.AddChannel(channel, currentChannelGroupIdList, m_channelGroups);
+      if (!m_channels.AddChannel(channel, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
+        Logger::Log(LEVEL_DEBUG, "%s - Not adding channel '%s' as only channels with groups are supported for %s channels per add-on settings", __func__, tmpChannel.GetChannelName().c_str(), channel.IsRadio() ? "radio" : "tv");
 
       tmpChannel.Reset();
       isRealTime = true;
+      channelHadGroups = false;
     }
   }
 
@@ -288,7 +297,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
 void PlaylistLoader::ParseAndAddChannelGroups(const std::string& groupNamesListString, std::vector<int>& groupIdList, bool isRadio)
 {
-  //groupNamesListString may have a single or multiple group names seapareted by ';'
+  // groupNamesListString may have a single or multiple group names seapareted by ';'
 
   std::stringstream streamGroups(groupNamesListString);
   std::string groupName;
@@ -301,8 +310,11 @@ void PlaylistLoader::ParseAndAddChannelGroups(const std::string& groupNamesListS
     group.SetGroupName(groupName);
     group.SetRadio(isRadio);
 
-    int uniqueGroupId = m_channelGroups.AddChannelGroup(group);
-    groupIdList.emplace_back(uniqueGroupId);
+    if (m_channelGroups.CheckChannelGroupAllowed(group))
+    {
+      int uniqueGroupId = m_channelGroups.AddChannelGroup(group);
+      groupIdList.emplace_back(uniqueGroupId);
+    }
   }
 }
 

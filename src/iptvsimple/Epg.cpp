@@ -46,8 +46,14 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
   SetEPGMaxPastDays(epgMaxPastDays);
   SetEPGMaxFutureDays(epgMaxFutureDays);
 
-  time_t now = std::time(nullptr);
-  LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+  if (Settings::GetInstance().IsCatchupEnabled())
+  {
+    // For catchup we need a local store of the EPG data. Kodi may not load the
+    // data on each startup so we need to make sure it's loaded whether or not
+    // kodi considers it necessary.
+    time_t now = std::time(nullptr);
+    LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+  }
 
   return true;
 }
@@ -243,12 +249,12 @@ bool Epg::LoadChannelEpgs(const xml_node& rootElement)
       if (existingChannelEpg)
       {
         if (existingChannelEpg->CombineNamesAndIconPathFrom(channelEpg))
-          Logger::Log(LEVEL_DEBUG, "%s - Combined channel EPG with id '%s' now has display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), StringUtils::Join(channelEpg.GetNames(), EPG_STRING_TOKEN_SEPARATOR).c_str());
+          Logger::Log(LEVEL_DEBUG, "%s - Combined channel EPG with id '%s' now has display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), channelEpg.GetJoinedDisplayNames().c_str());
 
         continue;
       }
 
-      Logger::Log(LEVEL_DEBUG, "%s - Loaded channel EPG with id '%s' with display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), StringUtils::Join(channelEpg.GetNames(), EPG_STRING_TOKEN_SEPARATOR).c_str());
+      Logger::Log(LEVEL_DEBUG, "%s - Loaded channel EPG with id '%s' with display names: '%s'", __FUNCTION__, channelEpg.GetId().c_str(), channelEpg.GetJoinedDisplayNames().c_str());
 
       m_channelEpgs.emplace_back(channelEpg);
     }
@@ -397,20 +403,19 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel) const
 
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    for (const std::string& displayName : myChannelEpg.GetNames())
+    for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
     {
-      const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
-      if (StringUtils::EqualsNoCase(convertedDisplayName, channel.GetTvgName()) ||
-          StringUtils::EqualsNoCase(displayName, channel.GetTvgName()))
+      if (StringUtils::EqualsNoCase(displayNamePair.m_displayNameWithUnderscores, channel.GetTvgName()) ||
+          StringUtils::EqualsNoCase(displayNamePair.m_displayName, channel.GetTvgName()))
         return const_cast<ChannelEpg*>(&myChannelEpg);
     }
   }
 
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    for (const std::string& displayName : myChannelEpg.GetNames())
+    for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
     {
-      if (StringUtils::EqualsNoCase(displayName, channel.GetChannelName()))
+      if (StringUtils::EqualsNoCase(displayNamePair.m_displayName, channel.GetChannelName()))
         return const_cast<ChannelEpg*>(&myChannelEpg);
     }
   }

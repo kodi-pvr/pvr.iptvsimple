@@ -36,7 +36,7 @@ namespace iptvsimple
     bool GetChannel(const kodi::addon::PVRChannel& channel, iptvsimple::data::Channel& myChannel) const;
     bool GetChannel(int uniqueId, iptvsimple::data::Channel& myChannel) const;
 
-    void AddChannel(iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups);
+    bool AddChannel(iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups, bool channelHadGroups);
     iptvsimple::data::Channel* GetChannel(int uniqueId);
     const iptvsimple::data::Channel* FindChannel(const std::string& id, const std::string& displayName) const;
     const std::vector<data::Channel>& GetChannelsList() const { return m_channels; }

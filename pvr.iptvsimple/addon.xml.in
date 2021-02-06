@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.3.0"
+  version="7.4.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,13 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.4.0
+- Fixed: An xmltv channel cannot have an empty id field
+- Fixed: Fix slow epg load due to display name checks when finding a channel
+- Fixed: Only force load EPG data on startup if catchup is enabled
+- Added: Support custom channel group filters
+- Added: Reload settings before reloading playlist and EPG data
+
 v7.3.0
 - Update: PVR API 7.1.0
 - Added: support past and future max epg days and always load EPG data on start

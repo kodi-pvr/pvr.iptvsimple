@@ -10,13 +10,16 @@
 
 #include "../utilities/XMLUtils.h"
 
+#include <kodi/tools/StringUtils.h>
+
+using namespace kodi::tools;
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace pugi;
 
 bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
 {
-  if (!GetAttributeValue(channelNode, "id", m_id))
+  if (!GetAttributeValue(channelNode, "id", m_id) || m_id.empty())
     return false;
 
   bool foundChannel = false;
@@ -29,7 +32,7 @@ bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
     if (channels.FindChannel(m_id, name))
     {
       foundChannel = true;
-      m_names.emplace_back(name);
+      AddDisplayName(name);
     }
   }
 
@@ -55,9 +58,9 @@ bool ChannelEpg::CombineNamesAndIconPathFrom(const ChannelEpg& right)
 {
   bool combined = false;
 
-  for (const std::string& name : right.m_names)
+  for (const DisplayNamePair& namePair : right.m_displayNames)
   {
-    AddName(name);
+    AddDisplayName(namePair.m_displayName);
     combined = true;
   }
 
@@ -68,4 +71,21 @@ bool ChannelEpg::CombineNamesAndIconPathFrom(const ChannelEpg& right)
   }
 
   return combined;
+}
+
+void ChannelEpg::AddDisplayName(const std::string& value)
+{
+  DisplayNamePair pair;
+  pair.m_displayName = value;
+  StringUtils::Replace(pair.m_displayNameWithUnderscores, ' ', '_');
+  m_displayNames.emplace_back(pair);
+}
+
+std::string ChannelEpg::GetJoinedDisplayNames()
+{
+  std::vector<std::string> names;
+  for (auto& displayNamePair : m_displayNames)
+    names.emplace_back(displayNamePair.m_displayName);
+
+  return StringUtils::Join(names, EPG_STRING_TOKEN_SEPARATOR);
 }

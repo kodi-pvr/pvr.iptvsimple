@@ -68,13 +68,29 @@ General settings required for the addon to function.
 * **M3U play list URL**: If location is `Remote path` this setting must contain a valid URL for the addon to function.
 * **Cache M3U at local storage**: If location is `Remote path` select whether or not the the M3U file should be cached locally.
 * **Start channel number**: The number to start numbering channels from. Only used when `Use backend channel numbers` from PVR settings is enabled and a channel number is not supplied in the M3U file.
-* **Only number by channel order in M3U**: Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'.
+* **Only number by channel order in M3U**: Ignore any `tvg-chno` tags and only number channels by the order in the M3U starting at `Start channel number`.
 * **Auto refresh mode**: Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are:
     - `Disabled` - Don't auto refresh the files.
     - `Repeated refresh` - Refresh the files on a minute based interval.
     - `Once per day` - Refresh the files once per day.
 * **Refresh interval**: If auto refresh mode is `Repeated refresh` refresh the files every time this number of minutes passes. Max 120 minutes.
 * **Refresh hour (24h)**: If auto refresh mode is `Once per day` refresh the files every time this hour of the day is reached.
+* **Only load TV channels in groups**: Only TV channels that belong to groups (i.e. have a `group-title` attribute) will be loaded from the M3U file.
+* **TV group mode**: Choose from one of the following three modes:
+    - `All groups` - Load all TV groups from the M3U file.
+    - `Some groups` - Only load the group specified in the next options
+    - `Custom groups` - Fetch a set of groups from the M3U file whose names are loaded from an XML file.
+* **Number of TV groups**: The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the `Custom groups` mode should be used instead.
+* **TV group 1-5**: If the previous option has been has been set to `Some groups` you need to specify a TV group to be loaded from the M3U file. Please not that this is the group-title attribute (i.e. "UK (TV)"). This setting is case-sensitive.
+* **Custom TV Groups file**: The file used to load the custom TV groups (groups). The default file is `customTVGroups-example.xml`. Details on how to customise can be found in the next section of the README.
+* **Only load Radio channels in groups**: Only Radio channels that belong to groups (i.e. have a `group-title` attribute) will be loaded from the M3U file.
+* **Radio group fetch mode**: Choose from one of the following three modes:
+    - `All groups` - Load all Radio groups from the set-top box.
+    - `Some groups` - Only load the group specified in the next options
+    - `Custom groups` - Fetch a set of groups from the M3U file whose names are loaded from an XML file.
+* **Number of radio groups**: The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the `Custom groups` mode should be used instead.
+* **Radio group 1-5**: If the previous option has been has been set to `Some groups` you need to specify a Radio group to be loaded from the M3U file. Please not that this is the group-title attribute (i.e. "UK (Radio)"). This setting is case-sensitive.
+* **Custom Radio Groups file**: The file used to load the custom Radio groups (groups). The default file is `customRadioGroups-example.xml`. Details on how to customise can be found in the next section of the README.
 
 ### EPG
 Settings related to the EPG.
@@ -456,6 +472,17 @@ Note: Once mapped to genre IDs the text displayed can either be the DVB standard
 
 - The `type` attribute can contain a values ranging from 16 to 240 in multiples of 16 (would be 0x10 to 0xF0 if in hex) and the `subtype` attributes can contain a value from 0 to 15 (would be 0x00 to 0x0F if in hex). `subtype` is optional.
 
+### Custom Channel Groups (Channels)
+
+Config files are located in the `userdata/addon_data/pvr.vuplus/channelGroups` folder.
+
+The following files are currently available with the addon:
+    - `customTVGroups-example.xml`
+    - `customRadioGroups-example.xml`
+
+Note that both these files are provided as examples and are overwritten each time the addon starts. Therefore you should make copies and use those for your custom config.
+
+The format is quite simple, containing a number of channel group/bouquet names.
 
 ### HTTP header fields supported by Kodi
 
