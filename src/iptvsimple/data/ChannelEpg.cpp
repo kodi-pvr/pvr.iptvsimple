@@ -77,6 +77,7 @@ void ChannelEpg::AddDisplayName(const std::string& value)
 {
   DisplayNamePair pair;
   pair.m_displayName = value;
+  pair.m_displayNameWithUnderscores = value;
   StringUtils::Replace(pair.m_displayNameWithUnderscores, ' ', '_');
   m_displayNames.emplace_back(pair);
 }
