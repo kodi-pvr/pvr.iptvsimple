@@ -598,6 +598,7 @@ bool PVRIptvData::LoadPlayList(void)
   bool bFirst = true;
   bool bIsRealTime  = true;
   int iChannelIndex     = 0;
+  int iUniqueGroupId    = 0;
   int iChannelNum       = g_iStartNumber;
   int iEPGTimeShift     = 0;
   bool bRadio           = false;
@@ -728,14 +729,14 @@ bool PVRIptvData::LoadPlayList(void)
         }
 
         iChannelGroupName = strGroupName;
-        ProcessGroupLine(strGroupName, bRadio, iCurrentGroupId);
+        ProcessGroupLine(strGroupName, bRadio, iUniqueGroupId, iCurrentGroupId);
       }
     }
     else if (iChannelGroupName.empty() && StringUtils::Left(strLine, strlen(M3U_GROUP_MARKER)) == M3U_GROUP_MARKER)
     {
       iChannelGroupName = StringUtils::Right(strLine, static_cast<int>(strLine.size()) - strlen(M3U_GROUP_MARKER));
       iChannelGroupName = StringUtils::Trim(iChannelGroupName);
-      ProcessGroupLine(iChannelGroupName, bRadio, iCurrentGroupId);
+      ProcessGroupLine(iChannelGroupName, bRadio, iUniqueGroupId, iCurrentGroupId);
     }
     else if (StringUtils::Left(strLine, strlen(KODIPROP_MARKER)) == KODIPROP_MARKER)
     {
@@ -846,10 +847,8 @@ bool PVRIptvData::LoadPlayList(void)
   return true;
 }
 
-void PVRIptvData::ProcessGroupLine(std::string groupsLine, bool bRadio, std::vector<int>& iCurrentGroupId)
+void PVRIptvData::ProcessGroupLine(std::string groupsLine, bool bRadio, int &uniqueGroupId, std::vector<int>& iCurrentGroupId)
 {
-  static int iUniqueGroupId = 0;
-
   if (!groupsLine.empty())
   {
     std::stringstream streamGroups(groupsLine);
@@ -863,11 +862,11 @@ void PVRIptvData::ProcessGroupLine(std::string groupsLine, bool bRadio, std::vec
       {
         PVRIptvChannelGroup group;
         group.strGroupName = groupsLine;
-        group.iGroupId = ++iUniqueGroupId;
+        group.iGroupId = ++uniqueGroupId;
         group.bRadio = bRadio;
 
         m_groups.push_back(group);
-        iCurrentGroupId.push_back(iUniqueGroupId);
+        iCurrentGroupId.push_back(uniqueGroupId);
       }
       else
       {

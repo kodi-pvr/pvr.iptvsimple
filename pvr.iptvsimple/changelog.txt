@@ -1,3 +1,6 @@
+v3.10.1
+- Fixed: Addon crashes when it is restarted
+
 v3.10.0
 - Added: Support for EXTGRP markers for channel groups
 
