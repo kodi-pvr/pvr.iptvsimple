@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.4.2"
+  version="7.4.3"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,10 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.4.3
+- Fixed: Add support for format specifiers use for detecting terminating catchup and granularity
+- Update: Make inputstream add-ons a required dependency
+
 v7.4.2
 - Fixed: Add missing initialisation of display name with underscores after fixing slow epg
 
