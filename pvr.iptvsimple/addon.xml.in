@@ -5,9 +5,9 @@
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
-    <import addon="inputstream.ffmpegdirect" minversion="1.19.0" optional="true"/>
-    <import addon="inputstream.adaptive" minversion="2.6.6" optional="true"/>
-    <import addon="inputstream.rtmp" minversion="3.4.0" optional="true"/>
+    <import addon="inputstream.ffmpegdirect" minversion="1.19.0"/>
+    <import addon="inputstream.adaptive" minversion="2.6.6"/>
+    <import addon="inputstream.rtmp" minversion="3.4.0"/>
   </requires>
   <extension
     point="kodi.pvrclient"
