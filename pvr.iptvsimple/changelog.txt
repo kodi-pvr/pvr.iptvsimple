@@ -1,3 +1,7 @@
+v7.4.3
+- Fixed: Add support for format specifiers use for detecting terminating catchup and granularity
+- Update: Make inputstream add-ons a required dependency
+
 v7.4.2
 - Fixed: Add missing initialisation of display name with underscores after fixing slow epg
 

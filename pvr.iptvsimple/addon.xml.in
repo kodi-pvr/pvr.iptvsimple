@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.4.2"
+  version="7.4.3"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
-    <import addon="inputstream.ffmpegdirect" minversion="1.19.0" optional="true"/>
-    <import addon="inputstream.adaptive" minversion="2.6.6" optional="true"/>
-    <import addon="inputstream.rtmp" minversion="3.4.0" optional="true"/>
+    <import addon="inputstream.ffmpegdirect" minversion="1.19.0"/>
+    <import addon="inputstream.adaptive" minversion="2.6.6"/>
+    <import addon="inputstream.rtmp" minversion="3.4.0"/>
   </requires>
   <extension
     point="kodi.pvrclient"
@@ -169,6 +169,10 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.4.3
+- Fixed: Add support for format specifiers use for detecting terminating catchup and granularity
+- Update: Make inputstream add-ons a required dependency
+
 v7.4.2
 - Fixed: Add missing initialisation of display name with underscores after fixing slow epg
 
