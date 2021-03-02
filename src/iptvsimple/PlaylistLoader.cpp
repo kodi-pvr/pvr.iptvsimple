@@ -228,7 +228,18 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     }
 
     if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
-      channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
+    {
+      size_t found = strChnlNo.find('.');
+      if (found != std::string::npos)
+      {
+        channel.SetChannelNumber(std::atoi(strChnlNo.substr(0, found).c_str()));
+        channel.SetSubChannelNumber(std::atoi(strChnlNo.substr(found + 1).c_str()));
+      }
+      else
+      {
+        channel.SetChannelNumber(std::atoi(strChnlNo.c_str()));
+      }
+    }
 
     double tvgShiftDecimal = std::atof(strTvgShift.c_str());
 

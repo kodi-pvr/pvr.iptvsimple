@@ -41,10 +41,10 @@ namespace iptvsimple
 
       Channel() = default;
       Channel(const Channel &c) : m_radio(c.IsRadio()), m_uniqueId(c.GetUniqueId()),
-        m_channelNumber(c.GetChannelNumber()), m_encryptionSystem(c.GetEncryptionSystem()),
-        m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()), m_iconPath(c.GetIconPath()),
-        m_streamURL(c.GetStreamURL()), m_hasCatchup(c.HasCatchup()), m_catchupMode(c.GetCatchupMode()),
-        m_catchupDays(c.GetCatchupDays()), m_catchupSource(c.GetCatchupSource()),
+        m_channelNumber(c.GetChannelNumber()), m_subChannelNumber(c.GetSubChannelNumber()),
+        m_encryptionSystem(c.GetEncryptionSystem()), m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()),
+        m_iconPath(c.GetIconPath()), m_streamURL(c.GetStreamURL()), m_hasCatchup(c.HasCatchup()),
+        m_catchupMode(c.GetCatchupMode()), m_catchupDays(c.GetCatchupDays()), m_catchupSource(c.GetCatchupSource()),
         m_isCatchupTSStream(c.IsCatchupTSStream()), m_catchupSupportsTimeshifting(c.CatchupSupportsTimeshifting()),
         m_catchupSourceTerminates(c.CatchupSourceTerminates()), m_catchupGranularitySeconds(c.GetCatchupGranularitySeconds()),
         m_catchupCorrectionSecs(c.GetCatchupCorrectionSecs()), m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
@@ -59,6 +59,9 @@ namespace iptvsimple
 
       int GetChannelNumber() const { return m_channelNumber; }
       void SetChannelNumber(int value) { m_channelNumber = value; }
+
+      int GetSubChannelNumber() const { return m_subChannelNumber; }
+      void SetSubChannelNumber(int value) { m_subChannelNumber = value; }
 
       int GetEncryptionSystem() const { return m_encryptionSystem; }
       void SetEncryptionSystem(int value) { m_encryptionSystem = value; }
@@ -142,6 +145,7 @@ namespace iptvsimple
       bool m_radio = false;
       int m_uniqueId = 0;
       int m_channelNumber = 0;
+      int m_subChannelNumber = 0;
       int m_encryptionSystem = 0;
       int m_tvgShift = 0;
       std::string m_channelName = "";

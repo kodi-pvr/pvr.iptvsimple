@@ -53,6 +53,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_uniqueId         = m_uniqueId;
   left.m_radio            = m_radio;
   left.m_channelNumber    = m_channelNumber;
+  left.m_subChannelNumber = m_subChannelNumber;
   left.m_encryptionSystem = m_encryptionSystem;
   left.m_tvgShift         = m_tvgShift;
   left.m_channelName      = m_channelName;
@@ -78,6 +79,7 @@ void Channel::UpdateTo(kodi::addon::PVRChannel& left) const
   left.SetUniqueId(m_uniqueId);
   left.SetIsRadio(m_radio);
   left.SetChannelNumber(m_channelNumber);
+  left.SetSubChannelNumber(m_subChannelNumber);
   left.SetChannelName(m_channelName);
   left.SetEncryptionSystem(m_encryptionSystem);
   left.SetIconPath(m_iconPath);
@@ -90,6 +92,7 @@ void Channel::Reset()
   m_uniqueId = 0;
   m_radio = false;
   m_channelNumber = 0;
+  m_subChannelNumber = 0;
   m_encryptionSystem = 0;
   m_tvgShift = 0;
   m_channelName.clear();
