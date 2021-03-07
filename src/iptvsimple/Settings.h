@@ -61,6 +61,14 @@ namespace iptvsimple
     PREFER_XMLTV
   };
 
+  enum class CatchupOverrideMode
+    : int // same type as addon settings
+  {
+    WITHOUT_TAGS = 0,
+    WITH_TAGS,
+    ALL_CHANNELS
+  };
+
   class Settings
   {
   public:
@@ -133,6 +141,7 @@ namespace iptvsimple
     int GetCatchupDays() const { return m_catchupDays; }
     time_t GetCatchupDaysInSeconds() const { return static_cast<time_t>(m_catchupDays) * 24 * 60 * 60; }
     const CatchupMode& GetAllChannelsCatchupMode() const { return m_allChannelsCatchupMode; }
+    const CatchupOverrideMode& GetCatchupOverrideMode() const { return m_catchupOverrideMode; }
     bool CatchupPlayEpgAsLive() const { return m_catchupPlayEpgAsLive; }
     int GetCatchupWatchEpgBeginBufferMins() const { return m_catchupWatchEpgBeginBufferMins; }
     time_t GetCatchupWatchEpgBeginBufferSecs() const { return static_cast<time_t>(m_catchupWatchEpgBeginBufferMins) * 60; }
@@ -282,6 +291,7 @@ namespace iptvsimple
     std::string m_catchupQueryFormat;
     int m_catchupDays = 3;
     CatchupMode m_allChannelsCatchupMode = CatchupMode::DISABLED;
+    CatchupOverrideMode m_catchupOverrideMode = CatchupOverrideMode::WITHOUT_TAGS;
     bool m_catchupPlayEpgAsLive = false;
     int m_catchupWatchEpgBeginBufferMins = 5;
     int m_catchupWatchEpgEndBufferMins = 15;

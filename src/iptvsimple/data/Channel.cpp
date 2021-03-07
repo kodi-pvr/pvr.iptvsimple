@@ -303,13 +303,32 @@ void Channel::ConfigureCatchupMode()
     protocolOptions = m_streamURL.substr(found, m_streamURL.length());
   }
 
-  if (Settings::GetInstance().GetAllChannelsCatchupMode() != CatchupMode::DISABLED &&
-      (m_catchupMode == CatchupMode::DISABLED || m_catchupMode == CatchupMode::TIMESHIFT))
+  if (Settings::GetInstance().GetAllChannelsCatchupMode() != CatchupMode::DISABLED)
   {
-    // As CatchupMode::TIMESHIFT is obsolete and some providers use it
-    // incorrectly we allow this setting to override it
-    m_catchupMode = Settings::GetInstance().GetAllChannelsCatchupMode();
-    m_hasCatchup = true;
+    bool overrideCatchupMode = false;
+
+    if (Settings::GetInstance().GetCatchupOverrideMode() == CatchupOverrideMode::WITHOUT_TAGS &&
+        (m_catchupMode == CatchupMode::DISABLED || m_catchupMode == CatchupMode::TIMESHIFT))
+    {
+      // As CatchupMode::TIMESHIFT is obsolete and some providers use it
+      // incorrectly we allow this setting to override it
+      overrideCatchupMode = true;
+    }
+    else if (Settings::GetInstance().GetCatchupOverrideMode() == CatchupOverrideMode::WITH_TAGS &&
+            m_catchupMode != CatchupMode::DISABLED)
+    {
+      overrideCatchupMode = true;
+    }
+    else if (Settings::GetInstance().GetCatchupOverrideMode() == CatchupOverrideMode::ALL_CHANNELS)
+    {
+      overrideCatchupMode = true;
+    }
+
+    if (overrideCatchupMode)
+    {
+      m_catchupMode = Settings::GetInstance().GetAllChannelsCatchupMode();
+      m_hasCatchup = true;
+    }
   }
 
   switch (m_catchupMode)

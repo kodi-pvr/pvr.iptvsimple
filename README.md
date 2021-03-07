@@ -198,14 +198,17 @@ Addon settings for catchup:
 * **Enable catchup**: Should be enabled if there are channels supporting catchup in your M3U list.
 * **Query format string**: A format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of `default` or `append` and a `catchup-source` tag is provided in the M3U entry this setting will be ignored.
 * **Catchup window**: The number of days into the past in which it is possible to catchup on a show. Can be overidden in an M3U entry using a 'catchup-days' tag.
-* **All channels support catchup**: If enabled it is assumed that all channels support catchup. If there are no catchup specific tags in the M3U entries then the stream URL will be used as the source, and the URL format and catchup days will come from the addon settings. If this option is disabled then a M3U entry must have at least a `catchup="true"` or `catchup="default"` tag to enable catchup.
-* **All channels support catchup using mode**: If enabled it is assumed that all channels support catchup using the selected mode if they do not have catchup tags. In this case the 'Query format string' and 'Catchup window' number of days will come from the addon settings if needed. If this option is disabled then an M3U entry must have at least a `catchup=` tag to enable catchup. The options for how to build the catch URL are:
+* **Channels support catchup using mode**: If enabled it is assumed that channels support catchup using the selected catchup mode while also obeying the override mode. If required the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then an M3U entry must have at least a `catchup=` tag to enable catchup. The options for how to build the catch URL are:
     - `Disabled` - Do not assume all channel support catchup.
     - `Default` - Use catchup source as the full catchup URL, if there is no catchup source use Append mode.
     - `Append` - Append the catchup source to the channel URL, if there is no catchup source append the `Query format string` instead.
     - `Shift (SIPTV)` - Append the standard SIPTV catchup string to the channel URL.
     - `Flussonic` - Build a flussonic URL from the channel URL.
     - `Xtream codes` - Build an Xtream codes URL from the channel URL.
+* **Override catchup for channels**: Set the scope for overriding the catchup mode. Options are:
+    - `without catchup mode` - Only include channels with no catchup mode set (except legacy SIP `timeshift` catchup mode).
+    - `with catchup mode` - Only include channels with catchup mode set (ignore those without a catchup mode).
+    - `with and without catchup mode (all channels)` - Include all channels ignoring any catchup mode from the M3U.
 * **Play from EPG in Live TV mode (using timeshift)**: When disabled any catchup show from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer.
 * **Buffer before programme start**: The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video.
 * **Buffer after programme end**: The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video.
