@@ -636,6 +636,21 @@
           </constraints>
           <control type="list" format="integer" />
         </setting>
+        <setting id="catchupOverrideMode" type="integer" parent="allChannelsCatchupMode" label="30116" help="30709">
+          <level>0</level>
+          <default>false</default>
+          <constraints>
+            <options>
+              <option label="30117">0</option> <!-- DISABLED -->
+              <option label="30118">1</option> <!-- DEFAULT -->
+              <option label="30119">2</option> <!-- APPEND -->
+            </options>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="allChannelsCatchupMode" operator="!is">0</dependency>
+          </dependencies>
+          <control type="list" format="integer" />
+        </setting>
       </group>
       <group id="2" label="30105">
         <setting id="catchupPlayEpgAsLive" type="boolean" label="30106" help="30705">
