@@ -93,7 +93,7 @@ PVR_ERROR PVRIptvData::GetCapabilities(kodi::addon::PVRCapabilities& capabilitie
 
 PVR_ERROR PVRIptvData::GetBackendName(std::string& name)
 {
-  name = "IPTV Simple PVR Add-on";
+  name = "IPTV Simple";
   return PVR_ERROR_NO_ERROR;
 }
 PVR_ERROR PVRIptvData::GetBackendVersion(std::string& version)
