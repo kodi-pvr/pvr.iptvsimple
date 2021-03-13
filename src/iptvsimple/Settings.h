@@ -21,6 +21,7 @@ namespace iptvsimple
   static const std::string M3U_CACHE_FILENAME = "iptv.m3u.cache";
   static const std::string XMLTV_CACHE_FILENAME = "xmltv.xml.cache";
   static const std::string ADDON_DATA_BASE_DIR = "special://userdata/addon_data/pvr.iptvsimple";
+  static const std::string DEFAULT_PROVIDER_NAME_MAP_FILE = ADDON_DATA_BASE_DIR + "/providers/providerMappings.xml";
   static const std::string DEFAULT_GENRE_TEXT_MAP_FILE = ADDON_DATA_BASE_DIR + "/genres/genreTextMappings/genres.xml";
   static const int DEFAULT_UDPXY_MULTICAST_RELAY_PORT = 4022;
 
@@ -98,6 +99,11 @@ namespace iptvsimple
     const RefreshMode& GetM3URefreshMode() const { return m_m3uRefreshMode; }
     int GetM3URefreshIntervalMins() const { return m_m3uRefreshIntervalMins; }
     int GetM3URefreshHour() const { return m_m3uRefreshHour; }
+    bool HasDefaultProviderName() const { return !m_defaultProviderName.empty(); }
+    const std::string& GetDefaultProviderName() const { return m_defaultProviderName; }
+    bool ProviderNameMapFileEnabled() const { return m_enableProviderMappings; }
+    const std::string& GetProviderNameMapFile() const { return m_providerMappingFile; }
+
     bool AllowTVChannelGroupsOnly() const { return m_allowTVChannelGroupsOnly; }
     const ChannelGroupMode& GetTVChannelGroupMode() const { return m_tvChannelGroupMode; }
     const std::string& GetCustomTVGroupsFile() const { return m_customTVGroupsFile; }
@@ -244,6 +250,11 @@ namespace iptvsimple
     RefreshMode m_m3uRefreshMode = RefreshMode::DISABLED;
     int m_m3uRefreshIntervalMins = 60;
     int m_m3uRefreshHour = 4;
+    std::string m_defaultProviderName;
+    bool m_enableProviderMappings = false;
+    std::string m_providerMappingFile = DEFAULT_PROVIDER_NAME_MAP_FILE;
+
+    // Groups
     bool m_allowTVChannelGroupsOnly = false;
     ChannelGroupMode m_tvChannelGroupMode = ChannelGroupMode::ALL_GROUPS;
     unsigned int m_numTVGroups = DEFAULT_NUM_GROUPS;

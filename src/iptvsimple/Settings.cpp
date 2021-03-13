@@ -37,7 +37,11 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_m3uRefreshMode = kodi::GetSettingEnum<RefreshMode>("m3uRefreshMode", RefreshMode::DISABLED);
   m_m3uRefreshIntervalMins = kodi::GetSettingInt("m3uRefreshIntervalMins", 60);
   m_m3uRefreshHour = kodi::GetSettingInt("m3uRefreshHour", 4);
+  m_defaultProviderName = kodi::GetSettingString("defaultProviderName");
+  m_enableProviderMappings = kodi::GetSettingBoolean("enableProviderMappings", false);
+  m_providerMappingFile = kodi::GetSettingString("providerMappingFile", DEFAULT_PROVIDER_NAME_MAP_FILE);
 
+  // Groups
   m_allowTVChannelGroupsOnly = kodi::GetSettingBoolean("tvChannelGroupsOnly", false);
   m_tvChannelGroupMode = kodi::GetSettingEnum<ChannelGroupMode>("tvGroupMode", ChannelGroupMode::ALL_GROUPS);
   m_numTVGroups = kodi::GetSettingInt("numTvGroups", DEFAULT_NUM_GROUPS);
@@ -179,6 +183,13 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSet
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshIntervalMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uRefreshHour")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshHour, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "defaultProviderName")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_defaultProviderName, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "enableProviderMappings")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_enableProviderMappings, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "providerMappingFile")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_providerMappingFile, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  // Groups
   else if (settingName == "tvChannelGroupsOnly")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_allowTVChannelGroupsOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "tvGroupMode")

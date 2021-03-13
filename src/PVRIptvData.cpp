@@ -24,6 +24,7 @@ PVRIptvData::PVRIptvData()
 {
   m_channels.Clear();
   m_channelGroups.Clear();
+  m_providers.Clear();
   m_epg.Clear();
 }
 
@@ -65,6 +66,7 @@ ADDON_STATUS PVRIptvData::Create()
   Settings::GetInstance().ReadFromAddon(kodi::GetBaseUserPath(), kodi::GetAddonPath());
 
   m_channels.Init();
+  m_providers.Init();
   m_playlistLoader.Init();
   m_playlistLoader.LoadPlayList();
   m_epg.Init(EpgMaxPastDays(), EpgMaxFutureDays());
@@ -83,6 +85,7 @@ PVR_ERROR PVRIptvData::GetCapabilities(kodi::addon::PVRCapabilities& capabilitie
   capabilities.SetSupportsTV(true);
   capabilities.SetSupportsRadio(true);
   capabilities.SetSupportsChannelGroups(true);
+  capabilities.SetSupportsProviders(true);
   capabilities.SetSupportsRecordings(false);
   capabilities.SetSupportsRecordingsRename(false);
   capabilities.SetSupportsRecordingsLifetimeChange(false);
@@ -157,8 +160,40 @@ PVRIptvData::~PVRIptvData()
   std::lock_guard<std::mutex> lock(m_mutex);
   m_channels.Clear();
   m_channelGroups.Clear();
+  m_providers.Clear();
   m_epg.Clear();
 }
+
+/***************************************************************************
+ * Providers
+ **************************************************************************/
+
+PVR_ERROR PVRIptvData::GetProvidersAmount(int& amount)
+{
+  amount = m_providers.GetNumProviders();
+
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR PVRIptvData::GetProviders(kodi::addon::PVRProvidersResultSet& results)
+{
+  std::vector<kodi::addon::PVRProvider> providers;
+  {
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_providers.GetProviders(providers);
+  }
+
+  Logger::Log(LEVEL_DEBUG, "%s - providers available '%d'", __func__, providers.size());
+
+  for (const auto& provider : providers)
+    results.Add(provider);
+
+  return PVR_ERROR_NO_ERROR;
+}
+
+/***************************************************************************
+ * Channels
+ **************************************************************************/
 
 PVR_ERROR PVRIptvData::GetChannelsAmount(int& amount)
 {
@@ -218,6 +253,10 @@ bool PVRIptvData::GetChannel(unsigned int uniqueChannelId, iptvsimple::data::Cha
   return m_channels.GetChannel(uniqueChannelId, myChannel);
 }
 
+/***************************************************************************
+ * Channel Groups
+ **************************************************************************/
+
 PVR_ERROR PVRIptvData::GetChannelGroupsAmount(int& amount)
 {
   std::lock_guard<std::mutex> lock(m_mutex);
@@ -238,6 +277,10 @@ PVR_ERROR PVRIptvData::GetChannelGroupMembers(const kodi::addon::PVRChannelGroup
 
   return m_channelGroups.GetChannelGroupMembers(group, results);
 }
+
+/***************************************************************************
+ * EPG
+ **************************************************************************/
 
 PVR_ERROR PVRIptvData::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results)
 {
@@ -323,6 +366,10 @@ PVR_ERROR PVRIptvData::SetEPGMaxFutureDays(int epgMaxFutureDays)
   return PVR_ERROR_NO_ERROR;
 }
 
+/***************************************************************************
+ * Signal Status
+ **************************************************************************/
+
 PVR_ERROR PVRIptvData::GetSignalStatus(int channelUid, kodi::addon::PVRSignalStatus& signalStatus)
 {
   signalStatus.SetAdapterName("IPTV Simple Adapter 1");
@@ -330,6 +377,10 @@ PVR_ERROR PVRIptvData::GetSignalStatus(int channelUid, kodi::addon::PVRSignalSta
 
   return PVR_ERROR_NO_ERROR;
 }
+
+/***************************************************************************
+ * Settings
+ **************************************************************************/
 
 ADDON_STATUS PVRIptvData::SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue)
 {

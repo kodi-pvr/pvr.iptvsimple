@@ -1,0 +1,46 @@
+<!--
+
+Custom Providers:
+ - Allows users to create a bespoke list of providers to map to.
+ - For each provider name that matches a provider name below the given name, type,
+   icon, country codes and lanuage codes will be used.
+ - If no names match the addon will just use the supplied name and any other metadta supplied
+   in the M3U for the provider.
+ - The valid values for types are: unknown, addon, satellite, cable, aerial and iptv
+ - Country codes should be ISO 3166 codes, comma separated (e.g 'GB,IE,FR,CA'),
+   an empty string means this value is undefined.
+ - Language codes should be RFC 5646 codes, comma separated (e.g. 'en_GB,fr_CA'),
+   an empty string means this value is undefined.
+
+If you have publicly available icons for providers and would like to make them available as default please
+create an issue at https://github.com/kodi-pvr/pvr.iptvsimple/issues requesting their inclusion.
+
+If you are creating your own Custom Providers file make a copy of this file in the same directory so it's
+not overwritten and start from there.
+
+NOTE: IF YOU MODIFY THIS FILE IT WILL BE OVERWRITTEN NEXT TIME THE ADDON IS STARTED
+-->
+
+<providerMappings>
+  <providerMapping mappedName="Freesat">
+    <name>Freesat</name>
+    <type>satellite</type>
+    <iconPath>https://www.lyngsat.com/logo/corp/ff/freesat_uk.png</iconPath>
+    <countries>UK,IE</countries>
+    <languages>en_GB,en_IE</languages>
+  </providerMapping>
+  <providerMapping mappedName="BSkyB">
+    <name>Sky</name>
+    <type>satellite</type>
+    <iconPath>https://www.lyngsat.com/logo/corp/ss/sky_uk.png</iconPath>
+    <countries>UK,IE</countries>
+    <languages>en_GB,en_IE</languages>
+  </providerMapping>
+  <providerMapping mappedName="RTÉNL">
+    <name>Saorview</name>
+    <type>aerial</type>
+    <iconPath>https://upload.wikimedia.org/wikipedia/en/thumb/9/92/Saorview_logo.png/320px-Saorview_logo.png</iconPath>
+    <countries>IE</countries>
+    <languages>en_GB,en_IE</languages>
+  </providerMapping>
+</providerMappings>

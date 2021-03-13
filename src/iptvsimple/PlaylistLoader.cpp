@@ -28,8 +28,8 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-PlaylistLoader::PlaylistLoader(kodi::addon::CInstancePVRClient* client, Channels& channels, ChannelGroups& channelGroups)
-  : m_channelGroups(channelGroups), m_channels(channels), m_client(client) { }
+PlaylistLoader::PlaylistLoader(kodi::addon::CInstancePVRClient* client, Channels& channels, ChannelGroups& channelGroups, Providers& providers)
+  : m_channelGroups(channelGroups), m_channels(channels), m_providers(providers), m_client(client) { }
 
 bool PlaylistLoader::Init()
 {
@@ -193,6 +193,8 @@ bool PlaylistLoader::LoadPlayList()
   }
 
   Logger::Log(LEVEL_INFO, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
+  Logger::Log(LEVEL_INFO, "%s - Loaded %d channel groups.", __FUNCTION__, m_channelGroups.GetChannelGroupsAmount());
+  Logger::Log(LEVEL_INFO, "%s - Loaded %d providers.", __FUNCTION__, m_providers.GetNumProviders());
   return true;
 }
 
@@ -240,7 +242,11 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
     std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
     std::string strCatchupCorrection = ReadMarkerValue(infoLine, CATCHUP_CORRECTION);
-
+    std::string strProviderName = ReadMarkerValue(infoLine, PROVIDER);
+    std::string strProviderType = ReadMarkerValue(infoLine, PROVIDER_TYPE);
+    std::string strProviderIconPath = ReadMarkerValue(infoLine, PROVIDER_LOGO);
+    std::string strProviderCountries = ReadMarkerValue(infoLine, PROVIDER_COUNTRIES);
+    std::string strProviderLanguages = ReadMarkerValue(infoLine, PROVIDER_LANGUAGES);
     kodi::UnknownToUTF8(strTvgName, strTvgName);
     kodi::UnknownToUTF8(strCatchupSource, strCatchupSource);
 
@@ -342,6 +348,47 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetHasCatchup(true);
     }
 
+    if (strProviderName.empty() && Settings::GetInstance().HasDefaultProviderName())
+      strProviderName = Settings::GetInstance().GetDefaultProviderName();
+
+    auto provider = m_providers.AddProvider(strProviderName);
+    if (provider)
+    {
+      StringUtils::ToLower(strProviderType);
+      if (!strProviderType.empty())
+      {
+        if (strProviderType == "addon")
+          provider->SetProviderType(PVR_PROVIDER_TYPE_ADDON);
+        else if (strProviderType == "satellite")
+          provider->SetProviderType(PVR_PROVIDER_TYPE_SATELLITE);
+        else if (strProviderType == "cable")
+          provider->SetProviderType(PVR_PROVIDER_TYPE_CABLE);
+        else if (strProviderType == "aerial")
+          provider->SetProviderType(PVR_PROVIDER_TYPE_AERIAL);
+        else if (strProviderType == "iptv")
+          provider->SetProviderType(PVR_PROVIDER_TYPE_IPTV);
+        else
+          provider->SetProviderType(PVR_PROVIDER_TYPE_UNKNOWN);
+      }
+
+      if (!strProviderIconPath.empty())
+        provider->SetIconPath(strProviderIconPath);
+
+      if (!strProviderCountries.empty())
+      {
+        std::vector<std::string> countries = StringUtils::Split(strProviderCountries, PROVIDER_STRING_TOKEN_SEPARATOR);
+        provider->SetCountries(countries);
+      }
+
+      if (!strProviderLanguages.empty())
+      {
+        std::vector<std::string> languages = StringUtils::Split(strProviderLanguages, PROVIDER_STRING_TOKEN_SEPARATOR);
+        provider->SetLanguages(languages);
+      }
+
+      channel.SetProviderUniqueId(provider->GetUniqueId());
+    }
+
     return ReadMarkerValue(infoLine, GROUP_NAME_MARKER);
   }
 
@@ -408,11 +455,13 @@ void PlaylistLoader::ReloadPlayList()
 
   m_channels.Clear();
   m_channelGroups.Clear();
+  m_providers.Clear();
 
   if (LoadPlayList())
   {
     m_client->TriggerChannelUpdate();
     m_client->TriggerChannelGroupsUpdate();
+    m_client->TriggerProvidersUpdate();
   }
 }
 

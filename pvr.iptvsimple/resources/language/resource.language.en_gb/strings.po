@@ -56,7 +56,25 @@ msgctxt "#30005"
 msgid "Once per day"
 msgstr ""
 
-#empty strings from id 30006 to 30009
+#. label-group: General - Providers
+msgctxt "#30006"
+msgid "Providers"
+msgstr ""
+
+#. label: Channels - defaultProviderName
+msgctxt "#30007"
+msgid "Default provider name"
+msgstr ""
+
+#. label: Channels - enableProviderMappings
+msgctxt "#30008"
+msgid "Enable provider mapping"
+msgstr ""
+
+#. label: Channels - providerMappingFile
+msgctxt "#30009"
+msgid "Provider name mapping file"
+msgstr ""
 
 #. label-category: general
 #. label-group: General - General
@@ -392,9 +410,13 @@ msgstr ""
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
+
+#. label-category: Groups
+msgctxt "#30076"
+msgid "Groups"
 msgstr ""
 
-#empty strings from id 30076 to 30099
+#empty strings from id 30077 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -933,4 +955,28 @@ msgstr ""
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr ""
+
+#empty strings from id 30727 to 307039
+
+#. help info - Other categories continued
+
+#. help: General - defaultproviderName
+msgctxt "#30740"
+msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
+msgstr ""
+
+#. help: General - enableProviderMappings
+msgctxt "#30741"
+msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
+msgstr ""
+
+#. help: General - providerMappingFile
+msgctxt "#30742"
+msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
+msgstr ""
+
+#. help: Groups - groups
+msgctxt "#30743"
+msgid "Settings on customising channel groups."
 msgstr ""
