@@ -16,58 +16,408 @@ msgstr ""
 "Language: zh_CN\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+#. settings labels
+
+#. label: General - m3uPathType
+#. label: EPG Settings - epgPathType
+#. label: Channel Logos - logoPathType
 msgctxt "#30000"
 msgid "Location"
 msgstr "位置"
 
+#. label-option: General - m3uPathType
+#. label-option: General - epgPathType
+#. label-option: General - logoPathType
+#. label-option: General - genresPathType
+msgctxt "#30001"
+msgid "Local path (include local network)"
+msgstr "本地路径 (包括本地网络)"
+
+#. label-option: General - m3uPathType
+#. label-option: General - epgPathType
+#. label-option: General - logoPathType
+#. label-option: General - genresPathType
+msgctxt "#30002"
+msgid "Remote path (Internet address)"
+msgstr "远程路径(互联网地址)"
+
+#. label-option: General - m3uRefreshMode
 msgctxt "#30003"
 msgid "Disabled"
 msgstr "已禁用"
 
+#. label-option: General - m3uRefreshMode
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "重复刷新"
+
+#. label-option: General - m3uRefreshMode
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "每天一次"
+
+#empty strings from id 30006 to 30009
+
+#. label-category: general
+#. label-group: General - General
 msgctxt "#30010"
 msgid "General"
 msgstr "常规"
 
+#. label: General - m3uPath
+msgctxt "#30011"
+msgid "M3U playlist path"
+msgstr "M3U播放列表路径"
+
+#. label: General - m3uUrl
+msgctxt "#30012"
+msgid "M3U playlist URL"
+msgstr "M3U播放列表URL"
+
+#. label: General - startNum
+msgctxt "#30013"
+msgid "Start channel number"
+msgstr "起始频道序号"
+
+#. label: General - numberByOrder
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr "仅通过M3U顺序排列频道"
+
+#. label: General - m3uRefreshMode
+msgctxt "#30015"
+msgid "Auto refresh mode"
+msgstr "自动刷新模式"
+
+#. label: General - m3uRefreshIntervalMins
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "刷新间隔"
+
+#. label: General - m3uRefreshHour
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "刷新小时数(24h)"
+
+#. label-group: General - Refresh
+msgctxt "#30018"
+msgid "Refresh"
+msgstr "刷新"
+
+#. label-category: epgsettings
 msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "电子节目单设置"
 
+#. label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
 msgid "EPG"
 msgstr "电子节目单"
 
+#. label: EPG Settings - epgPath
+msgctxt "#30021"
+msgid "XMLTV path"
+msgstr "XMLTV 路径"
+
+#. label: EPG Settings - epgUrl
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "XMLTV URL"
 
+#. label: EPG Settings - epgTSOverride
+msgctxt "#30023"
+msgid "Apply time shift to all channels"
+msgstr "为所有频道使用时移"
+
+#. label: EPG Settings - epgTimeShift
+msgctxt "#30024"
+msgid "EPG time shift"
+msgstr "电子节目单时移"
+
+#. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
 msgstr "缓存 m3u 到本地储存"
 
+#. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "缓存 XMLTV 到本地储存"
 
+#. format-label: EPG Settings - epgTimeShift
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} 小时"
+
+#. label: General - tvChannelGroupsOnly
+msgctxt "#30028"
+msgid "Only load TV channels in groups"
+msgstr "仅在组内载入电视频道"
+
+#. label-group: General - TV Groups
+msgctxt "#30029"
+msgid "TV Groups"
+msgstr "电视分组"
+
+#. label-category: channellogos
+#. label-group: Channel Logos - Channel Logos
+msgctxt "#30030"
+msgid "Channel Logos"
+msgstr "频道Logo"
+
+#. label: Channel Logos - logoPath
+msgctxt "#30031"
+msgid "Channel logos folder"
+msgstr "频道Logo文件夹"
+
+#. label: Channel Logos - logoBaseUrl
+msgctxt "#30032"
+msgid "Channel logos base URL"
+msgstr "频道Logo基URL"
+
+#. label-group: General - Radio Groups
+msgctxt "#30033"
+msgid "Radio Groups"
+msgstr "广播分组"
+
+#. label: General - tvGroupMoade
+msgctxt "#30034"
+msgid "TV group mode"
+msgstr "电视分组模式"
+
+#. label: General - radioGroupMoade
+msgctxt "#30035"
+msgid "Radio group mode"
+msgstr "广播分组模式"
+
+#. label-option: Channels - tvGroupmode
+#. label-option: Channels - radioGroupGode
+msgctxt "#30036"
+msgid "All groups"
+msgstr "全部分组"
+
+#. label-option: Channels - tvGroupMode
+#. label-option: Channels - radioGroupGode
+msgctxt "#30037"
+msgid "Some groups"
+msgstr "其他分组"
+
+#. label-option: General - tvGroupMode
+#. label-option: General - radioGroupGode
+msgctxt "#30038"
+msgid "Custom groups"
+msgstr "自定义分组"
+
+#. label: Channels - numTvGroups
+msgctxt "#30039"
+msgid "Number of TV groups"
+msgstr "电视分组数量"
+
+#. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "XMLTV 图标选项"
 
+#. label: Channel Logos - logoFromEpg
+msgctxt "#30041"
+msgid "Channels logos from XMLTV"
+msgstr "从XMLTV导入频道图标"
+
+#. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "忽略"
 
+#. label-option: Channel Logos - logoFromEpg
 msgctxt "#30043"
 msgid "Prefer M3U"
 msgstr "首选 M3U"
 
+#. label-option: Channel Logos - logoFromEpg
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "首选 XMLTV"
 
+#. label: General - oneTvGroup
+msgctxt "#30045"
+msgid "TV group 1"
+msgstr "电视组1"
+
+#. label: General - twoTvGroup
+msgctxt "#30046"
+msgid "TV group 2"
+msgstr "电视组2"
+
+#. label: General - threeTvGroup
+msgctxt "#30047"
+msgid "TV group 3"
+msgstr "电视组3"
+
+#. label: General - fourTvGroup
+msgctxt "#30048"
+msgid "TV group 4"
+msgstr "电视组4"
+
+#. label: General - fiveTvGroup
+msgctxt "#30049"
+msgid "TV group 5"
+msgstr "电视组5"
+
+#. label-category: genres
+#. label-group: Genres - Genres
 msgctxt "#30050"
 msgid "Genres"
-msgstr "类型"
+msgstr "节目类型"
 
+#. label: Genres - useEpgGenreText
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "若映射了节目类型则使用XMLTV中的节目类型文本"
+
+#. label: Genres - genresPath
+msgctxt "#30052"
+msgid "Genres path"
+msgstr "节目类型路径"
+
+#. label: Genres - genresUrl
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr "节目类型URL"
+
+#. label: Channels - customTvGroupsFile
+msgctxt "#30054"
+msgid "Custom TV groups file"
+msgstr "自定义电视分组文件"
+
+#. label: General - oneRadioGroup
+msgctxt "#30055"
+msgid "Radio group 1"
+msgstr "广播组1"
+
+#. label: General - twoRadioGroup
+msgctxt "#30056"
+msgid "Radio group 2"
+msgstr "广播组2"
+
+#. label: General - threeRadioGroup
+msgctxt "#30057"
+msgid "Radio group 3"
+msgstr "广播组3"
+
+#. label: General - fourRadioGroup
+msgctxt "#30058"
+msgid "Radio group 4"
+msgstr "广播组4"
+
+#. label: General - fiveRadioGroup
+msgctxt "#30059"
+msgid "Radio group 5"
+msgstr "广播组5"
+
+#. label-category: advanced
 msgctxt "#30060"
 msgid "Advanced"
 msgstr "高级"
+
+#. label-group: Advanced - Multicast relay
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr "多播中继 (udpxy)"
+
+#. label: Advanced - transformMulticastStreamUrls
+msgctxt "#30062"
+msgid "Transform multicast stream URLs"
+msgstr "传输多播流URLs"
+
+#. label: Advanced - udpxyHost
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr "中继主机名或IP地址"
+
+#. label: Advanced - udpxyPort
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "中继端口"
+
+#. label-group: Advanced - Streaming
+msgctxt "#30065"
+msgid "Streaming"
+msgstr "串流"
+
+#. label: Advanced - useInputstreamAdaptiveforHls
+msgctxt "#30066"
+msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
+msgstr "为 m3u8 (HLS) 流启用 inputstream.adaptive"
+
+#. label: Advanced - useFFmpegReconnect
+msgctxt "#30067"
+msgid "Use FFmpeg http reconnect options if possible"
+msgstr "尽可能使用 FFmepg http 重连选项"
+
+#. label: Advanced - defaultUserAgent
+msgctxt "#30068"
+msgid "User-Agent"
+msgstr "User-Agent"
+
+#. label: Advanced - defaultInputstream
+msgctxt "#30069"
+msgid "Inputstream name"
+msgstr "输入流名称"
+
+#. label: Advanced - defaultMimeType
+msgctxt "#30070"
+msgid "MIME type"
+msgstr "MIME类型"
+
+#. label-group: Advanced - Channel defaults
+msgctxt "#30071"
+msgid "Channel defaults"
+msgstr "频道默认选项"
+
+#. label: General - numRadioGroups
+msgctxt "#30072"
+msgid "Number of Radio groups"
+msgstr "广播组数量"
+
+#. label: Channels - customRadioGroupsFile
+msgctxt "#30073"
+msgid "Custom Radio groups file"
+msgstr "自定义广播组文件"
+
+#. label: General - radioChannelGroupsOnly
+msgctxt "#30074"
+msgid "Only load Radio channels in groups"
+msgstr "仅在组内导入广播频道"
+
+#empty strings from id 30075 to 30099
+
+#. label-category: catchup
+#. label-group: Catchup - Catchup
+msgctxt "#30100"
+msgid "Catchup"
+msgstr "回放"
+
+#. label: Catchup - enableCatchup
+msgctxt "#30101"
+msgid "Enable catchup"
+msgstr "启用回放"
+
+#. label: Catchup - catchupQueryFormat
+msgctxt "#30102"
+msgid "Query format string"
+msgstr "请求格式字符串"
+
+#. label: Catchup - catchupDays
+msgctxt "#30103"
+msgid "Catchup window"
+msgstr "回放窗口时间"
+
+#. label: Catchup - allChannelsCatchupMode
+msgctxt "#30104"
+msgid "All channels support catchup using mode"
+msgstr "所有频道支持的回放使用模式"
+
+#. label-group: Catchup - Watch From EPG
+msgctxt "#30105"
+msgid "Watch From EPG"
+msgstr "从电子节目单观看"
