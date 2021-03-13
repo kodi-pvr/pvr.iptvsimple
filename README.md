@@ -382,9 +382,9 @@ http://path-to-stream/live/channel-e.ts
 http://yoururl/channeld/video.m3u8
 #EXTINF:-1 catchup="fs",Channel G
 http://list.tv:8888/325/mono.m3u8?token=secret
-#EXTINF:-1 catchup="fs",Channel H
+#EXTINF:-1 catchup="xc",Channel H
 http://list.tv:8080/my@account.xc/my_password/1477
-#EXTINF:-1 catchup="fs",Channel I
+#EXTINF:-1 catchup="xc",Channel I
 http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
 #EXTINF:-1 catchup="vod" catchup-source="http://path-to-stream/live/catchup-j.ts&cutv={Y}-{m}-{d}T{H}:{M}:{S}" catchup-days="3",Channel J
 http://path-to-stream/live/channel-j.ts
