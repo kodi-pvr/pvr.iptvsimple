@@ -70,6 +70,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupCorrectionSecs = m_catchupCorrectionSecs;
   left.m_tvgId            = m_tvgId;
   left.m_tvgName          = m_tvgName;
+  left.m_providerUniqueId = m_providerUniqueId;
   left.m_properties       = m_properties;
   left.m_inputStreamName = m_inputStreamName;
 }
@@ -85,6 +86,7 @@ void Channel::UpdateTo(kodi::addon::PVRChannel& left) const
   left.SetIconPath(m_iconPath);
   left.SetIsHidden(false);
   left.SetHasArchive(IsCatchupSupported());
+  left.SetClientProviderUid(m_providerUniqueId);
 }
 
 void Channel::Reset()
@@ -109,6 +111,7 @@ void Channel::Reset()
   m_catchupCorrectionSecs = 0;
   m_tvgId.clear();
   m_tvgName.clear();
+  m_providerUniqueId = PVR_PROVIDER_INVALID_UID;
   m_properties.clear();
   m_inputStreamName.clear();
 }
