@@ -106,7 +106,40 @@
         </setting>
       </group>
 
-      <group id="3" label="30029">
+      <group id="3" label="30006">
+        <setting id="defaultProviderName" type="string" label="30007" help="30740">
+          <level>2</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="enableProviderMappings" type="boolean" label="30008" help="30741">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="providerMappingFile" type="path" parent="enableProviderMapping" label="30009" help="30472">
+          <level>2</level>
+          <default>special://userdata/addon_data/pvr.iptvsimple/providers/providersMappings.xml</default>
+          <constraints>
+            <allowempty>false</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="enableProviderMapping" operator="is">true</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+      </group>
+    </category>
+
+    <!-- Groups -->
+    <category id="groups" label="30076" help="30743">
+      <group id="1" label="30029">
         <setting id="tvGroupMode" type="integer" label="30034" help="30611">
           <level>0</level>
           <default>0</default>
@@ -228,7 +261,7 @@
         </setting>
       </group>
 
-      <group id="4" label="30033">
+      <group id="2" label="30033">
         <setting id="radioGroupMode" type="integer" label="30035" help="30647">
           <level>0</level>
           <default>0</default>

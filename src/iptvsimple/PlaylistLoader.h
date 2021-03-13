@@ -9,6 +9,7 @@
 
 #include "Channels.h"
 #include "ChannelGroups.h"
+#include "Providers.h"
 
 #include <string>
 
@@ -35,6 +36,11 @@ namespace iptvsimple
   static const std::string CATCHUP_SOURCE          = "catchup-source=";
   static const std::string CATCHUP_SIPTV           = "timeshift=";
   static const std::string CATCHUP_CORRECTION      = "catchup-correction=";
+  static const std::string PROVIDER                = "provider=";
+  static const std::string PROVIDER_TYPE           = "provider-type=";
+  static const std::string PROVIDER_LOGO           = "provider-logo=";
+  static const std::string PROVIDER_COUNTRIES      = "provider-countries=";
+  static const std::string PROVIDER_LANGUAGES      = "provider-languages=";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
   static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";
@@ -44,7 +50,7 @@ namespace iptvsimple
   class PlaylistLoader
   {
   public:
-    PlaylistLoader(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::ChannelGroups& channelGroups);
+    PlaylistLoader(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::ChannelGroups& channelGroups, iptvsimple::Providers& providers);
 
     bool Init();
 
@@ -61,6 +67,7 @@ namespace iptvsimple
     std::string m_m3uLocation;
     std::string m_logoLocation;
 
+    iptvsimple::Providers& m_providers;
     iptvsimple::ChannelGroups& m_channelGroups;
     iptvsimple::Channels& m_channels;
     kodi::addon::CInstancePVRClient* m_client;
