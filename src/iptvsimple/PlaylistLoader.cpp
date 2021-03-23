@@ -280,10 +280,12 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     int siptvTimeshiftDays = 0;
     if (!strCatchupSiptv.empty())
       siptvTimeshiftDays = atoi(strCatchupSiptv.c_str());
+    // treat tvg-rec tag like siptv if siptv has not been used
+    if (!strTvgRec.empty() && siptvTimeshiftDays == 0)
+      siptvTimeshiftDays = atoi(strTvgRec.c_str());
+
     if (!strCatchupDays.empty())
       channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
-    else if (!strTvgRec.empty())
-      channel.SetCatchupDays(atoi(strTvgRec.c_str()));
     else if (channel.GetCatchupMode() == CatchupMode::VOD)
       channel.SetCatchupDays(IGNORE_CATCHUP_DAYS);
     else if (siptvTimeshiftDays > 0)

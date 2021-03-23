@@ -65,8 +65,8 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
       m_programmeCatchupId.clear();
       if (channel.IsCatchupSupported())
       {
-        m_timeshiftBufferOffset = Settings::GetInstance().GetCatchupDaysInSeconds(); //offset from now to start of catchup window
-        m_timeshiftBufferStartTime = std::time(nullptr) - Settings::GetInstance().GetCatchupDaysInSeconds(); // now - the window size
+        m_timeshiftBufferOffset = channel.GetCatchupDaysInSeconds(); //offset from now to start of catchup window
+        m_timeshiftBufferStartTime = std::time(nullptr) - channel.GetCatchupDaysInSeconds(); // now - the window size
       }
       else
       {
@@ -107,7 +107,7 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::P
 
     time_t timeNow = time(0);
     time_t programmeOffset = timeNow - m_catchupStartTime;
-    time_t timeshiftBufferDuration = std::max(programmeOffset, Settings::GetInstance().GetCatchupDaysInSeconds());
+    time_t timeshiftBufferDuration = std::max(programmeOffset, static_cast<time_t>(channel.GetCatchupDaysInSeconds()));
     m_timeshiftBufferStartTime = timeNow - timeshiftBufferDuration;
     m_catchupStartTime = m_timeshiftBufferStartTime;
     m_catchupEndTime = timeNow;
