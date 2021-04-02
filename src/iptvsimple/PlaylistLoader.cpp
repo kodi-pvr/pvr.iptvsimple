@@ -95,7 +95,10 @@ bool PlaylistLoader::LoadPlayList()
         epgTimeShift = static_cast<int>(tvgShiftDecimal * 3600.0);
         double catchupCorrectionDecimal = std::atof(ReadMarkerValue(line, CATCHUP_CORRECTION).c_str());
         catchupCorrectionSecs = static_cast<int>(catchupCorrectionDecimal * 3600.0);
-        Settings::GetInstance().SetTvgUrl(ReadMarkerValue(line, TVG_URL_MARKER));
+        std::string tvgUrl = ReadMarkerValue(line, TVG_URL_MARKER);
+        if (tvgUrl.empty())
+          tvgUrl = ReadMarkerValue(line, TVG_URL_OTHER_MARKER);
+        Settings::GetInstance().SetTvgUrl(tvgUrl);
         continue;
       }
       else
