@@ -63,9 +63,9 @@ set(IPTV_HEADERS src/PVRIptvData.h
 addon_version(pvr.iptvsimple IPTV)
 add_definitions(-DIPTV_VERSION=${IPTV_VERSION})
 
-if(WIN32)
-  add_definitions(-DLZMA_API_STATIC)
-endif()
+# if(WIN32)
+#   add_definitions(-DLZMA_API_STATIC)
+# endif()
 
 build_addon(pvr.iptvsimple IPTV DEPLIBS)
 
