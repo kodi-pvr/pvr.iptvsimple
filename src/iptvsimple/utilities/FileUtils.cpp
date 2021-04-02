@@ -10,6 +10,7 @@
 
 #include "../Settings.h"
 
+#include <lzma.h>
 #include <zlib.h>
 
 using namespace iptvsimple;
@@ -129,6 +130,43 @@ bool FileUtils::GzipInflate(const std::string& compressedBytes, std::string& unc
     uncompressedBytes += uncomp[i];
 
   free(uncomp);
+  return true;
+}
+
+bool FileUtils::XzDecompress(const std::string& compressedBytes, std::string& uncompressedBytes)
+{
+  if (compressedBytes.size() == 0)
+  {
+    uncompressedBytes = compressedBytes;
+    return true;
+  }
+
+  uncompressedBytes.clear();
+
+  lzma_stream strm = LZMA_STREAM_INIT;
+  lzma_ret ret = lzma_stream_decoder(&strm, UINT64_MAX, LZMA_TELL_UNSUPPORTED_CHECK | LZMA_CONCATENATED);
+
+  if (ret != LZMA_OK)
+    return false;
+
+  uint8_t* in_buf = (uint8_t*) compressedBytes.c_str();
+  uint8_t out_buf[LZMA_OUT_BUF_MAX];
+  size_t out_len;
+
+  strm.next_in = in_buf;
+  strm.avail_in = compressedBytes.size();
+  do
+  {
+    strm.next_out = out_buf;
+    strm.avail_out = LZMA_OUT_BUF_MAX;
+    ret = lzma_code(&strm, LZMA_FINISH);
+
+    out_len = LZMA_OUT_BUF_MAX - strm.avail_out;
+    uncompressedBytes.append((char*) out_buf, out_len);
+    out_buf[0] = 0;
+  } while (strm.avail_out == 0);
+  lzma_end (&strm);
+
   return true;
 }
 
