@@ -1,3 +1,7 @@
+v7.6.0
+- Added: Support url-tvg in M3U header in adion to x-tvg-url
+- Added: Add support for XZ compression of XMLTV data
+
 v7.5.1
 - Fixed: Treat 'tvg-rec' catchup tag like the siptv 'timeshift' tag
 - Fixed: Ensure channel's catchup window is used instead of value from settings
