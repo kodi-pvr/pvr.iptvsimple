@@ -185,7 +185,18 @@ char* Epg::FillBufferFromXMLTVData(std::string& data, std::string& decompressedD
   {
     if (!FileUtils::GzipInflate(data, decompressedData))
     {
-      Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to decompress file.", __FUNCTION__, m_xmltvLocation.c_str());
+      Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to decompress gzip file.", __FUNCTION__, m_xmltvLocation.c_str());
+      return nullptr;
+    }
+    buffer = &(decompressedData[0]);
+  }
+  // xz packed
+  if (data[0] == '\xFD' && data[1] == '7' && data[2] == 'z' &&
+      data[3] == 'X' && data[4] == 'Z' && data[5] == '\x00')
+  {
+    if (!FileUtils::XzDecompress(data, decompressedData))
+    {
+      Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to decompress xz/7z file.", __FUNCTION__, m_xmltvLocation.c_str());
       return nullptr;
     }
     buffer = &(decompressedData[0]);
