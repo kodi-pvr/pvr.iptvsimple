@@ -68,6 +68,7 @@ bool PlaylistLoader::LoadPlayList()
   int catchupCorrectionSecs = Settings::GetInstance().GetCatchupCorrectionSecs();
   std::vector<int> currentChannelGroupIdList;
   bool channelHadGroups = false;
+  bool xeevCatchup = false;
 
   Channel tmpChannel;
 
@@ -101,10 +102,15 @@ bool PlaylistLoader::LoadPlayList()
           catchupCorrectionSecs = static_cast<int>(catchupCorrectionDecimal * 3600.0);
         }
 
+        std::string strXeevCatchup = ReadMarkerValue(line, CATCHUP);
+        if (strXeevCatchup == "xc")
+          xeevCatchup = true;
+
         std::string tvgUrl = ReadMarkerValue(line, TVG_URL_MARKER);
         if (tvgUrl.empty())
           tvgUrl = ReadMarkerValue(line, TVG_URL_OTHER_MARKER);
         Settings::GetInstance().SetTvgUrl(tvgUrl);
+
         continue;
       }
       else
@@ -119,7 +125,7 @@ bool PlaylistLoader::LoadPlayList()
       tmpChannel.SetChannelNumber(m_channels.GetCurrentChannelNumber());
       currentChannelGroupIdList.clear();
 
-      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs);
+      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
 
       if (!groupNamesListString.empty())
       {
@@ -190,7 +196,7 @@ bool PlaylistLoader::LoadPlayList()
   return true;
 }
 
-std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs)
+std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup)
 {
   // parse line
   size_t colonIndex = line.find(':');
@@ -285,6 +291,12 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
     else if (StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetCatchupMode(CatchupMode::VOD);
+
+    if (!channel.HasCatchup() && xeevCatchup && (StringUtils::StartsWith(channelName, "* ") || StringUtils::StartsWith(channelName, "[+] ")))
+    {
+      channel.SetHasCatchup(true);
+      channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
+    }
 
     int siptvTimeshiftDays = 0;
     if (!strCatchupSiptv.empty())
