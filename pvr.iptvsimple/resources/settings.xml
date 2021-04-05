@@ -655,6 +655,21 @@
           </dependencies>
           <control type="list" format="integer" />
         </setting>
+        <setting id="catchupCorrection" type="number" label="30128" help="30710">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <minimum>-12</minimum>
+            <step>0.5</step>
+            <maximum>14</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="slider" format="number">
+            <formatlabel>30027</formatlabel>
+          </control>
+        </setting>
       </group>
       <group id="2" label="30105">
         <setting id="catchupPlayEpgAsLive" type="boolean" label="30106" help="30705">

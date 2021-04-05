@@ -65,7 +65,7 @@ bool PlaylistLoader::LoadPlayList()
   bool isFirstLine = true;
   bool isRealTime = true;
   int epgTimeShift = 0;
-  int catchupCorrectionSecs = 0;
+  int catchupCorrectionSecs = Settings::GetInstance().GetCatchupCorrectionSecs();
   std::vector<int> currentChannelGroupIdList;
   bool channelHadGroups = false;
 
@@ -93,8 +93,14 @@ bool PlaylistLoader::LoadPlayList()
       {
         double tvgShiftDecimal = std::atof(ReadMarkerValue(line, TVG_INFO_SHIFT_MARKER).c_str());
         epgTimeShift = static_cast<int>(tvgShiftDecimal * 3600.0);
-        double catchupCorrectionDecimal = std::atof(ReadMarkerValue(line, CATCHUP_CORRECTION).c_str());
-        catchupCorrectionSecs = static_cast<int>(catchupCorrectionDecimal * 3600.0);
+
+        std::string strCatchupCorrection = ReadMarkerValue(line, CATCHUP_CORRECTION);
+        if (!strCatchupCorrection.empty())
+        {
+          double catchupCorrectionDecimal = std::atof(strCatchupCorrection.c_str());
+          catchupCorrectionSecs = static_cast<int>(catchupCorrectionDecimal * 3600.0);
+        }
+
         std::string tvgUrl = ReadMarkerValue(line, TVG_URL_MARKER);
         if (tvgUrl.empty())
           tvgUrl = ReadMarkerValue(line, TVG_URL_OTHER_MARKER);

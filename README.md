@@ -209,6 +209,7 @@ Addon settings for catchup:
     - `without catchup mode` - Only include channels with no catchup mode set (except legacy SIP `timeshift` catchup mode).
     - `with catchup mode` - Only include channels with catchup mode set (ignore those without a catchup mode).
     - `with and without catchup mode (all channels)` - Include all channels ignoring any catchup mode from the M3U.
+* **Catchup correction**: Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file, see [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements).
 * **Play from EPG in Live TV mode (using timeshift)**: When disabled any catchup show from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer.
 * **Buffer before programme start**: The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video.
 * **Buffer after programme end**: The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video.
