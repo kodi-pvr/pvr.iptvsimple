@@ -634,6 +634,9 @@
               <option label="30115">5</option> <!-- XTREAM_CODES -->
             </options>
           </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
           <control type="list" format="integer" />
         </setting>
         <setting id="catchupOverrideMode" type="integer" parent="allChannelsCatchupMode" label="30116" help="30709">
@@ -648,6 +651,7 @@
           </constraints>
           <dependencies>
             <dependency type="visible" setting="allChannelsCatchupMode" operator="!is">0</dependency>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
           </dependencies>
           <control type="list" format="integer" />
         </setting>
@@ -704,6 +708,9 @@
         <setting id="catchupOnlyOnFinishedProgrammes" type="boolean" label="30109" help="30708">
           <level>0</level>
           <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
           <control type="toggle" />
         </setting>
       </group>
