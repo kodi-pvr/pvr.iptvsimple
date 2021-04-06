@@ -125,6 +125,7 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_catchupDays = kodi::GetSettingInt("catchupDays", 5);
   m_allChannelsCatchupMode = kodi::GetSettingEnum<CatchupMode>("allChannelsCatchupMode", CatchupMode::DISABLED);
   m_catchupOverrideMode = kodi::GetSettingEnum<CatchupOverrideMode>("catchupOverrideMode", CatchupOverrideMode::WITHOUT_TAGS);
+  m_catchupCorrectionHours = kodi::GetSettingFloat("catchupCorrection", 0.0f);
   m_catchupPlayEpgAsLive = kodi::GetSettingBoolean("catchupPlayEpgAsLive", false);
   m_catchupWatchEpgBeginBufferMins = kodi::GetSettingInt("catchupWatchEpgBeginBufferMins", 5);
   m_catchupWatchEpgEndBufferMins = kodi::GetSettingInt("catchupWatchEpgEndBufferMins", 15);
@@ -266,6 +267,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSet
     return SetEnumSetting<CatchupMode, ADDON_STATUS>(settingName, settingValue, m_allChannelsCatchupMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupOverrideMode")
     return SetEnumSetting<CatchupOverrideMode, ADDON_STATUS>(settingName, settingValue, m_catchupOverrideMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "catchupCorrection")
+    return SetSetting<float, ADDON_STATUS>(settingName, settingValue, m_catchupCorrectionHours, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupPlayEpgAsLive")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayEpgAsLive, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupWatchEpgBeginBufferMins")

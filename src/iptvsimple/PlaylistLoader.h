@@ -21,6 +21,7 @@ namespace iptvsimple
   static const std::string M3U_INFO_MARKER         = "#EXTINF";
   static const std::string M3U_GROUP_MARKER        = "#EXTGRP:";
   static const std::string TVG_URL_MARKER          = "x-tvg-url=";
+  static const std::string TVG_URL_OTHER_MARKER    = "url-tvg=";
   static const std::string TVG_INFO_ID_MARKER      = "tvg-id=";
   static const std::string TVG_INFO_ID_MARKER_UC   = "tvg-ID="; //some provider incorrectly use an uppercase ID
   static const std::string TVG_INFO_NAME_MARKER    = "tvg-name=";
@@ -55,7 +56,7 @@ namespace iptvsimple
     static std::string ReadMarkerValue(const std::string& line, const std::string& markerName);
     static void ParseSinglePropertyIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, const std::string& markerName);
 
-    std::string ParseIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs);
+    std::string ParseIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup);
     void ParseAndAddChannelGroups(const std::string& groupNamesListString, std::vector<int>& groupIdList, bool isRadio);
 
     std::string m_m3uLocation;

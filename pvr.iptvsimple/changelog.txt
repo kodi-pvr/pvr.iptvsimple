@@ -1,3 +1,11 @@
+v7.6.0
+- Added: Support url-tvg in M3U header in addition to x-tvg-url
+- Added: Add support for XZ compression of XMLTV data
+- Fixed: Allow flusonnic channel ids containing forward slashes
+- Fixed: Disable other catchup settings if catched is not enabled
+- Added: Add setting for catchup correction
+- Added: Support xeev XC catchup prefixes
+
 v7.5.1
 - Fixed: Treat 'tvg-rec' catchup tag like the siptv 'timeshift' tag
 - Fixed: Ensure channel's catchup window is used instead of value from settings

@@ -432,7 +432,7 @@ bool Channel::GenerateFlussonicCatchupSource(const std::string& url)
   // stream:  http://list.tv:8888/325/mono.m3u8?token=secret
   // catchup: http://list.tv:8888/325/mono-timeshift_rel-{offset:1}.m3u8?token=secret
 
-  static std::regex fsRegex("^(http[s]?://[^/]+)/([^/]+)/([^/]*)(mpegts|\\.m3u8)(\\?.+=.+)?$");
+  static std::regex fsRegex("^(http[s]?://[^/]+)/(.*)/([^/]*)(mpegts|\\.m3u8)(\\?.+=.+)?$");
   std::smatch matches;
 
   if (std::regex_match(url, matches, fsRegex))

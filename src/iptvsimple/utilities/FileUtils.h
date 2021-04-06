@@ -15,6 +15,8 @@ namespace iptvsimple
 {
   namespace utilities
   {
+    static const int LZMA_OUT_BUF_MAX = 409600;
+
     class FileUtils
     {
     public:
@@ -22,6 +24,7 @@ namespace iptvsimple
       static std::string GetUserDataAddonFilePath(const std::string& fileName);
       static int GetFileContents(const std::string& url, std::string& content);
       static bool GzipInflate(const std::string& compressedBytes, std::string& uncompressedBytes);
+      static bool XzDecompress(const std::string& compressedBytes, std::string& uncompressedBytes);
       static int GetCachedFileContents(const std::string& cachedName, const std::string& filePath,
                                        std::string& content, const bool useCache = false);
       static bool FileExists(const std::string& file);
