@@ -35,6 +35,8 @@ The contents of this README.md file are as follows:
 5. [Appendix](#appendix)
    * [Catchup format specifiers](#catchup-format-specifiers)
    * [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements)
+   * [Online M3U and XMLTV Editors](#online-m3u-and-xmltv-editors)
+      * [XEEV](#xeev)
    * [HTTP header fields supported by Kodi](#http-header-fields-supported-by-kodi)
    * [Manual Steps to rebuild the addon on MacOSX](#manual-steps-to-rebuild-the-addon-on-macosx)
 
@@ -85,7 +87,7 @@ If you would prefer to run the rebuild steps manually instead of using the above
 ## Configuring the addon
 
 ### Settings Levels
-In Kodi 18.2 the level of settings shown will correspond to the level set in the main Kodi settings UI: `Basic`, `Standard`, `Advanced` and `Expert`. From Kodi 19 it will be possible to change the settings level from within the addon settings itself.
+Settings levels can be selected within the addon settings dialog. The options are: `Basic`, `Standard`, `Advanced` and `Expert`. If there are settings below that cannot be found it is most liekly because they are only available at a higher settings level.
 
 ### General
 General settings required for the addon to function.
@@ -517,6 +519,12 @@ The `programme` element supports the attributes `start`/`stop` in the format `YY
   - For `episode-num` elements using the `onscreen` system only the `S01E02` format is supported.
 - `credits`: Only director, writer and actor are supported (multiple of each can be supplied).
 - `icon`: If multiple elements are provided only the first will be used.
+
+### Online M3U and XMLTV Editors
+
+#### XEEV
+
+If using the XEEV online editor for your playlist storage you should set the `Use XC2 API Protocol` flag.
 
 ### HTTP header fields supported by Kodi
 
