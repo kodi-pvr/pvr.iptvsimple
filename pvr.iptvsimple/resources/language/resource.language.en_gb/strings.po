@@ -30,7 +30,7 @@ msgstr ""
 #. label-option: General - logoPathType
 #. label-option: General - genresPathType
 msgctxt "#30001"
-msgid "Local path (include local network)"
+msgid "Local path (includes local network)"
 msgstr ""
 
 #. label-option: General - m3uPathType
