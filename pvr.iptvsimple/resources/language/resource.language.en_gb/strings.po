@@ -30,7 +30,7 @@ msgstr ""
 #. label-option: General - logoPathType
 #. label-option: General - genresPathType
 msgctxt "#30001"
-msgid "Local path (include local network)"
+msgid "Local path (includes local network)"
 msgstr ""
 
 #. label-option: General - m3uPathType
@@ -389,7 +389,12 @@ msgctxt "#30074"
 msgid "Only load Radio channels in groups"
 msgstr ""
 
-#empty strings from id 30075 to 30099
+#. help: Channel Logos - useLogosLocalPathOnly
+msgctxt "#30075"
+msgid "For local logos path ignore M3U logos"
+msgstr ""
+
+#empty strings from id 30076 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -749,7 +754,12 @@ msgctxt "#30644"
 msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
 msgstr ""
 
-#empty strings from id 30645 to 30659
+#. help: Channel Logos - useLogosLocalPathOnly
+msgctxt "#30645"
+msgid "If a local path is selected for logos ignore any logos from the M3U file."
+msgstr ""
+
+#empty strings from id 30646 to 30659
 
 #. help info - Genres
 

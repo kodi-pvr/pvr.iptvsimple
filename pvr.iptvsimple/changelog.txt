@@ -1,3 +1,6 @@
+v7.6.1
+- Fixed: Allow ignoring M3U logos when using local logo path
+
 v7.6.0
 - Added: Support url-tvg in M3U header in addition to x-tvg-url
 - Added: Add support for XZ compression of XMLTV data

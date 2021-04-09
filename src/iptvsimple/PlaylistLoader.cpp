@@ -264,7 +264,10 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     channel.SetCatchupSource(strCatchupSource);
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
-    channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
+    if (Settings::GetInstance().GetLogoPathType() == PathType::LOCAL_PATH && Settings::GetInstance().UseLocalLogosOnlyIgnoreM3U())
+      channel.SetIconPathFromTvgLogo("", channelName);
+    else
+      channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
     if (strTvgShift.empty())
       channel.SetTvgShift(epgTimeShift);
 

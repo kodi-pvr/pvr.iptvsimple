@@ -129,6 +129,7 @@ namespace iptvsimple
     const std::string& GetLogoPath() const { return m_logoPath; }
     const std::string& GetLogoBaseUrl() const { return m_logoBaseUrl; }
     const EpgLogosMode& GetEpgLogosMode() const { return m_epgLogosMode; }
+    bool UseLocalLogosOnlyIgnoreM3U() const { return m_useLocalLogosOnly; }
 
     bool IsTimeshiftEnabled() const { return m_timeshiftEnabled; }
     bool IsTimeshiftEnabledAll() const { return m_timeshiftEnabledAll; }
@@ -280,6 +281,7 @@ namespace iptvsimple
     std::string m_logoPath;
     std::string m_logoBaseUrl;
     EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+    bool m_useLocalLogosOnly = false;
 
     // Timeshift
     bool m_timeshiftEnabled = false;

@@ -111,6 +111,7 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_logoPath = kodi::GetSettingString("logoPath");
   m_logoBaseUrl = kodi::GetSettingString("logoBaseUrl");
   m_epgLogosMode = kodi::GetSettingEnum<EpgLogosMode>("logoFromEpg", EpgLogosMode::IGNORE_XMLTV);
+  m_useLocalLogosOnly = kodi::GetSettingBoolean("useLogosLocalPathOnly", false);
 
   // Timeshift
   m_timeshiftEnabled = kodi::GetSettingBoolean("timeshiftEnabled", false);
@@ -245,6 +246,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSet
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_logoBaseUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "logoFromEpg")
     return SetEnumSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "useLogosLocalPathOnly")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useLocalLogosOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Timeshift
   else if (settingName == "timeshiftEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);

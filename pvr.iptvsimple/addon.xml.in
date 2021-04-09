@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.6.0"
+  version="7.6.1"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -169,6 +169,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.6.1
+- Fixed: Allow ignoring M3U logos when using local logo path
+
 v7.6.0
 - Added: Support url-tvg in M3U header in addition to x-tvg-url
 - Added: Add support for XZ compression of XMLTV data
