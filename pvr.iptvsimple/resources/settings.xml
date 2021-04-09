@@ -505,6 +505,14 @@
           </dependencies>
           <control type="edit" format="string" />
         </setting>
+        <setting id="useLogosLocalPathOnly" type="boolean" label="30075" help="30645">
+          <level>2</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="visible" setting="logoPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
       </group>
       <group id="2" label="30040">
        <setting id="logoFromEpg" type="integer" label="30041" help="30644">

@@ -155,6 +155,7 @@ Settings related to Channel Logos.
     - `Remote path ` - A base URL specifying the location of the logos.
 * **Channel logos folder**: If location is `Local Path` this setting should contain a valid folder.
 * **Channel logos base URL**: If location is `Remote Path` this setting should contain a valid base URL.
+* **For local logos path ignore M3U logos**: If a local path is selected for logos ignore any logos from the M3U file.
 * **Channel logos from XMLTV**: Preference on how to handle channel logos. The options are:
     - `Ignore` - Don't use channel logos from an XMLTV file.
     - `Prefer M3U` - Use the channel logo from the M3U if available otherwise use the XMLTV logo.
