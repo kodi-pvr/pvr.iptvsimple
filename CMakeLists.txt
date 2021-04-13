@@ -27,6 +27,7 @@ set(IPTV_SOURCES src/PVRIptvData.cpp
                  src/iptvsimple/ChannelGroups.cpp
                  src/iptvsimple/Providers.cpp
                  src/iptvsimple/Epg.cpp
+                 src/iptvsimple/Media.cpp
                  src/iptvsimple/PlaylistLoader.cpp
                  src/iptvsimple/Settings.cpp
                  src/iptvsimple/StreamManager.cpp
@@ -36,6 +37,7 @@ set(IPTV_SOURCES src/PVRIptvData.cpp
                  src/iptvsimple/data/Provider.cpp
                  src/iptvsimple/data/EpgEntry.cpp
                  src/iptvsimple/data/EpgGenre.cpp
+                 src/iptvsimple/data/MediaEntry.cpp
                  src/iptvsimple/utilities/FileUtils.cpp
                  src/iptvsimple/utilities/Logger.cpp
                  src/iptvsimple/utilities/StreamUtils.cpp
@@ -47,15 +49,18 @@ set(IPTV_HEADERS src/PVRIptvData.h
                  src/iptvsimple/ChannelGroups.h
                  src/iptvsimple/Providers.cpp
                  src/iptvsimple/Epg.h
+                 src/iptvsimple/Media.h
                  src/iptvsimple/PlaylistLoader.h
                  src/iptvsimple/Settings.h
                  src/iptvsimple/StreamManager.h
+                 src/iptvsimple/data/BaseEntry.h
                  src/iptvsimple/data/Channel.h
                  src/iptvsimple/data/ChannelEpg.h
                  src/iptvsimple/data/ChannelGroup.h
                  src/iptvsimple/data/Provider.cpp
                  src/iptvsimple/data/EpgEntry.h
                  src/iptvsimple/data/EpgGenre.h
+                 src/iptvsimple/data/MediaEntry.h
                  src/iptvsimple/data/StreamEntry.h
                  src/iptvsimple/utilities/FileUtils.h
                  src/iptvsimple/utilities/Logger.h

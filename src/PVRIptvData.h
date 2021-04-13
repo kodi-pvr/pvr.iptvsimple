@@ -12,6 +12,7 @@
 #include "iptvsimple/ChannelGroups.h"
 #include "iptvsimple/Providers.h"
 #include "iptvsimple/Epg.h"
+#include "iptvsimple/Media.h"
 #include "iptvsimple/PlaylistLoader.h"
 #include "iptvsimple/data/Channel.h"
 
@@ -65,6 +66,11 @@ public:
   PVR_ERROR SetEPGMaxFutureDays(int epgMaxFutureDays) override;
 
   PVR_ERROR GetSignalStatus(int channelUid, kodi::addon::PVRSignalStatus& signalStatus) override;
+
+  PVR_ERROR GetRecordingsAmount(bool deleted, int& amount) override;
+  PVR_ERROR GetRecordings(bool deleted, kodi::addon::PVRRecordingsResultSet& results) override;
+  PVR_ERROR GetRecordingStreamProperties(const kodi::addon::PVRRecording& recording, std::vector<kodi::addon::PVRStreamProperty>& properties) override;
+
   //@}
 
   // Internal functions
@@ -86,8 +92,9 @@ private:
   iptvsimple::Providers m_providers;
   iptvsimple::Channels m_channels;
   iptvsimple::ChannelGroups m_channelGroups{m_channels};
-  iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups, m_providers};
-  iptvsimple::Epg m_epg{this, m_channels};
+  iptvsimple::Media m_media;
+  iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups, m_providers, m_media};
+  iptvsimple::Epg m_epg{this, m_channels, m_media};
   iptvsimple::CatchupController m_catchupController{m_epg, &m_mutex};
 
   std::atomic<bool> m_running{false};

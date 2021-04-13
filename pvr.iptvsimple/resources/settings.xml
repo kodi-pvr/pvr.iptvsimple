@@ -449,11 +449,9 @@
           <control type="toggle" />
         </setting>
       </group>
-    </category>
 
-    <!-- Genres -->
-    <category id="genressettings" label="30050" help="30660">
-      <group id="1" label="30050">
+      <!-- Genres - Sub category of EPG -->
+      <group id="2" label="30050">
         <setting id="useEpgGenreText" type="boolean" label="30051" help="30661">
           <level>0</level>
           <default>false</default>
@@ -500,7 +498,7 @@
 
     <!-- Logos -->
     <category id="channellogos" label="30030" help="30640">
-      <group id="1" label="30030">
+      <group id="3" label="30030">
        <setting id="logoPathType" type="integer" label="30000" help="30641">
           <level>0</level>
           <default>1</default>
@@ -547,7 +545,7 @@
           <control type="toggle" />
         </setting>
       </group>
-      <group id="2" label="30040">
+      <group id="4" label="30040">
        <setting id="logoFromEpg" type="integer" label="30041" help="30644">
           <level>0</level>
           <default>1</default>
@@ -559,6 +557,49 @@
             </options>
           </constraints>
           <control type="spinner" format="integer" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- Media -->
+    <category id="media" label="30150" help="30800">
+      <group id="1" label="30150">
+        <setting id="mediaEnabled" type="boolean" label="30155" help="30805">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaGroupByTitle" type="boolean" parent="mediaEnabled" label="30151" help="30801">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaGroupBySeason" type="boolean" parent="mediaGroupByTitle" label="30152" help="30802">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaGroupByTitle" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaTitleSeasonEpisode" type="boolean" parent="mediaEnabled" label="30153" help="30803">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaVODAsRecordings" type="boolean" parent="mediaEnabled" label="30154" help="30804">
+          <level>2</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
         </setting>
       </group>
     </category>

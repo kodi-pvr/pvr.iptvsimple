@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../Channels.h"
+#include "../Media.h"
 #include "EpgEntry.h"
 
 #include <string>
@@ -41,12 +42,11 @@ namespace iptvsimple
       std::map<time_t, EpgEntry>& GetEpgEntries() { return m_epgEntries; }
       void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries[epgEntry.GetStartTime()] = epgEntry; }
 
-      bool UpdateFrom(const pugi::xml_node& channelNode, iptvsimple::Channels& channels);
+      bool UpdateFrom(const pugi::xml_node& channelNode, iptvsimple::Channels& channels, iptvsimple::Media& media);
       bool CombineNamesAndIconPathFrom(const ChannelEpg& right);
 
     private:
       std::string m_id;
-      //std::vector<std::string> m_names;
       std::vector<DisplayNamePair> m_displayNames;
       std::string m_iconPath;
       std::map<time_t, EpgEntry> m_epgEntries;

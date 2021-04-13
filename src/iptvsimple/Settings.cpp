@@ -116,6 +116,13 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_epgLogosMode = kodi::GetSettingEnum<EpgLogosMode>("logoFromEpg", EpgLogosMode::IGNORE_XMLTV);
   m_useLocalLogosOnly = kodi::GetSettingBoolean("useLogosLocalPathOnly", false);
 
+  // Media m_mediaEnabled
+  m_mediaEnabled = kodi::GetSettingBoolean("mediaEnabled", true);
+  m_showVodAsRecordings = kodi::GetSettingBoolean("mediaVODAsRecordings", true);
+  m_groupMediaByTitle = kodi::GetSettingBoolean("mediaGroupByTitle", true);
+  m_groupMediaBySeason = kodi::GetSettingBoolean("mediaGroupBySeason", true);
+  m_includeShowInfoInMediaTitle = kodi::GetSettingBoolean("mediaTitleSeasonEpisode", false);
+
   // Timeshift
   m_timeshiftEnabled = kodi::GetSettingBoolean("timeshiftEnabled", false);
   m_timeshiftEnabledAll = kodi::GetSettingBoolean("timeshiftEnabledAll", false);
@@ -258,6 +265,17 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSet
     return SetEnumSetting<EpgLogosMode, ADDON_STATUS>(settingName, settingValue, m_epgLogosMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "useLogosLocalPathOnly")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useLocalLogosOnly, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  // Media
+  else if (settingName == "mediaEnabled")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_mediaEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "mediaGroupByTitle")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_groupMediaByTitle, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "mediaGroupBySeason")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_groupMediaBySeason, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "mediaTitleSeasonEpisode")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_includeShowInfoInMediaTitle, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "mediaVODAsRecordings")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_showVodAsRecordings, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Timeshift
   else if (settingName == "timeshiftEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);

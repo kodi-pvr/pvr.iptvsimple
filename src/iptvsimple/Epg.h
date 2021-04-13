@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Channels.h"
+#include "Media.h"
 #include "Settings.h"
 #include "data/ChannelEpg.h"
 #include "data/EpgGenre.h"
@@ -35,7 +36,7 @@ namespace iptvsimple
   class Epg
   {
   public:
-    Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels);
+    Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::Media& media);
 
     bool Init(int epgMaxPastDays, int epgMaxFutureDays);
 
@@ -60,8 +61,11 @@ namespace iptvsimple
     void LoadEpgEntries(const pugi::xml_node& rootElement, int start, int end);
     bool LoadGenres();
 
+    void MergeEpgDataIntoMedia();
+
     data::ChannelEpg* FindEpgForChannel(const std::string& id) const;
     data::ChannelEpg* FindEpgForChannel(const data::Channel& channel) const;
+    data::ChannelEpg* FindEpgForMediaEntry(const data::MediaEntry& mediaEntry) const;
     void ApplyChannelsLogosFromEPG();
 
     std::string m_xmltvLocation;
@@ -75,6 +79,7 @@ namespace iptvsimple
     long m_epgMaxFutureDaysSeconds;
 
     iptvsimple::Channels& m_channels;
+    iptvsimple::Media& m_media;
     std::vector<data::ChannelEpg> m_channelEpgs;
     std::vector<iptvsimple::data::EpgGenre> m_genreMappings;
 

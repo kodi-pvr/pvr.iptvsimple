@@ -25,8 +25,8 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace pugi;
 
-Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels)
-  : m_lastStart(0), m_lastEnd(0), m_channels(channels), m_client(client)
+Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& media)
+  : m_lastStart(0), m_lastEnd(0), m_channels(channels), m_media(media), m_client(client)
 {
   FileUtils::CopyDirectory(FileUtils::GetResourceDataPath() + GENRE_DIR, GENRE_ADDON_DATA_BASE_DIR, true);
 
@@ -45,13 +45,14 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
   SetEPGMaxPastDays(epgMaxPastDays);
   SetEPGMaxFutureDays(epgMaxFutureDays);
 
-  if (Settings::GetInstance().AlwaysLoadEPGData())
+  if (Settings::GetInstance().IsCatchupEnabled() || Settings::GetInstance().IsMediaEnabled())
   {
     // Kodi may not load the data on each startup so we need to make sure it's loaded whether
     // or not kodi considers it necessary when either 1) we need the EPG logos or 2) for
     // catchup we need a local store of the EPG data
     time_t now = std::time(nullptr);
     LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+    MergeEpgDataIntoMedia();
   }
 
   return true;
@@ -253,7 +254,7 @@ bool Epg::LoadChannelEpgs(const xml_node& rootElement)
   {
     ChannelEpg channelEpg;
 
-    if (channelEpg.UpdateFrom(channelNode, m_channels))
+    if (channelEpg.UpdateFrom(channelNode, m_channels, m_media))
     {
       ChannelEpg* existingChannelEpg = FindEpgForChannel(channelEpg.GetId());
       if (existingChannelEpg)
@@ -304,10 +305,10 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
   ChannelEpg* channelEpg = nullptr;
   int count = 0;
 
-  for (const auto& channelNode : rootElement.children("programme"))
+  for (const auto& programmeNode : rootElement.children("programme"))
   {
     std::string id;
-    if (!GetAttributeValue(channelNode, "channel", id))
+    if (!GetAttributeValue(programmeNode, "channel", id))
       continue;
 
     if (!channelEpg || !StringUtils::EqualsNoCase(channelEpg->GetId(), id))
@@ -317,7 +318,7 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
     }
 
     EpgEntry entry;
-    if (entry.UpdateFrom(channelNode, id, start, end, minShiftTime, maxShiftTime))
+    if (entry.UpdateFrom(programmeNode, id, start, end, minShiftTime, maxShiftTime))
     {
       count++;
 
@@ -341,8 +342,12 @@ void Epg::ReloadEPG()
 
   if (LoadEPG(m_lastStart, m_lastEnd))
   {
+    MergeEpgDataIntoMedia();
+
     for (const auto& myChannel : m_channels.GetChannelsList())
       m_client->TriggerEpgUpdate(myChannel.GetUniqueId());
+
+    m_client->TriggerRecordingUpdate();
   }
 }
 
@@ -358,6 +363,8 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::
       // reload EPG for new time interval only
       LoadEPG(start, end);
       {
+        MergeEpgDataIntoMedia();
+
         // doesn't matter is epg loaded or not we shouldn't try to load it for same interval
         m_lastStart = static_cast<int>(start);
         m_lastEnd = static_cast<int>(end);
@@ -426,6 +433,37 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel) const
     for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
     {
       if (StringUtils::EqualsNoCase(displayNamePair.m_displayName, channel.GetChannelName()))
+        return const_cast<ChannelEpg*>(&myChannelEpg);
+    }
+  }
+
+  return nullptr;
+}
+
+ChannelEpg* Epg::FindEpgForMediaEntry(const MediaEntry& mediaEntry) const
+{
+  for (auto& myChannelEpg : m_channelEpgs)
+  {
+    if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId()))
+      return const_cast<ChannelEpg*>(&myChannelEpg);
+  }
+
+  for (auto& myChannelEpg : m_channelEpgs)
+  {
+    for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
+    {
+      if (StringUtils::EqualsNoCase(displayNamePair.m_displayNameWithUnderscores, mediaEntry.GetTvgName()) ||
+          StringUtils::EqualsNoCase(displayNamePair.m_displayName, mediaEntry.GetTvgName()))
+        return const_cast<ChannelEpg*>(&myChannelEpg);
+    }
+  }
+
+  // Note that prior to merging EPG data a media entries title will be the same a a channels name.
+  for (auto& myChannelEpg : m_channelEpgs)
+  {
+    for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
+    {
+      if (StringUtils::EqualsNoCase(displayNamePair.m_displayName, mediaEntry.GetM3UName()))
         return const_cast<ChannelEpg*>(&myChannelEpg);
     }
   }
@@ -549,4 +587,18 @@ EpgEntry* Epg::GetEPGEntry(const Channel& myChannel, time_t lookupTime) const
 int Epg::GetEPGTimezoneShiftSecs(const Channel& myChannel) const
 {
   return m_tsOverride ? m_epgTimeShift : myChannel.GetTvgShift() + m_epgTimeShift;
+}
+
+void Epg::MergeEpgDataIntoMedia()
+{
+  for (auto& mediaEntry : m_media.GetMediaEntryList())
+  {
+    ChannelEpg* channelEpg = FindEpgForMediaEntry(mediaEntry);
+
+    // If we have a channel EPG with entries for this media entry
+    // then return the first entry as matching. This is a common pattern
+    // for channel that only contain a single media item.
+    if (channelEpg && !channelEpg->GetEpgEntries().empty())
+      mediaEntry.UpdateFrom(channelEpg->GetEpgEntries().begin()->second);
+  }
 }

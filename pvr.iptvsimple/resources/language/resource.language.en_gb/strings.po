@@ -579,6 +579,39 @@ msgstr ""
 
 #empty strings from id 30129 to 30449
 
+#. category-lavel: Media
+#. group-label: Media - Media
+msgctxt "#30150"
+msgid "Media"
+msgstr ""
+
+#. label: Media - mediaGroupByTitle
+msgctxt "#30151"
+msgid "Group entries by title"
+msgstr ""
+
+#. label: Media - mediaGroupBySeason
+msgctxt "#30152"
+msgid "Group entries by season"
+msgstr ""
+
+#. label: Media - mediaBySeasonEpisode
+msgctxt "#30153"
+msgid "Include season and episode number in title"
+msgstr ""
+
+#. label: Media - mediaVODAsRecordings
+msgctxt "#30154"
+msgid "Include VODs as media"
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30155"
+msgid "Show Media as recordings"
+msgstr ""
+
+#empty strings from id 30156 to 30449
+
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
@@ -969,7 +1002,7 @@ msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
 msgstr ""
 
-#empty strings from id 30727 to 307039
+#empty strings from id 30727 to 30739
 
 #. help info - Other categories continued
 
@@ -991,4 +1024,38 @@ msgstr ""
 #. help: Groups - groups
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
+msgstr ""
+
+#empty strings from id 30744 to 30799
+
+#. help info - Media
+
+#. help-category: Media
+msgctxt "#30800"
+msgid "Settings related to VOD media."
+msgstr ""
+
+#. help: Media - mediaGroupByTitle
+msgctxt "#30801"
+msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
+msgstr ""
+
+#. help: Media - mediaGroupBySeason
+msgctxt "#30802"
+msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
+msgstr ""
+
+#. help: Media - mediaTitleSeasonEpisode
+msgctxt "#30803"
+msgid "Prepend the season and episode numbers to the title."
+msgstr ""
+
+#. help: Media - mediaVODAsRecordings
+msgctxt "#30804"
+msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30805"
+msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
 msgstr ""
