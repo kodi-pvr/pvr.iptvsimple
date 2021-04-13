@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="20.0.0"
+  version="20.1.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,11 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v20.1.0
+- Fixed: Change reported backend name
+- Added: Support pvr providers in Kodi 20
+- Added: Support VOD Media as recordings
+
 v20.0.0
 - Changed: Test builds to 'Kodi 20 Nexus'
 - Increased version to 20.0.0
