@@ -57,6 +57,10 @@ void EpgEntry::UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeS
     left.SetGenreType(EPG_GENRE_USE_STRING);
     left.SetGenreDescription(m_genreString);
   }
+  if (m_parentalRatingSystem.empty())
+    left.SetParentalRatingCode(m_parentalRating);
+  else
+    left.SetParentalRatingCode(m_parentalRatingSystem + "-" + m_parentalRating);
   left.SetStarRating(m_starRating);
   left.SetSeriesNumber(m_seasonNumber);
   left.SetEpisodeNumber(m_episodeNumber);
@@ -184,17 +188,17 @@ int ParseStarRating(const std::string& starRatingString)
 
 } // unnamed namespace
 
-bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
+bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
                           int start, int end, int minShiftTime, int maxShiftTime)
 {
   std::string strStart, strStop;
-  if (!GetAttributeValue(channelNode, "start", strStart) || !GetAttributeValue(channelNode, "stop", strStop))
+  if (!GetAttributeValue(programmeNode, "start", strStart) || !GetAttributeValue(programmeNode, "stop", strStop))
     return false;
 
   long long tmpStart = ParseDateTime(strStart);
   long long tmpEnd = ParseDateTime(strStop);
 
-  GetAttributeValue(channelNode, "catchup-id", m_catchupId);
+  GetAttributeValue(programmeNode, "catchup-id", m_catchupId);
   m_catchupId = StringUtils::Trim(m_catchupId);
 
   if ((tmpEnd + maxShiftTime < start) || (tmpStart + minShiftTime > end))
@@ -213,13 +217,13 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   m_episodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
   m_seasonNumber = EPG_TAG_INVALID_SERIES_EPISODE;
 
-  m_title = GetNodeValue(channelNode, "title");
-  m_plot = GetNodeValue(channelNode, "desc");
-  m_episodeName = GetNodeValue(channelNode, "sub-title");
+  m_title = GetNodeValue(programmeNode, "title");
+  m_plot = GetNodeValue(programmeNode, "desc");
+  m_episodeName = GetNodeValue(programmeNode, "sub-title");
 
-  m_genreString = GetJoinedNodeValues(channelNode, "category");
+  m_genreString = GetJoinedNodeValues(programmeNode, "category");
 
-  const std::string dateString = GetNodeValue(channelNode, "date");
+  const std::string dateString = GetNodeValue(programmeNode, "date");
   if (!dateString.empty())
   {
     static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
@@ -242,20 +246,34 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
     std::sscanf(dateString.c_str(), "%04d", &m_year);
   }
 
-  const auto& starRatingNode = channelNode.child("star-rating");
+  const auto& parentalRatingNode = programmeNode.child("rating");
+  if (parentalRatingNode)
+  {
+    m_parentalRating = GetNodeValue(parentalRatingNode, "value");
+    GetAttributeValue(parentalRatingNode, "system", m_parentalRatingSystem);
+
+    const auto& ratingIconNode = programmeNode.child("icon");
+    std::string ratingIconPath;
+    if (!ratingIconNode || !GetAttributeValue(ratingIconNode, "src", ratingIconPath))
+      m_parentalRatingIconPath = "";
+    else
+      m_parentalRatingIconPath = ratingIconPath;
+  }
+
+  const auto& starRatingNode = programmeNode.child("star-rating");
   if (starRatingNode)
     m_starRating = ParseStarRating(GetNodeValue(starRatingNode, "value"));
 
-  const auto& newNode = channelNode.child("new");
+  const auto& newNode = programmeNode.child("new");
   if (newNode)
     m_new = true;
 
-  const auto& premiereNode = channelNode.child("premiere");
+  const auto& premiereNode = programmeNode.child("premiere");
   if (premiereNode)
     m_premiere = true;
 
   std::vector<std::pair<std::string, std::string>> episodeNumbersList;
-  for (const auto& episodeNumNode : channelNode.children("episode-num"))
+  for (const auto& episodeNumNode : programmeNode.children("episode-num"))
   {
     std::string episodeNumberSystem;
     if (GetAttributeValue(episodeNumNode, "system", episodeNumberSystem))
@@ -272,7 +290,7 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
       m_year = 0;
   }
 
-  const auto& creditsNode = channelNode.child("credits");
+  const auto& creditsNode = programmeNode.child("credits");
   if (creditsNode)
   {
     m_cast = GetJoinedNodeValues(creditsNode, "actor");
@@ -280,7 +298,7 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
     m_writer = GetJoinedNodeValues(creditsNode, "writer");
   }
 
-  const auto& iconNode = channelNode.child("icon");
+  const auto& iconNode = programmeNode.child("icon");
   std::string iconPath;
   if (!iconNode || !GetAttributeValue(iconNode, "src", iconPath))
     m_iconPath = "";

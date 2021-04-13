@@ -25,6 +25,7 @@ The contents of this README.md file are as follows:
    * [General Channel Setup (M3U)](#general)
    * [EPG](#epg)
    * [Genres](#genres)
+   * [Media](#media)
    * [Channel logos](#channel-logos)
    * [Timeshift](#timeshift)
    * [Catchup](#catchup)
@@ -145,7 +146,7 @@ For settings related to genres please see the next section.
 * **EPG time shift**: Adjust the EPG times by this value, from -12 hours to +14 hours.
 * **Apply time shift to all channels**: Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used.
 
-### Genres
+#### Genres
 Settings related to genres.
 
 The addon will read all the `<category>` elements of a `programme` and use this as the genre string. It is also possible to supply a mapping file to convert the genre string to a genre ID, allowing colour coding of the EPG. When using a mapping file each category will be checked in order until a match is found. Please see: [Using a mapping file for Genres](#using-a-mapping-file-for-genres) in the Appendix for details on how to set this up.
@@ -170,6 +171,21 @@ Settings related to Channel Logos.
     - `Ignore` - Don't use channel logos from an XMLTV file.
     - `Prefer M3U` - Use the channel logo from the M3U if available otherwise use the XMLTV logo.
     - `Prefer XMLTV` - Use the channel logo from the XMLTV file if available otherwise use the M3U logo.
+
+### Media
+Media entries can be used to access the Video-On-Demand (VOD) library provided by IPTV services. The IPTV media library can be organized either as a plain list of channels or the hierarchy tree made of folders and PVR recordings.
+
+An M3U entry can denote that it's media by having:
+* an M3U property of `EXT-X-PLAYLIST-TYPE` set to `VOD`,
+* the M3U attributes of `media`, `media-dir` or `media-size` are set
+
+More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements).
+
+* **Show media as recordings**: If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels.
+* **Group entries by title**: If multiple entries exist with matching titles, create a virtual folder to group them together.
+* **Group entries by season**: If multiple entries exist with matching titles, try additionally grouping them in sub-folders representing seasons.
+* **Include season and episode number in title**: Prepend the season and episode numbers to the title.
+* **Include VODs as media**: Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as PVR recordings.
 
 ### Timeshift
 Timeshift settings for pausing/rewinding and fast-forwarding live streams.
@@ -413,6 +429,15 @@ http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
 http://path-to-stream/live/channel-j.ts
 #EXTINF:-1 catchup="vod",Channel K
 plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c-e31d8d15696b
+#EXTINF:-1,Channel L
+#EXT-X-PLAYLIST-TYPE:VOD
+http://path-to-stream/live/channel-l.mkv
+#EXTINF:-1 media="true",Channel M
+http://path-to-stream/live/channel-m.mkv
+#EXTINF:-1 radio="true" media="true" media-size="102400000",Channel N
+http://path-to-stream/live/channel-n.mkv
+#EXTINF:-1 media-dir="/movies/scifi",Channel O
+http://path-to-stream/live/channel-o.mkv
 ```
 
 *Explanation for Catchup entries*
@@ -427,6 +452,10 @@ plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c
 - For `Channel I` this is an example of a xtream codes style entry which auto generates the catchup-source for `m3u8` streams.
 - For `Channel J` this is an example of a VOD style entry which will only populated and play the `catchup-source` using a value of 3 `catchup-days`.
 - For `Channel K` this is an example of a VOD style entry which uses a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
+- For `Channel L` this is a tv media entry specified by the M3U `EXT-X-PLAYLIST-TYPE` property.
+- For `Channel M` this is a tv media entry specified by the `media` attribute on the M3U entry.
+- For `Channel N` this is a radio media entry of size 102400000 bytes.
+- For `Channel O` this is a tv media entry specifying a directory path.
 
 *Channel k Plugin example:*
 
@@ -479,6 +508,9 @@ http://path-to-stream/live/channel-z.ts
   - `provider-logo`: A path to the location where the icon for this provider is available.
   - `provider-countries`: The country for this provider. Should be passed using an ISO-3166 country codes, comma separated (e.g. 'IE,GB'). Leave empty or omit for unspecified.
   - `provider-languages`: The languages for this provider. Should be passed using RFC-5646 language codes, comma separated (e.g. 'en_GB,en_IE,fr_FR'). Leave empty or omit for unspecified.
+  - `media`: Specifies that this entry is a media entry by setting the values true `true`. Same as setting `#EXT-X-PLAYLIST-TYPE` to VOD.
+  - `media-dir`: An optional directory path which should specifiy where in the hierarchy this media entry should be represented. The path separator is `/`.
+  - `media-size`: An optional size of the media entry in bytes. Note: this is not usually available for VOD libraries.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
 - `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
 - `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
