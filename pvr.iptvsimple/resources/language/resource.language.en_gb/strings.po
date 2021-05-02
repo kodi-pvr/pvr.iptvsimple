@@ -692,7 +692,7 @@ msgstr ""
 
 #. help-category: EPG Settings
 msgctxt "#30620"
-msgid "Settings related to the EPG."
+msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
 msgstr ""
 
 #. help: EPG Settings - epgPathType

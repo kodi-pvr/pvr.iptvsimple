@@ -378,10 +378,10 @@ std::string FormatDateTime(time_t timeStart, time_t duration, const std::string 
   return formattedUrl;
 }
 
-std::string FormatDateTimeNowOnly(const std::string &urlFormatString)
+std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezoneShiftSecs)
 {
   std::string formattedUrl = urlFormatString;
-  const time_t timeNow = std::time(0);
+  const time_t timeNow = std::time(0) - timezoneShiftSecs;
   std::tm dateTimeNow = SafeLocaltime(timeNow);
 
   FormatUtc("{lutc}", timeNow, formattedUrl);
@@ -425,7 +425,7 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
   if ((startTime > 0 && offset < (timeNow - 5)) || (channel.IgnoreCatchupDays() && !programmeCatchupId.empty()))
     startTimeUrl = FormatDateTime(offset - timezoneShiftSecs, duration, channel.GetCatchupSource());
   else
-    startTimeUrl = FormatDateTimeNowOnly(channel.GetStreamURL());
+    startTimeUrl = FormatDateTimeNowOnly(channel.GetStreamURL(), timezoneShiftSecs);
 
   static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
   if (!programmeCatchupId.empty())
@@ -472,10 +472,10 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
   return "";
 }
 
-std::string CatchupController::ProcessStreamUrl(const std::string& streamUrl) const
+std::string CatchupController::ProcessStreamUrl(const Channel& channel) const
 {
-  //We only process  current time timestamps specifiers in this case
-  return FormatDateTimeNowOnly(streamUrl);
+  //We only process current time timestamps specifiers in this case
+  return FormatDateTimeNowOnly(channel.GetStreamURL(), m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs());
 }
 
 std::string CatchupController::GetStreamTestUrl(const Channel& channel, bool fromEpg) const
@@ -484,7 +484,7 @@ std::string CatchupController::GetStreamTestUrl(const Channel& channel, bool fro
     // Test URL from 2 hours ago for 1 hour duration.
     return BuildEpgTagUrl(std::time(nullptr) - (2 * 60 * 60), 60 * 60, channel, 0, m_programmeCatchupId, m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs());
   else
-    return ProcessStreamUrl(channel.GetStreamURL());
+    return ProcessStreamUrl(channel);
 }
 
 std::string CatchupController::GetStreamKey(const Channel& channel, bool fromEpg) const

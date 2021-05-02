@@ -191,7 +191,7 @@ PVR_ERROR PVRIptvData::GetChannelStreamProperties(const kodi::addon::PVRChannel&
     if (!catchupUrl.empty())
       streamURL = catchupUrl;
     else
-      streamURL = m_catchupController.ProcessStreamUrl(streamURL);
+      streamURL = m_catchupController.ProcessStreamUrl(m_currentChannel);
 
     StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamURL, catchupUrl.empty(), catchupProperties);
 

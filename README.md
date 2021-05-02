@@ -124,7 +124,7 @@ General settings required for the addon to function.
 * **Custom Radio Groups file**: The file used to load the custom Radio groups (groups). The default file is `customRadioGroups-example.xml`. Details on how to customise can be found in the next section of the README.
 
 ### EPG
-Settings related to the EPG.
+Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required.
 
 For settings related to genres please see the next section.
 

@@ -117,6 +117,7 @@ namespace iptvsimple
     float GetEpgTimeshiftHours() const { return m_epgTimeShiftHours; }
     int GetEpgTimeshiftSecs() const { return static_cast<int>(m_epgTimeShiftHours * 60 * 60); }
     bool GetTsOverride() const { return m_tsOverride; }
+    bool AlwaysLoadEPGData() const { return m_epgLogosMode == EpgLogosMode::PREFER_XMLTV || IsCatchupEnabled(); }
 
     const std::string& GetGenresLocation() const { return m_genresPathType == PathType::REMOTE_PATH ? m_genresUrl : m_genresPath; }
     bool UseEpgGenreTextWhenMapping() const { return m_useEpgGenreTextWhenMapping; }
