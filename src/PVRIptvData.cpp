@@ -98,7 +98,8 @@ PVR_ERROR PVRIptvData::GetBackendName(std::string& name)
 }
 PVR_ERROR PVRIptvData::GetBackendVersion(std::string& version)
 {
-  version = STR(IPTV_VERSION);
+  // Some linux platform require the full string initialisation here to compile. No idea why.
+  version = std::string(STR(IPTV_VERSION));
   return PVR_ERROR_NO_ERROR;
 }
 PVR_ERROR PVRIptvData::GetConnectionString(std::string& connection)
