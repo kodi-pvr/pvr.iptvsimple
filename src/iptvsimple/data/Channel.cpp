@@ -17,6 +17,7 @@
 #include <regex>
 
 #include <kodi/General.h>
+#include <kodi/Filesystem.h>
 #include <kodi/tools/StringUtils.h>
 
 using namespace kodi::tools;
@@ -134,7 +135,8 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
   if (m_iconPath.find("://") == std::string::npos)
   {
     const std::string& logoLocation = Settings::GetInstance().GetLogoLocation();
-    if (!logoLocation.empty())
+    // If the file does not exist it must be relative
+    if (!logoLocation.empty() && !kodi::vfs::FileExists(m_iconPath))
     {
       // not absolute path, only append .png in this case.
       m_iconPath = utilities::FileUtils::PathCombine(logoLocation, m_iconPath);
