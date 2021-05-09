@@ -1,6 +1,9 @@
-v7.6.3
+v7.6.4
 - Fixed: Only use Local logo location if file is relative
 - Fixed: Add string initialisation from macros as some linux fail to compile without it
+
+v7.6.3
+- Skipped
 
 v7.6.2
 - Fixed: Allow catchup correction (timezone shift) when live URLs have catchup placeholders
