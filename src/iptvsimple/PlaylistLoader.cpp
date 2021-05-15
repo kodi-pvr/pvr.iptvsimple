@@ -198,9 +198,25 @@ bool PlaylistLoader::LoadPlayList()
 
 std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup)
 {
-  // parse line
   size_t colonIndex = line.find(':');
-  size_t commaIndex = line.rfind(',');
+  size_t commaIndex = line.rfind(','); //default to last comma on line in case we don't find a better match
+
+  size_t lastQuoteIndex = line.rfind('"');
+  if (lastQuoteIndex != std::string::npos)
+  {
+    // This is a better way to find the correct comma in
+    // case there is a comma embedded in the channel name
+    std::string possibleName = line.substr(lastQuoteIndex + 1);
+    std::string commaName = possibleName;
+    StringUtils::Trim(commaName);
+
+    if (StringUtils::StartsWith(commaName, ","))
+    {
+      commaIndex = lastQuoteIndex + possibleName.find(',') + 1;
+      std::string temp = line.substr(commaIndex + 1);
+    }
+  }
+
   if (colonIndex != std::string::npos && commaIndex != std::string::npos && commaIndex > colonIndex)
   {
     // parse name
