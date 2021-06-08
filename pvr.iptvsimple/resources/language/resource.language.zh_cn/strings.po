@@ -20,13 +20,53 @@ msgctxt "#30000"
 msgid "Location"
 msgstr "位置"
 
+msgctxt "#30001"
+msgid "Local path (include local network)"
+msgstr "本地路径（含局域网）"
+
+msgctxt "#30002"
+msgid "Remote path (Internet address)"
+msgstr "远程路径（互联网链接）"
+
 msgctxt "#30003"
 msgid "Disabled"
 msgstr "已禁用"
 
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "循环刷新"
+
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "每日预约"
+
 msgctxt "#30010"
 msgid "General"
 msgstr "常规"
+
+msgctxt "#30011"
+msgid "M3U playlist path"
+msgstr "M3U 播放列表本地路径"
+
+msgctxt "#30012"
+msgid "M3U playlist URL"
+msgstr "M3U 播放列表网络链接"
+
+msgctxt "#30013"
+msgid "Start channel number"
+msgstr "起始频道号"
+
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr "仅按 M3U 文件中的频道顺序编号"
+
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "刷新间隔"
+
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "更新时间（24时制）"
 
 msgctxt "#30019"
 msgid "EPG Settings"
@@ -36,21 +76,53 @@ msgctxt "#30020"
 msgid "EPG"
 msgstr "电子节目单"
 
+msgctxt "#30021"
+msgid "XMLTV path"
+msgstr "XMLTV 节目单本地位置"
+
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV URL"
+msgstr "XMLTV 节目单网络链接"
+
+msgctxt "#30023"
+msgid "Apply time shift to all channels"
+msgstr "给所有的频道开启时移"
+
+msgctxt "#30024"
+msgid "EPG time shift"
+msgstr "电子节目单时移"
 
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "缓存 m3u 到本地储存"
+msgstr "缓存 M3U 文件到本地储存"
 
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "缓存 XMLTV 到本地储存"
+msgstr "缓存 XMLTV 文件到本地储存"
+
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} 小时"
+
+msgctxt "#30030"
+msgid "Channel Logos"
+msgstr "频道图标"
+
+msgctxt "#30031"
+msgid "Channel logos folder"
+msgstr "频道图标文件夹"
+
+msgctxt "#30032"
+msgid "Channel logos base URL"
+msgstr "频道图标网络链接"
 
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "XMLTV 图标选项"
+
+msgctxt "#30041"
+msgid "Channels logos from XMLTV"
+msgstr "接收来自 XMLTV 的频道图标"
 
 msgctxt "#30042"
 msgid "Ignore"
@@ -66,8 +138,144 @@ msgstr "首选 XMLTV"
 
 msgctxt "#30050"
 msgid "Genres"
-msgstr "类型"
+msgstr "类型/流派"
+
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "当建立类型/流派时使用来自 XMLTV 提供的文本数据"
+
+msgctxt "#30052"
+msgid "Genres path"
+msgstr "类型/流派本地路径"
+
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr "类型/流派网络链接"
 
 msgctxt "#30060"
 msgid "Advanced"
 msgstr "高级"
+
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr "组播中继 (udpxy)"
+
+msgctxt "#30062"
+msgid "Transform multicast stream URLs"
+msgstr "转换组播流链接"
+
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr "中继主机名或 IP 地址"
+
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "中继端口"
+
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr "插件运行所需的常规设置。"
+
+msgctxt "#30601"
+msgid "Select where to find the M3U resource. The options are: [Local path] - A path to an M3U file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the M3U file."
+msgstr "选择从何处查找 M3U 资源。此选项包含：[本地路径] - 一条连接向设备或本地网络的 M3U 文件路径；[远程路径] - 一条指向 M3U 文件路径的网络链接。"
+
+msgctxt "#30602"
+msgid "If location is [Local path] this setting must contain a valid path for the addon to function."
+msgstr "若上述选项设置为 [本地路径]。则此设置项必须包含有效路径才能让插件正常运行。"
+
+msgctxt "#30603"
+msgid "If location is [Remote path] this setting must contain a valid URL for the addon to function."
+msgstr "若上述选项设置为 [远程路径]。则此设置项必须包含有效网络链接才能让插件正常运行。"
+
+msgctxt "#30604"
+msgid "If location is [Remote path] select whether or not the the M3U file should be cached locally."
+msgstr "若上述选项设置为 [远程路径]。则选择是否缓存 M3U 文件至本地储存中。"
+
+msgctxt "#30605"
+msgid "The number to start numbering channels from. Only used when [Use backend channel numbers] from PVR settings is enabled and a channel number is not supplied in the M3U file."
+msgstr "在此键入起始频道的号码。"
+
+msgctxt "#30606"
+msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
+msgstr "忽略“tvg-chno”标签并仅按照“起始频道号”规定的号码启动 M3U 频道。"
+
+msgctxt "#30620"
+msgid "Settings related to the EPG."
+msgstr "电子节目单相关的设置。"
+
+msgctxt "#30621"
+msgid "Select where to find the XMLTV resource. The options are: [Local path] - A path to an XMLTV file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the XMLTV file."
+msgstr "选择从何处查找 XMLTV 节目单资源。此选项包含：[本地路径] - 一条连接向设备或本地网络的 XMLTV 节目单文件路径；[远程路径] - 一条指向 XMLTV 节目单文件路径的网络链接。"
+
+msgctxt "#30622"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "若上述选项设置为 [本地路径]。则此设置项必须包含有效路径。"
+
+msgctxt "#30623"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "若上述选项设置为 [远程路径]。则此设置项必须包含有效网络链接。"
+
+msgctxt "#30624"
+msgid "If location is [Remote path] select whether or not the the XMLTV file should be cached locally."
+msgstr "若上述选项设置为 [远程路径]。则选择是否缓存 M3U 文件至本地储存中。"
+
+msgctxt "#30625"
+msgid "Adjust the EPG times by this value in minutes, range is from -720 mins to +840 mins (- 12 hours to +14 hours)."
+msgstr "通过该值调整电子节目单刷新时间（以分钟为单位）。范围从 -720 分钟到 +840 分钟（-12 小时至 +14 小时）。"
+
+msgctxt "#30626"
+msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr "是否使用“电子节目单时移”覆盖所有频道的时移。如果禁用，则将使用“EPG 时移”与每个频道的单独时移（如果可用）。"
+
+msgctxt "#30640"
+msgid "Settings related to Channel Logos."
+msgstr "频道图标相关的设置。"
+
+msgctxt "#30641"
+msgid "Select where to find the channel logos. The options are: [Local path] - A path to a folder whether it be on the device or the local network; [Remote path] - A base URL specifying the location of the logos."
+msgstr "选择从何处查找频道图标资源。此选项包含：[本地路径] - 一条连接向设备或本地网络的频道图标文件夹路径；[远程路径] - 一条指向频道图标文件夹路径的网络链接。"
+
+msgctxt "#30642"
+msgid "If location is [Local Path] this setting should contain a valid folder."
+msgstr "若上述选项设置为 [本地路径]。则此设置项必须包含有效的文件夹路径。"
+
+msgctxt "#30643"
+msgid "If location is [Remote Path] this setting should contain a valid base URL."
+msgstr "若上述选项设置为 [远程路径]。则此设置项必须包含有效的文件夹网络链接。"
+
+msgctxt "#30644"
+msgid "Preference on how to handle channel logos. The options are: [Ignore] - Don't use channel logos from an XMLTV file; [Prefer M3U] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [Prefer XMLTV] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgstr "有关如何处理频道图标的选项。此选项包含：[忽略] - 不使用来自 XMLTV 节目单文件的频道图标；[首选 M3U] - 若 M3U 文件中包含频道图标文件则使用 M3U 内图标文件，否则使用 XMLTV 内的图标文件；[首选 XMLTV] - 若 XMLTV 文件中包含频道图标文件则使用 XMLTV 内图标文件，否则使用 M3U 内的图标文件。"
+
+msgctxt "#30660"
+msgid "Settings related to genres."
+msgstr "类型/流派相关的设置。"
+
+msgctxt "#30661"
+msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
+msgstr "如果启用，则建立类型/流派时将使用电子节目单内的类型/流派文本以及子类型文本（例如“category”）代替 kodi 默认的类型/流派。"
+
+msgctxt "#30662"
+msgid "Select where to find the genres XML resource. The options are: [Local path] - A path to a genres XML file whether it be on the device or the local network; [Remote path] - A URL specifying the location of the genres XML file."
+msgstr "选择从何处查找 XML 类型/流派文件资源。此选项包含：[本地路径] - 一条连接向设备或本地网络的 XML 类型/流派文件路径；[远程路径] - 一条指向 XML 类型/流派文件路径的网络链接。"
+
+msgctxt "#30663"
+msgid "If location is [Local Path] this setting should contain a valid path."
+msgstr "若上述选项设置为 [本地路径]。则此设置项必须包含有效路径。"
+
+msgctxt "#30664"
+msgid "If location is [Remote Path] this setting should contain a valid URL."
+msgstr "若上述选项设置为 [远程路径]。则此设置项必须包含有效网络链接。"
+
+msgctxt "#30681"
+msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr "组播（UDP/RTP）流在 Wifi 网络上运行不佳。组播中继可以将流从 UDP/RTP 组播转换为 HTTP 组播。启用此选项会将 M3U 文件中的组播流 URL 转换为 HTTP 地址，以便可以通过本地网络上的“udpxy”中继访问它们。例如。 像“udp://@239.239.3.38:5239”这样的 UDP 组播流 URL 会被转换成“http://192.168.1.1:4000/udp/239.239.3.38:5239”这样的网址。"
+
+msgctxt "#30682"
+msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
+msgstr "本地网络上组播中继（udpxy）的主机名或ip地址。"
+
+msgctxt "#30683"
+msgid "The port of the multicast relay (udpxy) on the local network."
+msgstr "本地网络上组播中继（udpxy）的端口。"
