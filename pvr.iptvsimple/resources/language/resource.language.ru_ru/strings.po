@@ -7,67 +7,915 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Russian (Russia) (http://www.transifex.com/projects/p/kodi-main/language/ru_RU/)\n"
+"PO-Revision-Date: 2021-06-28 08:29+0000\n"
+"Last-Translator: Dmitry Petrov <dimakrm361@gmail.com>\n"
+"Language-Team: Russian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/ru_ru/>\n"
+"Language: ru_ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: ru_RU\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.7\n"
 
+#. settings labels
+#. label: General - m3uPathType
+#. label: EPG Settings - epgPathType
+#. label: Channel Logos - logoPathType
 msgctxt "#30000"
 msgid "Location"
 msgstr "Расположение"
 
+#. label-option: General - m3uPathType
+#. label-option: General - epgPathType
+#. label-option: General - logoPathType
+#. label-option: General - genresPathType
+msgctxt "#30001"
+msgid "Local path (includes local network)"
+msgstr "Локальный путь (включает локальную сеть)"
+
+#. label-option: General - m3uPathType
+#. label-option: General - epgPathType
+#. label-option: General - logoPathType
+#. label-option: General - genresPathType
+msgctxt "#30002"
+msgid "Remote path (Internet address)"
+msgstr "Удалённый путь (Интернет адрес)"
+
+#. label-option: General - m3uRefreshMode
 msgctxt "#30003"
 msgid "Disabled"
 msgstr "Откл."
 
+#. label-option: General - m3uRefreshMode
+msgctxt "#30004"
+msgid "Repeated refresh"
+msgstr "Периодическое обновление"
+
+#. label-option: General - m3uRefreshMode
+msgctxt "#30005"
+msgid "Once per day"
+msgstr "Раз в день"
+
+#. label-category: general
+#. label-group: General - General
 msgctxt "#30010"
 msgid "General"
 msgstr "Основные"
 
+#. label: General - m3uPath
+msgctxt "#30011"
+msgid "M3U playlist path"
+msgstr "Путь M3U плейлиста"
+
+#. label: General - m3uUrl
+msgctxt "#30012"
+msgid "M3U playlist URL"
+msgstr "Ссылка на M3U плейлист"
+
+#. label: General - startNum
+msgctxt "#30013"
+msgid "Start channel number"
+msgstr "Номер начального канала"
+
+#. label: General - numberByOrder
+msgctxt "#30014"
+msgid "Only number by channel order in M3U"
+msgstr "Сортировка только по номеру канала"
+
+#. label: General - m3uRefreshMode
+msgctxt "#30015"
+msgid "Auto refresh mode"
+msgstr "Режим автоматического обновления"
+
+#. label: General - m3uRefreshIntervalMins
+msgctxt "#30016"
+msgid "Refresh interval"
+msgstr "Интервал обновления"
+
+#. label: General - m3uRefreshHour
+msgctxt "#30017"
+msgid "Refresh hour (24h)"
+msgstr "Час обновления (24ч)"
+
+#. label-group: General - Refresh
+msgctxt "#30018"
+msgid "Refresh"
+msgstr "Обновить"
+
+#. label-category: epgsettings
 msgctxt "#30019"
 msgid "EPG Settings"
 msgstr "Установки EPG"
 
+#. label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
 msgid "EPG"
 msgstr "EPG"
 
+#. label: EPG Settings - epgPath
+msgctxt "#30021"
+msgid "XMLTV path"
+msgstr "Путь к XMLTV"
+
+#. label: EPG Settings - epgUrl
 msgctxt "#30022"
 msgid "XMLTV URL"
 msgstr "Ссылка на XMLTV"
 
+#. label: EPG Settings - epgTSOverride
+msgctxt "#30023"
+msgid "Apply time shift to all channels"
+msgstr "Сдвиг времени во всех каналах"
+
+#. label: EPG Settings - epgTimeShift
+msgctxt "#30024"
+msgid "EPG time shift"
+msgstr "Сдвиг времени EPG"
+
+#. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
 msgstr "Кэшировать m3u в локальное хранилище"
 
+#. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
 msgstr "Кэшировать XMLTV в локальное хранилище"
 
+#. format-label: EPG Settings - epgTimeShift
+msgctxt "#30027"
+msgid "{0:.1f} hours"
+msgstr "{0:.1f} часов"
+
+#. label: General - tvChannelGroupsOnly
+msgctxt "#30028"
+msgid "Only load TV channels in groups"
+msgstr "Загружать ТВ каналы только в группах"
+
+#. label-group: General - TV Groups
+msgctxt "#30029"
+msgid "TV Groups"
+msgstr "ТВ группы"
+
+#. label-category: channellogos
+#. label-group: Channel Logos - Channel Logos
+msgctxt "#30030"
+msgid "Channel Logos"
+msgstr "Логотипы каналов"
+
+#. label: Channel Logos - logoPath
+msgctxt "#30031"
+msgid "Channel logos folder"
+msgstr "Папка с логотипами каналов"
+
+#. label: Channel Logos - logoBaseUrl
+msgctxt "#30032"
+msgid "Channel logos base URL"
+msgstr "Ссылка на логотипы каналов"
+
+#. label-group: General - Radio Groups
+msgctxt "#30033"
+msgid "Radio Groups"
+msgstr "Радио группы"
+
+#. label: General - tvGroupMoade
+msgctxt "#30034"
+msgid "TV group mode"
+msgstr "Режим ТВ групп"
+
+#. label: General - radioGroupMoade
+msgctxt "#30035"
+msgid "Radio group mode"
+msgstr "Режим радио групп"
+
+#. label-option: Channels - tvGroupmode
+#. label-option: Channels - radioGroupGode
+msgctxt "#30036"
+msgid "All groups"
+msgstr "Все группы"
+
+#. label-option: Channels - tvGroupMode
+#. label-option: Channels - radioGroupGode
+msgctxt "#30037"
+msgid "Some groups"
+msgstr "Некоторые группы"
+
+#. label-option: General - tvGroupMode
+#. label-option: General - radioGroupGode
+msgctxt "#30038"
+msgid "Custom groups"
+msgstr "Пользовательские группы"
+
+#. label: Channels - numTvGroups
+msgctxt "#30039"
+msgid "Number of TV groups"
+msgstr "Число ТВ групп"
+
+#. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
 msgstr "Установки логотипов из XMLTV"
 
+#. label: Channel Logos - logoFromEpg
+msgctxt "#30041"
+msgid "Channels logos from XMLTV"
+msgstr "Логотипы каналов из XMLTV"
+
+#. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
 msgid "Ignore"
 msgstr "Игнорировать"
 
+#. label-option: Channel Logos - logoFromEpg
 msgctxt "#30043"
 msgid "Prefer M3U"
 msgstr "Предпочтительно M3U"
 
+#. label-option: Channel Logos - logoFromEpg
 msgctxt "#30044"
 msgid "Prefer XMLTV"
 msgstr "Предпочтительно XMLTV"
 
+#. label: General - oneTvGroup
+msgctxt "#30045"
+msgid "TV group 1"
+msgstr "ТВ группа 1"
+
+#. label: General - twoTvGroup
+msgctxt "#30046"
+msgid "TV group 2"
+msgstr "ТВ группа 2"
+
+#. label: General - threeTvGroup
+msgctxt "#30047"
+msgid "TV group 3"
+msgstr "ТВ группа 3"
+
+#. label: General - fourTvGroup
+msgctxt "#30048"
+msgid "TV group 4"
+msgstr "ТВ группа 4"
+
+#. label: General - fiveTvGroup
+msgctxt "#30049"
+msgid "TV group 5"
+msgstr "ТВ группа 5"
+
+#. label-category: genres
+#. label-group: Genres - Genres
 msgctxt "#30050"
 msgid "Genres"
 msgstr "Жанры"
 
+#. label: Genres - useEpgGenreText
+msgctxt "#30051"
+msgid "Use genre text from XMLTV when mapping genres"
+msgstr "Использовать данные XMLTV при групировке по жанрам"
+
+#. label: Genres - genresPath
+msgctxt "#30052"
+msgid "Genres path"
+msgstr "Путь к файлу жанров"
+
+#. label: Genres - genresUrl
+msgctxt "#30053"
+msgid "Genres URL"
+msgstr "Ссылка к файлу жанров"
+
+#. label: Channels - customTvGroupsFile
+msgctxt "#30054"
+msgid "Custom TV groups file"
+msgstr "Файл ТВ групп"
+
+#. label: General - oneRadioGroup
+msgctxt "#30055"
+msgid "Radio group 1"
+msgstr "Радио группа 1"
+
+#. label: General - twoRadioGroup
+msgctxt "#30056"
+msgid "Radio group 2"
+msgstr "Радио группа 2"
+
+#. label: General - threeRadioGroup
+msgctxt "#30057"
+msgid "Radio group 3"
+msgstr "Радио группа 3"
+
+#. label: General - fourRadioGroup
+msgctxt "#30058"
+msgid "Radio group 4"
+msgstr "Радио группа 4"
+
+#. label: General - fiveRadioGroup
+msgctxt "#30059"
+msgid "Radio group 5"
+msgstr "Радио группа 5"
+
+#. label-category: advanced
 msgctxt "#30060"
 msgid "Advanced"
 msgstr "Дополнительно"
+
+#. label-group: Advanced - Multicast relay
+msgctxt "#30061"
+msgid "Multicast relay (udpxy)"
+msgstr "UDP-to-HTTP прокси (udpxy)"
+
+#. label: Advanced - transformMulticastStreamUrls
+msgctxt "#30062"
+msgid "Transform multicast stream URLs"
+msgstr "Преобразовывать мультикаст ссылки"
+
+#. label: Advanced - udpxyHost
+msgctxt "#30063"
+msgid "Relay hostname or IP address"
+msgstr "Адрес прокси сервера"
+
+#. label: Advanced - udpxyPort
+msgctxt "#30064"
+msgid "Relay port"
+msgstr "Порт"
+
+#. label-group: Advanced - Streaming
+msgctxt "#30065"
+msgid "Streaming"
+msgstr "Потоковое вещание"
+
+#. label: Advanced - useInputstreamAdaptiveforHls
+msgctxt "#30066"
+msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
+msgstr "Использовать inputstream.adaptive для m3u8 (HLS) потоков"
+
+#. label: Advanced - useFFmpegReconnect
+msgctxt "#30067"
+msgid "Use FFmpeg http reconnect options if possible"
+msgstr "Использовать опцию http переподключения FFmpeg если это возможно"
+
+#. label: Advanced - defaultUserAgent
+msgctxt "#30068"
+msgid "User-Agent"
+msgstr "User-Agent"
+
+#. label: Advanced - defaultInputstream
+msgctxt "#30069"
+msgid "Inputstream name"
+msgstr "Имя Inputstream"
+
+#. label: Advanced - defaultMimeType
+msgctxt "#30070"
+msgid "MIME type"
+msgstr "MIME тип"
+
+#. label-group: Advanced - Channel defaults
+msgctxt "#30071"
+msgid "Channel defaults"
+msgstr "Настройки канала по умолчанию"
+
+#. label: General - numRadioGroups
+msgctxt "#30072"
+msgid "Number of Radio groups"
+msgstr "Число радио групп"
+
+#. label: Channels - customRadioGroupsFile
+msgctxt "#30073"
+msgid "Custom Radio groups file"
+msgstr "Файл пользовательских радио групп"
+
+#. label: General - radioChannelGroupsOnly
+msgctxt "#30074"
+msgid "Only load Radio channels in groups"
+msgstr "Загружать только радио каналы в группах"
+
+#. help: Channel Logos - useLogosLocalPathOnly
+msgctxt "#30075"
+msgid "For local logos path ignore M3U logos"
+msgstr "Использовать локальные логотипы вместо M3U"
+
+# empty strings from id 30075 to 30099
+#. label-category: catchup
+#. label-group: Catchup - Catchup
+msgctxt "#30100"
+msgid "Catchup"
+msgstr "Архив"
+
+#. label: Catchup - enableCatchup
+msgctxt "#30101"
+msgid "Enable catchup"
+msgstr "Включить архив каналов"
+
+#. label: Catchup - catchupQueryFormat
+msgctxt "#30102"
+msgid "Query format string"
+msgstr "Строка формата запроса"
+
+#. label: Catchup - catchupDays
+msgctxt "#30103"
+msgid "Catchup window"
+msgstr "Граница архива"
+
+#. label: Catchup - allChannelsCatchupMode
+msgctxt "#30104"
+msgid "Channels support catchup using mode"
+msgstr "Режим поддержки архива"
+
+#. label-group: Catchup - Watch From EPG
+msgctxt "#30105"
+msgid "Watch From EPG"
+msgstr "Просмотр из EPG"
+
+#. label: Catchup - catchupPlayEpgAsLive
+msgctxt "#30106"
+msgid "Play from EPG in Live TV mode (using timeshift)"
+msgstr "Запускать из телепрограммы в режиме ТВ (используя timeshift)"
+
+#. label: Catchup - catchupWatchEpgBeginBuffer
+msgctxt "#30107"
+msgid "Buffer before program start"
+msgstr "Буфер до начала программы"
+
+#. label: Catchup - catchupWatchEpgEndBuffer
+msgctxt "#30108"
+msgid "Buffer after program end"
+msgstr "Буфер после конца программы"
+
+#. label: Catchup - catchupOnlyOnFinishedProgrammes
+msgctxt "#30109"
+msgid "Catchup only available on finished programmes"
+msgstr "Архив доступен только для завершенных программ"
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30110"
+msgid "Disabled"
+msgstr "Откл."
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30111"
+msgid "Default"
+msgstr "По-умолчанию"
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30112"
+msgid "Append"
+msgstr "Append"
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30113"
+msgid "Shift (SIPTV)"
+msgstr "Shift (SIPTV)"
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30114"
+msgid "Flussonic"
+msgstr "Flussonic"
+
+#. label-option: Catchup - allChannelsCatchupMode
+msgctxt "#30115"
+msgid "Xtream codes"
+msgstr "Xtream коды"
+
+#. label: Catchup - catchupOverrideMode
+msgctxt "#30116"
+msgid "Include channels"
+msgstr "Включить каналы"
+
+#. label-option: Catchup - catchupOverrideMode
+msgctxt "#30117"
+msgid "without catchup mode"
+msgstr "без режима архива"
+
+#. label-option: Catchup - catchupOverrideMode
+msgctxt "#30118"
+msgid "with catchup mode"
+msgstr "с режимом архива"
+
+#. label-option: Catchup - catchupOverrideMode
+msgctxt "#30119"
+msgid "with and without catchup mode (all channels)"
+msgstr "с и без режима архива (все каналы)"
+
+#. label-category: timeshift
+#. label-group: Timeshift - Timeshift
+msgctxt "#30120"
+msgid "Timeshift"
+msgstr "Timeshift"
+
+#. label: Timeshift - timeshiftEnabled
+msgctxt "#30121"
+msgid "Enable timeshift"
+msgstr "Включить timeshift"
+
+#. label: Timeshift - timeshiftEnabledHttp
+msgctxt "#30122"
+msgid "Enable timeshift for HTTP based streams"
+msgstr "Включить timeshift для HTTP трансляций"
+
+#. label: Timeshift - timeshiftFFmpegdirectSettings
+msgctxt "#30123"
+msgid "- Modify inputstream.ffmpegdirect settings..."
+msgstr "- Изменить настройки inputstream.ffmpegdirect..."
+
+#. label-group: Timeshift - Inputstream Settings
+msgctxt "#30124"
+msgid "Inputstream Settings"
+msgstr "Настройки Inputstream"
+
+#. label: Timeshift - timeshiftCustom
+msgctxt "#30125"
+msgid "Always enable timeshift stream mode if missing"
+msgstr "Всегда включать timeshift если он отсутствует"
+
+#. label: Timeshift - timeshiftEnabledAll
+msgctxt "#30126"
+msgid "Enable timeshift for all streams"
+msgstr "Включить timeshift для всех трансляций"
+
+#. label: Timeshift - timeshiftEnabledUdp
+msgctxt "#30127"
+msgid "Enable timeshift for UDP based streams"
+msgstr "Включить timeshift для UDP трансляций"
+
+#. label-option: Catchup - catchupCorrection
+msgctxt "#30128"
+msgid "Catchup correction"
+msgstr "Смещение архива"
+
+# empty strings from id 30128 to 30449
+#. label: TV
+msgctxt "#30450"
+msgid "TV"
+msgstr "ТВ"
+
+#. label: Radio
+msgctxt "#30451"
+msgid "Radio"
+msgstr "Радио"
+
+# empty strings from id 30452 to 30499
+#. notification: Inputstreams
+msgctxt "#30500"
+msgid "Inputstream error"
+msgstr "Ошибка Inputstream"
+
+#. notification: Inputstreams
+msgctxt "#30501"
+msgid "The %s addon is not installed."
+msgstr "Дополнение %s не установлено."
+
+#. notification: Inputstreams
+msgctxt "#30502"
+msgid "The %s addon is not enabled."
+msgstr "Дополнение %s не включено."
+
+# empty strings from id 30503 to 30599
+#. ############
+#. help info #
+#. ############
+#. help info - General
+#. help-category: General
+msgctxt "#30600"
+msgid "General settings required for the addon to function."
+msgstr "Основные настройки требуются для работы дополнения."
+
+#. help: General - m3uPathType
+msgctxt "#30601"
+msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
+msgstr "Выберите где находится M3U ресурс. Варианты: [B]Локальный путь[/B] - путь к M3U файлу на устройстве или в локальной сети; [B]Удалённый путь[/B] - ссылка, указывающая на M3U файл."
+
+#. help: General - m3uPath
+msgctxt "#30602"
+msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
+msgstr "Если выбрано расположение [B]Локальный путь[/B], то здесь нужно указать правильный путь к файлу для работы дополнения."
+
+#. help: General - m3uUrl
+msgctxt "#30603"
+msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
+msgstr "Если выбрано расположение [B]Удалённый путь[/B],то здесь нужно указать правильную ссылку для работы дополнения."
+
+#. help: General - m3uCache
+msgctxt "#30604"
+msgid "If location is [B]Remote path[/B] select whether or not the the M3U file should be cached locally."
+msgstr "Если выбран [B]Удалённый путь[/B], выберите, следует ли кэшировать файл M3U локально."
+
+#. help: General - startNum
+msgctxt "#30605"
+msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
+msgstr "Номер, от которого начинается отсчёт каналов. Используется, только когда включена опция [B]Использовать номера каналов с сервера[/B] в настройках PVR и не найден номер канала в M3U файле."
+
+#. help: General - numberByOrder
+msgctxt "#30606"
+msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
+msgstr "Игнорировать теги 'tvg-chno' и нумеровать каналы только по порядку, начиная с \"Номер начального канала\"."
+
+#. help: General - m3uRefreshMode
+msgctxt "#30607"
+msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
+msgstr "Выберите режим обновления для M3U/XMLTV файлов. При этом кеширование будет отключено. Варианты: [B]Выкл.[/B] - не обновлять файлы; [B]Периодическое обновление[/B] - обновлять файлы с заданным минутным интервалом; [B]Раз в день[/B] - обновлять файлы раз в день."
+
+#. help: General - m3uRefreshIntervalMins
+msgctxt "#30608"
+msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
+msgstr "Если выбран режим обновления [B]Периодическое обновление[/B] обновлять файлы каждый раз, когда проходит это количество минут. Максимум 120 минут."
+
+#. help: General - m3uRefreshHour
+msgctxt "#30609"
+msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
+msgstr "Если выбран режим обновления [B]Раз в день[/B], обновлять файлы каждый раз, когда наступает этот час дня."
+
+#. help: General - tvChannelGroupsOnly
+msgctxt "#30610"
+msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
+msgstr "Из M3U файла будут загружены только ТВ каналы которые принадлежат к группе (т.е имеют атрибут[B]group-title[/B])."
+
+#. help: Channels - tvGroupMode
+msgctxt "#30611"
+msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
+msgstr "Выберите один из режимов: [B]Все группы[/B] - загружать все ТВ группы из M3U файла; [B]Некоторые группы[/B] - загружать только группы, указанные в следующих опциях; [B]Пользовательские группы[/B] - загрузить набор групп из M3U файла, имена которых заданы в XML файле."
+
+#. help: Channels - oneTvGroup
+#. help: Channels - twoTvGroup
+#. help: Channels - threeTvGroup
+#. help: Channels - fourTvGroup
+#. help: Channels - fiveTvGroup
+msgctxt "#30612"
+msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
+msgstr "Если в предыдущей опции выбрано \"Некоторые группы\", вам нужно выбрать ТВ группы, которые будут загружены из M3U файла. Обратите внимание, что это имя группы, заданное в атрибуте group-title (например, \" UK (TV)\"). Этот параметр чувствителен к регистру."
+
+#. help: Channels - radioGroupMode
+msgctxt "#30613"
+msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
+msgstr "Выберите один из режимов: [B]Все группы[/B] - загружать все радио группы из M3U файла; [B]Некоторые группы[/B] - загружать только группы, указанные в следующих опциях; [B]Пользовательские группы[/B] - загрузить набор групп из M3U файла, имена которых заданы в XML файле."
+
+#. help: Channels - oneRadioGroup
+#. help: Channels - twoRadioGroup
+#. help: Channels - threeRadioGroup
+#. help: Channels - fourRadioGroup
+#. help: Channels - fiveRadioGroup
+msgctxt "#30614"
+msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
+msgstr "Если в предыдущей опции выбрано \"Некоторые группы\", вам нужно выбрать радио группы, которые будут загружены из M3U файла. Обратите внимание, что это имя группы, заданное в атрибуте group-title (например, \" UK (Radio)\"). Этот параметр чувствителен к регистру."
+
+#. help: Channels - customTvGroupsFile
+msgctxt "#30615"
+msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
+msgstr "Файл используется для загрузки пользовательских ТВ групп. По умолчанию это файл `customTVGroups-example.xml`."
+
+#. help: Channels - customRadioGroupsFile
+msgctxt "#30616"
+msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
+msgstr "Файл используется для загрузки пользовательских радио групп. По умолчанию это файл `customRadioGroups-example.xml`."
+
+#. help: Channels - numTvGroups
+msgctxt "#30617"
+msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
+msgstr "Число ТВ групп для загрузки, если выбран режим `Некоторые группы`. Можно выбрать до 5. Если требуется больше 5, нужно выбрать режим \"Пользовательские группы\"."
+
+#. help: Channels - numRadioGroups
+msgctxt "#30618"
+msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
+msgstr "Число радио групп для загрузки, если выбран режим `Некоторые группы`. Можно выбрать до 5. Если требуется больше 5, нужно выбрать режим \"Пользовательские группы\"."
+
+#. help: General - radioChannelGroupsOnly
+msgctxt "#30619"
+msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
+msgstr "Из M3U файла будут загружены только радио каналы которые принадлежат к группе (т.е имеют атрибут[B]group-title[/B])."
+
+#. help info - EPG Settings
+#. help-category: EPG Settings
+msgctxt "#30620"
+msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
+msgstr "Настройки относящиеся к EPG. Обратите внимание, что Kodi будет загружать данные EPG, только когда это необходимо. Дополнение будут принудительно загружать данные EPG независимо от того, запрашивает ли их Kodi, если включена функция архива или требуются XMLTV логотипы."
+
+#. help: EPG Settings - epgPathType
+msgctxt "#30621"
+msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
+msgstr "Выберите где находится XMLTV ресурс. Варианты: [B]Локальный путь[/B] - путь к XMLTV файлу на устройстве или в локальной сети; [B]Удалённый путь[/B] - ссылка, указывающая на XMLTV файл."
+
+#. help: EPG Settings - epgPath
+msgctxt "#30622"
+msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
+msgstr "Если выбрано расположение [B]Локальный путь[/B], то здесь нужно указать правильный путь к файлу."
+
+#. help: EPG Settings - epgUrl
+msgctxt "#30623"
+msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
+msgstr "Если выбрано расположение [B]Удалённый путь[/B], то здесь нужно указать правильную ссылку."
+
+#. help: EPG Settings - epgCache
+msgctxt "#30624"
+msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
+msgstr "Если выбрано расположение [B]Удалённый путь[/B], выберите следует ли кэшировать XMLTV файл локально или нет."
+
+#. help: EPG Settings - epgTimeShift
+msgctxt "#30625"
+msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
+msgstr "Скорректируете время телепрограммы, от -12 до +14 часов."
+
+#. help: EPG Settings - epgTSOverside
+msgctxt "#30626"
+msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr "Следует ли переопределять сдвиг времени для всех каналов с помощью `Сдвиг времени EPG`Если выключено будет использоваться `Сдвиг времени EPG`плюс индивидуальный сдвиг времени для каждого канала (если доступно)."
+
+# empty strings from id 30627 to 30639
+#. help info - Channel Logos
+#. help-category: Channel Logos
+msgctxt "#30640"
+msgid "Settings related to Channel Logos."
+msgstr "Настройки логотипов каналов."
+
+#. help: Channel Logos - logoPathType
+msgctxt "#30641"
+msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
+msgstr "Выберите где искать логотипы каналов. Варианты: [B]Локальный путь[/B] - путь к папке на устройстве или в локальной сети; [B]Удалённый путь[/B] - ссылка, указывающая на логотипы."
+
+#. help: Channel Logos - logo Path
+msgctxt "#30642"
+msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
+msgstr "Если выбрано расположение [B]Локальный путь[/B], здесь нужно указать правильный путь к папке."
+
+#. help: Channel Logos - logoBaseUrl
+msgctxt "#30643"
+msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
+msgstr "Если выбрано расположение [B]Удалённый путь[/B], то здесь нужно указать правильную ссылку."
+
+#. help: Channel Logos - logoFromEpg
+msgctxt "#30644"
+msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
+msgstr "Предпочтение относительно того, как обрабатывать логотипы каналов. Варианты: [B]Игнорировать[/B] - не использовать логотипы из XMLTV файла; [B]Предпочтительно M3U[/B] - использовать логотипы из M3U, если доступны, иначе использовать логотипы XMLTV; [B]Предпочтительно XMLTV[/B] - Использовать логотипы из XMLTV файла, если доступны, иначе использовать логотипы M3U."
+
+#. help: Channel Logos - useLogosLocalPathOnly
+msgctxt "#30645"
+msgid "If a local path is selected for logos ignore any logos from the M3U file."
+msgstr "Если выбран локальный путь для логотипов, то игнорировать любые логотипы из M3U файла."
+
+# empty strings from id 30645 to 30659
+#. help info - Genres
+#. help-category: Genres
+msgctxt "#30660"
+msgid "Settings related to genres."
+msgstr "Настройки жанров."
+
+#. help: Genres - useEpgGenreText
+msgctxt "#30661"
+msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
+msgstr "Если включено, то файл жанров будет использоваться для получения типа жанра и подтипа. Использовать для жанра текст из EPG (т.е. текст 'category') вместо текста по-умолчанию."
+
+#. help: Genres - genresPathType
+msgctxt "#30662"
+msgid "Select where to find the genres XML resource. The options are: [B]Local path[/B] - A path to a genres XML file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the genres XML file."
+msgstr "Выберите где находится XML файл жанров. Варианты: [B]Локальный путь[/B] - путь к XML файлу жанров на устройстве или в локальной сети; [B]Удалённый путь[/B] - ссылка, указывающая на XML файл жанров."
+
+#. help: Genres - genresPath
+msgctxt "#30663"
+msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
+msgstr "Если выбрано расположение [B]Локальный путь[/B], то здесь нужно указать правильный путь к файлу."
+
+#. help: Genres - genresUrl
+msgctxt "#30664"
+msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
+msgstr "Если выбрано расположение [B]Удалённый путь[/B], то здесь нужно указать правильную ссылку."
+
+# empty strings from id 30665 to 30679
+#. help info - Advanced
+#. help-category: Advanced
+msgctxt "#30680"
+msgid "Advanced settings including multicast relays, streaming properties etc."
+msgstr "Расширенные настройки, включая HTTP прокси, свойства трансляции и т.д."
+
+#. help: Advanced - transformMulticastStreamUrls
+msgctxt "#30681"
+msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr "Multicast (UDP/RTP) трансляции не очень хорошо работают в сетях Wifi. HTTP прокси могут конвертировать трансляции из UDP/RTP в HTTP. Включение этой опции приведет к преобразованию ссылок на трансляции из M3U файла в HTTP адреса, чтобы к ним можно было получить доступ через ретранслятор udpxy в локальной сети. Например UDP адрес трансляции 'udp://@239.239.3.38:5239' будет преобразован в 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+
+#. help: Advanced - udpxyHost
+msgctxt "#30682"
+msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
+msgstr "Имя хоста или IP адрес прокси сервера (udpxy) в локальной сети."
+
+#. help: Advanced - udpxyPort
+msgctxt "#30683"
+msgid "The port of the multicast relay (udpxy) on the local network."
+msgstr "Порт прокси сервера (udpxy) в локальной сети."
+
+#. help: Advanced - useInputstreamAdaptiveforHls
+msgctxt "#30684"
+msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
+msgstr "Использовать inputstream.adaptive вместо libavformat из ffmpeg для m3u8 (HLS) потоков."
+
+#. help: Advanced - useFFmpegReconnect
+msgctxt "#30685"
+msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
+msgstr "Обратите внимание, это можно применить только к http/https потокам которые обрабатываются libavformat (напр. M3u8/HLS). Использование libavformat может быть задано в M3U файле, если установить свойство `inputstream` как `inputstream.ffmpeg` для внутренней реализации kodi или `inputstream.ffmpegdirect` для версии из дополнения. Т.е добавление строки `#KODIPROP:inputstream=inputstream.ffmpeg`. Если эта опция отключена, ещё можно включить это для каждой трансляции/канала, путем добавления свойства kodi, т.е. `#KODIPROP:http-reconnect=true`."
+
+#. help: Advanced - defaultUserAgent
+msgctxt "#30686"
+msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
+msgstr "Использовать этот User-Agent, если он не указан как свойство или как часть URL-адреса потока канала."
+
+#. help: Advanced - defaultInputstream
+msgctxt "#30687"
+msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
+msgstr "Использовать этот inputsream по-умолчанию если он не указан как свойство (KODIPROP) канала. Используйте с осторожностью, так как это отключит любые проверки потоков по-умолчанию. Обратите внимание, что для `inputstream.ffmpegdirect`если `mimetype` и `inputstream.ffmpegdirect.manifest_type`не заданы, то проверка потока будет проведена если требуется."
+
+#. help: Advanced - defaultMimeType
+msgctxt "#30688"
+msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
+msgstr "Использовать этот MIME тип по-умолчанию, если он не указан как свойство (KODIPROP) канала. Используете с осторожностью, так как это отключит любые проверки потоков по-умолчанию."
+
+# empty strings from id 30689 to 30699
+#. help info - Catchup
+#. help-category: Catchup
+msgctxt "#30700"
+msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
+msgstr "Настройки для просмотра программ передач из архива. Позволяет выбрать «Воспроизвести программу» при просмотре информации о записи в EPG."
+
+#. help: Catchup - enableCatchup
+msgctxt "#30701"
+msgid "Should be enabled if there are channels supporting catchup in your M3U list."
+msgstr "Должен быть включен, если в вашем списке M3U есть каналы, поддерживающие архив."
+
+#. help: Catchup - catchupQueryFormat
+msgctxt "#30702"
+msgid "A query format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of 'default' or 'append' and a 'catchup-source' tag is provided in the M3U entry this setting will be ignored."
+msgstr "Строка формата запроса (зависит от провайдера), позволяющая вставить информацию о временной метке к URL-адресу, чтобы указать, откуда следует запустить архив. Например `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, который позволяет вставить год, месяц, день, час, минуту и секунду, чтобы получить: `&cutv = 2019-11-26T22:00:32`. Если для записи M3U используется режим архива 'по умолчанию' или 'append', а в записи M3U указан тег «catchup-source», то этот параметр будет проигнорирован."
+
+#. help: Catchup - catchupDays
+msgctxt "#30703"
+msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
+msgstr "Число дней, которое доступно для просмотра архива. Может быть перезаписано в записи M3U при помощи тега 'catchup-days'."
+
+#. help: Catchup - allChannelsCatchupMode
+msgctxt "#30704"
+msgid "If enabled it is assumed that channels support catchup using the selected catchup mode while also obeying the override mode. If required the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [B]Disabled[/B] - Do not assume all channel support catchup; [B]Default[/B] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [B]Append[/B] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [B]Shift (SIPTV)[/B] - Append the standard SIPTV catchup string to the channel URL; [B]Flussonic[/B] - Build a flussonic URL from the channel URL; [B]Xtream codes[/B] - Build an Xtream codes URL from the channel URL."
+msgstr "Если включено, предполагается, что каналы поддерживают архив с использованием выбранного режима. Если требуется, 'Строка формата запроса' и 'Граница архива' в днях будут взяты из настроек дополнения. Если эта опция отключена то, запись M3U должна иметь тег 'catchup=' для включения архива. Варианты как построить ссылку: [B]Выкл.[/B] - предполагается, что не все каналы поддерживают архив. [B]По-умолчанию[/B] - использовать catchup источник как полную ссылку на архив. Если нет, то используете режим Append. [B]Append[/B] - вставить catchup источник в ссылку на канал, если нет источника с использованием 'Строки формата запроса'; [B]Shift (SIPTV)[/B] - вставить стандартную SIPTV строку в ссылку на канал; [B]Flussonic[/B] - сформировать ссылку flussonic для ссылки канала. [B]Xtream коды[/B] - сформировать ссылку с Xtream кодами из ссылки канала."
+
+#. help: Catchup - catchupPlayEpgAsLive
+msgctxt "#30705"
+msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
+msgstr "Когда отключено, любая архивная программа будет воспроизведена как видео (имеющие время начала и конца). Если включено, это будет вести себя как трансляция с сдвигом во времени, а также позволяет пропускать назад и вперед программы. Обратите внимание, что единственный эффект, который эта опция оказывает на трансляции, не поддерживающие сдвиг во времени, - это применять ли буфер до/после."
+
+#. help: Catchup - catchupWatchEpgBeginBuffer
+msgctxt "#30706"
+msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
+msgstr "Объем буфера, предоставляемый перед началом воспроизведения записи EPG, которая будет просматриваться как видео."
+
+#. help: Catchup - catchupWatchEpgEndBuffer
+msgctxt "#30707"
+msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
+msgstr "Объем буфера, предоставляемый после конца воспроизведения записи EPG, которая будет просматриваться как видео."
+
+#. help: Catchup - catchupOnlyOnFinishedProgrammes
+msgctxt "#30708"
+msgid "When selected from the EPG the current live programme cannot be watched as catchup until finished."
+msgstr "Когда выбранная из EPG программа не может быть просмотрена в архиве, пока она не завершена."
+
+#. help: Catchup - catchupOverrideMode
+msgctxt "#30709"
+msgid "Set the scope for overriding the catchup mode. Options are: [B]without catchup mode[/B] - Only include channels with no catchup mode set (except legacy SIP [I]timeshift[/I] catchup mode); [B]with catchup mode[/B] - Only include channels with catchup mode set (ignore those without a catchup mode); [B]with and without catchup mode (all channels)[/B] - Include all channels ignoring any catchup mode from the M3U."
+msgstr "Выберите область действия режима архива. Варианты: [B]без режима архива[/B] - только включать каналы, без установленного режима архива (за исключением старого SIP [I]timeshift[/I] режима); [B]с режимом архива[/B] - только включать каналы с установленным режимом архива (игнорировать те, что не имеют режима); [B]с и без режима архива[/B] - включить все каналы, игнорируя режим архива, установленный в M3U."
+
+#. help: Catchup - catchupCorrection
+msgctxt "#30710"
+msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
+msgstr "Скорректируете время,используемое для создания URL-адреса архива, от -12 до +14 часов. Полезно для архивных трансляций, с неверным часовым поясом. Обратите внимание, что это значение, может быть перезаписано, значениями в M3U файле."
+
+# empty strings from id 30710 to 307019
+#. help info - Timeshift
+#. help-category: Timeshift
+msgctxt "#30720"
+msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
+msgstr "Настройка функции timeshift для паузы/перемотки трансляций."
+
+#. help: Timeshift - timeshiftEnabled
+msgctxt "#30721"
+msgid "Enable the timeshift feature."
+msgstr "Включить функцию timeshift (сдвиг во времени)."
+
+#. help: Timeshift - timeshiftEnabledHttp
+msgctxt "#30722"
+msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr "Включить функцию timeshift для HTTP трансляций. Применяется только к потокам, которые не выбирают конкретное дополнение inputstream для воспроизведения. Дополнение inputstream.ffmpegdirect будет использовано для сдвига во времени."
+
+#. help: Timeshift - timeshiftFFmpegdirectSettings
+msgctxt "#30723"
+msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
+msgstr "Открыть меню настроек inputstream.ffmpegdirect для изменения timeshift и других настроек."
+
+#. help: Timeshift - timeshiftEnabledCustom
+msgctxt "#30724"
+msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
+msgstr "Если не задано свойство stream_mode вместе со свойством inputstream.ffmpegdirect, то всегда добавлять это для любых поддерживаемых типов потоков. Обратите внимание, что эта настройка не влияет на VOD потоки, которые не в прямом эфире."
+
+#. help: Timeshift - timeshiftEnabledAll
+msgctxt "#30725"
+msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr "Включить функцию timeshift для всех потоков. Будет применяться только для тех потоков, которые не выбирают конкретное inputstream дополнение для воспроизведения. Дополнение inputstream.ffmpegdirect будет использоваться для сдвига во времени."
+
+#. help: Timeshift - timeshiftEnabledUdp
+msgctxt "#30726"
+msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr "Включить функцию timeshift для UDP трансляций. Применяется только к потокам, которые не выбирают конкретное дополнение inputstream для воспроизведения. Дополнение inputstream.ffmpegdirect будет использовано для сдвига во времени."
+
+#~ msgctxt "#30001"
+#~ msgid "Local path (include local network)"
+#~ msgstr "Локальный путь (включая локальную сеть)"
