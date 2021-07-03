@@ -1,3 +1,6 @@
+v7.6.6
+- Language update from Weblate
+
 v7.6.5
 - Fixed: Allow embedded commas in channel name in M3U
 
