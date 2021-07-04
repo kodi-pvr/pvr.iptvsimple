@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Lithuanian (Lithuania) (http://www.transifex.com/projects/p/kodi-main/language/lt_LT/)\n"
-"Language: lt_LT\n"
+"PO-Revision-Date: 2021-07-04 21:11+0000\n"
+"Last-Translator: Raimondas Dužinskas <raimondas.duzinskas@gmail.com>\n"
+"Language-Team: Lithuanian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/lt_lt/>\n"
+"Language: lt_lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #. settings labels
 #. label: General - m3uPathType
@@ -30,7 +31,7 @@ msgstr "Vieta"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "Lokalus kelias (įskaitant vietinį tinklą)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -79,12 +80,12 @@ msgstr "Pradinis kanalų numeris"
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr "Numeruoti tik kanalų tvarką M3U faile"
+msgstr "Numeruoti tik pagal kanalų tvarką M3U faile"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "Automatinio atnaujinimo būdas"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
@@ -99,7 +100,7 @@ msgstr "Atnaujinimo valanda (24h)"
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr ""
+msgstr "Atnaujinti"
 
 #. label-category: epgsettings
 msgctxt "#30019"
@@ -119,7 +120,7 @@ msgstr "XMLTV kelias"
 #. label: EPG Settings - epgUrl
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV adresas"
+msgstr "XMLTV URL"
 
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
@@ -149,7 +150,7 @@ msgstr "{0:.1f} valandos"
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "Įkelti tik kanalusesančius grupėse"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
@@ -175,40 +176,40 @@ msgstr "Kanalų logotipų bazinis URL"
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "Radijo grupės"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "TV grupės režimas"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "Radijo grupės režimas"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30036"
 msgid "All groups"
-msgstr ""
+msgstr "Visos grupės"
 
 #. label-option: Channels - tvGroupMode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "Kai kurios grupės"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "Savos grupės"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
 msgid "Number of TV groups"
-msgstr ""
+msgstr "TV grupių kiekis"
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
@@ -238,27 +239,27 @@ msgstr "Pirmenybė XMLTV"
 #. label: General - oneTvGroup
 msgctxt "#30045"
 msgid "TV group 1"
-msgstr ""
+msgstr "TV grupė 1"
 
 #. label: General - twoTvGroup
 msgctxt "#30046"
 msgid "TV group 2"
-msgstr ""
+msgstr "TV grupė 2"
 
 #. label: General - threeTvGroup
 msgctxt "#30047"
 msgid "TV group 3"
-msgstr ""
+msgstr "TV grupė 3"
 
 #. label: General - fourTvGroup
 msgctxt "#30048"
 msgid "TV group 4"
-msgstr ""
+msgstr "TV grupė 4"
 
 #. label: General - fiveTvGroup
 msgctxt "#30049"
 msgid "TV group 5"
-msgstr ""
+msgstr "TV grupė 5"
 
 #. label-category: genres
 #. label-group: Genres - Genres
