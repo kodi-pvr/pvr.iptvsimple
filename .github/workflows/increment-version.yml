@@ -37,7 +37,7 @@ jobs:
 
       - name: Increment add-on version
         run: |
-          python3 ../scripts/binary/increment_version.py $HOME/files.json
+          python3 ../scripts/binary/increment_version.py $HOME/files.json -c -n
         working-directory: ${{ github.event.repository.name }}
 
       - name: Create PR for incrementing add-on versions
