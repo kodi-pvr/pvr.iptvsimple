@@ -1,0 +1,100 @@
+name: Changelog and Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version_type:
+        description: 'Create a ''minor'' or ''micro'' release?'
+        required: true
+        default: 'minor'
+      changelog_text:
+        description: 'Input the changes you''d like to add to the changelogs. Your text should be encapsulated in "''s with line feeds represented by literal \n''s. ie. "This is the first change\nThis is the second change"'
+        required: true
+        default: ''
+      update_news:
+        description: 'Update news in addon.xml.in? [true|false]'
+        required: true
+        default: 'true'
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    name: Changelog and Release
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          path: ${{ github.event.repository.name }}
+
+      - name: Checkout Scripts
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          repository: kodi-pvr/pvr-scripts
+          path: scripts
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install libxml2-utils xmlstarlet
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Increment version and update changelogs
+        run: |
+          if [[ ${{ github.event.inputs.update_news }} == true ]] ;
+          then
+            python3 ../scripts/changelog_and_release.py ${{ github.event.inputs.version_type }} ${{ github.event.inputs.changelog_text }} --update-news
+          elif [[ ${{ github.event.inputs.update_news }} == false ]] ;
+          then
+            python3 ../scripts/changelog_and_release.py ${{ github.event.inputs.version_type }} ${{ github.event.inputs.changelog_text }}
+          else
+            exit 1
+          fi
+        working-directory: ${{ github.event.repository.name }}
+
+      - name: Get required variables
+        id: required-variables
+        run: |
+          changes=$(cat "$(find . -name changelog.txt)" | awk -v RS= 'NR==1')
+          changes="${changes//'%'/'%25'}"
+          changes="${changes//$'\n'/'%0A'}"
+          changes="${changes//$'\r'/'%0D'}"
+          changes="${changes//$'\\n'/'%0A'}"
+          changes="${changes//$'\\r'/'%0D'}"
+          echo ::set-output name=changes::$changes
+          version=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/@version)')
+          echo ::set-output name=version::$version
+          branch=$(echo ${GITHUB_REF#refs/heads/})
+          echo ::set-output name=branch::$branch
+        working-directory: ${{ github.event.repository.name }}
+
+      - name: Commit changes
+        run: |
+          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -m "v${{ steps.required-variables.outputs.version }}" -a
+        working-directory: ${{ github.event.repository.name }}
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          branch: ${{ github.ref }}
+          directory: ${{ github.event.repository.name }}
+
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.required-variables.outputs.version }}-${{ steps.required-variables.outputs.branch }}
+          release_name: ${{ steps.required-variables.outputs.version }}-${{ steps.required-variables.outputs.branch }}
+          body: ${{ steps.required-variables.outputs.changes }}
+          draft: false
+          prerelease: false
