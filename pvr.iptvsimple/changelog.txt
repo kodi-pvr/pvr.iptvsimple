@@ -1,5 +1,9 @@
+v8.0.0
+- Fixed: Change reported backend name
+- Added: Support pvr providers in Kodi 20
+
 v7.6.7
-Translations updates from Weblate
+- Translations updates from Weblate
 	- id_id, lt_lt
 
 v7.6.6
