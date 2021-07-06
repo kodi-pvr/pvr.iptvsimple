@@ -40,11 +40,22 @@ jobs:
           python3 ../scripts/binary/increment_version.py $HOME/files.json -c -n
         working-directory: ${{ github.event.repository.name }}
 
+      - name: Install dependencies
+        run: |
+          sudo apt-get install libxml2-utils xmlstarlet
+
+      - name: Get required variables
+        id: required-variables
+        run: |
+          version=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/@version)')
+          echo ::set-output name=version::$version
+        working-directory: ${{ github.event.repository.name }}
+
       - name: Create PR for incrementing add-on versions
         uses: peter-evans/create-pull-request@v3.10.0
         with:
-          commit-message: Add-on version incremented
-          title: Add-on version incremented
+          commit-message: Add-on version incremented to ${{ steps.required-variables.outputs.version }} from Weblate
+          title: Add-on version incremented to ${{ steps.required-variables.outputs.version }} from Weblate
           body: Add-on version incremented triggered by ${{ github.sha }}
           branch: inc-ver
           delete-branch: true
