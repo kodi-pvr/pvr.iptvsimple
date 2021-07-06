@@ -11,6 +11,7 @@
 #include "iptvsimple/CatchupController.h"
 #include "iptvsimple/Channels.h"
 #include "iptvsimple/ChannelGroups.h"
+#include "iptvsimple/Providers.h"
 #include "iptvsimple/Epg.h"
 #include "iptvsimple/PlaylistLoader.h"
 #include "iptvsimple/data/Channel.h"
@@ -47,11 +48,8 @@ public:
   PVR_ERROR OnPowerSavingActivated() override { return PVR_ERROR_NO_ERROR; }
   PVR_ERROR OnPowerSavingDeactivated() override { return PVR_ERROR_NO_ERROR; }
 
-  PVR_ERROR GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results) override;
-  PVR_ERROR GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& tag, std::vector<kodi::addon::PVRStreamProperty>& properties) override;
-  PVR_ERROR IsEPGTagPlayable(const kodi::addon::PVREPGTag& tag, bool& bIsPlayable) override;
-  PVR_ERROR SetEPGMaxPastDays(int epgMaxPastDays) override;
-  PVR_ERROR SetEPGMaxFutureDays(int epgMaxFutureDays) override;
+  PVR_ERROR GetProvidersAmount(int& amount) override;
+  PVR_ERROR GetProviders(kodi::addon::PVRProvidersResultSet& results) override;
 
   PVR_ERROR GetChannelsAmount(int& amount) override;
   PVR_ERROR GetChannels(bool radio, kodi::addon::PVRChannelsResultSet& results) override;
@@ -60,6 +58,12 @@ public:
   PVR_ERROR GetChannelGroupsAmount(int& amount) override;
   PVR_ERROR GetChannelGroups(bool radio, kodi::addon::PVRChannelGroupsResultSet& results) override;
   PVR_ERROR GetChannelGroupMembers(const kodi::addon::PVRChannelGroup& group, kodi::addon::PVRChannelGroupMembersResultSet& results) override;
+
+  PVR_ERROR GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results) override;
+  PVR_ERROR GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& tag, std::vector<kodi::addon::PVRStreamProperty>& properties) override;
+  PVR_ERROR IsEPGTagPlayable(const kodi::addon::PVREPGTag& tag, bool& bIsPlayable) override;
+  PVR_ERROR SetEPGMaxPastDays(int epgMaxPastDays) override;
+  PVR_ERROR SetEPGMaxFutureDays(int epgMaxFutureDays) override;
 
   PVR_ERROR GetSignalStatus(int channelUid, kodi::addon::PVRSignalStatus& signalStatus) override;
   //@}
@@ -80,9 +84,10 @@ private:
   static const int PROCESS_LOOP_WAIT_SECS = 2;
 
   iptvsimple::data::Channel m_currentChannel;
+  iptvsimple::Providers m_providers;
   iptvsimple::Channels m_channels;
   iptvsimple::ChannelGroups m_channelGroups{m_channels};
-  iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups};
+  iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups, m_providers};
   iptvsimple::Epg m_epg{this, m_channels};
   iptvsimple::CatchupController m_catchupController{m_epg, &m_mutex};
 

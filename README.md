@@ -30,8 +30,9 @@ The contents of this README.md file are as follows:
    * [Catchup](#catchup)
    * [Advanced](#advanced)
 4. [Customising Config Files](#customising-config-files)
-      * [Using a mapping file for Genres](#using-a-mapping-file-for-genres)
-      * [Custom Channel Groups (Channels)](#custom-channel-groups-channels)
+    * [Using a mapping file for Genres](#using-a-mapping-file-for-genres)
+    * [Custom Channel Groups (Channels)](#custom-channel-groups-channels)
+    * [Provider Name Mappings (Channels)](#channel-provider-name-mappings-channels)
 5. [Appendix](#appendix)
    * [Catchup format specifiers](#catchup-format-specifiers)
    * [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements)
@@ -106,6 +107,13 @@ General settings required for the addon to function.
     - `Once per day` - Refresh the files once per day.
 * **Refresh interval**: If auto refresh mode is `Repeated refresh` refresh the files every time this number of minutes passes. Max 120 minutes.
 * **Refresh hour (24h)**: If auto refresh mode is `Once per day` refresh the files every time this hour of the day is reached.
+* **Default provider name**: If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country code and language code fields.
+* **Enable provider mapping**: If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country code and language code.
+* **Provider name mapping file**: The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is `providerMappings.xml`.
+
+### Groups
+Settings on customising channel groups.
+
 * **Only load TV channels in groups**: Only TV channels that belong to groups (i.e. have a `group-title` attribute) will be loaded from the M3U file.
 * **TV group mode**: Choose from one of the following three modes:
     - `All groups` - Load all TV groups from the M3U file.
@@ -320,6 +328,17 @@ Note that both these files are provided as examples and are overwritten each tim
 
 The format is quite simple, containing a number of channel group/bouquet names.
 
+### Provider Name Mappings (Channels)
+
+Config files are located in the `userdata/addon_data/pvr.vuplus/providers` folder.
+
+The following file is currently available with the addon:
+    - `providerMappings.xml`
+
+Note that the provided file is a working example but it is overwritten each time the addon starts. Therefore you should make copies and use those for your custom config.
+
+The format is quite simple, containing a number of <providerMapping> elements. Each one of those elements can map to name, type, icon path, country codes and language codes.
+
 ## Appendix
 
 ### Catchup format specifiers
@@ -455,6 +474,11 @@ http://path-to-stream/live/channel-z.ts
   - `catchup-source`: Can contain the full catchup URL (complete with format specifiers) if in `default` mode. Or if the mode is `append` just the query string with format specifiers which will be appended to the channel URL. If omitted the `Query format string` from settings will be appended.
   - `catchup-days`: The number of days in the past catchup is available for.
   - `catchup-correction`: A correction to the time used for catchup stream URL generation. Useful for catchup streams which are geo mis-matched to the wrong time.
+  - `provider`: The name that idenitifes this provider and will be seen in the provider manager. Also that name that can be used for any provider mappings if required. No other provider are valid if this tag is omitted.
+  - `provider-type`: A type which must match one of addon, satellite, cable, aerial, iptv or unknown.
+  - `provider-logo`: A path to the location where the icon for this provider is available.
+  - `provider-countries`: The country for this provider. Should be passed using an ISO-3166 country code. eave empty or omit for unspecified.
+  - `provider-languages`: The languages for this provider. Should be passed using RFC-5646 language codes, comma separated (e.g. 'GB,IE,FR'). Leave empty or omit for unspecified.
 - `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
 - `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
 - `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
