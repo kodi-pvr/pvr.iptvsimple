@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-05-02 02:29+0000\n"
+"PO-Revision-Date: 2021-07-10 06:29+0000\n"
 "Last-Translator: Meano Lee <meanocat@gmail.com>\n"
 "Language-Team: Chinese (China) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/zh_cn/>\n"
 "Language: zh_cn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.6\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #. settings labels
 #. label: General - m3uPathType
@@ -600,37 +600,37 @@ msgstr "如果位置为 [B]远程路径[/B]，选择 M3U 文件是否需要缓�
 #. help: General - startNum
 msgctxt "#30605"
 msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
-msgstr ""
+msgstr "频道的起始序号。仅在 PVR 设置 [B]使用后端频道号[/B] 使能且 M3U 文件未提供频道号时可用。"
 
 #. help: General - numberByOrder
 msgctxt "#30606"
 msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
-msgstr ""
+msgstr "忽略任何 'tvg-chno' 标签，仅按 M3U 文件中“初始频道序号”为起始依序编号。"
 
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
 msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
-msgstr ""
+msgstr "选择 M3U/XMLTV 文件的自动刷新模式。注意若启用了自动刷新则缓存将被禁用。选项包括：[B]禁用[/B] - 不对文件进行自动刷新；[B]重复刷新[/B] - 以分钟为间隔刷新文件；[B]每天一次[/B] - 每天刷新一次文件。"
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
 msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
-msgstr ""
+msgstr "若 M3U 自动刷新模式为 [B]重复刷新[/B] 每经过此分钟数时将刷新文件。最多 120 分钟。"
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
 msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
-msgstr ""
+msgstr "若自动刷新模式为 [B]每天一次[/B] 每天到此时将刷新文件。"
 
 #. help: General - tvChannelGroupsOnly
 msgctxt "#30610"
 msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "M3U文件中只有属于组（即拥有 [B]group-title[/B] 属性）的电视频道才会被载入。"
 
 #. help: Channels - tvGroupMode
 msgctxt "#30611"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "从以下三种模式中选择一种：[B]所有分组[/B] 载入M3U文件中所有的电视分组；[B]部分分组[/B] 仅加载下一个选项中的指定的分组；[B]自定义分组[/B] 从包含有组名称的 XML 文件中加载一组分组。"
 
 #. help: Channels - oneTvGroup
 #. help: Channels - twoTvGroup
@@ -639,7 +639,7 @@ msgstr ""
 #. help: Channels - fiveTvGroup
 msgctxt "#30612"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
-msgstr ""
+msgstr "若上一个选项设置为“部分分组”，则您需要指定要从 M3U 文件中加载的电视分组。请注意，这里指的是 group-title 所显示的分组名称（即 'UK (TV)'）。此设置区分大小写。"
 
 #. help: Channels - radioGroupMode
 msgctxt "#30613"
