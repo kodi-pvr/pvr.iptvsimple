@@ -1,3 +1,7 @@
+v7.6.8
+- Translations updates from Weblate
+	- zh_cn
+
 v7.6.7
 Translations updates from Weblate
 	- id_id, lt_lt
