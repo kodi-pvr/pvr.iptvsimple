@@ -5,17 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-06-28 08:29+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2021-07-14 18:24+0000\n"
+"Last-Translator: Marek Adamski <fevbew@wp.pl>\n"
 "Language-Team: Polish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/pl_pl/>\n"
 "Language: pl_pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.7\n"
+"X-Generator: Weblate 4.7.1\n"
 
 #. settings labels
 #. label: General - m3uPathType
@@ -31,7 +31,7 @@ msgstr "Lokalizacja"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "Ścieżka lokalna (uwzględnia sieć lokalną)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -49,12 +49,12 @@ msgstr "Nieaktywny"
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
 msgid "Repeated refresh"
-msgstr ""
+msgstr "Wielokrotne odświeżanie"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30005"
 msgid "Once per day"
-msgstr ""
+msgstr "Raz dziennie"
 
 #. label-category: general
 #. label-group: General - General
@@ -80,27 +80,27 @@ msgstr "Rozpocznij numer kanału"
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr ""
+msgstr "Tylko numer według kolejności kanałów w M3U"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "Tryb automatycznego odświeżania"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
 msgid "Refresh interval"
-msgstr ""
+msgstr "Częstotliwość odświeżania"
 
 #. label: General - m3uRefreshHour
 msgctxt "#30017"
 msgid "Refresh hour (24h)"
-msgstr ""
+msgstr "Godzina odświeżania (24h)"
 
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr ""
+msgstr "Odświeżanie"
 
 #. label-category: epgsettings
 msgctxt "#30019"
@@ -145,17 +145,17 @@ msgstr "Buforuj lokalnie dane XMLTV"
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
 msgid "{0:.1f} hours"
-msgstr ""
+msgstr "{0:.1f} godziny"
 
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "Wczytuj tylko kanały telewizyjne w grupach"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "Grupy telewizyjne"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
@@ -176,7 +176,7 @@ msgstr "Bazowy adres URL z logiem kanału"
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "Grupy radiowe"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
