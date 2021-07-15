@@ -4,7 +4,7 @@ on:
   push:
     branches: [ Matrix, Nexus ]
     paths:
-      - '**addon.xml'
+      - '**addon.xml.in'
       - '**resource.language.**strings.po'
 
 jobs:
