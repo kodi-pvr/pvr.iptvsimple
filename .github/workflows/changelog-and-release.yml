@@ -15,6 +15,10 @@ on:
         description: 'Update news in addon.xml.in? [true|false]'
         required: true
         default: 'true'
+      add_date:
+        description: 'Add date to version number in changelog and news. ie. "v1.0.1 (2021-7-17)" [true|false]'
+        required: true
+        default: 'false'
 
 jobs:
   default:
@@ -47,21 +51,26 @@ jobs:
 
       - name: Increment version and update changelogs
         run: |
+          arguments=
           if [[ ${{ github.event.inputs.update_news }} == true ]] ;
           then
-            python3 ../scripts/changelog_and_release.py ${{ github.event.inputs.version_type }} ${{ github.event.inputs.changelog_text }} --update-news
-          elif [[ ${{ github.event.inputs.update_news }} == false ]] ;
-          then
-            python3 ../scripts/changelog_and_release.py ${{ github.event.inputs.version_type }} ${{ github.event.inputs.changelog_text }}
-          else
-            exit 1
+            arguments=$(echo $arguments && echo --update-news)
           fi
+          if [[ ${{ github.event.inputs.add_date }} == true ]] ;
+          then
+            arguments=$(echo $arguments && echo --add-date)
+          fi
+          python3 ../scripts/changelog_and_release.py ${{ github.event.inputs.version_type }} ${{ github.event.inputs.changelog_text }} $arguments
         working-directory: ${{ github.event.repository.name }}
 
       - name: Get required variables
         id: required-variables
         run: |
           changes=$(cat "$(find . -name changelog.txt)" | awk -v RS= 'NR==1')
+          if [ -z "$changes" ] ;
+          then
+            changes=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/extension/news)' | awk -v RS= 'NR==1')
+          fi
           changes="${changes//'%'/'%25'}"
           changes="${changes//$'\n'/'%0A'}"
           changes="${changes//$'\r'/'%0D'}"
@@ -72,13 +81,19 @@ jobs:
           echo ::set-output name=version::$version
           branch=$(echo ${GITHUB_REF#refs/heads/})
           echo ::set-output name=branch::$branch
+          echo ::set-output name=today::$(date +'%Y-%m-%d')
         working-directory: ${{ github.event.repository.name }}
 
       - name: Commit changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "changelog and version v${{ steps.required-variables.outputs.version }}" -a
+          commit_message="changelog and version v${{ steps.required-variables.outputs.version }}"
+          if [[ ${{ github.event.inputs.add_date }} == true ]] ;
+          then
+            commit_message="$commit_message (${{ steps.required-variables.outputs.today }})"
+          fi
+          git commit -m "$commit_message" -a
         working-directory: ${{ github.event.repository.name }}
 
       - name: Push changes
@@ -86,6 +101,10 @@ jobs:
         with:
           branch: ${{ github.ref }}
           directory: ${{ github.event.repository.name }}
+
+      - name: Sleep for 60 seconds
+        run: sleep 60s
+        shell: bash
 
       - name: Create Release
         id: create-release
@@ -98,3 +117,5 @@ jobs:
           body: ${{ steps.required-variables.outputs.changes }}
           draft: false
           prerelease: false
+          commitish: ${{ steps.required-variables.outputs.branch }}
+
