@@ -1,0 +1,53 @@
+name: Make Release
+
+on: workflow_dispatch
+
+jobs:
+  default:
+    runs-on: ubuntu-latest
+    name: Make Release
+
+    steps:
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          path: ${{ github.event.repository.name }}
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get install libxml2-utils xmlstarlet
+
+      - name: Get required variables
+        id: required-variables
+        run: |
+          changes=$(cat "$(find . -name changelog.txt)" | awk -v RS= 'NR==1')
+          if [ -z "$changes" ] ;
+          then
+            changes=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/extension/news)' | awk -v RS= 'NR==1')
+          fi
+          changes="${changes//'%'/'%25'}"
+          changes="${changes//$'\n'/'%0A'}"
+          changes="${changes//$'\r'/'%0D'}"
+          changes="${changes//$'\\n'/'%0A'}"
+          changes="${changes//$'\\r'/'%0D'}"
+          echo ::set-output name=changes::$changes
+          version=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/@version)')
+          echo ::set-output name=version::$version
+          branch=$(echo ${GITHUB_REF#refs/heads/})
+          echo ::set-output name=branch::$branch
+        working-directory: ${{ github.event.repository.name }}
+
+      - name: Create Release
+        id: create-release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.required-variables.outputs.version }}-${{ steps.required-variables.outputs.branch }}
+          release_name: ${{ steps.required-variables.outputs.version }}-${{ steps.required-variables.outputs.branch }}
+          body: ${{ steps.required-variables.outputs.changes }}
+          draft: false
+          prerelease: false
+          commitish: ${{ steps.required-variables.outputs.branch }}
