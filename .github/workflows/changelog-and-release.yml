@@ -1,4 +1,14 @@
 name: Changelog and Release
+# Update the changelog and news(optionally), bump the version, and create a release
+#
+# The release is created on the given branch, release and tag name format will be <version>-<branch> and
+# the body of the release will be created from the changelog.txt or news element in the addon.xml.in
+#
+# options:
+# - version_type: 'minor' / 'micro' # whether to do a minor or micro version bump
+# - changelog_text: string to add to the changelog and news
+# - update_news: 'true' / 'false' # whether to update the news in the addon.xml.in
+# - add_date: 'true' / 'false' # Add date to version number in changelog and news. ie. v1.0.1 (2021-7-17)
 
 on:
   workflow_dispatch:
@@ -27,12 +37,14 @@ jobs:
 
     steps:
 
+      # Checkout the current repository into a directory (repositories name)
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           path: ${{ github.event.repository.name }}
 
+      # Checkout the required scripts from kodi-pvr/pvr-scripts into the 'scripts' directory
       - name: Checkout Scripts
         uses: actions/checkout@v2
         with:
@@ -40,15 +52,19 @@ jobs:
           repository: kodi-pvr/pvr-scripts
           path: scripts
 
+      # Install all dependencies required by the following steps
+      # - libxml2-utils, xmlstarlet: reading news and version from addon.xml.in
       - name: Install dependencies
         run: |
           sudo apt-get install libxml2-utils xmlstarlet
 
+      # Setup python version 3.9
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
+      # Run the python script to increment the version, changelog and news
       - name: Increment version and update changelogs
         run: |
           arguments=
@@ -63,6 +79,11 @@ jobs:
           python3 ../scripts/changelog_and_release.py ${{ github.event.inputs.version_type }} ${{ github.event.inputs.changelog_text }} $arguments
         working-directory: ${{ github.event.repository.name }}
 
+      # Create the variables required by the following steps
+      # - steps.required-variables.outputs.changes: latest entry in the changelog.txt (if exists), or addon.xml.in news element
+      # - steps.required-variables.outputs.version: version element from addon.xml.in
+      # - steps.required-variables.outputs.branch: branch of the triggering ref
+      # - steps.required-variables.outputs.today: today's date in format '%Y-%m-%d'
       - name: Get required variables
         id: required-variables
         run: |
@@ -84,6 +105,9 @@ jobs:
           echo ::set-output name=today::$(date +'%Y-%m-%d')
         working-directory: ${{ github.event.repository.name }}
 
+      # Create a commit of the incremented version and changelog, news changes
+      # Commit message (add_date=false): changelog and version v{steps.required-variables.outputs.version}
+      # Commit message (add_date=true): changelog and version v{steps.required-variables.outputs.version} ({steps.required-variables.outputs.today})
       - name: Commit changes
         run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
@@ -96,16 +120,21 @@ jobs:
           git commit -m "$commit_message" -a
         working-directory: ${{ github.event.repository.name }}
 
+      # Push the commit(s) created above to the triggering branch
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           branch: ${{ github.ref }}
           directory: ${{ github.event.repository.name }}
 
+      # Sleep for 60 seconds to allow for any delays in the push
       - name: Sleep for 60 seconds
         run: sleep 60s
         shell: bash
 
+      # Create a release at {steps.required-variables.outputs.branch}
+      # - tag and release name format: {steps.required-variables.outputs.version}-{steps.required-variables.outputs.branch} ie. 1.0.0-Matrix
+      # - release body: {steps.required-variables.outputs.changes}
       - name: Create Release
         id: create-release
         uses: actions/create-release@v1
@@ -118,4 +147,3 @@ jobs:
           draft: false
           prerelease: false
           commitish: ${{ steps.required-variables.outputs.branch }}
-

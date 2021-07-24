@@ -1,4 +1,7 @@
 name: Make Release
+# Create a release on the given branch
+# Release and tag name format will be <version>-<branch>
+# The body of the release will be created from the changelog.txt or news element in the addon.xml.in
 
 on: workflow_dispatch
 
@@ -9,16 +12,23 @@ jobs:
 
     steps:
 
+      # Checkout the current repository into a directory (repositories name)
       - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
           path: ${{ github.event.repository.name }}
 
+      # Install all dependencies required by the following steps
+      # - libxml2-utils, xmlstarlet: reading news and version from addon.xml.in
       - name: Install dependencies
         run: |
           sudo apt-get install libxml2-utils xmlstarlet
 
+      # Create the variables required by the following steps
+      # - steps.required-variables.outputs.changes: latest entry in the changelog.txt (if exists), or addon.xml.in news element
+      # - steps.required-variables.outputs.version: version element from addon.xml.in
+      # - steps.required-variables.outputs.branch: branch of the triggering ref
       - name: Get required variables
         id: required-variables
         run: |
@@ -39,6 +49,9 @@ jobs:
           echo ::set-output name=branch::$branch
         working-directory: ${{ github.event.repository.name }}
 
+      # Create a release at {steps.required-variables.outputs.branch}
+      # - tag and release name format: {steps.required-variables.outputs.version}-{steps.required-variables.outputs.branch} ie. 1.0.0-Matrix
+      # - release body: {steps.required-variables.outputs.changes}
       - name: Create Release
         id: create-release
         uses: actions/create-release@v1
