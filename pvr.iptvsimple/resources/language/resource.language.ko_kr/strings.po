@@ -5,17 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-06-28 08:29+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2021-08-03 07:29+0000\n"
+"Last-Translator: Joe Baek <aalive1@gmail.com>\n"
 "Language-Team: Korean <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/ko_kr/>\n"
 "Language: ko_kr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7\n"
+"X-Generator: Weblate 4.7.2\n"
 
 #. settings labels
 #. label: General - m3uPathType
@@ -31,7 +31,7 @@ msgstr "위치"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "로컬 경로 (로컬 네트웍 포함)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -85,7 +85,7 @@ msgstr "M3U의 채널 순서에 따라서만 번호 매김"
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "자동 고침 모드"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
@@ -100,7 +100,7 @@ msgstr "새로 고침 시간 (24시)"
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr ""
+msgstr "새로 고침"
 
 #. label-category: epgsettings
 msgctxt "#30019"
@@ -150,12 +150,12 @@ msgstr "{0:.1f} 시간"
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "TV 채널을 그룹으로만 열기"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "TV 그룹"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos

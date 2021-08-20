@@ -5,17 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-07-04 21:11+0000\n"
-"Last-Translator: liimee <alt3753.7@gmail.com>\n"
+"PO-Revision-Date: 2021-08-03 07:29+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Indonesian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/id_id/>\n"
 "Language: id_id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.7.2\n"
 
 #. settings labels
 #. label: General - m3uPathType
@@ -29,7 +29,6 @@ msgstr "Lokasi"
 #. label-option: General - epgPathType
 #. label-option: General - logoPathType
 #. label-option: General - genresPathType
-#, fuzzy
 msgctxt "#30001"
 msgid "Local path (includes local network)"
 msgstr "Path lokal (termasuk jaringan lokal)"
@@ -264,7 +263,6 @@ msgstr ""
 
 #. label-category: genres
 #. label-group: Genres - Genres
-#, fuzzy
 msgctxt "#30050"
 msgid "Genres"
 msgstr "Aliran"
