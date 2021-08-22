@@ -1,3 +1,7 @@
+v7.6.10
+Translations updates from Weblate
+	- id_id, ko_kr, pl_pl
+
 v7.6.9
 - Translations updates from Weblate
 	- pl_pl
