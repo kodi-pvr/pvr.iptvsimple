@@ -43,11 +43,13 @@ namespace iptvsimple
     void Clear();
 
     int GetCurrentChannelNumber() const { return m_currentChannelNumber; }
+    void ChannelsLoadFailed() { m_channelsLoadFailed = true; };
 
   private:
     int GenerateChannelId(const char* channelName, const char* streamUrl);
 
     int m_currentChannelNumber;
+    bool m_channelsLoadFailed = false;
 
     std::vector<iptvsimple::data::Channel> m_channels;
   };
