@@ -31,6 +31,7 @@ bool Channels::Init()
 void Channels::Clear()
 {
   m_channels.clear();
+  m_channelsLoadFailed = false;
   m_currentChannelNumber = Settings::GetInstance().GetStartChannelNumber();
 }
 
@@ -41,6 +42,9 @@ int Channels::GetChannelsAmount() const
 
 PVR_ERROR Channels::GetChannels(kodi::addon::PVRChannelsResultSet& results, bool radio) const
 {
+  if (m_channelsLoadFailed)
+    return PVR_ERROR_SERVER_ERROR;
+
   // We set a channel order here that applies to the 'Any channels' group in kodi-pvr
   // This allows the users to use the 'Backend Order' sort option in the left to
   // have the same order as the backend (regardles of the channel numbering used)

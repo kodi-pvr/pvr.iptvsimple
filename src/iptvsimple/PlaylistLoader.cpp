@@ -189,7 +189,8 @@ bool PlaylistLoader::LoadPlayList()
   if (m_channels.GetChannelsAmount() == 0)
   {
     Logger::Log(LEVEL_ERROR, "%s - Unable to load channels from file '%s'", __FUNCTION__, m_m3uLocation.c_str());
-    return false;
+    // We no longer return false as this is just an empty M3U and a missing file error.
+    //return false;
   }
 
   Logger::Log(LEVEL_INFO, "%s - Loaded %d channels.", __FUNCTION__, m_channels.GetChannelsAmount());
@@ -413,6 +414,11 @@ void PlaylistLoader::ReloadPlayList()
   {
     m_client->TriggerChannelUpdate();
     m_client->TriggerChannelGroupsUpdate();
+  }
+  else
+  {
+    m_channels.ChannelsLoadFailed();
+    m_channelGroups.ChannelGroupsLoadFailed();
   }
 }
 

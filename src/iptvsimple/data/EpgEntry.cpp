@@ -157,7 +157,7 @@ std::string ParseAsW3CDateString(const std::string& strDate)
 
 std::string ParseAsW3CDateString(time_t time)
 {
-  std::tm tm = SafeLocaltime(time); 
+  std::tm tm = SafeLocaltime(time);
   char buffer[16];
   std::strftime(buffer, 16, "%Y-%m-%d", &tm);
 
@@ -336,16 +336,33 @@ bool EpgEntry::ParseOnScreenEpisodeNumberInfo(const std::string& episodeNumberSt
   static const std::regex unwantedCharsRegex("[ \\txX_\\.]");
   const std::string text = std::regex_replace(episodeNumberString, unwantedCharsRegex, "");
 
-  std::smatch match;
-  static const std::regex seasonEpisodeRegex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$");
-  if (std::regex_match(text, match, seasonEpisodeRegex))
+  if (StringUtils::StartsWithNoCase(text, "S"))
   {
-    if (match.size() == 3)
+    std::smatch match;
+    static const std::regex seasonEpisodeRegex("^[sS]([0-9][0-9]*)[eE][pP]?([0-9][0-9]*)$");
+    if (std::regex_match(text, match, seasonEpisodeRegex))
     {
-      m_seasonNumber = std::atoi(match[1].str().c_str());
-      m_episodeNumber = std::atoi(match[2].str().c_str());
+      if (match.size() == 3)
+      {
+        m_seasonNumber = std::atoi(match[1].str().c_str());
+        m_episodeNumber = std::atoi(match[2].str().c_str());
 
-      return true;
+        return true;
+      }
+    }
+  }
+  else if (StringUtils::StartsWithNoCase(text, "E"))
+  {
+    static const std::regex episodeOnlyRegex("^[eE][pP]?([0-9][0-9]*)$");
+    std::smatch matchEpOnly;
+    if (std::regex_match(text, matchEpOnly, episodeOnlyRegex))
+    {
+      if (matchEpOnly.size() == 2)
+      {
+        m_episodeNumber = std::atoi(matchEpOnly[1].str().c_str());
+
+        return true;
+      }
     }
   }
 

@@ -31,11 +31,15 @@ namespace iptvsimple
     iptvsimple::data::ChannelGroup* GetChannelGroup(int uniqueId);
     iptvsimple::data::ChannelGroup* FindChannelGroup(const std::string& name);
     const std::vector<data::ChannelGroup>& GetChannelGroupsList() const { return m_channelGroups; }
+    bool Init();
     void Clear();
     bool CheckChannelGroupAllowed(iptvsimple::data::ChannelGroup& newChannelGroup);
+    void ChannelGroupsLoadFailed() { m_channelGroupsLoadFailed = true; };
 
   private:
     const iptvsimple::Channels& m_channels;
     std::vector<iptvsimple::data::ChannelGroup> m_channelGroups;
+
+    bool m_channelGroupsLoadFailed = false;
   };
 } //namespace iptvsimple

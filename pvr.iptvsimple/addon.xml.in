@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.6.9"
+  version="7.6.10"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,12 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.6.10
+- Fixed: Fix episode number when there is no season
+- Fixed: Return server error if channels or groups could not be loaded due to missing file so they are not cleared in Kodi
+- Translations updates from Weblate
+	- id_id, ko_kr, pl_pl
+
 v7.6.9
 - Translations updates from Weblate
 	- pl_pl
@@ -30,7 +36,7 @@ v7.6.8
 	- zh_cn
 
 v7.6.7
-Translations updates from Weblate
+- Translations updates from Weblate
 	- id_id, lt_lt
 
 v7.6.6

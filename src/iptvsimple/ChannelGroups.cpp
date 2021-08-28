@@ -19,9 +19,16 @@ using namespace iptvsimple::utilities;
 
 ChannelGroups::ChannelGroups(const Channels& channels) : m_channels(channels) {}
 
+bool ChannelGroups::Init()
+{
+  Clear();
+  return true;
+}
+
 void ChannelGroups::Clear()
 {
   m_channelGroups.clear();
+  m_channelGroupsLoadFailed = false;
 }
 
 int ChannelGroups::GetChannelGroupsAmount() const
@@ -31,6 +38,9 @@ int ChannelGroups::GetChannelGroupsAmount() const
 
 PVR_ERROR ChannelGroups::GetChannelGroups(kodi::addon::PVRChannelGroupsResultSet& results, bool radio) const
 {
+  if (m_channelGroupsLoadFailed)
+    return PVR_ERROR_SERVER_ERROR;
+
   Logger::Log(LEVEL_DEBUG, "%s - Starting to get ChannelGroups for PVR", __FUNCTION__);
 
   for (const auto& channelGroup : m_channelGroups)
