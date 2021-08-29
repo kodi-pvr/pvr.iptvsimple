@@ -211,7 +211,7 @@ PVRIptvData::PVRIptvData(void)
   m_epg.clear();
   m_genres.clear();
 
-  LoadPlayList();
+  m_PlayListLoaded = LoadPlayList();
 }
 
 void *PVRIptvData::Process(void)
@@ -225,6 +225,7 @@ PVRIptvData::~PVRIptvData(void)
   m_groups.clear();
   m_epg.clear();
   m_genres.clear();
+  m_PlayListLoaded = false;  
 }
 
 bool PVRIptvData::LoadEPG(time_t iStart, time_t iEnd)
@@ -945,6 +946,9 @@ int PVRIptvData::GetChannelsAmount(void)
 
 PVR_ERROR PVRIptvData::GetChannels(ADDON_HANDLE handle, bool bRadio)
 {
+  if (!m_PlayListLoaded)
+    return PVR_ERROR_SERVER_ERROR;
+    
   P8PLATFORM::CLockObject lock(m_mutex);
   for (unsigned int iChannelPtr = 0; iChannelPtr < m_channels.size(); iChannelPtr++)
   {
@@ -1001,6 +1005,9 @@ int PVRIptvData::GetChannelGroupsAmount(void)
 
 PVR_ERROR PVRIptvData::GetChannelGroups(ADDON_HANDLE handle, bool bRadio)
 {
+  if (!m_PlayListLoaded)
+    return PVR_ERROR_SERVER_ERROR;
+
   P8PLATFORM::CLockObject lock(m_mutex);
   std::vector<PVRIptvChannelGroup>::iterator it;
   for (it = m_groups.begin(); it != m_groups.end(); ++it)
@@ -1462,8 +1469,9 @@ void PVRIptvData::ReloadPlayList(const char * strNewPath)
   {
     m_strM3uUrl = strNewPath;
     m_channels.clear();
+    m_PlayListLoaded = LoadPlayList();
 
-    if (LoadPlayList())
+    if (m_PlayListLoaded)
     {
       PVR->TriggerChannelUpdate();
       PVR->TriggerChannelGroupsUpdate();

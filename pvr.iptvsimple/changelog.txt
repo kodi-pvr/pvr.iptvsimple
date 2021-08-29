@@ -1,3 +1,6 @@
+v3.10.2
+- Fixed: Return server error if channels or groups could not be loaded due to missing file so they are not cleared in Kodi
+
 v3.10.1
 - Fixed: Addon crashes when it is restarted
 
