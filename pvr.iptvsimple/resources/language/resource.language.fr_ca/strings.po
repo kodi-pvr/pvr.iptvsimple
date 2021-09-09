@@ -5,16 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: French (Canada) (http://www.transifex.com/projects/p/kodi-main/language/fr_CA/)\n"
-"Language: fr_CA\n"
+"PO-Revision-Date: 2021-09-09 20:30+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: French (Canada) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/fr_ca/>\n"
+"Language: fr_ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.8\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -26,7 +27,7 @@ msgstr "Client de numériscope simple pour IPTV, prenant en charge les listes de
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "Ce logiciel est instable ! Les auteurs ne sont aucunement responsables des lectures  défaillantes, d’horaires erronés du GÉP, des heures perdues ou tout autre effet indésirable."
+msgstr "Ce logiciel est instable ! Les auteurs ne sont aucunement responsables des lectures défaillantes, d’horaires erronés du GÉP, des heures perdues ou tout autre effet indésirable."
 
 #. settings labels
 #. label: General - m3uPathType
