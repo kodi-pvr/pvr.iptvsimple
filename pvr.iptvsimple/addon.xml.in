@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.6.10"
+  version="7.6.11"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.6.11
+- Fixed: EPG date entry only parsing year
+
 v7.6.10
 - Fixed: Fix episode number when there is no season
 - Fixed: Return server error if channels or groups could not be loaded due to missing file so they are not cleared in Kodi
