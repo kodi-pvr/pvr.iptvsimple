@@ -227,7 +227,8 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
     if (std::regex_match(dateString, dateRegex))
     {
       m_firstAired = ParseAsW3CDateString(dateString);
-      if (m_firstAired == ParseAsW3CDateString(m_startTime))
+      // Always compare to the raw string date value to avoid timezone issues
+      if (m_firstAired == ParseAsW3CDateString(strStart))
         m_new = true;
     }
 
