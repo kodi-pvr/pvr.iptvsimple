@@ -152,7 +152,7 @@ std::string ParseAsW3CDateString(const std::string& strDate)
 
   std::sscanf(strDate.c_str(), "%04d%02d%02d", &year, &mon, &mday);
 
-  return StringUtils::Format("%04d%-02d%-02d", year, mon, mday);
+  return StringUtils::Format("%04d-%02d-%02d", year, mon, mday);
 }
 
 std::string ParseAsW3CDateString(time_t time)
