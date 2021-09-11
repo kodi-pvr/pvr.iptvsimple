@@ -226,8 +226,8 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
     static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
     if (std::regex_match(dateString, dateRegex))
     {
-      long long tmpDate = ParseDateTime(dateString.substr(0,8) + strStart.substr(8));
-      // Windows localtime_s does not support negative time_t
+      long long tmpDate = ParseDateTime(dateString.substr(0, DATESTRING_LENGTH) + strStart.substr(DATESTRING_LENGTH));
+      // Protect against negative time_t which can crash on some platforms such as localtime_s on Windows
       if (tmpDate < 0)
       {
         m_firstAired = ParseAsW3CDateString(dateString);

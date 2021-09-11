@@ -21,6 +21,7 @@ namespace iptvsimple
   namespace data
   {
     static const float STAR_RATING_SCALE = 10.0f;
+    constexpr int DATESTRING_LENGTH = 8;
 
     class EpgEntry
     {
