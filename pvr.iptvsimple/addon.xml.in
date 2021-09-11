@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="7.6.12"
+  version="7.6.13"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v7.6.13
+- Fixed: Apply timezone for first aired date if after 1970
+
 v7.6.12
 - Fixed: Always compare to the raw start date and not the localised time to detect NEW programmes
 - Fixed: Do not set year if this programme is a TV show

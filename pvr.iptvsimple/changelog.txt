@@ -1,3 +1,6 @@
+v7.6.13
+- Fixed: Apply timezone for first aired date if after 1970
+
 v7.6.12
 - Fixed: Always compare to the raw start date and not the localised time to detect NEW programmes
 - Fixed: Do not set year if this programme is a TV show
