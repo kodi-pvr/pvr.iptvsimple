@@ -1,5 +1,6 @@
 v7.6.12
 - Fixed: Always compare to the raw start date and not the localised time to detect NEW programmes
+- Fixed: Do not set year if this programme is a TV show
 
 v7.6.11
 - Fixed: EPG date entry only parsing year
