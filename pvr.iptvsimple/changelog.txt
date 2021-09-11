@@ -1,3 +1,6 @@
+v7.6.12
+- Fixed: Always compare to the raw start date and not the localised time to detect NEW programmes
+
 v7.6.11
 - Fixed: EPG date entry only parsing year
 

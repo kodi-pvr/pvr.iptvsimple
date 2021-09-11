@@ -227,7 +227,8 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
     if (std::regex_match(dateString, dateRegex))
     {
       m_firstAired = ParseAsW3CDateString(dateString);
-      if (m_firstAired == ParseAsW3CDateString(m_startTime))
+      // Always compare to the raw string date value to avoid timezone issues
+      if (m_firstAired == ParseAsW3CDateString(strStart))
         m_new = true;
     }
 
@@ -255,7 +256,14 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   }
 
   if (!episodeNumbersList.empty())
+  {
     ParseEpisodeNumberInfo(episodeNumbersList);
+
+    // If we don't have a season or episode number don't set the year as it's a TV show
+    // For TV show year usually represents the year of S01E01 which we don't have
+    if (m_episodeNumber != EPG_TAG_INVALID_SERIES_EPISODE || m_seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE)
+      m_year = 0;
+  }
 
   const auto& creditsNode = channelNode.child("credits");
   if (creditsNode)
