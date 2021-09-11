@@ -226,10 +226,18 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
     static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
     if (std::regex_match(dateString, dateRegex))
     {
-      m_firstAired = ParseAsW3CDateString(dateString);
-      // Always compare to the raw string date value to avoid timezone issues
-      if (m_firstAired == ParseAsW3CDateString(strStart))
-        m_new = true;
+      long long tmpDate = ParseDateTime(dateString.substr(0,8) + strStart.substr(8));
+      // Windows localtime_s does not support negative time_t
+      if (tmpDate < 0)
+      {
+        m_firstAired = ParseAsW3CDateString(dateString);
+        m_new = m_firstAired == ParseAsW3CDateString(strStart);
+      }
+      else
+      {
+        m_firstAired = ParseAsW3CDateString(static_cast<time_t>(tmpDate));
+        m_new = m_firstAired == ParseAsW3CDateString(m_startTime);
+      }
     }
 
     std::sscanf(dateString.c_str(), "%04d", &m_year);
