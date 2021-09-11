@@ -144,17 +144,6 @@ long long ParseDateTime(const std::string& strDate)
   return GetUTCTime(year, mon, mday, hour, min, sec) - offset_of_date;
 }
 
-std::string ParseAsW3CDateString(const std::string& strDate)
-{
-  int year = 2000;
-  int mon = 1;
-  int mday = 1;
-
-  std::sscanf(strDate.c_str(), "%04d%02d%02d", &year, &mon, &mday);
-
-  return StringUtils::Format("%04d-%02d-%02d", year, mon, mday);
-}
-
 std::string ParseAsW3CDateString(time_t time)
 {
   std::tm tm = SafeLocaltime(time);
@@ -220,13 +209,15 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
 
   m_genreString = GetJoinedNodeValues(channelNode, "category");
 
-  const std::string dateString = GetNodeValue(channelNode, "date");
+  std::string dateString = GetNodeValue(channelNode, "date");
   if (!dateString.empty())
   {
     static const std::regex dateRegex("^[1-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]");
     if (std::regex_match(dateString, dateRegex))
     {
-      m_firstAired = ParseAsW3CDateString(dateString);
+      dateString += strStart.substr(8);
+      long long tmpDate = ParseDateTime(dateString);
+      m_firstAired = ParseAsW3CDateString(static_cast<time_t>(tmpDate));
       if (m_firstAired == ParseAsW3CDateString(m_startTime))
         m_new = true;
     }
@@ -255,7 +246,14 @@ bool EpgEntry::UpdateFrom(const xml_node& channelNode, const std::string& id,
   }
 
   if (!episodeNumbersList.empty())
+  {
     ParseEpisodeNumberInfo(episodeNumbersList);
+
+    // If we don't have a season or episode number don't set the year as it's a TV show
+    // For TV show year usually represents the year of S01E01 which we don't have
+    if (m_episodeNumber != EPG_TAG_INVALID_SERIES_EPISODE || m_seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE)
+      m_year = 0;
+  }
 
   const auto& creditsNode = channelNode.child("credits");
   if (creditsNode)
