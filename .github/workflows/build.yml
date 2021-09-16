@@ -1,0 +1,61 @@
+name: Build and run tests
+on: [push, pull_request]
+env:
+  app_id: pvr.iptvsimple
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+        - name: "Debian package test"
+          os: ubuntu-18.04
+          CC: gcc
+          CXX: g++
+          DEBIAN_BUILD: true
+        #- os: ubuntu-18.04
+          #CC: gcc
+          #CXX: g++
+        #- os: ubuntu-18.04
+          #CC: clang
+          #CXX: clang++
+        #- os: macos-10.15
+    steps:
+    - name: Install needed ubuntu depends
+      env:
+        DEBIAN_BUILD: ${{ matrix.DEBIAN_BUILD }}
+      run: |
+        if [[ $DEBIAN_BUILD == true ]]; then sudo add-apt-repository -y ppa:team-xbmc/xbmc-nightly; fi
+        if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get update; fi
+        if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get install fakeroot; fi
+    - name: Checkout Kodi repo
+      uses: actions/checkout@v2
+      with:
+        repository: xbmc/xbmc
+        ref: master
+        path: xbmc
+    - name: Checkout pvr.iptvsimple repo
+      uses: actions/checkout@v2
+      with:
+        path: ${{ env.app_id }}
+    - name: Configure
+      env:
+        CC: ${{ matrix.CC }}
+        CXX: ${{ matrix.CXX }}
+        DEBIAN_BUILD: ${{ matrix.DEBIAN_BUILD }}
+      run: |
+        if [[ $DEBIAN_BUILD != true ]]; then cd ${app_id} && mkdir -p build && cd build; fi
+        if [[ $DEBIAN_BUILD != true ]]; then cmake -DADDONS_TO_BUILD=${app_id} -DADDON_SRC_PREFIX=${{ github.workspace }} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/xbmc/addons -DPACKAGE_ZIP=1 ${{ github.workspace }}/xbmc/cmake/addons; fi
+        if [[ $DEBIAN_BUILD == true ]]; then wget https://raw.githubusercontent.com/xbmc/xbmc/master/xbmc/addons/kodi-dev-kit/tools/debian-addon-package-test.sh && chmod +x ./debian-addon-package-test.sh; fi
+        if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get build-dep ${{ github.workspace }}/${app_id}; fi
+    - name: Build
+      env:
+        CC: ${{ matrix.CC }}
+        CXX: ${{ matrix.CXX }}
+        DEBIAN_BUILD: ${{ matrix.DEBIAN_BUILD }}
+      run: |
+        if [[ $DEBIAN_BUILD != true ]]; then cd ${app_id}/build; fi
+        if [[ $DEBIAN_BUILD != true ]]; then make; fi
+        if [[ $DEBIAN_BUILD == true ]]; then ./debian-addon-package-test.sh ${{ github.workspace }}/${app_id}; fi
