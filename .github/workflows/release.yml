@@ -50,7 +50,7 @@ jobs:
         working-directory: ${{ github.event.repository.name }}
 
       # Create a release at {steps.required-variables.outputs.branch}
-      # - tag and release name format: {steps.required-variables.outputs.version}-{steps.required-variables.outputs.branch} ie. 1.0.0-Matrix
+      # - tag and release name format: {steps.required-variables.outputs.version}-{steps.required-variables.outputs.branch} ie. 20.0.0-Nexus
       # - release body: {steps.required-variables.outputs.changes}
       - name: Create Release
         id: create-release
