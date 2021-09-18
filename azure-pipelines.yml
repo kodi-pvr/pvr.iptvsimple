@@ -46,7 +46,7 @@ jobs:
 
     - script: |
         cd ..
-        git clone --branch master --depth=1 https://github.com/xbmc/xbmc.git kodi
+        git clone --branch Matrix --depth=1 https://github.com/xbmc/xbmc.git kodi
         cd $(Build.SourcesDirectory)
         mkdir build
         cd build
