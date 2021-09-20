@@ -334,7 +334,7 @@ Note: Once mapped to genre IDs the text displayed can either be the DVB standard
 
 ### Custom Channel Groups (Channels)
 
-Config files are located in the `userdata/addon_data/pvr.vuplus/channelGroups` folder.
+Config files are located in the `userdata/addon_data/pvr.iptvsimple/channelGroups` folder.
 
 The following files are currently available with the addon:
     - `customTVGroups-example.xml`
