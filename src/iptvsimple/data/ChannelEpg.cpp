@@ -16,7 +16,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace pugi;
 
-bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
+bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels, Media& media)
 {
   if (!GetAttributeValue(channelNode, "id", m_id) || m_id.empty())
     return false;
@@ -28,7 +28,7 @@ bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
     haveDisplayNames = true;
 
     const std::string name = displayNameNode.child_value();
-    if (channels.FindChannel(m_id, name))
+    if (channels.FindChannel(m_id, name) || media.FindMediaEntry(m_id, name))
     {
       foundChannel = true;
       AddDisplayName(name);
@@ -36,7 +36,7 @@ bool ChannelEpg::UpdateFrom(const xml_node& channelNode, Channels& channels)
   }
 
   // If there are no display names just check if the id matches a channel
-  if (!haveDisplayNames && channels.FindChannel(m_id, ""))
+  if (!haveDisplayNames && (channels.FindChannel(m_id, "") || media.FindMediaEntry(m_id, "")))
     foundChannel = true;
 
   if (!foundChannel)

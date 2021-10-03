@@ -1,3 +1,8 @@
+v20.1.0
+- Fixed: Change reported backend name
+- Added: Support pvr providers in Kodi 20
+- Added: Support VOD Media as recordings
+
 v20.0.0
 - Changed: Test builds to 'Kodi 20 Nexus'
 - Increased version to 20.0.0
