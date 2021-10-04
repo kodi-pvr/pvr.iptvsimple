@@ -177,7 +177,7 @@ Media entries can be used to access the Video-On-Demand (VOD) library provided b
 
 An M3U entry can denote that it's media by having:
 * an M3U property of `EXT-X-PLAYLIST-TYPE` set to `VOD`,
-* the M3U attributes of `media`, `media-dir` or `media-size` are set
+* or one of the M3U attributes of `media`, `media-dir` or `media-size`
 
 More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements).
 
