@@ -169,7 +169,7 @@ bool PlaylistLoader::LoadPlayList()
     {
       Logger::Log(LEVEL_DEBUG, "%s - Adding channel '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
-      if ((isRealTime || !Settings::GetInstance().IsMediaEnabled() || (!Settings::GetInstance().ShowVodAsRecordings()) && !isMediaEntry))
+      if ((isRealTime || !Settings::GetInstance().IsMediaEnabled() || !Settings::GetInstance().ShowVodAsRecordings()) && !isMediaEntry)
       {
         tmpChannel.AddProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM, "true");
 

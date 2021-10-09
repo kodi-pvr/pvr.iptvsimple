@@ -1,3 +1,7 @@
+v20.1.1
+- Allow VOD or media tags to be used to specify view as PVR Recordings
+- Remove news as Kodi 20 will load changelog.txt as a fallback anyway
+
 v20.1.0
 - Fixed: Change reported backend name
 - Added: Support pvr providers in Kodi 20
@@ -27,15 +31,15 @@ v7.6.10
 
 v7.6.9
 - Translations updates from Weblate
-	- pl_pl
+  - pl_pl
 
 v7.6.8
 - Translations updates from Weblate
-	- zh_cn
+  - zh_cn
 
 v7.6.7
-Translations updates from Weblate
-	- id_id, lt_lt
+- Translations updates from Weblate
+  - id_id, lt_lt
 
 v7.6.6
 - Language update from Weblate
