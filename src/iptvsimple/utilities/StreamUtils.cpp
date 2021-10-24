@@ -54,12 +54,16 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
             CheckInputstreamInstalledAndEnabled(CATCHUP_INPUTSTREAM_NAME))
         {
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
+          // this property is required to force VideoPlayer for Radio channels
+          properties.emplace_back("inputstream-player", "videodefaultplayer");
           SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
         }
         else if (channel.SupportsLiveStreamTimeshifting() && isChannelURL &&
                  CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
         {
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
+          // this property is required to force VideoPlayer for Radio channels
+          properties.emplace_back("inputstream-player", "videodefaultplayer");
           SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
           properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
           properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
