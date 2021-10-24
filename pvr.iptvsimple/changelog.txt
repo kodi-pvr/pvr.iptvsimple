@@ -1,3 +1,6 @@
+v20.1.2
+- Set default player as VideoPlayer for ffmpegdirect so Timeshift works for PVR Radio
+
 v20.1.1
 - Allow VOD or media tags to be used to specify view as PVR Recordings
 - Remove news as Kodi 20 will load changelog.txt as a fallback anyway
