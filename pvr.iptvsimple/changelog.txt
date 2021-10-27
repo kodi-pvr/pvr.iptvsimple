@@ -1,3 +1,6 @@
+v19.0.1
+- Set default player as VideoPlayer for ffmpegdirect so Timeshift works for PVR Radio
+
 v19.0.0
 - Changed: Test builds to 'Kodi 19 Matrix'
 - Increased version to 19.0.0
