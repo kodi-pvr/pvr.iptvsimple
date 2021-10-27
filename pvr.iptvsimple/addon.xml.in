@@ -385,7 +385,7 @@ v4.0.0
 Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.iptvsimple/changelog.txt
     </news>
     <summary lang="af_ZA">Kodi PVR byvoegsel vir IPTV ondersteuning. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="az_AZ">IPTV dəstəyi üçün Kodi PVR əlavəsini yükləyin.&#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="az_AZ">IPTV dəstəyi üçün Kodi PVR əlavəsini yükləyin.&amp;#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="bg_BG">Добавка за ПВР за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca_ES">Complement PVR de Kodi per al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="cs_CZ">IPTV PVR doplněk pro Kodi. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -405,7 +405,7 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <summary lang="fr_CA">Addiciel de numériscope Kodi pour la prise en charge d’IPTV</summary>
     <summary lang="fr_FR">Extension enregistreur vidéo (PVR) pour la gestion IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="gl_ES">Complemento PVR do Kodi de soporte á IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="he_IL">לקוח טלוויזיה חיה עם תמיכה ב־IPTV.&#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="he_IL">לקוח טלוויזיה חיה עם תמיכה ב־IPTV.&amp;#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="hr_HR">Kodi PVR dodatak za IPTV podršku. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="hu_HU">Kodi PVR kiegészítő az IPTV támogatáshoz. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="id_ID">Pengaya PVR Kodi untuk dukungan IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -444,10 +444,10 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <description lang="de_DE">IPTV Simple PVR Client unterstützt m3u Wiedergabelisten, Streaming von Live-TV für Multicast/Unicast Quellen, Radiosender und EPG.    </description>
     <description lang="el_GR">Απλός Πελάτης PVR του IPTV, με υποστήριξη λιστών αναπαραγωγής m3u, αναπαραγωγή ροών Live TV για πηγές πολλαπλής/μοναδικής διανομής, ακρόαση ραδιοφωνικών καναλιών και EPG.</description>
     <description lang="en_AU">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
-    <description lang="en_GB">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    </description>
+    <description lang="en_GB">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&amp;#10;    &amp;#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="en_NZ">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
     <description lang="en_US">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
-    <description lang="es_AR">Cliente simple PVR IPTV.  Reproduce de TV en Vivo multicast/unicast y listas m3u8&#10; . reproduce tambien canales de radio y GEP</description>
+    <description lang="es_AR">Cliente simple PVR IPTV.  Reproduce de TV en Vivo multicast/unicast y listas m3u8&amp;#10; . reproduce tambien canales de radio y GEP</description>
     <description lang="es_ES">El cliente PVR IPTV Simple soporta listas M3U, reproducción de TV en Vivo para origenes multicast/unicast, escucha de canales de radio y EPG</description>
     <description lang="es_MX">IPTV Simple PVR Client soporta listas de reproducción m3u, streaming de Live TV para fuentes multicast / unicast, escuchando para canales de radio y EPG.</description>
     <description lang="fi_FI">IPTV-lisäosa tukee m3u-toistolistoja, multicast/unicast-tv-lähetysten toistoa, radiokanavia ja ohjelmaopasta.</description>
@@ -461,7 +461,7 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <description lang="is_IS">Einfaldur upptökubiðlari fyrir IPTV sem styður m3u spilunarlista, streymingu af beinum útsendingum frá multicast/unicast þjónustum, hlustun á útvarpsrásir og rafræna dagskrárvísa</description>
     <description lang="it_IT">Il client IPTV Simple PVR supporta playlist m3u, streaming della Live TV per sorgenti multicast/unicast e ascoltare canali Radio ed EPG.</description>
     <description lang="ja_JP">IPTV シンプル PVR クライアントは、m3u プレイリスト、マルチキャスト/ユニキャストのライブ TV ストリーミング、ラジオチャンネルや EPG の視聴をサポートしています。</description>
-    <description lang="ko_KR">IPTV Simple PVR 클라이언트는 m3u 재생목록, 스트리밍, 멀티캐스트/유니캐스트 소스의 TV 시청, 라디오 채널과 EPG를 통한 청취를 지원합니다.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    </description>
+    <description lang="ko_KR">IPTV Simple PVR 클라이언트는 m3u 재생목록, 스트리밍, 멀티캐스트/유니캐스트 소스의 TV 시청, 라디오 채널과 EPG를 통한 청취를 지원합니다.&amp;#10;    &amp;#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="lt_LT">IPTV Simple PVR klientas palaiko m3u grojaraščius, TV transliacijas iš multicast/unicast šaltinių, radijo stočių transliacijas ir EPG.</description>
     <description lang="lv_LV">IPTV vienkāršais PVR klients atbalsta m3u spēļsarakstus, tiešraides TV straumēšanu multiraides/uniraides avotiem, radio kanālu klausīšanos un EPG.</description>
     <description lang="mk_MK">IPTV Simple PVR Client поддржува m3u листи, гледање на Live TV од multicast/unicast извори, слушање Радио канали и EPG.</description>
@@ -473,7 +473,7 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <description lang="pt_BR">O cliente de PVR IPTV Simple Client oferece suporte para listas m3u, transmissão de TV ao vivo de fontes multicast/unicast, transmissão de rádios e, ainda, suporte a guia de programação eletrônico - EPG.</description>
     <description lang="pt_PT">Cliente IPTV Simple PVR com suporte a listas de reprodução m3u, transmissão de TV em direto de fontes multidifusão/unidifusão, ouvir estações de rádio e EPG.</description>
     <description lang="ro_RO">PVR Client IPTV suporta liste m3u, redare TV în direct pentru surse de multicast/unicast, ascultare canale radio si EPG.</description>
-    <description lang="ru_RU">IPTV Simple PVR поддерживает просмотр потокового ТВ для юникаст/мультикаст источников, прослушивание радиоканалов и работу с телегидом.&#10;    &#10;Для документации посетите: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    </description>
+    <description lang="ru_RU">IPTV Simple PVR поддерживает просмотр потокового ТВ для юникаст/мультикаст источников, прослушивание радиоканалов и работу с телегидом.&amp;#10;    &amp;#10;Для документации посетите: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="sk_SK">Jednoduchý IPTV PVR klient podporuje mp3 zoznamy súborov, streamovanie živého televízneho vysielania ako multicast/unicast zdroje, počúvanie rozhlasových kanálov a EPG.</description>
     <description lang="sl_SI">IPTV Simple odjemalec PVR podpira sezname m3u, pretakanja TV v živo za vire multicast/unicast, poslušenje radijskih postaj in EPG.</description>
     <description lang="sr_RS">IPTV Једноставан PVR Клијент подржава m3u листе за репродукцију, стримовање ТВ Уживо за multicast/unicast изворе, слушање Радио канала и EPG.</description>
