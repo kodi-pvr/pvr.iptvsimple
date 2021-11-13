@@ -15,7 +15,7 @@
   <extension point="xbmc.addon.metadata">
     <platform>@PLATFORM@</platform>
     <license>GPL-2.0-or-later</license>
-    <source>https://github.com/kodi-pvr/pvr.hts</source>
+    <source>https://github.com/kodi-pvr/pvr.iptvsimple</source>
     <forum>https://forum.kodi.tv/forumdisplay.php?fid=215</forum>
     <assets>
       <icon>icon.png</icon>
