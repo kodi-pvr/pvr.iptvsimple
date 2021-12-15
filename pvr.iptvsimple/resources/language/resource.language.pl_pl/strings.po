@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-09-09 20:30+0000\n"
-"Last-Translator: Jacek <jacek-bydgoszcz@o2.pl>\n"
+"PO-Revision-Date: 2021-10-08 01:49+0000\n"
+"Last-Translator: Marek Adamski <fevbew@wp.pl>\n"
 "Language-Team: Polish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/pl_pl/>\n"
 "Language: pl_pl\n"
 "MIME-Version: 1.0\n"
@@ -469,17 +469,17 @@ msgstr "Domyślny"
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
 msgid "Append"
-msgstr ""
+msgstr "Dołącz"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30113"
 msgid "Shift (SIPTV)"
-msgstr ""
+msgstr "Shift (SIPTV)"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30114"
 msgid "Flussonic"
-msgstr ""
+msgstr "Flussonic"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30115"

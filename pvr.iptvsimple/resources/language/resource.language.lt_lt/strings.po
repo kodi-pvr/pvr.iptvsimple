@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-07-04 21:11+0000\n"
+"PO-Revision-Date: 2021-10-03 08:41+0000\n"
 "Last-Translator: Raimondas Dužinskas <raimondas.duzinskas@gmail.com>\n"
 "Language-Team: Lithuanian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/lt_lt/>\n"
 "Language: lt_lt\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.8\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -302,27 +302,27 @@ msgstr ""
 #. label: General - oneRadioGroup
 msgctxt "#30055"
 msgid "Radio group 1"
-msgstr ""
+msgstr "Radijo grupė 1"
 
 #. label: General - twoRadioGroup
 msgctxt "#30056"
 msgid "Radio group 2"
-msgstr ""
+msgstr "Radijo grupė 2"
 
 #. label: General - threeRadioGroup
 msgctxt "#30057"
 msgid "Radio group 3"
-msgstr ""
+msgstr "Radijo grupė 3"
 
 #. label: General - fourRadioGroup
 msgctxt "#30058"
 msgid "Radio group 4"
-msgstr ""
+msgstr "Radijo grupė 4"
 
 #. label: General - fiveRadioGroup
 msgctxt "#30059"
 msgid "Radio group 5"
-msgstr ""
+msgstr "Radijo grupė 5"
 
 #. label-category: advanced
 msgctxt "#30060"
@@ -357,42 +357,42 @@ msgstr ""
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr ""
+msgstr "Naudoti inputstream.adaptive m3u8 (HLS) srautams"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
 msgid "Use FFmpeg http reconnect options if possible"
-msgstr ""
+msgstr "Naudoti FFmpeg http pakartotinio prisijungimo parinktis kai įmanoma"
 
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
 msgid "User-Agent"
-msgstr ""
+msgstr "Vartotojo agentas"
 
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
 msgid "Inputstream name"
-msgstr ""
+msgstr "Įvesties srauto vardas"
 
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
 msgid "MIME type"
-msgstr ""
+msgstr "MIME tipas"
 
 #. label-group: Advanced - Channel defaults
 msgctxt "#30071"
 msgid "Channel defaults"
-msgstr ""
+msgstr "Numatytieji kanalo nustatymai"
 
 #. label: General - numRadioGroups
 msgctxt "#30072"
 msgid "Number of Radio groups"
-msgstr ""
+msgstr "Radijo grupių skaičius"
 
 #. label: Channels - customRadioGroupsFile
 msgctxt "#30073"
 msgid "Custom Radio groups file"
-msgstr ""
+msgstr "Savas radijo grupių failas"
 
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
