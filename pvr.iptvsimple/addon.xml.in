@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="19.0.2"
+  version="19.0.3"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,10 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v19.0.3
+- Translations updates from Weblate
+	- da_dk, es_mx, et_ee, hu_hu, lt_lt, nl_nl, pl_pl, zh_cn, zh_tw
+
 v19.0.2
 - Release bump
 

@@ -1,3 +1,7 @@
+v19.0.3
+- Translations updates from Weblate
+	- da_dk, es_mx, et_ee, hu_hu, lt_lt, nl_nl, pl_pl, zh_cn, zh_tw
+
 v19.0.2
 - Release bump
 
