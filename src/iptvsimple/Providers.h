@@ -24,7 +24,7 @@ namespace iptvsimple
   static const std::string PROVIDER_DIR = "/providers";
   static const std::string PROVIDER_ADDON_DATA_BASE_DIR = ADDON_DATA_BASE_DIR + PROVIDER_DIR;
 
-  class ATTRIBUTE_HIDDEN Providers
+  class ATTR_DLL_LOCAL Providers
   {
   public:
     Providers();

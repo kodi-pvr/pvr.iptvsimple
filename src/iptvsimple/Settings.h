@@ -83,7 +83,7 @@ namespace iptvsimple
 
     void ReadFromAddon(const std::string& userPath, const std::string& clientPath);
     void ReloadAddonSettings();
-    ADDON_STATUS SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue);
+    ADDON_STATUS SetValue(const std::string& settingName, const kodi::addon::CSettingValue& settingValue);
 
     const std::string& GetUserPath() const { return m_userPath; }
     const std::string& GetClientPath() const { return m_clientPath; }
@@ -186,7 +186,7 @@ namespace iptvsimple
     void operator=(Settings const&) = delete;
 
     template<typename T, typename V>
-    V SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
+    V SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
     {
       T newValue;
       if (std::is_same<T, float>::value)
@@ -212,7 +212,7 @@ namespace iptvsimple
     }
 
     template<typename T, typename V>
-    V SetEnumSetting(const std::string& settingName, const kodi::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
+    V SetEnumSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)
     {
       T newValue = settingValue.GetEnum<T>();
       if (newValue != currentValue)
@@ -226,7 +226,7 @@ namespace iptvsimple
     }
 
     template<typename V>
-    V SetStringSetting(const std::string& settingName, const kodi::CSettingValue& settingValue, std::string& currentValue, V returnValueIfChanged, V defaultReturnValue)
+    V SetStringSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue, std::string& currentValue, V returnValueIfChanged, V defaultReturnValue)
     {
       const std::string strSettingValue = settingValue.GetString();
 

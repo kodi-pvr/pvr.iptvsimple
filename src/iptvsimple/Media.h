@@ -16,7 +16,7 @@
 
 namespace iptvsimple
 {
-  class ATTRIBUTE_HIDDEN Media
+  class ATTR_DLL_LOCAL Media
   {
   public:
     Media();
