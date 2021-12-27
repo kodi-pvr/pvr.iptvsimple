@@ -21,12 +21,12 @@
       <icon>icon.png</icon>
     </assets>
     <summary lang="af_ZA">Kodi PVR byvoegsel vir IPTV ondersteuning. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="az_AZ">IPTV dəstəyi üçün Kodi PVR əlavəsini yükləyin.&#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="az_AZ">IPTV dəstəyi üçün Kodi PVR əlavəsini yükləyin.&amp;#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="bg_BG">Добавка за ПВР за поддръжка на IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="ca_ES">Complement PVR de Kodi per al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="cs_CZ">IPTV PVR doplněk pro Kodi. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="cy_GB">Ychwanegyn recordydd Kodi ar gyfer cefnogi IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="da_DK">Kodi PVR addon til IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="da_DK">Kodi PVR addon til IPTV support.</summary>
     <summary lang="de_DE">Kodi PVR-Addon für IPTV-Unterstützung.</summary>
     <summary lang="el_GR">Πρόσθετο του Kodi για PVR, με υποστήριξη IPTV. Για λεπτομέρειες επισκεφθείτε το: https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="en_AU">Kodi PVR addon for IPTV support. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -36,12 +36,12 @@
     <summary lang="es_AR">Addon Kodi PVR para soporte IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="es_ES">Kodi PVR addon para soporte IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="es_MX">Complemento Kodi PVR para soporte de IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="et_EE">Kodi PVR'i lisamoodul IPTV toele. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="et_EE">Kodi IPTV lisamoodul.</summary>
     <summary lang="fi_FI">Kodin IPTV-lisäosa. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="fr_CA">Addiciel de numériscope Kodi pour la prise en charge d’IPTV</summary>
     <summary lang="fr_FR">Extension enregistreur vidéo (PVR) pour la gestion IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="gl_ES">Complemento PVR do Kodi de soporte á IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="he_IL">לקוח טלוויזיה חיה עם תמיכה ב־IPTV.&#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="he_IL">לקוח טלוויזיה חיה עם תמיכה ב־IPTV.&amp;#10;https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="hr_HR">Kodi PVR dodatak za IPTV podršku. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="hu_HU">Kodi PVR kiegészítő az IPTV támogatáshoz. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="id_ID">Pengaya PVR Kodi untuk dukungan IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -69,21 +69,21 @@
     <summary lang="szl">Klijynt telewizyjny dlŏ telewizyje internetowyj. Wiyncyj informacyji ô przidŏwku: https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="tr_TR">IPTV desteği için Kodi PVR eklentisi. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="uk_UA">PVR надбудова Kodi для підтримки IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="zh_CN">Kodi PVR 插件需要 IPTV 支持。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="zh_TW">支援IPTV的Kodi PVR附加元件。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="zh_CN">支持 IPTV 的 Kodi PVR 插件。</summary>
+    <summary lang="zh_TW">支援IPTV的Kodi PVR附加元件。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home。</summary>
     <description lang="af_ZA">IPTV Simple PVR kliënt ondersteun M3U speellyste, stroom van lewendige TV vir multisaai / unisaai bronne, luister na radio kanale en EPG.</description>
     <description lang="bg_BG">Прост клиент за ПВР за телевизия по Интернет. Поддържа списъци за възпроизвеждане във формат „m3u“, поточно предавана телевизия от източници с излъчване мултикаст и уникаст, слушане на радио канали и електронен програмен справочник.</description>
     <description lang="ca_ES">Client senzill per a IPTV PVR compatible amb les llistes de reproducció m3u, transmissions en línia de TV en directe per als orígens difusió única o múltiple, escolta d'emissores de ràdio i guia electrònica de programació (EPG).</description>
     <description lang="cs_CZ">Jednoduchý klient PVR pro IPTV podporuje seznamy stop m3u, streamování živého vysílání pro zdroje vícesměrového nebo jednosměrového vysílání, poslech rozhlasových stanic a televizní program.</description>
     <description lang="cy_GB">Mae Cleient IPTV Simple PVR yn cynnal rhestrau m3u, ffrydio Teledu Byw o ffynonellau darlledu eang ac unigol, gwrando ar sianeli Radio ac Amserlen Rhaglenni.</description>
-    <description lang="da_DK">IPTV Simpel PVR klient understøttelse M3U-afspilningslister, streaming af direkte tv til multicast/unicast kilder, lytte til radio kanaler og EPG.</description>
+    <description lang="da_DK">IPTV Simple PVR klient understøtter m3u playlister, streaming af direkte tv til multicast/unicast kilder, lytning til radiokanaler og EPG.&amp;#10; &amp;#10;For dokumentation besøg: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="de_DE">IPTV Simple PVR Client unterstützt m3u Wiedergabelisten, Streaming von Live-TV für Multicast/Unicast Quellen, Radiosender und EPG.    </description>
     <description lang="el_GR">Απλός Πελάτης PVR του IPTV, με υποστήριξη λιστών αναπαραγωγής m3u, αναπαραγωγή ροών Live TV για πηγές πολλαπλής/μοναδικής διανομής, ακρόαση ραδιοφωνικών καναλιών και EPG.</description>
     <description lang="en_AU">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
-    <description lang="en_GB">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    </description>
+    <description lang="en_GB">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&amp;#10;    &amp;#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="en_NZ">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
     <description lang="en_US">IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.</description>
-    <description lang="es_AR">Cliente simple PVR IPTV.  Reproduce de TV en Vivo multicast/unicast y listas m3u8&#10; . reproduce tambien canales de radio y GEP</description>
+    <description lang="es_AR">Cliente simple PVR IPTV.  Reproduce de TV en Vivo multicast/unicast y listas m3u8&amp;#10; . reproduce tambien canales de radio y GEP</description>
     <description lang="es_ES">El cliente PVR IPTV Simple soporta listas M3U, reproducción de TV en Vivo para origenes multicast/unicast, escucha de canales de radio y EPG</description>
     <description lang="es_MX">IPTV Simple PVR Client soporta listas de reproducción m3u, streaming de Live TV para fuentes multicast / unicast, escuchando para canales de radio y EPG.</description>
     <description lang="fi_FI">IPTV-lisäosa tukee m3u-toistolistoja, multicast/unicast-tv-lähetysten toistoa, radiokanavia ja ohjelmaopasta.</description>
@@ -97,7 +97,7 @@
     <description lang="is_IS">Einfaldur upptökubiðlari fyrir IPTV sem styður m3u spilunarlista, streymingu af beinum útsendingum frá multicast/unicast þjónustum, hlustun á útvarpsrásir og rafræna dagskrárvísa</description>
     <description lang="it_IT">Il client IPTV Simple PVR supporta playlist m3u, streaming della Live TV per sorgenti multicast/unicast e ascoltare canali Radio ed EPG.</description>
     <description lang="ja_JP">IPTV シンプル PVR クライアントは、m3u プレイリスト、マルチキャスト/ユニキャストのライブ TV ストリーミング、ラジオチャンネルや EPG の視聴をサポートしています。</description>
-    <description lang="ko_KR">IPTV Simple PVR 클라이언트는 m3u 재생목록, 스트리밍, 멀티캐스트/유니캐스트 소스의 TV 시청, 라디오 채널과 EPG를 통한 청취를 지원합니다.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    </description>
+    <description lang="ko_KR">IPTV Simple PVR 클라이언트는 m3u 재생목록, 스트리밍, 멀티캐스트/유니캐스트 소스의 TV 시청, 라디오 채널과 EPG를 통한 청취를 지원합니다.&amp;#10;    &amp;#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="lt_LT">IPTV Simple PVR klientas palaiko m3u grojaraščius, TV transliacijas iš multicast/unicast šaltinių, radijo stočių transliacijas ir EPG.</description>
     <description lang="lv_LV">IPTV vienkāršais PVR klients atbalsta m3u spēļsarakstus, tiešraides TV straumēšanu multiraides/uniraides avotiem, radio kanālu klausīšanos un EPG.</description>
     <description lang="mk_MK">IPTV Simple PVR Client поддржува m3u листи, гледање на Live TV од multicast/unicast извори, слушање Радио канали и EPG.</description>
@@ -109,7 +109,7 @@
     <description lang="pt_BR">O cliente de PVR IPTV Simple Client oferece suporte para listas m3u, transmissão de TV ao vivo de fontes multicast/unicast, transmissão de rádios e, ainda, suporte a guia de programação eletrônico - EPG.</description>
     <description lang="pt_PT">Cliente IPTV Simple PVR com suporte a listas de reprodução m3u, transmissão de TV em direto de fontes multidifusão/unidifusão, ouvir estações de rádio e EPG.</description>
     <description lang="ro_RO">PVR Client IPTV suporta liste m3u, redare TV în direct pentru surse de multicast/unicast, ascultare canale radio si EPG.</description>
-    <description lang="ru_RU">IPTV Simple PVR поддерживает просмотр потокового ТВ для юникаст/мультикаст источников, прослушивание радиоканалов и работу с телегидом.&#10;    &#10;Для документации посетите: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    </description>
+    <description lang="ru_RU">IPTV Simple PVR поддерживает просмотр потокового ТВ для юникаст/мультикаст источников, прослушивание радиоканалов и работу с телегидом.&amp;#10;    &amp;#10;Для документации посетите: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <description lang="sk_SK">Jednoduchý IPTV PVR klient podporuje mp3 zoznamy súborov, streamovanie živého televízneho vysielania ako multicast/unicast zdroje, počúvanie rozhlasových kanálov a EPG.</description>
     <description lang="sl_SI">IPTV Simple odjemalec PVR podpira sezname m3u, pretakanja TV v živo za vire multicast/unicast, poslušenje radijskih postaj in EPG.</description>
     <description lang="sr_RS">IPTV Једноставан PVR Клијент подржава m3u листе за репродукцију, стримовање ТВ Уживо за multicast/unicast изворе, слушање Радио канала и EPG.</description>
@@ -117,14 +117,14 @@
     <description lang="sv_SE">IPTV Simple PVR Client stöder m3u-spellistor, strömmande Live-TV för multicast/unicast-källor, radiolyssning och EPG.</description>
     <description lang="szl">Klijynt telewizyje dlŏ telewizyje internetowyj ôbsuguje wykŏzy ôdtwŏrzaniŏ m3u, szpricowanie kanałōw radyjowych i telewizyjnych ze źrōdeł pōnktowych i skupinowych, a tyż fōnkcyje EPG.</description>
     <description lang="tr_TR">IPTV Basit PVR İstemcisi m3u çalma listeleri, multicast/unicast kaynaklar için Canlı TV akışı, radyo kanallarını dinleme ve EPG destekler.</description>
-    <description lang="zh_CN">IPTV 简单 PVR 前端支持 m3u 播放列表、多播/单播源直播电视、收听电台和电子节目单。</description>
-    <description lang="zh_TW">IPTV Simple PVR 用戶端支援m3u 播放列表，來自multicast/unicast 的即時電視串流，收聽廣播及電子節目表。</description>
+    <description lang="zh_CN">IPTV Simple PVR 客户端支持 m3u 播放列表、多播/单播源直播电视、收听电台和电子节目单。    &amp;#10; 访问 https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md 以获取相关文档&amp;#10;    </description>
+    <description lang="zh_TW">IPTV Simple PVR 用戶端支援m3u 播放列表，來自multicast/unicast 的即時電視串流，收聽廣播及電子節目表。&amp;#10;    &amp;#10;查看說明文件請造訪: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&amp;#10;    </description>
     <disclaimer lang="af_ZA">Hierdie is onstabiele sagteware! Die outeurs is op geen manier verantwoordelik vir gefaalde spele, inkorrekte EPG tye, vermorsde ure, of enige ander ongewensde effekte.</disclaimer>
     <disclaimer lang="bg_BG">Тази програма е нестабилна! Авторите не носят отговорност за неуспешно възпроизвеждане, некоректни часове в електронния програмен справочник, пропиляното време и други нежелани ефекти.</disclaimer>
     <disclaimer lang="ca_ES">Aquest programari és inestable! Els autors no es fan responsables de reproduccions fallides, horaris incorrectes a la guia electrònica de programació (EPG), hores perdudes o qualsevol altre efecte no desitjat.</disclaimer>
     <disclaimer lang="cs_CZ">Tento software není stabilní! Autoři nejsou žádným způsobem zodpovědní za neúspěšná přehrávání, chybné časy televizního programu, ztracený čas nebo jakékoliv jiné nežádoucí efekty.</disclaimer>
     <disclaimer lang="cy_GB">Mae'r feddalwedd hon yn fregus! Nid yw'r awduron yn gyfrifol mewn unrhyw ffordd am fethu recordio, amseru gwallus, oriau wedi eu gwastraffu nac effeithiau annymunol eraill.</disclaimer>
-    <disclaimer lang="da_DK">Dette er ustabil software! Ophavsmændene er på ingen måde ansvarlig for mislykkede afspilninger, forkerte EPG-tider, spildte timer, eller andre uønskede konsekvenser.</disclaimer>
+    <disclaimer lang="da_DK">Udviklerne er på ingen måde ansvarlig for mislykkede afspilninger, forkerte EPG-tider, spildte timer eller andre uønskede konsekvenser.</disclaimer>
     <disclaimer lang="de_DE">Die Autoren sind in keiner Weise verantwortlich für fehlgeschlagene Wiedergaben, falsche EPG-Zeiten, verschwendete Zeit oder unerwünschte Effekte jeglicher Art.</disclaimer>
     <disclaimer lang="el_GR">Ασταθές πρόγραμμα! Οι δημιουργοί δεν είναι σε καμία περίπτωση υπεύθυνοι για αποτυχημένες εγγραφές, λανθασμένους χρονοδιακόπτες, χαμένες ώρες, ή κάθε είδους ανεπιθύμητα αποτελέσματα.</disclaimer>
     <disclaimer lang="en_AU">This is unstable software! The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects.</disclaimer>
@@ -153,7 +153,7 @@
     <disclaimer lang="ms_MY">Perisian ini tidak stabi! Pengarang tidak bertanggungjawab atas kegagalan memainkan, pemasa EPG yang tidak betul, pembaziran masa atau sebarang kesan tidak diingini.</disclaimer>
     <disclaimer lang="mt_MT">Dan il-programm mhuwiex stabbli! L-awturi m'huma bl-ebda mod responsabbli għal daqq li ma jirnexxiex, ħinijiet tal-EPG żbaljati, siegħat moħlija jew kwalunkwe effet ieħor mhux mixtieq.</disclaimer>
     <disclaimer lang="nb_NO">Dette er et ustabilt program! Skaperne er på ingen måte ansvarlig for feil ved avspilling, feil programguidetider, bortkastede timer eller andre uønskede ting.</disclaimer>
-    <disclaimer lang="nl_NL">Deze software is niet 100% stabiel! De auteurs zijn op geen enkele wijze aansprakelijk voor mislukte opnames, incorrecte EPG-tijden, verspilde uren, of enig ander ongewild neveneffect..</disclaimer>
+    <disclaimer lang="nl_NL">De auteurs zijn op geen enkele wijze aansprakelijk voor mislukte opnames, incorrecte EPG-tijden, verspilde uren, of enig ander ongewild neveneffect..</disclaimer>
     <disclaimer lang="pl_PL">Oprogramowanie nadal jest w fazie rozwoju i jest niestabilne! Autorzy w żaden sposób nie są odpowiedzialni za nieudane nagrania, błędy w harmonogramie nagrań, zmarnowany czas ani jakiekolwiek inne niepożądane efekty.</disclaimer>
     <disclaimer lang="pt_BR">Este é um software instável! Os autores não são responsáveis por falhas nas reproduções, horários incorretos no EPG, horas perdidas ou quaisquer outros efeitos indesejáveis.</disclaimer>
     <disclaimer lang="pt_PT">Este software é instável! Os autores não podem ser responsabilizados por gravações falhadas, temporizadores incorretos, horas desperdiçadas ou qualquer outro tipo de efeitos indesejáveis...</disclaimer>
@@ -166,7 +166,7 @@
     <disclaimer lang="sv_SE">Denna mjukvara är ostabil! Författarna kan inte på något sätt hållas ansvariga för felaktiga uppspelningar, EPG-tider, bortslösade timmar eller andra oönskade effekter.</disclaimer>
     <disclaimer lang="szl">To je niystabilny softwer! Autōry niy sōm ôdpedzialne za niypodarzōne graniy, niynŏleżne godziny EPG, stracōne godziny i inksze niychciane efekty.</disclaimer>
     <disclaimer lang="tr_TR">Bu kararsız bir yazılımdır! Yazanlar oynatma hatası, yanlış EPG zamanları, harcanmış saatler ya da diğer etkilerden sorumlu değildir.</disclaimer>
-    <disclaimer lang="zh_CN">这是不稳定版的软件！作者不对录像失败、错误定时造成时间浪费或其它不良影响负责。</disclaimer>
+    <disclaimer lang="zh_CN">作者不对播放失败、错误的电子节目单时间造成时间浪费或其它不良影响负责。</disclaimer>
     <disclaimer lang="zh_TW">這是測試中的軟體！原創作者無法針對以下情況負責：包括播放失敗，不正確的電子節目表，多餘的時數，或任何不可預期的不良影響。</disclaimer>
   </extension>
 </addon>

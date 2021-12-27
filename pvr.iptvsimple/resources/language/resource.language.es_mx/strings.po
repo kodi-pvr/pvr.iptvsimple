@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-04-06 21:06+0000\n"
+"PO-Revision-Date: 2021-12-15 06:13+0000\n"
 "Last-Translator: Edson Armando <edsonarmando78@outlook.com>\n"
 "Language-Team: Spanish (Mexico) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/es_mx/>\n"
 "Language: es_mx\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.5.3\n"
+"X-Generator: Weblate 4.9.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -43,7 +43,7 @@ msgstr "Ubicación"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "Ruta local (incluyendo redes locales)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -429,7 +429,7 @@ msgstr "Rango para Ponerse al día"
 #. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
 msgid "Channels support catchup using mode"
-msgstr ""
+msgstr "Los canales soportan Catchup utilizando el modo"
 
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
@@ -459,17 +459,17 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Desactivado"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Predeterminado"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
 msgid "Append"
-msgstr ""
+msgstr "Agregar"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30113"
@@ -489,48 +489,48 @@ msgstr ""
 #. label: Catchup - catchupOverrideMode
 msgctxt "#30116"
 msgid "Include channels"
-msgstr ""
+msgstr "Incluir canales"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30117"
 msgid "without catchup mode"
-msgstr ""
+msgstr "sin modo catchup"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30118"
 msgid "with catchup mode"
-msgstr ""
+msgstr "con modo catchup"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30119"
 msgid "with and without catchup mode (all channels)"
-msgstr ""
+msgstr "sin y con modo catchup (todos los canales)"
 
 #. label-category: timeshift
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr ""
+msgstr "Timeshift"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
 msgid "Enable timeshift"
-msgstr ""
+msgstr "Activar timeshift"
 
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr ""
+msgstr "Activar timeshift para transmisiones HTTP"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr ""
+msgstr "- Modificar configuración de inputstream.ffmpegdirect..."
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr ""
+msgstr "Configuración de Inputstream"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
