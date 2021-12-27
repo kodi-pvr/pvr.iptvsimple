@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="20.1.2"
-  name="IPTV Simple"
+  version="20.2.0"
+  name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
     <import addon="inputstream.ffmpegdirect" minversion="1.19.0"/>
