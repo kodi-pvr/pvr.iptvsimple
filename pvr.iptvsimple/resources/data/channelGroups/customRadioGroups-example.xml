@@ -2,8 +2,7 @@
 
 Custom Channel Groups:
  - Allows users to create a bespoke list of groups to load.
- - For each name that matches a group/bouquet name from the set top box include it in the channels loaded
- - If no names match the addon will load last scanned by default.
+ - For each name that matches a group name from the M3U include it in the channels loaded
  - channelGroupName is the only value to be set
 
 If you are creating your own Custom Channel Groups file make a copy of this file in the same directory so it's not overwritten and start from there.
