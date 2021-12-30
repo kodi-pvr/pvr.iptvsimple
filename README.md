@@ -342,7 +342,7 @@ The following files are currently available with the addon:
 
 Note that both these files are provided as examples and are overwritten each time the addon starts. Therefore you should make copies and use those for your custom config.
 
-The format is quite simple, containing a number of channel group/bouquet names.
+The format is quite simple, containing a number of channel group names.
 
 ### Provider Name Mappings (Channels)
 
