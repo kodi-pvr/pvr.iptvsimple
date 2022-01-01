@@ -22,7 +22,7 @@
 
 #include <kodi/addon-instance/PVR.h>
 
-class ATTRIBUTE_HIDDEN PVRIptvData
+class ATTR_DLL_LOCAL PVRIptvData
   : public kodi::addon::CAddonBase,
     public kodi::addon::CInstancePVRClient
 {
@@ -33,7 +33,7 @@ public:
   // kodi::addon::CAddonBase functions
   //@{
   ADDON_STATUS Create() override;
-  ADDON_STATUS SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue) override;
+  ADDON_STATUS SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue) override;
   //@}
 
   // kodi::addon::CInstancePVRClient functions

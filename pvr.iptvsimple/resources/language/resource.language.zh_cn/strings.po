@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-07-10 06:29+0000\n"
+"PO-Revision-Date: 2021-12-01 06:13+0000\n"
 "Last-Translator: Meano Lee <meanocat@gmail.com>\n"
 "Language-Team: Chinese (China) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/zh_cn/>\n"
 "Language: zh_cn\n"
@@ -15,19 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.1\n"
+"X-Generator: Weblate 4.9.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "Kodi PVR 插件需要 IPTV 支持。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr "支持 IPTV 的 Kodi PVR 插件。"
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    "
-msgstr "IPTV 简单 PVR 前端支持 m3u 播放列表、多播/单播源直播电视、收听电台和电子节目单。"
+msgstr "IPTV Simple PVR 客户端支持 m3u 播放列表、多播/单播源直播电视、收听电台和电子节目单。    &#10; 访问 https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md 以获取相关文档&#10;    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "这是不稳定版的软件！作者不对录像失败、错误定时造成时间浪费或其它不良影响负责。"
+msgstr "作者不对播放失败、错误的电子节目单时间造成时间浪费或其它不良影响负责。"
 
 #. settings labels
 #. label: General - m3uPathType
@@ -706,34 +706,34 @@ msgstr ""
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "若位置是 [B]本地路径[/B] 则此设置项需要包含一个有效路径。"
 
 #. help: EPG Settings - epgUrl
 msgctxt "#30623"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "若位置是 [B]远程路径[/B] 则此设置项需要包含一个有效 URL。"
 
 #. help: EPG Settings - epgCache
 msgctxt "#30624"
 msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
-msgstr ""
+msgstr "若位置为 [B]远程路径[/B] 则选择是否将 XMLTV 文件缓存到本地。"
 
 #. help: EPG Settings - epgTimeShift
 msgctxt "#30625"
 msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
-msgstr ""
+msgstr "使用该值调整电子节目单时间，从 -12 小时到 +14 小时。"
 
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
-msgstr ""
+msgstr "是否用`电子节目单时移`覆盖所有频道的时移。若未启用覆盖，则使用`电子节目单时移`加上每个频道单独的时移。"
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
 #. help-category: Channel Logos
 msgctxt "#30640"
 msgid "Settings related to Channel Logos."
-msgstr ""
+msgstr "与频道 Logo 相关的设置。"
 
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
@@ -743,12 +743,12 @@ msgstr ""
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
-msgstr ""
+msgstr "若位置是 [B]本地路径[/B] 则此设置项需要包含一个有效文件夹。"
 
 #. help: Channel Logos - logoBaseUrl
 msgctxt "#30643"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
-msgstr ""
+msgstr "若位置是 [B]远程路径[/B] 则此设置项需要包含一个有效基础 URL。"
 
 #. help: Channel Logos - logoFromEpg
 msgctxt "#30644"
@@ -758,14 +758,14 @@ msgstr ""
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
-msgstr ""
+msgstr "如果为 Logo 选择了本地路径则会忽略 M3U 文件中的任何 Logo。"
 
 # empty strings from id 30645 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
 msgid "Settings related to genres."
-msgstr ""
+msgstr "与节目类型相关的设置。"
 
 #. help: Genres - useEpgGenreText
 msgctxt "#30661"
@@ -780,12 +780,12 @@ msgstr ""
 #. help: Genres - genresPath
 msgctxt "#30663"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "若位置是 [B]本地路径[/B] 则此设置项需要包含一个有效路径。"
 
 #. help: Genres - genresUrl
 msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "若位置是 [B]远程路径[/B] 则此设置项需要包含一个有效 URL。"
 
 # empty strings from id 30665 to 30679
 #. help info - Advanced
@@ -901,7 +901,7 @@ msgstr ""
 #. help: Timeshift - timeshiftEnabled
 msgctxt "#30721"
 msgid "Enable the timeshift feature."
-msgstr ""
+msgstr "启用时移特性。"
 
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"

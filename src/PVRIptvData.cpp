@@ -39,7 +39,7 @@ ADDON_STATUS PVRIptvData::Create()
   Logger::GetInstance().SetImplementation([](LogLevel level, const char* message)
   {
     /* Convert the log level */
-    AddonLog addonLevel;
+    ADDON_LOG addonLevel;
 
     switch (level)
     {
@@ -66,7 +66,7 @@ ADDON_STATUS PVRIptvData::Create()
 
   Logger::Log(LogLevel::LEVEL_INFO, "%s - Creating the PVR IPTV Simple add-on", __FUNCTION__);
 
-  Settings::GetInstance().ReadFromAddon(kodi::GetBaseUserPath(), kodi::GetAddonPath());
+  Settings::GetInstance().ReadFromAddon(kodi::addon::GetUserPath(), kodi::addon::GetAddonPath());
 
   m_channels.Init();
   m_channelGroups.Init();
@@ -439,7 +439,7 @@ PVR_ERROR PVRIptvData::GetSignalStatus(int channelUid, kodi::addon::PVRSignalSta
  * Settings
  **************************************************************************/
 
-ADDON_STATUS PVRIptvData::SetSetting(const std::string& settingName, const kodi::CSettingValue& settingValue)
+ADDON_STATUS PVRIptvData::SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
 {
   std::lock_guard<std::mutex> lock(m_mutex);
 

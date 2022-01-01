@@ -106,9 +106,9 @@ int ChannelGroups::AddChannelGroup(iptvsimple::data::ChannelGroup& channelGroup)
     // so let's add ' (Radio)' or ' (TV)' depending on which group was added first.
 
     if (existingChannelGroup->IsRadio())
-      channelGroup.SetGroupName(channelGroup.GetGroupName() + " (" + kodi::GetLocalizedString(30450) + ")"); // ' (TV)';
+      channelGroup.SetGroupName(channelGroup.GetGroupName() + " (" + kodi::addon::GetLocalizedString(30450) + ")"); // ' (TV)';
     else
-      channelGroup.SetGroupName(channelGroup.GetGroupName() + " (" + kodi::GetLocalizedString(30451) + ")"); // ' (Radio)';
+      channelGroup.SetGroupName(channelGroup.GetGroupName() + " (" + kodi::addon::GetLocalizedString(30451) + ")"); // ' (Radio)';
 
     existingChannelGroup = FindChannelGroup(channelGroup.GetGroupName());
   }

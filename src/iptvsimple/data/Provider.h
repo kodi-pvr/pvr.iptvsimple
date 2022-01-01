@@ -17,7 +17,7 @@ namespace iptvsimple
 {
   namespace data
   {
-    class ATTRIBUTE_HIDDEN Provider
+    class ATTR_DLL_LOCAL Provider
     {
     public:
       Provider() = default;

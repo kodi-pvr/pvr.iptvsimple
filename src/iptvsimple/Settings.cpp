@@ -27,28 +27,28 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_clientPath = clientPath;
 
   // M3U
-  m_m3uPathType = kodi::GetSettingEnum<PathType>("m3uPathType", PathType::REMOTE_PATH);
-  m_m3uPath = kodi::GetSettingString("m3uPath");
-  m_m3uUrl = kodi::GetSettingString("m3uUrl");
-  m_cacheM3U = kodi::GetSettingBoolean("m3uCache");
-  m_startChannelNumber = kodi::GetSettingInt("startNum", 1);
-  m_numberChannelsByM3uOrderOnly = kodi::GetSettingBoolean("numberByOrder", false);
-  m_m3uRefreshMode = kodi::GetSettingEnum<RefreshMode>("m3uRefreshMode", RefreshMode::DISABLED);
-  m_m3uRefreshIntervalMins = kodi::GetSettingInt("m3uRefreshIntervalMins", 60);
-  m_m3uRefreshHour = kodi::GetSettingInt("m3uRefreshHour", 4);
-  m_defaultProviderName = kodi::GetSettingString("defaultProviderName");
-  m_enableProviderMappings = kodi::GetSettingBoolean("enableProviderMappings", false);
-  m_providerMappingFile = kodi::GetSettingString("providerMappingFile", DEFAULT_PROVIDER_NAME_MAP_FILE);
+  m_m3uPathType = kodi::addon::GetSettingEnum<PathType>("m3uPathType", PathType::REMOTE_PATH);
+  m_m3uPath = kodi::addon::GetSettingString("m3uPath");
+  m_m3uUrl = kodi::addon::GetSettingString("m3uUrl");
+  m_cacheM3U = kodi::addon::GetSettingBoolean("m3uCache");
+  m_startChannelNumber = kodi::addon::GetSettingInt("startNum", 1);
+  m_numberChannelsByM3uOrderOnly = kodi::addon::GetSettingBoolean("numberByOrder", false);
+  m_m3uRefreshMode = kodi::addon::GetSettingEnum<RefreshMode>("m3uRefreshMode", RefreshMode::DISABLED);
+  m_m3uRefreshIntervalMins = kodi::addon::GetSettingInt("m3uRefreshIntervalMins", 60);
+  m_m3uRefreshHour = kodi::addon::GetSettingInt("m3uRefreshHour", 4);
+  m_defaultProviderName = kodi::addon::GetSettingString("defaultProviderName");
+  m_enableProviderMappings = kodi::addon::GetSettingBoolean("enableProviderMappings", false);
+  m_providerMappingFile = kodi::addon::GetSettingString("providerMappingFile", DEFAULT_PROVIDER_NAME_MAP_FILE);
 
   // Groups
-  m_allowTVChannelGroupsOnly = kodi::GetSettingBoolean("tvChannelGroupsOnly", false);
-  m_tvChannelGroupMode = kodi::GetSettingEnum<ChannelGroupMode>("tvGroupMode", ChannelGroupMode::ALL_GROUPS);
-  m_numTVGroups = kodi::GetSettingInt("numTvGroups", DEFAULT_NUM_GROUPS);
-  m_oneTVGroup = kodi::GetSettingString("oneTvGroup");
-  m_twoTVGroup = kodi::GetSettingString("twoTvGroup");
-  m_threeTVGroup = kodi::GetSettingString("threeTvGroup");
-  m_fourTVGroup = kodi::GetSettingString("fourTvGroup");
-  m_fiveTVGroup = kodi::GetSettingString("fiveTvGroup");
+  m_allowTVChannelGroupsOnly = kodi::addon::GetSettingBoolean("tvChannelGroupsOnly", false);
+  m_tvChannelGroupMode = kodi::addon::GetSettingEnum<ChannelGroupMode>("tvGroupMode", ChannelGroupMode::ALL_GROUPS);
+  m_numTVGroups = kodi::addon::GetSettingInt("numTvGroups", DEFAULT_NUM_GROUPS);
+  m_oneTVGroup = kodi::addon::GetSettingString("oneTvGroup");
+  m_twoTVGroup = kodi::addon::GetSettingString("twoTvGroup");
+  m_threeTVGroup = kodi::addon::GetSettingString("threeTvGroup");
+  m_fourTVGroup = kodi::addon::GetSettingString("fourTvGroup");
+  m_fiveTVGroup = kodi::addon::GetSettingString("fiveTvGroup");
   if (m_tvChannelGroupMode == ChannelGroupMode::SOME_GROUPS)
   {
     m_customTVChannelGroupNameList.clear();
@@ -64,18 +64,18 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
     if (!m_fiveTVGroup.empty() && m_numTVGroups >= 5)
       m_customTVChannelGroupNameList.emplace_back(m_fiveTVGroup);
   }
-  m_customTVGroupsFile = kodi::GetSettingString("customTvGroupsFile", DEFAULT_CUSTOM_TV_GROUPS_FILE);
+  m_customTVGroupsFile = kodi::addon::GetSettingString("customTvGroupsFile", DEFAULT_CUSTOM_TV_GROUPS_FILE);
   if (m_tvChannelGroupMode == ChannelGroupMode::CUSTOM_GROUPS)
     LoadCustomChannelGroupFile(m_customTVGroupsFile, m_customTVChannelGroupNameList);
 
-  m_allowRadioChannelGroupsOnly = kodi::GetSettingBoolean("radioChannelGroupsOnly", false);
-  m_radioChannelGroupMode = kodi::GetSettingEnum<ChannelGroupMode>("radioGroupMode", ChannelGroupMode::ALL_GROUPS);
-  m_numRadioGroups = kodi::GetSettingInt("numRadioGroups", DEFAULT_NUM_GROUPS);
-  m_oneRadioGroup = kodi::GetSettingString("oneRadioGroup");
-  m_twoRadioGroup = kodi::GetSettingString("twoRadioGroup");
-  m_threeRadioGroup = kodi::GetSettingString("threeRadioGroup");
-  m_fourRadioGroup = kodi::GetSettingString("fourRadioGroup");
-  m_fiveRadioGroup = kodi::GetSettingString("fiveRadioGroup");
+  m_allowRadioChannelGroupsOnly = kodi::addon::GetSettingBoolean("radioChannelGroupsOnly", false);
+  m_radioChannelGroupMode = kodi::addon::GetSettingEnum<ChannelGroupMode>("radioGroupMode", ChannelGroupMode::ALL_GROUPS);
+  m_numRadioGroups = kodi::addon::GetSettingInt("numRadioGroups", DEFAULT_NUM_GROUPS);
+  m_oneRadioGroup = kodi::addon::GetSettingString("oneRadioGroup");
+  m_twoRadioGroup = kodi::addon::GetSettingString("twoRadioGroup");
+  m_threeRadioGroup = kodi::addon::GetSettingString("threeRadioGroup");
+  m_fourRadioGroup = kodi::addon::GetSettingString("fourRadioGroup");
+  m_fiveRadioGroup = kodi::addon::GetSettingString("fiveRadioGroup");
   if (m_radioChannelGroupMode == ChannelGroupMode::SOME_GROUPS)
   {
     m_customRadioChannelGroupNameList.clear();
@@ -91,66 +91,66 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
     if (!m_fiveRadioGroup.empty() && m_numRadioGroups >= 5)
       m_customRadioChannelGroupNameList.emplace_back(m_fiveRadioGroup);
   }
-  m_customRadioGroupsFile = kodi::GetSettingString("customRadioGroupsFile", DEFAULT_CUSTOM_RADIO_GROUPS_FILE);
+  m_customRadioGroupsFile = kodi::addon::GetSettingString("customRadioGroupsFile", DEFAULT_CUSTOM_RADIO_GROUPS_FILE);
   if (m_radioChannelGroupMode == ChannelGroupMode::CUSTOM_GROUPS)
     LoadCustomChannelGroupFile(m_customRadioGroupsFile, m_customRadioChannelGroupNameList);
 
   // EPG
-  m_epgPathType = kodi::GetSettingEnum<PathType>("epgPathType", PathType::REMOTE_PATH);
-  m_epgPath = kodi::GetSettingString("epgPath");
-  m_epgUrl = kodi::GetSettingString("epgUrl");
-  m_cacheEPG = kodi::GetSettingBoolean("epgCache", true);
-  m_epgTimeShiftHours = kodi::GetSettingFloat("epgTimeShift", 0.0f);
-  m_tsOverride = kodi::GetSettingBoolean("epgTSOverride", true);
+  m_epgPathType = kodi::addon::GetSettingEnum<PathType>("epgPathType", PathType::REMOTE_PATH);
+  m_epgPath = kodi::addon::GetSettingString("epgPath");
+  m_epgUrl = kodi::addon::GetSettingString("epgUrl");
+  m_cacheEPG = kodi::addon::GetSettingBoolean("epgCache", true);
+  m_epgTimeShiftHours = kodi::addon::GetSettingFloat("epgTimeShift", 0.0f);
+  m_tsOverride = kodi::addon::GetSettingBoolean("epgTSOverride", true);
 
   //Genres
-  m_useEpgGenreTextWhenMapping = kodi::GetSettingBoolean("useEpgGenreText", false);
-  m_genresPathType = kodi::GetSettingEnum<PathType>("genresPathType", PathType::LOCAL_PATH);
-  m_genresPath = kodi::GetSettingString("genresPath");
-  m_genresUrl = kodi::GetSettingString("genresUrl");
+  m_useEpgGenreTextWhenMapping = kodi::addon::GetSettingBoolean("useEpgGenreText", false);
+  m_genresPathType = kodi::addon::GetSettingEnum<PathType>("genresPathType", PathType::LOCAL_PATH);
+  m_genresPath = kodi::addon::GetSettingString("genresPath");
+  m_genresUrl = kodi::addon::GetSettingString("genresUrl");
 
   // Channel Logos
-  m_logoPathType = kodi::GetSettingEnum<PathType>("logoPathType", PathType::REMOTE_PATH);
-  m_logoPath = kodi::GetSettingString("logoPath");
-  m_logoBaseUrl = kodi::GetSettingString("logoBaseUrl");
-  m_epgLogosMode = kodi::GetSettingEnum<EpgLogosMode>("logoFromEpg", EpgLogosMode::IGNORE_XMLTV);
-  m_useLocalLogosOnly = kodi::GetSettingBoolean("useLogosLocalPathOnly", false);
+  m_logoPathType = kodi::addon::GetSettingEnum<PathType>("logoPathType", PathType::REMOTE_PATH);
+  m_logoPath = kodi::addon::GetSettingString("logoPath");
+  m_logoBaseUrl = kodi::addon::GetSettingString("logoBaseUrl");
+  m_epgLogosMode = kodi::addon::GetSettingEnum<EpgLogosMode>("logoFromEpg", EpgLogosMode::IGNORE_XMLTV);
+  m_useLocalLogosOnly = kodi::addon::GetSettingBoolean("useLogosLocalPathOnly", false);
 
   // Media m_mediaEnabled
-  m_mediaEnabled = kodi::GetSettingBoolean("mediaEnabled", true);
-  m_showVodAsRecordings = kodi::GetSettingBoolean("mediaVODAsRecordings", true);
-  m_groupMediaByTitle = kodi::GetSettingBoolean("mediaGroupByTitle", true);
-  m_groupMediaBySeason = kodi::GetSettingBoolean("mediaGroupBySeason", true);
-  m_includeShowInfoInMediaTitle = kodi::GetSettingBoolean("mediaTitleSeasonEpisode", false);
+  m_mediaEnabled = kodi::addon::GetSettingBoolean("mediaEnabled", true);
+  m_showVodAsRecordings = kodi::addon::GetSettingBoolean("mediaVODAsRecordings", true);
+  m_groupMediaByTitle = kodi::addon::GetSettingBoolean("mediaGroupByTitle", true);
+  m_groupMediaBySeason = kodi::addon::GetSettingBoolean("mediaGroupBySeason", true);
+  m_includeShowInfoInMediaTitle = kodi::addon::GetSettingBoolean("mediaTitleSeasonEpisode", false);
 
   // Timeshift
-  m_timeshiftEnabled = kodi::GetSettingBoolean("timeshiftEnabled", false);
-  m_timeshiftEnabledAll = kodi::GetSettingBoolean("timeshiftEnabledAll", false);
-  m_timeshiftEnabledHttp = kodi::GetSettingBoolean("timeshiftEnabledHttp", false);
-  m_timeshiftEnabledUdp = kodi::GetSettingBoolean("timeshiftEnabledUdp", false);
-  m_timeshiftEnabledCustom = kodi::GetSettingBoolean("timeshiftEnabledCustom", false);
+  m_timeshiftEnabled = kodi::addon::GetSettingBoolean("timeshiftEnabled", false);
+  m_timeshiftEnabledAll = kodi::addon::GetSettingBoolean("timeshiftEnabledAll", false);
+  m_timeshiftEnabledHttp = kodi::addon::GetSettingBoolean("timeshiftEnabledHttp", false);
+  m_timeshiftEnabledUdp = kodi::addon::GetSettingBoolean("timeshiftEnabledUdp", false);
+  m_timeshiftEnabledCustom = kodi::addon::GetSettingBoolean("timeshiftEnabledCustom", false);
 
   // Catchup
-  m_catchupEnabled = kodi::GetSettingBoolean("catchupEnabled", false);
-  m_catchupQueryFormat = kodi::GetSettingString("catchupQueryFormat");
-  m_catchupDays = kodi::GetSettingInt("catchupDays", 5);
-  m_allChannelsCatchupMode = kodi::GetSettingEnum<CatchupMode>("allChannelsCatchupMode", CatchupMode::DISABLED);
-  m_catchupOverrideMode = kodi::GetSettingEnum<CatchupOverrideMode>("catchupOverrideMode", CatchupOverrideMode::WITHOUT_TAGS);
-  m_catchupCorrectionHours = kodi::GetSettingFloat("catchupCorrection", 0.0f);
-  m_catchupPlayEpgAsLive = kodi::GetSettingBoolean("catchupPlayEpgAsLive", false);
-  m_catchupWatchEpgBeginBufferMins = kodi::GetSettingInt("catchupWatchEpgBeginBufferMins", 5);
-  m_catchupWatchEpgEndBufferMins = kodi::GetSettingInt("catchupWatchEpgEndBufferMins", 15);
-  m_catchupOnlyOnFinishedProgrammes = kodi::GetSettingBoolean("catchupOnlyOnFinishedProgrammes", false);
+  m_catchupEnabled = kodi::addon::GetSettingBoolean("catchupEnabled", false);
+  m_catchupQueryFormat = kodi::addon::GetSettingString("catchupQueryFormat");
+  m_catchupDays = kodi::addon::GetSettingInt("catchupDays", 5);
+  m_allChannelsCatchupMode = kodi::addon::GetSettingEnum<CatchupMode>("allChannelsCatchupMode", CatchupMode::DISABLED);
+  m_catchupOverrideMode = kodi::addon::GetSettingEnum<CatchupOverrideMode>("catchupOverrideMode", CatchupOverrideMode::WITHOUT_TAGS);
+  m_catchupCorrectionHours = kodi::addon::GetSettingFloat("catchupCorrection", 0.0f);
+  m_catchupPlayEpgAsLive = kodi::addon::GetSettingBoolean("catchupPlayEpgAsLive", false);
+  m_catchupWatchEpgBeginBufferMins = kodi::addon::GetSettingInt("catchupWatchEpgBeginBufferMins", 5);
+  m_catchupWatchEpgEndBufferMins = kodi::addon::GetSettingInt("catchupWatchEpgEndBufferMins", 15);
+  m_catchupOnlyOnFinishedProgrammes = kodi::addon::GetSettingBoolean("catchupOnlyOnFinishedProgrammes", false);
 
   // Advanced
-  m_transformMulticastStreamUrls = kodi::GetSettingBoolean("transformMulticastStreamUrls", false);
-  m_udpxyHost = kodi::GetSettingString("udpxyHost");
-  m_udpxyPort = kodi::GetSettingInt("udpxyPort", DEFAULT_UDPXY_MULTICAST_RELAY_PORT);
-  m_useFFmpegReconnect = kodi::GetSettingBoolean("useFFmpegReconnect");
-  m_useInputstreamAdaptiveforHls = kodi::GetSettingBoolean("useInputstreamAdaptiveforHls", false);
-  m_defaultUserAgent = kodi::GetSettingString("defaultUserAgent");
-  m_defaultInputstream = kodi::GetSettingString("defaultInputstream");
-  m_defaultMimeType = kodi::GetSettingString("defaultMimeType");
+  m_transformMulticastStreamUrls = kodi::addon::GetSettingBoolean("transformMulticastStreamUrls", false);
+  m_udpxyHost = kodi::addon::GetSettingString("udpxyHost");
+  m_udpxyPort = kodi::addon::GetSettingInt("udpxyPort", DEFAULT_UDPXY_MULTICAST_RELAY_PORT);
+  m_useFFmpegReconnect = kodi::addon::GetSettingBoolean("useFFmpegReconnect");
+  m_useInputstreamAdaptiveforHls = kodi::addon::GetSettingBoolean("useInputstreamAdaptiveforHls", false);
+  m_defaultUserAgent = kodi::addon::GetSettingString("defaultUserAgent");
+  m_defaultInputstream = kodi::addon::GetSettingString("defaultInputstream");
+  m_defaultMimeType = kodi::addon::GetSettingString("defaultMimeType");
 }
 
 void Settings::ReloadAddonSettings()
@@ -158,7 +158,7 @@ void Settings::ReloadAddonSettings()
   ReadFromAddon(m_userPath, m_clientPath);
 }
 
-ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSettingValue& settingValue)
+ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
 {
   // reset cache and restart addon
 

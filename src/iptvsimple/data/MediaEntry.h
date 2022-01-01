@@ -20,7 +20,7 @@ namespace iptvsimple
 {
   namespace data
   {
-    class ATTRIBUTE_HIDDEN MediaEntry : public BaseEntry
+    class ATTR_DLL_LOCAL MediaEntry : public BaseEntry
     {
     public:
       const std::string& GetMediaEntryId() const { return m_mediaEntryId; }

@@ -283,12 +283,12 @@ bool FileUtils::CopyDirectory(const std::string& sourceDir, const std::string& t
 
 std::string FileUtils::GetSystemAddonPath()
 {
-  return kodi::GetAddonPath();
+  return kodi::addon::GetAddonPath();
 }
 
 std::string FileUtils::GetResourceDataPath()
 {
-  return kodi::GetAddonPath("/resources/data");
+  return kodi::addon::GetAddonPath("/resources/data");
 }
 
 std::string FileUtils::ReadFileContents(kodi::vfs::CFile& file)
