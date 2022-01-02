@@ -1,3 +1,6 @@
+v20.2.1
+- Remove redundant PVR from addon name
+
 v20.2.0
 - Translation updates by Weblate
 - Kodi main API update to version 2.0.0
