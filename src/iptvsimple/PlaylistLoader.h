@@ -53,6 +53,13 @@ namespace iptvsimple
 
   class PlaylistLoader
   {
+    struct M3UHeaderStrings {
+        // members will be public without `private:` keyword
+        std::string m_catchup;
+        std::string m_catchupDays;
+        std::string m_catchupSource;
+    };    
+
   public:
     PlaylistLoader(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels,
                    iptvsimple::ChannelGroups& channelGroups, iptvsimple::Providers& providers,
@@ -78,5 +85,7 @@ namespace iptvsimple
     iptvsimple::Channels& m_channels;
     iptvsimple::Media& m_media;
     kodi::addon::CInstancePVRClient* m_client;
+
+    M3UHeaderStrings m_m3uHeaderStrings;
   };
 } //namespace iptvsimple
