@@ -432,12 +432,15 @@ bool Channel::GenerateFlussonicCatchupSource(const std::string& url)
   // catchup: http://list.tv:8888/325/timeshift_rel-{offset:1}.m3u8?token=secret
   // stream:  http://list.tv:8888/325/mono.m3u8?token=secret
   // catchup: http://list.tv:8888/325/mono-timeshift_rel-{offset:1}.m3u8?token=secret
+  // stream:  http://list.tv:8888/325/live?token=my_token
+  // catchup: http://list.tv:8888/325/{utc}.ts?token=my_token
 
   static std::regex fsRegex("^(http[s]?://[^/]+)/(.*)/([^/]*)(mpegts|\\.m3u8)(\\?.+=.+)?$");
   std::smatch matches;
 
   if (std::regex_match(url, matches, fsRegex))
   {
+    // This is path for well defined stream naming
     if (matches.size() == 6)
     {
       const std::string fsHost = matches[1].str();
@@ -460,6 +463,31 @@ bool Channel::GenerateFlussonicCatchupSource(const std::string& url)
       }
 
       return true;
+    }
+  }
+  else
+  {
+    // Flussonic servers will return a stream with any directory name after the channel id
+    // so we handle this case separately
+    static std::regex genericRegex("^(http[s]?://[^/]+)/(.*)/([^\\?]*)(\\?.+=.+)?$");
+    std::smatch genericMmatches;
+
+    if (std::regex_match(url, genericMmatches, genericRegex))
+    {
+      if (genericMmatches.size() == 5)
+      {
+        const std::string fsHost = genericMmatches[1].str();
+        const std::string fsChannelId = genericMmatches[2].str();
+        const std::string fsStreamType = genericMmatches[3].str();
+        const std::string fsUrlAppend = genericMmatches[4].str();
+
+        if (m_isCatchupTSStream) // the catchup type was "flussonic-ts" or "fs"
+          m_catchupSource = fsHost + "/" + fsChannelId + "/timeshift_abs-${start}.ts" + fsUrlAppend;
+        else // the catchup type was "flussonic" or "flussonic-hls"
+          m_catchupSource = fsHost + "/" + fsChannelId + "/timeshift_rel-{offset:1}.m3u8" + fsUrlAppend;
+
+        return true;
+      }
     }
   }
 
