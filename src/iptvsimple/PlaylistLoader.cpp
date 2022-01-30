@@ -312,8 +312,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     if (StringUtils::EqualsNoCase(strCatchup, "default") || StringUtils::EqualsNoCase(strCatchup, "append") ||
         StringUtils::EqualsNoCase(strCatchup, "shift") || StringUtils::EqualsNoCase(strCatchup, "flussonic") ||
-        StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs") ||
-        StringUtils::EqualsNoCase(strCatchup, "xc") || StringUtils::EqualsNoCase(strCatchup, "vod"))
+        StringUtils::EqualsNoCase(strCatchup, "flussonic-hls") || StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") ||
+        StringUtils::EqualsNoCase(strCatchup, "fs") || StringUtils::EqualsNoCase(strCatchup, "xc") ||
+        StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetHasCatchup(true);
 
     if (StringUtils::EqualsNoCase(strCatchup, "default"))
@@ -322,12 +323,16 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetCatchupMode(CatchupMode::APPEND);
     else if (StringUtils::EqualsNoCase(strCatchup, "shift"))
       channel.SetCatchupMode(CatchupMode::SHIFT);
-    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
+    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "flussonic-hls") ||
+             StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
       channel.SetCatchupMode(CatchupMode::FLUSSONIC);
     else if (StringUtils::EqualsNoCase(strCatchup, "xc"))
       channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
     else if (StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetCatchupMode(CatchupMode::VOD);
+
+    if (StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
+      channel.SetCatchupTSStream(true);
 
     if (!channel.HasCatchup() && xeevCatchup && (StringUtils::StartsWith(channelName, "* ") || StringUtils::StartsWith(channelName, "[+] ")))
     {
