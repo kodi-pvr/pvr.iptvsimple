@@ -306,6 +306,10 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       strTvgId.append(buff);
     }
 
+    // If don't have a channel number try another format
+    if (strChnlNo.empty())
+      ReadMarkerValue(infoLine, CHANNEL_NUMBER_MARKER);
+
     if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
     {
       size_t found = strChnlNo.find('.');
