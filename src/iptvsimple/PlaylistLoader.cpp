@@ -104,10 +104,22 @@ bool PlaylistLoader::LoadPlayList()
           catchupCorrectionSecs = static_cast<int>(catchupCorrectionDecimal * 3600.0);
         }
 
-        std::string strXeevCatchup = ReadMarkerValue(line, CATCHUP);
-        if (strXeevCatchup == "xc")
+        //
+        // If there are catchup values in the M3U header we read them to be used as defaults later on
+        //
+        m_m3uHeaderStrings.m_catchup = ReadMarkerValue(line, CATCHUP);
+        // There is some xeev specific functionality if specificed in the header
+        if (m_m3uHeaderStrings.m_catchup == "xc")
           xeevCatchup = true;
+        // Some providers use a 'catchup-type' tag instead of 'catchup'
+        if (m_m3uHeaderStrings.m_catchup.empty())
+          m_m3uHeaderStrings.m_catchup = ReadMarkerValue(line, CATCHUP_TYPE);
+        m_m3uHeaderStrings.m_catchupDays = ReadMarkerValue(line, CATCHUP_DAYS);
+        m_m3uHeaderStrings.m_catchupSource = ReadMarkerValue(line, CATCHUP_SOURCE);
 
+        //
+        // Read either of the M3U header based EPG xmltv urls
+        //
         std::string tvgUrl = ReadMarkerValue(line, TVG_URL_MARKER);
         if (tvgUrl.empty())
           tvgUrl = ReadMarkerValue(line, TVG_URL_OTHER_MARKER);
@@ -280,6 +292,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     // Some providers use a 'catchup-type' tag instead of 'catchup'
     if (strCatchup.empty())
       strCatchup = ReadMarkerValue(infoLine, CATCHUP_TYPE);
+    // If we still don't have a value use the header supplied value if there is one
+    if (strCatchup.empty() && !m_m3uHeaderStrings.m_catchup.empty())
+      strCatchup = m_m3uHeaderStrings.m_catchup;
 
     if (strTvgId.empty())
       strTvgId = ReadMarkerValue(infoLine, TVG_INFO_ID_MARKER_UC);
@@ -290,6 +305,10 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       sprintf(buff, "%d", std::atoi(infoLine.c_str()));
       strTvgId.append(buff);
     }
+
+    // If don't have a channel number try another format
+    if (strChnlNo.empty())
+      ReadMarkerValue(infoLine, CHANNEL_NUMBER_MARKER);
 
     if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
     {
@@ -311,6 +330,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     channel.SetTvgId(strTvgId);
     channel.SetTvgName(strTvgName);
     channel.SetCatchupSource(strCatchupSource);
+    // If we still don't have a value use the header supplied value if there is one
+    if (strCatchupSource.empty() && !m_m3uHeaderStrings.m_catchupSource.empty())
+      strCatchupSource = m_m3uHeaderStrings.m_catchupSource;
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
     if (Settings::GetInstance().GetLogoPathType() == PathType::LOCAL_PATH && Settings::GetInstance().UseLocalLogosOnlyIgnoreM3U())
@@ -327,8 +349,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     if (StringUtils::EqualsNoCase(strCatchup, "default") || StringUtils::EqualsNoCase(strCatchup, "append") ||
         StringUtils::EqualsNoCase(strCatchup, "shift") || StringUtils::EqualsNoCase(strCatchup, "flussonic") ||
-        StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs") ||
-        StringUtils::EqualsNoCase(strCatchup, "xc") || StringUtils::EqualsNoCase(strCatchup, "vod"))
+        StringUtils::EqualsNoCase(strCatchup, "flussonic-hls") || StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") ||
+        StringUtils::EqualsNoCase(strCatchup, "fs") || StringUtils::EqualsNoCase(strCatchup, "xc") ||
+        StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetHasCatchup(true);
 
     if (StringUtils::EqualsNoCase(strCatchup, "default"))
@@ -337,12 +360,16 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetCatchupMode(CatchupMode::APPEND);
     else if (StringUtils::EqualsNoCase(strCatchup, "shift"))
       channel.SetCatchupMode(CatchupMode::SHIFT);
-    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
+    else if (StringUtils::EqualsNoCase(strCatchup, "flussonic") || StringUtils::EqualsNoCase(strCatchup, "flussonic-hls") ||
+             StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
       channel.SetCatchupMode(CatchupMode::FLUSSONIC);
     else if (StringUtils::EqualsNoCase(strCatchup, "xc"))
       channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
     else if (StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetCatchupMode(CatchupMode::VOD);
+
+    if (StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
+      channel.SetCatchupTSStream(true);
 
     if (!channel.HasCatchup() && xeevCatchup && (StringUtils::StartsWith(channelName, "* ") || StringUtils::StartsWith(channelName, "[+] ")))
     {
@@ -359,6 +386,9 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     if (!strCatchupDays.empty())
       channel.SetCatchupDays(atoi(strCatchupDays.c_str()));
+    // If we still don't have a value use the header supplied value if there is one
+    else if (!m_m3uHeaderStrings.m_catchupSource.empty())
+      channel.SetCatchupDays(atoi(m_m3uHeaderStrings.m_catchupDays.c_str()));
     else if (channel.GetCatchupMode() == CatchupMode::VOD)
       channel.SetCatchupDays(IGNORE_CATCHUP_DAYS);
     else if (siptvTimeshiftDays > 0)

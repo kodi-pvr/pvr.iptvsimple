@@ -1,3 +1,11 @@
+v20.3.0
+- Choose a suitable default stream type for default and append catchup modes
+- Allow catchup tags in M3U header
+- Update flussonic catchup type strings
+- For flussonic catchup add support for generic stream types (where any dir name is used after channel id)
+- Support alternative tag name for channel number
+- Fix incorrect provider mappings file path
+
 v20.2.1
 - Remove redundant PVR from addon name
 

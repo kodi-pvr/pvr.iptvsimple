@@ -122,7 +122,7 @@
         </setting>
         <setting id="providerMappingFile" type="path" parent="enableProviderMapping" label="30009" help="30472">
           <level>2</level>
-          <default>special://userdata/addon_data/pvr.iptvsimple/providers/providersMappings.xml</default>
+          <default>special://userdata/addon_data/pvr.iptvsimple/providers/providerMappings.xml</default>
           <constraints>
             <allowempty>false</allowempty>
             <writable>false</writable>

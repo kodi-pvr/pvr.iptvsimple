@@ -256,8 +256,10 @@ const StreamType StreamUtils::InspectStreamType(const std::string& url, const Ch
       return StreamType::SMOOTH_STREAMING;
   }
 
-  // If we can't inspect the stream type the only option left for shift mode is TS
-  if (channel.GetCatchupMode() == CatchupMode::SHIFT ||
+  // If we can't inspect the stream type the only option left for default, append or shift mode is TS
+  if (channel.GetCatchupMode() == CatchupMode::DEFAULT ||
+      channel.GetCatchupMode() == CatchupMode::APPEND ||
+      channel.GetCatchupMode() == CatchupMode::SHIFT ||
       channel.GetCatchupMode() == CatchupMode::TIMESHIFT)
     return StreamType::TS;
 

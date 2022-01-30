@@ -29,6 +29,7 @@ namespace iptvsimple
   static const std::string TVG_INFO_LOGO_MARKER    = "tvg-logo=";
   static const std::string TVG_INFO_SHIFT_MARKER   = "tvg-shift=";
   static const std::string TVG_INFO_CHNO_MARKER    = "tvg-chno=";
+  static const std::string CHANNEL_NUMBER_MARKER   = "ch-number=";
   static const std::string TVG_INFO_REC            = "tvg-rec="; // some providers use 'tvg-rec' instead of 'catchup-days'
   static const std::string GROUP_NAME_MARKER       = "group-title=";
   static const std::string CATCHUP                 = "catchup=";
@@ -53,6 +54,13 @@ namespace iptvsimple
 
   class PlaylistLoader
   {
+    struct M3UHeaderStrings {
+        // members will be public without `private:` keyword
+        std::string m_catchup;
+        std::string m_catchupDays;
+        std::string m_catchupSource;
+    };
+
   public:
     PlaylistLoader(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels,
                    iptvsimple::ChannelGroups& channelGroups, iptvsimple::Providers& providers,
@@ -78,5 +86,7 @@ namespace iptvsimple
     iptvsimple::Channels& m_channels;
     iptvsimple::Media& m_media;
     kodi::addon::CInstancePVRClient* m_client;
+
+    M3UHeaderStrings m_m3uHeaderStrings;
   };
 } //namespace iptvsimple
