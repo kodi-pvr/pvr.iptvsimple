@@ -308,7 +308,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     // If don't have a channel number try another format
     if (strChnlNo.empty())
-      ReadMarkerValue(infoLine, CHANNEL_NUMBER_MARKER);
+      strChnlNo = ReadMarkerValue(infoLine, CHANNEL_NUMBER_MARKER);
 
     if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
     {
