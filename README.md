@@ -89,7 +89,7 @@ If you would prefer to run the rebuild steps manually instead of using the above
 ## Configuring the addon
 
 ### Settings Levels
-Settings levels can be selected within the addon settings dialog. The options are: `Basic`, `Standard`, `Advanced` and `Expert`. If there are settings below that cannot be found it is most liekly because they are only available at a higher settings level.
+Settings levels can be selected within the addon settings dialog. The options are: `Basic`, `Standard`, `Advanced` and `Expert`. If there are settings below that cannot be found it is most likely because they are only available at a higher settings level.
 
 ### General
 General settings required for the addon to function.
