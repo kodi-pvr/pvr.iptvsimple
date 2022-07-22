@@ -357,6 +357,7 @@ std::string FormatDateTime(time_t timeStart, time_t duration, const std::string 
   FormatUtc("{lutc}", timeNow, formattedUrl);
   FormatUtc("${now}", timeNow, formattedUrl);
   FormatUtc("${timestamp}", timeNow, formattedUrl);
+  FormatUtc("${duration}", duration, formattedUrl);
   FormatUtc("{duration}", duration, formattedUrl);
   FormatUnits("duration", duration, formattedUrl);
   FormatUtc("${offset}", timeNow - timeStart, formattedUrl);
