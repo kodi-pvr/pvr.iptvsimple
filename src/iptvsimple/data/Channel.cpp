@@ -129,10 +129,29 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
 
   kodi::UnknownToUTF8(m_iconPath, m_iconPath);
 
-  // urlencode channel logo when set from channel name and source is Remote Path
-  // append extension as channel name wouldn't have it
+  // urlencode channel logo when set from channel name and source is Remote Path, append extension as channel wouldn't cover this
   if (logoSetFromChannelName && Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH)
+  {
     m_iconPath = utilities::WebUtils::UrlEncode(m_iconPath);
+  }
+  else if (m_iconPath.find("://") != std::string::npos)
+  {
+    // we also want to check the last part of a URL to ensure it's valid as quite often they are based on channel names
+    // the path should be fine
+
+    size_t pos = m_iconPath.find_last_of("/");
+    if (pos != std::string::npos)
+    {
+      const std::string urlPath = m_iconPath.substr(0, pos + 1);
+      std::string urlFile = m_iconPath.substr(pos + 1);
+      if (!utilities::WebUtils::IsEncoded(urlFile))
+      {
+        urlFile = utilities::WebUtils::UrlEncode(urlFile);
+
+        m_iconPath = urlPath + urlFile;
+      }
+    }
+  }
 
   if (m_iconPath.find("://") == std::string::npos)
   {
