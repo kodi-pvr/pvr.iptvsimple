@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="19.1.1"
+  version="19.2.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v19.2.0
+- URL encode last part of tvg logo URL as they can be based on channel names
+
 v19.1.1
 - Fix ch-number tag being ignored
 
