@@ -42,6 +42,53 @@ const std::string WebUtils::UrlEncode(const std::string& value)
   return escaped.str();
 }
 
+namespace
+{
+
+char from_hex(char ch) {
+    return isdigit(ch) ? ch - '0' : tolower(ch) - 'a' + 10;
+}
+
+} // unamed namespace
+
+const std::string WebUtils::UrlDecode(const std::string& value)
+{
+  char h;
+  std::ostringstream escaped;
+  escaped.fill('0');
+
+  for (auto i = value.begin(), n = value.end(); i != n; ++i)
+  {
+    std::string::value_type c = (*i);
+
+    if (c == '%')
+    {
+      if (i[1] && i[2])
+      {
+        h = from_hex(i[1]) << 4 | from_hex(i[2]);
+        escaped << h;
+        i += 2;
+      }
+    }
+    else if (c == '+')
+    {
+      escaped << ' ';
+    }
+    else
+    {
+      escaped << c;
+    }
+  }
+
+  return escaped.str();
+}
+
+bool WebUtils::IsEncoded(const std::string& value)
+{
+  // Note this is not perfect as '+' symbols will mess this up, they should in general be avoided in preference of '%20'
+  return UrlDecode(value) != value;
+}
+
 std::string WebUtils::ReadFileContentsStartOnly(const std::string& url, int* httpCode)
 {
   std::string strContent;

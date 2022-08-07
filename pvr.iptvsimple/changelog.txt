@@ -1,3 +1,6 @@
+v19.2.0
+- URL encode last part of tvg logo URL as they can be based on channel names
+
 v19.1.1
 - Fix ch-number tag being ignored
 
