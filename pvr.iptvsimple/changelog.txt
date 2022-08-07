@@ -1,3 +1,6 @@
+v20.5.0
+- URL encode last part of tvg logo URL as they can be based on channel names and they can contain spaces and non standard characters not allowed in paths
+
 v20.4.0
 - Support ${duration} format specifier
 - Fix azure image to use Windows 2019 and VS 2019
