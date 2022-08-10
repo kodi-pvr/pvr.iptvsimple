@@ -1,3 +1,6 @@
+v20.5.1
+- Support url arguments when encoding file portion of icon URL
+
 v20.5.0
 - URL encode last part of tvg logo URL as they can be based on channel names and they can contain spaces and non standard characters not allowed in paths
 
