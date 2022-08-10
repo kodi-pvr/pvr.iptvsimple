@@ -141,11 +141,20 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
     {
       const std::string urlPath = m_iconPath.substr(0, pos + 1);
       std::string urlFile = m_iconPath.substr(pos + 1);
+
+      std::string urlArguments;
+      size_t argumentsPos = urlFile.find("?");
+      if (argumentsPos != std::string::npos && argumentsPos > 0)
+      {
+        urlArguments = urlFile.substr(argumentsPos);
+        urlFile = urlFile.substr(0, argumentsPos - 1);
+      }
+
       if (!utilities::WebUtils::IsEncoded(urlFile))
       {
         urlFile = utilities::WebUtils::UrlEncode(urlFile);
 
-        m_iconPath = urlPath + urlFile;
+        m_iconPath = urlPath + urlFile + urlArguments;
       }
     }
   }
