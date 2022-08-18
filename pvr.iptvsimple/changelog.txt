@@ -1,3 +1,6 @@
+v20.5.2
+- Fixed: Some icons using url arguments not displaying
+
 v20.5.1
 - Support url arguments when encoding file portion of icon URL
 
