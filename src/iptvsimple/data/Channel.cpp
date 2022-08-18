@@ -150,7 +150,7 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
       if (argumentsPos != std::string::npos && argumentsPos > 0)
       {
         urlArguments = urlFile.substr(argumentsPos);
-        urlFile = urlFile.substr(0, argumentsPos - 1);
+        urlFile = urlFile.substr(0, argumentsPos);
       }
 
       if (!utilities::WebUtils::IsEncoded(urlFile))
