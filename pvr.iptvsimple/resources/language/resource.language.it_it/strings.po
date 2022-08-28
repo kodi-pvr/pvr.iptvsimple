@@ -22,8 +22,8 @@ msgid "Kodi PVR addon for IPTV support."
 msgstr "Addon Kodi PVR per il supporto IPTV."
 
 msgctxt "Addon Description"
-msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    "
-msgstr "IPTV Simple PVR Client supporta playlist m3u, streaming di Live TV per sorgenti multicast/unicast, ascolto di canali Radio ed EPG.&#10;    &#10;Per la documentazione visita: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    "
+msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
+msgstr "IPTV Simple PVR Client supporta playlist m3u, streaming di Live TV per sorgenti multicast/unicast, ascolto di canali Radio ed EPG.[CR]    [CR]Per la documentazione visita: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
