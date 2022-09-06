@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-03-19 06:52+0000\n"
+"PO-Revision-Date: 2022-09-06 07:31+0000\n"
 "Last-Translator: Antikruk <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/be_by/>\n"
 "Language: be_by\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 4.11.2\n"
+"X-Generator: Weblate 4.14\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -627,22 +627,22 @@ msgstr "Абярыце рэжым абнаўлення файлаў M3U/XMLTV. �
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
 msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
-msgstr ""
+msgstr "Калі абраны рэжым [B]Перыядычнае абнаўленне[/B], абнаўляць кожны раз, калі мінае гэтая колькасць хвілін. Максімум - 120 хвілін."
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
 msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
-msgstr ""
+msgstr "Калі абраны рэжым [B]Адзін раз на дзень[/B], абнаўляць кожны раз у гэтую гадзіну."
 
 #. help: General - tvChannelGroupsOnly
 msgctxt "#30610"
 msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "З файла M3U будуць загружаныя толькі ТБ-каналы, якія ўваходзяць у групы (маюць атрыбут [B]group-title[/B])."
 
 #. help: Channels - tvGroupMode
 msgctxt "#30611"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Абярыце адзін з наступных рэжымаў: [B]Усе групы[/B] Загружаць усе групы з файла M3U; [B]Пэўныя групы[/B] Загружаць усе групы, пазначаныя ў параметрах; [B]Адвольныя групы[/B] Загружаць групы з файла M3U, назвы якіх пазначаныя ў файле XML."
 
 #. help: Channels - oneTvGroup
 #. help: Channels - twoTvGroup
@@ -651,12 +651,12 @@ msgstr ""
 #. help: Channels - fiveTvGroup
 msgctxt "#30612"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Калі ў папярэднім параметры абрана \"Пэўныя групы\", вам трэба будзе абраць групы, якія будуць загружацца з файла M3U. Гэта назва групы, пазначаная ў атрыбуце \"group-title\" (напрыклад, UK (TV)). У гэтым параметры ўлічваецца рэгістр."
 
 #. help: Channels - radioGroupMode
 msgctxt "#30613"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Абярыце адзін з наступных рэжымаў: [B]Усе групы[/B] Загружаць усе групы з файла M3U; [B]Пэўныя групы[/B] Загружаць усе групы, пазначаныя ў параметрах; [B]Адвольныя групы[/B] Загружаць групы з файла M3U, назвы якіх пазначаныя ў файле XML."
 
 #. help: Channels - oneRadioGroup
 #. help: Channels - twoRadioGroup
@@ -665,134 +665,134 @@ msgstr ""
 #. help: Channels - fiveRadioGroup
 msgctxt "#30614"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Калі ў папярэднім параметры абрана \"Пэўныя групы\", вам трэба будзе абраць групы, якія будуць загружацца з файла M3U. Гэта назва групы, пазначаная ў атрыбуце \"group-title\" (напрыклад, UK (Radio)). У гэтым параметры ўлічваецца рэгістр."
 
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr ""
+msgstr "Файл выкарыстоўваецца для загрузкі адвольных ТБ-групаў. Прадвызначаны файл - customTVGroups-example.xml."
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr ""
+msgstr "Файл выкарыстоўваецца для загрузкі адвольных радыёгрупаў. Прадвызначаны файл - customRadioGroups-example.xml."
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr ""
+msgstr "Колькасць ТБ-групаў для загрузкі, калі абраны рэжым \"Пэўныя групы\". Максімум - 5. Калі трэба болей, то патрэбна абраць рэжым \"Адвольныя групы\"."
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
 msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
-msgstr ""
+msgstr "Колькасць радыёгрупаў для загрузкі, калі абраны рэжым \"Пэўныя групы\". Максімум - 5. Калі трэба болей, то патрэбна абраць рэжым \"Адвольныя групы\"."
 
 #. help: General - radioChannelGroupsOnly
 msgctxt "#30619"
 msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "З файла M3U будуць загружаныя толькі радыёканалы, якія ўваходзяць у групы (маюць атрыбут [B]group-title[/B])."
 
 #. help info - EPG Settings
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr ""
+msgstr "Налады, звязаныя з EPG. Звярніце ўвагу на тое, што Kodi будзе загружаць даныя EPG толькі пры неабходнасці. Дапаўненне будзе прымусова загружаць даныя EPG незалежна ад таго, ці запытвае іх Kodi, калі ўключана функцыя архівавання або патрэбныя лагатыпы XMLTV."
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
 msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
-msgstr ""
+msgstr "Абярыце размяшчэнне рэсурсу XMLTV. Варыянты: [B]Лакальны шлях[/B] - шлях да файла XMLTV на прыладзе або ў лакальнай сетцы; [B]Адлеглы шлях[/B] - URL-адрас, які вядзе да файла XMLTV."
 
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Калі абрана [B]Лакальны шлях[/B], параметр павінен змяшчаць прыдатны шлях да файла."
 
 #. help: EPG Settings - epgUrl
 msgctxt "#30623"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Калі абрана [B]Адлеглы шлях[/B], параметр павінен змяшчаць прыдатны URL-адрас."
 
 #. help: EPG Settings - epgCache
 msgctxt "#30624"
 msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
-msgstr ""
+msgstr "Калі абрана [B]Адлеглы шлях[/B], трэба вызначыць, ці патрэбна захоўваць у кэшы файл XMLTV."
 
 #. help: EPG Settings - epgTimeShift
 msgctxt "#30625"
 msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
-msgstr ""
+msgstr "Падладзьце час тэлепраграмы (EPG), ад -12 да +14 гадзін."
 
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
-msgstr ""
+msgstr "Ці трэба перавызначаць зрух часу для ўсіх каналаў з дапамогай \"Зрух часу тэлеперадачы (EPG)\". Калі адключана, будзе выкарыстоўвацца \"Зрух часу тэлеперадачы (EPG)\" плюс індывідуальны зрух для кожнага канала (калі ёсць)."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
 #. help-category: Channel Logos
 msgctxt "#30640"
 msgid "Settings related to Channel Logos."
-msgstr ""
+msgstr "Налады, звязаныя з лагатыпамі каналаў."
 
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
 msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
-msgstr ""
+msgstr "Абярыце шлях да лагатыпаў каналаў. Параметры: [B]Лакальны шлях[/B] - шлях да каталога на прыладзе або ў лакальнай сетцы; [B]Адлеглы шлях[/B] - URL-адрас да лагатыпаў."
 
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
-msgstr ""
+msgstr "Калі абрана [B]Лакальны шлях[/B], параметр павінен змяшчаць прыдатны шлях да каталога."
 
 #. help: Channel Logos - logoBaseUrl
 msgctxt "#30643"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
-msgstr ""
+msgstr "Калі абрана [B]Адлеглы шлях[/B], параметр павінен змяшчаць прыдатны URL-адрас."
 
 #. help: Channel Logos - logoFromEpg
 msgctxt "#30644"
 msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
-msgstr ""
+msgstr "Налады апрацоўвання лагатыпаў каналаў. Параметры: [B]Не зважаць[/B] - не выкарыстоўваць лагатыпы з файла XMLTV; [B]Аддаваць перавагу M3U[/B] - выкарыстоўваць лагатыпы з файла M3U, калі недаступна - з XMLTV; [B]Аддаваць перавагу XMLTV[/B] - выкарыстоўваць лагатыпы з файла XMLTV, калі недаступна - з M3U."
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
-msgstr ""
+msgstr "Калі абраны лакальны шлях, не зважаць на любыя лагатыпы з файла M3U."
 
 # empty strings from id 30645 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
 msgid "Settings related to genres."
-msgstr ""
+msgstr "Налады, звязаныя з жанрамі."
 
 #. help: Genres - useEpgGenreText
 msgctxt "#30661"
 msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
-msgstr ""
+msgstr "Калі ўключана, файл жанраў будзе выкарыстоўвацца для атрымання тыпу і падтыпу жанру. Выкарыстоўваць для жанру тэкст з EPG (напрыклад, тэкст \"катэгорыя\") замест прадвызначанага тэксту."
 
 #. help: Genres - genresPathType
 msgctxt "#30662"
 msgid "Select where to find the genres XML resource. The options are: [B]Local path[/B] - A path to a genres XML file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the genres XML file."
-msgstr ""
+msgstr "Абярыце размяшчэнне рэсурсу з файламі жанраў у фармаце XML. Варыянты: [B]Лакальны шлях[/B] - шлях да файла XML на прыладзе або ў лакальнай сетцы; [B]Адлеглы шлях[/B] - URL-адрас, які вядзе да файла XML."
 
 #. help: Genres - genresPath
 msgctxt "#30663"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Калі абрана [B]Лакальны шлях[/B], параметр павінен змяшчаць прыдатны шлях да файла."
 
 #. help: Genres - genresUrl
 msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Калі абрана [B]Адлеглы шлях[/B], параметр павінен змяшчаць прыдатны URL-адрас."
 
 # empty strings from id 30665 to 30679
 #. help info - Advanced
 #. help-category: Advanced
 msgctxt "#30680"
 msgid "Advanced settings including multicast relays, streaming properties etc."
-msgstr ""
+msgstr "Дадатковыя налады, уключаючы ўласцівасці трансляцыі, адрасы і г.д."
 
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
