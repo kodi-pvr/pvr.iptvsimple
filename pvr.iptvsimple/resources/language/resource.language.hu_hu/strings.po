@@ -22,7 +22,7 @@ msgid "Kodi PVR addon for IPTV support."
 msgstr "Kodi PVR kiegészítő az IPTV támogatáshoz. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
 
 msgctxt "Addon Description"
-msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.&#10;    &#10;For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md&#10;    "
+msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
 msgstr "Az IPTV PVR kiegészítő támogatja m3u listák lejátszását, élő TV adások hálózati streamelését, rádióadók hallgatását EPG adatok kezelésével."
 
 msgctxt "Addon Disclaimer"
