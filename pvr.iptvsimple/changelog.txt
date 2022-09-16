@@ -1,3 +1,7 @@
+v20.6.0
+- Kodi inputstream API update to version 3.2.0
+- Kodi PVR API update to version 8.0.2
+
 v20.5.2
 - Fixed: Some icons using url arguments not displaying
 
