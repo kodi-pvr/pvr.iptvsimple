@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-09-30 11:15+0000\n"
+"PO-Revision-Date: 2022-10-19 10:15+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/da_dk/>\n"
 "Language: da_dk\n"
@@ -23,7 +23,7 @@ msgstr "Kodi PVR addon til IPTV support."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "IPTV Simple PVR klient understøtter m3u playlister, streaming af direkte tv til multicast/unicast kilder, lytning til radiokanaler og EPG.[CR] [CR]For dokumentation besøg: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
+msgstr "IPTV Simple PVR klient understøtter m3u playlister, streaming af direkte tv til multicast-/unicast-kilder, lytning til radiokanaler og EPG.[CR][CR]For dokumentation besøg: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
@@ -332,7 +332,7 @@ msgstr "Avanceret"
 #. label-group: Advanced - Multicast relay
 msgctxt "#30061"
 msgid "Multicast relay (udpxy)"
-msgstr ""
+msgstr "Multicast relay (udpxy)"
 
 #. label: Advanced - transformMulticastStreamUrls
 msgctxt "#30062"
@@ -429,32 +429,32 @@ msgstr "Vindue til indhentning"
 #. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
 msgid "Channels support catchup using mode"
-msgstr ""
+msgstr "Kanaler understøttende cahtchup"
 
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
 msgid "Watch From EPG"
-msgstr ""
+msgstr "Se fra EPG"
 
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
 msgid "Play from EPG in Live TV mode (using timeshift)"
-msgstr ""
+msgstr "Afspil fra EPG ved direkte tv (ved hjælp af tidsforskydning)"
 
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
 msgid "Buffer before program start"
-msgstr ""
+msgstr "Buffer før programstart"
 
 #. label: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30108"
 msgid "Buffer after program end"
-msgstr ""
+msgstr "Buffer efter programmet er slut"
 
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
 msgid "Catchup only available on finished programmes"
-msgstr ""
+msgstr "Catchup er kun tilgængelig for færdige programmer"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
@@ -469,42 +469,42 @@ msgstr "Standard"
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
 msgid "Append"
-msgstr ""
+msgstr "Tilføj"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30113"
 msgid "Shift (SIPTV)"
-msgstr ""
+msgstr "Skift (SIPTV)"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30114"
 msgid "Flussonic"
-msgstr ""
+msgstr "Flussonic"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30115"
 msgid "Xtream codes"
-msgstr ""
+msgstr "Xtream koder"
 
 #. label: Catchup - catchupOverrideMode
 msgctxt "#30116"
 msgid "Include channels"
-msgstr ""
+msgstr "Inkluder kanaler"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30117"
 msgid "without catchup mode"
-msgstr ""
+msgstr "uden catchup-tilstand"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30118"
 msgid "with catchup mode"
-msgstr ""
+msgstr "med catchup-tilstand"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30119"
 msgid "with and without catchup mode (all channels)"
-msgstr ""
+msgstr "med og uden catchup-tilstand (alle kanaler)"
 
 #. label-category: timeshift
 #. label-group: Timeshift - Timeshift
@@ -515,42 +515,42 @@ msgstr "Tidsforskydning"
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
 msgid "Enable timeshift"
-msgstr ""
+msgstr "Aktiver tidsforskydning"
 
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr ""
+msgstr "Aktiver tidsforskydning for HTTP-baserede streams"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr ""
+msgstr "- Rediger inputstream.ffmpegdirect-indstillinger..."
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr ""
+msgstr "Inputstream-indstillinger"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr ""
+msgstr "Aktiver altid tilstand for tidsforskydning af stream hvis den mangler"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
 msgid "Enable timeshift for all streams"
-msgstr ""
+msgstr "Aktiver tidsforskydning for alle streams"
 
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr ""
+msgstr "Aktiver tidsforskydning for UDP-baserede streams"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
 msgid "Catchup correction"
-msgstr ""
+msgstr "Catchup-korrektion"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -567,17 +567,17 @@ msgstr "Radio"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr ""
+msgstr "Inputstream fejl"
 
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr ""
+msgstr "%s add-on er ikke installeret."
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr ""
+msgstr "%s add-on er ikke aktiveret."
 
 # empty strings from id 30503 to 30599
 #. ############
@@ -587,62 +587,62 @@ msgstr ""
 #. help-category: General
 msgctxt "#30600"
 msgid "General settings required for the addon to function."
-msgstr ""
+msgstr "Generelle indstillinger påkrævet for at dette add-on fungerer."
 
 #. help: General - m3uPathType
 msgctxt "#30601"
 msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
-msgstr ""
+msgstr "Vælg hvor M3U-ressourcen skal findes. Mulighederne er: [B]Lokal sti[/B] - En sti til en M3U-fil, uanset om den er på enheden eller det lokale netværk; [B]Ekstern sti[/B] - En URL, der angiver placeringen af M3U-filen."
 
 #. help: General - m3uPath
 msgctxt "#30602"
 msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
-msgstr ""
+msgstr "Hvis placeringen er [B]Lokal sti[/B], skal denne indstilling indeholde en gyldig sti, for at dette add-on kan fungere."
 
 #. help: General - m3uUrl
 msgctxt "#30603"
 msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
-msgstr ""
+msgstr "Hvis placeringen er [B]Ekstern sti[/B], skal denne indstilling indeholde en gyldig URL for at dette add-on kan fungere."
 
 #. help: General - m3uCache
 msgctxt "#30604"
 msgid "If location is [B]Remote path[/B] select whether or not the the M3U file should be cached locally."
-msgstr ""
+msgstr "Hvis placeringen er [B]Ekstern sti[/B], skal du vælge, om M3U-filen skal cachelagres lokalt."
 
 #. help: General - startNum
 msgctxt "#30605"
 msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
-msgstr ""
+msgstr "Nummeret nummereringen af kanaler startes fra. Bruges kun når [B]Brug backend-kanalnumre[/B] fra PVR-indstillinger er aktiveret, og et kanalnummer ikke er angivet i M3U-filen."
 
 #. help: General - numberByOrder
 msgctxt "#30606"
 msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
-msgstr ""
+msgstr "Ignorer eventuelle 'tvg-chno'-mærkater og nummerer kun kanaler i rækkefølgen fra M3U, startende ved 'Start kanalnummer'."
 
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
 msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
-msgstr ""
+msgstr "Vælg den automatiske opdateringstilstand for M3U-/XMLTV-filerne. Bemærk, at cachelagring er deaktiveret, hvis der bruges automatisk opdatering. Indstillingerne er: [B]Deaktiveret[/B] - Opdater ikke filerne automatisk; [B]Gentagen opdatering[/B] - Opdater filerne på et minutbaseret interval; [B]Én gang om dagen[/B] - Opdater filerne én gang om dagen."
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
 msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
-msgstr ""
+msgstr "Hvis M3U automatisk opdateringstilstand er [B]Gentagen opdatering[/B] skal filerne opdateres, hver gang dette antal minutter går. Max 120 minutter."
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
 msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
-msgstr ""
+msgstr "Hvis automatisk opdateringstilstand er [B]Én gang om dagen[/B] skal filerne opdateres hver gang denne time på dagen nås."
 
 #. help: General - tvChannelGroupsOnly
 msgctxt "#30610"
 msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "Kun tv-kanaler, der tilhører grupper (dvs. har en [B]gruppetitel[/B]-attribut), vil blive indlæst fra M3U-filen."
 
 #. help: Channels - tvGroupMode
 msgctxt "#30611"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Vælg mellem en af følgende tre tilstande: [B]Alle grupper[/B] Indlæs alle tv-grupper fra M3U-filen; [B]Nogle grupper[/B] Indlæs kun de grupper, der er angivet i de næste muligheder; [B]Brugerdefinerede grupper[/B] Indlæs et sæt grupper fra M3U-filen, hvis navne er indlæst fra en XML-fil."
 
 #. help: Channels - oneTvGroup
 #. help: Channels - twoTvGroup
@@ -651,12 +651,12 @@ msgstr ""
 #. help: Channels - fiveTvGroup
 msgctxt "#30612"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Hvis den tidligere indstilling er blevet sat til 'Nogle grupper', skal der angives en tv-gruppe, der indlæses fra M3U-filen. Bemærk, at dette er gruppenavnet som vist i attributten gruppetitel (f.eks. \"UK (TV)\"). Denne indstilling skelner mellem store og små bogstaver."
 
 #. help: Channels - radioGroupMode
 msgctxt "#30613"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Vælg mellem en af følgende tre tilstande: [B]Alle grupper[/B] Indlæs alle radiogrupper fra M3U-filen[/B]; [B]Nogle grupper[/B] Indlæs kun de grupper, der er angivet i de næste muligheder; [B]Brugerdefinerede grupper[/B] Indlæs et sæt grupper fra M3U-filen, hvis navne er indlæst fra en XML-fil."
 
 #. help: Channels - oneRadioGroup
 #. help: Channels - twoRadioGroup
@@ -665,107 +665,107 @@ msgstr ""
 #. help: Channels - fiveRadioGroup
 msgctxt "#30614"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Hvis den tidligere indstilling er blevet sat til 'Nogle grupper', skal der angives en radiogruppe, der hentes fra M3U-filen. Bemærk venligst, at dette er gruppenavnet som vist på attributten gruppetitel (f.eks. \"UK (Radio)\"). Denne indstilling skelner mellem store og små bogstaver."
 
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr ""
+msgstr "Filen brugt til at indlæse de brugerdefinerede tv-grupper. Standardfilen er 'customTVGroups-example.xml'."
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr ""
+msgstr "Filen brugt til at indlæse de brugerdefinerede radiogrupper. Standardfilen er 'customRadioGroups-example.xml'."
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr ""
+msgstr "Antallet af tv-grupper der indlæses, når 'Nogle grupper' er den valgte tilstand. Der kan vælges op til 5. Hvis der kræves mere end 5, bør tilstanden 'Brugerdefinerede grupper' bruges i stedet."
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
 msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
-msgstr ""
+msgstr "Antallet af radiogrupper der indlæses, når 'Nogle grupper' er den valgte tilstand. Der kan vælges op til 5. Hvis der kræves mere end 5, bør tilstanden 'Brugerdefinerede grupper' bruges i stedet."
 
 #. help: General - radioChannelGroupsOnly
 msgctxt "#30619"
 msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "Kun radiokanaler, der tilhører grupper (dvs. har en [B]gruppetitel[/B]-attribut), vil blive indlæst fra M3U-filen."
 
 #. help info - EPG Settings
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr ""
+msgstr "Indstillinger relateret til EPG. Bemærk, at Kodi kun indlæser EPG-dataene, når det er nødvendigt. Add-on'et vil gennemtvinge en indlæsning af EPG-dataene, uanset om Kodi anmoder om det, hvis enten catchup er aktiveret eller XMLTV-logoer er påkrævet."
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
 msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
-msgstr ""
+msgstr "Vælg hvor XMLTV-ressourcen skal findes. Valgmulighederne er: [B]Lokal sti[/B] - En sti til en XMLTV-fil, uanset om den er på enheden eller det lokale netværk; [B]Ekstern sti[/B] - En URL, der angiver placeringen af XMLTV-filen."
 
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Hvis placeringen er [B]Lokal sti[/B], bør denne indstilling indeholde en gyldig sti."
 
 #. help: EPG Settings - epgUrl
 msgctxt "#30623"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Hvis placeringen er [B]Ekstern sti[/B], bør denne indstilling indeholde en gyldig URL."
 
 #. help: EPG Settings - epgCache
 msgctxt "#30624"
 msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
-msgstr ""
+msgstr "Hvis placeringen er [B]Ekstern sti[/B] skal du vælge, om XMLTV-filen skal cachelagres lokalt."
 
 #. help: EPG Settings - epgTimeShift
 msgctxt "#30625"
 msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
-msgstr ""
+msgstr "Juster EPG-tiderne med denne værdi, fra -12 timer til +14 timer."
 
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
-msgstr ""
+msgstr "Hvorvidt tidsforskydningen skal overskrives for alle kanaler med 'EPG tidsforskydning'. Ved deaktivering vil 'EPG tidsforskydning' plus den individuelle tidsforskydning pr. kanal (hvis tilgængelig) blive brugt."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
 #. help-category: Channel Logos
 msgctxt "#30640"
 msgid "Settings related to Channel Logos."
-msgstr ""
+msgstr "Indstillinger relateret til kanalerlogoer."
 
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
 msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
-msgstr ""
+msgstr "Vælg hvor kanallogoerne skal findes. Mulighederne er: [B]Lokal sti[/B] - En sti til en mappe, uanset om den er på enheden eller det lokale netværk; [B]Ekstern sti[/B] - En basis-URL, der angiver logoernes placering."
 
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
-msgstr ""
+msgstr "Hvis placeringen er [B]Lokal sti[/B], bør denne indstilling indeholde en gyldig mappe."
 
 #. help: Channel Logos - logoBaseUrl
 msgctxt "#30643"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
-msgstr ""
+msgstr "Hvis placeringen er [B]Ekstern sti[/B], bør denne indstilling indeholde en gyldig basis-URL."
 
 #. help: Channel Logos - logoFromEpg
 msgctxt "#30644"
 msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
-msgstr ""
+msgstr "Indstillinger for håndtering af kanallogoer. Mulighederne er: [B]Ignorer[/B] - Brug ikke kanallogoer fra en XMLTV-fil; [B]Foretrækker M3U[/B] - Brug kanallogoet fra M3U, hvis det er tilgængeligt, ellers brug XMLTV-logoet; [B]Foretrækker XMLTV[/B] - Brug kanallogoet fra XMLTV-filen, hvis det er tilgængeligt, ellers brug M3U-logoet."
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
-msgstr ""
+msgstr "Hvis en lokal sti er valgt til logoer, ignorer eventuelle logoer fra M3U-filen."
 
 # empty strings from id 30645 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
 msgid "Settings related to genres."
-msgstr ""
+msgstr "Indstillinger relateret til genrer."
 
 #. help: Genres - useEpgGenreText
 msgctxt "#30661"
@@ -775,39 +775,39 @@ msgstr ""
 #. help: Genres - genresPathType
 msgctxt "#30662"
 msgid "Select where to find the genres XML resource. The options are: [B]Local path[/B] - A path to a genres XML file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the genres XML file."
-msgstr ""
+msgstr "Vælg hvor genrernes XML-ressource skal findes. Valgmulighederne er: [B]Lokal sti[/B] - en sti til en genres XML-fil, uanset om den er på enheden eller det lokale netværk; [B]Ekstern sti[/B] - en URL, der angiver placeringen af genrernes XML-fil."
 
 #. help: Genres - genresPath
 msgctxt "#30663"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Hvis placeringen er [B]Lokal sti[/B], bør denne indstilling indeholde en gyldig sti."
 
 #. help: Genres - genresUrl
 msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Hvis placeringen er [B]Ekstern sti[/B], bør denne indstilling indeholde en gyldig URL."
 
 # empty strings from id 30665 to 30679
 #. help info - Advanced
 #. help-category: Advanced
 msgctxt "#30680"
 msgid "Advanced settings including multicast relays, streaming properties etc."
-msgstr ""
+msgstr "Avancerede indstillinger inklusive multicast relay, streamingegenskaber osv."
 
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
 msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
-msgstr ""
+msgstr "Multicast (UDP/RTP)-streams fungerer ikke godt på Wifi-netværk. Et multicast relay kan konvertere streamen fra UDP/RTP multicast til HTTP. Aktivering af denne mulighed vil transformere multicast-stream-URL'er fra M3U-filen til HTTP-adresser, så de kan tilgås via et 'udpxy'-relay på det lokale netværk. F.eks. en UDP multicast-stream-URL som 'udp://@239.239.3.38:5239' ville blive transformeret til noget som 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
 
 #. help: Advanced - udpxyHost
 msgctxt "#30682"
 msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "Værtsnavnet eller IP-adressen for multicast relay (udpxy) på det lokale netværk."
 
 #. help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "Porten for multicast relay (udpxy) på det lokale netværk."
 
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
