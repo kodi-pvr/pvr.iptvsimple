@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-10-19 10:15+0000\n"
+"PO-Revision-Date: 2022-10-28 11:15+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/da_dk/>\n"
 "Language: da_dk\n"
@@ -770,7 +770,7 @@ msgstr "Indstillinger relateret til genrer."
 #. help: Genres - useEpgGenreText
 msgctxt "#30661"
 msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
-msgstr ""
+msgstr "Ved aktivering og en fil til genremapping bruges til genretype og undertype, bruges EPG'ens genretekst (f.eks. 'kategori'-tekst) for genren i stedet for Kodis standardtekst."
 
 #. help: Genres - genresPathType
 msgctxt "#30662"
@@ -812,44 +812,44 @@ msgstr "Porten for multicast relay (udpxy) på det lokale netværk."
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr ""
+msgstr "Brug inputstream.adaptive i stedet for ffmpegs libavformat til m3u8 (HLS) streams."
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr ""
+msgstr "Bemærk at dette kun gælder for http/https-streams, der behandles af libavformat (f.eks. M3u8/HLS). Brug af libavformat kan specificeres i en M3U-fil ved at sætte egenskaben 'inputstream' som 'inputstream.ffmpeg' for Kodis interne implementering eller 'inputstream.ffmpegdirect' for add-on-version. F.eks. tilføjes linjen: '#KODIPROP:inputstream=inputstream.ffmpeg'. Hvis denne mulighed ikke er aktiveret, kan den aktiveres pr. stream/kanal ved at tilføje en Kodi-egenskab, f.eks.: '#KODIPROP:http-reconnect=true'."
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
-msgstr ""
+msgstr "Anvend denne brugeragent, hvis der ikke er en leveret som en egenskab eller som en del af kanalstreamens URL."
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr ""
+msgstr "Brug denne inputstream som standard, hvis der ikke er én leveret som en egenskab (KODIPROP) for kanalen. Brug med forsigtighed, da dette vil deaktivere enhver brug af add-on'ets standard adfærd for inspektion af stream. Bemærk, at for 'inputstream.ffmpegdirect', hvis både 'mimetype' og 'inputstream.ffmpegdirect.manifest_type' ikke er indstillet, vil inspektion af streamen stadig finde sted hvis påkrævet."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr ""
+msgstr "Brug denne MIME-type som standard, hvis der ikke er én leveret som en egenskab (KODIPROP) for kanalen. Brug med forsigtighed, da dette vil deaktivere enhver brug af add-on'ets standard adfærd for inspektion af stream."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr ""
+msgstr "Catchup-indstillinger for at se arkiverede live-programmer. Tillader muligheden for 'Afspil program', når der ses EPG-oplysninger."
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
 msgid "Should be enabled if there are channels supporting catchup in your M3U list."
-msgstr ""
+msgstr "Bør være aktiveret, hvis der er kanaler, der understøtter catchup på din M3U-liste."
 
 #. help: Catchup - catchupQueryFormat
 msgctxt "#30702"
 msgid "A query format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of 'default' or 'append' and a 'catchup-source' tag is provided in the M3U entry this setting will be ignored."
-msgstr ""
+msgstr "En forespørgsels-formatstreng (afhængig af udbyder), der gør det muligt at tilføje oplysninger med tidsstempel til en URL for at angive, hvornår catchup skal starte. F.eks. '&cutv={Y}-{m}-{d}T{H}:{M}:{S}', som tillader år, måned, dag, time, minut og sekund og giver: '&cutv=2019 -11-26T22:00:32'. Hvis den anvendte M3U-post har en catchuptilstand på 'standard' eller 'tilføj', og et 'catchup-kilde'-mærkat er angivet i M3U-posten, vil denne indstilling blive ignoreret."
 
 #. help: Catchup - catchupDays
 msgctxt "#30703"
