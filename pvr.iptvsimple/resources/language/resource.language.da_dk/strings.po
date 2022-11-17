@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-10-28 11:15+0000\n"
+"PO-Revision-Date: 2022-11-17 11:15+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/da_dk/>\n"
 "Language: da_dk\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.14.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -429,7 +429,7 @@ msgstr "Vindue til indhentning"
 #. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
 msgid "Channels support catchup using mode"
-msgstr "Kanaler understøttende cahtchup"
+msgstr "Kanaler understøttende indhentning"
 
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
@@ -454,7 +454,7 @@ msgstr "Buffer efter programmet er slut"
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
 msgid "Catchup only available on finished programmes"
-msgstr "Catchup er kun tilgængelig for færdige programmer"
+msgstr "Indhentning er kun tilgængelig for færdige programmer"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
@@ -494,17 +494,17 @@ msgstr "Inkluder kanaler"
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30117"
 msgid "without catchup mode"
-msgstr "uden catchup-tilstand"
+msgstr "uden indhentningstilstand"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30118"
 msgid "with catchup mode"
-msgstr "med catchup-tilstand"
+msgstr "med indhentningstilstand"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30119"
 msgid "with and without catchup mode (all channels)"
-msgstr "med og uden catchup-tilstand (alle kanaler)"
+msgstr "med og uden indhentningstilstand (alle kanaler)"
 
 #. label-category: timeshift
 #. label-group: Timeshift - Timeshift
@@ -550,7 +550,7 @@ msgstr "Aktiver tidsforskydning for UDP-baserede streams"
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
 msgid "Catchup correction"
-msgstr "Catchup-korrektion"
+msgstr "Korrektion af indhentning"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -696,7 +696,7 @@ msgstr "Kun radiokanaler, der tilhører grupper (dvs. har en [B]gruppetitel[/B]-
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr "Indstillinger relateret til EPG. Bemærk, at Kodi kun indlæser EPG-dataene, når det er nødvendigt. Add-on'et vil gennemtvinge en indlæsning af EPG-dataene, uanset om Kodi anmoder om det, hvis enten catchup er aktiveret eller XMLTV-logoer er påkrævet."
+msgstr "Indstillinger relateret til EPG. Bemærk, at Kodi kun indlæser EPG-dataene, når det er nødvendigt. Add-on'et vil gennemtvinge en indlæsning af EPG-dataene, uanset om Kodi anmoder om det, hvis enten indhentning er aktiveret eller XMLTV-logoer er påkrævet."
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
@@ -839,22 +839,22 @@ msgstr "Brug denne MIME-type som standard, hvis der ikke er én leveret som en e
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr "Catchup-indstillinger for at se arkiverede live-programmer. Tillader muligheden for 'Afspil program', når der ses EPG-oplysninger."
+msgstr "Indstillinger for indhentning til at se arkiverede live-programmer. Tillader muligheden for 'Afspil program', når der ses EPG-oplysninger."
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
 msgid "Should be enabled if there are channels supporting catchup in your M3U list."
-msgstr "Bør være aktiveret, hvis der er kanaler, der understøtter catchup på din M3U-liste."
+msgstr "Bør være aktiveret, hvis der er kanaler, der understøtter indhentning på din M3U-liste."
 
 #. help: Catchup - catchupQueryFormat
 msgctxt "#30702"
 msgid "A query format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of 'default' or 'append' and a 'catchup-source' tag is provided in the M3U entry this setting will be ignored."
-msgstr "En forespørgsels-formatstreng (afhængig af udbyder), der gør det muligt at tilføje oplysninger med tidsstempel til en URL for at angive, hvornår catchup skal starte. F.eks. '&cutv={Y}-{m}-{d}T{H}:{M}:{S}', som tillader år, måned, dag, time, minut og sekund og giver: '&cutv=2019 -11-26T22:00:32'. Hvis den anvendte M3U-post har en catchuptilstand på 'standard' eller 'tilføj', og et 'catchup-kilde'-mærkat er angivet i M3U-posten, vil denne indstilling blive ignoreret."
+msgstr "En forespørgsels-formatstreng (afhængig af udbyder), der gør det muligt at tilføje oplysninger med tidsstempel til en URL for at angive, hvornår indhentning skal starte. F.eks. '&cutv={Y}-{m}-{d}T{H}:{M}:{S}', som tillader år, måned, dag, time, minut og sekund og giver: '&cutv=2019 -11-26T22:00:32'. Hvis den anvendte M3U-post har en indhentningstilstand på 'standard' eller 'tilføj', og et 'indhentningskilde'-mærkat er angivet i M3U-posten, vil denne indstilling blive ignoreret."
 
 #. help: Catchup - catchupDays
 msgctxt "#30703"
 msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
-msgstr ""
+msgstr "Antal forudgående dage hvor det er muligt at indhente en udsendelse. Kan overskrives i en M3U-indtastning ved hjælp af et 'indhentningsdage'-mærkat."
 
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
