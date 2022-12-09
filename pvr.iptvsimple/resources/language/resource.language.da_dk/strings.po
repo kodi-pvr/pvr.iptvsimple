@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-11-17 11:15+0000\n"
+"PO-Revision-Date: 2022-12-09 08:56+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/da_dk/>\n"
 "Language: da_dk\n"
@@ -419,7 +419,7 @@ msgstr "Aktiver indhentning"
 #. label: Catchup - catchupQueryFormat
 msgctxt "#30102"
 msgid "Query format string"
-msgstr "Forespørg formatstreng"
+msgstr "Forespørgsels-formatstreng"
 
 #. label: Catchup - catchupDays
 msgctxt "#30103"
@@ -854,76 +854,76 @@ msgstr "En forespørgsels-formatstreng (afhængig af udbyder), der gør det muli
 #. help: Catchup - catchupDays
 msgctxt "#30703"
 msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
-msgstr "Antal forudgående dage hvor det er muligt at indhente en udsendelse. Kan overskrives i en M3U-indtastning ved hjælp af et 'indhentningsdage'-mærkat."
+msgstr "Antal forudgående dage hvor det er muligt at indhente en udsendelse. Kan overskrives i en M3U-post ved hjælp af et 'indhentningsdage'-mærkat."
 
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
 msgid "If enabled it is assumed that channels support catchup using the selected catchup mode while also obeying the override mode. If required the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [B]Disabled[/B] - Do not assume all channel support catchup; [B]Default[/B] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [B]Append[/B] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [B]Shift (SIPTV)[/B] - Append the standard SIPTV catchup string to the channel URL; [B]Flussonic[/B] - Build a flussonic URL from the channel URL; [B]Xtream codes[/B] - Build an Xtream codes URL from the channel URL."
-msgstr ""
+msgstr "Ved aktivering antages det, at kanaler understøtter indhentning ved hjælp af den valgte indhentningstilstand, mens de også overholder tilstanden for overskrivelse. Om nødvendigt vil 'Forespørgsels-formatstrengens' og 'Indhentningsvinduets' antal dage komme fra add-on-indstillingerne. Hvis denne mulighed er deaktiveret, skal en M3U-post mindst have et 'catchup='-mærkat for at aktivere indhentning. Mulighederne for, hvordan man opbygger indhentnings-URL'en er: [B]Deaktiveret[/B] - Antag ikke at alle kanaler understøtter indhentning; [B]Standard[/B] - Brug indhentningskilde som den fulde indhentnings-URL. Hvis der ikke er nogen indhentningskilde, brug tilstanden Tilføj; [B]Tilføj[/B] - Føj indhentningskilden til kanal-URL'en, hvis der ikke er nogen indhentningskilde ved hjælp af 'Forespørgsels-formatstreng'; [B]Shift (SIPTV)[/B] - Føj standard SIPTV indhentningspost til kanalens URL; [B]Flussonic[/B] - Byg en flussonisk URL fra kanalens URL; [B]Xtream-koder[/B] - Byg en Xtream-kode-URL fra kanalens URL."
 
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
 msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
-msgstr ""
+msgstr "Ved deaktivering vil et hvilket som helst indhentningsprogram fra fortiden blive afspillet som en video (afgrænset af start- og sluttidspunkter). Ved aktivering fungerer det i stedet som en livestream med tidsforskydning, hvilket også giver mulighed for at springe frem og tilbage i udsendelser. Bemærk at den eneste effekt, denne mulighed har på streams, der ikke understøtter tidsforskydning, er, om der skal anvendes før/efter bufferen."
 
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
 msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "Mængde af buffer før startpunktet for afspilning af en EPG-post, der vil blive set som en video."
 
 #. help: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30707"
 msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "Mængde af buffer efter slutpunktet for afspilning af en EPG-post, der vil blive set som en video."
 
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"
 msgid "When selected from the EPG the current live programme cannot be watched as catchup until finished."
-msgstr ""
+msgstr "Ved valg fra EPG, kan den aktuelle direkte udsendelse ikke ses som indhentning, før det er færdigt."
 
 #. help: Catchup - catchupOverrideMode
 msgctxt "#30709"
 msgid "Set the scope for overriding the catchup mode. Options are: [B]without catchup mode[/B] - Only include channels with no catchup mode set (except legacy SIP [I]timeshift[/I] catchup mode); [B]with catchup mode[/B] - Only include channels with catchup mode set (ignore those without a catchup mode); [B]with and without catchup mode (all channels)[/B] - Include all channels ignoring any catchup mode from the M3U."
-msgstr ""
+msgstr "Indstil omfanget for overskrivelse af indhentningstilstanden. Valgmulighederne er: [B]uden indhentningstilstand[/B] - Inkluder kun kanaler uden indhentningstilstand (undtagen ældre SIP [I]tidsforskydning[/I] indhentningstilstand); [B]med indhentningstilstand[/B] - Inkluder kun kanaler med indhentningstilstand indstillet (ignorer dem uden indhentningstilstand); [B]med og uden indhentningstilstand (alle kanaler)[/B] - Inkluder alle kanaler, der ignorerer enhver indhentningstilstand fra M3U."
 
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
-msgstr ""
+msgstr "Juster den tid, der bruges til generering af indhentningsstream URL-adresser, fra -12 timer til +14 timer. Nyttigt til indhentnigsstreams, som ikke er geografisk afstemt med det forkerte tidspunkt. Bemærk at denne værdi kan overskrives med værdier i M3U-filen."
 
 # empty strings from id 30710 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
 msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
-msgstr ""
+msgstr "Indstillingerne for tidsforskydning til pause/tilbagespoling og fremspoling af livestreams."
 
 #. help: Timeshift - timeshiftEnabled
 msgctxt "#30721"
 msgid "Enable the timeshift feature."
-msgstr ""
+msgstr "Aktiver tidsforskydning."
 
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Aktiver tidsforskydning for HTTP-baserede streams. Gælder kun for streams, der ikke vælger et specifik inputstream-add-on til afspilning. Add-on'et inputstream.ffmpegdirect vil blive brugt til tidsforskydning."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
-msgstr ""
+msgstr "Åbn indstillingsdialogen til inputstream.ffmpegdirect for ændring af tidsforskydnings- og andre indstillinger."
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
 msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
-msgstr ""
+msgstr "Hvis en stream_mode-egenskab ikke er angivet sammen med en inputstream.ffmpegdirect-egenskab, skal den altid tilføjes for alle understøttede streamtyper. Bemærk at denne indstilling ikke har nogen effekt på indhentnings VOD-streams, der ikke er direkte."
 
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Aktiver tidsforskydning for alle streams. Gælder kun for streams, der ikke vælger et specifikt inputstream-add-on til afspilning. Add-on'et inputstream.ffmpegdirect vil blive brugt til tidsforskydning."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Aktiver tidsforskydning for UDP-baserede streams. Gælder kun for streams, der ikke vælger et specifik inputstream-add-on til afspilning. Add-on'et inputstream.ffmpegdirect vil blive brugt til tidsforskydning."
