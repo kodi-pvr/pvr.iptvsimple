@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-11-07 19:15+0000\n"
+"PO-Revision-Date: 2022-12-12 07:47+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -572,12 +572,12 @@ msgstr "Errore stream in ingresso"
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr "L'add-on %s non è installato."
+msgstr "L'Add-on %s non è installato."
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr "L'add-on %s non è abilitato.."
+msgstr "L'Add-on %s non è abilitato.."
 
 # empty strings from id 30503 to 30599
 #. ############
@@ -587,7 +587,7 @@ msgstr "L'add-on %s non è abilitato.."
 #. help-category: General
 msgctxt "#30600"
 msgid "General settings required for the addon to function."
-msgstr "Impostazioni generali necessarie per il funzionamento dell'add-on."
+msgstr "Impostazioni generali necessarie per il funzionamento dell'Add-on."
 
 #. help: General - m3uPathType
 msgctxt "#30601"
@@ -597,12 +597,12 @@ msgstr "Scegli dove trovare la risorsa M3U. Le opzioni sono: [B]Percorso locale[
 #. help: General - m3uPath
 msgctxt "#30602"
 msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
-msgstr "Se la posizione è [B]Percorso locale[/B], questa impostazione deve contenere un percorso valido per il funzionamento dell'add-on."
+msgstr "Se la posizione è [B]Percorso locale[/B], questa impostazione deve contenere un percorso valido per il funzionamento dell'Add-on."
 
 #. help: General - m3uUrl
 msgctxt "#30603"
 msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
-msgstr "Se la posizione è [B]Percorso remoto[/B], questa impostazione deve contenere un URL valido per il funzionamento dell'add-on."
+msgstr "Se la posizione è [B]Percorso remoto[/B], questa impostazione deve contenere un URL valido per il funzionamento dell'Add-on."
 
 #. help: General - m3uCache
 msgctxt "#30604"
@@ -696,7 +696,7 @@ msgstr "Solo i canali Radio che appartengono a gruppi (cioè hanno un attributo 
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr "Impostazioni relative all'EPG. Nota che Kodi caricherà i dati EPG solo quando necessario. L'add-on forzerà un caricamento dei dati EPG indipendentemente dal fatto che Kodi lo richieda o meno se il recupero è abilitato o sono richiesti i loghi XMLTV."
+msgstr "Impostazioni relative all'EPG. Nota che Kodi caricherà i dati EPG solo quando necessario. L'Add-on forzerà un caricamento dei dati EPG indipendentemente dal fatto che Kodi lo richieda o meno se il recupero è abilitato o sono richiesti i loghi XMLTV."
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
@@ -817,7 +817,7 @@ msgstr "Usa inputstream.adaptive invece di libavformat di ffmpeg per i flussi m3
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr "Nota che questo può essere applicato solo a stream http/https elaborati da libavformat (ad es. M3u8/HLS). L'uso di libavformat può essere specificato in un file M3U impostando la proprietà 'inputstream' come 'inputstream.ffmpeg' per l'implementazione interna di Kodi o 'inputstream.ffmpegdirect' per la versione add-on. Cioè. aggiungendo la riga: '#KODIPROP:inputstream=inputstream.ffmpeg'. Se questa opzione non è abilitata, può comunque essere abilitata per stream/canale aggiungendo una proprietà Kodi, ad esempio: '#KODIPROP:http-reconnect=true'."
+msgstr "Nota che questo può essere applicato solo a stream http/https elaborati da libavformat (ad es. M3u8/HLS). L'uso di libavformat può essere specificato in un file M3U impostando la proprietà 'inputstream' come 'inputstream.ffmpeg' per l'implementazione interna di Kodi o 'inputstream.ffmpegdirect' per la versione Add-on. Cioè. aggiungendo la riga: '#KODIPROP:inputstream=inputstream.ffmpeg'. Se questa opzione non è abilitata, può comunque essere abilitata per stream/canale aggiungendo una proprietà Kodi, ad esempio: '#KODIPROP:http-reconnect=true'."
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
@@ -827,12 +827,12 @@ msgstr "Usa questo User-Agent se non ce n'è uno fornito come proprietà o come 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr "Usa questo stream in ingresso come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto ciò disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on. Nota che per 'inputstream.ffmpegdirect' se sia 'mimetype' che 'inputstream.ffmpegdirect.manifest_type' non sono impostati, l'ispezione dello stream avverrà comunque se necessario."
+msgstr "Usa questo stream in ingresso come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto ciò disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'Add-on. Nota che per 'inputstream.ffmpegdirect' se sia 'mimetype' che 'inputstream.ffmpegdirect.manifest_type' non sono impostati, l'ispezione dello stream avverrà comunque se necessario."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr "Usa questo tipo MIME come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto ciò disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on."
+msgstr "Usa questo tipo MIME come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto ciò disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'Add-on."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
@@ -906,7 +906,7 @@ msgstr "Abilita la funzione timeshift."
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per gli stream basati su HTTP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
+msgstr "Abilita la funzione timeshift per gli stream basati su HTTP. Si applicherà solo agli stream che non selezionano uno specifico Add-on dello stream in ingresso per la riproduzione. L'Add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
@@ -921,9 +921,9 @@ msgstr "Se una proprietà stream_mode non è specificata insieme a una propriet�
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per tutti gli stream. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
+msgstr "Abilita la funzione timeshift per tutti gli stream. Si applicherà solo agli stream che non selezionano uno specifico Add-on dello stream in ingresso per la riproduzione. L'Add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per gli stream basati su UDP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
+msgstr "Abilita la funzione timeshift per gli stream basati su UDP. Si applicherà solo agli stream che non selezionano uno specifico Add-on dello stream in ingresso per la riproduzione. L'Add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."

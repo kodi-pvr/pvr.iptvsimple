@@ -5,29 +5,29 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-06-10 09:14+0000\n"
-"Last-Translator: Marin Došen <marin.dosen@gmail.com>\n"
+"PO-Revision-Date: 2022-12-28 16:18+0000\n"
+"Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/hr_hr/>\n"
 "Language: hr_hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 4.12.2\n"
+"X-Generator: Weblate 4.15\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "Kodi PVR dodatak za IPTV podršku. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr "Kodi PVR dodatak za IPTV podršku."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "IPTV Simple PVR klijent podržava m3u liste izvođenja, strujanje TV programa uživo s višesmjernih/jednosmjernih izvora, slušanje radio kanala i elektroničke programske vodiče (EPG).    "
+msgstr "IPTV Simple PVR klijent podržava m3u popise izvođenja, strujanje TV programa s multicast/unicast izvora, slušanje radio programa i elektroničke programske vodiče (EPG).    [CR]Za dokumentaciju posjetite: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "Ovo je nestabilan softver! Autori nisu ni na koji način odgovorani za neuspjelo snimanje, netočna zakazana snimanja, izgubjene sate, ili bilo koje druge neželjene učinke..."
+msgstr "Ovo je nestabilan softver! Autori nisu ni na koji način odgovorni za neuspjelo snimanje, netočna zakazana snimanja, izgubljene sate, ili bilo koje druge neželjene učinke."
 
 #. settings labels
 #. label: General - m3uPathType
@@ -43,7 +43,7 @@ msgstr "Lokacija"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr "Lokalni put (uključuje lokalnu mrežu)"
+msgstr "Lokalna putanja (uključuje lokalnu mrežu)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -51,7 +51,7 @@ msgstr "Lokalni put (uključuje lokalnu mrežu)"
 #. label-option: General - genresPathType
 msgctxt "#30002"
 msgid "Remote path (Internet address)"
-msgstr "Udaljeni put (internetska adresa)"
+msgstr "Udaljena putanja (internet adresa)"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30003"
@@ -61,7 +61,7 @@ msgstr "Onemogućeno"
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
 msgid "Repeated refresh"
-msgstr "Ponovljeno osvježavanje"
+msgstr "Ponavljajuće osvježavanje"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30005"
@@ -77,37 +77,37 @@ msgstr "Općenito"
 #. label: General - m3uPath
 msgctxt "#30011"
 msgid "M3U playlist path"
-msgstr "Put do M3U liste"
+msgstr "Putanja M3U popisa izvođenja"
 
 #. label: General - m3uUrl
 msgctxt "#30012"
 msgid "M3U playlist URL"
-msgstr "URL M3U liste"
+msgstr "URL M3U popisa izvođenja"
 
 #. label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
-msgstr "Početni broj kanala"
+msgstr "Početni broj programa"
 
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr "Numeriraj kanale po poretku u M3U listi"
+msgstr "Samo broj po poretku programa u M3U popisu izvođenja"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "Način automatskog osvježavanja"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
 msgid "Refresh interval"
-msgstr "Interval osvježavanja"
+msgstr "Razdoblje osvježavanja"
 
 #. label: General - m3uRefreshHour
 msgctxt "#30017"
 msgid "Refresh hour (24h)"
-msgstr "Sat osvježavanja (24 sata)"
+msgstr "Osvježi sate (24 sata)"
 
 #. label-group: General - Refresh
 msgctxt "#30018"
@@ -127,7 +127,7 @@ msgstr "EPG vodič"
 #. label: EPG Settings - epgPath
 msgctxt "#30021"
 msgid "XMLTV path"
-msgstr "Put XMLTV-a"
+msgstr "XMLTV putanja"
 
 #. label: EPG Settings - epgUrl
 msgctxt "#30022"
@@ -137,12 +137,12 @@ msgstr "XMLTV URL"
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
 msgid "Apply time shift to all channels"
-msgstr "Primijeni vremenski pomak na sve kanale"
+msgstr "Primijeni vremenski pomak na sve programe"
 
 #. label: EPG Settings - epgTimeShift
 msgctxt "#30024"
 msgid "EPG time shift"
-msgstr "Vremenski pomak EPG-a"
+msgstr "EPG vremensko premotavanje"
 
 #. label: General - m3uCache
 msgctxt "#30025"
@@ -157,48 +157,48 @@ msgstr "XMLTV predmemorija na lokalnoj pohrani"
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
 msgid "{0:.1f} hours"
-msgstr "{0:.1f} sati"
+msgstr "{0:.1f} sata"
 
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "Učitaj samo TV programe u grupama"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "TV grupe"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
 msgctxt "#30030"
 msgid "Channel Logos"
-msgstr "Logotipi kanala"
+msgstr "Logotipi programa"
 
 #. label: Channel Logos - logoPath
 msgctxt "#30031"
 msgid "Channel logos folder"
-msgstr "Mapa logotipa kanala"
+msgstr "Mapa logotipa programa"
 
 #. label: Channel Logos - logoBaseUrl
 msgctxt "#30032"
 msgid "Channel logos base URL"
-msgstr "Osnovni URL logotipa kanala"
+msgstr "Osnovni URL logotipa programa"
 
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "Radio grupe"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "Način TV grupe"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "Način radio grupe"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
@@ -210,18 +210,18 @@ msgstr "Sve grupe"
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "Pojedine grupe"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "Prilagođene grupe"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
 msgid "Number of TV groups"
-msgstr ""
+msgstr "Broj TV grupa"
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
@@ -231,7 +231,7 @@ msgstr "Mogućnosti XMLTV logotipa"
 #. label: Channel Logos - logoFromEpg
 msgctxt "#30041"
 msgid "Channels logos from XMLTV"
-msgstr "Logotipi kanala iz XMLTV-a"
+msgstr "Logotipovi programa iz XMLTV vodiča"
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
@@ -282,12 +282,12 @@ msgstr "Žanrovi"
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
 msgid "Use genre text from XMLTV when mapping genres"
-msgstr "Upotrijebi tekst žanra iz XMLTV-a kod mapiranja žanrova"
+msgstr "Koristi tekst žanra iz XMLTV vodiča pri mapiranju žanrova"
 
 #. label: Genres - genresPath
 msgctxt "#30052"
 msgid "Genres path"
-msgstr "Put žanrova"
+msgstr "Putanja žanrova"
 
 #. label: Genres - genresUrl
 msgctxt "#30053"
@@ -297,7 +297,7 @@ msgstr "URL žanrova"
 #. label: Channels - customTvGroupsFile
 msgctxt "#30054"
 msgid "Custom TV groups file"
-msgstr ""
+msgstr "Prilagođena datoteka TV grupa"
 
 #. label: General - oneRadioGroup
 msgctxt "#30055"
@@ -332,22 +332,22 @@ msgstr "Napredno"
 #. label-group: Advanced - Multicast relay
 msgctxt "#30061"
 msgid "Multicast relay (udpxy)"
-msgstr "Multicast prijenosnik (udpxy)"
+msgstr "Multicast relej (udpxy)"
 
 #. label: Advanced - transformMulticastStreamUrls
 msgctxt "#30062"
 msgid "Transform multicast stream URLs"
-msgstr ""
+msgstr "Pretvori multicast URL-ove strujanja"
 
 #. label: Advanced - udpxyHost
 msgctxt "#30063"
 msgid "Relay hostname or IP address"
-msgstr "Ime ili IP adresa prijenosnika"
+msgstr "Naziv računala ili IP adresa releja"
 
 #. label: Advanced - udpxyPort
 msgctxt "#30064"
 msgid "Relay port"
-msgstr "Port prijenosnika"
+msgstr "Ulaz releja"
 
 #. label-group: Advanced - Streaming
 msgctxt "#30065"
@@ -357,104 +357,104 @@ msgstr "Strujanje"
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr ""
+msgstr "Koristi inputstream.adaptive za m3u8 (HLS) strujanja"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
 msgid "Use FFmpeg http reconnect options if possible"
-msgstr ""
+msgstr "Koristi mogućnost FFmpeg http ponovnog povezivanja ako je moguće"
 
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
 msgid "User-Agent"
-msgstr ""
+msgstr "Korisnički agent"
 
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
 msgid "Inputstream name"
-msgstr ""
+msgstr "Inputstream naziv"
 
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
 msgid "MIME type"
-msgstr ""
+msgstr "MIME vrsta"
 
 #. label-group: Advanced - Channel defaults
 msgctxt "#30071"
 msgid "Channel defaults"
-msgstr ""
+msgstr "Zadano programom"
 
 #. label: General - numRadioGroups
 msgctxt "#30072"
 msgid "Number of Radio groups"
-msgstr ""
+msgstr "Broj radio grupa"
 
 #. label: Channels - customRadioGroupsFile
 msgctxt "#30073"
 msgid "Custom Radio groups file"
-msgstr ""
+msgstr "Prilagođena datoteka radio grupa"
 
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
 msgid "Only load Radio channels in groups"
-msgstr ""
+msgstr "Učitaj samo radio programe u grupama"
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
-msgstr ""
+msgstr "Za putanju lokalnih logotipa zanemri M3U logotipe"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
 msgid "Catchup"
-msgstr ""
+msgstr "Hvatanje"
 
 #. label: Catchup - enableCatchup
 msgctxt "#30101"
 msgid "Enable catchup"
-msgstr ""
+msgstr "Omogući hvatanje"
 
 #. label: Catchup - catchupQueryFormat
 msgctxt "#30102"
 msgid "Query format string"
-msgstr ""
+msgstr "Format izraza upita"
 
 #. label: Catchup - catchupDays
 msgctxt "#30103"
 msgid "Catchup window"
-msgstr ""
+msgstr "Prozor hvatanja"
 
 #. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
 msgid "Channels support catchup using mode"
-msgstr ""
+msgstr "Programi podržavaju način korištenja hvatanja"
 
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
 msgid "Watch From EPG"
-msgstr ""
+msgstr "Gledaj iz EPG vodiča"
 
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
 msgid "Play from EPG in Live TV mode (using timeshift)"
-msgstr ""
+msgstr "Reproduciraj iz EPG vodiča u TV gledanju uživo (koristeći vremensko premotavanje)"
 
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
 msgid "Buffer before program start"
-msgstr ""
+msgstr "Međuspremnik prije početka programa"
 
 #. label: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30108"
 msgid "Buffer after program end"
-msgstr ""
+msgstr "Međuspremnik nakon završetka programa"
 
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
 msgid "Catchup only available on finished programmes"
-msgstr ""
+msgstr "Hvataj samo dostupne pri završetku programa"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
@@ -469,42 +469,42 @@ msgstr "Zadano"
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
 msgid "Append"
-msgstr ""
+msgstr "Dodano"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30113"
 msgid "Shift (SIPTV)"
-msgstr ""
+msgstr "Pomak (SIPTV)"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30114"
 msgid "Flussonic"
-msgstr ""
+msgstr "Flussonic"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30115"
 msgid "Xtream codes"
-msgstr ""
+msgstr "Xtream kôdovi"
 
 #. label: Catchup - catchupOverrideMode
 msgctxt "#30116"
 msgid "Include channels"
-msgstr ""
+msgstr "Uključi programe"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30117"
 msgid "without catchup mode"
-msgstr ""
+msgstr "bez načina hvatanja"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30118"
 msgid "with catchup mode"
-msgstr ""
+msgstr "s načinom hvatanja"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30119"
 msgid "with and without catchup mode (all channels)"
-msgstr ""
+msgstr "s i bez načina hvatanja (svi programi)"
 
 #. label-category: timeshift
 #. label-group: Timeshift - Timeshift
@@ -520,37 +520,37 @@ msgstr "Omogući vremensko premotavanje"
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr ""
+msgstr "Omogući vremensko premotavanje za HTTP temeljena strujanja"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr ""
+msgstr "- Promijeni inputstream.ffmpegdirect postavke..."
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr ""
+msgstr "Inputstream postavke"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr ""
+msgstr "Uvijek omogući način strujanja vremenskog premotavanja ako nedostaje"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
 msgid "Enable timeshift for all streams"
-msgstr ""
+msgstr "Omogući vremensko premotavanje za sva strujanja"
 
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr ""
+msgstr "Omogući vremensko premotavanje za UDP temeljena strujanja"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
 msgid "Catchup correction"
-msgstr ""
+msgstr "Ispravak hvatanja"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -567,17 +567,17 @@ msgstr "Radio"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr ""
+msgstr "Inputstream greška"
 
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr ""
+msgstr "%s dodatak nije instaliran."
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr ""
+msgstr "%s dodatak nije omogućen."
 
 #. ############
 #. help info #
@@ -586,62 +586,62 @@ msgstr ""
 #. help-category: General
 msgctxt "#30600"
 msgid "General settings required for the addon to function."
-msgstr "Opće postavke potrebne za funkcioniranje dodatka"
+msgstr "Općenite postavke potrebne za funkcioniranje dodatka."
 
 #. help: General - m3uPathType
 msgctxt "#30601"
 msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
-msgstr ""
+msgstr "Odaberite gdje pronaći M3U resurs. Mogućnosti su: [B]Lokalna putanja[/B] - Putanja do M3U datoteke koja se nalazi na uređaju ili lokalnoj mreži; [B]Udaljena putanja[/B] - URL koji određuje lokaciju M3U datoteke."
 
 #. help: General - m3uPath
 msgctxt "#30602"
 msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
-msgstr ""
+msgstr "Ako je lokacija [B]Lokalna putanja[/B] ova mogućnost mora sadržavati valjanu putanju kako bi dodatak funkcionirao."
 
 #. help: General - m3uUrl
 msgctxt "#30603"
 msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
-msgstr ""
+msgstr "Ako je lokacija [B]Udaljena putanja[/B] ova mogućnost mora sadržavati valjan URL kako bi dodatak funkcionirao."
 
 #. help: General - m3uCache
 msgctxt "#30604"
 msgid "If location is [B]Remote path[/B] select whether or not the the M3U file should be cached locally."
-msgstr ""
+msgstr "Ako je lokacija [B]Udaljena putanja[/B] odaberite treba li lokalna M3U datoteka stvarati predmemoriju lokalno."
 
 #. help: General - startNum
 msgctxt "#30605"
 msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
-msgstr ""
+msgstr "Broj od kojeg se počinju nabrajati programi. Koristi se samo kada se [B]Koriste brojevi programa iz pozadinskog softvera[/B] ako je PVR postavka omogućena i broj programa nije sadržan u M3U datoteci."
 
 #. help: General - numberByOrder
 msgctxt "#30606"
 msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
-msgstr "Zanemari bilo koju 'tgv-chno' oznaku i samo numeriraj kanale po redoslijedu u M3U datoteci počevši od 'Početni broj kanala'."
+msgstr "Zanemari bilo koju 'tgv-chno' oznaku i samo pobroji programe po redoslijedu u M3U datoteci započevši od 'Početni broj programa'."
 
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
 msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
-msgstr ""
+msgstr "Odaberite način automatskog osvježavanja za M3U/XMLTV datoteke. Zapamtite da je stvaranje predmemorije onemogućeno ako se automatsko osvježavanje koristi. Mogućnosti su: [B]Onemogućeno[/B] - Automatski ne osvježavaj datoteke; [B]Ponavljajuće osvježavanje[/B] - Osvježi datoteke temeljem jednominutnog razdoblja; [B]Jednom dnevno[/B] - Osvježi datoteke jednom dnevno."
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
 msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
-msgstr ""
+msgstr "Ako je M3U način automatskg osvježavanja [B]Ponavljajuće osvježavanje[/B] osvježi datoteke svaki puta kada ovaj broj minuta prođe. Najviše 120 minuta."
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
 msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
-msgstr ""
+msgstr "Ako je način osvježavanja [B]Jednom dnevno[/B] Osvježi datoteke svaki puta kada se ovaj sat u danu dostigne."
 
 #. help: General - tvChannelGroupsOnly
 msgctxt "#30610"
 msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "Samo TV programi koji pripadaju grupi (npr. sadrži [B]group-title[/B] svojstvo) biti će učitani iz M3U datoteke."
 
 #. help: Channels - tvGroupMode
 msgctxt "#30611"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Odaberite jedan od sljedeća tri načina: [B]Sve grupe[/B] Učitaj sve TV grupe iz M3U datoteke; [B]Pojedine grupe[/B] Učitaj samo grupe određene sljedećim mogućnostima; [B]Prilagođene grupe[/B] Učitaj skup grupa iz M3U datoteke čiji su nazivi učitani iz XML datoteke."
 
 #. help: Channels - oneTvGroup
 #. help: Channels - twoTvGroup
@@ -650,12 +650,12 @@ msgstr ""
 #. help: Channels - fiveTvGroup
 msgctxt "#30612"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Ako je prijašnja mogućnost postavljena na 'Pojedine grupe' morate odrediti TV grupu za učitavanje iz M3U datoteke. Zapamtite da je to naziv grupe prikazan u group-title svojstvu (npr. 'HR (TV)'). Ova postavka je osjetljiva na mala i velika slova."
 
 #. help: Channels - radioGroupMode
 msgctxt "#30613"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Odaberite jedan od sljedeća tri načina: [B]Sve grupe[/B] Učitaj sve Radio grupe iz M3U datoteke[/B]; [B]Pojedine grupe[/B] Samo učitaj grupe određene sljedećim mogućnostima; [B]Prilagođene grupe[/B] Učitaj skup grupa iz M3U datoteke čiji nazivi su učitani iz XML datoteke."
 
 #. help: Channels - oneRadioGroup
 #. help: Channels - twoRadioGroup
@@ -664,266 +664,266 @@ msgstr ""
 #. help: Channels - fiveRadioGroup
 msgctxt "#30614"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Ako je prijašnja mogućnost postavljena na 'Pojedine grupe' morate odrediti Radio grupu za učitavanje iz M3U datoteke. Zapamtite da je to naziv grupe prikazan u group-title svojstvu (npr. 'HR (Radio)'). Ova postavka je osjetljiva na mala i velika slova."
 
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr ""
+msgstr "Datoteka koja se koristi za prilagođeno učitavanje TV grupa. Zadana datoteka je `customTVGroups-example.xml`."
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr ""
+msgstr "Datoteka koja se koristi za prilagođeno učitavanje Radio grupa. Zadana datoteka je `customRadioGroups-example.xml`."
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr ""
+msgstr "Broj TV grupa za učitavanje kada `Pojedine grupe` su u načinu odabira. Do 5 ih se može odabrati. Ako je potrebno više od 5 način 'Pojedine grupe' trebao bi se koristiti."
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
 msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
-msgstr ""
+msgstr "Broj Radio grupa za učitavanje kada `Pojedine grupe` su u načinu odabira. Do 5 ih se može odabrati. Ako je potrebno više od 5 način 'Pojedine grupe'  trebao bi se koristiti."
 
 #. help: General - radioChannelGroupsOnly
 msgctxt "#30619"
 msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "Samo Radio programi koji pripadaju grupama (npr. sadrže [B]group-title[/B] svojstvo) biti će učitani iz M3U datoteke."
 
 #. help info - EPG Settings
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr ""
+msgstr "Postavke povezane s EPG vodičem. Zapamtite da će Kodi samo učitati EPG podatke kada je potrebno. Dodatak će prisiliti učitavanje EPG podataka unatoč tome zahtijeva li ih Kodi ili ako je hvatanje omogućeno ili XMLTV logotipovi su potrebni."
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
 msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
-msgstr ""
+msgstr "Odaberite gdje pronaći XMLTV resurs. Mogućnosti su: [B]Lokalna putanja[/B] - Putanja do XMLTV datoteke bilo da je na uređaju ili lokalnoj mreži; [B]Udaljena putanja[/B] - URL koji određuje lokaciju XMLTV datoteke."
 
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Ako je lokacija [B]Lokalna putanja[/B] ova postavka bi trebala sadržavati valjanu putanju."
 
 #. help: EPG Settings - epgUrl
 msgctxt "#30623"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Ako je lokacija [B]Udaljena putanja[/B] ova postava trebala bi sadržavati valjan URL."
 
 #. help: EPG Settings - epgCache
 msgctxt "#30624"
 msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
-msgstr ""
+msgstr "Ako je lokacija [B]Udaljena putanja[/B] odaberite treba li se predmemorija XMLTV datoteke stvarati lokalno."
 
 #. help: EPG Settings - epgTimeShift
 msgctxt "#30625"
 msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
-msgstr ""
+msgstr "Prilagodi vremena EPG vodiča ovim vrijednostima, od -12 sati do +14 sati."
 
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
-msgstr "Da li zamijeniti vremenski pomak za sve kanale opcijom `EPG vremenski pomak`. Ako nije omogućeno koristit će se `EPG vremenski pomak` plus individualni vremenski pomak po kanalu (ako je dostupan)."
+msgstr "Treba li zaobići vremensko premotavanje za sve programe s `EPG vremensko premotavanje`. Ako nije omogućeno koristit će se `EPG vremensko premotavanje` plus pojedinačno vremensko premotavanje po programu (ako je dostupno)."
 
 #. help info - Channel Logos
 #. help-category: Channel Logos
 msgctxt "#30640"
 msgid "Settings related to Channel Logos."
-msgstr "Postavke vezane uz Logotipe Kanala."
+msgstr "Postavke povezane uz Logotipove programa."
 
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
 msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
-msgstr ""
+msgstr "Odaberite gdje se pronalaze logotipi programa. Mogućnosti su: [B]Lokalna putanja[/B] - Putanja do mape bilo na uređaju ili lokalnoj mreži; [B]Udaljena putanja[/B] - Osnovni URL koji određuje lokaciju logotipova."
 
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
-msgstr ""
+msgstr "Ako je lokacija [B]Lokalna putanja[/B] ova postavka treba sadržavati valjanu mapu."
 
 #. help: Channel Logos - logoBaseUrl
 msgctxt "#30643"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
-msgstr ""
+msgstr "Ako je lokacija [B]Udaljena putanja[/B] ova postavka trebala bi sadržavati valjan osnovni URL."
 
 #. help: Channel Logos - logoFromEpg
 msgctxt "#30644"
 msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
-msgstr ""
+msgstr "Postavke o rukovanju logotipovima programa. Mogućnosti su: [B]Zanemari[/B] - Ne koristi logotipove programa iz XMLTV datoteke; [B]Preferiraj M3U[/B] - Koristi logotipove programa iz M3U datoteke ako su dostupni u suprotnome koristi XMLTV logotipove; [B]Preferiraj XMLTV[/B] - Koristi logotipove programa iz XMLTV datoteke ako su dostupni u suprotnome koristi M3U logotipove."
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
-msgstr ""
+msgstr "Ako je odabrana lokalna putanja za logotipove, zanemari sve logotipove iz M3U datoteke."
 
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
 msgid "Settings related to genres."
-msgstr "Postavke vezane uz žanrove."
+msgstr "Postavke povezane s žanrovima."
 
 #. help: Genres - useEpgGenreText
 msgctxt "#30661"
 msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
-msgstr "Ako je omogućeno, i koristi se datoteka za mapiranje žanrova za pribavljanje vrste i podvrste žanra, koristi tekst žanra iz EPG-a (npr 'kategorija') za žanr umjesto zadanog kodi teksta."
+msgstr "Ako je omogućeno, i koristi se datoteka mapiranja žanrova za nabavljanje vrste i podvrste žanra, koristi tekst žanra iz EPG vodiča (npr. 'category' tekst) za žanr umjesto zadanog kodi teksta."
 
 #. help: Genres - genresPathType
 msgctxt "#30662"
 msgid "Select where to find the genres XML resource. The options are: [B]Local path[/B] - A path to a genres XML file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the genres XML file."
-msgstr ""
+msgstr "Odaberite gdje treba pronaći XML resurs žanra. Mogućnosti su: [B]Lokalna putanja[/B] - Putanja do XML datoteke žanra bilo da je na uređaju ili lokalnoj mreži; [B]Udaljena putanja[/B] - URL koji određuje lokaciju XML datoteke žanra."
 
 #. help: Genres - genresPath
 msgctxt "#30663"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Ako je lokacija [B]Lokalna putanja[/B] ova postavka treba sadržavati valjanu putanju."
 
 #. help: Genres - genresUrl
 msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Ako je lokacija [B]Udaljena putanja[/B] Ova postavka treba sadržavati valjani URL."
 
 # empty strings from id 30665 to 30679
 #. help info - Advanced
 #. help-category: Advanced
 msgctxt "#30680"
 msgid "Advanced settings including multicast relays, streaming properties etc."
-msgstr ""
+msgstr "Napredne postavke koje obuhvaćaju multicast releje, svojstva strujanja itd."
 
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
 msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
-msgstr "Multicast (UDP/RTP) streamovi ne rade dobro na bežičnim mrežama. Multicast prijenosnik može pretvoriti stream iz UDP/RTP multicasta u HTTP. Omogučujući tu postavku će pretvoriti multicast URL iz M3U datoteke u HTTP adrese do kojih se može pristupiti putem 'udpxy' prijenosnika na lokalnoj mreži.Npr. UDP multicast stream URL kao 'udp://@239.239.3.38:5239' će biti pretvoreno u nešto kao 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
+msgstr "Multicast (UDP/RTP) strujanja ne rade dobro na bežičnim mrežama. Multicast relej može pretvoriti strujanje iz UDP/RTP multicasta u HTTP. Omogućavanje ove postavke pretvoriti će multicast URL strujanje iz M3U datoteke u HTTP adrese do kojih se može pristupiti putem 'udpxy' releja na lokalnoj mreži. Npr. UDP multicast URL strujanje u obliku 'udp://@239.239.3.38:5239' će biti pretvoreno u nešto poput 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
 
 #. help: Advanced - udpxyHost
 msgctxt "#30682"
 msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
-msgstr "Ime ili IP adresa multicast prijenosnika (udpxy) na lokalnoj mreži."
+msgstr "Naziv računala ili IP adresa multicast releja (udpxy) na lokalnoj mreži."
 
 #. help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
-msgstr "Port multicast prijenosnika (udpxy) na lokalnoj mreži."
+msgstr "Ulaz multicast releja (udpxy) na lokalnoj mreži."
 
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr ""
+msgstr "Koristi inputstream.adaptive umjesto ffmpeg libavformat biblioteke za m3u8 (HLS) strujanja."
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr ""
+msgstr "Zapamtite da se ovo primjenjuje samo na http/https strujanja koja su obrađena libavformat biblotekom (npr. M3u8/HLS). Korištenje libavformat biblioteke može se odrediti u M3U datoteci postavljanjem svojstva `inputstream` kao `inputstream.ffmpeg` za kodijevu unutarnju implementaciju ili `inputstream.ffmpegdirect` za inačicu dodatka. Npr. dodavanje retka: `#KODIPROP:inputstream=inputstream.ffmpeg`. Ako ova mogućnost nije omogućena može se još omogućiti po strujanju/programu dodavanjem kodi svojstva, npr.: `#KODIPROP:http-reconnect=true`."
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
-msgstr ""
+msgstr "Koristi ovog korisničkog agenta ako nema određenog svojstvom ili kao dijela URL strujanja programa."
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr ""
+msgstr "Koristi ovaj inputsream kao zadan ako nema određenog svojstvom (KODIPROP) programa. Koristite uz oprez jer će ovo onemogućiti zadano ponašanje korištenja dodatka inspekcije strujanja. Zapamtite da `inputstream.ffmpegdirect` ako oboje `mimetype` i `inputstream.ffmpegdirect.manifest_type` nisu postavljeni, inspekcija strujanja će se pokrenuti ako je potrebno."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr ""
+msgstr "Koristi ove MIME vrste kao zadane ako nema određenih kao svojstvo (KODIPROP) programa. Koristite uz oprez jer će ovo onemogućiti korištenje zadanog ponašanja inspekcije strujanja dodatka."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr ""
+msgstr "Postavke hvatanja za gledanje arhiviranih emitiranja TV programa uživo. Omogućuje mogućnost 'Gledaj program' kada se pregleda uvod EPG vodiča."
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
 msgid "Should be enabled if there are channels supporting catchup in your M3U list."
-msgstr ""
+msgstr "Treba biti omogućeno ako postoje programi koji podržavaju hvatanje u M3U datoteci."
 
 #. help: Catchup - catchupQueryFormat
 msgctxt "#30702"
 msgid "A query format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of 'default' or 'append' and a 'catchup-source' tag is provided in the M3U entry this setting will be ignored."
-msgstr ""
+msgstr "Format izraza zahtjeva (ovisan o pružatelju usluge) koji dopušta dodavanje informacija vremenske oznake u URL kako bi se označilo od kada treba uhvatiti. Npr. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, oznaka omogućuje umetanje godine, mjeseca, dana, sata, minute i sekunde da daju: `&cutv=2019-11-26T22:00:32` format. Ako M3U unos koristi način hvatanja 'default' ili 'append' i 'catchup-source' oznaka je pružena u M3U unosu, ova postavka će biti zanemarena."
 
 #. help: Catchup - catchupDays
 msgctxt "#30703"
 msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
-msgstr ""
+msgstr "Broj dana u prošlosti za koje je moguće hvatanje programa. Može se zaobići M3U unosom koristeći 'catchup-days' oznaku."
 
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
 msgid "If enabled it is assumed that channels support catchup using the selected catchup mode while also obeying the override mode. If required the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [B]Disabled[/B] - Do not assume all channel support catchup; [B]Default[/B] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [B]Append[/B] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [B]Shift (SIPTV)[/B] - Append the standard SIPTV catchup string to the channel URL; [B]Flussonic[/B] - Build a flussonic URL from the channel URL; [B]Xtream codes[/B] - Build an Xtream codes URL from the channel URL."
-msgstr ""
+msgstr "Ako je omogućeno, pretpostavlja se da podrška hvatanja programa koristi odabrani način hvatanja dok poštuje način zaobilaženja. Ako zahtijeva 'Format izraza upita' i 'Prozor hvatanja' broj dana će doći iz postavki dodatka. Ako je ova mogućnost onemogućena tada M3U unos mora sadržavati najmanje 'catchup=' oznaku za omogućavanje hvatanja. Mogućnosti za izgradnju URL hvatanja su: [B]Onemogućeno[/B] - Ne pretpostavaljaj da svi programi podržavaju hvatanje; [B]Zadano[/B] - Koristi izvor hvatanja kao potpun URL hvatanja, ako nema izvora hvatanja koristi način dodavanja; [B]Dodano[/B] - Dodaj izvor hvatanja URL-u programa, ako ne postoji izvor hvatanja koji koristi 'Format izraza upita'; [B]Pomak (SIPTV)[/B] - Dodaj standaradan izraz SIPTV hvatanja u URL programa; [B]Flussonic[/B] - Izgradi flussonic URL iz URL-a programa; [B]Xtream kôdovi[/B] - Izgradi URL Xtream kôdove iz URL-a programa."
 
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
 msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
-msgstr ""
+msgstr "Kada je onemogućeno svako hvatanje programa iz prošlosti biti će reproducirano kao video (Ograničeno početnim i završnim vremenom). Ako je omogućeno, tada će se ponašati kao strujanje TV programa uživo s vremenskim premotavanjem, dopuštajući mogućnost premotavanja programa unaprijed i unazad. Zapamtite da ova mogućnost ima samo efekta na strujanjima koja ne podržavaju vremensko premotavanje, jest hoće li se primijeniti prije/nakon stvaranja međuspremnika."
 
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
 msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "Količina međuspremnika koji treba dodati prije točke početka reprodukcije iz EPG unosa koji će biti gledan kao video."
 
 #. help: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30707"
 msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "Količina međuspremnika koji treba dodati nakon točke početka reprodukcije iz EPG unosa koji će biti gledan kao video."
 
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"
 msgid "When selected from the EPG the current live programme cannot be watched as catchup until finished."
-msgstr ""
+msgstr "Kada je odabran iz EPG vodiča trenutno emitiranje TV programa uživo ne može se gledati kao hvatanje dok ne završi."
 
 #. help: Catchup - catchupOverrideMode
 msgctxt "#30709"
 msgid "Set the scope for overriding the catchup mode. Options are: [B]without catchup mode[/B] - Only include channels with no catchup mode set (except legacy SIP [I]timeshift[/I] catchup mode); [B]with catchup mode[/B] - Only include channels with catchup mode set (ignore those without a catchup mode); [B]with and without catchup mode (all channels)[/B] - Include all channels ignoring any catchup mode from the M3U."
-msgstr ""
+msgstr "Postavite opseg za zaobilaženje načina hvatanja. Mogućnosti su: [B]bez načina hvatanja[/B] - Obuhvati samo programe bez postavljenog načina hvatanja (osim zastarjeli SIP [I]vremensko premotavanje[/I] način hvatanja); [B]s načinom hvatanja[/B] - Obuhvati samo programe s postavljenim načinom hvatanja (zanemare one bez načina hvatanja); [B]s i bez načina hvatanja (svi programi)[/B] - Svi programi zanemaruju sve načine hvatanja iz M3U datoteke."
 
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
-msgstr ""
+msgstr "Prilagodite vrijeme za stvaranje URL strujanja hvatanja ovim vrijednostima, od -12 sati do +14 sati. Korisno za hvatanje strujanja koja su zemljopisno usklađena na krivo vrijeme. Zapamtite da se ova vrijednost može zaobići vrijednostima u M3U datoteci."
 
 # empty strings from id 30710 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
 msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
-msgstr ""
+msgstr "Postavke vremenskog premotavanja za pauzu/premotavanje i brzo premotavanje strujanja emitiranja TV programa uživo."
 
 #. help: Timeshift - timeshiftEnabled
 msgctxt "#30721"
 msgid "Enable the timeshift feature."
-msgstr ""
+msgstr "Omogući značajku vremenskog premotavanja."
 
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Omogući značajku vremenskog premotavanja za HTTP temeljena strujanja. Primijenit će se samo na strujanja koja ne odabiru određeni inputstream dodatak za reprodukciju. inputstream.ffmpegdirect dodatak će se koristiti za vremensko premotavanje."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
-msgstr ""
+msgstr "Otvori dijalog postavki inputstream.ffmpegdirect za promjenu vremenskog premotavanja i ostalih postavki."
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
 msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
-msgstr ""
+msgstr "Ako stream_mode svojstvo nije određeno s inputstream.ffmpegdirect svojstvom, uvijek ga dodaj za svaku podržanu vrstu strujanja. Zapamtite da ovo svojstvo nema efekta na hvatanje VOD strujanja koji ne emitiraju TV program uživo."
 
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Omogući značajku vremenskog premotavanja za sva strujanja. Primijenit će se samo na strujanja koja nemaju odabran određen inputstream dodatak za reprodukciju. inputstream.ffmpegdirect dodatak će se koristiti za vremensko premotavanje."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Omogući značajku vremenskog premotavanja za UDP temeljena strujanja. Primijenit će se samo na strujanja koja nemaju odabran određen inputstream dodatak za reprodukciju. inputstream.ffmpegdirect dodatak će se koristiti za vremensko premotavanje."
 
 #~ msgctxt "#30620"
 #~ msgid "Settings related to the EPG."
