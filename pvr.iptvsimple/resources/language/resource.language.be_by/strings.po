@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-09-06 07:31+0000\n"
+"PO-Revision-Date: 2022-12-28 16:18+0000\n"
 "Last-Translator: Antikruk <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/be_by/>\n"
 "Language: be_by\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 4.14\n"
+"X-Generator: Weblate 4.15\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -797,133 +797,133 @@ msgstr "Дадатковыя налады, уключаючы ўласцівас
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
 msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
-msgstr ""
+msgstr "Шматадрасныя трансляцыі (UDP/RTP) не вельмі добра працуюць у сетках Wifi. Рэтранслятары могуць пераўтвараць струмені з UDP/RTP у HTTP. Калі ўключыць гэты параметр, то URL-спасылкі ў M3U будуць пераўтварацца ў HTTP, каб да іх можна атрымаць доступ па \"udpxy\" у лакальнай сетцы. Напрыклад, UDP-адрас трансляцыі \"udp://@239.239.3.38:5239\" будзе пераўтвораны ў \"http://192.168.1.1:4000/udp/239.239.3.38:5239\"."
 
 #. help: Advanced - udpxyHost
 msgctxt "#30682"
 msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "Назва хоста або ip-адрас рэтранслятара (udpxy) у лакальнай сетцы."
 
 #. help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "Нумар порта рэтранслятара (udpxy) у лакальнай сетцы."
 
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr ""
+msgstr "Выкарыстоўваць inputstream.adaptive замест libavformat ад ffmpeg для трансляцый m3u8 (HLS)."
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr ""
+msgstr "Звярніце ўвагу, што гэта можна ўжыць толькі да http/https-трансляцый, якія апрацоўваюцца libavformat (M3u8/HLS). Выкарыстанне libavformat можна вызначыць у файле M3U, калі змяніць уласцівасць \"inputstream\" на \"inputstream.ffmpeg\" для унутранай рэалізацыі kodi або дадаць новы радок для дапаўнення, \"inputstream.ffmpegdirect\": `#KODIPROP:inputstream=inputstream.ffmpeg`. Калі гэты параметр не ўключаны, яго можна ўключыць асобна для кожнай трансляцыі, калі дадаць уласцівасць: `#KODIPROP:http-reconnect=true`."
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
-msgstr ""
+msgstr "Выкарыстоўваць User-Agent, калі ён не пазначаны як уласцівасць або частка URL-адраса трансляцыі."
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr ""
+msgstr "Выкарыстоўваць гэты inputsream як прадвызначаны, калі ён пазначаны як уласцівасць канала (KODIPROP). Выкарыстоўвайце ўважліва, бо гэты параметр адключыць прадвызначанае правяранне струменяў. Звярніце ўвагу, што `inputstream.ffmpegdirect`будзе правярацца, калі для яго не вызначаныя`mimetype` і `inputstream.ffmpegdirect.manifest_type`."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr ""
+msgstr "Прадвызначана выкарыстоўваць гэты тып MIME, калі ён не пазначаны як уласцівасць канала (KODIPROP). Выкарыстоўвайце ўважліва, бо адключыцца прадвызначанае правяранне струменяў."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr ""
+msgstr "Налады для прагляду праграм з архіва. Рэалізуе параметр \"Прайграць праграму\" пры праглядзе звестак пра праграму ў праграме тэлеперадач."
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
 msgid "Should be enabled if there are channels supporting catchup in your M3U list."
-msgstr ""
+msgstr "Павінна быць уключана, калі ў вашым спісе M3U ёсць каналы, якія падтрымліваюць архіваванне."
 
 #. help: Catchup - catchupQueryFormat
 msgctxt "#30702"
 msgid "A query format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of 'default' or 'append' and a 'catchup-source' tag is provided in the M3U entry this setting will be ignored."
-msgstr ""
+msgstr "Радок фармату запыту (залежыць ад правайдара) дазваляе дадаць адзнаку часу ў URL-адрас, каб пазначыць, адкуль трэба запускаць архіў. Напрыклад, \"&cutv={Y}-{m}-{d}T{H}:{M}:{S}\" дазваляе ўставіць год, месяц, дзень, гадзіну, хвіліну, каб атрымаць: \"&cutv=2019-11-26T22:00:32\". Калі для запісу M3U выкарыстоўваецца рэжым архіва і ў M3U ёсць пазнака \"catchup-source\", параметр не будзе дзейнічаць."
 
 #. help: Catchup - catchupDays
 msgctxt "#30703"
 msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
-msgstr ""
+msgstr "Колькасць дзён, на працягу якіх даступны прагляд з архіва. Можна перазапісаць у запісе M3U з дапамогай пазнакі \"catchup-days\"."
 
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
 msgid "If enabled it is assumed that channels support catchup using the selected catchup mode while also obeying the override mode. If required the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [B]Disabled[/B] - Do not assume all channel support catchup; [B]Default[/B] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [B]Append[/B] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [B]Shift (SIPTV)[/B] - Append the standard SIPTV catchup string to the channel URL; [B]Flussonic[/B] - Build a flussonic URL from the channel URL; [B]Xtream codes[/B] - Build an Xtream codes URL from the channel URL."
-msgstr ""
+msgstr "Калі ўключана, мяркуецца, што каналы падтрымліваюць працу з архіва з абраным рэжымам. Калі патрэбна, \"Радок фармату запыту\" і \"Перыяд архівацыі\" будуць узятыя з налад дапаўнення. Калі гэты параметр адключаны, то запіс M3U павінен мець пазнаку \"catchup=\" для таго, каб уключыць архіававанне. Параметры для стварэння URL: [B]Адключана[/B] - мяркуецца, што не ўсе каналы падтрымліваюць архіў; [B]Прадвызначаны[/B] - выкарыстоўваць крыніцу catchup як поўную спасылку на архіў. Калі не, выкарыстоўваць дастасавальны рэжым; [B]Дастасавальны[/B] - уставіць крыніцу catchup у спасылку, калі няма крыніцы з \"Радок фармату запыту\"; [B]Shift (SIPTV)[/B] - уставіць прадвызначаны радок SIPTV у спасылку; [B]Flussonic[/B] - стварыць спасылку flussonic; [B]Коды Xtream[/B]m codes[/B] - стварыць спасылку з кодамі Xtream."
 
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
 msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
-msgstr ""
+msgstr "Калі адключана, любая праграма з архіва будзе прайгравацца як відэа (мець пачатак і канец). Калі ўключана, будзе прайгравацца як жывая трансляцыя з перамтованнем па часе і пераключэннем паміж праграмамі. Звярніце ўвагу, што адзіны эфект, які не падтрымлівае параметр - ужываць ці не ўжываць буфер да/пасля."
 
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
 msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "Памер буфера, які адводзіцца перад запускам прайгравання запісу тэлеперадачы, якая будзе прайгравацца як відэа."
 
 #. help: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30707"
 msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "Памер буфера, які адводзіцца пасля завяршэння прайгравання запісу тэлеперадачы, якая будзе прайгравацца як відэа."
 
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"
 msgid "When selected from the EPG the current live programme cannot be watched as catchup until finished."
-msgstr ""
+msgstr "Калі абраную тэлеперадачу немагчыма паглядзець у архіве, пакуль яна не скончыцца."
 
 #. help: Catchup - catchupOverrideMode
 msgctxt "#30709"
 msgid "Set the scope for overriding the catchup mode. Options are: [B]without catchup mode[/B] - Only include channels with no catchup mode set (except legacy SIP [I]timeshift[/I] catchup mode); [B]with catchup mode[/B] - Only include channels with catchup mode set (ignore those without a catchup mode); [B]with and without catchup mode (all channels)[/B] - Include all channels ignoring any catchup mode from the M3U."
-msgstr ""
+msgstr "Абраць вобласць дзеяння рэжыму архіва. Параметры: [B]без рэжыму архіва[/B] - ўключаць толькі каналы без рэжыму архіву (выключэнне састарэлы SIP [I]timeshift[/I]); [B]з рэжымам архіва[/B] - уключаць толькі каналы з рэжымам архіва; [B]усе каналы[/B] - уключаць усе каналы з M3U."
 
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
-msgstr ""
+msgstr "Падладжванне часу, які выкарыстоўваецца для стварэння URL-адраса архіва, ад -12 да +14 гадзін. Карысна для архіўных трансляцый з няправільным часавым поясам. Звярніце ўвагу на тое, што гэтае значэнне можа быць перавызначана значэннямі з файла M3U."
 
 # empty strings from id 30710 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
 msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
-msgstr ""
+msgstr "Налады перамотвання жывых трансляцый."
 
 #. help: Timeshift - timeshiftEnabled
 msgctxt "#30721"
 msgid "Enable the timeshift feature."
-msgstr ""
+msgstr "Уключыць функцыю перамотвання."
 
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Уключыць функцыю перамотвання для HTTP-трансляцый. Будзе ўжывацца толькі да струменяў, якія не выкарыстоўваюць пэўнае дапаўненне для прайгравання. Будзе выкарыстоўвацца дапаўненне inputstream.ffmpegdirect."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
-msgstr ""
+msgstr "Адкрыць дыялогавае акно налад inputstream.ffmpegdirect."
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
 msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
-msgstr ""
+msgstr "Калі не вызначаны параметр stream_mode і ўласцівасць inputstream.ffmpegdirect, дадаваць іх для любых струменяў, якія падтрымліваюцца. Звярніце ўвагу на тое, што гэты параметр не ўплывае VOD-струмені, якія перадаюцца ў жывым эфіры."
 
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Уключыць функцыю перамотвання для ўсіх трансляцый. Будзе ўжывацца толькі да струменяў, якія не выкарыстоўваюць пэўнае дапаўненне для прайгравання. Будзе выкарыстоўвацца дапаўненне inputstream.ffmpegdirect."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Уключыць функцыю перамотвання для UDP-трансляцый. Будзе ўжывацца толькі да струменяў, якія не выкарыстоўваюць пэўнае дапаўненне для прайгравання. Будзе выкарыстоўвацца дапаўненне inputstream.ffmpegdirect."
