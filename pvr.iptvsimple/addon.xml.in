@@ -430,10 +430,10 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <summary lang="et_EE">Kodi IPTV lisamoodul.</summary>
     <summary lang="fi_FI">Kodin tallenninlisäosa IPTV-tuelle. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="fr_CA">Addiciel de numériscope Kodi pour la prise en charge d’IPTV</summary>
-    <summary lang="fr_FR">Extension enregistreur vidéo (PVR) pour la gestion IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="fr_FR">Extension enregistreur vidéo (PVR) pour la gestion IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home.</summary>
     <summary lang="gl_ES">Complemento PVR do Kodi de soporte á IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="he_IL">לקוח טלוויזיה חיה עם תמיכה ב־IPTV.[CR]https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
-    <summary lang="hr_HR">Kodi PVR dodatak za IPTV podršku. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
+    <summary lang="hr_HR">Kodi PVR dodatak za IPTV podršku.</summary>
     <summary lang="hu_HU">Kodi PVR kiegészítő az IPTV támogatáshoz. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="id_ID">Pengaya PVR Kodi untuk dukungan IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
     <summary lang="is_IS">Kodi upptökuviðbót fyrir stuðning við IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home</summary>
@@ -480,10 +480,10 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <description lang="es_MX">IPTV Simple PVR Client soporta listas de reproducción m3u, streaming de Live TV para fuentes multicast / unicast, escuchando para canales de radio y EPG.</description>
     <description lang="fi_FI">IPTV Simple tallenninpääte tukee m3u-toistolistoja, televisiolähetysten multicast-/unicast-suoratoistoa, radiokanavien kuuntelua sekä ohjelmaopasta.[CR]    [CR]Ohjeita löydät täältä: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
     <description lang="fr_CA">Client de numériscope simple pour IPTV, prenant en charge les listes de lecture m3u, la diffusion en continu des télés en direct pour les sources de multidiffusion et de monodiffusion, l’écoute de chaînes radio, et le GÉP.</description>
-    <description lang="fr_FR">Le client enregistreur vidéo (PVR) IPTV Simple gère les listes de lecture M3U, la diffusion en continu de la TV en direct en mono ou multidiffusion, l&apos;écoute des chaînes radio et le guide électronique des programmes TV.</description>
+    <description lang="fr_FR">Le client IPTV Simple PVR prend en charge les listes de lecture m3u, le streaming de la télévision en direct pour les sources multidiffusion/unicast, l&apos;écoute des chaînes de radio et de l&apos;EPG.[CR] [CR]Pour la documentation, visitez : https://github.com/kodi-pvr/pvr.iptvsimple /blob/Matrix/README.md[CR]    </description>
     <description lang="gl_ES">O cliente PVR simple de IPTV soporta listaxes m3u, transmisión de TV en directo para fontes multicast/unicast, escoita de canles de Radio e Guía.</description>
     <description lang="he_IL">לקוח טלוויזיה חיה IPTV Simple תומך ברשימות m3u, הזרמת שידורים חיים ממקור מרובב/ סטרים בודד, האזנה לתחנות רדיו והצגת לוח שידורים.</description>
-    <description lang="hr_HR">IPTV Simple PVR klijent podržava m3u liste izvođenja, strujanje TV programa uživo s višesmjernih/jednosmjernih izvora, slušanje radio kanala i elektroničke programske vodiče (EPG).    </description>
+    <description lang="hr_HR">IPTV Simple PVR klijent podržava m3u popise izvođenja, strujanje TV programa s multicast/unicast izvora, slušanje radio programa i elektroničke programske vodiče (EPG).    [CR]Za dokumentaciju posjetite: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
     <description lang="hu_HU">Az IPTV PVR kiegészítő támogatja m3u listák lejátszását, élő TV adások hálózati streamelését, rádióadók hallgatását EPG adatok kezelésével.</description>
     <description lang="id_ID">IPTV, klien PTV sederhana yang mendukung playlist m3u, pengaliran siaran TV langsung untuk sumber multicast/unicast, mendengarkan radio dan EPG.</description>
     <description lang="is_IS">Einfaldur upptökubiðlari fyrir IPTV sem styður m3u spilunarlista, streymingu af beinum útsendingum frá multicast/unicast þjónustum, hlustun á útvarpsrásir og rafræna dagskrárvísa</description>
@@ -533,7 +533,7 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <disclaimer lang="fr_FR">Logiciel en cours d&apos;élaboration ! Les auteurs ne sont en aucun cas responsables de l&apos;échec des enregistrements, programmations défectueuses, temps perdu ou autres effets indésirables.</disclaimer>
     <disclaimer lang="gl_ES">Este software non é estábel! Os autores non se fan responsábeis dos erros na reproducción, horarios incorrectos na Guía, horas vencidas, e otros efectos non desexados.</disclaimer>
     <disclaimer lang="he_IL">זוהי איננה הרחבה יציבה! המפתחים אינם אחראים על כשלון בניגון, זמנים שגויים במדריך השידורים, שעות מבוזבזות או כל תופעה לא רצויה אחרת.</disclaimer>
-    <disclaimer lang="hr_HR">Ovo je nestabilan softver! Autori nisu ni na koji način odgovorani za neuspjelo snimanje, netočna zakazana snimanja, izgubjene sate, ili bilo koje druge neželjene učinke...</disclaimer>
+    <disclaimer lang="hr_HR">Ovo je nestabilan softver! Autori nisu ni na koji način odgovorni za neuspjelo snimanje, netočna zakazana snimanja, izgubljene sate, ili bilo koje druge neželjene učinke.</disclaimer>
     <disclaimer lang="hu_HU">Ez nem stabil szoftver! A készítők nem vállalnak felelősséget, a hibás felvételért, rossz időzítésért, elvesztegetett időért...</disclaimer>
     <disclaimer lang="id_ID">Perangkat lunak ini belum stabil. Penulis tidak akan bertanggung-jawa untuk kegagalan penyetelan, waktu EPG yang tidak tepat, Waktu yang terbuang dan efek yang tidak diinginkan lainnya.</disclaimer>
     <disclaimer lang="is_IS">Þetta er óstöðugur hugbúnaður! Höfundarnir eru á engan hátt ábyrgir fyrir misheppnuðum spilunum, röngum upptökutímum, klukkustundum sem að fóru í súginn eða nokkrum öðrum óæskilegum áhrifum.</disclaimer>
