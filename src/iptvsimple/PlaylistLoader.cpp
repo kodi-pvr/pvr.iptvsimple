@@ -123,6 +123,11 @@ bool PlaylistLoader::LoadPlayList()
         std::string tvgUrl = ReadMarkerValue(line, TVG_URL_MARKER);
         if (tvgUrl.empty())
           tvgUrl = ReadMarkerValue(line, TVG_URL_OTHER_MARKER);
+        // The tvgUrl might be a comma separated list. If it is just take
+        // the first one as we don't support multiple list but at least it will work.
+        size_t found = tvgUrl.find(',');
+        if (found != std::string::npos)
+          tvgUrl = tvgUrl.substr(0, found);
         Settings::GetInstance().SetTvgUrl(tvgUrl);
 
         continue;
@@ -302,7 +307,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (strTvgId.empty())
     {
       char buff[255];
-      sprintf(buff, "%d", std::atoi(infoLine.c_str()));
+      snprintf(buff, 255, "%d", std::atoi(infoLine.c_str()));
       strTvgId.append(buff);
     }
 
@@ -544,6 +549,13 @@ std::string PlaylistLoader::ReadMarkerValue(const std::string& line, const std::
     markerStart += marker.length();
     if (markerStart < line.length())
     {
+      if (marker == M3U_GROUP_MARKER && line[markerStart] != '"')
+      {
+        //For this case we just want to return the full string without splitting it
+        //This is because groups use semi-colons and not spaces as a delimiter
+        return line.substr(markerStart, line.length());
+      }
+
       char find = ' ';
       if (line[markerStart] == '"')
       {
