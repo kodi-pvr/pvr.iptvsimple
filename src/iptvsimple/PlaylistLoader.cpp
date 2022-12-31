@@ -123,6 +123,11 @@ bool PlaylistLoader::LoadPlayList()
         std::string tvgUrl = ReadMarkerValue(line, TVG_URL_MARKER);
         if (tvgUrl.empty())
           tvgUrl = ReadMarkerValue(line, TVG_URL_OTHER_MARKER);
+        // The tvgUrl might be a comma separated list. If it is just take
+        // the first one as we don't support multiple list but at least it will work.
+        size_t found = tvgUrl.find(',');
+        if (found != std::string::npos)
+          tvgUrl = tvgUrl.substr(0, found);
         Settings::GetInstance().SetTvgUrl(tvgUrl);
 
         continue;
