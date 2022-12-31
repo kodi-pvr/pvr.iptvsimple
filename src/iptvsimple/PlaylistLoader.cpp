@@ -302,7 +302,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (strTvgId.empty())
     {
       char buff[255];
-      sprintf(buff, "%d", std::atoi(infoLine.c_str()));
+      snprintf(buff, 255, "%d", std::atoi(infoLine.c_str()));
       strTvgId.append(buff);
     }
 
