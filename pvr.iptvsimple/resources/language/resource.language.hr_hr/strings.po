@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-12-28 16:18+0000\n"
+"PO-Revision-Date: 2023-01-02 17:15+0000\n"
 "Last-Translator: gogogogi <trebelnik2@gmail.com>\n"
 "Language-Team: Croatian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/hr_hr/>\n"
 "Language: hr_hr\n"
@@ -112,7 +112,7 @@ msgstr "Osvježi sate (24 sata)"
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr "Osvježi"
+msgstr "Osvježavanje"
 
 #. label-category: epgsettings
 msgctxt "#30019"
@@ -137,7 +137,7 @@ msgstr "XMLTV URL"
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
 msgid "Apply time shift to all channels"
-msgstr "Primijeni vremenski pomak na sve programe"
+msgstr "Primijeni vremensko premotavanje na sve programe"
 
 #. label: EPG Settings - epgTimeShift
 msgctxt "#30024"
@@ -173,7 +173,7 @@ msgstr "TV grupe"
 #. label-group: Channel Logos - Channel Logos
 msgctxt "#30030"
 msgid "Channel Logos"
-msgstr "Logotipi programa"
+msgstr "Logotipovi programa"
 
 #. label: Channel Logos - logoPath
 msgctxt "#30031"
@@ -434,7 +434,7 @@ msgstr "Programi podržavaju način korištenja hvatanja"
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
 msgid "Watch From EPG"
-msgstr "Gledaj iz EPG vodiča"
+msgstr "Gledanje iz EPG vodiča"
 
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
@@ -736,7 +736,7 @@ msgstr "Postavke povezane uz Logotipove programa."
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
 msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
-msgstr "Odaberite gdje se pronalaze logotipi programa. Mogućnosti su: [B]Lokalna putanja[/B] - Putanja do mape bilo na uređaju ili lokalnoj mreži; [B]Udaljena putanja[/B] - Osnovni URL koji određuje lokaciju logotipova."
+msgstr "Odaberite gdje se pronalaze logotipovi programa. Mogućnosti su: [B]Lokalna putanja[/B] - Putanja do mape bilo na uređaju ili lokalnoj mreži; [B]Udaljena putanja[/B] - Osnovni URL koji određuje lokaciju logotipova."
 
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
