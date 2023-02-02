@@ -487,7 +487,7 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <description lang="hu_HU">Az IPTV PVR kiegészítő támogatja m3u listák lejátszását, élő TV adások hálózati streamelését, rádióadók hallgatását EPG adatok kezelésével.</description>
     <description lang="id_ID">IPTV, klien PTV sederhana yang mendukung playlist m3u, pengaliran siaran TV langsung untuk sumber multicast/unicast, mendengarkan radio dan EPG.</description>
     <description lang="is_IS">Einfaldur upptökubiðlari fyrir IPTV sem styður m3u spilunarlista, streymingu af beinum útsendingum frá multicast/unicast þjónustum, hlustun á útvarpsrásir og rafræna dagskrárvísa</description>
-    <description lang="it_IT">IPTV Simple PVR Client supporta playlist m3u, streaming di Live TV per sorgenti multicast/unicast, ascolto di canali Radio ed EPG.[CR]    [CR]Per la documentazione visita: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
+    <description lang="it_IT">IPTV Simple PVR Client supporta playlist m3u, supporta lo stream per sorgenti multicast/unicast, ascolto di canali radio ed EPG.[CR]    [CR]Per la documentazione visita: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
     <description lang="ja_JP">IPTV シンプル PVR クライアントは、m3u プレイリスト、マルチキャスト/ユニキャストのライブ TV ストリーミング、ラジオチャンネルや EPG の視聴をサポートしています。</description>
     <description lang="ko_KR">IPTV Simple PVR 클라이언트는 m3u 재생목록, 스트리밍, 멀티캐스트/유니캐스트 소스의 TV 시청, 라디오 채널과 EPG를 통한 청취를 지원합니다.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
     <description lang="lt_LT">IPTV Simple PVR klientas palaiko m3u grojaraščius, TV transliacijas iš multicast/unicast šaltinių, radijo stočių transliacijas ir EPG.</description>
@@ -537,7 +537,7 @@ Full changelog here: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/pvr.
     <disclaimer lang="hu_HU">Ez nem stabil szoftver! A készítők nem vállalnak felelősséget, a hibás felvételért, rossz időzítésért, elvesztegetett időért...</disclaimer>
     <disclaimer lang="id_ID">Perangkat lunak ini belum stabil. Penulis tidak akan bertanggung-jawa untuk kegagalan penyetelan, waktu EPG yang tidak tepat, Waktu yang terbuang dan efek yang tidak diinginkan lainnya.</disclaimer>
     <disclaimer lang="is_IS">Þetta er óstöðugur hugbúnaður! Höfundarnir eru á engan hátt ábyrgir fyrir misheppnuðum spilunum, röngum upptökutímum, klukkustundum sem að fóru í súginn eða nokkrum öðrum óæskilegum áhrifum.</disclaimer>
-    <disclaimer lang="it_IT">Questo software è instabile! Gli autori non sono in alcun modo responsabili per registrazioni fallite, timers incorretti, ore perse, o qualsiasi altro effetto indesiderato.</disclaimer>
+    <disclaimer lang="it_IT">Gli autori non sono in alcun modo responsabili per riproduzioni fallite, tempi EPG errati, ore sprecate o qualsiasi altro effetto indesiderato.</disclaimer>
     <disclaimer lang="ja_JP">これは不安定なソフトウェアです！本プログラムの作者は、再生の失敗、EPG 時刻のずれ、無駄にした時間、その他あらゆる好ましくない結果について責任を負わないものとします。</disclaimer>
     <disclaimer lang="ko_KR">이 소프트웨어는 불안정합니다! 재생 실패, 정확하지 않은 EPG 시각, 시간 낭비, 의도하지 않은 현상에 대해 제작자는 어떤 책임도 지지 않습니다.</disclaimer>
     <disclaimer lang="lt_LT">Tai yra nestabili programinė įranga! Autoriai nėra atsakingi dėl nepavykusio atkūrimo, klaidingo EPG laiko, prarastų valandų ar kito nepageidaujamo poveikio.</disclaimer>
