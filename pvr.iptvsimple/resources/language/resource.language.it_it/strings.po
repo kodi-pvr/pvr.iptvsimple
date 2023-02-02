@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-01-23 13:25+0000\n"
+"PO-Revision-Date: 2023-02-02 10:59+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15.1\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -827,12 +827,12 @@ msgstr "Usa questo User-Agent se non ce n'è uno fornito come proprietà o come 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr "Usa questo stream in ingresso come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto ciò disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on. Nota che per 'inputstream.ffmpegdirect' se sia 'mimetype' che 'inputstream.ffmpegdirect.manifest_type' non sono impostati, l'ispezione dello stream avverrà comunque se necessario."
+msgstr "Usa questo stream in ingresso come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto questo disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on. Nota che per 'inputstream.ffmpegdirect' se sia 'mimetype' che 'inputstream.ffmpegdirect.manifest_type' non sono impostati, l'ispezione dello stream avverrà comunque se necessario."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr "Usa questo tipo MIME come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto ciò disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on."
+msgstr "Usa questo tipo MIME come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto questo disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
