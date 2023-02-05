@@ -415,6 +415,11 @@
           <default>false</default>
           <control type="toggle" />
         </setting>
+        <setting id="epgIgnoreCaseForChannelIds" type="boolean" label="30076" help="30627">
+          <level>2</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
       </group>
     </category>
 

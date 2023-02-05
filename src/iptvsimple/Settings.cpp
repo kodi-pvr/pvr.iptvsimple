@@ -98,6 +98,7 @@ void Settings::ReadFromAddon(const std::string& userPath, const std::string& cli
   m_cacheEPG = kodi::GetSettingBoolean("epgCache", true);
   m_epgTimeShiftHours = kodi::GetSettingFloat("epgTimeShift", 0.0f);
   m_tsOverride = kodi::GetSettingBoolean("epgTSOverride", true);
+  m_ignoreCaseForEpgChannelIds =  kodi::GetSettingBoolean("epgIgnoreCaseForChannelIds", true);
 
   //Genres
   m_useEpgGenreTextWhenMapping = kodi::GetSettingBoolean("useEpgGenreText", false);
@@ -227,6 +228,8 @@ ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::CSet
     return SetSetting<float, ADDON_STATUS>(settingName, settingValue, m_epgTimeShiftHours, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "epgTSOverride")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_tsOverride, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "epgIgnoreCaseForChannelIds")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_ignoreCaseForEpgChannelIds, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Genres
   else if (settingName == "useEpgGenreText")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useEpgGenreTextWhenMapping, ADDON_STATUS_OK, ADDON_STATUS_OK);

@@ -136,6 +136,7 @@ For settings related to genres please see the next section.
 * **Cache XMLTV at local storage**: If location is `Remote path` select whether or not the the XMLTV file should be cached locally.
 * **EPG time shift**: Adjust the EPG times by this value, from -12 hours to +14 hours.
 * **Apply time shift to all channels**: Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used.
+* **Ignore Case for EPG Channel IDs**: Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used.
 
 ### Genres
 Settings related to genres.

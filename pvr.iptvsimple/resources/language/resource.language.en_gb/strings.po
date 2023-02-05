@@ -406,7 +406,12 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr ""
 
-#empty strings from id 30076 to 30099
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
+#empty strings from id 30077 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -737,7 +742,12 @@ msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
 msgstr ""
 
-#empty strings from id 30627 to 30639
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
+msgstr ""
+
+#empty strings from id 30628 to 30639
 
 #. help info - Channel Logos
 
