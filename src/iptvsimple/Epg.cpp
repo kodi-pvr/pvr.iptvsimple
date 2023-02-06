@@ -399,11 +399,22 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::
   return PVR_ERROR_NO_ERROR;
 }
 
+namespace
+{
+  bool TvgIdMatchesCaseOrNoCase(const std::string& idOne, const std::string& idTwo)
+  {
+    if (Settings::GetInstance().IgnoreCaseForEpgChannelIds())
+      return StringUtils::EqualsNoCase(idOne, idTwo);
+    else
+      return idOne == idTwo;
+  }
+}
+
 ChannelEpg* Epg::FindEpgForChannel(const std::string& id) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), id))
+    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), id))
       return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
@@ -414,7 +425,7 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), channel.GetTvgId()))
+    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), channel.GetTvgId()))
       return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
@@ -444,7 +455,7 @@ ChannelEpg* Epg::FindEpgForMediaEntry(const MediaEntry& mediaEntry) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId()))
+    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId()))
       return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
