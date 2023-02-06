@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="19.2.2"
+  version="19.3.0"
   name="PVR IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
@@ -21,6 +21,9 @@
       <icon>icon.png</icon>
     </assets>
     <news>
+v19.3.0
+- Add setting to make matching channel IDs and tvg-id's case sensitive
+
 v19.2.2
 - Fixed: Some icons using url arguments not displaying
 
