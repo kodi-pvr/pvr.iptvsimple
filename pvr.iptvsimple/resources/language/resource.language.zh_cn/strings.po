@@ -162,7 +162,7 @@ msgstr "{0:.1f} 小时"
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr "仅载入已分组的电视频道"
+msgstr "仅加载已分组的电视频道"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
@@ -183,7 +183,7 @@ msgstr "频道Logo文件夹"
 #. label: Channel Logos - logoBaseUrl
 msgctxt "#30032"
 msgid "Channel logos base URL"
-msgstr "频道Logo基URL"
+msgstr "频道Logo URL"
 
 #. label-group: General - Radio Groups
 msgctxt "#30033"
@@ -792,7 +792,7 @@ msgstr "若位置是 [B]远程路径[/B] 则此设置项需要包含一个有效
 #. help-category: Advanced
 msgctxt "#30680"
 msgid "Advanced settings including multicast relays, streaming properties etc."
-msgstr ""
+msgstr "高级设置，包括多播中继、流媒体等。"
 
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
@@ -802,17 +802,17 @@ msgstr ""
 #. help: Advanced - udpxyHost
 msgctxt "#30682"
 msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "本地网络上多播中继（udpxy）的主机名或ip地址。"
 
 #. help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "本地网络上多播中继（udpxy）的端口。"
 
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr ""
+msgstr "对m3u8（HLS）流使用inputstream.adaptive而不是ffmpeg的libavformat。"
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
@@ -839,7 +839,7 @@ msgstr ""
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr ""
+msgstr "查看存档实时节目的捕获设置。允许在查看EPG条目信息时选择“播放节目”。"
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
@@ -911,7 +911,7 @@ msgstr ""
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
-msgstr ""
+msgstr "打开inputstream.ffmpegdirect的设置对话框，以修改时间表和其他设置。"
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
