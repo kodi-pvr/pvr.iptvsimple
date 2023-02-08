@@ -8,7 +8,7 @@
 
 #include "Media.h"
 
-#include "../PVRIptvData.h"
+#include "../IptvSimple.h"
 #include "utilities/Logger.h"
 
 #include <kodi/tools/StringUtils.h>
@@ -18,7 +18,7 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace kodi::tools;
 
-Media::Media()
+Media::Media(std::shared_ptr<iptvsimple::Settings>& settings) : m_settings(settings)
 {
 }
 
@@ -84,7 +84,7 @@ bool Media::AddMediaEntry(MediaEntry& mediaEntry)
 
 MediaEntry Media::GetMediaEntry(const std::string& mediaEntryId) const
 {
-  MediaEntry entry;
+  MediaEntry entry{m_settings};
 
   auto mediaEntryPair = m_mediaIdMap.find(mediaEntryId);
   if (mediaEntryPair != m_mediaIdMap.end())

@@ -72,14 +72,10 @@ namespace iptvsimple
   class Settings
   {
   public:
-    /**
-     * Singleton getter for the instance
-     */
-    static Settings& GetInstance()
-    {
-      static Settings settings;
-      return settings;
-    }
+    Settings() {};
+
+    void ReadSettings();
+    ADDON_STATUS SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue);
 
     void ReadFromAddon(const std::string& userPath, const std::string& clientPath);
     void ReloadAddonSettings();
@@ -181,10 +177,6 @@ namespace iptvsimple
     std::vector<std::string>& GetCustomRadioChannelGroupNameList() { return m_customRadioChannelGroupNameList; }
 
   private:
-    Settings() = default;
-
-    Settings(Settings const&) = delete;
-    void operator=(Settings const&) = delete;
 
     template<typename T, typename V>
     V SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue, T& currentValue, V returnValueIfChanged, V defaultReturnValue)

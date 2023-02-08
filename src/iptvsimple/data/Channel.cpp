@@ -130,7 +130,7 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
   kodi::UnknownToUTF8(m_iconPath, m_iconPath);
 
   // urlencode channel logo when set from channel name and source is Remote Path, append extension as channel wouldn't cover this
-  if (logoSetFromChannelName && Settings::GetInstance().GetLogoPathType() == PathType::REMOTE_PATH)
+  if (logoSetFromChannelName && m_settings->GetLogoPathType() == PathType::REMOTE_PATH)
   {
     m_iconPath = utilities::WebUtils::UrlEncode(m_iconPath);
   }
@@ -164,7 +164,7 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
 
   if (m_iconPath.find("://") == std::string::npos)
   {
-    const std::string& logoLocation = Settings::GetInstance().GetLogoLocation();
+    const std::string& logoLocation = m_settings->GetLogoLocation();
     // If the file does not exist it must be relative
     if (!logoLocation.empty() && !kodi::vfs::FileExists(m_iconPath))
     {
@@ -183,27 +183,27 @@ void Channel::SetStreamURL(const std::string& url)
 
   if (StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX))
   {
-    if (!Settings::GetInstance().GetDefaultUserAgent().empty() && GetProperty("http-user-agent").empty())
-      AddProperty("http-user-agent", Settings::GetInstance().GetDefaultUserAgent());
+    if (!m_settings->GetDefaultUserAgent().empty() && GetProperty("http-user-agent").empty())
+      AddProperty("http-user-agent", m_settings->GetDefaultUserAgent());
 
     TryToAddPropertyAsHeader("http-user-agent", "user-agent");
     TryToAddPropertyAsHeader("http-referrer", "referer"); // spelling differences are correct
   }
 
-  if (Settings::GetInstance().TransformMulticastStreamUrls() &&
+  if (m_settings->TransformMulticastStreamUrls() &&
       (StringUtils::StartsWith(url, UDP_MULTICAST_PREFIX) || StringUtils::StartsWith(url, RTP_MULTICAST_PREFIX)))
   {
     const std::string typePath = StringUtils::StartsWith(url, "rtp") ? "/rtp/" : "/udp/";
 
-    m_streamURL = "http://" + Settings::GetInstance().GetUdpxyHost() + ":" + std::to_string(Settings::GetInstance().GetUdpxyPort()) + typePath + url.substr(UDP_MULTICAST_PREFIX.length());
+    m_streamURL = "http://" + m_settings->GetUdpxyHost() + ":" + std::to_string(m_settings->GetUdpxyPort()) + typePath + url.substr(UDP_MULTICAST_PREFIX.length());
     Logger::Log(LEVEL_DEBUG, "%s - Transformed multicast stream URL to local relay url: %s", __FUNCTION__, m_streamURL.c_str());
   }
 
-  if (!Settings::GetInstance().GetDefaultInputstream().empty() && GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM).empty())
-    AddProperty(PVR_STREAM_PROPERTY_INPUTSTREAM, Settings::GetInstance().GetDefaultInputstream());
+  if (!m_settings->GetDefaultInputstream().empty() && GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM).empty())
+    AddProperty(PVR_STREAM_PROPERTY_INPUTSTREAM, m_settings->GetDefaultInputstream());
 
-  if (!Settings::GetInstance().GetDefaultMimeType().empty() && GetProperty(PVR_STREAM_PROPERTY_MIMETYPE).empty())
-    AddProperty(PVR_STREAM_PROPERTY_MIMETYPE, Settings::GetInstance().GetDefaultMimeType());
+  if (!m_settings->GetDefaultMimeType().empty() && GetProperty(PVR_STREAM_PROPERTY_MIMETYPE).empty())
+    AddProperty(PVR_STREAM_PROPERTY_MIMETYPE, m_settings->GetDefaultMimeType());
 
   m_inputStreamName = GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM);
 }
@@ -236,8 +236,8 @@ void Channel::TryToAddPropertyAsHeader(const std::string& propertyName, const st
 
 bool Channel::ChannelTypeAllowsGroupsOnly() const
 {
-  return ((m_radio && Settings::GetInstance().AllowRadioChannelGroupsOnly()) ||
-          (!m_radio && Settings::GetInstance().AllowTVChannelGroupsOnly()));
+  return ((m_radio && m_settings->AllowRadioChannelGroupsOnly()) ||
+          (!m_radio && m_settings->AllowTVChannelGroupsOnly()));
 }
 
 void Channel::SetCatchupDays(int catchupDays)
@@ -245,20 +245,20 @@ void Channel::SetCatchupDays(int catchupDays)
   if (catchupDays > 0 || catchupDays == IGNORE_CATCHUP_DAYS)
     m_catchupDays = catchupDays;
   else
-    m_catchupDays = Settings::GetInstance().GetCatchupDays();
+    m_catchupDays = m_settings->GetCatchupDays();
 }
 
 bool Channel::IsCatchupSupported() const
 {
-  return Settings::GetInstance().IsCatchupEnabled() && m_hasCatchup && !m_catchupSource.empty();
+  return m_settings->IsCatchupEnabled() && m_hasCatchup && !m_catchupSource.empty();
 }
 
 bool Channel::SupportsLiveStreamTimeshifting() const
 {
-  return Settings::GetInstance().IsTimeshiftEnabled() && GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM) == "true" &&
-         (Settings::GetInstance().IsTimeshiftEnabledAll() ||
-          (Settings::GetInstance().IsTimeshiftEnabledHttp() && StringUtils::StartsWith(m_streamURL, "http")) ||
-          (Settings::GetInstance().IsTimeshiftEnabledUdp() && StringUtils::StartsWith(m_streamURL, "udp"))
+  return m_settings->IsTimeshiftEnabled() && GetProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM) == "true" &&
+         (m_settings->IsTimeshiftEnabledAll() ||
+          (m_settings->IsTimeshiftEnabledHttp() && StringUtils::StartsWith(m_streamURL, "http")) ||
+          (m_settings->IsTimeshiftEnabledUdp() && StringUtils::StartsWith(m_streamURL, "udp"))
          );
 }
 
@@ -335,30 +335,30 @@ void Channel::ConfigureCatchupMode()
     protocolOptions = m_streamURL.substr(found, m_streamURL.length());
   }
 
-  if (Settings::GetInstance().GetAllChannelsCatchupMode() != CatchupMode::DISABLED)
+  if (m_settings->GetAllChannelsCatchupMode() != CatchupMode::DISABLED)
   {
     bool overrideCatchupMode = false;
 
-    if (Settings::GetInstance().GetCatchupOverrideMode() == CatchupOverrideMode::WITHOUT_TAGS &&
+    if (m_settings->GetCatchupOverrideMode() == CatchupOverrideMode::WITHOUT_TAGS &&
         (m_catchupMode == CatchupMode::DISABLED || m_catchupMode == CatchupMode::TIMESHIFT))
     {
       // As CatchupMode::TIMESHIFT is obsolete and some providers use it
       // incorrectly we allow this setting to override it
       overrideCatchupMode = true;
     }
-    else if (Settings::GetInstance().GetCatchupOverrideMode() == CatchupOverrideMode::WITH_TAGS &&
+    else if (m_settings->GetCatchupOverrideMode() == CatchupOverrideMode::WITH_TAGS &&
             m_catchupMode != CatchupMode::DISABLED)
     {
       overrideCatchupMode = true;
     }
-    else if (Settings::GetInstance().GetCatchupOverrideMode() == CatchupOverrideMode::ALL_CHANNELS)
+    else if (m_settings->GetCatchupOverrideMode() == CatchupOverrideMode::ALL_CHANNELS)
     {
       overrideCatchupMode = true;
     }
 
     if (overrideCatchupMode)
     {
-      m_catchupMode = Settings::GetInstance().GetAllChannelsCatchupMode();
+      m_catchupMode = m_settings->GetAllChannelsCatchupMode();
       m_hasCatchup = true;
     }
   }
@@ -436,9 +436,9 @@ bool Channel::GenerateAppendCatchupSource(const std::string& url)
   }
   else
   {
-    if (!Settings::GetInstance().GetCatchupQueryFormat().empty())
+    if (!m_settings->GetCatchupQueryFormat().empty())
     {
-      m_catchupSource = url + Settings::GetInstance().GetCatchupQueryFormat();
+      m_catchupSource = url + m_settings->GetCatchupQueryFormat();
       return true;
     }
   }

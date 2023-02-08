@@ -40,7 +40,10 @@ namespace iptvsimple
       void SetIconPath(const std::string& value) { m_iconPath = value; }
 
       std::map<time_t, EpgEntry>& GetEpgEntries() { return m_epgEntries; }
-      void AddEpgEntry(const EpgEntry& epgEntry) { m_epgEntries[epgEntry.GetStartTime()] = epgEntry; }
+      void AddEpgEntry(const EpgEntry& epgEntry)
+      {
+        m_epgEntries[epgEntry.GetStartTime()] = epgEntry;
+      }
 
       bool UpdateFrom(const pugi::xml_node& channelNode, iptvsimple::Channels& channels, iptvsimple::Media& media);
       bool CombineNamesAndIconPathFrom(const ChannelEpg& right);

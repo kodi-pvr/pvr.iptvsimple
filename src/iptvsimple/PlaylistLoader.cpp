@@ -28,13 +28,13 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
 PlaylistLoader::PlaylistLoader(kodi::addon::CInstancePVRClient* client, Channels& channels,
-                               ChannelGroups& channelGroups, Providers& providers, Media& media)
-  : m_channelGroups(channelGroups), m_channels(channels), m_providers(providers), m_media(media), m_client(client) { }
+                               ChannelGroups& channelGroups, Providers& providers, Media& media, std::shared_ptr<Settings>& settings)
+  : m_channelGroups(channelGroups), m_channels(channels), m_providers(providers), m_media(media), m_client(client), m_settings(settings) { }
 
 bool PlaylistLoader::Init()
 {
-  m_m3uLocation = Settings::GetInstance().GetM3ULocation();
-  m_logoLocation = Settings::GetInstance().GetLogoLocation();
+  m_m3uLocation = m_settings->GetM3ULocation();
+  m_logoLocation = m_settings->GetLogoLocation();
   return true;
 }
 
@@ -50,10 +50,10 @@ bool PlaylistLoader::LoadPlayList()
   }
 
   // Cache is only allowed if refresh mode is disabled
-  bool useM3UCache = Settings::GetInstance().GetM3URefreshMode() != RefreshMode::DISABLED ? false : Settings::GetInstance().UseM3UCache();
+  bool useM3UCache = m_settings->GetM3URefreshMode() != RefreshMode::DISABLED ? false : m_settings->UseM3UCache();
 
   std::string playlistContent;
-  if (!FileUtils::GetCachedFileContents(M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, useM3UCache))
+  if (!FileUtils::GetCachedFileContents(m_settings, M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, useM3UCache))
   {
     Logger::Log(LEVEL_ERROR, "%s - Unable to load playlist cache file '%s':  file is missing or empty.", __FUNCTION__, m_m3uLocation.c_str());
     return false;
@@ -66,13 +66,13 @@ bool PlaylistLoader::LoadPlayList()
   bool isRealTime = true;
   bool isMediaEntry = false;
   int epgTimeShift = 0;
-  int catchupCorrectionSecs = Settings::GetInstance().GetCatchupCorrectionSecs();
+  int catchupCorrectionSecs = m_settings->GetCatchupCorrectionSecs();
   std::vector<int> currentChannelGroupIdList;
   bool channelHadGroups = false;
   bool xeevCatchup = false;
 
-  Channel tmpChannel;
-  MediaEntry tmpMediaEntry;
+  Channel tmpChannel{m_settings};
+  MediaEntry tmpMediaEntry{m_settings};
 
   std::string line;
   while (std::getline(stream, line))
@@ -128,7 +128,7 @@ bool PlaylistLoader::LoadPlayList()
         size_t found = tvgUrl.find(',');
         if (found != std::string::npos)
           tvgUrl = tvgUrl.substr(0, found);
-        Settings::GetInstance().SetTvgUrl(tvgUrl);
+        m_settings->SetTvgUrl(tvgUrl);
 
         continue;
       }
@@ -186,7 +186,7 @@ bool PlaylistLoader::LoadPlayList()
     {
       Logger::Log(LEVEL_DEBUG, "%s - Adding channel '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
-      if ((isRealTime || !Settings::GetInstance().IsMediaEnabled() || !Settings::GetInstance().ShowVodAsRecordings()) && !isMediaEntry)
+      if ((isRealTime || !m_settings->IsMediaEnabled() || !m_settings->ShowVodAsRecordings()) && !isMediaEntry)
       {
         tmpChannel.AddProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM, "true");
 
@@ -315,7 +315,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (strChnlNo.empty())
       strChnlNo = ReadMarkerValue(infoLine, CHANNEL_NUMBER_MARKER);
 
-    if (!strChnlNo.empty() && !Settings::GetInstance().NumberChannelsByM3uOrderOnly())
+    if (!strChnlNo.empty() && !m_settings->NumberChannelsByM3uOrderOnly())
     {
       size_t found = strChnlNo.find('.');
       if (found != std::string::npos)
@@ -340,7 +340,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       strCatchupSource = m_m3uHeaderStrings.m_catchupSource;
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
-    if (Settings::GetInstance().GetLogoPathType() == PathType::LOCAL_PATH && Settings::GetInstance().UseLocalLogosOnlyIgnoreM3U())
+    if (m_settings->GetLogoPathType() == PathType::LOCAL_PATH && m_settings->UseLocalLogosOnlyIgnoreM3U())
       channel.SetIconPathFromTvgLogo("", channelName);
     else
       channel.SetIconPathFromTvgLogo(strTvgLogo, channelName);
@@ -399,7 +399,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     else if (siptvTimeshiftDays > 0)
       channel.SetCatchupDays(siptvTimeshiftDays);
     else
-      channel.SetCatchupDays(Settings::GetInstance().GetCatchupDays());
+      channel.SetCatchupDays(m_settings->GetCatchupDays());
 
     // We also need to support the timeshift="days" tag from siptv
     // this was used before the catchup tags were introduced
@@ -410,8 +410,8 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetHasCatchup(true);
     }
 
-    if (strProviderName.empty() && Settings::GetInstance().HasDefaultProviderName())
-      strProviderName = Settings::GetInstance().GetDefaultProviderName();
+    if (strProviderName.empty() && m_settings->HasDefaultProviderName())
+      strProviderName = m_settings->GetDefaultProviderName();
 
     auto provider = m_providers.AddProvider(strProviderName);
     if (provider)
@@ -519,7 +519,7 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
 
 void PlaylistLoader::ReloadPlayList()
 {
-  m_m3uLocation = Settings::GetInstance().GetM3ULocation();
+  m_m3uLocation = m_settings->GetM3ULocation();
 
   m_channels.Clear();
   m_channelGroups.Clear();

@@ -27,7 +27,7 @@ namespace iptvsimple
   class ATTR_DLL_LOCAL Providers
   {
   public:
-    Providers();
+    Providers(std::shared_ptr<iptvsimple::Settings>& settings);
 
     bool Init();
 
@@ -53,5 +53,7 @@ namespace iptvsimple
     std::unordered_map<std::string, std::shared_ptr<iptvsimple::data::Provider>> m_providersNameMap;
 
     std::unordered_map<std::string, iptvsimple::data::Provider> m_providerMappingsMap;
+
+    std::shared_ptr<iptvsimple::Settings> m_settings;
   };
 } //namespace iptvsimple

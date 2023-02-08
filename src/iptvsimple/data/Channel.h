@@ -8,6 +8,7 @@
 #pragma once
 
 #include <map>
+#include <memory>
 #include <string>
 
 #include <kodi/addon-instance/pvr/Channels.h>
@@ -29,6 +30,8 @@ namespace iptvsimple
 
   constexpr int IGNORE_CATCHUP_DAYS = -1;
 
+  class Settings;
+
   namespace data
   {
     static const std::string CHANNEL_LOGO_EXTENSION = ".png";
@@ -38,7 +41,7 @@ namespace iptvsimple
     public:
       static const std::string GetCatchupModeText(const CatchupMode& catchupMode);
 
-      Channel() = default;
+      Channel(std::shared_ptr<iptvsimple::Settings>& settings) : m_settings(settings) {};
       Channel(const Channel &c) : m_radio(c.IsRadio()), m_uniqueId(c.GetUniqueId()),
         m_channelNumber(c.GetChannelNumber()), m_subChannelNumber(c.GetSubChannelNumber()),
         m_encryptionSystem(c.GetEncryptionSystem()), m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()),
@@ -48,7 +51,7 @@ namespace iptvsimple
         m_catchupSourceTerminates(c.CatchupSourceTerminates()), m_catchupGranularitySeconds(c.GetCatchupGranularitySeconds()),
         m_catchupCorrectionSecs(c.GetCatchupCorrectionSecs()), m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
         m_providerUniqueId(c.GetProviderUniqueId()), m_properties(c.GetProperties()),
-        m_inputStreamName(c.GetInputStreamName()) {};
+        m_inputStreamName(c.GetInputStreamName()) { m_settings = c.GetSettings(); };
       ~Channel() = default;
 
       bool IsRadio() const { return m_radio; }
@@ -136,6 +139,8 @@ namespace iptvsimple
 
       bool ChannelTypeAllowsGroupsOnly() const;
 
+      const std::shared_ptr<iptvsimple::Settings>& GetSettings() const { return m_settings; }
+
     private:
       void RemoveProperty(const std::string& propName);
       void TryToAddPropertyAsHeader(const std::string& propertyName, const std::string& headerName);
@@ -169,6 +174,8 @@ namespace iptvsimple
 
       std::map<std::string, std::string> m_properties;
       std::string m_inputStreamName;
+
+      std::shared_ptr<iptvsimple::Settings> m_settings;
     };
   } //namespace data
 } //namespace iptvsimple

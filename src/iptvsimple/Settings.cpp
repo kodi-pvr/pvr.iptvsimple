@@ -159,15 +159,15 @@ void Settings::ReloadAddonSettings()
   ReadFromAddon(m_userPath, m_clientPath);
 }
 
-ADDON_STATUS Settings::SetValue(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
+ADDON_STATUS Settings::SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
 {
   // reset cache and restart addon
 
-  std::string strFile = FileUtils::GetUserDataAddonFilePath(M3U_CACHE_FILENAME);
+  std::string strFile = FileUtils::GetUserDataAddonFilePath(GetUserPath(), M3U_CACHE_FILENAME);
   if (FileUtils::FileExists(strFile))
     FileUtils::DeleteFile(strFile);
 
-  strFile = FileUtils::GetUserDataAddonFilePath(XMLTV_CACHE_FILENAME);
+  strFile = FileUtils::GetUserDataAddonFilePath(GetUserPath(), XMLTV_CACHE_FILENAME);
   if (FileUtils::FileExists(strFile))
     FileUtils::DeleteFile(strFile);
 
