@@ -7,7 +7,7 @@
 
 #include "Channel.h"
 
-#include "../Settings.h"
+#include "../InstanceSettings.h"
 #include "../utilities/FileUtils.h"
 #include "../utilities/Logger.h"
 #include "../utilities/StreamUtils.h"

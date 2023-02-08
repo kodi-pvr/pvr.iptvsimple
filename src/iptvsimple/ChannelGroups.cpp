@@ -15,7 +15,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-ChannelGroups::ChannelGroups(const Channels& channels, std::shared_ptr<iptvsimple::Settings>& settings) : m_channels(channels), m_settings(settings) {}
+ChannelGroups::ChannelGroups(const Channels& channels, std::shared_ptr<iptvsimple::InstanceSettings>& settings) : m_channels(channels), m_settings(settings) {}
 
 bool ChannelGroups::Init()
 {

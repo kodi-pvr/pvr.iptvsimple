@@ -7,7 +7,7 @@
 
 #include "PlaylistLoader.h"
 
-#include "Settings.h"
+#include "InstanceSettings.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/WebUtils.h"
@@ -28,7 +28,7 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
 PlaylistLoader::PlaylistLoader(kodi::addon::CInstancePVRClient* client, Channels& channels,
-                               ChannelGroups& channelGroups, Providers& providers, Media& media, std::shared_ptr<Settings>& settings)
+                               ChannelGroups& channelGroups, Providers& providers, Media& media, std::shared_ptr<InstanceSettings>& settings)
   : m_channelGroups(channelGroups), m_channels(channels), m_providers(providers), m_media(media), m_client(client), m_settings(settings) { }
 
 bool PlaylistLoader::Init()
@@ -53,7 +53,7 @@ bool PlaylistLoader::LoadPlayList()
   bool useM3UCache = m_settings->GetM3URefreshMode() != RefreshMode::DISABLED ? false : m_settings->UseM3UCache();
 
   std::string playlistContent;
-  if (!FileUtils::GetCachedFileContents(m_settings, M3U_CACHE_FILENAME, m_m3uLocation, playlistContent, useM3UCache))
+  if (!FileUtils::GetCachedFileContents(m_settings, m_settings->GetM3UCacheFilename(), m_m3uLocation, playlistContent, useM3UCache))
   {
     Logger::Log(LEVEL_ERROR, "%s - Unable to load playlist cache file '%s':  file is missing or empty.", __FUNCTION__, m_m3uLocation.c_str());
     return false;

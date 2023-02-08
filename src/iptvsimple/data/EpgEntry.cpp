@@ -7,7 +7,7 @@
 
 #include "EpgEntry.h"
 
-#include "../Settings.h"
+#include "../InstanceSettings.h"
 #include "../utilities/TimeUtils.h"
 #include "../utilities/XMLUtils.h"
 

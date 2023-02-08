@@ -25,10 +25,8 @@ namespace iptvsimple
   static const int DEFAULT_UDPXY_MULTICAST_RELAY_PORT = 4022;
 
   static const int DEFAULT_NUM_GROUPS = 1;
-  static const std::string CHANNEL_GROUPS_DIR = "/channelGroups";
   static const std::string DEFAULT_CUSTOM_TV_GROUPS_FILE = ADDON_DATA_BASE_DIR + "/channelGroups/customTVGroups-example.xml";
   static const std::string DEFAULT_CUSTOM_RADIO_GROUPS_FILE = ADDON_DATA_BASE_DIR + "/channelGroups/customRadioGroups-example.xml";
-  static const std::string CHANNEL_GROUPS_ADDON_DATA_BASE_DIR = ADDON_DATA_BASE_DIR + CHANNEL_GROUPS_DIR;
 
   enum class PathType
     : int // same type as addon settings
@@ -69,20 +67,17 @@ namespace iptvsimple
     ALL_CHANNELS
   };
 
-  class Settings
+  class InstanceSettings
   {
   public:
-    Settings() {};
+    explicit InstanceSettings(kodi::addon::IAddonInstance& instance, const kodi::addon::IInstanceInfo& instanceInfo);
 
-    void ReadSettings();
     ADDON_STATUS SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue);
 
-    void ReadFromAddon(const std::string& userPath, const std::string& clientPath);
-    void ReloadAddonSettings();
-    ADDON_STATUS SetValue(const std::string& settingName, const kodi::addon::CSettingValue& settingValue);
+    void ReadSettings();
+    void ReloadAddonInstanceSettings();
 
-    const std::string& GetUserPath() const { return m_userPath; }
-    const std::string& GetClientPath() const { return m_clientPath; }
+    const std::string GetUserPath() const { return kodi::addon::GetUserPath(); }
 
     const std::string& GetM3ULocation() const { return m_m3uPathType == PathType::REMOTE_PATH ? m_m3uUrl : m_m3uPath; }
     const PathType& GetM3UPathType() const { return m_m3uPathType; }
@@ -176,6 +171,9 @@ namespace iptvsimple
     std::vector<std::string>& GetCustomTVChannelGroupNameList() { return m_customTVChannelGroupNameList; }
     std::vector<std::string>& GetCustomRadioChannelGroupNameList() { return m_customRadioChannelGroupNameList; }
 
+    const std::string GetM3UCacheFilename() { return M3U_CACHE_FILENAME + "-" + std::to_string(m_instanceNumber); }
+    const std::string GetXMLTVCacheFilename() { return XMLTV_CACHE_FILENAME + "-" + std::to_string(m_instanceNumber); }
+
   private:
 
     template<typename T, typename V>
@@ -235,9 +233,6 @@ namespace iptvsimple
 
     static bool LoadCustomChannelGroupFile(std::string& file, std::vector<std::string>& channelGroupNameList);
 
-    std::string m_userPath;
-    std::string m_clientPath;
-
     // M3U
     PathType m_m3uPathType = PathType::REMOTE_PATH;
     std::string m_m3uPath;
@@ -255,7 +250,7 @@ namespace iptvsimple
     // Groups
     bool m_allowTVChannelGroupsOnly = false;
     ChannelGroupMode m_tvChannelGroupMode = ChannelGroupMode::ALL_GROUPS;
-    unsigned int m_numTVGroups = DEFAULT_NUM_GROUPS;
+    int m_numTVGroups = DEFAULT_NUM_GROUPS;
     std::string m_oneTVGroup = "";
     std::string m_twoTVGroup = "";
     std::string m_threeTVGroup = "";
@@ -264,7 +259,7 @@ namespace iptvsimple
     std::string m_customTVGroupsFile = "";
     bool m_allowRadioChannelGroupsOnly = false;
     ChannelGroupMode m_radioChannelGroupMode = ChannelGroupMode::ALL_GROUPS;
-    unsigned int m_numRadioGroups = DEFAULT_NUM_GROUPS;
+    int m_numRadioGroups = DEFAULT_NUM_GROUPS;
     std::string m_oneRadioGroup = "";
     std::string m_twoRadioGroup = "";
     std::string m_threeRadioGroup = "";
@@ -334,5 +329,8 @@ namespace iptvsimple
     std::vector<std::string> m_customRadioChannelGroupNameList;
 
     std::string m_tvgUrl;
+
+    kodi::addon::IAddonInstance& m_instance;
+    int m_instanceNumber = 0;
   };
 } //namespace iptvsimple

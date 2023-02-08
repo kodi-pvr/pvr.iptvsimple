@@ -20,7 +20,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-Channels::Channels(std::shared_ptr<iptvsimple::Settings>& settings) : m_settings(settings)
+Channels::Channels(std::shared_ptr<iptvsimple::InstanceSettings>& settings) : m_settings(settings)
 {
 }
 
