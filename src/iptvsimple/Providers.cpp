@@ -22,7 +22,7 @@ using namespace iptvsimple::utilities;
 using namespace kodi::tools;
 using namespace pugi;
 
-Providers::Providers(std::shared_ptr<Settings>& settings) : m_settings(settings)
+Providers::Providers(std::shared_ptr<InstanceSettings>& settings) : m_settings(settings)
 {
 }
 

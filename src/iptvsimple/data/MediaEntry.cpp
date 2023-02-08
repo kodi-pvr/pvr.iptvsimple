@@ -8,7 +8,7 @@
 
 #include "MediaEntry.h"
 
-#include "../Settings.h"
+#include "../InstanceSettings.h"
 
 #include <kodi/General.h>
 #include <kodi/tools/StringUtils.h>
@@ -134,7 +134,7 @@ std::string GetEpisodePrefix(int episodeNumber)
   return {};
 }
 
-std::string CreateTitle(const std::string& title, int seasonNumber, int episodeNumber, std::shared_ptr<Settings> settings)
+std::string CreateTitle(const std::string& title, int seasonNumber, int episodeNumber, std::shared_ptr<InstanceSettings> settings)
 {
   std::string newTitle;
 

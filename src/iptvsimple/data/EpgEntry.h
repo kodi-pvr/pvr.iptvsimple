@@ -27,7 +27,7 @@ namespace iptvsimple
     {
     public:
       EpgEntry() {};
-      EpgEntry(std::shared_ptr<iptvsimple::Settings> settings)
+      EpgEntry(std::shared_ptr<iptvsimple::InstanceSettings> settings)
       {
         m_settings = settings;
       };

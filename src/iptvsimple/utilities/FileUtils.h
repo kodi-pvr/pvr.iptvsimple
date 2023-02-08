@@ -13,7 +13,7 @@
 
 namespace iptvsimple
 {
-  class Settings;
+  class InstanceSettings;
 
   namespace utilities
   {
@@ -27,7 +27,7 @@ namespace iptvsimple
       static int GetFileContents(const std::string& url, std::string& content);
       static bool GzipInflate(const std::string& compressedBytes, std::string& uncompressedBytes);
       static bool XzDecompress(const std::string& compressedBytes, std::string& uncompressedBytes);
-      static int GetCachedFileContents(std::shared_ptr<iptvsimple::Settings>& settings,
+      static int GetCachedFileContents(std::shared_ptr<iptvsimple::InstanceSettings>& settings,
                                        const std::string& cachedName, const std::string& filePath,
                                        std::string& content, const bool useCache = false);
       static bool FileExists(const std::string& file);

@@ -18,7 +18,7 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace kodi::tools;
 
-Media::Media(std::shared_ptr<iptvsimple::Settings>& settings) : m_settings(settings)
+Media::Media(std::shared_ptr<iptvsimple::InstanceSettings>& settings) : m_settings(settings)
 {
 }
 

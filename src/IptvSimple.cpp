@@ -7,7 +7,7 @@
 
 #include "IptvSimple.h"
 
-#include "iptvsimple/Settings.h"
+#include "iptvsimple/InstanceSettings.h"
 #include "iptvsimple/utilities/Logger.h"
 #include "iptvsimple/utilities/TimeUtils.h"
 #include "iptvsimple/utilities/WebUtils.h"
@@ -22,7 +22,7 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace kodi::tools;
 
-IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance, std::shared_ptr<iptvsimple::Settings>& settings) : kodi::addon::CInstancePVRClient(instance), m_settings(settings)
+IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : kodi::addon::CInstancePVRClient(instance), m_settings(new InstanceSettings(*this, instance))
 {
   m_channels.Clear();
   m_channelGroups.Clear();
@@ -34,8 +34,6 @@ IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance, std::shared_p
 bool IptvSimple::Initialise()
 {
   std::lock_guard<std::mutex> lock(m_mutex);
-
-  m_settings->ReadFromAddon(kodi::addon::GetUserPath(), kodi::addon::GetAddonPath());
 
   m_channels.Init();
   m_channelGroups.Init();
@@ -117,7 +115,7 @@ void IptvSimple::Process()
     {
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
-      m_settings->ReloadAddonSettings();
+      m_settings->ReloadAddonInstanceSettings();
       m_playlistLoader.ReloadPlayList();
       m_epg.ReloadEPG(); // Reloading EPG also updates media
 
@@ -405,18 +403,17 @@ PVR_ERROR IptvSimple::GetSignalStatus(int channelUid, kodi::addon::PVRSignalStat
 }
 
 /***************************************************************************
- * Settings
+ * InstanceSettings
  **************************************************************************/
 
-// ADDON_STATUS IptvSimple::SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
-// {
-//   std::lock_guard<std::mutex> lock(m_mutex);
+ADDON_STATUS IptvSimple::SetInstanceSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue)
+{
+  std::lock_guard<std::mutex> lock(m_mutex);
 
-//   // When a number of settings change set this on the first one so it can be picked up
-//   // in the process call for a reload of channels, groups and EPG.
-//   if (!m_reloadChannelsGroupsAndEPG)
-//     m_reloadChannelsGroupsAndEPG = true;
+  // When a number of settings change set this on the first one so it can be picked up
+  // in the process call for a reload of channels, groups and EPG.
+  if (!m_reloadChannelsGroupsAndEPG)
+    m_reloadChannelsGroupsAndEPG = true;
 
-//   return m_settings->SetValue(settingName, settingValue);
-// }
-
+  return m_settings->SetSetting(settingName, settingValue);
+}
