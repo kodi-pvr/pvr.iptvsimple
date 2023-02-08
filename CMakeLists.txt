@@ -21,7 +21,8 @@ message(STATUS "PUGIXML_LIBRARIES: ${PUGIXML_LIBRARIES}")
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 message(STATUS "LZMA_LIBRARIES: ${LZMA_LIBRARIES}")
 
-set(IPTV_SOURCES src/PVRIptvData.cpp
+set(IPTV_SOURCES src/addon.cpp
+                 src/IptvSimple.cpp
                  src/iptvsimple/CatchupController.cpp
                  src/iptvsimple/Channels.cpp
                  src/iptvsimple/ChannelGroups.cpp
@@ -43,7 +44,8 @@ set(IPTV_SOURCES src/PVRIptvData.cpp
                  src/iptvsimple/utilities/StreamUtils.cpp
                  src/iptvsimple/utilities/WebUtils.cpp)
 
-set(IPTV_HEADERS src/PVRIptvData.h
+set(IPTV_HEADERS src/addon.h
+                 src/IptvSimple.h
                  src/iptvsimple/CatchupController.h
                  src/iptvsimple/Channels.h
                  src/iptvsimple/ChannelGroups.h

@@ -7,7 +7,6 @@
 
 #include "ChannelGroups.h"
 
-#include "Settings.h"
 #include "utilities/Logger.h"
 
 #include <kodi/General.h>
@@ -16,7 +15,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-ChannelGroups::ChannelGroups(const Channels& channels) : m_channels(channels) {}
+ChannelGroups::ChannelGroups(const Channels& channels, std::shared_ptr<iptvsimple::Settings>& settings) : m_channels(channels), m_settings(settings) {}
 
 bool ChannelGroups::Init()
 {
@@ -157,17 +156,17 @@ bool ChannelGroups::CheckChannelGroupAllowed(iptvsimple::data::ChannelGroup& new
 
   if (newChannelGroup.IsRadio())
   {
-    if (Settings::GetInstance().GetRadioChannelGroupMode() == ChannelGroupMode::ALL_GROUPS)
+    if (m_settings->GetRadioChannelGroupMode() == ChannelGroupMode::ALL_GROUPS)
       return true;
 
-    customNameList = Settings::GetInstance().GetCustomRadioChannelGroupNameList();
+    customNameList = m_settings->GetCustomRadioChannelGroupNameList();
   }
   else
   {
-    if (Settings::GetInstance().GetTVChannelGroupMode() == ChannelGroupMode::ALL_GROUPS)
+    if (m_settings->GetTVChannelGroupMode() == ChannelGroupMode::ALL_GROUPS)
       return true;
 
-    customNameList = Settings::GetInstance().GetCustomTVChannelGroupNameList();
+    customNameList = m_settings->GetCustomTVChannelGroupNameList();
   }
 
   for (const std::string& groupName : customNameList)
