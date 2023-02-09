@@ -7,6 +7,7 @@
 
 #include "addon.h"
 #include "IptvSimple.h"
+#include "iptvsimple/utilities/SettingsMigration.h"
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
@@ -67,6 +68,13 @@ ADDON_STATUS CIptvSimpleAddon::CreateInstance(const kodi::addon::IInstanceInfo& 
       return ADDON_STATUS_PERMANENT_FAILURE;
     }
 
+    // Try to migrate settings from a pre-multi-instance setup
+    if (SettingsMigration::MigrateSettings(*usedInstance))
+    {
+      // Initial client operated on old/incomplete settings
+      delete usedInstance;
+      usedInstance = new IptvSimple(instance);
+    }
     hdl = usedInstance;
 
     // Store this instance also on this class, currently support Kodi only one

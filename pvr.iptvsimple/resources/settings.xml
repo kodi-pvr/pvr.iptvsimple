@@ -4,9 +4,394 @@
 
     <!-- Hidden category with all settings which were add-on settings before multi-instance
          support was added to this add-on. Used for settings migration, which needs minimal
-         settings definition to work. -->
+         settings definition to work.
+
+         Note that empty default values still require an allowempty constraint -->
     <category id="hidden_obsolete">
       <group id="1" label="-1">
+        <setting id="m3uPathType" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+        <setting id="m3uPath" type="path">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="m3uUrl" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="m3uCache" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="startNum" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+        <setting id="numberByOrder" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+      </group>
+      <group id="2">
+        <setting id="m3uRefreshMode" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="m3uRefreshIntervalMins" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>60</default>
+        </setting>
+        <setting id="m3uRefreshHour" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>4</default>
+        </setting>
+
+        <setting id="defaultProviderName" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="enableProviderMappings" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="providerMappingFile" type="path">
+          <level>4</level> <!-- hidden -->
+          <default>special://userdata/addon_data/pvr.iptvsimple/providers/providerMappings.xml</default>
+        </setting>
+
+        <!-- Groups -->
+        <setting id="tvGroupMode" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="numTvGroups" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+        <setting id="oneTvGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="twoTvGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="threeTvGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="fourTvGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="fiveTvGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="customTvGroupsFile" type="path">
+          <level>4</level> <!-- hidden -->
+          <default>special://userdata/addon_data/pvr.iptvsimple/channelGroups/customTVGroups-example.xml</default>
+        </setting>
+        <setting id="tvChannelGroupsOnly" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+
+        <setting id="radioGroupMode" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="numRadioGroups" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+        <setting id="oneRadioGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="twoRadioGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="threeRadioGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="fourRadioGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="fiveRadioGroup" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="customRadioGroupsFile" type="path">
+          <level>4</level> <!-- hidden -->
+          <default>special://userdata/addon_data/pvr.iptvsimple/channelGroups/customRadioGroups-example.xml</default>
+        </setting>
+        <setting id="radioChannelGroupsOnly" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+
+        <!-- EPG -->
+        <setting id="epgPathType" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+        <setting id="epgPath" type="path">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="epgUrl" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="epgCache" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="epgTimeShift" type="number">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="epgTSOverride" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="epgIgnoreCaseForChannelIds" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+
+        <!-- Genres - Sub category of EPG -->
+        <setting id="useEpgGenreText" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="genresPathType" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="genresPath" type="path">
+          <level>4</level> <!-- hidden -->
+          <default>special://userdata/addon_data/pvr.iptvsimple/genres/genreTextMappings/genres.xml</default>
+        </setting>
+        <setting id="genresUrl" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+
+        <!-- Logos -->
+        <setting id="logoPathType" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+        <setting id="logoPath" type="path">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="logoBaseUrl" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="useLogosLocalPathOnly" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="logoFromEpg" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>1</default>
+        </setting>
+
+        <!-- Media -->
+        <setting id="mediaEnabled" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="mediaGroupByTitle" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="mediaGroupBySeason" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="mediaTitleSeasonEpisode" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="mediaVODAsRecordings" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+
+        <!-- Timeshift -->
+        <setting id="timeshiftEnabled" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="timeshiftEnabledAll" type="boolean" >
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="timeshiftEnabledHttp" type="boolean" >
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="timeshiftEnabledUdp" type="boolean" >
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="timeshiftEnabledCustom" type="boolean" >
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+
+        <!-- Catchup -->
+        <setting id="catchupEnabled" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="catchupQueryFormat" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="catchupDays" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>5</default>
+        </setting>
+        <setting id="allChannelsCatchupMode" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="catchupOverrideMode" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="catchupCorrection" type="number">
+          <level>4</level> <!-- hidden -->
+          <default>0</default>
+        </setting>
+        <setting id="catchupPlayEpgAsLive" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="catchupWatchEpgBeginBufferMins" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>5</default>
+        </setting>
+        <setting id="catchupWatchEpgEndBufferMins" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>15</default>
+        </setting>
+        <setting id="catchupOnlyOnFinishedProgrammes" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+
+        <!-- Advanced -->
+        <setting id="transformMulticastStreamUrls" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="udpxyHost" type="string">
+          <level>4</level> <!-- hidden -->
+          <default>127.0.0.1</default>
+        </setting>
+        <setting id="udpxyPort" type="integer">
+          <level>4</level>
+          <default>4022</default>
+        </setting>
+        <setting id="useFFmpegReconnect" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>true</default>
+        </setting>
+        <setting id="useInputstreamAdaptiveforHls" type="boolean">
+          <level>4</level> <!-- hidden -->
+          <default>false</default>
+        </setting>
+        <setting id="defaultUserAgent" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="defaultInputstream" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+        <setting id="defaultMimeType" type="string">
+          <level>4</level> <!-- hidden -->
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+        </setting>
+
       </group>
     </category>
   </section>
