@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-02-02 10:59+0000\n"
+"PO-Revision-Date: 2023-02-07 20:29+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -404,6 +404,11 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr "Per il percorso dei loghi locali, ignora i loghi M3U"
 
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr "Ignora maiuscole/minuscole per ID EPG del canale"
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -727,6 +732,11 @@ msgstr "Regola i tempi EPG di questo valore, da -12 ore a +14 ore."
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
 msgstr "Ignora o meno il timeshift per tutti i canali con 'Timeshift EPG'. Se non abilitato, verrà utilizzato il 'Timeshift EPG' più il timeshift individuale per canale (se disponibile)."
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
+msgstr "Ignora maiuscole e minuscole per gli ID EPG dei canali, noti anche come tvg-id, quando si abbinano i canali alle voci EPG. Se disabilitato, verrà utilizzata solo la corrispondenza con distinzione tra maiuscole e minuscole."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
