@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addon
   id="pvr.iptvsimple"
-  version="20.7.0"
+  version="21.0.0"
   name="IPTV Simple Client"
   provider-name="nightik and Ross Nicholson">
   <requires>@ADDON_DEPENDS@
-    <import addon="inputstream.ffmpegdirect" minversion="1.19.0"/>
-    <import addon="inputstream.adaptive" minversion="2.6.6"/>
-    <import addon="inputstream.rtmp" minversion="3.4.0"/>
+    <import addon="inputstream.ffmpegdirect" minversion="21.0.0"/>
+    <import addon="inputstream.adaptive" minversion="21.0.0"/>
+    <import addon="inputstream.rtmp" minversion="21.0.0"/>
   </requires>
   <extension
     point="kodi.pvrclient"
