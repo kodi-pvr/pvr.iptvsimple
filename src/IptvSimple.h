@@ -22,19 +22,17 @@
 
 #include <kodi/addon-instance/PVR.h>
 
-class ATTR_DLL_LOCAL PVRIptvData
-  : public kodi::addon::CAddonBase,
-    public kodi::addon::CInstancePVRClient
+class ATTR_DLL_LOCAL IptvSimple : public kodi::addon::CInstancePVRClient
 {
 public:
-  PVRIptvData();
-  ~PVRIptvData() override;
+  IptvSimple(const kodi::addon::IInstanceInfo& instance);
+  ~IptvSimple() override;
 
-  // kodi::addon::CAddonBase functions
-  //@{
-  ADDON_STATUS Create() override;
-  ADDON_STATUS SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue) override;
-  //@}
+  bool Initialise();
+
+  // kodi::addon::CInstancePVRClient -> kodi::addon::IAddonInstance overrides
+  ADDON_STATUS SetInstanceSetting(const std::string& settingName,
+                                  const kodi::addon::CSettingValue& settingValue) override;
 
   // kodi::addon::CInstancePVRClient functions
   //@{
@@ -88,14 +86,16 @@ protected:
 private:
   static const int PROCESS_LOOP_WAIT_SECS = 2;
 
-  iptvsimple::data::Channel m_currentChannel;
-  iptvsimple::Providers m_providers;
-  iptvsimple::Channels m_channels;
-  iptvsimple::ChannelGroups m_channelGroups{m_channels};
-  iptvsimple::Media m_media;
-  iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups, m_providers, m_media};
-  iptvsimple::Epg m_epg{this, m_channels, m_media};
-  iptvsimple::CatchupController m_catchupController{m_epg, &m_mutex};
+  std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
+
+  iptvsimple::data::Channel m_currentChannel{m_settings};
+  iptvsimple::Providers m_providers{m_settings};
+  iptvsimple::Channels m_channels{m_settings};
+  iptvsimple::ChannelGroups m_channelGroups{m_channels, m_settings};
+  iptvsimple::Media m_media{m_settings};
+  iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups, m_providers, m_media, m_settings};
+  iptvsimple::Epg m_epg{this, m_channels, m_media, m_settings};
+  iptvsimple::CatchupController m_catchupController{m_epg, &m_mutex, m_settings};
 
   std::atomic<bool> m_running{false};
   std::thread m_thread;

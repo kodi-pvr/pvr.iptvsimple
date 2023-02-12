@@ -8,7 +8,6 @@
 #include "Channels.h"
 
 #include "ChannelGroups.h"
-#include "Settings.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 
@@ -21,6 +20,10 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
+Channels::Channels(std::shared_ptr<iptvsimple::InstanceSettings>& settings) : m_settings(settings)
+{
+}
+
 bool Channels::Init()
 {
   Clear();
@@ -31,7 +34,7 @@ void Channels::Clear()
 {
   m_channels.clear();
   m_channelsLoadFailed = false;
-  m_currentChannelNumber = Settings::GetInstance().GetStartChannelNumber();
+  m_currentChannelNumber = m_settings->GetStartChannelNumber();
 }
 
 int Channels::GetChannelsAmount() const

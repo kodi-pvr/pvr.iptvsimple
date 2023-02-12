@@ -8,7 +8,7 @@
 
 #include "MediaEntry.h"
 
-#include "../Settings.h"
+#include "../InstanceSettings.h"
 
 #include <kodi/General.h>
 #include <kodi/tools/StringUtils.h>
@@ -134,11 +134,11 @@ std::string GetEpisodePrefix(int episodeNumber)
   return {};
 }
 
-std::string CreateTitle(const std::string& title, int seasonNumber, int episodeNumber)
+std::string CreateTitle(const std::string& title, int seasonNumber, int episodeNumber, std::shared_ptr<InstanceSettings> settings)
 {
   std::string newTitle;
 
-  if (Settings::GetInstance().IncludeShowInfoInMediaTitle() &&
+  if (settings->IncludeShowInfoInMediaTitle() &&
       (seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE ||
        episodeNumber != EPG_TAG_INVALID_SERIES_EPISODE))
   {
@@ -179,7 +179,7 @@ std::string FixPath(const std::string& path)
 
 void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes)
 {
-  left.SetTitle(CreateTitle(m_title, m_seasonNumber, m_episodeNumber));
+  left.SetTitle(CreateTitle(m_title, m_seasonNumber, m_episodeNumber, m_settings));
   left.SetPlotOutline(m_plotOutline);
   left.SetPlot(m_plot);
   // left.SetCast(m_cast);
@@ -222,9 +222,9 @@ void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMedia
   left.SetSizeInBytes(m_sizeInBytes);
 
   std::string newDirectory = FixPath(m_directory);
-  if (Settings::GetInstance().GroupMediaByTitle() && isInVirtualMediaEntryFolder)
+  if (m_settings->GroupMediaByTitle() && isInVirtualMediaEntryFolder)
   {
-    if (Settings::GetInstance().GroupMediaBySeason() && m_seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE)
+    if (m_settings->GroupMediaBySeason() && m_seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE)
       newDirectory = StringUtils::Format("%s%s/%s/", newDirectory.c_str(), m_title.c_str(), GetSeasonPrefix(m_seasonNumber).c_str());
     else
       newDirectory = StringUtils::Format("%s%s/", newDirectory.c_str(), m_title.c_str());

@@ -19,7 +19,7 @@ namespace iptvsimple
   class ATTR_DLL_LOCAL Media
   {
   public:
-    Media();
+    Media(std::shared_ptr<iptvsimple::InstanceSettings>& settings);
     void GetMedia(std::vector<kodi::addon::PVRRecording>& kodiRecordings);
     int GetNumMedia() const;
     void Clear();
@@ -38,5 +38,7 @@ namespace iptvsimple
     std::unordered_map<std::string, iptvsimple::data::MediaEntry> m_mediaIdMap;
 
     bool m_haveMediaTypes = false;
+
+    std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
   };
 } //namespace iptvsimple
