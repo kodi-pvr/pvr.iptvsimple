@@ -1,3 +1,6 @@
+v21.1.0
+- Add support for multiple instances each supporting their own M3U/XMLTV and settings
+
 v20.7.0
 - Add setting to make matching channel IDs and tvg-id's case sensitive
 
