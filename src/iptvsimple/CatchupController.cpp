@@ -9,7 +9,6 @@
 
 #include "Channels.h"
 #include "Epg.h"
-#include "Settings.h"
 #include "data/Channel.h"
 #include "utilities/Logger.h"
 #include "utilities/TimeUtils.h"
@@ -25,8 +24,8 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-CatchupController::CatchupController(Epg& epg, std::mutex* mutex)
-  : m_epg(epg), m_mutex(mutex) {}
+CatchupController::CatchupController(Epg& epg, std::mutex* mutex, std::shared_ptr<InstanceSettings>& settings)
+  : m_epg(epg), m_mutex(mutex), m_settings(settings) {}
 
 void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::map<std::string, std::string>& catchupProperties)
 {
@@ -38,7 +37,7 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
   if (!m_fromEpgTag || m_controlsLiveStream)
   {
     EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
-    if (m_controlsLiveStream && liveEpgEntry && !Settings::GetInstance().CatchupOnlyOnFinishedProgrammes())
+    if (m_controlsLiveStream && liveEpgEntry && !m_settings->CatchupOnlyOnFinishedProgrammes())
     {
       // Live timeshifting support with EPG entry
       UpdateProgrammeFrom(*liveEpgEntry, channel.GetTvgShift());
@@ -149,8 +148,8 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
       m_catchupStartTime = epgTag.GetStartTime();
       m_catchupEndTime = epgTag.GetEndTime();
 
-      const time_t beginBuffer = Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs();
-      const time_t endBuffer = Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
+      const time_t beginBuffer = m_settings->GetCatchupWatchEpgBeginBufferSecs();
+      const time_t endBuffer = m_settings->GetCatchupWatchEpgEndBufferSecs();
       m_timeshiftBufferStartTime = m_catchupStartTime - beginBuffer;
       m_catchupStartTime = m_timeshiftBufferStartTime;
       m_catchupEndTime += endBuffer;
@@ -172,8 +171,8 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
 
     m_timeshiftBufferStartTime = 0;
     m_timeshiftBufferOffset = 0;
-    m_catchupStartTime = m_catchupStartTime - Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs();
-    m_catchupEndTime += Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
+    m_catchupStartTime = m_catchupStartTime - m_settings->GetCatchupWatchEpgBeginBufferSecs();
+    m_catchupEndTime += m_settings->GetCatchupWatchEpgEndBufferSecs();
   }
 
   if (m_catchupStartTime > 0)
@@ -201,8 +200,8 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_granularity", std::to_string(channel.GetCatchupGranularitySeconds())});
 
   // TODO: Should also send programme start and duration potentially
-  // When doing this don't forget to add Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
-  // if in video playback mode from epg, i.e. if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)s
+  // When doing this don't forget to add m_settings->GetCatchupWatchEpgBeginBufferSecs() + m_settings->GetCatchupWatchEpgEndBufferSecs();
+  // if in video playback mode from epg, i.e. if (!m_settings->CatchupPlayEpgAsLive() && m_playbackIsVideo)s
 
   Logger::Log(LEVEL_DEBUG, "default_url - %s", WebUtils::RedactUrl(channel.GetStreamURL()).c_str());
   Logger::Log(LEVEL_DEBUG, "playback_as_live - %s", playbackAsLive ? "true" : "false");
@@ -221,7 +220,7 @@ StreamType CatchupController::StreamTypeLookup(const Channel& channel, bool from
 {
   StreamType streamType = m_streamManager.StreamTypeLookup(channel, GetStreamTestUrl(channel, fromEpg), GetStreamKey(channel, fromEpg));
 
-  m_controlsLiveStream = StreamUtils::GetEffectiveInputStreamName(streamType, channel) == "inputstream.ffmpegdirect" && channel.CatchupSupportsTimeshifting();
+  m_controlsLiveStream = StreamUtils::GetEffectiveInputStreamName(streamType, channel, m_settings) == "inputstream.ffmpegdirect" && channel.CatchupSupportsTimeshifting();
 
   return streamType;
 }
@@ -457,8 +456,8 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
     {
       duration = static_cast<time_t>(m_programmeEndTime - m_programmeStartTime);
 
-      if (!Settings::GetInstance().CatchupPlayEpgAsLive() && m_playbackIsVideo)
-        duration += Settings::GetInstance().GetCatchupWatchEpgBeginBufferSecs() + Settings::GetInstance().GetCatchupWatchEpgEndBufferSecs();
+      if (!m_settings->CatchupPlayEpgAsLive() && m_playbackIsVideo)
+        duration += m_settings->GetCatchupWatchEpgBeginBufferSecs() + m_settings->GetCatchupWatchEpgEndBufferSecs();
 
       time_t timeNow = time(0);
       // cap duration to timeNow

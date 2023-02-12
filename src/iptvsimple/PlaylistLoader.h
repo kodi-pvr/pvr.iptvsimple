@@ -11,7 +11,9 @@
 #include "ChannelGroups.h"
 #include "Providers.h"
 #include "Media.h"
+#include "InstanceSettings.h"
 
+#include <memory>
 #include <string>
 
 #include <kodi/addon-instance/PVR.h>
@@ -64,7 +66,7 @@ namespace iptvsimple
   public:
     PlaylistLoader(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels,
                    iptvsimple::ChannelGroups& channelGroups, iptvsimple::Providers& providers,
-                   iptvsimple::Media& media);
+                   iptvsimple::Media& media, std::shared_ptr<iptvsimple::InstanceSettings>& setting);
 
     bool Init();
 
@@ -88,5 +90,7 @@ namespace iptvsimple
     kodi::addon::CInstancePVRClient* m_client;
 
     M3UHeaderStrings m_m3uHeaderStrings;
+
+    std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
   };
 } //namespace iptvsimple

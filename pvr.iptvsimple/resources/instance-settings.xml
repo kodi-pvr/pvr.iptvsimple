@@ -1,0 +1,892 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<settings version="1">
+  <section id="addon" help="-1">
+
+    <!-- M3U -->
+    <category id="general" label="30010" help="30600">
+      <group id="1" label="30010">
+        <setting id="m3uPathType" type="integer" label="30000" help="30601">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="m3uPath" type="path" parent="m3uPathType" label="30011" help="30602">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="m3uPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="m3uUrl" type="string" parent="m3uPathType" label="30012" help="30603">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="m3uPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="m3uCache" type="boolean" parent="m3uPathType" label="30025" help="30604">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="visible" setting="m3uPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="startNum" type="integer" label="30013" help="30605">
+          <level>0</level>
+          <default>1</default>
+          <control type="edit" format="integer" />
+        </setting>
+        <setting id="numberByOrder" type="boolean" label="30014" help="30606">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+      <group id="2" label="30018">
+        <setting id="m3uRefreshMode" type="integer" label="30015" help="30607">
+          <level>1</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30003">0</option> <!-- DISABLED -->
+              <option label="30004">1</option> <!-- REPEATED_REFRESH -->
+              <option label="30005">2</option> <!-- ONCE_PER_DAY -->
+            </options>
+          </constraints>
+          <control type="list" format="integer" />
+        </setting>
+        <setting id="m3uRefreshIntervalMins" type="integer" parent="m3uRefreshMode" label="30016" help="30608">
+          <level>1</level>
+          <default>60</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>10</step>
+            <maximum>120</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="m3uRefreshMode" operator="is">1</dependency>
+          </dependencies>
+          <control type="slider" format="integer">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+        <setting id="m3uRefreshHour" type="integer" parent="m3uRefreshMode" label="30017" help="30609">
+          <level>1</level>
+          <default>4</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>23</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="m3uRefreshMode" operator="is">2</dependency>
+          </dependencies>
+          <control type="slider" format="integer">
+            <popup>true</popup>
+            <formatlabel>17998</formatlabel>
+          </control>
+        </setting>
+      </group>
+
+      <group id="3" label="30006">
+        <setting id="defaultProviderName" type="string" label="30007" help="30740">
+          <level>2</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="enableProviderMappings" type="boolean" label="30008" help="30741">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="providerMappingFile" type="path" parent="enableProviderMappings" label="30009" help="30472">
+          <level>2</level>
+          <default>special://userdata/addon_data/pvr.iptvsimple/providers/providerMappings.xml</default>
+          <constraints>
+            <allowempty>false</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="enableProviderMappings" operator="is">true</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+      </group>
+    </category>
+
+    <!-- Groups -->
+    <category id="groups" label="30076" help="30743">
+      <group id="1" label="30029">
+        <setting id="tvGroupMode" type="integer" label="30034" help="30611">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30036">0</option> <!-- ALL_GROUPS -->
+              <option label="30037">1</option> <!-- SOME_GROUPS -->
+              <option label="30038">2</option> <!-- CUSTOM_GROUPS -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="numTvGroups" type="integer" parent="tvGroupMode" label="30039" help="30617">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>5</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="tvGroupMode" operator="is">1</dependency>
+          </dependencies>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="oneTvGroup" type="string" parent="tvGroupMode" label="30045" help="30612">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="tvGroupMode" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="twoTvGroup" type="string" parent="tvGroupMode" label="30046" help="30612">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="tvGroupMode" operator="is">1</condition>
+                <condition setting="numTvGroups" operator="gt">1</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="threeTvGroup" type="string" parent="tvGroupMode" label="30047" help="30612">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="tvGroupMode" operator="is">1</condition>
+                <condition setting="numTvGroups" operator="gt">2</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="fourTvGroup" type="string" parent="tvGroupMode" label="30048" help="30612">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="tvGroupMode" operator="is">1</condition>
+                <condition setting="numTvGroups" operator="gt">3</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="fiveTvGroup" type="string" parent="tvGroupMode" label="30049" help="30612">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="tvGroupMode" operator="is">1</condition>
+                <condition setting="numTvGroups" operator="gt">4</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="customTvGroupsFile" type="path" parent="tvGroupMode" label="30054" help="30615">
+          <level>0</level>
+          <default>special://userdata/addon_data/pvr.iptvsimple/channelGroups/customTVGroups-example.xml</default>
+          <constraints>
+            <allowempty>false</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="tvGroupMode" operator="is">2</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="tvChannelGroupsOnly" type="boolean" label="30028" help="30610">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+
+      <group id="2" label="30033">
+        <setting id="radioGroupMode" type="integer" label="30035" help="30647">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30036">0</option> <!-- ALL_GROUPS -->
+              <option label="30037">1</option> <!-- SOME_GROUPS -->
+              <option label="30038">2</option> <!-- CUSTOM_GROUPS -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="numRadioGroups" type="integer" parent="radioGroupMode" label="30072" help="30618">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>5</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="radioGroupMode" operator="is">1</dependency>
+          </dependencies>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="oneRadioGroup" type="string" parent="radioGroupMode" label="30055" help="30614">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="radioGroupMode" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="twoRadioGroup" type="string" parent="radioGroupMode" label="30056" help="30614">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="radioGroupMode" operator="is">1</condition>
+                <condition setting="numRadioGroups" operator="gt">1</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="threeRadioGroup" type="string" parent="radioGroupMode" label="30057" help="30614">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="radioGroupMode" operator="is">1</condition>
+                <condition setting="numRadioGroups" operator="gt">2</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="fourRadioGroup" type="string" parent="radioGroupMode" label="30058" help="30614">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="radioGroupMode" operator="is">1</condition>
+                <condition setting="numRadioGroups" operator="gt">3</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="fiveRadioGroup" type="string" parent="radioGroupMode" label="30059" help="30614">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible">
+              <and>
+                <condition setting="radioGroupMode" operator="is">1</condition>
+                <condition setting="numRadioGroups" operator="gt">4</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="customRadioGroupsFile" type="path" parent="radioGroupMode" label="30073" help="30616">
+          <level>0</level>
+          <default>special://userdata/addon_data/pvr.iptvsimple/channelGroups/customRadioGroups-example.xml</default>
+          <constraints>
+            <allowempty>false</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="radioGroupMode" operator="is">2</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="radioChannelGroupsOnly" type="boolean" label="30074" help="30619">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- EPG -->
+    <category id="epgsettings" label="30020" help="30620">
+      <group id="1" label="30019">
+       <setting id="epgPathType" type="integer" label="30000" help="30621">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="epgPath" type="path" parent="epgPathType" label="30021" help="30622">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="epgPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="epgUrl" type="string" parent="epgPathType" label="30022" help="30623">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="epgPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="epgCache" type="boolean" parent="epgPathType" label="30026" help="30624">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="visible" setting="epgPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="epgTimeShift" type="number" label="30024" help="30625">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <minimum>-12</minimum>
+            <step>0.5</step>
+            <maximum>14</maximum>
+          </constraints>
+          <control type="slider" format="number">
+            <formatlabel>30027</formatlabel>
+          </control>
+        </setting>
+        <setting id="epgTSOverride" type="boolean" label="30023" help="30626">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="epgIgnoreCaseForChannelIds" type="boolean" label="30077" help="30627">
+          <level>2</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+
+      <!-- Genres - Sub category of EPG -->
+      <group id="2" label="30050">
+        <setting id="useEpgGenreText" type="boolean" label="30051" help="30661">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="genresPathType" type="integer" label="30000" help="30662">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="genresPath" type="path" parent="genresPathType" label="30052" help="30663">
+          <level>0</level>
+          <default>special://userdata/addon_data/pvr.iptvsimple/genres/genreTextMappings/genres.xml</default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>false</writable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="genresPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="file">
+            <heading>1033</heading>
+          </control>
+        </setting>
+        <setting id="genresUrl" type="string" parent="genresPathType" label="30053" help="30664">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="genresPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- Logos -->
+    <category id="channellogos" label="30030" help="30640">
+      <group id="3" label="30030">
+       <setting id="logoPathType" type="integer" label="30000" help="30641">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30001">0</option> <!-- LOCAL_PATH -->
+              <option label="30002">1</option> <!-- REMOTE_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="logoPath" type="path" parent="logoPathType" label="30031" help="30642">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+            <writable>true</writable>
+            <editable>true</editable>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="logoPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="button" format="path">
+            <heading>657</heading>
+          </control>
+        </setting>
+        <setting id="logoBaseUrl" type="string" parent="logoPathType" label="30032" help="30643">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="logoPathType" operator="is">1</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="useLogosLocalPathOnly" type="boolean" label="30075" help="30645">
+          <level>2</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="visible" setting="logoPathType" operator="is">0</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+      </group>
+      <group id="4" label="30040">
+       <setting id="logoFromEpg" type="integer" label="30041" help="30644">
+          <level>0</level>
+          <default>1</default>
+          <constraints>
+            <options>
+              <option label="30042">0</option> <!-- IGNORE -->
+              <option label="30043">1</option> <!-- PREFER_M3U -->
+              <option label="30044">2</option> <!-- PREFER_XMLTV -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- Media -->
+    <category id="media" label="30150" help="30800">
+      <group id="1" label="30150">
+        <setting id="mediaEnabled" type="boolean" label="30155" help="30805">
+          <level>0</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaGroupByTitle" type="boolean" parent="mediaEnabled" label="30151" help="30801">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaGroupBySeason" type="boolean" parent="mediaGroupByTitle" label="30152" help="30802">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaGroupByTitle" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaTitleSeasonEpisode" type="boolean" parent="mediaEnabled" label="30153" help="30803">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="mediaVODAsRecordings" type="boolean" parent="mediaEnabled" label="30154" help="30804">
+          <level>2</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- Timeshift -->
+    <category id="timeshift" label="30120" help="30720">
+      <group id="1" label="30120">
+        <setting id="timeshiftEnabled" type="boolean" label="30121" help="30721">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledAll" type="boolean"  parent="timeshiftEnabled" label="30126" help="30725">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable" setting="timeshiftEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledHttp" type="boolean"  parent="timeshiftEnabledAll" label="30122" help="30722">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="timeshiftEnabled" operator="is">true</condition>
+                <condition setting="timeshiftEnabledAll" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledUdp" type="boolean"  parent="timeshiftEnabledAll" label="30127" help="30726">
+          <level>0</level>
+          <default>true</default>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="timeshiftEnabled" operator="is">true</condition>
+                <condition setting="timeshiftEnabledAll" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="timeshiftEnabledCustom" type="boolean"  parent="timeshiftEnabled" label="30125" help="30724">
+          <level>2</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="timeshiftEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+      </group>
+      <group id="2" label="30124">
+        <setting id="ffmpegdirectSettings" type="action" label="30123" help="30723">
+          <level>0</level>
+          <data>Addon.OpenSettings(inputstream.ffmpegdirect)</data>
+          <dependencies>
+            <dependency type="enable" setting="timeshiftEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="button" format="action">
+            <close>true</close>
+          </control>
+        </setting>
+      </group>
+    </category>
+
+    <!-- Catchup -->
+    <category id="catchup" label="30100" help="30700">
+      <group id="1" label="30100">
+        <setting id="catchupEnabled" type="boolean" label="30101" help="30701">
+          <level>0</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="catchupQueryFormat" type="string" parent="catchupEnabled" label="30102" help="30702">
+          <level>0</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="catchupDays" type="integer" parent="catchupEnabled" label="30103" help="30703">
+          <level>0</level>
+          <default>5</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>15</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="spinner" format="string">
+            <formatlabel>17999</formatlabel>
+          </control>
+        </setting>
+        <setting id="allChannelsCatchupMode" type="integer" label="30104" help="30704">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30110">0</option> <!-- DISABLED -->
+              <option label="30111">1</option> <!-- DEFAULT -->
+              <option label="30112">2</option> <!-- APPEND -->
+              <option label="30113">3</option> <!-- SHIFT -->
+              <option label="30114">4</option> <!-- FLUSSONIC -->
+              <option label="30115">5</option> <!-- XTREAM_CODES -->
+            </options>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="list" format="integer" />
+        </setting>
+        <setting id="catchupOverrideMode" type="integer" parent="allChannelsCatchupMode" label="30116" help="30709">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30117">0</option> <!-- DISABLED -->
+              <option label="30118">1</option> <!-- DEFAULT -->
+              <option label="30119">2</option> <!-- APPEND -->
+            </options>
+          </constraints>
+          <dependencies>
+            <dependency type="visible" setting="allChannelsCatchupMode" operator="!is">0</dependency>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="list" format="integer" />
+        </setting>
+        <setting id="catchupCorrection" type="number" label="30128" help="30710">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <minimum>-12</minimum>
+            <step>0.5</step>
+            <maximum>14</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="slider" format="number">
+            <formatlabel>30027</formatlabel>
+          </control>
+        </setting>
+      </group>
+      <group id="2" label="30105">
+        <setting id="catchupPlayEpgAsLive" type="boolean" label="30106" help="30705">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+        <setting id="catchupWatchEpgBeginBufferMins" type="integer" parent="catchupPlayEpgAsLive" label="30107" help="30706">
+          <level>0</level>
+          <default>5</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>60</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="catchupEnabled" operator="is">true</condition>
+                <condition setting="catchupPlayEpgAsLive" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="spinner" format="string">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+        <setting id="catchupWatchEpgEndBufferMins" type="integer" parent="catchupPlayEpgAsLive" label="30108" help="30707">
+          <level>0</level>
+          <default>15</default>
+          <constraints>
+            <minimum>0</minimum>
+            <step>1</step>
+            <maximum>60</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable">
+              <and>
+                <condition setting="catchupEnabled" operator="is">true</condition>
+                <condition setting="catchupPlayEpgAsLive" operator="!is">true</condition>
+              </and>
+            </dependency>
+          </dependencies>
+          <control type="spinner" format="string">
+            <formatlabel>14044</formatlabel>
+          </control>
+        </setting>
+        <setting id="catchupOnlyOnFinishedProgrammes" type="boolean" label="30109" help="30708">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
+      </group>
+    </category>
+
+    <!-- Advanced -->
+    <category id="advanced" label="30060" help="30680">
+      <group id="1" label="30061">
+        <setting id="transformMulticastStreamUrls" type="boolean" label="30062" help="30681">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="udpxyHost" type="string" parent="transformMulticastStreamUrls" label="30063" help="30682">
+          <level>2</level>
+          <default>127.0.0.1</default>
+          <dependencies>
+            <dependency type="enable" setting="transformMulticastStreamUrls" operator="is">true</dependency>
+          </dependencies>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="udpxyPort" type="integer" parent="transformMulticastStreamUrls" label="30064" help="30683">
+          <level>2</level>
+          <default>4022</default>
+          <constraints>
+            <minimum>1</minimum>
+            <step>1</step>
+            <maximum>65535</maximum>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="transformMulticastStreamUrls" operator="is">true</dependency>
+          </dependencies>
+          <control type="edit" format="integer" />
+        </setting>
+      </group>
+      <group id="2" label="30065">
+        <setting id="useFFmpegReconnect" type="boolean" label="30067" help="30685">
+          <level>3</level>
+          <default>true</default>
+          <control type="toggle" />
+        </setting>
+        <setting id="useInputstreamAdaptiveforHls" type="boolean" label="30066" help="30684">
+          <level>3</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
+      </group>
+      <group id="3" label="30071">
+        <setting id="defaultUserAgent" type="string" label="30068" help="30686">
+          <level>3</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="defaultInputstream" type="string" label="30069" help="30687">
+          <level>3</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+        <setting id="defaultMimeType" type="string" label="30070" help="30688">
+          <level>3</level>
+          <default></default>
+          <constraints>
+            <allowempty>true</allowempty>
+          </constraints>
+          <control type="edit" format="string" />
+        </setting>
+      </group>
+    </category>
+
+  </section>
+</settings>

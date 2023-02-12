@@ -26,6 +26,12 @@ namespace iptvsimple
     class EpgEntry : public BaseEntry
     {
     public:
+      EpgEntry() {};
+      EpgEntry(std::shared_ptr<iptvsimple::InstanceSettings> settings)
+      {
+        m_settings = settings;
+      };
+
       int GetBroadcastId() const { return m_broadcastId; }
       void SetBroadcastId(int value) { m_broadcastId = value; }
 

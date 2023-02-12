@@ -7,8 +7,10 @@
 
 #pragma once
 
+#include "InstanceSettings.h"
 #include "data/Channel.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -26,7 +28,7 @@ namespace iptvsimple
   class Channels
   {
   public:
-    Channels() = default;
+    Channels(std::shared_ptr<iptvsimple::InstanceSettings>& settings);
 
     bool Init();
 
@@ -51,5 +53,7 @@ namespace iptvsimple
     bool m_channelsLoadFailed = false;
 
     std::vector<iptvsimple::data::Channel> m_channels;
+
+    std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
   };
 } //namespace iptvsimple

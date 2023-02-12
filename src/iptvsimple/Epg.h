@@ -9,10 +9,12 @@
 
 #include "Channels.h"
 #include "Media.h"
-#include "Settings.h"
+#include "InstanceSettings.h"
 #include "data/ChannelEpg.h"
+#include "data/EpgEntry.h"
 #include "data/EpgGenre.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -33,10 +35,12 @@ namespace iptvsimple
     INVALID
   };
 
+  class InstanceSettings;
+
   class Epg
   {
   public:
-    Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::Media& media);
+    Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::Media& media, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
 
     bool Init(int epgMaxPastDays, int epgMaxFutureDays);
 
@@ -84,5 +88,7 @@ namespace iptvsimple
     std::vector<iptvsimple::data::EpgGenre> m_genreMappings;
 
     kodi::addon::CInstancePVRClient* m_client;
+
+    std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
   };
 } //namespace iptvsimple

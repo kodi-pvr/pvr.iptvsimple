@@ -9,7 +9,9 @@
 #pragma once
 
 #include "EpgGenre.h"
+#include "../InstanceSettings.h"
 
+#include <memory>
 #include <string>
 #include <vector>
 
@@ -116,6 +118,8 @@ namespace iptvsimple
 
       bool m_new = false;
       bool m_premiere = false;
+
+      std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
     };
   } //namespace data
 } //namespace iptvsimple

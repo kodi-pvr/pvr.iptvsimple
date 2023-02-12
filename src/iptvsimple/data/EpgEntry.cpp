@@ -7,7 +7,7 @@
 
 #include "EpgEntry.h"
 
-#include "../Settings.h"
+#include "../InstanceSettings.h"
 #include "../utilities/TimeUtils.h"
 #include "../utilities/XMLUtils.h"
 
@@ -40,7 +40,7 @@ void EpgEntry::UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeS
   if (SetEpgGenre(genreMappings))
   {
     left.SetGenreType(m_genreType);
-    if (Settings::GetInstance().UseEpgGenreTextWhenMapping())
+    if (m_settings->UseEpgGenreTextWhenMapping())
     {
       //Setting this value in sub type allows custom text to be displayed
       //while still sending the type used for EPG colour

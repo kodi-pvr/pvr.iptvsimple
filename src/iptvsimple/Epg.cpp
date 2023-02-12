@@ -7,7 +7,6 @@
 
 #include "Epg.h"
 
-#include "Settings.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/XMLUtils.h"
@@ -25,8 +24,8 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace pugi;
 
-Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& media)
-  : m_lastStart(0), m_lastEnd(0), m_channels(channels), m_media(media), m_client(client)
+Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& media, std::shared_ptr<InstanceSettings>& settings)
+  : m_lastStart(0), m_lastEnd(0), m_channels(channels), m_media(media), m_client(client), m_settings(settings)
 {
   FileUtils::CopyDirectory(FileUtils::GetResourceDataPath() + GENRE_DIR, GENRE_ADDON_DATA_BASE_DIR, true);
 
@@ -38,14 +37,14 @@ Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& med
 
 bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
 {
-  m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
-  m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
-  m_tsOverride = Settings::GetInstance().GetTsOverride();
+  m_xmltvLocation = m_settings->GetEpgLocation();
+  m_epgTimeShift = m_settings->GetEpgTimeshiftSecs();
+  m_tsOverride = m_settings->GetTsOverride();
 
   SetEPGMaxPastDays(epgMaxPastDays);
   SetEPGMaxFutureDays(epgMaxFutureDays);
 
-  if (Settings::GetInstance().IsCatchupEnabled() || Settings::GetInstance().IsMediaEnabled())
+  if (m_settings->IsCatchupEnabled() || m_settings->IsMediaEnabled())
   {
     // Kodi may not load the data on each startup so we need to make sure it's loaded whether
     // or not kodi considers it necessary when either 1) we need the EPG logos or 2) for
@@ -137,7 +136,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
 
   LoadGenres();
 
-  if (Settings::GetInstance().GetEpgLogosMode() != EpgLogosMode::IGNORE_XMLTV)
+  if (m_settings->GetEpgLogosMode() != EpgLogosMode::IGNORE_XMLTV)
     ApplyChannelsLogosFromEPG();
 
   int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
@@ -154,11 +153,11 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
   int count = 0;
 
   // Cache is only allowed if refresh mode is disabled
-  bool useEPGCache = Settings::GetInstance().GetM3URefreshMode() != RefreshMode::DISABLED ? false : Settings::GetInstance().UseEPGCache();
+  bool useEPGCache = m_settings->GetM3URefreshMode() != RefreshMode::DISABLED ? false : m_settings->UseEPGCache();
 
   while (count < 3) // max 3 tries
   {
-    if ((bytesRead = FileUtils::GetCachedFileContents(XMLTV_CACHE_FILENAME, m_xmltvLocation, data, useEPGCache)) != 0)
+    if ((bytesRead = FileUtils::GetCachedFileContents(m_settings, m_settings->GetXMLTVCacheFilename(), m_xmltvLocation, data, useEPGCache)) != 0)
       break;
 
     Logger::Log(LEVEL_ERROR, "%s - Unable to load EPG file '%s':  file is missing or empty. :%dth try.", __FUNCTION__, m_xmltvLocation.c_str(), ++count);
@@ -317,7 +316,7 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
         continue;
     }
 
-    EpgEntry entry;
+    EpgEntry entry{m_settings};
     if (entry.UpdateFrom(programmeNode, id, start, end, minShiftTime, maxShiftTime))
     {
       count++;
@@ -332,9 +331,9 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
 
 void Epg::ReloadEPG()
 {
-  m_xmltvLocation = Settings::GetInstance().GetEpgLocation();
-  m_epgTimeShift = Settings::GetInstance().GetEpgTimeshiftSecs();
-  m_tsOverride = Settings::GetInstance().GetTsOverride();
+  m_xmltvLocation = m_settings->GetEpgLocation();
+  m_epgTimeShift = m_settings->GetEpgTimeshiftSecs();
+  m_tsOverride = m_settings->GetTsOverride();
   m_lastStart = 0;
   m_lastEnd = 0;
 
@@ -401,9 +400,9 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::
 
 namespace
 {
-  bool TvgIdMatchesCaseOrNoCase(const std::string& idOne, const std::string& idTwo)
+  bool TvgIdMatchesCaseOrNoCase(const std::string& idOne, const std::string& idTwo, bool ignoreCaseForEpgChannelIds)
   {
-    if (Settings::GetInstance().IgnoreCaseForEpgChannelIds())
+    if (ignoreCaseForEpgChannelIds)
       return StringUtils::EqualsNoCase(idOne, idTwo);
     else
       return idOne == idTwo;
@@ -414,7 +413,7 @@ ChannelEpg* Epg::FindEpgForChannel(const std::string& id) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), id))
+    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), id, m_settings->IgnoreCaseForEpgChannelIds()))
       return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
@@ -425,7 +424,7 @@ ChannelEpg* Epg::FindEpgForChannel(const Channel& channel) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), channel.GetTvgId()))
+    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), channel.GetTvgId(), m_settings->IgnoreCaseForEpgChannelIds()))
       return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
@@ -455,7 +454,7 @@ ChannelEpg* Epg::FindEpgForMediaEntry(const MediaEntry& mediaEntry) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId()))
+    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId(), m_settings->IgnoreCaseForEpgChannelIds()))
       return const_cast<ChannelEpg*>(&myChannelEpg);
   }
 
@@ -493,11 +492,11 @@ void Epg::ApplyChannelsLogosFromEPG()
       continue;
 
     // 1 - prefer icon from playlist
-    if (!channel.GetIconPath().empty() && Settings::GetInstance().GetEpgLogosMode() == EpgLogosMode::PREFER_M3U)
+    if (!channel.GetIconPath().empty() && m_settings->GetEpgLogosMode() == EpgLogosMode::PREFER_M3U)
       continue;
 
     // 2 - prefer icon from epg
-    if (!channelEpg->GetIconPath().empty() && Settings::GetInstance().GetEpgLogosMode() == EpgLogosMode::PREFER_XMLTV)
+    if (!channelEpg->GetIconPath().empty() && m_settings->GetEpgLogosMode() == EpgLogosMode::PREFER_XMLTV)
     {
       m_channels.GetChannel(channel.GetUniqueId())->SetIconPath(channelEpg->GetIconPath());
       updated = true;
@@ -510,11 +509,11 @@ void Epg::ApplyChannelsLogosFromEPG()
 
 bool Epg::LoadGenres()
 {
-  if (!FileUtils::FileExists(Settings::GetInstance().GetGenresLocation()))
+  if (!FileUtils::FileExists(m_settings->GetGenresLocation()))
     return false;
 
   std::string data;
-  FileUtils::GetFileContents(Settings::GetInstance().GetGenresLocation(), data);
+  FileUtils::GetFileContents(m_settings->GetGenresLocation(), data);
 
   if (data.empty())
     return false;
