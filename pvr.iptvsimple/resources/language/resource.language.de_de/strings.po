@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2023-02-02 10:59+0000\n"
 "Last-Translator: Kai Sommerfeld <kai.sommerfeld@gmx.com>\n"
@@ -404,6 +404,11 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr "Sendersymbole aus M3U für lokalen Symboldateipfad ignorieren"
 
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -727,6 +732,11 @@ msgstr "EPG-Zeiten anpassen, von -12 Stunden bis +14 Stunden."
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
 msgstr "Festlegen, ob die Zeitverschiebung für alle Sender durch die Einstellung „Zeitverschiebung für EPG“ ersetzt werden soll. Wenn nicht aktiviert, wird „Zeitverschiebung für EPG“ plus die senderspezifische Zeitverschiebung (wenn verfügbar) verwendet."
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
+msgstr ""
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos

@@ -67,7 +67,7 @@ msgctxt "#30005"
 msgid "Once per day"
 msgstr ""
 
-#empty strings from id 30006 to 30009
+# empty strings from id 30006 to 30009
 #. label-category: general
 #. label-group: General - General
 msgctxt "#30010"
@@ -404,7 +404,12 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr ""
 
-#empty strings from id 30076 to 30099
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
+# empty strings from id 30076 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
@@ -552,7 +557,7 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
-#empty strings from id 30129 to 30449
+# empty strings from id 30129 to 30449
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
@@ -563,7 +568,7 @@ msgctxt "#30451"
 msgid "Radio"
 msgstr ""
 
-#empty strings from id 30452 to 30499
+# empty strings from id 30452 to 30499
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
@@ -579,7 +584,7 @@ msgctxt "#30502"
 msgid "The %s addon is not enabled."
 msgstr ""
 
-#empty strings from id 30503 to 30599
+# empty strings from id 30503 to 30599
 #. ############
 #. help info #
 #. ############
@@ -728,7 +733,12 @@ msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
 msgstr ""
 
-#empty strings from id 30627 to 30639
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
+msgstr ""
+
+# empty strings from id 30627 to 30639
 #. help info - Channel Logos
 #. help-category: Channel Logos
 msgctxt "#30640"
@@ -760,7 +770,7 @@ msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
 msgstr ""
 
-#empty strings from id 30646 to 30659
+# empty strings from id 30646 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
@@ -787,7 +797,7 @@ msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
 msgstr ""
 
-#empty strings from id 30665 to 30679
+# empty strings from id 30665 to 30679
 #. help info - Advanced
 #. help-category: Advanced
 msgctxt "#30680"
@@ -834,7 +844,7 @@ msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
 msgstr ""
 
-#empty strings from id 30689 to 30699
+# empty strings from id 30689 to 30699
 #. help info - Catchup
 #. help-category: Catchup
 msgctxt "#30700"
@@ -891,7 +901,7 @@ msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
 msgstr ""
 
-#empty strings from id 30711 to 307019
+# empty strings from id 30711 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
