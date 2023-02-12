@@ -7,26 +7,27 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Turkish (Turkey) (http://www.transifex.com/projects/p/kodi-main/language/tr_TR/)\n"
-"Language: tr_TR\n"
+"PO-Revision-Date: 2022-09-30 11:15+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Turkish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/tr_tr/>\n"
+"Language: tr_tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "IPTV desteği için Kodi PVR eklentisi. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr "IPTV desteği için Kodi PVR eklentisi."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "IPTV Basit PVR İstemcisi m3u çalma listeleri, multicast/unicast kaynaklar için Canlı TV akışı, radyo kanallarını dinleme ve EPG destekler."
+msgstr "IPTV Basit PVR İstemcisi m3u çalma listeleri, multicast/unicast kaynaklar için Canlı TV akışı, radyo kanallarını dinleme ve EPG destekler.[CR]    [CR]Kullanım belgesi için ziyaret edin: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "Bu kararsız bir yazılımdır! Yazanlar oynatma hatası, yanlış EPG zamanları, harcanmış saatler ya da diğer etkilerden sorumlu değildir."
+msgstr "Yazanlar oynatma hatası, yanlış EPG zamanları, harcanmış saatler ya da diğer etkilerden sorumlu değildir."
 
 #. settings labels
 #. label: General - m3uPathType
@@ -42,7 +43,7 @@ msgstr "Konum"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "Yerel yol (yerel ağ dahil)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -60,12 +61,12 @@ msgstr "Devre dışı"
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
 msgid "Repeated refresh"
-msgstr ""
+msgstr "Tekrarlanan yenileme"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30005"
 msgid "Once per day"
-msgstr ""
+msgstr "Günde bir defa"
 
 #. label-category: general
 #. label-group: General - General
@@ -96,22 +97,22 @@ msgstr ""
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "Otomatik yenileme modu"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
 msgid "Refresh interval"
-msgstr ""
+msgstr "Yenileme aralığı"
 
 #. label: General - m3uRefreshHour
 msgctxt "#30017"
 msgid "Refresh hour (24h)"
-msgstr ""
+msgstr "Yenileme saati (24 saatlik)"
 
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr ""
+msgstr "Yenile"
 
 #. label-category: epgsettings
 msgctxt "#30019"
@@ -146,17 +147,17 @@ msgstr "EPG süre değiştirme"
 #. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "m3u'yu yerel depoda önbelleğe al"
+msgstr "m3u verisini yerel depoda önbelleğe al"
 
 #. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "XMLTV'yi yerel depoda önbelleğe al"
+msgstr "XMLTV verisini yerel depoda önbelleğe al"
 
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
 msgid "{0:.1f} hours"
-msgstr ""
+msgstr "{0:.1f} saat"
 
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
@@ -166,7 +167,7 @@ msgstr ""
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "TV Grupları"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
@@ -187,35 +188,35 @@ msgstr "Kanal logoları taban URL'si"
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "Radyo Grupları"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "TV grup modu"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "Radyo grup modu"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30036"
 msgid "All groups"
-msgstr ""
+msgstr "Bütün gruplar"
 
 #. label-option: Channels - tvGroupMode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "Bazı gruplar"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "Özel gruplar"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
@@ -225,7 +226,7 @@ msgstr ""
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "XMLTV Logo Ayarları"
+msgstr "XMLTV Logo Seçenekleri"
 
 #. label: Channel Logos - logoFromEpg
 msgctxt "#30041"
@@ -250,78 +251,78 @@ msgstr "XMLTV tercih et"
 #. label: General - oneTvGroup
 msgctxt "#30045"
 msgid "TV group 1"
-msgstr ""
+msgstr "TV grubu 1"
 
 #. label: General - twoTvGroup
 msgctxt "#30046"
 msgid "TV group 2"
-msgstr ""
+msgstr "TV grubu 2"
 
 #. label: General - threeTvGroup
 msgctxt "#30047"
 msgid "TV group 3"
-msgstr ""
+msgstr "TV grubu 3"
 
 #. label: General - fourTvGroup
 msgctxt "#30048"
 msgid "TV group 4"
-msgstr ""
+msgstr "TV grubu 4"
 
 #. label: General - fiveTvGroup
 msgctxt "#30049"
 msgid "TV group 5"
-msgstr ""
+msgstr "TV grubu 5"
 
 #. label-category: genres
 #. label-group: Genres - Genres
 msgctxt "#30050"
 msgid "Genres"
-msgstr "Türler"
+msgstr "Tarzlar"
 
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
 msgid "Use genre text from XMLTV when mapping genres"
-msgstr ""
+msgstr "Tarzları eşlerken XMLTV tarafından sağlanan tarz metnini kullan"
 
 #. label: Genres - genresPath
 msgctxt "#30052"
 msgid "Genres path"
-msgstr ""
+msgstr "Tarzlar yolu"
 
 #. label: Genres - genresUrl
 msgctxt "#30053"
 msgid "Genres URL"
-msgstr ""
+msgstr "Tarzlar URL'si"
 
 #. label: Channels - customTvGroupsFile
 msgctxt "#30054"
 msgid "Custom TV groups file"
-msgstr ""
+msgstr "Özel TV grubu dosyası"
 
 #. label: General - oneRadioGroup
 msgctxt "#30055"
 msgid "Radio group 1"
-msgstr ""
+msgstr "Radyo grubu 1"
 
 #. label: General - twoRadioGroup
 msgctxt "#30056"
 msgid "Radio group 2"
-msgstr ""
+msgstr "Radyo grubu 2"
 
 #. label: General - threeRadioGroup
 msgctxt "#30057"
 msgid "Radio group 3"
-msgstr ""
+msgstr "Radyo grubu 3"
 
 #. label: General - fourRadioGroup
 msgctxt "#30058"
 msgid "Radio group 4"
-msgstr ""
+msgstr "Radyo grubu 4"
 
 #. label: General - fiveRadioGroup
 msgctxt "#30059"
 msgid "Radio group 5"
-msgstr ""
+msgstr "Radyo grubu 5"
 
 #. label-category: advanced
 msgctxt "#30060"
@@ -351,7 +352,7 @@ msgstr ""
 #. label-group: Advanced - Streaming
 msgctxt "#30065"
 msgid "Streaming"
-msgstr ""
+msgstr "Akış"
 
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
@@ -376,7 +377,7 @@ msgstr ""
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
 msgid "MIME type"
-msgstr ""
+msgstr "MIME türü"
 
 #. label-group: Advanced - Channel defaults
 msgctxt "#30071"
@@ -391,7 +392,7 @@ msgstr ""
 #. label: Channels - customRadioGroupsFile
 msgctxt "#30073"
 msgid "Custom Radio groups file"
-msgstr ""
+msgstr "Özel Radyo grup dosyası"
 
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
@@ -401,6 +402,11 @@ msgstr ""
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
+msgstr ""
+
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
 msgstr ""
 
 # empty strings from id 30075 to 30099
@@ -458,12 +464,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Devre dışı"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Varsayılan"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -509,7 +515,7 @@ msgstr ""
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr ""
+msgstr "Zaman Kaydırma"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
@@ -555,12 +561,12 @@ msgstr ""
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr ""
+msgstr "Radyo"
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -725,6 +731,11 @@ msgstr ""
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
 # empty strings from id 30627 to 30639

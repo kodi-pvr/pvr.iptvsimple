@@ -7,15 +7,14 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-03-10 22:36+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
-"Language-Team: Faroese <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/fo_fo/>\n"
-"Language: fo_fo\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ast_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -35,7 +34,7 @@ msgstr ""
 #. label: Channel Logos - logoPathType
 msgctxt "#30000"
 msgid "Location"
-msgstr "Stað"
+msgstr ""
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -56,7 +55,7 @@ msgstr ""
 #. label-option: General - m3uRefreshMode
 msgctxt "#30003"
 msgid "Disabled"
-msgstr "Sløkt"
+msgstr ""
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
@@ -68,11 +67,12 @@ msgctxt "#30005"
 msgid "Once per day"
 msgstr ""
 
+# empty strings from id 30006 to 30009
 #. label-category: general
 #. label-group: General - General
 msgctxt "#30010"
 msgid "General"
-msgstr "Vanligt"
+msgstr ""
 
 #. label: General - m3uPath
 msgctxt "#30011"
@@ -277,7 +277,7 @@ msgstr ""
 #. label-group: Genres - Genres
 msgctxt "#30050"
 msgid "Genres"
-msgstr "Evni"
+msgstr ""
 
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
@@ -409,7 +409,7 @@ msgctxt "#30076"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr ""
 
-# empty strings from id 30075 to 30099
+# empty strings from id 30076 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
@@ -464,12 +464,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr "Sløkt"
+msgstr ""
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr "Vanligt"
+msgstr ""
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -557,16 +557,16 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
-# empty strings from id 30128 to 30449
+# empty strings from id 30129 to 30449
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr "Sjónvarp"
+msgstr ""
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr "Útvarp"
+msgstr ""
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -770,7 +770,7 @@ msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
 msgstr ""
 
-# empty strings from id 30645 to 30659
+# empty strings from id 30646 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
@@ -901,7 +901,7 @@ msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
 msgstr ""
 
-# empty strings from id 30710 to 307019
+# empty strings from id 30711 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"

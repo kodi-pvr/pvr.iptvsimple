@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-06-28 08:29+0000\n"
+"PO-Revision-Date: 2022-03-30 10:57+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Portuguese (Brazil) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/pt_br/>\n"
 "Language: pt_br\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.7\n"
+"X-Generator: Weblate 4.11.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -352,7 +352,7 @@ msgstr "Porta de relé"
 #. label-group: Advanced - Streaming
 msgctxt "#30065"
 msgid "Streaming"
-msgstr ""
+msgstr "Transmissão"
 
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
@@ -402,6 +402,11 @@ msgstr ""
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
+msgstr ""
+
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
 msgstr ""
 
 # empty strings from id 30075 to 30099
@@ -459,12 +464,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Desativado"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Normal"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -510,12 +515,12 @@ msgstr ""
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr ""
+msgstr "Ver Mais Tarde"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
 msgid "Enable timeshift"
-msgstr ""
+msgstr "Ativar Ver mais tarde"
 
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
@@ -556,12 +561,12 @@ msgstr ""
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr ""
+msgstr "Rádio"
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -726,6 +731,11 @@ msgstr ""
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
 msgstr "Substituir ou não a mudança de horário para todos os canais com `EPG time shift '. Se não estiver ativado, será utilizado o `EPG time shift 'mais o time shift individual por canal (se disponível)."
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
+msgstr ""
 
 #. help info - Channel Logos
 #. help-category: Channel Logos
