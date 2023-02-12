@@ -7,22 +7,23 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Catalan (Spain) (http://www.transifex.com/projects/p/kodi-main/language/ca_ES/)\n"
-"Language: ca_ES\n"
+"PO-Revision-Date: 2022-09-06 07:31+0000\n"
+"Last-Translator: Xean <xeanhort007@gmail.com>\n"
+"Language-Team: Catalan (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/ca_es/>\n"
+"Language: ca_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "Complement PVR de Kodi per al suport d'IPTV https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr "Complement PVR de Kodi per al suport d'IPTV."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "Client senzill per a IPTV PVR compatible amb les llistes de reproducció m3u, transmissions en línia de TV en directe per als orígens difusió única o múltiple, escolta d'emissores de ràdio i guia electrònica de programació (EPG)."
+msgstr "Client senzill per a IPTV PVR compatible amb les llistes de reproducció m3u, transmissions en línia de TV en directe per als orígens difusió única o múltiple, escolta d'emissores de ràdio i guia electrònica de programació (EPG);    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
@@ -403,6 +404,11 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr ""
 
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -458,12 +464,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Inhabilitat"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Per defecte"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -509,7 +515,7 @@ msgstr ""
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr ""
+msgstr "Salts en el temps"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
@@ -555,12 +561,12 @@ msgstr ""
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr ""
+msgstr "Ràdio"
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -725,6 +731,11 @@ msgstr ""
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
 # empty strings from id 30627 to 30639
@@ -895,7 +906,7 @@ msgstr ""
 #. help-category: Timeshift
 msgctxt "#30720"
 msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
-msgstr ""
+msgstr "Configuració de desplaçament temporal per posar en pausa/rebobinar i avançar ràpidament les reproduccions en directe."
 
 #. help: Timeshift - timeshiftEnabled
 msgctxt "#30721"

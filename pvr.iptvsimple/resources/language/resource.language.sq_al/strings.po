@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Albanian (Albania) (http://www.transifex.com/projects/p/kodi-main/language/sq_AL/)\n"
-"Language: sq_AL\n"
+"PO-Revision-Date: 2022-03-06 18:03+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Albanian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/sq_al/>\n"
+"Language: sq_al\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.11.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -403,6 +404,11 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr ""
 
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30076"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -458,12 +464,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Deaktivuar"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Prezgjedhuar"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -555,12 +561,12 @@ msgstr ""
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr ""
+msgstr "Radio"
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -725,6 +731,11 @@ msgstr ""
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
 # empty strings from id 30627 to 30639
