@@ -24,7 +24,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-CatchupController::CatchupController(Epg& epg, std::mutex* mutex, std::shared_ptr<InstanceSettings>& settings)
+CatchupController::CatchupController(Epg& epg, std::mutex* mutex, std::shared_ptr<Settings>& settings)
   : m_epg(epg), m_mutex(mutex), m_settings(settings) {}
 
 void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::map<std::string, std::string>& catchupProperties)

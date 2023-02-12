@@ -25,14 +25,10 @@
 class ATTR_DLL_LOCAL IptvSimple : public kodi::addon::CInstancePVRClient
 {
 public:
-  IptvSimple(const kodi::addon::IInstanceInfo& instance);
+  IptvSimple(const kodi::addon::IInstanceInfo& instance, std::shared_ptr<iptvsimple::Settings>& settings);
   ~IptvSimple() override;
 
   bool Initialise();
-
-  // kodi::addon::CInstancePVRClient -> kodi::addon::IAddonInstance overrides
-  ADDON_STATUS SetInstanceSetting(const std::string& settingName,
-                                  const kodi::addon::CSettingValue& settingValue) override;
 
   // kodi::addon::CInstancePVRClient functions
   //@{
@@ -86,7 +82,7 @@ protected:
 private:
   static const int PROCESS_LOOP_WAIT_SECS = 2;
 
-  std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
+  std::shared_ptr<iptvsimple::Settings> m_settings;
 
   iptvsimple::data::Channel m_currentChannel{m_settings};
   iptvsimple::Providers m_providers{m_settings};

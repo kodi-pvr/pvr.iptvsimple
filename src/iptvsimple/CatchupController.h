@@ -9,7 +9,7 @@
 
 #include <string>
 
-#include "InstanceSettings.h"
+#include "Settings.h"
 #include "data/Channel.h"
 #include "data/EpgEntry.h"
 #include "utilities/StreamUtils.h"
@@ -27,7 +27,7 @@ namespace iptvsimple
   class CatchupController
   {
   public:
-    CatchupController(iptvsimple::Epg& epg, std::mutex* mutex, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+    CatchupController(iptvsimple::Epg& epg, std::mutex* mutex, std::shared_ptr<iptvsimple::Settings>& settings);
 
     void ProcessChannelForPlayback(const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
     void ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::PVREPGTag& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
@@ -76,6 +76,6 @@ namespace iptvsimple
 
     StreamManager m_streamManager;
 
-    std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
+    std::shared_ptr<iptvsimple::Settings> m_settings;
   };
 } //namespace iptvsimple

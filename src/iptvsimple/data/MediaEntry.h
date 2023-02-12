@@ -23,7 +23,7 @@ namespace iptvsimple
     class ATTR_DLL_LOCAL MediaEntry : public BaseEntry
     {
     public:
-      MediaEntry(std::shared_ptr<iptvsimple::InstanceSettings> settings)
+      MediaEntry(std::shared_ptr<iptvsimple::Settings> settings)
       {
         m_settings = settings;
       };

@@ -7,6 +7,7 @@
 
 #include "Epg.h"
 
+#include "Settings.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/XMLUtils.h"
@@ -24,7 +25,7 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace pugi;
 
-Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& media, std::shared_ptr<InstanceSettings>& settings)
+Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& media, std::shared_ptr<Settings>& settings)
   : m_lastStart(0), m_lastEnd(0), m_channels(channels), m_media(media), m_client(client), m_settings(settings)
 {
   FileUtils::CopyDirectory(FileUtils::GetResourceDataPath() + GENRE_DIR, GENRE_ADDON_DATA_BASE_DIR, true);
@@ -157,7 +158,7 @@ bool Epg::GetXMLTVFileWithRetries(std::string& data)
 
   while (count < 3) // max 3 tries
   {
-    if ((bytesRead = FileUtils::GetCachedFileContents(m_settings, m_settings->GetXMLTVCacheFilename(), m_xmltvLocation, data, useEPGCache)) != 0)
+    if ((bytesRead = FileUtils::GetCachedFileContents(m_settings, XMLTV_CACHE_FILENAME, m_xmltvLocation, data, useEPGCache)) != 0)
       break;
 
     Logger::Log(LEVEL_ERROR, "%s - Unable to load EPG file '%s':  file is missing or empty. :%dth try.", __FUNCTION__, m_xmltvLocation.c_str(), ++count);

@@ -23,15 +23,14 @@ message(STATUS "LZMA_LIBRARIES: ${LZMA_LIBRARIES}")
 
 set(IPTV_SOURCES src/addon.cpp
                  src/IptvSimple.cpp
-                 src/iptvsimple/AddonSettings.cpp
                  src/iptvsimple/CatchupController.cpp
                  src/iptvsimple/Channels.cpp
                  src/iptvsimple/ChannelGroups.cpp
+                 src/iptvsimple/Providers.cpp
                  src/iptvsimple/Epg.cpp
-                 src/iptvsimple/InstanceSettings.cpp
                  src/iptvsimple/Media.cpp
                  src/iptvsimple/PlaylistLoader.cpp
-                 src/iptvsimple/Providers.cpp
+                 src/iptvsimple/Settings.cpp
                  src/iptvsimple/StreamManager.cpp
                  src/iptvsimple/data/Channel.cpp
                  src/iptvsimple/data/ChannelEpg.cpp
@@ -47,15 +46,14 @@ set(IPTV_SOURCES src/addon.cpp
 
 set(IPTV_HEADERS src/addon.h
                  src/IptvSimple.h
-                 src/iptvsimple/AddonSettings.h
                  src/iptvsimple/CatchupController.h
                  src/iptvsimple/Channels.h
                  src/iptvsimple/ChannelGroups.h
+                 src/iptvsimple/Providers.cpp
                  src/iptvsimple/Epg.h
-                 src/iptvsimple/InstanceSettings.h
                  src/iptvsimple/Media.h
                  src/iptvsimple/PlaylistLoader.h
-                 src/iptvsimple/Providers.cpp
+                 src/iptvsimple/Settings.h
                  src/iptvsimple/StreamManager.h
                  src/iptvsimple/data/BaseEntry.h
                  src/iptvsimple/data/Channel.h

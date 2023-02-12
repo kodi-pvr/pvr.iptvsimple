@@ -15,7 +15,9 @@ using namespace iptvsimple::utilities;
 ADDON_STATUS CIptvSimpleAddon::Create()
 {
   /* Init settings */
-  m_settings.reset(new AddonSettings());
+  m_settings.reset(new Settings());
+
+  Logger::Log(LEVEL_DEBUG, "%s - Creating IPTV Simple PVR-Client", __func__);
 
   /* Configure the logger */
   Logger::GetInstance().SetImplementation([this](LogLevel level, const char* message)
@@ -46,7 +48,7 @@ ADDON_STATUS CIptvSimpleAddon::Create()
 
   Logger::GetInstance().SetPrefix("pvr.iptvsimple");
 
-  Logger::Log(LogLevel::LEVEL_INFO, "%s starting IPTV Simple PVR client...", __func__);
+  Logger::Log(LogLevel::LEVEL_INFO, "%s starting PVR client...", __func__);
 
   return ADDON_STATUS_OK;
 }
@@ -60,7 +62,7 @@ ADDON_STATUS CIptvSimpleAddon::CreateInstance(const kodi::addon::IInstanceInfo& 
 {
   if (instance.IsType(ADDON_INSTANCE_PVR))
   {
-    IptvSimple* usedInstance = new IptvSimple(instance);
+    IptvSimple* usedInstance = new IptvSimple(instance, m_settings);
     if (!usedInstance->Initialise())
     {
       delete usedInstance;

@@ -7,7 +7,7 @@
 
 #include "StreamUtils.h"
 
-#include "../InstanceSettings.h"
+#include "../Settings.h"
 #include "FileUtils.h"
 #include "Logger.h"
 #include "WebUtils.h"
@@ -20,7 +20,7 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
-void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<InstanceSettings>& settings)
+void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<Settings>& settings)
 {
   if (ChannelSpecifiesInputstream(channel))
   {
@@ -148,7 +148,7 @@ bool StreamUtils::CheckInputstreamInstalledAndEnabled(const std::string& inputst
   return true;
 }
 
-void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::shared_ptr<InstanceSettings>& settings)
+void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::shared_ptr<Settings>& settings)
 {
   // If there is no MIME type and no manifest type (BOTH!) set then potentially inspect the stream and set them
   if (!channel.HasMimeType() && !channel.GetProperty("inputstream.ffmpegdirect.manifest_type").empty())
@@ -182,7 +182,7 @@ void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::ad
     properties.emplace_back("inputstream.ffmpegdirect.manifest_type", manifestType);
 }
 
-std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<InstanceSettings>& settings)
+std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<Settings>& settings)
 {
   std::string inputStreamName = channel.GetInputStreamName();
 
@@ -301,7 +301,7 @@ bool StreamUtils::HasMimeType(const StreamType& streamType)
   return streamType != StreamType::OTHER_TYPE && streamType != StreamType::SMOOTH_STREAMING;
 }
 
-std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<InstanceSettings>& settings)
+std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<Settings>& settings)
 {
   std::string newStreamUrl = streamUrl;
 
@@ -352,7 +352,7 @@ std::string StreamUtils::AddHeader(const std::string& headerTarget, const std::s
   return newHeaderTarget;
 }
 
-bool StreamUtils::UseKodiInputstreams(const StreamType& streamType, std::shared_ptr<iptvsimple::InstanceSettings>& settings)
+bool StreamUtils::UseKodiInputstreams(const StreamType& streamType, std::shared_ptr<iptvsimple::Settings>& settings)
 {
   return streamType == StreamType::OTHER_TYPE || streamType == StreamType::TS || streamType == StreamType::PLUGIN ||
         (streamType == StreamType::HLS && !settings->UseInputstreamAdaptiveforHls());

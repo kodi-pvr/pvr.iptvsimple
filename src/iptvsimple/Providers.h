@@ -10,7 +10,7 @@
 
 #include "data/Provider.h"
 
-#include "InstanceSettings.h"
+#include "Settings.h"
 
 #include <memory>
 #include <string>
@@ -27,7 +27,7 @@ namespace iptvsimple
   class ATTR_DLL_LOCAL Providers
   {
   public:
-    Providers(std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+    Providers(std::shared_ptr<iptvsimple::Settings>& settings);
 
     bool Init();
 
@@ -54,6 +54,6 @@ namespace iptvsimple
 
     std::unordered_map<std::string, iptvsimple::data::Provider> m_providerMappingsMap;
 
-    std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
+    std::shared_ptr<iptvsimple::Settings> m_settings;
   };
 } //namespace iptvsimple

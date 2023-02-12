@@ -7,7 +7,7 @@
 
 #include "FileUtils.h"
 
-#include "../InstanceSettings.h"
+#include "../Settings.h"
 
 #include <lzma.h>
 #include <zlib.h>
@@ -169,7 +169,7 @@ bool FileUtils::XzDecompress(const std::string& compressedBytes, std::string& un
   return true;
 }
 
-int FileUtils::GetCachedFileContents(std::shared_ptr<iptvsimple::InstanceSettings>& settings,
+int FileUtils::GetCachedFileContents(std::shared_ptr<iptvsimple::Settings>& settings,
                                      const std::string& cachedName, const std::string& filePath,
                                      std::string& contents, const bool useCache /* false */)
 {
