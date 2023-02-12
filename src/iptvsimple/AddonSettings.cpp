@@ -9,7 +9,6 @@
 
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
-#include "utilities/SettingsMigration.h"
 
 #include "kodi/General.h"
 
@@ -31,11 +30,5 @@ void AddonSettings::ReadSettings()
 ADDON_STATUS AddonSettings::SetSetting(const std::string& settingName,
                                        const kodi::addon::CSettingValue& settingValue)
 {
-  if (SettingsMigration::IsMigrationSetting(settingName))
-  {
-    // ignore settings from pre-multi-instance setup
-    return ADDON_STATUS_OK;
-  }
-
   return ADDON_STATUS_UNKNOWN;
 }

@@ -42,7 +42,6 @@ set(IPTV_SOURCES src/addon.cpp
                  src/iptvsimple/data/MediaEntry.cpp
                  src/iptvsimple/utilities/FileUtils.cpp
                  src/iptvsimple/utilities/Logger.cpp
-                 src/iptvsimple/utilities/SettingsMigration.cpp
                  src/iptvsimple/utilities/StreamUtils.cpp
                  src/iptvsimple/utilities/WebUtils.cpp)
 
@@ -69,7 +68,6 @@ set(IPTV_HEADERS src/addon.h
                  src/iptvsimple/data/StreamEntry.h
                  src/iptvsimple/utilities/FileUtils.h
                  src/iptvsimple/utilities/Logger.h
-                 src/iptvsimple/utilities/SettingsMigration.h
                  src/iptvsimple/utilities/StreamUtils.h
                  src/iptvsimple/utilities/TimeUtils.h
                  src/iptvsimple/utilities/WebUtils.h
