@@ -237,7 +237,7 @@ namespace iptvsimple
     PathType m_m3uPathType = PathType::REMOTE_PATH;
     std::string m_m3uPath;
     std::string m_m3uUrl;
-    bool m_cacheM3U = false;
+    bool m_cacheM3U = true;
     int m_startChannelNumber = 1;
     bool m_numberChannelsByM3uOrderOnly = false;
     RefreshMode m_m3uRefreshMode = RefreshMode::DISABLED;
@@ -256,7 +256,7 @@ namespace iptvsimple
     std::string m_threeTVGroup = "";
     std::string m_fourTVGroup = "";
     std::string m_fiveTVGroup = "";
-    std::string m_customTVGroupsFile = "";
+    std::string m_customTVGroupsFile = DEFAULT_CUSTOM_TV_GROUPS_FILE;
     bool m_allowRadioChannelGroupsOnly = false;
     ChannelGroupMode m_radioChannelGroupMode = ChannelGroupMode::ALL_GROUPS;
     int m_numRadioGroups = DEFAULT_NUM_GROUPS;
@@ -265,28 +265,28 @@ namespace iptvsimple
     std::string m_threeRadioGroup = "";
     std::string m_fourRadioGroup = "";
     std::string m_fiveRadioGroup = "";
-    std::string m_customRadioGroupsFile = "";
+    std::string m_customRadioGroupsFile = DEFAULT_CUSTOM_RADIO_GROUPS_FILE;
 
     // EPG
     PathType m_epgPathType = PathType::REMOTE_PATH;
     std::string m_epgPath;
     std::string m_epgUrl;
-    bool m_cacheEPG = false;
-    float m_epgTimeShiftHours = 0;
-    bool m_tsOverride = true;
+    bool m_cacheEPG = true;
+    float m_epgTimeShiftHours = 0.0f;
+    bool m_tsOverride = false;
     bool m_ignoreCaseForEpgChannelIds = true;
 
     // Genres
     bool m_useEpgGenreTextWhenMapping = false;
     PathType m_genresPathType = PathType::LOCAL_PATH;
-    std::string m_genresPath;
+    std::string m_genresPath = DEFAULT_GENRE_TEXT_MAP_FILE;
     std::string m_genresUrl;
 
     // Channel Logos
     PathType m_logoPathType = PathType::REMOTE_PATH;
     std::string m_logoPath;
     std::string m_logoBaseUrl;
-    EpgLogosMode m_epgLogosMode = EpgLogosMode::IGNORE_XMLTV;
+    EpgLogosMode m_epgLogosMode = EpgLogosMode::PREFER_M3U;
     bool m_useLocalLogosOnly = false;
 
     // Media
@@ -298,9 +298,9 @@ namespace iptvsimple
 
     // Timeshift
     bool m_timeshiftEnabled = false;
-    bool m_timeshiftEnabledAll = false;
-    bool m_timeshiftEnabledHttp = false;
-    bool m_timeshiftEnabledUdp = false;
+    bool m_timeshiftEnabledAll = true;
+    bool m_timeshiftEnabledHttp = true;
+    bool m_timeshiftEnabledUdp = true;
     bool m_timeshiftEnabledCustom = false;
 
     // Catchup
