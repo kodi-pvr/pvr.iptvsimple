@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-08-28 13:02+0000\n"
+"PO-Revision-Date: 2023-02-27 16:15+0000\n"
 "Last-Translator: Minho Park <parkmino@gmail.com>\n"
 "Language-Team: Korean <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/ko_kr/>\n"
 "Language: ko_kr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.8\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -407,7 +407,7 @@ msgstr "로컬 로고 경로의 경우 M3U 로고 무시"
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30076"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "EPG 채널 ID의 대소문자 무시"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -735,7 +735,7 @@ msgstr "모든 채널의 타임 시프트를 `EPG 타임 시프트`로 덮어쓸
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr ""
+msgstr "채널을 EPG 항목과 일치시킬 때, tvg-id라고도 하는 EPG 채널 ID의 대소문자는 무시합니다. 비활성화하면 대소문자 구분 일치만 사용됩니다."
 
 #. help info - Channel Logos
 #. help-category: Channel Logos

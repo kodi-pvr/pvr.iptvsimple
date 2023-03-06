@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-12-09 08:56+0000\n"
+"PO-Revision-Date: 2023-02-27 16:15+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Danish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/da_dk/>\n"
 "Language: da_dk\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.2\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -407,7 +407,7 @@ msgstr "For stier til lokale logoer, ignorer M3U-logoer"
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30076"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "Ignorer versalfølsomhed for EPG kanal-ID'er"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -736,7 +736,7 @@ msgstr "Hvorvidt tidsforskydningen skal overskrives for alle kanaler med 'EPG ti
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr ""
+msgstr "Ignorer versalfølsomhed for EPG kanal-ID'er, også kendt som TVG-ID'er, når de matcher kanaler til EPG-poster. Ved deaktivering, bruges kun versalfølsom matchning."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
