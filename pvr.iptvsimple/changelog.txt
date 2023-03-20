@@ -1,3 +1,6 @@
+v21.2.0
+- Support async connect
+
 v21.1.1
 - Set default settings correctly and update settings migration
 
