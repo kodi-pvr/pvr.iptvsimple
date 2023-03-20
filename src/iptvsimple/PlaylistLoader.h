@@ -71,7 +71,7 @@ namespace iptvsimple
     bool Init();
 
     bool LoadPlayList();
-    void ReloadPlayList();
+    bool ReloadPlayList();
 
   private:
     static std::string ReadMarkerValue(const std::string& line, const std::string& markerName);
