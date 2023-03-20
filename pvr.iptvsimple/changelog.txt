@@ -1,3 +1,6 @@
+v20.9.0
+- Support async connect
+
 v20.8.1
 - Set default settings correctly and update settings migration
 
