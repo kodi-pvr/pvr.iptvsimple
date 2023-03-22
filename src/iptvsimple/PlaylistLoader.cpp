@@ -553,7 +553,7 @@ std::string PlaylistLoader::ReadMarkerValue(const std::string& line, const std::
     markerStart += marker.length();
     if (markerStart < line.length())
     {
-      if (marker == M3U_GROUP_MARKER && line[markerStart] != '"')
+      if ((marker == M3U_GROUP_MARKER || marker == TVG_INFO_LOGO_MARKER) && line[markerStart] != '"')
       {
         //For this case we just want to return the full string without splitting it
         //This is because groups use semi-colons and not spaces as a delimiter
