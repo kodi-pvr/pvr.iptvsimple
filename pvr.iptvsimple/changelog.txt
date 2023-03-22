@@ -1,3 +1,6 @@
+v21.2.1
+- Allow channel logo paths containing spaces
+
 v21.2.0
 - Support async connect
 
