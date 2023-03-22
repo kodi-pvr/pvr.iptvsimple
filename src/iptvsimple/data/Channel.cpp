@@ -116,6 +116,16 @@ void Channel::Reset()
   m_inputStreamName.clear();
 }
 
+namespace
+{
+
+bool IsSpecialOrResourceProtocol(const std::string& path)
+{
+  return StringUtils::StartsWith(path, "special://") || StringUtils::StartsWith(path, "resource://");
+}
+
+}
+
 void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& channelName)
 {
   m_iconPath = tvgLogo;
@@ -134,7 +144,7 @@ void Channel::SetIconPathFromTvgLogo(const std::string& tvgLogo, std::string& ch
   {
     m_iconPath = utilities::WebUtils::UrlEncode(m_iconPath);
   }
-  else if (m_iconPath.find("://") != std::string::npos)
+  else if (m_iconPath.find("://") != std::string::npos && !IsSpecialOrResourceProtocol(m_iconPath))
   {
     // we also want to check the last part of a URL to ensure it's valid as quite often they are based on channel names
     // the path should be fine
