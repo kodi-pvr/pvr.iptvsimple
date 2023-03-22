@@ -1,3 +1,6 @@
+v21.2.1
+- Don't URL encode paths using resource:// or special:// protocols
+
 v21.2.0
 - Support async connect
 
