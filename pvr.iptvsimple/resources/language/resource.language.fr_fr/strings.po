@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-12-27 11:54+0000\n"
+"PO-Revision-Date: 2023-03-24 11:16+0000\n"
 "Last-Translator: skypichat <skypichat@hotmail.fr>\n"
 "Language-Team: French (France) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/fr_fr/>\n"
 "Language: fr_fr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.15\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -407,7 +407,7 @@ msgstr "Pour les logos locaux, le chemin ignore les logos M3U"
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30076"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "Ignorer la casse pour les ID de canal EPG"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -735,7 +735,7 @@ msgstr "Permet d'écraser ou non le décalage pour toutes les chaînes avec le �
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr ""
+msgstr "Ignorer la casse pour les ID de chaîne EPG, également appelés tvg-id, lors de la mise en correspondance des chaînes avec les entrées EPG. Si elle est désactivée, seule la correspondance sensible à la casse sera utilisée."
 
 #. help info - Channel Logos
 #. help-category: Channel Logos
