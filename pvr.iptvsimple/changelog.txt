@@ -1,4 +1,7 @@
-v20.9.1
+v20.9.2
+- Revert async connect support
+
+v20.9.2
 - Don't URL encode paths using resource:// or special:// protocols
 
 v20.9.0
