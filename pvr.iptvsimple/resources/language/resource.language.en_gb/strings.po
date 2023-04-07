@@ -615,7 +615,27 @@ msgctxt "#30155"
 msgid "Show Media as recordings"
 msgstr ""
 
-#empty strings from id 30156 to 30449
+#. label: Media - mediaUseM3UGroupForGrouping
+msgctxt "#30156"
+msgid "Use M3U Group name in path"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
+msgctxt "#30157"
+msgid "Never"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - ALWAYS_APPEND
+msgctxt "#30158"
+msgid "Always append"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
+msgctxt "#30159"
+msgid "When no media-dir is present"
+msgstr ""
+
+#empty strings from id 30161 to 30449
 
 #. label: TV
 msgctxt "#30450"
@@ -1068,4 +1088,9 @@ msgstr ""
 #. label: Media - mediaEnabled
 msgctxt "#30805"
 msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
+msgstr ""
+
+#. label: Media - mediaM3UGroupPath
+msgctxt "#30806"
+msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
 msgstr ""
