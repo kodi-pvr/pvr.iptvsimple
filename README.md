@@ -192,6 +192,7 @@ More detail on these can be found in [Supported M3U and XMLTV elements](#support
     - `Never` - Never use it.
     - `Always append` - Always append it.
     - `When no media-dir is present` - Only use the group title of the M3U when no media-dir is provided.
+* **Force all M3U entries to be media**: Force the full playlist to be media, regardless of what tags are present. Since the introduction of multiple instances for PVR add-ons this option can be useful.
 * **Include VODs as media**: Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as PVR recordings.
 
 ### Timeshift

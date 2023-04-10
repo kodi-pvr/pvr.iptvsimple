@@ -610,6 +610,14 @@
           </constraints>
           <control type="spinner" format="integer" />
         </setting>
+        <setting id="mediaForcePlaylist" type="boolean" parent="mediaEnabled" label="30160" help="30807">
+          <level>2</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
         <setting id="mediaVODAsRecordings" type="boolean" parent="mediaEnabled" label="30154" help="30804">
           <level>2</level>
           <default>true</default>

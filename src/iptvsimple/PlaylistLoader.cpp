@@ -146,7 +146,8 @@ bool PlaylistLoader::LoadPlayList()
 
       isMediaEntry = line.find(MEDIA) != std::string::npos ||
                      line.find(MEDIA_DIR) != std::string::npos ||
-                     line.find(MEDIA_SIZE) != std::string::npos;
+                     line.find(MEDIA_SIZE) != std::string::npos ||
+                     m_settings->MediaForcePlaylist();
 
       const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
 
