@@ -66,14 +66,33 @@ int GenerateMediaEntryId(const char* providerName, const char* streamUrl)
 
 } // unamed namespace
 
-bool Media::AddMediaEntry(MediaEntry& mediaEntry)
+bool Media::AddMediaEntry(MediaEntry& mediaEntry, std::vector<int>& groupIdList, ChannelGroups& channelGroups, bool channelHadGroups)
 {
+  // If we have no groups set for this media check it that's ok before adding it.
+  // Note that TV is a proxy for Media. There is no concept of radio for media
+  if (m_settings->AllowTVChannelGroupsOnly() && groupIdList.empty())
+    return false;
+
   std::string mediaEntryId = std::to_string(GenerateMediaEntryId(mediaEntry.GetProviderName().c_str(),
                                                                  mediaEntry.GetStreamURL().c_str()));
   mediaEntryId.append("-" + mediaEntry.GetDirectory() + mediaEntry.GetTitle());
   mediaEntry.SetMediaEntryId(mediaEntryId);
 
+  // Media Ids must be unique
   if (m_mediaIdMap.find(mediaEntryId) != m_mediaIdMap.end())
+    return false;
+
+  bool belongsToGroup = false;
+  for (int myGroupId : groupIdList)
+  {
+    if (channelGroups.GetChannelGroup(myGroupId) != nullptr)
+      belongsToGroup = true;
+  }
+
+
+  // We only care if a media entry belongs to a group if it had groups to begin with
+  // Note that a channel can have had groups but no have no groups valid currently.
+  if (!belongsToGroup && channelHadGroups)
     return false;
 
   m_media.emplace_back(mediaEntry);

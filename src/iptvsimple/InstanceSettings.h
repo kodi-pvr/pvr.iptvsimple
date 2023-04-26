@@ -59,6 +59,15 @@ namespace iptvsimple
     PREFER_XMLTV
   };
 
+  enum class MediaUseM3UGroupPathMode
+    : int // same type as addon settings
+  {
+    IGNORE_GROUP_NAME = 0,
+    ALWAYS_APPEND,
+    ONLY_IF_EMPTY
+  };
+
+
   enum class CatchupOverrideMode
     : int // same type as addon settings
   {
@@ -133,6 +142,8 @@ namespace iptvsimple
     bool ShowVodAsRecordings() const { return m_showVodAsRecordings; }
     bool GroupMediaByTitle() const { return m_groupMediaByTitle; }
     bool GroupMediaBySeason() const { return m_groupMediaBySeason; }
+    const MediaUseM3UGroupPathMode& GetMediaUseM3UGroupPathMode() { return m_mediaUseM3UGroupPathMode; }
+    bool MediaForcePlaylist() const { return m_mediaForcePlaylist; }
     bool IncludeShowInfoInMediaTitle() const { return m_includeShowInfoInMediaTitle; }
 
     bool IsTimeshiftEnabled() const { return m_timeshiftEnabled; }
@@ -294,6 +305,8 @@ namespace iptvsimple
     bool m_groupMediaByTitle = true;
     bool m_groupMediaBySeason = true;
     bool m_includeShowInfoInMediaTitle = false;
+    MediaUseM3UGroupPathMode m_mediaUseM3UGroupPathMode = MediaUseM3UGroupPathMode::IGNORE_GROUP_NAME;
+    bool m_mediaForcePlaylist = false;
     bool m_showVodAsRecordings = true;
 
     // Timeshift
