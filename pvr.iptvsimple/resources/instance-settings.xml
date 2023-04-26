@@ -598,6 +598,26 @@
           </dependencies>
           <control type="toggle" />
         </setting>
+        <setting id="mediaM3UGroupPath" type="integer" parent="mediaEnabled" label="30156" help="30806">
+          <level>0</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30157">0</option> <!-- DONT_USE_GROUP_TITLE -->
+              <option label="30158">1</option> <!-- ALWAYS_APPEND_GROUP_TITLE -->
+              <option label="30159">2</option> <!-- USE_GROUP_TITLE_IF_NO_PATH -->
+            </options>
+          </constraints>
+          <control type="spinner" format="integer" />
+        </setting>
+        <setting id="mediaForcePlaylist" type="boolean" parent="mediaEnabled" label="30160" help="30807">
+          <level>2</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
         <setting id="mediaVODAsRecordings" type="boolean" parent="mediaEnabled" label="30154" help="30804">
           <level>2</level>
           <default>true</default>

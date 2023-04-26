@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "ChannelGroups.h"
 #include "data/MediaEntry.h"
 
 #include <string>
@@ -26,7 +27,7 @@ namespace iptvsimple
     const std::string GetMediaEntryURL(const kodi::addon::PVRRecording& mediaEntry);
     const iptvsimple::data::MediaEntry* FindMediaEntry(const std::string& id, const std::string& displayName) const;
 
-    bool AddMediaEntry(iptvsimple::data::MediaEntry& entry);
+    bool AddMediaEntry(iptvsimple::data::MediaEntry& entry, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups, bool channelHadGroups);
 
     std::vector<iptvsimple::data::MediaEntry>& GetMediaEntryList() { return m_media; }
 

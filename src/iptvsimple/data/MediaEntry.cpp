@@ -177,6 +177,12 @@ std::string FixPath(const std::string& path)
 
 } // unamed namespace
 
+void MediaEntry::SetDirectory(const std::string& value)
+{
+  m_directory = FixPath(value);
+}
+
+
 void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes)
 {
   left.SetTitle(CreateTitle(m_title, m_seasonNumber, m_episodeNumber, m_settings));

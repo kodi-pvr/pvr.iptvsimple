@@ -146,7 +146,8 @@ bool PlaylistLoader::LoadPlayList()
 
       isMediaEntry = line.find(MEDIA) != std::string::npos ||
                      line.find(MEDIA_DIR) != std::string::npos ||
-                     line.find(MEDIA_SIZE) != std::string::npos;
+                     line.find(MEDIA_SIZE) != std::string::npos ||
+                     m_settings->MediaForcePlaylist();
 
       const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
 
@@ -203,7 +204,7 @@ bool PlaylistLoader::LoadPlayList()
         entry.UpdateFrom(tmpChannel);
         entry.SetStreamURL(line);
 
-        if (!m_media.AddMediaEntry(entry))
+        if (!m_media.AddMediaEntry(entry, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
           Logger::Log(LEVEL_DEBUG, "%s - Counld not add media entry as an entry with the same gnenerated unique ID already exists", __func__);
 
       }
@@ -454,10 +455,24 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (!strMediaDir.empty())
       mediaEntry.SetDirectory(strMediaDir);
 
+    std::string groupNames = ReadMarkerValue(infoLine, GROUP_NAME_MARKER);
+    auto& m3uGroupPathMode = m_settings->GetMediaUseM3UGroupPathMode();
+    if (m3uGroupPathMode != MediaUseM3UGroupPathMode::IGNORE_GROUP_NAME)
+    {
+      if (m3uGroupPathMode == MediaUseM3UGroupPathMode::ALWAYS_APPEND || strMediaDir.empty())
+      {
+        if (!groupNames.empty() && groupNames.find(';') == std::string::npos)
+        {
+          //A media entry directory will always end with a "/"
+          mediaEntry.SetDirectory(mediaEntry.GetDirectory() + groupNames);
+        }
+      }
+    }
+
     if (!strMediaSize.empty())
       mediaEntry.SetSizeInBytes(std::strtoll(strMediaSize.c_str(), nullptr, 10));
 
-    return ReadMarkerValue(infoLine, GROUP_NAME_MARKER);
+    return groupNames;
   }
 
   return "";
