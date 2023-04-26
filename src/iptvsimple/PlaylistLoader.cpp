@@ -204,7 +204,7 @@ bool PlaylistLoader::LoadPlayList()
         entry.UpdateFrom(tmpChannel);
         entry.SetStreamURL(line);
 
-        if (!m_media.AddMediaEntry(entry))
+        if (!m_media.AddMediaEntry(entry, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
           Logger::Log(LEVEL_DEBUG, "%s - Counld not add media entry as an entry with the same gnenerated unique ID already exists", __func__);
 
       }
