@@ -5,25 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2022-03-27 01:17+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2023-04-26 15:07+0000\n"
+"Last-Translator: yohru <yohru7@gmail.com>\n"
 "Language-Team: Japanese <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/ja_jp/>\n"
 "Language: ja_jp\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.11.2\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "IPTV をサポートする Kodi PVR アドオンです。 https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr "IPTVをサポートするKodi PVRアドオンです。https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "IPTV シンプル PVR クライアントは、m3u プレイリスト、マルチキャスト/ユニキャストのライブ TV ストリーミング、ラジオチャンネルや EPG の視聴をサポートしています。"
+msgstr "IPTVシンプルPVRクライアントは、m3uプレイリスト、マルチキャスト/ユニキャストのライブ TV ストリーミング、ラジオチャンネルやEPGの視聴をサポートしています。    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
@@ -43,7 +43,7 @@ msgstr "ロケーション"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "ローカルパス(ローカル ネットワークを含む)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -51,7 +51,7 @@ msgstr ""
 #. label-option: General - genresPathType
 msgctxt "#30002"
 msgid "Remote path (Internet address)"
-msgstr ""
+msgstr "リモートパス(インターネットアドレス)"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30003"
@@ -61,12 +61,12 @@ msgstr "無効化"
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
 msgid "Repeated refresh"
-msgstr ""
+msgstr "リフレッシュの繰り返し"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30005"
 msgid "Once per day"
-msgstr ""
+msgstr "1日1回"
 
 #. label-category: general
 #. label-group: General - General
@@ -77,47 +77,47 @@ msgstr "一般"
 #. label: General - m3uPath
 msgctxt "#30011"
 msgid "M3U playlist path"
-msgstr ""
+msgstr "M3Uプレイリストのパス"
 
 #. label: General - m3uUrl
 msgctxt "#30012"
 msgid "M3U playlist URL"
-msgstr ""
+msgstr "M3UプレイリストURL"
 
 #. label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
-msgstr ""
+msgstr "開始チャネル番号"
 
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr ""
+msgstr "M3Uではチャネル順による番号のみ"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "自動更新モード"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
 msgid "Refresh interval"
-msgstr ""
+msgstr "リフレッシュ間隔"
 
 #. label: General - m3uRefreshHour
 msgctxt "#30017"
 msgid "Refresh hour (24h)"
-msgstr ""
+msgstr "リフレッシュ時間(24h)"
 
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr ""
+msgstr "リフレッシュ"
 
 #. label-category: epgsettings
 msgctxt "#30019"
 msgid "EPG Settings"
-msgstr "EPG 設定"
+msgstr "EPG設定"
 
 #. label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
@@ -127,7 +127,7 @@ msgstr "EPG"
 #. label: EPG Settings - epgPath
 msgctxt "#30021"
 msgid "XMLTV path"
-msgstr ""
+msgstr "XMLTVパス"
 
 #. label: EPG Settings - epgUrl
 msgctxt "#30022"
@@ -137,91 +137,91 @@ msgstr "XMLTV URL"
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
 msgid "Apply time shift to all channels"
-msgstr ""
+msgstr "すべてのチャネルにタイムシフトを適用する"
 
 #. label: EPG Settings - epgTimeShift
 msgctxt "#30024"
 msgid "EPG time shift"
-msgstr ""
+msgstr "EPGタイムシフト"
 
 #. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "m3u をローカルディスクにキャッシュ"
+msgstr "m3uをローカルディスクにキャッシュ"
 
 #. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "XMLTV をローカルディスクにキャッシュ"
+msgstr "XMLTVをローカルディスクにキャッシュ"
 
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
 msgid "{0:.1f} hours"
-msgstr ""
+msgstr "{0:.1f} 時間"
 
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "グループ内のTVチャンネルのみを読み込む"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "TVグループ"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
 msgctxt "#30030"
 msgid "Channel Logos"
-msgstr ""
+msgstr "チャンネルのロゴ"
 
 #. label: Channel Logos - logoPath
 msgctxt "#30031"
 msgid "Channel logos folder"
-msgstr ""
+msgstr "チャンネルのロゴのフォルダー"
 
 #. label: Channel Logos - logoBaseUrl
 msgctxt "#30032"
 msgid "Channel logos base URL"
-msgstr ""
+msgstr "チャンネルロゴのベースURL"
 
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "ラジオグループ"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "TVグループモード"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "ラジオグループモード"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30036"
 msgid "All groups"
-msgstr ""
+msgstr "すべてのグループ"
 
 #. label-option: Channels - tvGroupMode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "一部のグループ"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "カスタム グループ"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
 msgid "Number of TV groups"
-msgstr ""
+msgstr "テレビグループ数"
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
@@ -231,7 +231,7 @@ msgstr "XMLTVロゴ オプション"
 #. label: Channel Logos - logoFromEpg
 msgctxt "#30041"
 msgid "Channels logos from XMLTV"
-msgstr ""
+msgstr "XMLTVのチャンネル ロゴ"
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
@@ -251,27 +251,27 @@ msgstr "XMLTVを優先"
 #. label: General - oneTvGroup
 msgctxt "#30045"
 msgid "TV group 1"
-msgstr ""
+msgstr "テレビグループ1"
 
 #. label: General - twoTvGroup
 msgctxt "#30046"
 msgid "TV group 2"
-msgstr ""
+msgstr "テレビグループ2"
 
 #. label: General - threeTvGroup
 msgctxt "#30047"
 msgid "TV group 3"
-msgstr ""
+msgstr "テレビグループ3"
 
 #. label: General - fourTvGroup
 msgctxt "#30048"
 msgid "TV group 4"
-msgstr ""
+msgstr "テレビグループ4"
 
 #. label: General - fiveTvGroup
 msgctxt "#30049"
 msgid "TV group 5"
-msgstr ""
+msgstr "テレビグループ5"
 
 #. label-category: genres
 #. label-group: Genres - Genres
@@ -282,47 +282,47 @@ msgstr "ジャンル"
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
 msgid "Use genre text from XMLTV when mapping genres"
-msgstr ""
+msgstr "ジャンルのマッピング時に、XMLTVのジャンル テキストを使用する"
 
 #. label: Genres - genresPath
 msgctxt "#30052"
 msgid "Genres path"
-msgstr ""
+msgstr "ジャンルのパス"
 
 #. label: Genres - genresUrl
 msgctxt "#30053"
 msgid "Genres URL"
-msgstr ""
+msgstr "ジャンルのURL"
 
 #. label: Channels - customTvGroupsFile
 msgctxt "#30054"
 msgid "Custom TV groups file"
-msgstr ""
+msgstr "カスタムTVのグループファイル"
 
 #. label: General - oneRadioGroup
 msgctxt "#30055"
 msgid "Radio group 1"
-msgstr ""
+msgstr "ラジオグループ1"
 
 #. label: General - twoRadioGroup
 msgctxt "#30056"
 msgid "Radio group 2"
-msgstr ""
+msgstr "ラジオグループ2"
 
 #. label: General - threeRadioGroup
 msgctxt "#30057"
 msgid "Radio group 3"
-msgstr ""
+msgstr "ラジオグループ3"
 
 #. label: General - fourRadioGroup
 msgctxt "#30058"
 msgid "Radio group 4"
-msgstr ""
+msgstr "ラジオグループ4"
 
 #. label: General - fiveRadioGroup
 msgctxt "#30059"
 msgid "Radio group 5"
-msgstr ""
+msgstr "ラジオグループ5"
 
 #. label-category: advanced
 msgctxt "#30060"
@@ -332,134 +332,134 @@ msgstr "アドバンスド"
 #. label-group: Advanced - Multicast relay
 msgctxt "#30061"
 msgid "Multicast relay (udpxy)"
-msgstr ""
+msgstr "マルチキャストリレイ(udpxy)"
 
 #. label: Advanced - transformMulticastStreamUrls
 msgctxt "#30062"
 msgid "Transform multicast stream URLs"
-msgstr ""
+msgstr "マルチキャスト ストリームのURLを変換する"
 
 #. label: Advanced - udpxyHost
 msgctxt "#30063"
 msgid "Relay hostname or IP address"
-msgstr ""
+msgstr "リレーのホスト名または、IPアドレス"
 
 #. label: Advanced - udpxyPort
 msgctxt "#30064"
 msgid "Relay port"
-msgstr ""
+msgstr "リレーポート"
 
 #. label-group: Advanced - Streaming
 msgctxt "#30065"
 msgid "Streaming"
-msgstr ""
+msgstr "ストリーミング"
 
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr ""
+msgstr "m3u8(HLS)ストリームに、inputstream.adaptiveを使用する"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
 msgid "Use FFmpeg http reconnect options if possible"
-msgstr ""
+msgstr "可能な場合は、FFmpeg http再接続オプションを使用する"
 
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
 msgid "User-Agent"
-msgstr ""
+msgstr "ユーザーエージェント"
 
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
 msgid "Inputstream name"
-msgstr ""
+msgstr "入力ストリーム名"
 
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
 msgid "MIME type"
-msgstr ""
+msgstr "MIME タイプ"
 
 #. label-group: Advanced - Channel defaults
 msgctxt "#30071"
 msgid "Channel defaults"
-msgstr ""
+msgstr "チャネルのデフォルト"
 
 #. label: General - numRadioGroups
 msgctxt "#30072"
 msgid "Number of Radio groups"
-msgstr ""
+msgstr "ラジオグループ数"
 
 #. label: Channels - customRadioGroupsFile
 msgctxt "#30073"
 msgid "Custom Radio groups file"
-msgstr ""
+msgstr "カスタム ラジオ グループ ファイル"
 
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
 msgid "Only load Radio channels in groups"
-msgstr ""
+msgstr "グループ内のラジオ チャンネルのみを読み込む"
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
-msgstr ""
+msgstr "ローカル ロゴ パスの場合、M3Uロゴを無視する"
 
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30076"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "EPGチャネルIDの大文字と小文字を区別しない"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
 msgid "Catchup"
-msgstr ""
+msgstr "キャッチアップ(追いかけ)"
 
 #. label: Catchup - enableCatchup
 msgctxt "#30101"
 msgid "Enable catchup"
-msgstr ""
+msgstr "キャッチアップ(追いかけ)有効"
 
 #. label: Catchup - catchupQueryFormat
 msgctxt "#30102"
 msgid "Query format string"
-msgstr ""
+msgstr "クエリ形式文字列"
 
 #. label: Catchup - catchupDays
 msgctxt "#30103"
 msgid "Catchup window"
-msgstr ""
+msgstr "キャッチアップ ウィンドウ"
 
 #. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
 msgid "Channels support catchup using mode"
-msgstr ""
+msgstr "チャネルは、モードを使用してキャッチアップをサポートします"
 
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
 msgid "Watch From EPG"
-msgstr ""
+msgstr "EPGから見る"
 
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
 msgid "Play from EPG in Live TV mode (using timeshift)"
-msgstr ""
+msgstr "ライブTVモードでEPGから再生(タイムシフトを使用)"
 
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
 msgid "Buffer before program start"
-msgstr ""
+msgstr "プログラム開始前のバッファ"
 
 #. label: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30108"
 msgid "Buffer after program end"
-msgstr ""
+msgstr "プログラム終了後のバッファ"
 
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
 msgid "Catchup only available on finished programmes"
-msgstr ""
+msgstr "キャッチアップは終了したプログラムでのみ利用可能"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
@@ -474,42 +474,42 @@ msgstr "デフォルト"
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
 msgid "Append"
-msgstr ""
+msgstr "追加"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30113"
 msgid "Shift (SIPTV)"
-msgstr ""
+msgstr "シフト(SIPTV)"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30114"
 msgid "Flussonic"
-msgstr ""
+msgstr "フルソニック(Flussonic)"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30115"
 msgid "Xtream codes"
-msgstr ""
+msgstr "Xtream codes"
 
 #. label: Catchup - catchupOverrideMode
 msgctxt "#30116"
 msgid "Include channels"
-msgstr ""
+msgstr "チャネルを含める"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30117"
 msgid "without catchup mode"
-msgstr ""
+msgstr "キャッチアップモードなし"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30118"
 msgid "with catchup mode"
-msgstr ""
+msgstr "キャッチアップモードあり"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30119"
 msgid "with and without catchup mode (all channels)"
-msgstr ""
+msgstr "キャッチアップ モードの有無にかかわらず (すべてのチャネル)"
 
 #. label-category: timeshift
 #. label-group: Timeshift - Timeshift
@@ -520,42 +520,42 @@ msgstr "タイムシフト"
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
 msgid "Enable timeshift"
-msgstr ""
+msgstr "タイムシフト有効"
 
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr ""
+msgstr "HTTP ベースのストリームのタイムシフトを有効にする"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr ""
+msgstr "- inputstream.ffmpegdirect 設定を変更します..."
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr ""
+msgstr "Inputstreamの設定"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr ""
+msgstr "欠落している場合は常にタイムシフト ストリーム モードを有効にします"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
 msgid "Enable timeshift for all streams"
-msgstr ""
+msgstr "すべてのストリームのタイムシフトを有効にする"
 
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr ""
+msgstr "UDPベースのストリームのタイムシフトを有効にする"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
 msgid "Catchup correction"
-msgstr ""
+msgstr "キャッチアップ補正"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -572,17 +572,17 @@ msgstr "ラジオ"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr ""
+msgstr "入力ストリーム エラー"
 
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr ""
+msgstr "%s アドオンはインストールされていません。"
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr ""
+msgstr "%s アドオンは有効になっていません。"
 
 # empty strings from id 30503 to 30599
 #. ############
@@ -592,32 +592,32 @@ msgstr ""
 #. help-category: General
 msgctxt "#30600"
 msgid "General settings required for the addon to function."
-msgstr ""
+msgstr "アドオンが機能するために必要な一般設定。"
 
 #. help: General - m3uPathType
 msgctxt "#30601"
 msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
-msgstr ""
+msgstr "M3Uリソースを見つける場所を選択します。 オプションは次のとおりです。[B]ローカル パス[/B] - デバイスまたはローカル ネットワーク上にある 、M3Uファイルへのパス。[B]リモート パス[/B] - M3U ファイルの場所を指定するURL。"
 
 #. help: General - m3uPath
 msgctxt "#30602"
 msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
-msgstr ""
+msgstr "場所が[B]ローカル パス[/B] の場合、この設定には、アドオンが機能する有効なパスが含まれている必要があります。"
 
 #. help: General - m3uUrl
 msgctxt "#30603"
 msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
-msgstr ""
+msgstr "場所が[B]リモート パス[/B]の場合、アドオンが機能するには、この設定に有効な URLが含まれている必要があります。"
 
 #. help: General - m3uCache
 msgctxt "#30604"
 msgid "If location is [B]Remote path[/B] select whether or not the the M3U file should be cached locally."
-msgstr ""
+msgstr "場所が [B]リモート パス[/B] の場合、M3Uファイルをローカルにキャッシュするかどうかを選択します。"
 
 #. help: General - startNum
 msgctxt "#30605"
 msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
-msgstr ""
+msgstr "チャネルの番号付けを開始する番号。 PVR 設定の[B]バックエンド チャネル番号を使用する[/B] が有効になっていて、M3Uファイルにチャネル番号が指定されていない場合にのみ使用されます。"
 
 #. help: General - numberByOrder
 msgctxt "#30606"
@@ -675,17 +675,17 @@ msgstr ""
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr ""
+msgstr "カスタムTVグループのロードに使用されるファイル。 デフォルトのファイルは、 `customTVGroups-example.xml`です。"
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr ""
+msgstr "カスタムRadio ループをロードするために使用されるファイル。 デフォルトのファイルは、 `customRadioGroups-example.xml`です。"
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr ""
+msgstr "`いくつかのグループ`が選択されたモードの場合にロードする、TV グループの数。5つまで選べます。5 つ以上必要な場合は、代わりに`カスタム グループ`モードを使用する必要があります。"
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
