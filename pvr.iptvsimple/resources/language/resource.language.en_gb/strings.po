@@ -422,6 +422,7 @@ msgstr ""
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
+msgstr ""
 
 #. label-category: Groups
 msgctxt "#30076"
