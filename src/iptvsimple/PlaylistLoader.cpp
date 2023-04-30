@@ -219,6 +219,9 @@ bool PlaylistLoader::LoadPlayList()
 
   stream.clear();
 
+  //Now we need to remove any emptry channel groups. We do this as we may have added some while loading media entries.
+  m_channelGroups.RemoveEmptyGroups();
+
   int milliseconds = std::chrono::duration_cast<std::chrono::milliseconds>(
                       std::chrono::high_resolution_clock::now() - started).count();
 
