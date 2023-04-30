@@ -177,3 +177,11 @@ bool ChannelGroups::CheckChannelGroupAllowed(iptvsimple::data::ChannelGroup& new
 
   return false;
 }
+
+void ChannelGroups::RemoveEmptyGroups()
+{
+  m_channelGroups.erase(
+    std::remove_if(m_channelGroups.begin(), m_channelGroups.end(),
+        [](const ChannelGroup& channelGroup) { return channelGroup.IsEmpty(); }),
+    m_channelGroups.end());
+}

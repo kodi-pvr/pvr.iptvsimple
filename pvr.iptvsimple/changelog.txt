@@ -1,3 +1,6 @@
+v21.3.1
+- Remove empty media groups before sending to Kodi PVR
+
 v21.3.0
 - Add settings options to add M3U group name to directory for media
 - Add expert option to force the entire playlist to be Media. Useful now that multiple instances are supported
