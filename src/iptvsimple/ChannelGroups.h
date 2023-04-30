@@ -36,6 +36,7 @@ namespace iptvsimple
     void Clear();
     bool CheckChannelGroupAllowed(iptvsimple::data::ChannelGroup& newChannelGroup);
     void ChannelGroupsLoadFailed() { m_channelGroupsLoadFailed = true; };
+    void RemoveEmptyGroups();
 
   private:
     const iptvsimple::Channels& m_channels;

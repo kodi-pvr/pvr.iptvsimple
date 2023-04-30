@@ -31,6 +31,8 @@ namespace iptvsimple
       const std::vector<int>& GetMemberChannelIndexes() const { return m_memberChannelIndexes; }
       void AddMemberChannelIndex(int channelIndex) { m_memberChannelIndexes.emplace_back(channelIndex); }
 
+      bool IsEmpty() const { return m_memberChannelIndexes.empty(); }
+
       void UpdateTo(kodi::addon::PVRChannelGroup& left) const;
 
     private:
