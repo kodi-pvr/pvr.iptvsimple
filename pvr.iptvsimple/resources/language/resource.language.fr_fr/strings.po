@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-03-24 11:16+0000\n"
+"PO-Revision-Date: 2023-05-29 15:42+0000\n"
 "Last-Translator: skypichat <skypichat@hotmail.fr>\n"
 "Language-Team: French (France) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/fr_fr/>\n"
 "Language: fr_fr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 4.17\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -71,22 +71,22 @@ msgstr "Une fois par jour"
 #. label-group: General - Providers
 msgctxt "#30006"
 msgid "Providers"
-msgstr ""
+msgstr "Fournisseurs"
 
 #. label: Channels - defaultProviderName
 msgctxt "#30007"
 msgid "Default provider name"
-msgstr ""
+msgstr "Nom du fournisseur par défaut"
 
 #. label: Channels - enableProviderMappings
 msgctxt "#30008"
 msgid "Enable provider mapping"
-msgstr ""
+msgstr "Activer la table de correspondance des fournisseurs"
 
 #. label: Channels - providerMappingFile
 msgctxt "#30009"
 msgid "Provider name mapping file"
-msgstr ""
+msgstr "File de correspondance des fournisseurs"
 
 #. label-category: general
 #. label-group: General - General
@@ -427,12 +427,12 @@ msgstr "Pour les logos locaux, le chemin ignore les logos M3U"
 #. label-category: Groups
 msgctxt "#30076"
 msgid "Groups"
-msgstr ""
+msgstr "Groupes"
 
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "Ignorer la casse pour les identifiants du guide TV"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -587,57 +587,57 @@ msgstr "Correction de rattrapage"
 #. group-label: Media - Media
 msgctxt "#30150"
 msgid "Media"
-msgstr ""
+msgstr "Média"
 
 #. label: Media - mediaGroupByTitle
 msgctxt "#30151"
 msgid "Group entries by title"
-msgstr ""
+msgstr "Regrouper les entrées par titre"
 
 #. label: Media - mediaGroupBySeason
 msgctxt "#30152"
 msgid "Group entries by season"
-msgstr ""
+msgstr "Regrouper les entrées par saison"
 
 #. label: Media - mediaBySeasonEpisode
 msgctxt "#30153"
 msgid "Include season and episode number in title"
-msgstr ""
+msgstr "Inclure les numéros de saison et d'épisode dans le titre"
 
 #. label: Media - mediaVODAsRecordings
 msgctxt "#30154"
 msgid "Include VODs as media"
-msgstr ""
+msgstr "Inclure les VOD comme média"
 
 #. label: Media - mediaEnabled
 msgctxt "#30155"
 msgid "Show Media as recordings"
-msgstr ""
+msgstr "Afficher les médias comme des enregistrements"
 
 #. label: Media - mediaUseM3UGroupForGrouping
 msgctxt "#30156"
 msgid "Use M3U Group name in path"
-msgstr ""
+msgstr "Utiliser le nom du groupes M3U dans le chemin"
 
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
 msgid "Never"
-msgstr ""
+msgstr "Jamais"
 
 #. label-option: Media - mediaEnabled - ALWAYS_APPEND
 msgctxt "#30158"
 msgid "Always append"
-msgstr ""
+msgstr "Toujours ajouter"
 
 #. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
 msgctxt "#30159"
 msgid "When no media-dir is present"
-msgstr ""
+msgstr "Lorsqu'aucun répertoire de média n'est présent"
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30160"
 msgid "Force all M3U entries to be media"
-msgstr ""
+msgstr "Forcer toutes les entrées M3U comme des médias"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -1022,64 +1022,64 @@ msgstr "Activer la fonction de décalage temporel pour les flux basés sur UDP. 
 #. help: General - defaultproviderName
 msgctxt "#30740"
 msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
-msgstr ""
+msgstr "Si fournie, cette valeur sera utilisée comme nom de fournisseur si non existante dans le M3U. Elle peut être utilisée en combinaison avec le fichier de mappage du fournisseur qui peut fournir le type, le chemin de l’icône, le pays et les champs de langue."
 
 #. help: General - enableProviderMappings
 msgctxt "#30741"
 msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
-msgstr ""
+msgstr "Si cette option est activée, tout nom de fournisseur lu dans le M3U ou le nom de fournisseur par défaut sera utilisé pour lire d'autres métadonnées dans le fichier de correspondance. Ces métadonnées comprennent le nom personnalisé, le type, le chemin d'accès à l'icône, le pays et la langue."
 
 #. help: General - providerMappingFile
 msgctxt "#30742"
 msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
-msgstr ""
+msgstr "Fichier de configuration permettant de faire correspondre les noms de fournisseurs reçus de l'unité M3U ou le nom de fournisseur par défaut à un nom personnalisé, à des icônes, etc. Le fichier par défaut est [I]providerMappings.xml[/I]."
 
 #. help: Groups - groups
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
-msgstr ""
+msgstr "Paramètres de personnalisation des groupes de chaînes."
 
 # empty strings from id 30744 to 30799
 #. help info - Media
 #. help-category: Media
 msgctxt "#30800"
 msgid "Settings related to VOD media."
-msgstr ""
+msgstr "Paramètres relatifs aux médias VOD."
 
 #. help: Media - mediaGroupByTitle
 msgctxt "#30801"
 msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
-msgstr ""
+msgstr "Si plusieurs entrées existent avec des titres correspondant, créer un répertoire virtuel pour les regrouper."
 
 #. help: Media - mediaGroupBySeason
 msgctxt "#30802"
 msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
-msgstr ""
+msgstr "Si plusieurs entrées existent avec des titres correspondant, créer un second répertoire virtuel pour les regrouper par saison également si possible."
 
 #. help: Media - mediaTitleSeasonEpisode
 msgctxt "#30803"
 msgid "Prepend the season and episode numbers to the title."
-msgstr ""
+msgstr "Préfixer le titre avec les numéros de saison et d'épisodes."
 
 #. help: Media - mediaVODAsRecordings
 msgctxt "#30804"
 msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
-msgstr ""
+msgstr "Si activé, afficher la VOD sous forme d'enregistrements. Si désactivée, seules les entrées M3U avec des attributs de média seront affichées en tant qu'enregistrements."
 
 #. label: Media - mediaEnabled
 msgctxt "#30805"
 msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
-msgstr ""
+msgstr "Si activée, toutes les entrées multimédia IPTV peuvent être affichées comme des enregistrements PVR. Dans le cas contraire, elles apparaissent comme des chaînes PVR normales."
 
 #. label: Media - mediaM3UGroupPath
 msgctxt "#30806"
 msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
-msgstr ""
+msgstr "Choix de la façon d'utiliser le titre du groupe M3U dans le chemin d'accès. Notez qu'il ne sera utilisé que si un seul nom de groupe est fourni. Les options sont les suivantes : [B]Jamais[/B] - Ne jamais l'utiliser ; [B]Toujours l'ajouter[/B] - Toujours l'ajouter ; [B]Quand aucun répertoire média n'est présent[/B] - N'utiliser le titre de groupe du M3U que quand aucun répertoire média n'est fourni."
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30806"
 msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
-msgstr ""
+msgstr "Force la liste de lecture complète à être des médias, sans tenir compte des balises présentes. Depuis l'introduction de multiples instances pour les modules PVR. Cette option peut être utile."
 
 #~ msgctxt "#30076"
 #~ msgid "Ignore Case for EPG Channel IDs"
