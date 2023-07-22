@@ -535,7 +535,7 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
   }
 }
 
-bool PlaylistLoader::ReloadPlayList()
+void PlaylistLoader::ReloadPlayList()
 {
   m_m3uLocation = m_settings->GetM3ULocation();
 
@@ -550,15 +550,11 @@ bool PlaylistLoader::ReloadPlayList()
     m_client->TriggerChannelGroupsUpdate();
     m_client->TriggerProvidersUpdate();
     m_client->TriggerRecordingUpdate();
-
-    return true;
   }
   else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
-
-    return false;
   }
 }
 
