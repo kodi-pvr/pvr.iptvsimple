@@ -35,8 +35,6 @@ bool IptvSimple::Initialise()
 {
   std::lock_guard<std::mutex> lock(m_mutex);
 
-  ConnectionStateChange("", PVR_CONNECTION_STATE_CONNECTING, "");
-
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
@@ -45,11 +43,6 @@ bool IptvSimple::Initialise()
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
-    ConnectionStateChange("", PVR_CONNECTION_STATE_DISCONNECTED, "");
-  }
-  else
-  {
-    ConnectionStateChange("", PVR_CONNECTION_STATE_CONNECTED, "");
   }
   m_epg.Init(EpgMaxPastDays(), EpgMaxFutureDays());
 
@@ -123,8 +116,7 @@ void IptvSimple::Process()
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
       m_settings->ReloadAddonInstanceSettings();
-      if (m_playlistLoader.ReloadPlayList())
-        ConnectionStateChange("", PVR_CONNECTION_STATE_CONNECTED, "");
+      m_playlistLoader.ReloadPlayList();
       m_epg.ReloadEPG(); // Reloading EPG also updates media
 
       m_reloadChannelsGroupsAndEPG = false;
