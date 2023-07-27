@@ -38,6 +38,33 @@ bool PlaylistLoader::Init()
   return true;
 }
 
+namespace {
+
+bool GetOverrideRealTime(std::string& line)
+{
+  size_t realtimeIndex = line.find(REALTIME_OVERRIDE);
+  if (realtimeIndex != std::string::npos)
+  {
+    size_t startValueIndex = realtimeIndex + REALTIME_OVERRIDE.length();
+    size_t endQuoteIndex = line.find('"', startValueIndex);
+    if (endQuoteIndex != std::string::npos)
+    {
+      size_t valueLength = endQuoteIndex - startValueIndex;
+      std::string value = line.substr(startValueIndex, valueLength);
+      StringUtils::ToLower(value);
+      // The only value that matters is if the 'realtime' specifier is 'false'
+      // that means we want to override the realtime value but not treat the stream
+      // like media/VOD in the UI
+      // It's a bit confusing, but hey, that's Kodi for you ;)
+      return value == "false";
+    }
+  }
+
+  return false;
+}
+
+}
+
 bool PlaylistLoader::LoadPlayList()
 {
   auto started = std::chrono::high_resolution_clock::now();
@@ -64,6 +91,7 @@ bool PlaylistLoader::LoadPlayList()
   /* load channels */
   bool isFirstLine = true;
   bool isRealTime = true;
+  bool overrideRealTime = false;
   bool isMediaEntry = false;
   int epgTimeShift = 0;
   int catchupCorrectionSecs = m_settings->GetCatchupCorrectionSecs();
@@ -149,6 +177,8 @@ bool PlaylistLoader::LoadPlayList()
                      line.find(MEDIA_SIZE) != std::string::npos ||
                      m_settings->MediaForcePlaylist();
 
+      overrideRealTime = GetOverrideRealTime(line);
+
       const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
 
       if (!groupNamesListString.empty())
@@ -187,9 +217,12 @@ bool PlaylistLoader::LoadPlayList()
     {
       Logger::Log(LEVEL_DEBUG, "%s - Adding channel '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
-      if ((isRealTime || !m_settings->IsMediaEnabled() || !m_settings->ShowVodAsRecordings()) && !isMediaEntry)
+      if ((isRealTime || overrideRealTime || !m_settings->IsMediaEnabled() || !m_settings->ShowVodAsRecordings()) && !isMediaEntry)
       {
-        tmpChannel.AddProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM, "true");
+        // There are cases where we want the stream to be represetned as a channel with live streaming disabled
+        // to allow features such as passthrough to work. We don't want this to be VOD as then it would be treated like media.
+        if (!overrideRealTime)
+          tmpChannel.AddProperty(PVR_STREAM_PROPERTY_ISREALTIMESTREAM, "true");
 
         Channel channel = tmpChannel;
         channel.SetStreamURL(line);
@@ -206,12 +239,12 @@ bool PlaylistLoader::LoadPlayList()
 
         if (!m_media.AddMediaEntry(entry, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
           Logger::Log(LEVEL_DEBUG, "%s - Counld not add media entry as an entry with the same gnenerated unique ID already exists", __func__);
-
       }
 
       tmpChannel.Reset();
       tmpMediaEntry.Reset();
       isRealTime = true;
+      overrideRealTime = false;
       isMediaEntry = false;
       channelHadGroups = false;
     }
@@ -535,7 +568,7 @@ void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Cha
   }
 }
 
-bool PlaylistLoader::ReloadPlayList()
+void PlaylistLoader::ReloadPlayList()
 {
   m_m3uLocation = m_settings->GetM3ULocation();
 
@@ -550,15 +583,11 @@ bool PlaylistLoader::ReloadPlayList()
     m_client->TriggerChannelGroupsUpdate();
     m_client->TriggerProvidersUpdate();
     m_client->TriggerRecordingUpdate();
-
-    return true;
   }
   else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
-
-    return false;
   }
 }
 
