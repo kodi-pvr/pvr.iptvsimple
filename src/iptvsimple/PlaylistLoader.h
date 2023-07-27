@@ -48,6 +48,7 @@ namespace iptvsimple
   static const std::string MEDIA                   = "media=";
   static const std::string MEDIA_DIR               = "media-dir=";
   static const std::string MEDIA_SIZE              = "media-size=";
+  static const std::string REALTIME_OVERRIDE       = "realtime=\"";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";
   static const std::string EXTVLCOPT_DASH_MARKER   = "#EXTVLCOPT--";
@@ -71,7 +72,7 @@ namespace iptvsimple
     bool Init();
 
     bool LoadPlayList();
-    bool ReloadPlayList();
+    void ReloadPlayList();
 
   private:
     static std::string ReadMarkerValue(const std::string& line, const std::string& markerName);
