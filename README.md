@@ -182,7 +182,9 @@ An M3U entry can denote that it's media by having:
 * an M3U property of `EXT-X-PLAYLIST-TYPE` set to `VOD`,
 * or one of the M3U attributes of `media`, `media-dir` or `media-size`
 
-More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements).
+More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements). 
+
+Note that the media item will read from the XMLTV file, where it will read just the first entry. The entry must have a start time greater than now and be within the boundaries of the Kodi PVR Guide settings.
 
 * **Show media as recordings**: If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels.
 * **Group entries by title**: If multiple entries exist with matching titles, create a virtual folder to group them together.
