@@ -170,7 +170,6 @@ bool PlaylistLoader::LoadPlayList()
     if (StringUtils::StartsWith(line, M3U_INFO_MARKER)) //#EXTINF
     {
       tmpChannel.SetChannelNumber(m_channels.GetCurrentChannelNumber());
-      currentChannelGroupIdList.clear();
 
       isMediaEntry = line.find(MEDIA) != std::string::npos ||
                      line.find(MEDIA_DIR) != std::string::npos ||
@@ -249,6 +248,8 @@ bool PlaylistLoader::LoadPlayList()
       overrideRealTime = false;
       isMediaEntry = false;
       channelHadGroups = false;
+
+      currentChannelGroupIdList.clear();
     }
   }
 
