@@ -179,7 +179,7 @@ bool PlaylistLoader::LoadPlayList()
 
       overrideRealTime = GetOverrideRealTime(line);
 
-      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
+      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
 
       if (!groupNamesListString.empty())
       {
@@ -277,7 +277,7 @@ bool PlaylistLoader::LoadPlayList()
   return true;
 }
 
-std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, MediaEntry& mediaEntry, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup)
+std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, MediaEntry& mediaEntry, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup)
 {
   size_t colonIndex = line.find(':');
   size_t commaIndex = line.rfind(','); //default to last comma on line in case we don't find a better match
