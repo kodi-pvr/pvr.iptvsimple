@@ -98,6 +98,7 @@ bool PlaylistLoader::LoadPlayList()
   std::vector<int> currentChannelGroupIdList;
   bool channelHadGroups = false;
   bool xeevCatchup = false;
+  bool groupsFromBeginDirective = false; //From EXTGRP begin directive
 
   Channel tmpChannel{m_settings};
   MediaEntry tmpMediaEntry{m_settings};
@@ -183,6 +184,7 @@ bool PlaylistLoader::LoadPlayList()
       if (!groupNamesListString.empty())
       {
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
+        groupsFromBeginDirective = false;
         channelHadGroups = true;
       }
     }
@@ -200,10 +202,15 @@ bool PlaylistLoader::LoadPlayList()
     }
     else if (StringUtils::StartsWith(line, M3U_GROUP_MARKER)) //#EXTGRP:
     {
+      //Clear any previous Group Ids
+      currentChannelGroupIdList.clear();
+      groupsFromBeginDirective = false;
+
       const std::string groupNamesListString = ReadMarkerValue(line, M3U_GROUP_MARKER);
       if (!groupNamesListString.empty())
       {
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
+        groupsFromBeginDirective = true;
         channelHadGroups = true;
       }
     }
@@ -249,7 +256,10 @@ bool PlaylistLoader::LoadPlayList()
       isMediaEntry = false;
       channelHadGroups = false;
 
-      currentChannelGroupIdList.clear();
+      // We want to clear the groups if they came from a 'group-title' tag from a channel
+      // But if it's from an EXTGRP tag we don't as that's a begin directive.
+      if (!groupsFromBeginDirective)
+        currentChannelGroupIdList.clear();
     }
   }
 
