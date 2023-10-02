@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-04-30 10:39+0000\n"
+"PO-Revision-Date: 2023-10-02 18:11+0000\n"
 "Last-Translator: José Antonio Alvarado <jalvarado0.eses@gmail.com>\n"
 "Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/es_es/>\n"
 "Language: es_es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.0.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -659,12 +659,12 @@ msgstr "Error inputstream"
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr "El complemento %s no está instalado."
+msgstr "El add-on %s no está instalado."
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr "El complemento %s no está activado."
+msgstr "El add-on %s no está activado."
 
 #. ############
 #. help info #
