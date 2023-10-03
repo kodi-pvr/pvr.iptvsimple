@@ -608,6 +608,9 @@
               <option label="30159">2</option> <!-- USE_GROUP_TITLE_IF_NO_PATH -->
             </options>
           </constraints>
+          <dependencies>
+            <dependency type="enable" setting="mediaEnabled" operator="is">true</dependency>
+          </dependencies>
           <control type="spinner" format="integer" />
         </setting>
         <setting id="mediaForcePlaylist" type="boolean" parent="mediaEnabled" label="30160" help="30807">
