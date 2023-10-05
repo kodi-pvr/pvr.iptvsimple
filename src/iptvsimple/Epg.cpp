@@ -299,6 +299,14 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int epgWindowStart, int ep
       if (channel.GetTvgShift() + m_epgTimeShift > maxShiftTime)
         maxShiftTime = channel.GetTvgShift() + m_epgTimeShift;
     }
+
+    for (const auto& mediaEntry : m_media.GetMediaEntryList())
+    {
+      if (mediaEntry.GetTvgShift() + m_epgTimeShift < minShiftTime)
+        minShiftTime = mediaEntry.GetTvgShift() + m_epgTimeShift;
+      if (mediaEntry.GetTvgShift() + m_epgTimeShift > maxShiftTime)
+        maxShiftTime = mediaEntry.GetTvgShift() + m_epgTimeShift;
+    }
   }
 
   ChannelEpg* channelEpg = nullptr;
