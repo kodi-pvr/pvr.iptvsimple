@@ -185,6 +185,12 @@ int ParseStarRating(const std::string& starRatingString)
 
   return static_cast<int>(std::round(starRating));
 }
+
+bool FirstRun(int start, int end)
+{
+  return start == 0 && end == 0;
+}
+
 } // unnamed namespace
 
 bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
@@ -200,7 +206,11 @@ bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
   GetAttributeValue(programmeNode, "catchup-id", m_catchupId);
   m_catchupId = StringUtils::Trim(m_catchupId);
 
-  if ((programmeEnd + maxShiftTime < epgWindowsStart) || (programmeStart + minShiftTime > epgWindowsEnd))
+  // Discard only if this is not a first run AND
+  //  - The programme end time + the max timeshift is earlier than the EPG window start OR
+  //  - The programme start time + the min timeshift is after than the EPG window end
+  // I.e. we discard any programme that does not start of finish during the EPG window
+  if (!FirstRun(epgWindowsStart, epgWindowsEnd) && ((programmeEnd + maxShiftTime < epgWindowsStart) || (programmeStart + minShiftTime > epgWindowsEnd)))
     return false;
 
   m_broadcastId = static_cast<int>(programmeStart);

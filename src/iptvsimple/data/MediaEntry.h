@@ -70,6 +70,8 @@ namespace iptvsimple
       const std::string& GetM3UName() const { return m_m3uName; }
       const std::string& GetTvgId() const { return m_tvgId; }
       const std::string& GetTvgName() const { return m_tvgName; }
+      int GetTvgShift() const { return m_tvgShift; }
+      void SetTvgShift(int value) { m_tvgShift = value; }
 
       const std::map<std::string, std::string>& GetProperties() const { return m_properties; }
       void SetProperties(std::map<std::string, std::string>& value) { m_properties = value; }
@@ -106,6 +108,7 @@ namespace iptvsimple
       std::string m_m3uName;
       std::string m_tvgId;
       std::string m_tvgName;
+      int m_tvgShift = 0;
 
       // Props
       std::map<std::string, std::string> m_properties;
