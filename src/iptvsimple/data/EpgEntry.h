@@ -49,7 +49,7 @@ namespace iptvsimple
 
       void UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& programmeNode, const std::string& id,
-                      int start, int end, int minShiftTime, int maxShiftTime);
+                      int epgWindowsStart, int epgWindowsEnd, int minShiftTime, int maxShiftTime);
 
     private:
       bool SetEpgGenre(std::vector<EpgGenre> genreMappings);
