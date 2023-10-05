@@ -185,32 +185,31 @@ int ParseStarRating(const std::string& starRatingString)
 
   return static_cast<int>(std::round(starRating));
 }
-
 } // unnamed namespace
 
 bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
-                          int start, int end, int minShiftTime, int maxShiftTime)
+                          int epgWindowsStart, int epgWindowsEnd, int minShiftTime, int maxShiftTime)
 {
   std::string strStart, strStop;
   if (!GetAttributeValue(programmeNode, "start", strStart) || !GetAttributeValue(programmeNode, "stop", strStop))
     return false;
 
-  long long tmpStart = ParseDateTime(strStart);
-  long long tmpEnd = ParseDateTime(strStop);
+  long long programmeStart = ParseDateTime(strStart);
+  long long programmeEnd = ParseDateTime(strStop);
 
   GetAttributeValue(programmeNode, "catchup-id", m_catchupId);
   m_catchupId = StringUtils::Trim(m_catchupId);
 
-  if ((tmpEnd + maxShiftTime < start) || (tmpStart + minShiftTime > end))
+  if ((programmeEnd + maxShiftTime < epgWindowsStart) || (programmeStart + minShiftTime > epgWindowsEnd))
     return false;
 
-  m_broadcastId = static_cast<int>(tmpStart);
+  m_broadcastId = static_cast<int>(programmeStart);
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;
   m_plotOutline.clear();
-  m_startTime = static_cast<time_t>(tmpStart);
-  m_endTime = static_cast<time_t>(tmpEnd);
+  m_startTime = static_cast<time_t>(programmeStart);
+  m_endTime = static_cast<time_t>(programmeEnd);
   m_year = 0;
   m_starRating = 0;
   m_episodeNumber = EPG_TAG_INVALID_SERIES_EPISODE;
