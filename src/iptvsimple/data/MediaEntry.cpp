@@ -55,6 +55,8 @@ void MediaEntry::Reset()
   m_providerUniqueId = PVR_PROVIDER_INVALID_UID;
   m_directory.clear();
   m_sizeInBytes = 0;
+
+  m_tvgShift = 0;
 }
 
 void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
@@ -66,6 +68,7 @@ void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
   m_iconPath = channel.GetIconPath();
   m_tvgId = channel.GetTvgId();
   m_tvgName = channel.GetTvgId();
+  m_tvgShift = channel.GetTvgShift();
   m_startTime = std::time(nullptr);
 
   m_providerUniqueId = channel.GetProviderUniqueId();

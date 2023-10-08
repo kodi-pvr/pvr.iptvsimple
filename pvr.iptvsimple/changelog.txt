@@ -1,3 +1,8 @@
+v21.4.1
+- EPG entry selection criteria for timezone shift calculation works for Media as well as channels
+- Fix being able to disable media from settings
+- Fix group name in recording path being disabled in addon settings when media is not enabled
+
 v21.4.0
 - M3U format specifier to override realtime processing in Kodi PVR where the stream should not be treated like VOD/Media in the UI
 - Revert the support of Async connect that was causing Connection Lost error messages for users of this add-on

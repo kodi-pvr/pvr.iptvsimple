@@ -44,7 +44,7 @@ namespace iptvsimple
 
     bool Init(int epgMaxPastDays, int epgMaxFutureDays);
 
-    PVR_ERROR GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results);
+    PVR_ERROR GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t epgWindowEnd, kodi::addon::PVREPGTagsResultSet& results);
     void SetEPGMaxPastDays(int epgMaxPastDays);
     void SetEPGMaxFutureDays(int epgMaxFutureDays);
     void Clear();
@@ -62,7 +62,7 @@ namespace iptvsimple
     bool GetXMLTVFileWithRetries(std::string& data);
     char* FillBufferFromXMLTVData(std::string& data, std::string& decompressedData);
     bool LoadChannelEpgs(const pugi::xml_node& rootElement);
-    void LoadEpgEntries(const pugi::xml_node& rootElement, int start, int end);
+    void LoadEpgEntries(const pugi::xml_node& rootElement, int epgWindowStart, int epgWindowEnd);
     bool LoadGenres();
 
     void MergeEpgDataIntoMedia();
