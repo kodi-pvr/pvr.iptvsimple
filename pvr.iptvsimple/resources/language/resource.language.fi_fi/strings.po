@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-07-27 21:24+0000\n"
+"PO-Revision-Date: 2023-09-27 18:06+0000\n"
 "Last-Translator: Oskari Lavinto <olavinto@protonmail.com>\n"
 "Language-Team: Finnish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/fi_fi/>\n"
 "Language: fi_fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.2\n"
+"X-Generator: Weblate 5.0.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -654,17 +654,17 @@ msgstr "Radio"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr ""
+msgstr "Inputstream-virhe"
 
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr ""
+msgstr "%s -lisäosaa ei ole asennettu."
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr ""
+msgstr "%s -lisäosa ei ole käytössä."
 
 # empty strings from id 30503 to 30599
 #. ############
