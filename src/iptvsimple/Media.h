@@ -9,6 +9,7 @@
 #pragma once
 
 #include "ChannelGroups.h"
+#include "data/EpgGenre.h"
 #include "data/MediaEntry.h"
 
 #include <string>
@@ -31,12 +32,16 @@ namespace iptvsimple
 
     std::vector<iptvsimple::data::MediaEntry>& GetMediaEntryList() { return m_media; }
 
+    void SetGenreMappings(std::vector<iptvsimple::data::EpgGenre>& genreMappings) { m_genreMappings = genreMappings; }
+
   private:
     data::MediaEntry GetMediaEntry(const std::string& mediaEntryId) const;
     bool IsInVirtualMediaEntryFolder(const data::MediaEntry& mediaEntry) const;
 
     std::vector<iptvsimple::data::MediaEntry> m_media;
     std::unordered_map<std::string, iptvsimple::data::MediaEntry> m_mediaIdMap;
+
+    std::vector<iptvsimple::data::EpgGenre> m_genreMappings;
 
     bool m_haveMediaTypes = false;
 
