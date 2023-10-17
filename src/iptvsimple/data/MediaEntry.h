@@ -86,10 +86,12 @@ namespace iptvsimple
       void Reset();
 
       void UpdateFrom(iptvsimple::data::Channel channel);
-      void UpdateFrom(iptvsimple::data::EpgEntry epgEntry);
+      void UpdateFrom(iptvsimple::data::EpgEntry epgEntry, const std::vector<EpgGenre>& genres);
       void UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes);
 
     private:
+      bool SetEpgGenre(std::vector<EpgGenre> genreMappings);
+
       std::string m_mediaEntryId;
       bool m_radio = false;
       time_t m_startTime = 0;

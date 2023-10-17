@@ -33,6 +33,8 @@ Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& med
   {
     MoveOldGenresXMLFileToNewLocation();
   }
+
+  m_media.SetGenreMappings(m_genreMappings);
 }
 
 bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
@@ -617,6 +619,6 @@ void Epg::MergeEpgDataIntoMedia()
     // then return the first entry as matching. This is a common pattern
     // for channel that only contain a single media item.
     if (channelEpg && !channelEpg->GetEpgEntries().empty())
-      mediaEntry.UpdateFrom(channelEpg->GetEpgEntries().begin()->second);
+      mediaEntry.UpdateFrom(channelEpg->GetEpgEntries().begin()->second, m_genreMappings);
   }
 }
