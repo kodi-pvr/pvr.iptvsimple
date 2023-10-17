@@ -1,3 +1,6 @@
+v21.4.2
+- Add support for Genres for Media
+
 v21.4.1
 - EPG entry selection criteria for timezone shift calculation works for Media as well as channels
 - Fix being able to disable media from settings
