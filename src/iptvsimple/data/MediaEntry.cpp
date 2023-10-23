@@ -55,6 +55,8 @@ void MediaEntry::Reset()
   m_providerUniqueId = PVR_PROVIDER_INVALID_UID;
   m_directory.clear();
   m_sizeInBytes = 0;
+
+  m_tvgShift = 0;
 }
 
 void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
@@ -66,6 +68,7 @@ void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
   m_iconPath = channel.GetIconPath();
   m_tvgId = channel.GetTvgId();
   m_tvgName = channel.GetTvgId();
+  m_tvgShift = channel.GetTvgShift();
   m_startTime = std::time(nullptr);
 
   m_providerUniqueId = channel.GetProviderUniqueId();
@@ -73,7 +76,7 @@ void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
   m_inputStreamName = channel.GetInputStreamName();
 }
 
-void MediaEntry::UpdateFrom(iptvsimple::data::EpgEntry epgEntry)
+void MediaEntry::UpdateFrom(iptvsimple::data::EpgEntry epgEntry, const std::vector<EpgGenre>& genreMappings)
 {
   // All from Base Entry
   m_startTime = epgEntry.GetStartTime();
@@ -92,6 +95,19 @@ void MediaEntry::UpdateFrom(iptvsimple::data::EpgEntry epgEntry)
   if (!epgEntry.GetIconPath().empty())
     m_iconPath = epgEntry.GetIconPath();
   m_genreString = epgEntry.GetGenreString();
+  if (SetEpgGenre(genreMappings))
+  {
+    if (m_settings->UseEpgGenreTextWhenMapping())
+    {
+      //Setting this value in sub type allows custom text to be displayed
+      //while still sending the type used for EPG colour
+      m_genreSubType = EPG_GENRE_USE_STRING;
+    }
+  }
+  else
+  {
+    m_genreType = EPG_GENRE_USE_STRING;
+  }
   m_cast = epgEntry.GetCast();
   m_director = epgEntry.GetDirector();
   m_writer = epgEntry.GetWriter();
@@ -103,6 +119,30 @@ void MediaEntry::UpdateFrom(iptvsimple::data::EpgEntry epgEntry)
 
   m_new = epgEntry.IsNew();
   m_premiere = epgEntry.IsPremiere();
+}
+
+bool MediaEntry::SetEpgGenre(const std::vector<EpgGenre> genreMappings)
+{
+  if (genreMappings.empty())
+    return false;
+
+  for (const auto& genre : StringUtils::Split(m_genreString, EPG_STRING_TOKEN_SEPARATOR))
+  {
+    if (genre.empty())
+      continue;
+
+    for (const auto& genreMapping : genreMappings)
+    {
+      if (StringUtils::EqualsNoCase(genreMapping.GetGenreString(), genre))
+      {
+        m_genreType = genreMapping.GetGenreType();
+        m_genreSubType = genreMapping.GetGenreSubType();
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 namespace

@@ -186,31 +186,40 @@ int ParseStarRating(const std::string& starRatingString)
   return static_cast<int>(std::round(starRating));
 }
 
+bool FirstRun(int start, int end)
+{
+  return start == 0 && end == 0;
+}
+
 } // unnamed namespace
 
 bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
-                          int start, int end, int minShiftTime, int maxShiftTime)
+                          int epgWindowsStart, int epgWindowsEnd, int minShiftTime, int maxShiftTime)
 {
   std::string strStart, strStop;
   if (!GetAttributeValue(programmeNode, "start", strStart) || !GetAttributeValue(programmeNode, "stop", strStop))
     return false;
 
-  long long tmpStart = ParseDateTime(strStart);
-  long long tmpEnd = ParseDateTime(strStop);
+  long long programmeStart = ParseDateTime(strStart);
+  long long programmeEnd = ParseDateTime(strStop);
 
   GetAttributeValue(programmeNode, "catchup-id", m_catchupId);
   m_catchupId = StringUtils::Trim(m_catchupId);
 
-  if ((tmpEnd + maxShiftTime < start) || (tmpStart + minShiftTime > end))
+  // Discard only if this is not a first run AND
+  //  - The programme end time + the max timeshift is earlier than the EPG window start OR
+  //  - The programme start time + the min timeshift is after than the EPG window end
+  // I.e. we discard any programme that does not start of finish during the EPG window
+  if (!FirstRun(epgWindowsStart, epgWindowsEnd) && ((programmeEnd + maxShiftTime < epgWindowsStart) || (programmeStart + minShiftTime > epgWindowsEnd)))
     return false;
 
-  m_broadcastId = static_cast<int>(tmpStart);
+  m_broadcastId = static_cast<int>(programmeStart);
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;
   m_plotOutline.clear();
-  m_startTime = static_cast<time_t>(tmpStart);
-  m_endTime = static_cast<time_t>(tmpEnd);
+  m_startTime = static_cast<time_t>(programmeStart);
+  m_endTime = static_cast<time_t>(programmeEnd);
   m_year = 0;
   m_starRating = 0;
   m_episodeNumber = EPG_TAG_INVALID_SERIES_EPISODE;

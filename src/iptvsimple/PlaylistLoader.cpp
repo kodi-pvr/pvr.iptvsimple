@@ -215,9 +215,19 @@ bool PlaylistLoader::LoadPlayList()
     }
     else if (line[0] != '#')
     {
-      Logger::Log(LEVEL_DEBUG, "%s - Adding channel '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
+      Logger::Log(LEVEL_DEBUG, "%s - Adding channel or Media Entry '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
-      if ((isRealTime || overrideRealTime || !m_settings->IsMediaEnabled() || !m_settings->ShowVodAsRecordings()) && !isMediaEntry)
+      if (m_settings->IsMediaEnabled() &&
+          (isMediaEntry || (m_settings->ShowVodAsRecordings() && !isRealTime)))
+      {
+        MediaEntry entry = tmpMediaEntry;
+        entry.UpdateFrom(tmpChannel);
+        entry.SetStreamURL(line);
+
+        if (!m_media.AddMediaEntry(entry, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
+          Logger::Log(LEVEL_DEBUG, "%s - Counld not add media entry as an entry with the same gnenerated unique ID already exists", __func__);
+      }
+      else
       {
         // There are cases where we want the stream to be represetned as a channel with live streaming disabled
         // to allow features such as passthrough to work. We don't want this to be VOD as then it would be treated like media.
@@ -230,15 +240,7 @@ bool PlaylistLoader::LoadPlayList()
 
         if (!m_channels.AddChannel(channel, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
           Logger::Log(LEVEL_DEBUG, "%s - Not adding channel '%s' as only channels with groups are supported for %s channels per add-on settings", __func__, tmpChannel.GetChannelName().c_str(), channel.IsRadio() ? "radio" : "tv");
-      }
-      else // We have media
-      {
-        MediaEntry entry = tmpMediaEntry;
-        entry.UpdateFrom(tmpChannel);
-        entry.SetStreamURL(line);
 
-        if (!m_media.AddMediaEntry(entry, currentChannelGroupIdList, m_channelGroups, channelHadGroups))
-          Logger::Log(LEVEL_DEBUG, "%s - Counld not add media entry as an entry with the same gnenerated unique ID already exists", __func__);
       }
 
       tmpChannel.Reset();

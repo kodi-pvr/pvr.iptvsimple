@@ -33,6 +33,8 @@ Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& med
   {
     MoveOldGenresXMLFileToNewLocation();
   }
+
+  m_media.SetGenreMappings(m_genreMappings);
 }
 
 bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
@@ -83,7 +85,7 @@ void Epg::SetEPGMaxFutureDays(int epgMaxFutureDays)
     m_epgMaxFutureDaysSeconds = DEFAULT_EPG_MAX_DAYS * 24 * 60 * 60;
 }
 
-bool Epg::LoadEPG(time_t start, time_t end)
+bool Epg::LoadEPG(time_t epgWindowStart, time_t epgWindowEnd)
 {
   auto started = std::chrono::high_resolution_clock::now();
   Logger::Log(LEVEL_DEBUG, "%s - EPG Load Start", __FUNCTION__);
@@ -125,7 +127,7 @@ bool Epg::LoadEPG(time_t start, time_t end)
     if (!LoadChannelEpgs(rootElement))
       return false;
 
-    LoadEpgEntries(rootElement, start, end);
+    LoadEpgEntries(rootElement, epgWindowStart, epgWindowEnd);
 
     xmlDoc.reset();
   }
@@ -283,7 +285,7 @@ bool Epg::LoadChannelEpgs(const xml_node& rootElement)
   return true;
 }
 
-void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
+void Epg::LoadEpgEntries(const xml_node& rootElement, int epgWindowStart, int epgWindowEnd)
 {
   int minShiftTime = m_epgTimeShift;
   int maxShiftTime = m_epgTimeShift;
@@ -298,6 +300,14 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
         minShiftTime = channel.GetTvgShift() + m_epgTimeShift;
       if (channel.GetTvgShift() + m_epgTimeShift > maxShiftTime)
         maxShiftTime = channel.GetTvgShift() + m_epgTimeShift;
+    }
+
+    for (const auto& mediaEntry : m_media.GetMediaEntryList())
+    {
+      if (mediaEntry.GetTvgShift() + m_epgTimeShift < minShiftTime)
+        minShiftTime = mediaEntry.GetTvgShift() + m_epgTimeShift;
+      if (mediaEntry.GetTvgShift() + m_epgTimeShift > maxShiftTime)
+        maxShiftTime = mediaEntry.GetTvgShift() + m_epgTimeShift;
     }
   }
 
@@ -317,7 +327,7 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int start, int end)
     }
 
     EpgEntry entry{m_settings};
-    if (entry.UpdateFrom(programmeNode, id, start, end, minShiftTime, maxShiftTime))
+    if (entry.UpdateFrom(programmeNode, id, epgWindowStart, epgWindowEnd, minShiftTime, maxShiftTime))
     {
       count++;
 
@@ -350,23 +360,23 @@ void Epg::ReloadEPG()
   }
 }
 
-PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::addon::PVREPGTagsResultSet& results)
+PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t epgWindowEnd, kodi::addon::PVREPGTagsResultSet& results)
 {
   for (const auto& myChannel : m_channels.GetChannelsList())
   {
     if (myChannel.GetUniqueId() != channelUid)
       continue;
 
-    if (start > m_lastStart || end > m_lastEnd)
+    if (epgWindowStart > m_lastStart || epgWindowEnd > m_lastEnd)
     {
       // reload EPG for new time interval only
-      LoadEPG(start, end);
+      LoadEPG(epgWindowStart, epgWindowEnd);
       {
         MergeEpgDataIntoMedia();
 
         // doesn't matter is epg loaded or not we shouldn't try to load it for same interval
-        m_lastStart = static_cast<int>(start);
-        m_lastEnd = static_cast<int>(end);
+        m_lastStart = static_cast<int>(epgWindowStart);
+        m_lastEnd = static_cast<int>(epgWindowEnd);
       }
     }
 
@@ -379,7 +389,7 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::
     for (auto& epgEntryPair : channelEpg->GetEpgEntries())
     {
       auto& epgEntry = epgEntryPair.second;
-      if ((epgEntry.GetEndTime() + shift) < start)
+      if ((epgEntry.GetEndTime() + shift) < epgWindowStart)
         continue;
 
       kodi::addon::PVREPGTag tag;
@@ -388,7 +398,7 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t start, time_t end, kodi::
 
       results.Add(tag);
 
-      if ((epgEntry.GetStartTime() + shift) > end)
+      if ((epgEntry.GetStartTime() + shift) > epgWindowEnd)
         break;
     }
 
@@ -609,6 +619,6 @@ void Epg::MergeEpgDataIntoMedia()
     // then return the first entry as matching. This is a common pattern
     // for channel that only contain a single media item.
     if (channelEpg && !channelEpg->GetEpgEntries().empty())
-      mediaEntry.UpdateFrom(channelEpg->GetEpgEntries().begin()->second);
+      mediaEntry.UpdateFrom(channelEpg->GetEpgEntries().begin()->second, m_genreMappings);
   }
 }
