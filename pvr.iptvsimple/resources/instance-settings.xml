@@ -600,7 +600,7 @@
         </setting>
         <setting id="mediaM3UGroupPath" type="integer" parent="mediaEnabled" label="30156" help="30806">
           <level>0</level>
-          <default>0</default>
+          <default>2</default>
           <constraints>
             <options>
               <option label="30157">0</option> <!-- DONT_USE_GROUP_TITLE -->
