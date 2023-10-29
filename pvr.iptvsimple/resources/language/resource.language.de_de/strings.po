@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-05-10 12:16+0000\n"
+"PO-Revision-Date: 2023-10-19 09:11+0000\n"
 "Last-Translator: Kai Sommerfeld <ksooo@users.noreply.kodi.weblate.cloud>\n"
 "Language-Team: German <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/de_de/>\n"
 "Language: de_de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.0.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -71,22 +71,22 @@ msgstr "Einmal am Tag"
 #. label-group: General - Providers
 msgctxt "#30006"
 msgid "Providers"
-msgstr ""
+msgstr "Anbieter"
 
 #. label: Channels - defaultProviderName
 msgctxt "#30007"
 msgid "Default provider name"
-msgstr ""
+msgstr "Standard-Anbietername"
 
 #. label: Channels - enableProviderMappings
 msgctxt "#30008"
 msgid "Enable provider mapping"
-msgstr ""
+msgstr "Anbieter-Mapping aktivieren"
 
 #. label: Channels - providerMappingFile
 msgctxt "#30009"
 msgid "Provider name mapping file"
-msgstr ""
+msgstr "Datei für Anbieter-Mapping"
 
 #. label-category: general
 #. label-group: General - General
@@ -427,12 +427,12 @@ msgstr "Sendersymbole aus M3U für lokalen Symboldateipfad ignorieren"
 #. label-category: Groups
 msgctxt "#30076"
 msgid "Groups"
-msgstr ""
+msgstr "Gruppen"
 
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "Groß-/Kleinschreibung für EPG Sender-IDs ignorieren"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -587,37 +587,37 @@ msgstr "Aufholkorrektur"
 #. group-label: Media - Media
 msgctxt "#30150"
 msgid "Media"
-msgstr ""
+msgstr "Medien"
 
 #. label: Media - mediaGroupByTitle
 msgctxt "#30151"
 msgid "Group entries by title"
-msgstr ""
+msgstr "Einträge nach Titeln gruppieren"
 
 #. label: Media - mediaGroupBySeason
 msgctxt "#30152"
 msgid "Group entries by season"
-msgstr ""
+msgstr "Einträge nach Staffeln gruppieren"
 
 #. label: Media - mediaBySeasonEpisode
 msgctxt "#30153"
 msgid "Include season and episode number in title"
-msgstr ""
+msgstr "Staffel- und Episodennummer in Titel aufnehmen"
 
 #. label: Media - mediaVODAsRecordings
 msgctxt "#30154"
 msgid "Include VODs as media"
-msgstr ""
+msgstr "VODs als Medien aufnehmen"
 
 #. label: Media - mediaEnabled
 msgctxt "#30155"
 msgid "Show Media as recordings"
-msgstr ""
+msgstr "Medien als Aufnahmen anzeigen"
 
 #. label: Media - mediaUseM3UGroupForGrouping
 msgctxt "#30156"
 msgid "Use M3U Group name in path"
-msgstr ""
+msgstr "M3U-Gruppenname im Pfad aufnehmen"
 
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
@@ -627,17 +627,17 @@ msgstr "Nie"
 #. label-option: Media - mediaEnabled - ALWAYS_APPEND
 msgctxt "#30158"
 msgid "Always append"
-msgstr ""
+msgstr "Immer anhängen"
 
 #. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
 msgctxt "#30159"
 msgid "When no media-dir is present"
-msgstr ""
+msgstr "Wenn media-dir nicht vorhanden ist"
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30160"
 msgid "Force all M3U entries to be media"
-msgstr ""
+msgstr "Erzwingen, dass alle M3U-Einträge Medien sind"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -659,7 +659,7 @@ msgstr "Inputstream-Fehler"
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr "Das Addon %s ist nicht installirt."
+msgstr "Das Addon %s ist nicht installiert."
 
 #. notification: Inputstreams
 msgctxt "#30502"
@@ -818,7 +818,7 @@ msgstr "Festlegen, ob die Zeitverschiebung für alle Sender durch die Einstellun
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr ""
+msgstr "Groß-/Kleinschreibung für EPG Sender-IDs (auch bekannt als tvg-id's) ignorieren, wenn Sendern EPG-Einträge zugeordnet werden. Wenn deaktiviert, wird die Groß-/Kleinschreibung bei der Zuordnung beachtet."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1040,14 +1040,14 @@ msgstr ""
 #. help: Groups - groups
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
-msgstr ""
+msgstr "Einstellungen für Sendergruppen."
 
 # empty strings from id 30744 to 30799
 #. help info - Media
 #. help-category: Media
 msgctxt "#30800"
 msgid "Settings related to VOD media."
-msgstr ""
+msgstr "Einstellugen für VOD-Medien."
 
 #. help: Media - mediaGroupByTitle
 msgctxt "#30801"
