@@ -182,7 +182,9 @@ An M3U entry can denote that it's media by having:
 * an M3U property of `EXT-X-PLAYLIST-TYPE` set to `VOD`,
 * or one of the M3U attributes of `media`, `media-dir` or `media-size`
 
-More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements).
+More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements). 
+
+Note that the media item will read from the XMLTV file, where it will read just the first entry. The entry must have a start time greater than now and be within the boundaries of the Kodi PVR Guide settings.
 
 * **Show media as recordings**: If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels.
 * **Group entries by title**: If multiple entries exist with matching titles, create a virtual folder to group them together.
@@ -521,7 +523,7 @@ http://path-to-stream/live/channel-z.ts
   - `media-dir`: An optional directory path which should specifiy where in the hierarchy this media entry should be represented. The path separator is `/`.
   - `media-size`: An optional size of the media entry in bytes. Note: this is not usually available for VOD libraries.
   - `realtime`: Live streams in PVR disable features such as passthrough by default. Set this item to "false" to bypass this behaviour if the stream should not be treated like VOD/Media in the UI.
-- `#EXTGRP`: A semi-colon separted list of channel groups that this channel belongs to.
+- `#EXTGRP`: A semi-colon separted list of channel groups. Note that this is a begin directive, i.e. all channels following this directive will have these groups until an empty `#EXTGRP` directive is reached. These groupings wil also be reset by any `group-title` tag for an `#EXTINF` channel directive.
 - `#KODIPROP`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line.
 - `#EXTVLCOPT`: A single property in the format `key=value` that can be passed to Kodi. Multiple can be passed each on a separate line. Note that if either a `http-user-agent` or a `http-referrer` property is found it will added to the URL as a HTTP header as `user-agent` or `referrer` respectively if not already provided in the URL. These two fields specifically will be dropped as properties whether or not they are added as header values. They will be added in the same format as the `URL` below.
 - `#EXT-X-PLAYLIST-TYPE`: If this element is present with a value of `VOD` (Video on Demand) the stream is marked as not being live.
