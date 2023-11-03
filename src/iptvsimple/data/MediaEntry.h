@@ -12,6 +12,7 @@
 #include "Channel.h"
 #include "EpgEntry.h"
 
+#include <regex>
 #include <string>
 
 #include <kodi/addon-instance/pvr/Recordings.h>
@@ -67,6 +68,9 @@ namespace iptvsimple
       int64_t GetSizeInBytes() const { return m_sizeInBytes; }
       void SetSizeInBytes(int64_t value) { m_sizeInBytes = value; }
 
+      const std::string& GetFolderTitle() const { return m_folderTitle; }
+      void SetFolderTitle(const std::string& value);
+
       const std::string& GetM3UName() const { return m_m3uName; }
       const std::string& GetTvgId() const { return m_tvgId; }
       const std::string& GetTvgName() const { return m_tvgName; }
@@ -89,6 +93,23 @@ namespace iptvsimple
       void UpdateFrom(iptvsimple::data::EpgEntry epgEntry, const std::vector<EpgGenre>& genres);
       void UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes);
 
+      std::string GetMatchTextFromString(const std::string& text, const std::regex& pattern)
+      {
+        std::string matchText = "";
+        std::smatch match;
+
+        if (std::regex_match(text, match, pattern))
+        {
+          if (match.size() == 2)
+          {
+            std::ssub_match base_sub_match = match[1];
+            matchText = base_sub_match.str();
+          }
+        }
+
+        return matchText;
+      };
+
     private:
       bool SetEpgGenre(std::vector<EpgGenre> genreMappings);
 
@@ -105,6 +126,7 @@ namespace iptvsimple
       int m_providerUniqueId = PVR_PROVIDER_INVALID_UID;
       std::string m_directory;
       int64_t m_sizeInBytes = 0;
+      std::string m_folderTitle;
 
       // EPG lookup
       std::string m_m3uName;

@@ -1,3 +1,7 @@
+v20.12.0
+- Extract season from medis title for path if not available
+- Set default to include media Group name in path if no dir present
+
 v20.11.1
 - EPG entry selection criteria for timezone shift calculation works for Media as well as channels
 - Fix being able to disable media from settings

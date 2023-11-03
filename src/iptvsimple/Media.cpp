@@ -116,12 +116,12 @@ MediaEntry Media::GetMediaEntry(const std::string& mediaEntryId) const
 
 bool Media::IsInVirtualMediaEntryFolder(const MediaEntry& mediaEntryToCheck) const
 {
-  const std::string& mediaEntryFolderToCheck = mediaEntryToCheck.GetTitle();
+  const std::string& mediaEntryFolderToCheck = mediaEntryToCheck.GetFolderTitle();
 
   int iMatches = 0;
   for (const auto& mediaEntry : m_media)
   {
-    if (mediaEntryFolderToCheck == mediaEntry.GetTitle())
+    if (mediaEntryFolderToCheck == mediaEntry.GetFolderTitle())
     {
       iMatches++;
       Logger::Log(LEVEL_DEBUG, "%s Found MediaEntry title '%s' in media vector!", __func__, mediaEntryFolderToCheck.c_str());
