@@ -1,3 +1,8 @@
+
+v20.13.0
+- Only reset channel group list when a channel URL is read from M3U playlist
+- Modify EXTGRP behaviour so it is a begin directive for channels groups, i.e. it carries across channels unless reset by an empty EXTGRP directive or any group-title tag for a EXTINF channel directive
+
 v20.12.0
 - Extract season from medis title for path if not available
 - Set default to include media Group name in path if no dir present

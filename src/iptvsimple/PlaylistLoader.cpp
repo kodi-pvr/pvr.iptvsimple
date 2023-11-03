@@ -98,6 +98,7 @@ bool PlaylistLoader::LoadPlayList()
   std::vector<int> currentChannelGroupIdList;
   bool channelHadGroups = false;
   bool xeevCatchup = false;
+  bool groupsFromBeginDirective = false; //From EXTGRP begin directive
 
   Channel tmpChannel{m_settings};
   MediaEntry tmpMediaEntry{m_settings};
@@ -170,7 +171,6 @@ bool PlaylistLoader::LoadPlayList()
     if (StringUtils::StartsWith(line, M3U_INFO_MARKER)) //#EXTINF
     {
       tmpChannel.SetChannelNumber(m_channels.GetCurrentChannelNumber());
-      currentChannelGroupIdList.clear();
 
       isMediaEntry = line.find(MEDIA) != std::string::npos ||
                      line.find(MEDIA_DIR) != std::string::npos ||
@@ -179,11 +179,12 @@ bool PlaylistLoader::LoadPlayList()
 
       overrideRealTime = GetOverrideRealTime(line);
 
-      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, currentChannelGroupIdList, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
+      const std::string groupNamesListString = ParseIntoChannel(line, tmpChannel, tmpMediaEntry, epgTimeShift, catchupCorrectionSecs, xeevCatchup);
 
       if (!groupNamesListString.empty())
       {
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
+        groupsFromBeginDirective = false;
         channelHadGroups = true;
       }
     }
@@ -201,10 +202,15 @@ bool PlaylistLoader::LoadPlayList()
     }
     else if (StringUtils::StartsWith(line, M3U_GROUP_MARKER)) //#EXTGRP:
     {
+      //Clear any previous Group Ids
+      currentChannelGroupIdList.clear();
+      groupsFromBeginDirective = false;
+
       const std::string groupNamesListString = ReadMarkerValue(line, M3U_GROUP_MARKER);
       if (!groupNamesListString.empty())
       {
         ParseAndAddChannelGroups(groupNamesListString, currentChannelGroupIdList, tmpChannel.IsRadio());
+        groupsFromBeginDirective = true;
         channelHadGroups = true;
       }
     }
@@ -249,6 +255,11 @@ bool PlaylistLoader::LoadPlayList()
       overrideRealTime = false;
       isMediaEntry = false;
       channelHadGroups = false;
+
+      // We want to clear the groups if they came from a 'group-title' tag from a channel
+      // But if it's from an EXTGRP tag we don't as that's a begin directive.
+      if (!groupsFromBeginDirective)
+        currentChannelGroupIdList.clear();
     }
   }
 
@@ -277,7 +288,7 @@ bool PlaylistLoader::LoadPlayList()
   return true;
 }
 
-std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, MediaEntry& mediaEntry, std::vector<int>& groupIdList, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup)
+std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& channel, MediaEntry& mediaEntry, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup)
 {
   size_t colonIndex = line.find(':');
   size_t commaIndex = line.rfind(','); //default to last comma on line in case we don't find a better match
