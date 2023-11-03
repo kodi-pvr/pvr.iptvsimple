@@ -59,6 +59,24 @@ void MediaEntry::Reset()
   m_tvgShift = 0;
 }
 
+namespace {
+
+std::string ExtractFolderTitle(const std::string& title)
+{
+  std::regex pattern(" *[sS]\\.?[0-9]+ ?[eE][pP]?\\.?[0-9]+/?[0-9]*");
+  std::stringstream result;
+  std::regex_replace(std::ostream_iterator<char>(result), title.begin(), title.end(), pattern, "");
+  std::string folderTitle = result.str();
+  StringUtils::Trim(folderTitle);
+
+  if (title != folderTitle)
+    return folderTitle;
+
+  return title;
+}
+
+}
+
 void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
 {
   m_radio = channel.IsRadio();
@@ -74,6 +92,8 @@ void MediaEntry::UpdateFrom(iptvsimple::data::Channel channel)
   m_providerUniqueId = channel.GetProviderUniqueId();
   m_properties = channel.GetProperties();
   m_inputStreamName = channel.GetInputStreamName();
+
+  m_folderTitle = ExtractFolderTitle(m_title);
 }
 
 void MediaEntry::UpdateFrom(iptvsimple::data::EpgEntry epgEntry, const std::vector<EpgGenre>& genreMappings)
@@ -119,6 +139,8 @@ void MediaEntry::UpdateFrom(iptvsimple::data::EpgEntry epgEntry, const std::vect
 
   m_new = epgEntry.IsNew();
   m_premiere = epgEntry.IsPremiere();
+
+  m_folderTitle = ExtractFolderTitle(m_title);
 }
 
 bool MediaEntry::SetEpgGenre(const std::vector<EpgGenre> genreMappings)
@@ -270,10 +292,21 @@ void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMedia
   std::string newDirectory = FixPath(m_directory);
   if (m_settings->GroupMediaByTitle() && isInVirtualMediaEntryFolder)
   {
-    if (m_settings->GroupMediaBySeason() && m_seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE)
-      newDirectory = StringUtils::Format("%s%s/%s/", newDirectory.c_str(), m_title.c_str(), GetSeasonPrefix(m_seasonNumber).c_str());
-    else
-      newDirectory = StringUtils::Format("%s%s/", newDirectory.c_str(), m_title.c_str());
+    if (m_settings->GroupMediaBySeason())
+    {
+      if (m_seasonNumber != EPG_TAG_INVALID_SERIES_EPISODE)
+      {
+        newDirectory = StringUtils::Format("%s%s/%s/", newDirectory.c_str(), m_title.c_str(), GetSeasonPrefix(m_seasonNumber).c_str());
+      }
+      else
+      {
+        static std::regex pattern("^.*([sS]\\.?[0-9]+) ?[^]*$");
+        std::string seasonText = GetMatchTextFromString(m_title, pattern);
+
+        if (!seasonText.empty())
+          newDirectory = StringUtils::Format("%s%s/%s/", newDirectory.c_str(), m_folderTitle.c_str(), seasonText.c_str());
+      }
+    }
   }
 
   left.SetDirectory(newDirectory);
