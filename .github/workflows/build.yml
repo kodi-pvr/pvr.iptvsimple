@@ -11,17 +11,10 @@ jobs:
       matrix:
         include:
         - name: "Debian package test"
-          os: ubuntu-18.04
+          os: ubuntu-latest
           CC: gcc
           CXX: g++
           DEBIAN_BUILD: true
-        #- os: ubuntu-18.04
-          #CC: gcc
-          #CXX: g++
-        #- os: ubuntu-18.04
-          #CC: clang
-          #CXX: clang++
-        #- os: macos-10.15
     steps:
     - name: Install needed ubuntu depends
       env:
@@ -36,7 +29,7 @@ jobs:
         repository: xbmc/xbmc
         ref: master
         path: xbmc
-    - name: Checkout pvr.iptvsimple repo
+    - name: Checkout add-on repo
       uses: actions/checkout@v2
       with:
         path: ${{ env.app_id }}
