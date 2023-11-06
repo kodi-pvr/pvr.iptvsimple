@@ -6,6 +6,7 @@ trigger:
     include:
     - Matrix
     - Nexus
+    - Omega
     - releases/*
   paths:
     include:
