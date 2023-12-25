@@ -24,6 +24,7 @@ The contents of this README.md file are as follows:
 2. [Support links](#support-links)
 3. [Configuring the addon](#configuring-the-addon)
    * [General Channel Setup (M3U)](#general)
+   * [Groups](#groups)
    * [EPG](#epg)
    * [Genres](#genres)
    * [Media](#media)
@@ -181,7 +182,7 @@ An M3U entry can denote that it's media by having:
 * an M3U property of `EXT-X-PLAYLIST-TYPE` set to `VOD`,
 * or one of the M3U attributes of `media`, `media-dir` or `media-size`
 
-More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements). 
+More detail on these can be found in [Supported M3U and XMLTV elements](#supported-m3u-and-xmltv-elements).
 
 Note that the media item will read from the XMLTV file, where it will read just the first entry. The entry must have a start time greater than now and be within the boundaries of the Kodi PVR Guide settings.
 
