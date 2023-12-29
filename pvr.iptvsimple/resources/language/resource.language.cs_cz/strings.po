@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-05-10 12:16+0000\n"
+"PO-Revision-Date: 2023-10-23 20:09+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Czech <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/cs_cz/>\n"
 "Language: cs_cz\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.0.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -699,7 +699,7 @@ msgstr "Pokud je umístění [B]Vzdálená cesta[/B], vyberte, zda se má soubor
 #. help: General - startNum
 msgctxt "#30605"
 msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
-msgstr ""
+msgstr "Číslo, od kterého se začne číslovat kanál. Používá se pouze v případě, že je povoleno [B]Použít čísla kanálů z nastavení PVR a v souboru M3U není uvedeno číslo kanálu.[/B]"
 
 #. help: General - numberByOrder
 msgctxt "#30606"
