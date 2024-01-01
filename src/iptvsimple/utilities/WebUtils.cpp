@@ -7,6 +7,7 @@
 
 #include "WebUtils.h"
 
+#include "Logger.h"
 
 #include <cctype>
 #include <iomanip>
@@ -127,4 +128,25 @@ std::string WebUtils::RedactUrl(const std::string& url)
   }
 
   return redactedUrl;
+}
+
+bool WebUtils::Check(const std::string& strURL, int connectionTimeoutSecs)
+{
+  kodi::vfs::CFile fileHandle;
+  if (!fileHandle.CURLCreate(strURL))
+  {
+    Logger::Log(LEVEL_ERROR, "%s Unable to create curl handle for %s", __func__, WebUtils::RedactUrl(strURL).c_str());
+    return false;
+  }
+
+  fileHandle.CURLAddOption(ADDON_CURL_OPTION_PROTOCOL, "connection-timeout",
+                      std::to_string(connectionTimeoutSecs));
+
+  if (!fileHandle.CURLOpen(ADDON_READ_NO_CACHE))
+  {
+    Logger::Log(LEVEL_DEBUG, "%s Unable to open url: %s", __func__, WebUtils::RedactUrl(strURL).c_str());
+    return false;
+  }
+
+  return true;
 }

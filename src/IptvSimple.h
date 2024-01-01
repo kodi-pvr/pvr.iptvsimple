@@ -10,8 +10,10 @@
 #include "iptvsimple/CatchupController.h"
 #include "iptvsimple/Channels.h"
 #include "iptvsimple/ChannelGroups.h"
+#include "iptvsimple/ConnectionManager.h"
 #include "iptvsimple/Providers.h"
 #include "iptvsimple/Epg.h"
+#include "iptvsimple/IConnectionListener.h"
 #include "iptvsimple/Media.h"
 #include "iptvsimple/PlaylistLoader.h"
 #include "iptvsimple/data/Channel.h"
@@ -22,11 +24,15 @@
 
 #include <kodi/addon-instance/PVR.h>
 
-class ATTR_DLL_LOCAL IptvSimple : public kodi::addon::CInstancePVRClient
+class ATTR_DLL_LOCAL IptvSimple : public iptvsimple::IConnectionListener
 {
 public:
   IptvSimple(const kodi::addon::IInstanceInfo& instance);
   ~IptvSimple() override;
+
+  // IConnectionListener implementation
+  void ConnectionLost() override;
+  void ConnectionEstablished() override;
 
   bool Initialise();
 
@@ -41,8 +47,8 @@ public:
   PVR_ERROR GetBackendVersion(std::string& version) override;
   PVR_ERROR GetConnectionString(std::string& connection) override;
 
-  PVR_ERROR OnSystemSleep() override { return PVR_ERROR_NO_ERROR; }
-  PVR_ERROR OnSystemWake() override { return PVR_ERROR_NO_ERROR; }
+  PVR_ERROR OnSystemSleep() override;
+  PVR_ERROR OnSystemWake() override;
   PVR_ERROR OnPowerSavingActivated() override { return PVR_ERROR_NO_ERROR; }
   PVR_ERROR OnPowerSavingDeactivated() override { return PVR_ERROR_NO_ERROR; }
 
@@ -96,6 +102,7 @@ private:
   iptvsimple::PlaylistLoader m_playlistLoader{this, m_channels, m_channelGroups, m_providers, m_media, m_settings};
   iptvsimple::Epg m_epg{this, m_channels, m_media, m_settings};
   iptvsimple::CatchupController m_catchupController{m_epg, &m_mutex, m_settings};
+  iptvsimple::ConnectionManager* connectionManager;
 
   std::atomic<bool> m_running{false};
   std::thread m_thread;

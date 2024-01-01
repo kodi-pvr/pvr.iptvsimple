@@ -22,19 +22,45 @@ using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace kodi::tools;
 
-IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : kodi::addon::CInstancePVRClient(instance), m_settings(new InstanceSettings(*this, instance))
+IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple::IConnectionListener(instance), m_settings(new InstanceSettings(*this, instance))
 {
   m_channels.Clear();
   m_channelGroups.Clear();
   m_providers.Clear();
   m_epg.Clear();
   m_media.Clear();
+  connectionManager = new ConnectionManager(*this, m_settings);
 }
 
-bool IptvSimple::Initialise()
+IptvSimple::~IptvSimple()
 {
-  std::lock_guard<std::mutex> lock(m_mutex);
+  Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
+  m_running = false;
+  if (m_thread.joinable())
+    m_thread.join();
 
+  std::lock_guard<std::mutex> lock(m_mutex);
+  m_channels.Clear();
+  m_channelGroups.Clear();
+  m_providers.Clear();
+  m_epg.Clear();
+
+  if (connectionManager)
+    connectionManager->Stop();
+  delete connectionManager;
+}
+
+/* **************************************************************************
+ * Connection
+ * *************************************************************************/
+
+void IptvSimple::ConnectionLost()
+{
+  Logger::Log(LEVEL_INFO, "%s Could not validiate M3U after startup, but ignoring as startup is all we care about.", __func__);
+}
+
+void IptvSimple::ConnectionEstablished()
+{
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
@@ -50,8 +76,27 @@ bool IptvSimple::Initialise()
 
   m_running = true;
   m_thread = std::thread([&] { Process(); });
+}
+
+bool IptvSimple::Initialise()
+{
+  std::lock_guard<std::mutex> lock(m_mutex);
+
+  connectionManager->Start();
 
   return true;
+}
+
+PVR_ERROR IptvSimple::OnSystemSleep()
+{
+  connectionManager->OnSleep();
+  return PVR_ERROR_NO_ERROR;
+}
+
+PVR_ERROR IptvSimple::OnSystemWake()
+{
+  connectionManager->OnWake();
+  return PVR_ERROR_NO_ERROR;
 }
 
 PVR_ERROR IptvSimple::GetCapabilities(kodi::addon::PVRCapabilities& capabilities)
@@ -124,20 +169,6 @@ void IptvSimple::Process()
     }
     lastRefreshHour = timeInfo.tm_hour;
   }
-}
-
-IptvSimple::~IptvSimple()
-{
-  Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
-  m_running = false;
-  if (m_thread.joinable())
-    m_thread.join();
-
-  std::lock_guard<std::mutex> lock(m_mutex);
-  m_channels.Clear();
-  m_channelGroups.Clear();
-  m_providers.Clear();
-  m_epg.Clear();
 }
 
 /***************************************************************************

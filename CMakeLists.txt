@@ -27,6 +27,7 @@ set(IPTV_SOURCES src/addon.cpp
                  src/iptvsimple/CatchupController.cpp
                  src/iptvsimple/Channels.cpp
                  src/iptvsimple/ChannelGroups.cpp
+                 src/iptvsimple/ConnectionManager.cpp
                  src/iptvsimple/Epg.cpp
                  src/iptvsimple/InstanceSettings.cpp
                  src/iptvsimple/Media.cpp
@@ -52,7 +53,9 @@ set(IPTV_HEADERS src/addon.h
                  src/iptvsimple/CatchupController.h
                  src/iptvsimple/Channels.h
                  src/iptvsimple/ChannelGroups.h
+                 src/iptvsimple/ConnectionManager.h
                  src/iptvsimple/Epg.h
+                 src/iptvsimple/IConnectionListener.h
                  src/iptvsimple/InstanceSettings.h
                  src/iptvsimple/Media.h
                  src/iptvsimple/PlaylistLoader.h
