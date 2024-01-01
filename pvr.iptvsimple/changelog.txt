@@ -1,3 +1,7 @@
+v21.7.0
+- Add connection manager support to wait for a valid M3U file before starting the add-on instance
+- The minimum refresh interval for the M3U should be 1 minutes and not zero, as that would be infinite refresh
+
 v21.6.0
 - Only reset channel group list when a channel URL is read from M3U Playlist
 - Modify EXTGRP behaviour so it is a begin directive for channels groups, i.e. it carries across channels unless reset by an empty EXTGRP directive or any group-title tag for a EXTINF channel directive
