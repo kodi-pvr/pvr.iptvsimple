@@ -38,6 +38,7 @@ namespace iptvsimple
   static const std::string CATCHUP_TYPE            = "catchup-type=";
   static const std::string CATCHUP_DAYS            = "catchup-days=";
   static const std::string CATCHUP_SOURCE          = "catchup-source=";
+  static const std::string CATCHUP_LATEST_SOURCE   = "catchup-latest-source=";
   static const std::string CATCHUP_SIPTV           = "timeshift=";
   static const std::string CATCHUP_CORRECTION      = "catchup-correction=";
   static const std::string PROVIDER                = "provider=";

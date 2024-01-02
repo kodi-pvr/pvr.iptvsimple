@@ -33,7 +33,7 @@ namespace iptvsimple
     void ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::PVREPGTag& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
     void ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGTag& epgTag, const data::Channel& channel, std::map<std::string, std::string>& catchupProperties);
 
-    std::string GetCatchupUrlFormatString(const data::Channel& channel) const;
+    std::string GetCatchupUrlFormatString(const data::Channel& channel, bool isLiveEntry) const;
     std::string GetCatchupUrl(const data::Channel& channel) const;
     std::string ProcessStreamUrl(const data::Channel& channel) const;
 
@@ -43,7 +43,7 @@ namespace iptvsimple
 
   private:
     data::EpgEntry* GetLiveEPGEntry(const iptvsimple::data::Channel& myChannel);
-    void SetCatchupInputStreamProperties(bool playbackAsLive, const iptvsimple::data::Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType);
+    void SetCatchupInputStreamProperties(bool playbackAsLive, const iptvsimple::data::Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType, bool isLiveEntry);
     StreamType StreamTypeLookup(const data::Channel& channel, bool fromEpg = false);
     std::string GetStreamTestUrl(const data::Channel& channel, bool fromEpg) const;
     std::string GetStreamKey(const data::Channel& channel, bool fromEpg) const;

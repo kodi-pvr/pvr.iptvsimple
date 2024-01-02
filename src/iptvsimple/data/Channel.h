@@ -46,7 +46,7 @@ namespace iptvsimple
         m_channelNumber(c.GetChannelNumber()), m_subChannelNumber(c.GetSubChannelNumber()),
         m_encryptionSystem(c.GetEncryptionSystem()), m_tvgShift(c.GetTvgShift()), m_channelName(c.GetChannelName()),
         m_iconPath(c.GetIconPath()), m_streamURL(c.GetStreamURL()), m_hasCatchup(c.HasCatchup()),
-        m_catchupMode(c.GetCatchupMode()), m_catchupDays(c.GetCatchupDays()), m_catchupSource(c.GetCatchupSource()),
+        m_catchupMode(c.GetCatchupMode()), m_catchupDays(c.GetCatchupDays()), m_catchupSource(c.GetCatchupSource()), m_catchupLatestSource(c.GetCatchupLatestSource()),
         m_isCatchupTSStream(c.IsCatchupTSStream()), m_catchupSupportsTimeshifting(c.CatchupSupportsTimeshifting()),
         m_catchupSourceTerminates(c.CatchupSourceTerminates()), m_catchupGranularitySeconds(c.GetCatchupGranularitySeconds()),
         m_catchupCorrectionSecs(c.GetCatchupCorrectionSecs()), m_tvgId(c.GetTvgId()), m_tvgName(c.GetTvgName()),
@@ -94,6 +94,9 @@ namespace iptvsimple
 
       const std::string& GetCatchupSource() const { return m_catchupSource; }
       void SetCatchupSource(const std::string& value) { m_catchupSource = value; }
+
+      const std::string& GetCatchupLatestSource() const { return m_catchupLatestSource; }
+      void SetCatchupLatestSource(const std::string& value) { m_catchupLatestSource = value; }
 
       bool IsCatchupTSStream() const { return m_isCatchupTSStream; }
       void SetCatchupTSStream(bool value) { m_isCatchupTSStream = value; }
@@ -161,6 +164,7 @@ namespace iptvsimple
       CatchupMode m_catchupMode = CatchupMode::DISABLED;
       int m_catchupDays = 0;
       std::string m_catchupSource = "";
+      std::string m_catchupLatestSource = "";
       bool m_isCatchupTSStream = false;
       bool m_catchupSupportsTimeshifting = false;
       bool m_catchupSourceTerminates = false;

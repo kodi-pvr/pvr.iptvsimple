@@ -31,13 +31,16 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
 {
   StreamType streamType = StreamTypeLookup(channel);
 
+  bool isLiveEntry = false;
+
   // Anything from here is live!
   m_playbackIsVideo = false; // TODO: possible time jitter on UI as this will effect get stream times
 
   if (!m_fromEpgTag || m_controlsLiveStream)
   {
     EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
-    if (m_controlsLiveStream && liveEpgEntry && !m_settings->CatchupOnlyOnFinishedProgrammes())
+    isLiveEntry = liveEpgEntry != nullptr;
+    if (m_controlsLiveStream && liveEpgEntry && (!m_settings->CatchupOnlyOnFinishedProgrammes() || !channel.GetCatchupLatestSource().empty()))
     {
       // Live timeshifting support with EPG entry
       UpdateProgrammeFrom(*liveEpgEntry, channel.GetTvgShift());
@@ -84,7 +87,7 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
     // TODO: Need a method of updating an inputstream if already running such as web call to stream etc.
     // this will avoid inputstream restarts which are expensive, may be better placed in client.cpp
     // this also mean knowing when a stream has stopped
-    SetCatchupInputStreamProperties(true, channel, catchupProperties, streamType);
+    SetCatchupInputStreamProperties(true, channel, catchupProperties, streamType, isLiveEntry);
   }
 }
 
@@ -94,6 +97,8 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::P
   EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.GetStartTime());
   if (epgEntry)
     m_programmeCatchupId = epgEntry->GetCatchupId();
+
+  bool isLiveEntry = epgEntry == GetLiveEPGEntry(channel);
 
   StreamType streamType = StreamTypeLookup(channel, true);
 
@@ -116,7 +121,7 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::P
     // TODO: Need a method of updating an inputstream if already running such as web call to stream etc.
     // this will avoid inputstream restarts which are expensive, may be better placed in client.cpp
     // this also mean knowing when a stream has stopped
-    SetCatchupInputStreamProperties(true, channel, catchupProperties, streamType);
+    SetCatchupInputStreamProperties(true, channel, catchupProperties, streamType, isLiveEntry);
   }
   else
   {
@@ -137,6 +142,8 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
   EpgEntry* epgEntry = GetEPGEntry(channel, epgTag.GetStartTime());
   if (epgEntry)
     m_programmeCatchupId = epgEntry->GetCatchupId();
+
+  bool isLiveEntry = epgEntry == GetLiveEPGEntry(channel);
 
   StreamType streamType = StreamTypeLookup(channel, true);
 
@@ -161,7 +168,7 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
     // TODO: Need a method of updating an inputstream if already running such as web call to stream etc.
     // this will avoid inputstream restarts which are expensive, may be better placed in client.cpp
     // this also mean knowing when a stream has stopped
-    SetCatchupInputStreamProperties(false, channel, catchupProperties, streamType);
+    SetCatchupInputStreamProperties(false, channel, catchupProperties, streamType, isLiveEntry);
   }
   else
   {
@@ -179,7 +186,7 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
     m_playbackIsVideo = true;
 }
 
-void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, const Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType)
+void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, const Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType, bool isLiveEntry)
 {
   catchupProperties.insert({PVR_STREAM_PROPERTY_EPGPLAYBACKASLIVE, playbackAsLive ? "true" : "false"});
 
@@ -189,7 +196,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
 
   catchupProperties.insert({"inputstream.ffmpegdirect.default_url", channel.GetStreamURL()});
   catchupProperties.insert({"inputstream.ffmpegdirect.playback_as_live", playbackAsLive ? "true" : "false"});
-  catchupProperties.insert({"inputstream.ffmpegdirect.catchup_url_format_string", GetCatchupUrlFormatString(channel)});
+  catchupProperties.insert({"inputstream.ffmpegdirect.catchup_url_format_string", GetCatchupUrlFormatString(channel, isLiveEntry)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_start_time", std::to_string(m_catchupStartTime)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_end_time", std::to_string(m_catchupEndTime)});
   catchupProperties.insert({"inputstream.ffmpegdirect.catchup_buffer_offset", std::to_string(m_timeshiftBufferOffset)});
@@ -205,7 +212,7 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
 
   Logger::Log(LEVEL_DEBUG, "default_url - %s", WebUtils::RedactUrl(channel.GetStreamURL()).c_str());
   Logger::Log(LEVEL_DEBUG, "playback_as_live - %s", playbackAsLive ? "true" : "false");
-  Logger::Log(LEVEL_DEBUG, "catchup_url_format_string - %s", WebUtils::RedactUrl(GetCatchupUrlFormatString(channel)).c_str());
+  Logger::Log(LEVEL_DEBUG, "catchup_url_format_string - %s", WebUtils::RedactUrl(GetCatchupUrlFormatString(channel, isLiveEntry)).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_start_time - %s", std::to_string(m_catchupStartTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_end_time - %s", std::to_string(m_catchupEndTime).c_str());
   Logger::Log(LEVEL_DEBUG, "catchup_buffer_offset - %s", std::to_string(m_timeshiftBufferOffset).c_str());
@@ -437,10 +444,15 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
 
 } // unnamed namespace
 
-std::string CatchupController::GetCatchupUrlFormatString(const Channel& channel) const
+std::string CatchupController::GetCatchupUrlFormatString(const Channel& channel, bool isLiveEntry) const
 {
   if (m_catchupStartTime > 0)
-    return channel.GetCatchupSource();
+  {
+    if (isLiveEntry && !channel.GetCatchupLatestSource().empty())
+      return channel.GetCatchupLatestSource();
+    else
+      return channel.GetCatchupSource();
+  }
 
   return "";
 }

@@ -324,7 +324,7 @@ PVR_ERROR IptvSimple::IsEPGTagPlayable(const kodi::addon::PVREPGTag& tag, bool& 
     bIsPlayable = bIsPlayable &&
                   tag.GetStartTime() < now &&
                   tag.GetStartTime() >= (now - static_cast<time_t>(channel.GetCatchupDaysInSeconds())) &&
-                  (!m_settings->CatchupOnlyOnFinishedProgrammes() || tag.GetEndTime() < now);
+                  ((!m_settings->CatchupOnlyOnFinishedProgrammes() || !channel.GetCatchupLatestSource().empty()) || tag.GetEndTime() < now);
   }
 
   return PVR_ERROR_NO_ERROR;
