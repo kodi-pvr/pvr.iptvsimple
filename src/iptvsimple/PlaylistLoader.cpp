@@ -330,6 +330,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strCatchupDays   = ReadMarkerValue(infoLine, CATCHUP_DAYS);
     std::string strTvgRec        = ReadMarkerValue(infoLine, TVG_INFO_REC);
     std::string strCatchupSource = ReadMarkerValue(infoLine, CATCHUP_SOURCE);
+    std::string strCatchupLatestSource = ReadMarkerValue(infoLine, CATCHUP_LATEST_SOURCE);
     std::string strCatchupSiptv = ReadMarkerValue(infoLine, CATCHUP_SIPTV);
     std::string strCatchupCorrection = ReadMarkerValue(infoLine, CATCHUP_CORRECTION);
     std::string strProviderName = ReadMarkerValue(infoLine, PROVIDER);
@@ -343,6 +344,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
 
     kodi::UnknownToUTF8(strTvgName, strTvgName);
     kodi::UnknownToUTF8(strCatchupSource, strCatchupSource);
+    kodi::UnknownToUTF8(strCatchupLatestSource, strCatchupLatestSource);
 
     // Some providers use a 'catchup-type' tag instead of 'catchup'
     if (strCatchup.empty())
@@ -388,6 +390,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     // If we still don't have a value use the header supplied value if there is one
     if (strCatchupSource.empty() && !m_m3uHeaderStrings.m_catchupSource.empty())
       strCatchupSource = m_m3uHeaderStrings.m_catchupSource;
+    channel.SetCatchupLatestSource(strCatchupLatestSource);
     channel.SetTvgShift(static_cast<int>(tvgShiftDecimal * 3600.0));
     channel.SetRadio(isRadio);
     if (m_settings->GetLogoPathType() == PathType::LOCAL_PATH && m_settings->UseLocalLogosOnlyIgnoreM3U())

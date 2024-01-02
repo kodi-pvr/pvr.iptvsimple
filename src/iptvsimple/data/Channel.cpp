@@ -63,6 +63,7 @@ void Channel::UpdateTo(Channel& left) const
   left.m_catchupMode      = m_catchupMode;
   left.m_catchupDays      = m_catchupDays;
   left.m_catchupSource    = m_catchupSource;
+  left.m_catchupLatestSource = m_catchupLatestSource;
   left.m_isCatchupTSStream = m_isCatchupTSStream;
   left.m_catchupSupportsTimeshifting = m_catchupSupportsTimeshifting;
   left.m_catchupSourceTerminates = m_catchupSourceTerminates;
@@ -104,6 +105,7 @@ void Channel::Reset()
   m_catchupMode = CatchupMode::DISABLED;
   m_catchupDays = 0;
   m_catchupSource.clear();
+  m_catchupLatestSource.clear();
   m_catchupSupportsTimeshifting = false;
   m_catchupSourceTerminates = false;
   m_catchupGranularitySeconds = 1;

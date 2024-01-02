@@ -1,3 +1,6 @@
+v21.7.1
+- Add support for catchup source for the latest programme
+
 v21.6.0
 - Only reset channel group list when a channel URL is read from M3U Playlist
 - Modify EXTGRP behaviour so it is a begin directive for channels groups, i.e. it carries across channels unless reset by an empty EXTGRP directive or any group-title tag for a EXTINF channel directive
