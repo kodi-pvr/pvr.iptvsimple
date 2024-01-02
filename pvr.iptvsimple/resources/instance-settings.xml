@@ -77,7 +77,7 @@
           <level>1</level>
           <default>60</default>
           <constraints>
-            <minimum>0</minimum>
+            <minimum>1</minimum>
             <step>10</step>
             <maximum>120</maximum>
           </constraints>
