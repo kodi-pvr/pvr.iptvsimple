@@ -434,7 +434,22 @@ msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr ""
 
-#empty strings from id 30078 to 30099
+#. label-group: General - M3U Startup Check
+msgctxt "#30078"
+msgid "M3U Startup Check"
+msgstr ""
+
+#. label: Catchup - connectCheckTimoutSecs
+msgctxt "#30079"
+msgid "Timeout for check"
+msgstr ""
+
+#. label: Catchup - connectCheckIntervalSecs
+msgctxt "#30080"
+msgid "Interval for check"
+msgstr ""
+
+#empty strings from id 30081 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -828,7 +843,17 @@ msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
-#empty strings from id 30628 to 30639
+#. help: EPG Settings - connectionCheckTimeoutSecs
+msgctxt "#30628"
+msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
+msgstr ""
+
+#. help: EPG Settings - connectionCheckIntervalSecs
+msgctxt "#30629"
+msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
+msgstr ""
+
+#empty strings from id 30630 to 30639
 
 #. help info - Channel Logos
 

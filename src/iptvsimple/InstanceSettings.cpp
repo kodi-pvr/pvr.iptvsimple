@@ -156,6 +156,8 @@ void InstanceSettings::ReadSettings()
   m_instance.CheckInstanceSettingString("defaultUserAgent", m_defaultUserAgent);
   m_instance.CheckInstanceSettingString("defaultInputstream", m_defaultInputstream);
   m_instance.CheckInstanceSettingString("defaultMimeType", m_defaultMimeType);
+  m_instance.CheckInstanceSettingInt("connectionchecktimeout", m_connectioncCheckTimeoutSecs);
+  m_instance.CheckInstanceSettingInt("connectioncheckinterval", m_connectioncCheckIntervalSecs);
 }
 
 void InstanceSettings::ReloadAddonInstanceSettings()
@@ -194,6 +196,10 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshIntervalMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uRefreshHour")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshHour, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "connectionchecktimeout")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_connectioncCheckTimeoutSecs, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "connectioncheckinterval")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_connectioncCheckIntervalSecs, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "defaultProviderName")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_defaultProviderName, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "enableProviderMappings")

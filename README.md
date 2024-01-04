@@ -110,6 +110,8 @@ General settings required for the addon to function.
     - `Once per day` - Refresh the files once per day.
 * **Refresh interval**: If auto refresh mode is `Repeated refresh` refresh the files every time this number of minutes passes. Max 120 minutes.
 * **Refresh hour (24h)**: If auto refresh mode is `Once per day` refresh the files every time this hour of the day is reached.
+* **M3U Check Interval**: When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop.
+* **M3U Check Timeout**: When checking for a valid M3U file, the length of time to wait before timing out the attempt.
 * **Default provider name**: If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country code and language code fields.
 * **Enable provider mapping**: If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country code and language code.
 * **Provider name mapping file**: The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is `providerMappings.xml`.

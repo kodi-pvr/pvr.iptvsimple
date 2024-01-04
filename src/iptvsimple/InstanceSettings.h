@@ -28,6 +28,9 @@ namespace iptvsimple
   static const std::string DEFAULT_CUSTOM_TV_GROUPS_FILE = ADDON_DATA_BASE_DIR + "/channelGroups/customTVGroups-example.xml";
   static const std::string DEFAULT_CUSTOM_RADIO_GROUPS_FILE = ADDON_DATA_BASE_DIR + "/channelGroups/customRadioGroups-example.xml";
 
+  static const int DEFAULT_CONNECTION_CHECK_TIMEOUT_SECS = 10;
+  static const int DEFAULT_CONNECTION_CHECK_INTERVAL_SECS = 5;
+
   enum class PathType
     : int // same type as addon settings
   {
@@ -175,6 +178,8 @@ namespace iptvsimple
     const std::string& GetDefaultUserAgent() const { return m_defaultUserAgent; }
     const std::string& GetDefaultInputstream() const { return m_defaultInputstream; }
     const std::string& GetDefaultMimeType() const { return m_defaultMimeType; }
+    int GetConnectioncCheckTimeoutSecs() const { return m_connectioncCheckTimeoutSecs; }
+    int GetConnectioncCheckIntervalSecs() const { return m_connectioncCheckIntervalSecs; }
 
     const std::string& GetTvgUrl() const { return m_tvgUrl; }
     void SetTvgUrl(const std::string& tvgUrl) { m_tvgUrl = tvgUrl; }
@@ -337,6 +342,8 @@ namespace iptvsimple
     std::string m_defaultUserAgent;
     std::string m_defaultInputstream;
     std::string m_defaultMimeType;
+    int m_connectioncCheckTimeoutSecs = DEFAULT_CONNECTION_CHECK_TIMEOUT_SECS;
+    int m_connectioncCheckIntervalSecs = DEFAULT_CONNECTION_CHECK_INTERVAL_SECS;
 
     std::vector<std::string> m_customTVChannelGroupNameList;
     std::vector<std::string> m_customRadioChannelGroupNameList;
