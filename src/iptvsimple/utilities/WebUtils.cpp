@@ -7,6 +7,7 @@
 
 #include "WebUtils.h"
 
+#include "FileUtils.h"
 #include "Logger.h"
 
 #include <cctype>
@@ -130,8 +131,13 @@ std::string WebUtils::RedactUrl(const std::string& url)
   return redactedUrl;
 }
 
-bool WebUtils::Check(const std::string& strURL, int connectionTimeoutSecs)
+bool WebUtils::Check(const std::string& strURL, int connectionTimeoutSecs, bool isLocalPath)
 {
+  // For local paths we only need to check existence of the file
+  if (isLocalPath && FileUtils::FileExists(strURL))
+    return true;
+
+  //Otherwise it's remote
   kodi::vfs::CFile fileHandle;
   if (!fileHandle.CURLCreate(strURL))
   {
