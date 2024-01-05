@@ -1,3 +1,6 @@
+v21.7.1
+- Fix supporting of local paths in Connection Manager
+
 v21.7.0
 - Add connection manager support to wait for a valid M3U file before starting the add-on instance
 - The minimum refresh interval for the M3U should be 1 minutes and not zero, as that would be infinite refresh
