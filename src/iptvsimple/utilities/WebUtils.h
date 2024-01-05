@@ -27,7 +27,7 @@ namespace iptvsimple
       static std::string ReadFileContentsStartOnly(const std::string& url, int* httpCode);
       static bool IsHttpUrl(const std::string& url);
       static std::string RedactUrl(const std::string& url);
-      static bool Check(const std::string& url, int connectionTimeoutSecs);
+      static bool Check(const std::string& url, int connectionTimeoutSecs, bool isLocalPath = false);
     };
   } // namespace utilities
 } // namespace iptvsimple

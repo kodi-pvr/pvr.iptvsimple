@@ -141,6 +141,8 @@ void ConnectionManager::Process()
     }
 
     const std::string url = m_settings->GetM3ULocation();
+    int tcpTimeout = m_settings->GetConnectioncCheckTimeoutSecs();
+    bool isLocalPath = m_settings->GetM3UPathType() == PathType::LOCAL_PATH;
 
     /* URL is set */
     if (url.empty())
@@ -151,7 +153,7 @@ void ConnectionManager::Process()
     }
 
     /* Connect */
-    if ((firstRun || !m_onStartupOnly) && !WebUtils::Check(url, m_settings->GetConnectioncCheckTimeoutSecs()))
+    if ((firstRun || !m_onStartupOnly) && !WebUtils::Check(url, tcpTimeout, isLocalPath))
     {
       /* Unable to connect */
       if (retryAttempt == 0)

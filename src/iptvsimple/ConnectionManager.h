@@ -50,7 +50,6 @@ namespace iptvsimple
     PVR_CONNECTION_STATE m_state;
 
     bool m_onStartupOnly = true;
-    bool m_notifyStateChangeToUser = false;
 
     std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
   };
