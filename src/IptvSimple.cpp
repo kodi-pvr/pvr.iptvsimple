@@ -305,7 +305,7 @@ PVR_ERROR IptvSimple::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& ta
     Logger::Log(LEVEL_DEBUG, "%s - GetPlayEpgAsLive is %s", __FUNCTION__, m_settings->CatchupPlayEpgAsLive() ? "enabled" : "disabled");
 
     std::map<std::string, std::string> catchupProperties;
-    if (m_settings->CatchupPlayEpgAsLive() && m_currentChannel.CatchupSupportsTimeshifting())
+    if (m_settings->CatchupPlayEpgAsLive() && (m_currentChannel.CatchupSupportsTimeshifting() || m_currentChannel.GetCatchupMode() == CatchupMode::VOD))
     {
       m_catchupController.ProcessEPGTagForTimeshiftedPlayback(tag, m_currentChannel, catchupProperties);
     }

@@ -127,6 +127,8 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::P
     m_timeshiftBufferStartTime = 0;
     m_timeshiftBufferOffset = 0;
 
+    catchupProperties.insert({PVR_STREAM_PROPERTY_EPGPLAYBACKASLIVE, "true"});
+
     m_fromEpgTag = true;
   }
 }
