@@ -38,9 +38,11 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
   // Anything from here is live!
   m_playbackIsVideo = false; // TODO: possible time jitter on UI as this will effect get stream times
 
+  //Always get the live EPG entry
+  EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
+
   if (!m_fromTimeshiftedEpgTagCall)
   {
-    EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
     if (m_controlsLiveStream && liveEpgEntry && !m_settings->CatchupOnlyOnFinishedProgrammes())
     {
       // Live timeshifting support with EPG entry
@@ -55,6 +57,10 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
       m_programmeCatchupId.clear();
       m_catchupStartTime = 0;
       m_catchupEndTime = 0;
+
+      // Not from timeshifted EPG so safe to set the catchup ID here
+      if (!m_controlsLiveStream && liveEpgEntry)
+        m_programmeCatchupId = liveEpgEntry->GetCatchupId();
     }
   }
 
@@ -490,7 +496,13 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
 std::string CatchupController::ProcessStreamUrl(const Channel& channel) const
 {
   //We only process current time timestamps specifiers in this case
-  return FormatDateTimeNowOnly(channel.GetStreamURL(), m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs());
+  std::string processedUrl = FormatDateTimeNowOnly(channel.GetStreamURL(), m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs());
+
+  static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
+  if (!m_programmeCatchupId.empty())
+    processedUrl = std::regex_replace(processedUrl, CATCHUP_ID_REGEX, m_programmeCatchupId);
+
+  return processedUrl;
 }
 
 std::string CatchupController::GetStreamTestUrl(const Channel& channel, bool fromEpg) const
