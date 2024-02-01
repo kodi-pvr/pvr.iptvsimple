@@ -38,7 +38,7 @@ namespace iptvsimple
     std::string ProcessStreamUrl(const data::Channel& channel) const;
 
     bool ControlsLiveStream() const { return m_controlsLiveStream; }
-    void ResetCatchupState() { m_resetCatchupState = true; }
+    void ResetCatchupState();
     data::EpgEntry* GetEPGEntry(const iptvsimple::data::Channel& myChannel, time_t lookupTime);
 
   private:
@@ -60,7 +60,7 @@ namespace iptvsimple
     long long m_timeshiftBufferOffset = 0;
     bool m_resetCatchupState = false;
     bool m_playbackIsVideo = false;
-    bool m_fromEpgTag = false;
+    bool m_fromTimeshiftedEpgTagCall = false;
 
     // Current programme details
     time_t m_programmeStartTime = 0;
