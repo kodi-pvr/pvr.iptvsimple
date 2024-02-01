@@ -60,7 +60,10 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
 
       // Not from timeshifted EPG so safe to set the catchup ID here
       if (!m_controlsLiveStream && liveEpgEntry)
+      {
         m_programmeCatchupId = liveEpgEntry->GetCatchupId();
+        UpdateProgrammeFrom(*liveEpgEntry, channel.GetTvgShift());
+      }
     }
   }
 
@@ -399,7 +402,7 @@ std::string FormatDateTime(time_t timeStart, time_t duration, const std::string 
   return formattedUrl;
 }
 
-std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezoneShiftSecs)
+std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezoneShiftSecs, int programmeStartTime)
 {
   std::string formattedUrl = urlFormatString;
   const time_t timeNow = std::time(0) - timezoneShiftSecs;
@@ -411,6 +414,19 @@ std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezo
   FormatTime("lutc", &dateTimeNow, formattedUrl, false);
   FormatTime("now", &dateTimeNow, formattedUrl, true);
   FormatTime("timestamp", &dateTimeNow, formattedUrl, true);
+
+  // If we have the start time for a programme also process those spcifiers
+  if (programmeStartTime > 0)
+  {
+    std::tm dateTimeStart = SafeLocaltime(programmeStartTime);
+
+    FormatTime('Y', &dateTimeStart, formattedUrl);
+    FormatTime('m', &dateTimeStart, formattedUrl);
+    FormatTime('d', &dateTimeStart, formattedUrl);
+    FormatTime('H', &dateTimeStart, formattedUrl);
+    FormatTime('M', &dateTimeStart, formattedUrl);
+    FormatTime('S', &dateTimeStart, formattedUrl);
+  }
 
   Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, WebUtils::RedactUrl(formattedUrl).c_str());
 
@@ -446,7 +462,7 @@ std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& cha
   if ((startTime > 0 && offset < (timeNow - 5)) || (channel.IgnoreCatchupDays() && !programmeCatchupId.empty()))
     startTimeUrl = FormatDateTime(offset - timezoneShiftSecs, duration, channel.GetCatchupSource());
   else
-    startTimeUrl = FormatDateTimeNowOnly(channel.GetStreamURL(), timezoneShiftSecs);
+    startTimeUrl = FormatDateTimeNowOnly(channel.GetStreamURL(), timezoneShiftSecs, startTime);
 
   static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
   if (!programmeCatchupId.empty())
@@ -496,7 +512,7 @@ std::string CatchupController::GetCatchupUrl(const Channel& channel) const
 std::string CatchupController::ProcessStreamUrl(const Channel& channel) const
 {
   //We only process current time timestamps specifiers in this case
-  std::string processedUrl = FormatDateTimeNowOnly(channel.GetStreamURL(), m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs());
+  std::string processedUrl = FormatDateTimeNowOnly(channel.GetStreamURL(), m_epg.GetEPGTimezoneShiftSecs(channel) + channel.GetCatchupCorrectionSecs(), m_programmeStartTime);
 
   static const std::regex CATCHUP_ID_REGEX("\\{catchup-id\\}");
   if (!m_programmeCatchupId.empty())
