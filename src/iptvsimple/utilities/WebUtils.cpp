@@ -116,6 +116,11 @@ bool WebUtils::IsHttpUrl(const std::string& url)
   return StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX);
 }
 
+bool WebUtils::IsNfsUrl(const std::string& url)
+{
+  return StringUtils::StartsWith(url, NFS_PREFIX);
+}
+
 std::string WebUtils::RedactUrl(const std::string& url)
 {
   std::string redactedUrl = url;
@@ -145,8 +150,8 @@ bool WebUtils::Check(const std::string& strURL, int connectionTimeoutSecs, bool 
     return false;
   }
 
-  fileHandle.CURLAddOption(ADDON_CURL_OPTION_PROTOCOL, "connection-timeout",
-                      std::to_string(connectionTimeoutSecs));
+  if (!IsNfsUrl(strURL))
+    fileHandle.CURLAddOption(ADDON_CURL_OPTION_PROTOCOL, "connection-timeout", std::to_string(connectionTimeoutSecs));
 
   if (!fileHandle.CURLOpen(ADDON_READ_NO_CACHE))
   {

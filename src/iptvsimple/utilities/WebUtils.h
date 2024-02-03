@@ -15,6 +15,7 @@ namespace iptvsimple
   {
     static const std::string HTTP_PREFIX = "http://";
     static const std::string HTTPS_PREFIX = "https://";
+    static const std::string NFS_PREFIX = "nfs://";
     static const std::string UDP_MULTICAST_PREFIX = "udp://@";
     static const std::string RTP_MULTICAST_PREFIX = "rtp://@";
 
@@ -26,6 +27,7 @@ namespace iptvsimple
       static bool IsEncoded(const std::string& value);
       static std::string ReadFileContentsStartOnly(const std::string& url, int* httpCode);
       static bool IsHttpUrl(const std::string& url);
+      static bool IsNfsUrl(const std::string& url);
       static std::string RedactUrl(const std::string& url);
       static bool Check(const std::string& url, int connectionTimeoutSecs, bool isLocalPath = false);
     };
