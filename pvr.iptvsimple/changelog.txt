@@ -1,3 +1,12 @@
+v2.8.0
+- Support catchup-id for live URLs where possible
+- Support the Y, m, d, H, M, S specifiers for live URLs, useful for plugins and debugging
+- Enable Play from EPG in Live TV mode setting for Catchup VOD
+- Only set connection-timeout for connection manager if it's not NFS
+- Support the duration specifier for live URLs, useful for plugins and debugging
+- Support the all specifier for live URLs, useful for plugins and debugging
+- Fix timezone shift not applied for start time for live URLs
+
 v21.7.2
 - Only reset the catchup state if not playing a timeshifted EPG tag
 
