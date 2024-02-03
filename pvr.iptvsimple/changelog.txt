@@ -1,3 +1,6 @@
+v21.7.2
+- Only reset the catchup state if not playing a timeshifted EPG tag
+
 v21.7.1
 - Fix supporting of local paths in Connection Manager
 

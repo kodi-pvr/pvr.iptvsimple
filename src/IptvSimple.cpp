@@ -222,6 +222,9 @@ PVR_ERROR IptvSimple::GetChannelStreamProperties(const kodi::addon::PVRChannel& 
   {
     std::string streamURL = m_currentChannel.GetStreamURL();
 
+    // This reset will have no effect if we tried to play an epg tag as live
+    // i.e GetEPGTagStreamProperties will have been called prior to GetChannelStreamProperties
+    // So the state will not be reset as we need to carry the EPG entry details over to the timehifted live stream.
     m_catchupController.ResetCatchupState(); // TODO: we need this currently until we have a way to know the stream stops.
 
     // We always call the catchup controller regardless so it can cleanup state

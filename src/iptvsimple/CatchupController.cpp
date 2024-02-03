@@ -29,12 +29,16 @@ CatchupController::CatchupController(Epg& epg, std::mutex* mutex, std::shared_pt
 
 void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::map<std::string, std::string>& catchupProperties)
 {
+  // This function is called in two different sceanrios
+  // 1) From a 'Switch' to a channel where we play a live stream
+  // 2) From a timeshifted EPG tag call where we want to playback as live
+
   StreamType streamType = StreamTypeLookup(channel);
 
   // Anything from here is live!
   m_playbackIsVideo = false; // TODO: possible time jitter on UI as this will effect get stream times
 
-  if (!m_fromEpgTag || m_controlsLiveStream)
+  if (!m_fromTimeshiftedEpgTagCall)
   {
     EpgEntry* liveEpgEntry = GetLiveEPGEntry(channel);
     if (m_controlsLiveStream && liveEpgEntry && !m_settings->CatchupOnlyOnFinishedProgrammes())
@@ -52,7 +56,6 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
       m_catchupStartTime = 0;
       m_catchupEndTime = 0;
     }
-    m_fromEpgTag = false;
   }
 
   if (m_controlsLiveStream)
@@ -78,6 +81,9 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
       if (currentEpgEntry)
         UpdateProgrammeFrom(*currentEpgEntry, channel.GetTvgShift());
     }
+
+    //We no longer need to know if this originated from an EPG tag
+    m_fromTimeshiftedEpgTagCall = false;
 
     m_catchupStartTime = m_timeshiftBufferStartTime;
 
@@ -126,9 +132,9 @@ void CatchupController::ProcessEPGTagForTimeshiftedPlayback(const kodi::addon::P
 
     m_timeshiftBufferStartTime = 0;
     m_timeshiftBufferOffset = 0;
-
-    m_fromEpgTag = true;
   }
+
+  m_fromTimeshiftedEpgTagCall = true;
 }
 
 void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGTag& epgTag, const Channel& channel, std::map<std::string, std::string>& catchupProperties)
@@ -177,6 +183,16 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
 
   if (m_catchupStartTime > 0)
     m_playbackIsVideo = true;
+
+  m_fromTimeshiftedEpgTagCall = false;
+}
+
+void CatchupController::ResetCatchupState()
+{
+  // 'm_fromTimeshiftedEpgTagCall' can only be set if we tried to play an EPG tag as live
+  // This can only happen in ProcessEPGTagForTimeshiftedPlayback() and nowhere else
+  if (!m_fromTimeshiftedEpgTagCall)
+    m_resetCatchupState = true;
 }
 
 void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, const Channel& channel, std::map<std::string, std::string>& catchupProperties, const StreamType& streamType)
