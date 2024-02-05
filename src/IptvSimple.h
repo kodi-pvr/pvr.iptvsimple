@@ -57,7 +57,7 @@ public:
 
   PVR_ERROR GetChannelsAmount(int& amount) override;
   PVR_ERROR GetChannels(bool radio, kodi::addon::PVRChannelsResultSet& results) override;
-  PVR_ERROR GetChannelStreamProperties(const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties) override;
+  PVR_ERROR GetChannelStreamProperties(const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties, bool fromEpgAsLive) override;
 
   PVR_ERROR GetChannelGroupsAmount(int& amount) override;
   PVR_ERROR GetChannelGroups(bool radio, kodi::addon::PVRChannelGroupsResultSet& results) override;
@@ -70,6 +70,8 @@ public:
   PVR_ERROR SetEPGMaxFutureDays(int epgMaxFutureDays) override;
 
   PVR_ERROR GetSignalStatus(int channelUid, kodi::addon::PVRSignalStatus& signalStatus) override;
+
+  void StreamClosed() override;
 
   PVR_ERROR GetRecordingsAmount(bool deleted, int& amount) override;
   PVR_ERROR GetRecordings(bool deleted, kodi::addon::PVRRecordingsResultSet& results) override;
