@@ -405,7 +405,7 @@ std::string FormatDateTime(time_t timeStart, time_t duration, const std::string 
   return formattedUrl;
 }
 
-std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezoneShiftSecs, int programmeStartTime, int duration)
+std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezoneShiftSecs, int timeStart, int duration)
 {
   std::string formattedUrl = urlFormatString;
   const time_t timeNow = std::time(0) - timezoneShiftSecs;
@@ -418,10 +418,15 @@ std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezo
   FormatTime("now", &dateTimeNow, formattedUrl, true);
   FormatTime("timestamp", &dateTimeNow, formattedUrl, true);
 
-  // If we have the start time for a programme also process those spcifiers
-  if (programmeStartTime > 0)
+  // If we have the start time for a programme also process those specifiers
+  // These can be useful for plugins that don't call ffmpegdirect and instead
+  // play EPG as live for catchup="vod"
+  if (timeStart > 0)
   {
-    std::tm dateTimeStart = SafeLocaltime(programmeStartTime);
+    std::tm dateTimeStart = SafeLocaltime(timeStart);
+
+    const time_t timeEnd = timeStart + duration;
+    std::tm dateTimeEnd = SafeLocaltime(timeEnd);
 
     FormatTime('Y', &dateTimeStart, formattedUrl);
     FormatTime('m', &dateTimeStart, formattedUrl);
@@ -429,8 +434,28 @@ std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezo
     FormatTime('H', &dateTimeStart, formattedUrl);
     FormatTime('M', &dateTimeStart, formattedUrl);
     FormatTime('S', &dateTimeStart, formattedUrl);
-
+    FormatUtc("{utc}", timeStart, formattedUrl);
+    FormatUtc("${start}", timeStart, formattedUrl);
+    FormatUtc("{utcend}", timeStart + duration, formattedUrl);
+    FormatUtc("${end}", timeStart + duration, formattedUrl);
+    FormatUtc("{lutc}", timeNow, formattedUrl);
+    FormatUtc("${now}", timeNow, formattedUrl);
+    FormatUtc("${timestamp}", timeNow, formattedUrl);
+    FormatUtc("${duration}", duration, formattedUrl);
     FormatUtc("{duration}", duration, formattedUrl);
+    FormatUnits("duration", duration, formattedUrl);
+    FormatUtc("${offset}", timeNow - timeStart, formattedUrl);
+    FormatUnits("offset", timeNow - timeStart, formattedUrl);
+
+    FormatTime("utc", &dateTimeStart, formattedUrl, false);
+    FormatTime("start", &dateTimeStart, formattedUrl, true);
+
+    FormatTime("utcend", &dateTimeEnd, formattedUrl, false);
+    FormatTime("end", &dateTimeEnd, formattedUrl, true);
+
+    FormatTime("lutc", &dateTimeNow, formattedUrl, false);
+    FormatTime("now", &dateTimeNow, formattedUrl, true);
+    FormatTime("timestamp", &dateTimeNow, formattedUrl, true);
   }
 
   Logger::Log(LEVEL_DEBUG, "%s - \"%s\"", __FUNCTION__, WebUtils::RedactUrl(formattedUrl).c_str());
