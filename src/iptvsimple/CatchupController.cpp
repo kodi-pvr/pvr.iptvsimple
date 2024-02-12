@@ -408,6 +408,8 @@ std::string FormatDateTime(time_t timeStart, time_t duration, const std::string 
 std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezoneShiftSecs, int timeStart, int duration)
 {
   std::string formattedUrl = urlFormatString;
+
+  timeStart -= timezoneShiftSecs;
   const time_t timeNow = std::time(0) - timezoneShiftSecs;
   std::tm dateTimeNow = SafeLocaltime(timeNow);
 
