@@ -15,20 +15,20 @@ jobs:
     steps:
 
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           path: ${{ github.event.repository.name }}
 
       - name: Checkout Scripts
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           repository: xbmc/weblate-supplementary-scripts
           path: scripts
 
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -48,7 +48,7 @@ jobs:
         id: required-variables
         run: |
           version=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/@version)')
-          echo ::set-output name=version::$version
+          echo "version=$version" >> $GITHUB_OUTPUT
         working-directory: ${{ github.event.repository.name }}
 
       - name: Create PR for incrementing add-on versions
