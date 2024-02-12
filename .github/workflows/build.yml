@@ -24,13 +24,13 @@ jobs:
         if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get update; fi
         if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get install fakeroot; fi
     - name: Checkout Kodi repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: xbmc/xbmc
         ref: master
         path: xbmc
     - name: Checkout add-on repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         path: ${{ env.app_id }}
     - name: Configure
