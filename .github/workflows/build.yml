@@ -15,13 +15,6 @@ jobs:
           CC: gcc
           CXX: g++
           DEBIAN_BUILD: true
-        #- os: ubuntu-latest
-          #CC: gcc
-          #CXX: g++
-        #- os: ubuntu-latest
-          #CC: clang
-          #CXX: clang++
-        #- os: macos-10.15
     steps:
     - name: Install needed ubuntu depends
       env:
@@ -31,13 +24,13 @@ jobs:
         if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get update; fi
         if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get install fakeroot; fi
     - name: Checkout Kodi repo
-      uses: actions/checkout@v2
+      uses: actions/checkout@v4
       with:
         repository: xbmc/xbmc
         ref: Nexus
         path: xbmc
-    - name: Checkout pvr.iptvsimple repo
-      uses: actions/checkout@v2
+    - name: Checkout add-on repo
+      uses: actions/checkout@v4
       with:
         path: ${{ env.app_id }}
     - name: Configure
@@ -48,7 +41,7 @@ jobs:
       run: |
         if [[ $DEBIAN_BUILD != true ]]; then cd ${app_id} && mkdir -p build && cd build; fi
         if [[ $DEBIAN_BUILD != true ]]; then cmake -DADDONS_TO_BUILD=${app_id} -DADDON_SRC_PREFIX=${{ github.workspace }} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/xbmc/addons -DPACKAGE_ZIP=1 ${{ github.workspace }}/xbmc/cmake/addons; fi
-        if [[ $DEBIAN_BUILD == true ]]; then wget https://raw.githubusercontent.com/xbmc/xbmc/master/xbmc/addons/kodi-dev-kit/tools/debian-addon-package-test.sh && chmod +x ./debian-addon-package-test.sh; fi
+        if [[ $DEBIAN_BUILD == true ]]; then wget https://raw.githubusercontent.com/xbmc/xbmc/Nexus/xbmc/addons/kodi-dev-kit/tools/debian-addon-package-test.sh && chmod +x ./debian-addon-package-test.sh; fi
         if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get build-dep ${{ github.workspace }}/${app_id}; fi
     - name: Build
       env:
