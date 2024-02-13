@@ -39,14 +39,14 @@ jobs:
 
       # Checkout the current repository into a directory (repositories name)
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           path: ${{ github.event.repository.name }}
 
       # Checkout the required scripts from kodi-pvr/pvr-scripts into the 'scripts' directory
       - name: Checkout Scripts
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         with:
           fetch-depth: 0
           repository: kodi-pvr/pvr-scripts
@@ -60,7 +60,7 @@ jobs:
 
       # Setup python version 3.9
       - name: Set up Python
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: '3.9'
 
@@ -97,12 +97,12 @@ jobs:
           changes="${changes//$'\r'/'%0D'}"
           changes="${changes//$'\\n'/'%0A'}"
           changes="${changes//$'\\r'/'%0D'}"
-          echo ::set-output name=changes::$changes
+          echo "changes=$changes" >> $GITHUB_OUTPUT
           version=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/@version)')
-          echo ::set-output name=version::$version
+          echo "version=$version" >> $GITHUB_OUTPUT
           branch=$(echo ${GITHUB_REF#refs/heads/})
-          echo ::set-output name=branch::$branch
-          echo ::set-output name=today::$(date +'%Y-%m-%d')
+          echo "branch=$branch" >> $GITHUB_OUTPUT
+          echo "today=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
         working-directory: ${{ github.event.repository.name }}
 
       # Create a commit of the incremented version and changelog, news changes
