@@ -1,4 +1,4 @@
-v2.8.0
+v21.8.0
 - Support catchup-id for live URLs where possible
 - Support the Y, m, d, H, M, S specifiers for live URLs, useful for plugins and debugging
 - Enable Play from EPG in Live TV mode setting for Catchup VOD
