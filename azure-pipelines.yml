@@ -4,7 +4,6 @@ variables:
 trigger:
   branches:
     include:
-    - Matrix
     - Nexus
     - Omega
     - releases/*
@@ -30,16 +29,26 @@ jobs:
           GENERATOR: "Visual Studio 17 2022"
           ARCHITECTURE: x64
           CONFIGURATION: Release
+        Win32-UWP:
+          GENERATOR: "Visual Studio 17 2022"
+          ARCHITECTURE: Win32
+          CONFIGURATION: Release
+          WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.17763.0"
         Win64-UWP:
           GENERATOR: "Visual Studio 17 2022"
           ARCHITECTURE: x64
           CONFIGURATION: Release
           WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.17763.0"
-        ARM64-UWP:
+        ARM32-UWP:
           GENERATOR: "Visual Studio 17 2022"
-          ARCHITECTURE: ARM64
+          ARCHITECTURE: ARM
           CONFIGURATION: Release
           WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.17763.0"
+        #ARM64-UWP:
+        #  GENERATOR: "Visual Studio 17 2022"
+        #  ARCHITECTURE: ARM64
+        #  CONFIGURATION: Release
+        #  WINSTORE: -DCMAKE_SYSTEM_NAME=WindowsStore -DCMAKE_SYSTEM_VERSION="10.0.17763.0"
 
     workspace:
       clean: all
