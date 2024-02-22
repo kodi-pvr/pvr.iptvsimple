@@ -44,18 +44,19 @@ jobs:
           fetch-depth: 0
           path: ${{ github.event.repository.name }}
 
-      # Checkout the required scripts from kodi-pvr/pvr-scripts into the 'scripts' directory
+      # Checkout the required scripts from xbmc/binary-addon-scripts into the 'scripts' directory
       - name: Checkout Scripts
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          repository: kodi-pvr/pvr-scripts
+          repository: xbmc/binary-addon-scripts
           path: scripts
 
       # Install all dependencies required by the following steps
       # - libxml2-utils, xmlstarlet: reading news and version from addon.xml.in
       - name: Install dependencies
         run: |
+          sudo apt-get update
           sudo apt-get install libxml2-utils xmlstarlet
 
       # Setup python version 3.9
@@ -84,6 +85,7 @@ jobs:
       # - steps.required-variables.outputs.version: version element from addon.xml.in
       # - steps.required-variables.outputs.branch: branch of the triggering ref
       # - steps.required-variables.outputs.today: today's date in format '%Y-%m-%d'
+      # Note: we use a random EOF for 'changes' as is best practice for for multiline variables
       - name: Get required variables
         id: required-variables
         run: |
@@ -92,12 +94,10 @@ jobs:
           then
             changes=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/extension/news)' | awk -v RS= 'NR==1')
           fi
-          changes="${changes//'%'/'%25'}"
-          changes="${changes//$'\n'/'%0A'}"
-          changes="${changes//$'\r'/'%0D'}"
-          changes="${changes//$'\\n'/'%0A'}"
-          changes="${changes//$'\\r'/'%0D'}"
-          echo "changes=$changes" >> $GITHUB_OUTPUT
+          EOF=$(dd if=/dev/urandom bs=15 count=1 status=none | base64)
+          echo "changes<<$EOF" >> $GITHUB_OUTPUT
+          echo "$changes" >> $GITHUB_OUTPUT
+          echo "$EOF" >> $GITHUB_OUTPUT
           version=$(xmlstarlet fo -R "$(find . -name addon.xml.in)" | xmlstarlet sel -t -v 'string(/addon/@version)')
           echo "version=$version" >> $GITHUB_OUTPUT
           branch=$(echo ${GITHUB_REF#refs/heads/})
