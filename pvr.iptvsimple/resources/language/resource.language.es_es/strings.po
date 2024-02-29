@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-10-02 18:11+0000\n"
+"PO-Revision-Date: 2024-01-02 08:54+0000\n"
 "Last-Translator: José Antonio Alvarado <jalvarado0.eses@gmail.com>\n"
 "Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/es_es/>\n"
 "Language: es_es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.3\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -377,7 +377,7 @@ msgstr "Transmisión"
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr "Usar inputstream.adaptive para emisiones m3u8 (HLS)"
+msgstr "Utilizar inputstream.adaptive para transmisiones m3u8 (HLS)"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
@@ -474,12 +474,12 @@ msgstr "Reproducir desde EPG en modo TV en directo (con Timeshift)"
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
 msgid "Buffer before program start"
-msgstr "Buffer Antes del Inicio del Programa"
+msgstr "Búfer antes de iniciar el programa"
 
 #. label: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30108"
 msgid "Buffer after program end"
-msgstr "Buffer Después del Final del Programa"
+msgstr "Búfer después de finalizar el programa"
 
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
@@ -901,12 +901,12 @@ msgstr "El puerto del relé de multidifusión (udpxy) en la red local."
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr "Utilizar inputstream.adaptive en lugar de libavformat de ffmpeg para flujos m3u8 (HLS)."
+msgstr "Utilizar inputstream.adaptive en lugar de libavformat de ffmpeg para transmisiones m3u8 (HLS)."
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr "Tenga en cuenta que esto sólo puede aplicarse a transmisiones http/https que son procesadas por libavformat (p. ej., M3u8/HLS). El uso de libavformat se puede especificar en un archivo M3U estableciendo la propiedad `inputstream` como `inputstream.ffmpeg` para la implementación interna de kodi o `inputstream.ffmpegdirect` para la versión del complemento. Es decir, añadiendo la línea: `#KODIPROP:inputstream=inputstream.ffmpeg`. Si esta opción no está activada, puede ser activada por transmisión/canal añadiendo una propiedad kodi, es decir: `#KODIPROP:http-reconnect=true`."
+msgstr "Tenga en cuenta que esto sólo puede aplicarse a transmisiones http/https que son procesadas por libavformat (p. ej. M3u8/HLS). El uso de libavformat se puede especificar en un archivo M3U estableciendo la propiedad `inputstream` como `inputstream.ffmpeg` para la implementación interna de kodi o `inputstream.ffmpegdirect` para la versión del complemento. Es decir, añadiendo la línea: `#KODIPROP:inputstream=inputstream.ffmpeg`. Si esta opción no está activada, puede ser activada por transmisión/canal añadiendo una propiedad kodi, es decir: `#KODIPROP:http-reconnect=true`."
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
@@ -953,17 +953,17 @@ msgstr "Si se activa, se asume que los canales soportan catchup utilizando el mo
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
 msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
-msgstr "Cuando se desactiva, cualquier programa de catchup del pasado se reproducirá como un vídeo (limitado por las horas de inicio y fin). Si está activada, actuará como una transmisión en directo con timeshift, permitiendo también la posibilidad de saltar hacia atrás y hacia delante en los programas. Tenga en cuenta que el único efecto que tiene esta opción en las transmisiones que no admiten Timeshift es si se aplica o no el búfer antes/después."
+msgstr "Si se desactiva, cualquier programa de catchup del pasado se reproducirá como un vídeo (limitado por las horas de inicio y fin). Si se activa, actuará como una emisión en directo con timeshift, permitiendo también saltar hacia atrás y hacia delante en los programas. Tenga en cuenta que el único efecto que tiene esta opción en las emisiones que no admiten timeshifting es si se aplica o no el búfer antes/después."
 
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
 msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
-msgstr "La cantidad de buffer a dar antes del punto de inicio de reproducción de una entrada EPG que será vista como un vídeo."
+msgstr "La cantidad de búfer a dar después del punto de inicio de la reproducción de una entrada EPG que se verá como un vídeo."
 
 #. help: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30707"
 msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
-msgstr "La cantidad de buffer a dar después del punto final de reproducción de una entrada EPG que se verá como un vídeo."
+msgstr "La cantidad de búfer a dar después del punto final de la reproducción de una entrada EPG que se verá como un vídeo."
 
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"
@@ -1015,7 +1015,7 @@ msgstr "Activar la función Timeshift para todas las transmisiones. Sólo se apl
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Activar la función Timeshift para transmisiones basadas en UDP. Sólo se aplicará a las transmisiones que no seleccionen un complemento inputstream específico para la reproducción. El complemento inputstream.ffmpegdirect se utilizará para Timeshift."
+msgstr "Activar la función timeshift para transmisiones basadas en UDP. Sólo se aplicará a las transmisiones que no seleccionen un complemento inputstream específico para la reproducción. El complemento inputstream.ffmpegdirect se utilizará para timeshift."
 
 # empty strings from id 30727 to 30739
 #. help info - Other categories continued
