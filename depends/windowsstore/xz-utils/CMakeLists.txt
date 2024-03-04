@@ -72,6 +72,7 @@ add_library(lzma
     src/liblzma/lz/lz_encoder_mf.c
     src/liblzma/rangecoder/price_table.c
     src/liblzma/simple/arm.c
+    src/liblzma/simple/arm64.c
     src/liblzma/simple/armthumb.c
     src/liblzma/simple/ia64.c
     src/liblzma/simple/powerpc.c
