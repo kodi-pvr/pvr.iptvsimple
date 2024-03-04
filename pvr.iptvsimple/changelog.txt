@@ -1,3 +1,8 @@
+v21.8.1
+- Update zlib to v1.2.13
+- Update pugixml to v1.14
+- Update xz-utils to 5.4.3
+
 v21.8.0
 - Support catchup-id for live URLs where possible
 - Support the Y, m, d, H, M, S specifiers for live URLs, useful for plugins and debugging
