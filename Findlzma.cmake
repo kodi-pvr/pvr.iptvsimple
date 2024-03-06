@@ -6,7 +6,7 @@
 # LZMA_LIBRARIES - the xz library
 
 find_path(LZMA_INCLUDE_DIRS lzma.h)
-find_library(LZMA_LIBRARIES lzma)
+find_library(LZMA_LIBRARIES NAMES lzma liblzma)
 
 include(FindPackageHandleStandardArgs)
 find_package_handle_standard_args(lzma REQUIRED_VARS LZMA_INCLUDE_DIRS LZMA_LIBRARIES)
