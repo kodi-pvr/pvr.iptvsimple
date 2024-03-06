@@ -1,3 +1,7 @@
+v21.8.2
+- Remove xz-utils windows depends since Findlzma.cmake was fixed
+- Findlzma add alternate name to satisfy windows builds
+
 v21.8.1
 - Update zlib to v1.2.13
 - Update pugixml to v1.14
