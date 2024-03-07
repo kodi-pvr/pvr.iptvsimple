@@ -143,6 +143,7 @@ void InstanceSettings::ReadSettings()
   m_instance.CheckInstanceSettingEnum<CatchupOverrideMode>("catchupOverrideMode", m_catchupOverrideMode);
   m_instance.CheckInstanceSettingFloat("catchupCorrection", m_catchupCorrectionHours);
   m_instance.CheckInstanceSettingBoolean("catchupPlayEpgAsLive", m_catchupPlayEpgAsLive);
+  m_instance.CheckInstanceSettingBoolean("catchupPlayLiveAsEpg", m_catchupPlayLiveAsEpg);
   m_instance.CheckInstanceSettingInt("catchupWatchEpgBeginBufferMins", m_catchupWatchEpgBeginBufferMins);
   m_instance.CheckInstanceSettingInt("catchupWatchEpgEndBufferMins", m_catchupWatchEpgEndBufferMins);
   m_instance.CheckInstanceSettingBoolean("catchupOnlyOnFinishedProgrammes", m_catchupOnlyOnFinishedProgrammes);
@@ -319,6 +320,8 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetSetting<float, ADDON_STATUS>(settingName, settingValue, m_catchupCorrectionHours, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupPlayEpgAsLive")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayEpgAsLive, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "catchupPlayLiveAsEpg")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_catchupPlayLiveAsEpg, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupWatchEpgBeginBufferMins")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_catchupWatchEpgBeginBufferMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupWatchEpgEndBufferMins")

@@ -598,7 +598,12 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
-#empty strings from id 30129 to 30449
+#. label: Catchup - catchupPlayLiveAsEpg
+msgctxt "#30129"
+msgid "Play from Live TV in EPG mode (video playback)"
+msgstr ""
+
+#empty strings from id 30130 to 30449
 
 #. category-lavel: Media
 #. group-label: Media - Media
@@ -1024,7 +1029,12 @@ msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
 msgstr ""
 
-#empty strings from id 30711 to 307019
+#. help: Catchup - catchupPlayLiveAsEpg
+msgctxt "#30711"
+msgid "When disabled any catchup channel will be played using the Live OSD. If enabled, it will instead act like a video (bounded by start and end times), also allowing the ability to skip back and forward programmes, if the previous and next programmes support catchup."
+msgstr ""
+
+#empty strings from id 30712 to 307019
 
 #. help info - Timeshift
 

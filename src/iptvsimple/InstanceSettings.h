@@ -164,6 +164,7 @@ namespace iptvsimple
     float GetCatchupCorrectionHours() const { return m_catchupCorrectionHours; }
     int GetCatchupCorrectionSecs() const { return static_cast<int>(m_catchupCorrectionHours * 60 * 60); }
     bool CatchupPlayEpgAsLive() const { return m_catchupPlayEpgAsLive; }
+    bool CatchupPlayLiveAsEpg() const { return m_catchupPlayLiveAsEpg; }
     int GetCatchupWatchEpgBeginBufferMins() const { return m_catchupWatchEpgBeginBufferMins; }
     time_t GetCatchupWatchEpgBeginBufferSecs() const { return static_cast<time_t>(m_catchupWatchEpgBeginBufferMins) * 60; }
     int GetCatchupWatchEpgEndBufferMins() const { return m_catchupWatchEpgEndBufferMins; }
@@ -329,6 +330,7 @@ namespace iptvsimple
     CatchupOverrideMode m_catchupOverrideMode = CatchupOverrideMode::WITHOUT_TAGS;
     float m_catchupCorrectionHours = 0;
     bool m_catchupPlayEpgAsLive = false;
+    bool m_catchupPlayLiveAsEpg = false;
     int m_catchupWatchEpgBeginBufferMins = 5;
     int m_catchupWatchEpgEndBufferMins = 15;
     bool m_catchupOnlyOnFinishedProgrammes = false;

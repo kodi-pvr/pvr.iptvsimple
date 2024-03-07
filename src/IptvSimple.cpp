@@ -216,8 +216,11 @@ PVR_ERROR IptvSimple::GetChannels(bool radio, kodi::addon::PVRChannelsResultSet&
   return m_channels.GetChannels(results, radio);
 }
 
-PVR_ERROR IptvSimple::GetChannelStreamProperties(const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties)
+PVR_ERROR IptvSimple::GetChannelStreamProperties(const kodi::addon::PVRChannel& channel, std::vector<kodi::addon::PVRStreamProperty>& properties, bool fromEpgAsLive)
 {
+  Logger::Log(LogLevel::LEVEL_INFO, "%s - XXXXX fromEpgAsLive: %d", __FUNCTION__, fromEpgAsLive);
+
+
   if (GetChannel(channel, m_currentChannel))
   {
     std::string streamURL = m_currentChannel.GetStreamURL();
@@ -434,6 +437,15 @@ PVR_ERROR IptvSimple::GetSignalStatus(int channelUid, kodi::addon::PVRSignalStat
   signalStatus.SetAdapterStatus("OK");
 
   return PVR_ERROR_NO_ERROR;
+}
+
+/***************************************************************************
+ * Stream State
+ **************************************************************************/
+
+void IptvSimple::StreamClosed()
+{
+  Logger::Log(LEVEL_INFO, "%s - XXXX Stream Closed", __FUNCTION__);
 }
 
 /***************************************************************************
