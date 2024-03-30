@@ -1,3 +1,6 @@
+v21.8.3
+- Change xz-utils to 5.4.3 to match kodi mirrors
+
 v21.8.2
 - Remove xz-utils windows depends since Findlzma.cmake was fixed
 - Findlzma add alternate name to satisfy windows builds
