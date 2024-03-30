@@ -9,7 +9,9 @@
 
 #include "../InstanceSettings.h"
 
-#include <lzma.h>
+#if defined (WITH_LZMA)
+  #include <lzma.h>
+#endif
 #include <zlib.h>
 
 using namespace iptvsimple;
@@ -134,6 +136,7 @@ bool FileUtils::GzipInflate(const std::string& compressedBytes, std::string& unc
 
 bool FileUtils::XzDecompress(const std::string& compressedBytes, std::string& uncompressedBytes)
 {
+#if defined (WITH_LZMA)
   if (compressedBytes.size() == 0)
   {
     uncompressedBytes = compressedBytes;
@@ -167,6 +170,9 @@ bool FileUtils::XzDecompress(const std::string& compressedBytes, std::string& un
   lzma_end (&strm);
 
   return true;
+#else
+  return false;
+#endif
 }
 
 int FileUtils::GetCachedFileContents(std::shared_ptr<iptvsimple::InstanceSettings>& settings,

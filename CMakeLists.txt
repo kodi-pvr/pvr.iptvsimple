@@ -6,20 +6,17 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR})
 find_package(Kodi REQUIRED)
 find_package(pugixml REQUIRED)
 find_package(ZLIB REQUIRED)
-find_package(lzma REQUIRED)
+find_package(lzma)
 
 include_directories(${KODI_INCLUDE_DIR}/.. # Hack way with "/..", need bigger Kodi cmake rework to match right include ways
                     ${PUGIXML_INCLUDE_DIRS}
-                    ${ZLIB_INCLUDE_DIRS}
-                    ${LZMA_INCLUDE_DIRS})
+                    ${ZLIB_INCLUDE_DIRS})
 
 set(DEPLIBS ${PUGIXML_LIBRARIES}
-            ${ZLIB_LIBRARIES}
-            ${LZMA_LIBRARIES})
+            ${ZLIB_LIBRARIES})
 
 message(STATUS "PUGIXML_LIBRARIES: ${PUGIXML_LIBRARIES}")
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
-message(STATUS "LZMA_LIBRARIES: ${LZMA_LIBRARIES}")
 
 set(IPTV_SOURCES src/addon.cpp
                  src/IptvSimple.cpp
@@ -81,8 +78,14 @@ set(IPTV_HEADERS src/addon.h
 addon_version(pvr.iptvsimple IPTV)
 add_definitions(-DIPTV_VERSION=${IPTV_VERSION})
 
-if(WIN32)
-  add_definitions(-DLZMA_API_STATIC)
+if(lzma_FOUND)
+  include_directories(${LZMA_INCLUDE_DIRS})
+  list(APPEND DEPLIBS ${LZMA_LIBRARIES})
+  message(STATUS "LZMA_LIBRARIES: ${LZMA_LIBRARIES}")
+  add_definitions(-DWITH_LZMA)
+  if(WIN32)
+    add_definitions(-DLZMA_API_STATIC)
+  endif()
 endif()
 
 build_addon(pvr.iptvsimple IPTV DEPLIBS)
