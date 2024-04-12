@@ -109,8 +109,6 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       properties.emplace_back("inputstream.adaptive.manifest_type", StreamUtils::GetManifestType(streamType));
       if (streamType == StreamType::HLS || streamType == StreamType::DASH)
         properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
-      if (streamType == StreamType::DASH)
-        properties.emplace_back("inputstream.adaptive.manifest_update_parameter", "full");
     }
   }
 
