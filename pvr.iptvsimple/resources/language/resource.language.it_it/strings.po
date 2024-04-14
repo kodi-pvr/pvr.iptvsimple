@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-09-27 18:06+0000\n"
+"PO-Revision-Date: 2024-04-14 04:58+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.4.3\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -392,7 +392,7 @@ msgstr "User-Agent"
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
 msgid "Inputstream name"
-msgstr "Nome stream in ingresso"
+msgstr "Nome Inputstream"
 
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
@@ -560,7 +560,7 @@ msgstr "- Modifica impostazioni di inputstream.ffmpegdirect..."
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr "Impostazioni stream in ingresso"
+msgstr "Impostazioni Inputstream"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
@@ -654,7 +654,7 @@ msgstr "Radio"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr "Errore stream in ingresso"
+msgstr "Errore Inputstream"
 
 #. notification: Inputstreams
 msgctxt "#30501"
