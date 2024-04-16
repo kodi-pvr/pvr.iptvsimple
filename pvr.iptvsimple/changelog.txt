@@ -1,3 +1,7 @@
+v20.13.1
+- Translations updates from Weblate
+	- da_dk, de_de, es_es, fr_fr, it_it, ko_kr, pl_pl, pt_br, ru_ru
+
 
 v20.13.0
 - Only reset channel group list when a channel URL is read from M3U playlist
