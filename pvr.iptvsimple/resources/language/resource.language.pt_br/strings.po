@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-05-10 12:16+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2024-01-28 23:13+0000\n"
+"Last-Translator: icarok99 <icarok00@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/pt_br/>\n"
 "Language: pt_br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.3\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -23,7 +23,7 @@ msgstr "Addon de PVR no Kodi com suporte a IPTV. https://github.com/afedchin/Kod
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "O cliente de PVR IPTV Simple Client oferece suporte para listas m3u, transmissão de TV ao vivo de fontes multicast/unicast, transmissão de rádios e, ainda, suporte a guia de programação eletrônico - EPG."
+msgstr "O IPTV Simple PVR Client oferece suporte para listas m3u, transmissão de TV ao vivo de fontes multicast/unicast, transmissão de rádios e, ainda, suporta o guia eletrônico de programação - EPG.    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
@@ -43,7 +43,7 @@ msgstr "Local"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "Caminho local (inclui a rede local)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -71,22 +71,22 @@ msgstr "Uma vez por dia"
 #. label-group: General - Providers
 msgctxt "#30006"
 msgid "Providers"
-msgstr ""
+msgstr "Provedores"
 
 #. label: Channels - defaultProviderName
 msgctxt "#30007"
 msgid "Default provider name"
-msgstr ""
+msgstr "Nome do provedor padrão"
 
 #. label: Channels - enableProviderMappings
 msgctxt "#30008"
 msgid "Enable provider mapping"
-msgstr ""
+msgstr "Ativar mapeamento de provedor"
 
 #. label: Channels - providerMappingFile
 msgctxt "#30009"
 msgid "Provider name mapping file"
-msgstr ""
+msgstr "Arquivo de mapeamento do nome do provedor"
 
 #. label-category: general
 #. label-group: General - General
@@ -107,7 +107,7 @@ msgstr "URL da lista de reprodução M3U"
 #. label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
-msgstr "Iniciar número canal"
+msgstr "Número do canal inicial"
 
 #. label: General - numberByOrder
 msgctxt "#30014"
@@ -117,7 +117,7 @@ msgstr "Somente número por ordem de canal no M3U"
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "Modo de atualização automática"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
@@ -182,12 +182,12 @@ msgstr "{0:.1f} horas"
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "Carregar apenas canais de TV em grupos"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "Grupos de TV"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
@@ -208,40 +208,40 @@ msgstr "URL base dos logotipos do canal"
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "Grupos de rádio"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "Modo de grupo de TV"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "Modo de grupo de rádio"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30036"
 msgid "All groups"
-msgstr ""
+msgstr "Todos os grupos"
 
 #. label-option: Channels - tvGroupMode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "Alguns grupos"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "Grupos personalizados"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
 msgid "Number of TV groups"
-msgstr ""
+msgstr "Número de grupos de TV"
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
@@ -271,27 +271,27 @@ msgstr "Preferir XMLTV"
 #. label: General - oneTvGroup
 msgctxt "#30045"
 msgid "TV group 1"
-msgstr ""
+msgstr "Grupo 1 de TV"
 
 #. label: General - twoTvGroup
 msgctxt "#30046"
 msgid "TV group 2"
-msgstr ""
+msgstr "Grupo 2 de TV"
 
 #. label: General - threeTvGroup
 msgctxt "#30047"
 msgid "TV group 3"
-msgstr ""
+msgstr "Grupo 3 de TV"
 
 #. label: General - fourTvGroup
 msgctxt "#30048"
 msgid "TV group 4"
-msgstr ""
+msgstr "Grupo 4 de TV"
 
 #. label: General - fiveTvGroup
 msgctxt "#30049"
 msgid "TV group 5"
-msgstr ""
+msgstr "Grupo 5 de TV"
 
 #. label-category: genres
 #. label-group: Genres - Genres
@@ -317,32 +317,32 @@ msgstr "URL Gêneros"
 #. label: Channels - customTvGroupsFile
 msgctxt "#30054"
 msgid "Custom TV groups file"
-msgstr ""
+msgstr "Arquivo de grupos de TV personalizados"
 
 #. label: General - oneRadioGroup
 msgctxt "#30055"
 msgid "Radio group 1"
-msgstr ""
+msgstr "Grupo 1 de rádio"
 
 #. label: General - twoRadioGroup
 msgctxt "#30056"
 msgid "Radio group 2"
-msgstr ""
+msgstr "Grupo 2 de rádio"
 
 #. label: General - threeRadioGroup
 msgctxt "#30057"
 msgid "Radio group 3"
-msgstr ""
+msgstr "Grupo 3 de rádio"
 
 #. label: General - fourRadioGroup
 msgctxt "#30058"
 msgid "Radio group 4"
-msgstr ""
+msgstr "Grupo 4 de rádio"
 
 #. label: General - fiveRadioGroup
 msgctxt "#30059"
 msgid "Radio group 5"
-msgstr ""
+msgstr "Grupo 5 de rádio"
 
 #. label-category: advanced
 msgctxt "#30060"
@@ -377,17 +377,17 @@ msgstr "Transmissão"
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr ""
+msgstr "Usar inputstream.adaptive para fluxos m3u8 (HLS)"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
 msgid "Use FFmpeg http reconnect options if possible"
-msgstr ""
+msgstr "Usar as opções de reconexão http do FFmpeg, se possível"
 
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
 msgid "User-Agent"
-msgstr ""
+msgstr "User-Agent"
 
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
@@ -397,94 +397,94 @@ msgstr ""
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
 msgid "MIME type"
-msgstr ""
+msgstr "Tipo MIME"
 
 #. label-group: Advanced - Channel defaults
 msgctxt "#30071"
 msgid "Channel defaults"
-msgstr ""
+msgstr "Padrões de canal"
 
 #. label: General - numRadioGroups
 msgctxt "#30072"
 msgid "Number of Radio groups"
-msgstr ""
+msgstr "Número de grupos de rádio"
 
 #. label: Channels - customRadioGroupsFile
 msgctxt "#30073"
 msgid "Custom Radio groups file"
-msgstr ""
+msgstr "Arquivo de grupos de rádios personalizados"
 
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
 msgid "Only load Radio channels in groups"
-msgstr ""
+msgstr "Carregar apenas canais de rádio em grupos"
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
-msgstr ""
+msgstr "Para o caminho de logotipos locais, ignore os logotipos M3U"
 
 #. label-category: Groups
 msgctxt "#30076"
 msgid "Groups"
-msgstr ""
+msgstr "Grupos"
 
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "Ignorar maiúsculas e minúsculas para IDs de canal EPG"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
 msgid "Catchup"
-msgstr ""
+msgstr "Catchup"
 
 #. label: Catchup - enableCatchup
 msgctxt "#30101"
 msgid "Enable catchup"
-msgstr ""
+msgstr "Ativar catchup"
 
 #. label: Catchup - catchupQueryFormat
 msgctxt "#30102"
 msgid "Query format string"
-msgstr ""
+msgstr "Cadeia de formato da consulta"
 
 #. label: Catchup - catchupDays
 msgctxt "#30103"
 msgid "Catchup window"
-msgstr ""
+msgstr "Janela de recuperação"
 
 #. label: Catchup - allChannelsCatchupMode
 msgctxt "#30104"
 msgid "Channels support catchup using mode"
-msgstr ""
+msgstr "Os canais suportam o modo de uso catchup"
 
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
 msgid "Watch From EPG"
-msgstr ""
+msgstr "Assistir a partir do EPG"
 
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
 msgid "Play from EPG in Live TV mode (using timeshift)"
-msgstr ""
+msgstr "Reproduzir a partir do EPG no modo TV ao vivo (usando timeshift)"
 
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
 msgid "Buffer before program start"
-msgstr ""
+msgstr "Buffer antes do início do programa"
 
 #. label: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30108"
 msgid "Buffer after program end"
-msgstr ""
+msgstr "Buffer após o fim do programa"
 
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
 msgid "Catchup only available on finished programmes"
-msgstr ""
+msgstr "Catchup disponível apenas em programas concluídos"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
@@ -499,125 +499,125 @@ msgstr "Normal"
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
 msgid "Append"
-msgstr ""
+msgstr "Acrescentar"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30113"
 msgid "Shift (SIPTV)"
-msgstr ""
+msgstr "Shift (SIPTV)"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30114"
 msgid "Flussonic"
-msgstr ""
+msgstr "Flussônico"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30115"
 msgid "Xtream codes"
-msgstr ""
+msgstr "Xtream codes"
 
 #. label: Catchup - catchupOverrideMode
 msgctxt "#30116"
 msgid "Include channels"
-msgstr ""
+msgstr "Incluir canais"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30117"
 msgid "without catchup mode"
-msgstr ""
+msgstr "sem o modo catchup"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30118"
 msgid "with catchup mode"
-msgstr ""
+msgstr "com o modo catchup"
 
 #. label-option: Catchup - catchupOverrideMode
 msgctxt "#30119"
 msgid "with and without catchup mode (all channels)"
-msgstr ""
+msgstr "com e sem modo catchup (todos os canais)"
 
 #. label-category: timeshift
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr "Ver Mais Tarde"
+msgstr "Timeshift"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
 msgid "Enable timeshift"
-msgstr "Ativar Ver mais tarde"
+msgstr "Ativar timeshift"
 
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr ""
+msgstr "Ativar timeshift para fluxos baseados em HTTP"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr ""
+msgstr "- Modificar as configurações do inputstream.ffmpegdirect..."
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr ""
+msgstr "Inputstream"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr ""
+msgstr "Sempre ative o modo de fluxo de timeshift se estiver faltando"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
 msgid "Enable timeshift for all streams"
-msgstr ""
+msgstr "Ativar timeshift para todos os fluxos"
 
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr ""
+msgstr "Ativar timeshift para fluxos baseados em UDP"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
 msgid "Catchup correction"
-msgstr ""
+msgstr "Correção do catchup"
 
 # empty strings from id 30129 to 30449
 #. category-lavel: Media
 #. group-label: Media - Media
 msgctxt "#30150"
 msgid "Media"
-msgstr ""
+msgstr "Mídia"
 
 #. label: Media - mediaGroupByTitle
 msgctxt "#30151"
 msgid "Group entries by title"
-msgstr ""
+msgstr "Agrupar registros por título"
 
 #. label: Media - mediaGroupBySeason
 msgctxt "#30152"
 msgid "Group entries by season"
-msgstr ""
+msgstr "Agrupar registros por temporada"
 
 #. label: Media - mediaBySeasonEpisode
 msgctxt "#30153"
 msgid "Include season and episode number in title"
-msgstr ""
+msgstr "Incluir número de temporada e episódio no título"
 
 #. label: Media - mediaVODAsRecordings
 msgctxt "#30154"
 msgid "Include VODs as media"
-msgstr ""
+msgstr "Incluir VODs como mídia"
 
 #. label: Media - mediaEnabled
 msgctxt "#30155"
 msgid "Show Media as recordings"
-msgstr ""
+msgstr "Mostrar mídia como gravações"
 
 #. label: Media - mediaUseM3UGroupForGrouping
 msgctxt "#30156"
 msgid "Use M3U Group name in path"
-msgstr ""
+msgstr "Usar o nome do grupo M3U no caminho"
 
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
@@ -627,17 +627,17 @@ msgstr "Nunca"
 #. label-option: Media - mediaEnabled - ALWAYS_APPEND
 msgctxt "#30158"
 msgid "Always append"
-msgstr ""
+msgstr "Sempre acrescentar"
 
 #. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
 msgctxt "#30159"
 msgid "When no media-dir is present"
-msgstr ""
+msgstr "Quando nenhum diretório de mídia estiver presente"
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30160"
 msgid "Force all M3U entries to be media"
-msgstr ""
+msgstr "Forçar todas as entradas M3U a serem de mídia"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -654,17 +654,17 @@ msgstr "Rádio"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr ""
+msgstr "Erro no inputstream"
 
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr ""
+msgstr "O addon %s não está instalado."
 
 #. notification: Inputstreams
 msgctxt "#30502"
 msgid "The %s addon is not enabled."
-msgstr ""
+msgstr "O addon %s não está ativado."
 
 #. ############
 #. help info #
@@ -678,27 +678,27 @@ msgstr "Ajustes gerais necessárias para o complemento funcionar."
 #. help: General - m3uPathType
 msgctxt "#30601"
 msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
-msgstr ""
+msgstr "Selecione onde encontrar o recurso M3U. As opções são: [B]Caminho local[/B] - Um caminho para um arquivo M3U, seja no dispositivo ou na rede local; [B] Caminho remoto[/B] - UMA URL especificando o local do arquivo M3U."
 
 #. help: General - m3uPath
 msgctxt "#30602"
 msgid "If location is [B]Local path[/B] this setting must contain a valid path for the addon to function."
-msgstr ""
+msgstr "Se o local for [B]Caminho local[/B], essa configuração deverá conter um caminho válido para que o addon funcione."
 
 #. help: General - m3uUrl
 msgctxt "#30603"
 msgid "If location is [B]Remote path[/B] this setting must contain a valid URL for the addon to function."
-msgstr ""
+msgstr "Se o local for [B]Caminho remoto[/B], essa configuração deverá conter uma URL válida para que o addon funcione."
 
 #. help: General - m3uCache
 msgctxt "#30604"
 msgid "If location is [B]Remote path[/B] select whether or not the the M3U file should be cached locally."
-msgstr ""
+msgstr "Se o local for [B]Caminho remoto[/B], selecione se o arquivo M3U deve ou não ser armazenado em cache localmente."
 
 #. help: General - startNum
 msgctxt "#30605"
 msgid "The number to start numbering channels from. Only used when [B]Use backend channel numbers[/B] from PVR settings is enabled and a channel number is not supplied in the M3U file."
-msgstr ""
+msgstr "O número a partir do qual iniciar a numeração de canais. Usado somente quando [B]Usar números de canal de back-end[/B] das configurações de PVR está habilitado e um número de canal não é fornecido no arquivo M3U."
 
 #. help: General - numberByOrder
 msgctxt "#30606"
@@ -708,27 +708,27 @@ msgstr "Ignore as tags 'tvg-chno' e apenas os canais numéricos pela ordem no M3
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
 msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
-msgstr ""
+msgstr "Selecione o modo de atualização automática para os arquivos M3U/XMLTV. Observe que o armazenamento em cache será desativado se a atualização automática for usada. As opções são: [B]desativado[/B] - Não atualizar automaticamente os arquivos; [B]Atualização repetida[/B] - Atualizar os arquivos em um intervalo baseado em minutos; [B]Uma vez por dia[/B] - Atualizar os arquivos uma vez por dia."
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
 msgid "If M3U auto refresh mode is [B]Repeated refresh[/B] refresh the files every time this number of minutes passes. Max 120 minutes."
-msgstr ""
+msgstr "Se o modo de atualização automática do M3U for [B]Atualização repetida[/B], atualize os arquivos sempre que esse número de minutos passar. Máximo de 120 minutos."
 
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
 msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
-msgstr ""
+msgstr "Se o modo de atualização automática for [B]Uma vez por dia[/B], atualize os arquivos sempre que essa hora do dia for atingida."
 
 #. help: General - tvChannelGroupsOnly
 msgctxt "#30610"
 msgid "Only TV channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "Somente os canais de TV que pertencem a grupos (ou seja, têm um atributo [B]grupo-título[/B]) serão carregados do arquivo M3U."
 
 #. help: Channels - tvGroupMode
 msgctxt "#30611"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Escolha um dos três modos a seguir: [B]Todos os grupos[/B] Carrega todos os grupos de TV do arquivo M3U; [B]Alguns grupos[/B] Carrega apenas os grupos especificados nas próximas opções; [B]Grupos personalizados[/B] Carrega um conjunto de grupos do arquivo M3U cujos nomes são carregados de um arquivo XML."
 
 #. help: Channels - oneTvGroup
 #. help: Channels - twoTvGroup
@@ -737,12 +737,12 @@ msgstr ""
 #. help: Channels - fiveTvGroup
 msgctxt "#30612"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Se a opção anterior tiver sido definida como \"Alguns grupos\", você precisará especificar um grupo de TV a ser carregado do arquivo M3U. Observe que esse é o nome do grupo, conforme mostrado no atributo grupo-título (ou seja, \"UK (TV)\"). Essa configuração diferencia maiúsculas de minúsculas."
 
 #. help: Channels - radioGroupMode
 msgctxt "#30613"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "Escolha um dos três modos a seguir: [B]Todos os grupos[/B] Carrega todos os grupos de rádio do arquivo M3U[/B]; [B]Alguns grupos[/B] Carrega apenas os grupos especificados nas próximas opções; [B]Grupos personalizados[/B] Carrega um conjunto de grupos do arquivo M3U cujos nomes são carregados de um arquivo XML."
 
 #. help: Channels - oneRadioGroup
 #. help: Channels - twoRadioGroup
@@ -751,63 +751,63 @@ msgstr ""
 #. help: Channels - fiveRadioGroup
 msgctxt "#30614"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
-msgstr ""
+msgstr "Se a opção anterior tiver sido definida como \"Alguns grupos\", você precisará especificar um grupo de rádio a ser obtido do arquivo M3U. Observe que esse é o nome do grupo, conforme mostrado no atributo grupo-título (ou seja, \"UK (Radio)\"). Essa configuração diferencia maiúsculas de minúsculas."
 
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr ""
+msgstr "O arquivo usado para carregar os grupos de TV personalizados. O arquivo padrão é \"customTVGroups-example.xml\"."
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr ""
+msgstr "O arquivo usado para carregar os grupos de rádios personalizados. O arquivo padrão é \"customRadioGroups-example.xml\"."
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr ""
+msgstr "O número de grupos de TV a serem carregados quando \"Alguns grupos\" for o modo selecionado. Podem ser escolhidos até 5. Se forem necessários mais de 5, o modo \"Grupos personalizados\" deverá ser usado."
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
 msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
-msgstr ""
+msgstr "O número de grupos de rádio a serem carregados quando \"Alguns grupos\" for o modo selecionado. Podem ser escolhidos até 5. Se forem necessários mais de 5, o modo \"Grupos personalizados\" deve ser usado."
 
 #. help: General - radioChannelGroupsOnly
 msgctxt "#30619"
 msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "Somente os canais de rádio que pertencem a grupos (ou seja, têm um atributo [B]grupo-título[/B]) serão carregados do arquivo M3U."
 
 #. help info - EPG Settings
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr ""
+msgstr "Configurações relacionadas ao EPG. Observe que a Kodi só carregará os dados do EPG quando for necessário. O addon forçará o carregamento dos dados do EPG, independentemente de o Kodi solicitá-lo ou não, se o catchup estiver ativado ou se os logotipos XMLTV forem necessários."
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
 msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
-msgstr ""
+msgstr "Selecione onde localizar o recurso XMLTV. As opções são: [B]Caminho local[/B] - Um caminho para um arquivo XMLTV, esteja ele no dispositivo ou na rede local; [B]Caminho remoto[/B] - Uma URL especificando o local do arquivo XMLTV."
 
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Se o local for [B]Caminho local[/B], essa configuração deverá conter um caminho válido."
 
 #. help: EPG Settings - epgUrl
 msgctxt "#30623"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Se o local for [B]Caminho remoto[/B], essa configuração deverá conter uma URL válida."
 
 #. help: EPG Settings - epgCache
 msgctxt "#30624"
 msgid "If location is [B]Remote path[/B] select whether or not the the XMLTV file should be cached locally."
-msgstr ""
+msgstr "Se o local for [B]Caminho remoto[/B], selecione se o arquivo XMLTV deve ou não ser armazenado em cache localmente."
 
 #. help: EPG Settings - epgTimeShift
 msgctxt "#30625"
 msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
-msgstr ""
+msgstr "Ajuste os horários do EPG por esse valor, de -12 horas a +14 horas."
 
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
@@ -817,7 +817,7 @@ msgstr "Substituir ou não a mudança de horário para todos os canais com `EPG 
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr ""
+msgstr "Ignora maiúsculas e minúsculas para IDs de canal EPG, também conhecidas como tvg-id's, ao corresponder canais a registros EPG. Se desabilitada, somente a correspondência de senitiva de maiúsculas e minúsculas será usada."
 
 #. help info - Channel Logos
 #. help-category: Channel Logos
@@ -828,27 +828,27 @@ msgstr "Ajustes relacionados aos logos do canais."
 #. help: Channel Logos - logoPathType
 msgctxt "#30641"
 msgid "Select where to find the channel logos. The options are: [B]Local path[/B] - A path to a folder whether it be on the device or the local network; [B]Remote path[/B] - A base URL specifying the location of the logos."
-msgstr ""
+msgstr "Selecione onde encontrar os logotipos dos canais. As opções são: [B]Caminho local[/B] (Caminho local) - Um caminho para uma pasta, seja no dispositivo ou na rede local; [B]Caminho remoto[/B] (Caminho remoto) - Uma URL de base que especifica o local dos logotipos."
 
 #. help: Channel Logos - logo Path
 msgctxt "#30642"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid folder."
-msgstr ""
+msgstr "Se o local for [B]Caminho local[/B], essa configuração deverá conter uma pasta válida."
 
 #. help: Channel Logos - logoBaseUrl
 msgctxt "#30643"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid base URL."
-msgstr ""
+msgstr "Se o local for [B]Caminho remoto[/B], essa configuração deverá conter uma URL de base válida."
 
 #. help: Channel Logos - logoFromEpg
 msgctxt "#30644"
 msgid "Preference on how to handle channel logos. The options are: [B]Ignore[/B] - Don't use channel logos from an XMLTV file; [B]Prefer M3U[/B] - Use the channel logo from the M3U if available otherwise use the XMLTV logo; [B]Prefer XMLTV[/B] - Use the channel logo from the XMLTV file if available otherwise use the M3U logo."
-msgstr ""
+msgstr "Preferência sobre como lidar com os logotipos do canal. As opções são: [B]Ignorar[/B] - Não usa logotipos de canais de um arquivo XMLTV; [B]Preferir M3U[/B] - Usa o logotipo do canal do M3U, se disponível; caso contrário, usa o logotipo do XMLTV; [B]Preferir XMLTV[/B] - Usa o logotipo do canal do arquivo XMLTV, se disponível; caso contrário, usa o logotipo do M3U."
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
-msgstr ""
+msgstr "Se um caminho local for selecionado para os logotipos, ignore todos os logotipos do arquivo M3U."
 
 #. help info - Genres
 #. help-category: Genres
@@ -864,24 +864,24 @@ msgstr "Se ativado, e um arquivo de mapeamento de gênero for usado para obter u
 #. help: Genres - genresPathType
 msgctxt "#30662"
 msgid "Select where to find the genres XML resource. The options are: [B]Local path[/B] - A path to a genres XML file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the genres XML file."
-msgstr ""
+msgstr "Selecione onde encontrar o recurso XML de gêneros. As opções são: [B]Caminho local[/B] - Um caminho para um arquivo XML de gêneros, seja no dispositivo ou na rede local; [B]Caminho remoto[/B] - Uma URL que especifica o local do arquivo XML de gêneros."
 
 #. help: Genres - genresPath
 msgctxt "#30663"
 msgid "If location is [B]Local Path[/B] this setting should contain a valid path."
-msgstr ""
+msgstr "Se o local for [B]Caminho local[/B], essa configuração deverá conter um caminho válido."
 
 #. help: Genres - genresUrl
 msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
-msgstr ""
+msgstr "Se o local for [B]Caminho remoto[/B], essa configuração deverá conter uma URL válida."
 
 # empty strings from id 30665 to 30679
 #. help info - Advanced
 #. help-category: Advanced
 msgctxt "#30680"
 msgid "Advanced settings including multicast relays, streaming properties etc."
-msgstr ""
+msgstr "Configurações avançadas, incluindo retransmissões multicast, propriedades de streaming etc."
 
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
@@ -901,49 +901,49 @@ msgstr "A porta do relé multicast (udpxy) na rede local."
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr ""
+msgstr "Usar inputstream.adaptive em vez do libavformat do ffmpeg para fluxos m3u8 (HLS)."
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr ""
+msgstr "Observe que isso só se aplica a fluxos http/https que são processados pelo libavformat (por exemplo, M3u8/HLS). O uso do libavformat pode ser especificado em um arquivo M3U, definindo a propriedade \"inputstream\" como \"inputstream.ffmpeg\" para a implementação interna do kodi ou \"inputstream.ffmpegdirect\" para a versão addon. Ou seja, adicionando a linha: \"#KODIPROP:inputstream=inputstream.ffmpeg\". Se essa opção não estiver ativada, ela ainda poderá ser ativada por fluxo/canal adicionando uma propriedade do kodi, ou seja: \"#KODIPROP:http-reconnect=true\"."
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
-msgstr ""
+msgstr "Use esse User-Agent se não houver um fornecido como uma propriedade ou como parte da URL do fluxo do canal."
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr ""
+msgstr "Use esse inputsream como padrão se não houver um fornecido como uma propriedade (KODIPROP) do canal. Use com cuidado, pois isso desabilitará qualquer uso do comportamento de inspeção de fluxo padrão do addon. Observe que para \"inputstream.ffmpegdirect\" se ambos \"mimetype\" e \"inputstream.ffmpegdirect.manifest_type\" estiverem desconfigurados, a inspeção de fluxo ainda ocorrerá, se necessário."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr ""
+msgstr "Use esse tipo de MIME como padrão se não houver um fornecido como uma propriedade (KODIPROP) do canal. Use com cuidado, pois isso desativará qualquer uso do comportamento de inspeção de fluxo padrão do addon."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr ""
+msgstr "Configurações do Catchup para visualização de programas ao vivo arquivados. Permite a opção de \"Reproduzir programa\" ao visualizar informações de entrada do EPG."
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
 msgid "Should be enabled if there are channels supporting catchup in your M3U list."
-msgstr ""
+msgstr "Deve ser ativado se houver canais que suportem catchup em sua lista M3U."
 
 #. help: Catchup - catchupQueryFormat
 msgctxt "#30702"
 msgid "A query format string (provider dependent) allowing timestamp information to be appended to a URL to denote when to catchup from. E.g. `&cutv={Y}-{m}-{d}T{H}:{M}:{S}`, which allows year, month, day, hour minute and second to be inserted to give: `&cutv=2019-11-26T22:00:32`. If the M3U entry using has a catchup mode of 'default' or 'append' and a 'catchup-source' tag is provided in the M3U entry this setting will be ignored."
-msgstr ""
+msgstr "Uma cadeia de caracteres de formato de consulta (dependente do provedor) que permite que informações de registro de data e hora sejam anexadas a um URL para indicar quando a recuperação deve ser feita. Por exemplo, \"&cutv={Y}-{m}-{d}T{H}:{M}:{S}\", que permite que o ano, o mês, o dia, a hora, o minuto e o segundo sejam inseridos para fornecer: \"&cutv=2019-11-26T22:00:32\". Se a entrada M3U que estiver sendo usada tiver um modo de catchup \"padrão\" ou \"acrescentar\" e uma tag \"catchup-source\" for fornecida na entrada M3U, essa configuração será ignorada."
 
 #. help: Catchup - catchupDays
 msgctxt "#30703"
 msgid "A number of days into the past in which it is possible to catchup on a programme. Can be overidden in an M3U entry using a 'catchup-days' tag."
-msgstr ""
+msgstr "Um número de alguns dias atrás em que é possível assistir a um programa. Pode ser substituído em uma entrada M3U usando uma tag \"catchup-days\"."
 
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
@@ -958,17 +958,17 @@ msgstr ""
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
 msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "A quantidade de buffer a ser fornecida antes do ponto de início da reprodução de uma entrada de EPG que será assistida como um vídeo."
 
 #. help: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30707"
 msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
-msgstr ""
+msgstr "A quantidade de buffer a ser fornecida após o ponto final de reprodução de uma entrada de EPG que será assistida como um vídeo."
 
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"
 msgid "When selected from the EPG the current live programme cannot be watched as catchup until finished."
-msgstr ""
+msgstr "Quando selecionado no EPG, o programa ao vivo atual não pode ser assistido como catchup até que seja concluído."
 
 #. help: Catchup - catchupOverrideMode
 msgctxt "#30709"
@@ -978,108 +978,108 @@ msgstr ""
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
-msgstr ""
+msgstr "Ajuste o horário usado para a geração de URL de fluxo de catchup por esse valor, de -12 horas a +14 horas. Útil para transmissões de catchup com correspondência geográfica incorreta para a hora errada. Observe que esse valor pode ser substituído por valores no arquivo M3U."
 
 # empty strings from id 30710 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
 msgid "Timeshift settings for pausing/rewinding and fast-forwarding live streams."
-msgstr ""
+msgstr "Configurações de Timeshift para pausar/retroceder e avançar rapidamente as transmissões ao vivo."
 
 #. help: Timeshift - timeshiftEnabled
 msgctxt "#30721"
 msgid "Enable the timeshift feature."
-msgstr ""
+msgstr "Ativa o recurso de timeshift."
 
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Ativa o recurso de timeshift para fluxos baseados em HTTP. Será aplicado somente a transmissões que não selecionam um addon de fluxo de entrada específico para reprodução. O addon inputstream.ffmpegdirect será usado para o timeshift."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
-msgstr ""
+msgstr "Abra a caixa de diálogo de configurações do inputstream.ffmpegdirect para modificar o timeshift e outras configurações."
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
 msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
-msgstr ""
+msgstr "Se uma propriedade stream_mode não for especificada junto com uma propriedade inputstream.ffmpegdirect, sempre a adicione para qualquer tipo de fluxo compatível. Observe que essa configuração não tem efeito sobre fluxos VOD catchup que não sejam ao vivo."
 
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Ativa o recurso de timeshift para todos os fluxos. Será aplicado somente a transmissões que não selecionam um addon de fluxo de entrada específica para reprodução. O addon inputstream.ffmpegdirect será usado para o timeshift."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr ""
+msgstr "Ativa o recurso de timeshift para fluxos baseados em UDP. Será aplicado somente a transmissões que não selecionam um addon de fluxo de entrada específica para reprodução. O addon inputstream.ffmpegdirect será usado para o timeshift."
 
 # empty strings from id 30727 to 30739
 #. help info - Other categories continued
 #. help: General - defaultproviderName
 msgctxt "#30740"
 msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
-msgstr ""
+msgstr "Se fornecido, esse valor será usado como o nome do provedor, caso não tenha sido fornecido um no M3U. Ele pode ser usado em combinação com o arquivo de mapeamento do provedor, que pode fornecer campos de tipo, caminho do ícone, país e idioma."
 
 #. help: General - enableProviderMappings
 msgctxt "#30741"
 msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
-msgstr ""
+msgstr "Se ativado, qualquer nome de provedor lido do M3U ou o nome de provedor padrão será usado para ler outros metadados do arquivo de mapeamento. Os metadados incluem nome personalizado, tipo, caminho do ícone, país e idioma."
 
 #. help: General - providerMappingFile
 msgctxt "#30742"
 msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
-msgstr ""
+msgstr "O arquivo de configuração para mapear os nomes de provedores recebidos do M3U ou o nome padrão do provedor para nomes personalizados, ícones etc. O arquivo padrão é [I]providerMappings.xml[/I]."
 
 #. help: Groups - groups
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
-msgstr ""
+msgstr "Configurações sobre a personalização de grupos de canais."
 
 # empty strings from id 30744 to 30799
 #. help info - Media
 #. help-category: Media
 msgctxt "#30800"
 msgid "Settings related to VOD media."
-msgstr ""
+msgstr "Configurações relacionadas à mídia VOD."
 
 #. help: Media - mediaGroupByTitle
 msgctxt "#30801"
 msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
-msgstr ""
+msgstr "Se houver várias entradas com títulos correspondentes, crie uma pasta virtual para agrupá-las."
 
 #. help: Media - mediaGroupBySeason
 msgctxt "#30802"
 msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
-msgstr ""
+msgstr "Se houver várias entradas com títulos correspondentes, crie uma segunda pasta virtual para agrupá-las por temporada também, se possível."
 
 #. help: Media - mediaTitleSeasonEpisode
 msgctxt "#30803"
 msgid "Prepend the season and episode numbers to the title."
-msgstr ""
+msgstr "Acrescenta os números da temporada e do episódio ao título."
 
 #. help: Media - mediaVODAsRecordings
 msgctxt "#30804"
 msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
-msgstr ""
+msgstr "Mostra VOD como gravações, se ativado. Se estiver desativado, somente as entradas M3U com atributos de mídia serão mostradas como gravações."
 
 #. label: Media - mediaEnabled
 msgctxt "#30805"
 msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
-msgstr ""
+msgstr "Se ativado, todas as entradas de mídia IPTV podem ser mostradas como gravações PVR. Caso contrário, elas aparecerão como canais PVR normais."
 
 #. label: Media - mediaM3UGroupPath
 msgctxt "#30806"
 msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
-msgstr ""
+msgstr "Selecione como usar o título do grupo M3U no caminho. Observe que ele só será usado se for fornecido um único nome de grupo. As opções são: [B] Nunca [/B] - Nunca use; [B]Sempre acrescentar[/B] - Sempre acrescenta; [B]Quando nenhum diretório de mídia estiver presente[/B] - Usa apenas o título do grupo do M3U quando nenhum diretório de mídia for fornecido."
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30806"
 msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
-msgstr ""
+msgstr "Força a lista de reprodução completa a ser mídia, independentemente de quais tags estejam presentes. Desde a introdução de várias instâncias para addons de PVR, essa opção pode ser útil."
 
 #~ msgctxt "#30620"
 #~ msgid "Settings related to the EPG."

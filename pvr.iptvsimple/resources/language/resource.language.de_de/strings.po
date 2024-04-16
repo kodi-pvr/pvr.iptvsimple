@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-10-19 09:11+0000\n"
+"PO-Revision-Date: 2024-02-29 09:13+0000\n"
 "Last-Translator: Kai Sommerfeld <ksooo@users.noreply.kodi.weblate.cloud>\n"
 "Language-Team: German <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/de_de/>\n"
 "Language: de_de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.0.2\n"
+"X-Generator: Weblate 5.4\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -659,7 +659,7 @@ msgstr "Inputstream-Fehler"
 #. notification: Inputstreams
 msgctxt "#30501"
 msgid "The %s addon is not installed."
-msgstr "Das Addon %s ist nicht installiert."
+msgstr "Das Addon %s ist nicht installirt."
 
 #. notification: Inputstreams
 msgctxt "#30502"
@@ -1025,17 +1025,17 @@ msgstr "Timeshift-Funktionen für UDP-Streams aktivieren. Nur anwendbar auf Stre
 #. help: General - defaultproviderName
 msgctxt "#30740"
 msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
-msgstr ""
+msgstr "Wenn kein Providername in der M3U-Datei enthalten ist, wird dieser Wert als Providername verwendet. Er kann in Kombination mit der Providermapping-Datei verwendet werden, die Typ, Symbolpfad, Land and Sprache liefern kann."
 
 #. help: General - enableProviderMappings
 msgctxt "#30741"
 msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
-msgstr ""
+msgstr "Wenn aktiviert, wird der aus der M3U-Datei gelesene Providername oder der Standard-Providername verwendet, um weitere Meatdaten aus der Mapping-Datei zu lesen. Diese Metadaten beinhalten benutzerdefinierte Namen, Typ, Symbolpfad, Land und Sprache."
 
 #. help: General - providerMappingFile
 msgctxt "#30742"
 msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
-msgstr ""
+msgstr "Die Konfiguarationsdatei zum Mappen von Providernamen aus der M3U-Datei oder des Standerd-Providers auf benutzerdefinierte Namen, Symbole etc. Standard-Datei ist [I]providerMappings.xml[/I]."
 
 #. help: Groups - groups
 msgctxt "#30743"
@@ -1052,34 +1052,34 @@ msgstr "Einstellugen für VOD-Medien."
 #. help: Media - mediaGroupByTitle
 msgctxt "#30801"
 msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
-msgstr ""
+msgstr "Wenn es mehrere Einträge mit passenden Titeln gibt, einen virtuellen Ordner zum Gruppieren dieser Einträge erstellen."
 
 #. help: Media - mediaGroupBySeason
 msgctxt "#30802"
 msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
-msgstr ""
+msgstr "Wenn es mehrere Einträge mit passenden Titeln gibt, einen zweiten virtuellen Ordner zum Gruppieren dieser Einträge nach Staffeln erstellen, wenn möglich."
 
 #. help: Media - mediaTitleSeasonEpisode
 msgctxt "#30803"
 msgid "Prepend the season and episode numbers to the title."
-msgstr ""
+msgstr "Staffel- und Episodennummer an den Titel anhängen."
 
 #. help: Media - mediaVODAsRecordings
 msgctxt "#30804"
 msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
-msgstr ""
+msgstr "Wenn aktiviert, werden VOD als Aufnahmen angezeigt. Wenn deaktiviert, werden nur M3U-Dateieinträge mit Medien-Attributen als Aufnahmen angezeigt."
 
 #. label: Media - mediaEnabled
 msgctxt "#30805"
 msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
-msgstr ""
+msgstr "Wenn aktiviert, können alle IPTV-Medieneinträge als Aufnahmen angezeigt werden. Anderenfalls erscheinen sie als normale TV-Sender."
 
 #. label: Media - mediaM3UGroupPath
 msgctxt "#30806"
 msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
-msgstr ""
+msgstr "Auswählen, wie der M3U-Gruppentitel im Pfad verwendet wird. Bitte beachten, dass die Einstellung nur verwendet wird, wenn ein einzelner Gruppenname zur Verfügung steht. Optionen sind: [B]Nie[/B] - Niemals nutzen. [B]Immer anhängen[/B] - Immer anhängen. [B]Wenn media-dir nicht vorhanden[/B] - M3U-Gruppentitel nur verwenden, wenn media-dir nicht zur Verfügung steht."
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30806"
 msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
-msgstr ""
+msgstr "Erzwingen, dass die gesamte Wiedergabeliste für Medien ist, ungeachtet welche Tags vergügbar sind. Seit Einführung mehrerer Instanzen für PVR-Addons kann diese Option hilfreich sein."
