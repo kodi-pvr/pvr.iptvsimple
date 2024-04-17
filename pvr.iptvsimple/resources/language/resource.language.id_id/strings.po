@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2021-08-03 07:29+0000\n"
+"PO-Revision-Date: 2023-10-23 20:09+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
 "Language-Team: Indonesian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/id_id/>\n"
 "Language: id_id\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.7.2\n"
+"X-Generator: Weblate 5.0.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -68,6 +68,26 @@ msgctxt "#30005"
 msgid "Once per day"
 msgstr "Sekali per hari"
 
+#. label-group: General - Providers
+msgctxt "#30006"
+msgid "Providers"
+msgstr ""
+
+#. label: Channels - defaultProviderName
+msgctxt "#30007"
+msgid "Default provider name"
+msgstr "Nama penyedia bawaan"
+
+#. label: Channels - enableProviderMappings
+msgctxt "#30008"
+msgid "Enable provider mapping"
+msgstr "Aktifkan pemetaan penyedia"
+
+#. label: Channels - providerMappingFile
+msgctxt "#30009"
+msgid "Provider name mapping file"
+msgstr "Berkas pemetaan nama penyedia"
+
 #. label-category: general
 #. label-group: General - General
 msgctxt "#30010"
@@ -77,37 +97,37 @@ msgstr "Umum"
 #. label: General - m3uPath
 msgctxt "#30011"
 msgid "M3U playlist path"
-msgstr ""
+msgstr "Jalur daftar putar M3U"
 
 #. label: General - m3uUrl
 msgctxt "#30012"
 msgid "M3U playlist URL"
-msgstr ""
+msgstr "URL daftar putar M3U"
 
 #. label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
-msgstr ""
+msgstr "Nomor saluran mulai"
 
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr ""
+msgstr "Hanya nomor berdasarkan urutan saluran di M3U"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "Mode pembaharuan otomatis"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
 msgid "Refresh interval"
-msgstr ""
+msgstr "Selang waktu pembaharuan"
 
 #. label: General - m3uRefreshHour
 msgctxt "#30017"
 msgid "Refresh hour (24h)"
-msgstr ""
+msgstr "Jam pembaharuan (24 Jam)"
 
 #. label-group: General - Refresh
 msgctxt "#30018"
@@ -137,12 +157,12 @@ msgstr "URL XMLTV"
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
 msgid "Apply time shift to all channels"
-msgstr ""
+msgstr "Terapkan pergeseran waktu ke semua saluran"
 
 #. label: EPG Settings - epgTimeShift
 msgctxt "#30024"
 msgid "EPG time shift"
-msgstr ""
+msgstr "Pergeseran waktu EPG"
 
 #. label: General - m3uCache
 msgctxt "#30025"
@@ -162,7 +182,7 @@ msgstr ""
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "Hanya muat saluran TV dalam bentuk kelompok"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
@@ -193,35 +213,35 @@ msgstr ""
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "Mode kelompok TV"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "Mode kelompok Radio"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30036"
 msgid "All groups"
-msgstr ""
+msgstr "Semua Kelompok"
 
 #. label-option: Channels - tvGroupMode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "Beberapa kelompok"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "Kelompok kustom"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
 msgid "Number of TV groups"
-msgstr ""
+msgstr "Jumlah kelompok TV"
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
@@ -231,7 +251,7 @@ msgstr "Pilihan Logo XMLTV"
 #. label: Channel Logos - logoFromEpg
 msgctxt "#30041"
 msgid "Channels logos from XMLTV"
-msgstr ""
+msgstr "Logo saluran dari XMLTV"
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
@@ -251,27 +271,27 @@ msgstr "Utamakan XMLTV"
 #. label: General - oneTvGroup
 msgctxt "#30045"
 msgid "TV group 1"
-msgstr ""
+msgstr "Kelompok TV 1"
 
 #. label: General - twoTvGroup
 msgctxt "#30046"
 msgid "TV group 2"
-msgstr ""
+msgstr "Kelompok TV 2"
 
 #. label: General - threeTvGroup
 msgctxt "#30047"
 msgid "TV group 3"
-msgstr ""
+msgstr "Kelompok TV 3"
 
 #. label: General - fourTvGroup
 msgctxt "#30048"
 msgid "TV group 4"
-msgstr ""
+msgstr "Kelompok TV 4"
 
 #. label: General - fiveTvGroup
 msgctxt "#30049"
 msgid "TV group 5"
-msgstr ""
+msgstr "Kelompok TV 5"
 
 #. label-category: genres
 #. label-group: Genres - Genres
@@ -282,47 +302,47 @@ msgstr "Aliran"
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
 msgid "Use genre text from XMLTV when mapping genres"
-msgstr ""
+msgstr "Gunakan teks aliran dari XMLTV saat pemetaan aliran"
 
 #. label: Genres - genresPath
 msgctxt "#30052"
 msgid "Genres path"
-msgstr ""
+msgstr "Jalur aliran"
 
 #. label: Genres - genresUrl
 msgctxt "#30053"
 msgid "Genres URL"
-msgstr ""
+msgstr "URL Aliran"
 
 #. label: Channels - customTvGroupsFile
 msgctxt "#30054"
 msgid "Custom TV groups file"
-msgstr ""
+msgstr "Berkas kelompok TV kustom"
 
 #. label: General - oneRadioGroup
 msgctxt "#30055"
 msgid "Radio group 1"
-msgstr ""
+msgstr "Kelompok Radio 1"
 
 #. label: General - twoRadioGroup
 msgctxt "#30056"
 msgid "Radio group 2"
-msgstr ""
+msgstr "Kelompok Radio 2"
 
 #. label: General - threeRadioGroup
 msgctxt "#30057"
 msgid "Radio group 3"
-msgstr ""
+msgstr "Kelompok Radio 3"
 
 #. label: General - fourRadioGroup
 msgctxt "#30058"
 msgid "Radio group 4"
-msgstr ""
+msgstr "Kelompok Radio 4"
 
 #. label: General - fiveRadioGroup
 msgctxt "#30059"
 msgid "Radio group 5"
-msgstr ""
+msgstr "Kelompok Radio 5"
 
 #. label-category: advanced
 msgctxt "#30060"
@@ -337,17 +357,17 @@ msgstr ""
 #. label: Advanced - transformMulticastStreamUrls
 msgctxt "#30062"
 msgid "Transform multicast stream URLs"
-msgstr ""
+msgstr "Ubah URL aliran multicast"
 
 #. label: Advanced - udpxyHost
 msgctxt "#30063"
 msgid "Relay hostname or IP address"
-msgstr ""
+msgstr "Relay hostname atau IP address"
 
 #. label: Advanced - udpxyPort
 msgctxt "#30064"
 msgid "Relay port"
-msgstr ""
+msgstr "Port Relay"
 
 #. label-group: Advanced - Streaming
 msgctxt "#30065"
@@ -357,12 +377,12 @@ msgstr ""
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr ""
+msgstr "Gunakan inputstream.adaptive untuk stream m3u8 (HLS)"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
 msgid "Use FFmpeg http reconnect options if possible"
-msgstr ""
+msgstr "Gunakan opsi hubung kembali FFmpeg http jika memungkinkan"
 
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
@@ -372,36 +392,46 @@ msgstr ""
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
 msgid "Inputstream name"
-msgstr ""
+msgstr "Nama inputstream"
 
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
 msgid "MIME type"
-msgstr ""
+msgstr "Tipe MIME"
 
 #. label-group: Advanced - Channel defaults
 msgctxt "#30071"
 msgid "Channel defaults"
-msgstr ""
+msgstr "Saluran bawaan"
 
 #. label: General - numRadioGroups
 msgctxt "#30072"
 msgid "Number of Radio groups"
-msgstr ""
+msgstr "Jumlah kelompok radio"
 
 #. label: Channels - customRadioGroupsFile
 msgctxt "#30073"
 msgid "Custom Radio groups file"
-msgstr ""
+msgstr "Berkas kelompok radio kustom"
 
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
 msgid "Only load Radio channels in groups"
-msgstr ""
+msgstr "Hanya muat saluran radio dalam kelompok"
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
+msgstr "Untuk jalur logo lokal abaikan logo dari M3U"
+
+#. label-category: Groups
+msgctxt "#30076"
+msgid "Groups"
+msgstr "Kelompok"
+
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30077"
+msgid "Ignore Case for EPG Channel IDs"
 msgstr ""
 
 # empty strings from id 30075 to 30099
@@ -419,7 +449,7 @@ msgstr ""
 #. label: Catchup - catchupQueryFormat
 msgctxt "#30102"
 msgid "Query format string"
-msgstr ""
+msgstr "String format kueri"
 
 #. label: Catchup - catchupDays
 msgctxt "#30103"
@@ -434,22 +464,22 @@ msgstr ""
 #. label-group: Catchup - Watch From EPG
 msgctxt "#30105"
 msgid "Watch From EPG"
-msgstr ""
+msgstr "Tonton dari EPG"
 
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
 msgid "Play from EPG in Live TV mode (using timeshift)"
-msgstr ""
+msgstr "Mainkan dari EPG dalam mode Live TV (menggunakan pergeseran waktu)"
 
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
 msgid "Buffer before program start"
-msgstr ""
+msgstr "Buffer sebelum program dimulai"
 
 #. label: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30108"
 msgid "Buffer after program end"
-msgstr ""
+msgstr "Buffer setelah program selesai"
 
 #. label: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30109"
@@ -459,12 +489,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Non Aktif"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Standar"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -510,47 +540,104 @@ msgstr ""
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr ""
+msgstr "Pergeseran waktu"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
 msgid "Enable timeshift"
-msgstr ""
+msgstr "Aktifkan pergeseran waktu"
 
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr ""
+msgstr "Aktifkan pergrseran waktu untuk stream berbasis HTTP"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr ""
+msgstr "‐ Ubah pengaturan inputstream.ffmpegdirect…"
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr ""
+msgstr "Pengaturan inputstream.ffmpegdirect"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr ""
+msgstr "Selalu aktifkan mode pergeseran waktu stream jika hilang"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
 msgid "Enable timeshift for all streams"
-msgstr ""
+msgstr "Aktifkan pergeseran waktu untuk semua stream"
 
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr ""
+msgstr "Aktifkan pergeseran waktu untuk stream berbasis UDP"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
+
+# empty strings from id 30129 to 30449
+#. category-lavel: Media
+#. group-label: Media - Media
+msgctxt "#30150"
+msgid "Media"
+msgstr "Media"
+
+#. label: Media - mediaGroupByTitle
+msgctxt "#30151"
+msgid "Group entries by title"
+msgstr "Daftar kelompok berdasarkan judul"
+
+#. label: Media - mediaGroupBySeason
+msgctxt "#30152"
+msgid "Group entries by season"
+msgstr "Daftar kelompok berdasarkan season"
+
+#. label: Media - mediaBySeasonEpisode
+msgctxt "#30153"
+msgid "Include season and episode number in title"
+msgstr "Sertakan season dan nomor episode di judul"
+
+#. label: Media - mediaVODAsRecordings
+msgctxt "#30154"
+msgid "Include VODs as media"
+msgstr "Sertakan VOD sebagai media"
+
+#. label: Media - mediaEnabled
+msgctxt "#30155"
+msgid "Show Media as recordings"
+msgstr "Tampilkan Media sebagai Rekaman"
+
+#. label: Media - mediaUseM3UGroupForGrouping
+msgctxt "#30156"
+msgid "Use M3U Group name in path"
+msgstr "Gunakan nama kelompok M3U di jalur"
+
+#. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
+msgctxt "#30157"
+msgid "Never"
+msgstr "Tidak Pernah"
+
+#. label-option: Media - mediaEnabled - ALWAYS_APPEND
+msgctxt "#30158"
+msgid "Always append"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
+msgctxt "#30159"
+msgid "When no media-dir is present"
+msgstr ""
+
+#. label: Media - mediaForcePlaylist
+msgctxt "#30160"
+msgid "Force all M3U entries to be media"
+msgstr "Paksakan semua daftar M3U sebagai media"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -567,7 +654,7 @@ msgstr "Radio"
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
-msgstr ""
+msgstr "Inputstream error"
 
 #. notification: Inputstreams
 msgctxt "#30501"
@@ -587,12 +674,12 @@ msgstr "Addon %s tidak diaktifkan."
 #. help-category: General
 msgctxt "#30600"
 msgid "General settings required for the addon to function."
-msgstr ""
+msgstr "Pengaturan umum dibutuhkan untuk berjalannya addon"
 
 #. help: General - m3uPathType
 msgctxt "#30601"
 msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
-msgstr ""
+msgstr "Pilih dimana untuk mencari sumber M3U. Pilihannya: [B]Jalur lokal[/B] ‐ jalur ke M3U bisa dari perangkat atau jaringan lokal; [B]Jalur Remot[/B] - berkas M3U berasal dari lokasi URL spesifik"
 
 #. help: General - m3uPath
 msgctxt "#30602"
@@ -726,6 +813,11 @@ msgstr ""
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
 # empty strings from id 30627 to 30639
@@ -926,4 +1018,68 @@ msgstr ""
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr ""
+
+# empty strings from id 30727 to 30739
+#. help info - Other categories continued
+#. help: General - defaultproviderName
+msgctxt "#30740"
+msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
+msgstr ""
+
+#. help: General - enableProviderMappings
+msgctxt "#30741"
+msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
+msgstr ""
+
+#. help: General - providerMappingFile
+msgctxt "#30742"
+msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
+msgstr ""
+
+#. help: Groups - groups
+msgctxt "#30743"
+msgid "Settings on customising channel groups."
+msgstr ""
+
+# empty strings from id 30744 to 30799
+#. help info - Media
+#. help-category: Media
+msgctxt "#30800"
+msgid "Settings related to VOD media."
+msgstr ""
+
+#. help: Media - mediaGroupByTitle
+msgctxt "#30801"
+msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
+msgstr ""
+
+#. help: Media - mediaGroupBySeason
+msgctxt "#30802"
+msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
+msgstr ""
+
+#. help: Media - mediaTitleSeasonEpisode
+msgctxt "#30803"
+msgid "Prepend the season and episode numbers to the title."
+msgstr ""
+
+#. help: Media - mediaVODAsRecordings
+msgctxt "#30804"
+msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30805"
+msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
+msgstr ""
+
+#. label: Media - mediaM3UGroupPath
+msgctxt "#30806"
+msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
+msgstr ""
+
+#. label: Media - mediaForcePlaylist
+msgctxt "#30806"
+msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
 msgstr ""

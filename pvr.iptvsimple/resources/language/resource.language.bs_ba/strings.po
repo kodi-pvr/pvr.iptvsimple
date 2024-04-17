@@ -5,16 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Bosnian (Bosnia and Herzegovina) (http://www.transifex.com/projects/p/kodi-main/language/bs_BA/)\n"
-"Language: bs_BA\n"
+"PO-Revision-Date: 2023-05-10 12:16+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Bosnian (Bosnia and Herzegovina) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/bs_ba/>\n"
+"Language: bs_ba\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -65,6 +66,26 @@ msgstr ""
 #. label-option: General - m3uRefreshMode
 msgctxt "#30005"
 msgid "Once per day"
+msgstr ""
+
+#. label-group: General - Providers
+msgctxt "#30006"
+msgid "Providers"
+msgstr ""
+
+#. label: Channels - defaultProviderName
+msgctxt "#30007"
+msgid "Default provider name"
+msgstr ""
+
+#. label: Channels - enableProviderMappings
+msgctxt "#30008"
+msgid "Enable provider mapping"
+msgstr ""
+
+#. label: Channels - providerMappingFile
+msgctxt "#30009"
+msgid "Provider name mapping file"
 msgstr ""
 
 #. label-category: general
@@ -403,6 +424,16 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr ""
 
+#. label-category: Groups
+msgctxt "#30076"
+msgid "Groups"
+msgstr ""
+
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30077"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -458,12 +489,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "Onemogućeno"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "Podrazumjevano"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -551,16 +582,73 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
+# empty strings from id 30129 to 30449
+#. category-lavel: Media
+#. group-label: Media - Media
+msgctxt "#30150"
+msgid "Media"
+msgstr ""
+
+#. label: Media - mediaGroupByTitle
+msgctxt "#30151"
+msgid "Group entries by title"
+msgstr ""
+
+#. label: Media - mediaGroupBySeason
+msgctxt "#30152"
+msgid "Group entries by season"
+msgstr ""
+
+#. label: Media - mediaBySeasonEpisode
+msgctxt "#30153"
+msgid "Include season and episode number in title"
+msgstr ""
+
+#. label: Media - mediaVODAsRecordings
+msgctxt "#30154"
+msgid "Include VODs as media"
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30155"
+msgid "Show Media as recordings"
+msgstr ""
+
+#. label: Media - mediaUseM3UGroupForGrouping
+msgctxt "#30156"
+msgid "Use M3U Group name in path"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
+msgctxt "#30157"
+msgid "Never"
+msgstr "Nikada"
+
+#. label-option: Media - mediaEnabled - ALWAYS_APPEND
+msgctxt "#30158"
+msgid "Always append"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
+msgctxt "#30159"
+msgid "When no media-dir is present"
+msgstr ""
+
+#. label: Media - mediaForcePlaylist
+msgctxt "#30160"
+msgid "Force all M3U entries to be media"
+msgstr ""
+
 # empty strings from id 30128 to 30449
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr ""
+msgstr "TV"
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr ""
+msgstr "Radio"
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -725,6 +813,11 @@ msgstr ""
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
 # empty strings from id 30627 to 30639
@@ -925,4 +1018,68 @@ msgstr ""
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr ""
+
+# empty strings from id 30727 to 30739
+#. help info - Other categories continued
+#. help: General - defaultproviderName
+msgctxt "#30740"
+msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
+msgstr ""
+
+#. help: General - enableProviderMappings
+msgctxt "#30741"
+msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
+msgstr ""
+
+#. help: General - providerMappingFile
+msgctxt "#30742"
+msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
+msgstr ""
+
+#. help: Groups - groups
+msgctxt "#30743"
+msgid "Settings on customising channel groups."
+msgstr ""
+
+# empty strings from id 30744 to 30799
+#. help info - Media
+#. help-category: Media
+msgctxt "#30800"
+msgid "Settings related to VOD media."
+msgstr ""
+
+#. help: Media - mediaGroupByTitle
+msgctxt "#30801"
+msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
+msgstr ""
+
+#. help: Media - mediaGroupBySeason
+msgctxt "#30802"
+msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
+msgstr ""
+
+#. help: Media - mediaTitleSeasonEpisode
+msgctxt "#30803"
+msgid "Prepend the season and episode numbers to the title."
+msgstr ""
+
+#. help: Media - mediaVODAsRecordings
+msgctxt "#30804"
+msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30805"
+msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
+msgstr ""
+
+#. label: Media - mediaM3UGroupPath
+msgctxt "#30806"
+msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
+msgstr ""
+
+#. label: Media - mediaForcePlaylist
+msgctxt "#30806"
+msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
 msgstr ""
