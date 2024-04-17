@@ -1,3 +1,7 @@
+v21.8.4
+- Translations updates from Weblate
+	- af_za, am_et, ar_sa, ast_es, az_az, be_by, bg_bg, bs_ba, ca_es, cs_cz, cy_gb, da_dk, de_de, el_gr, en_au, en_nz, en_us, eo, es_ar, es_es, es_mx, et_ee, eu_es, fa_af, fa_ir, fi_fi, fo_fo, fr_ca, fr_fr, gl_es, he_il, hi_in, hr_hr, hu_hu, hy_am, id_id, is_is, it_it, ja_jp, ko_kr, lt_lt, lv_lv, mi, mk_mk, ml_in, mn_mn, ms_my, mt_mt, my_mm, nb_no, nl_nl, pl_pl, pt_br, pt_pt, ro_ro, ru_ru, si_lk, sk_sk, sl_si, sq_al, sr_rs, sr_rs@latin, sv_se, szl, ta_in, te_in, tg_tj, th_th, tr_tr, uk_ua, uz_uz, vi_vn, zh_cn, zh_tw
+
 v21.8.3
 - Change xz-utils to 5.4.3 to match kodi mirrors
 
