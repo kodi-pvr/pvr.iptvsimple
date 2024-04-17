@@ -14,7 +14,7 @@ jobs:
           os: ubuntu-latest
           CC: gcc
           CXX: g++
-          DEBIAN_BUILD: true
+  #        DEBIAN_BUILD: true
     steps:
     - name: Install needed ubuntu depends
       env:
