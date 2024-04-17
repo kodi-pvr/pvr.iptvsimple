@@ -5,24 +5,25 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Kodi Translation Team\n"
-"Language-Team: Hebrew (Israel) (http://www.transifex.com/projects/p/kodi-main/language/he_IL/)\n"
-"Language: he_IL\n"
+"PO-Revision-Date: 2023-10-23 20:09+0000\n"
+"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"Language-Team: Hebrew (Israel) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/he_il/>\n"
+"Language: he_il\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 5.0.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "לקוח טלוויזיה חיה עם תמיכה ב־IPTV.[CR]https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr "תוסף Kodi PVR עם תמיכה ב-IPTV. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "לקוח טלוויזיה חיה IPTV Simple תומך ברשימות m3u, הזרמת שידורים חיים ממקור מרובב/ סטרים בודד, האזנה לתחנות רדיו והצגת לוח שידורים."
+msgstr "IPTV Simple PVR Client תומך ברשימות השמעה של m3u, הזרמת טלוויזיה בשידור חי עבור מקורות מרובי שידור/חד שידור, האזנה לערוצי רדיו ולוח שידורים..[CR]    [CR]לתיעוד ניתן לבקר: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
@@ -42,7 +43,7 @@ msgstr "מיקום"
 #. label-option: General - genresPathType
 msgctxt "#30001"
 msgid "Local path (includes local network)"
-msgstr ""
+msgstr "נתיב מקומי (כולל רשת מקומית)"
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -50,21 +51,41 @@ msgstr ""
 #. label-option: General - genresPathType
 msgctxt "#30002"
 msgid "Remote path (Internet address)"
-msgstr ""
+msgstr "נתיב מרוחק (כתובת אינטרנט)"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30003"
 msgid "Disabled"
-msgstr "מנוטרל"
+msgstr "מושבת"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
 msgid "Repeated refresh"
-msgstr ""
+msgstr "רענון חוזר"
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30005"
 msgid "Once per day"
+msgstr "פעם ביום"
+
+#. label-group: General - Providers
+msgctxt "#30006"
+msgid "Providers"
+msgstr ""
+
+#. label: Channels - defaultProviderName
+msgctxt "#30007"
+msgid "Default provider name"
+msgstr ""
+
+#. label: Channels - enableProviderMappings
+msgctxt "#30008"
+msgid "Enable provider mapping"
+msgstr ""
+
+#. label: Channels - providerMappingFile
+msgctxt "#30009"
+msgid "Provider name mapping file"
 msgstr ""
 
 #. label-category: general
@@ -76,47 +97,47 @@ msgstr "כללי"
 #. label: General - m3uPath
 msgctxt "#30011"
 msgid "M3U playlist path"
-msgstr ""
+msgstr "נתיב רשימת השמעה M3U"
 
 #. label: General - m3uUrl
 msgctxt "#30012"
 msgid "M3U playlist URL"
-msgstr ""
+msgstr "כתובת אתר של רשימת השמעה M3U"
 
 #. label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
-msgstr ""
+msgstr "מספר ערוץ ראשוני"
 
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr ""
+msgstr "מספרים בלבד בסידור ערוצי M3U"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr ""
+msgstr "מצב רענון אוטומטי"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
 msgid "Refresh interval"
-msgstr ""
+msgstr "מרווח רענון"
 
 #. label: General - m3uRefreshHour
 msgctxt "#30017"
 msgid "Refresh hour (24h)"
-msgstr ""
+msgstr "שעת רענון (24 שעות)"
 
 #. label-group: General - Refresh
 msgctxt "#30018"
 msgid "Refresh"
-msgstr ""
+msgstr "רענון"
 
 #. label-category: epgsettings
 msgctxt "#30019"
 msgid "EPG Settings"
-msgstr "לוח שידורים"
+msgstr "הגדרות לוח שידורים"
 
 #. label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
@@ -126,7 +147,7 @@ msgstr "לוח שידורים"
 #. label: EPG Settings - epgPath
 msgctxt "#30021"
 msgid "XMLTV path"
-msgstr ""
+msgstr "נתיב XMLTV"
 
 #. label: EPG Settings - epgUrl
 msgctxt "#30022"
@@ -136,116 +157,116 @@ msgstr "כתובת XMLTV"
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
 msgid "Apply time shift to all channels"
-msgstr ""
+msgstr "החלת הסטת זמן על כל הערוצים"
 
 #. label: EPG Settings - epgTimeShift
 msgctxt "#30024"
 msgid "EPG time shift"
-msgstr ""
+msgstr "הסטת זמן לוח שידורים"
 
 #. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "שמור m3u באחסון מקומי"
+msgstr "שמירת m3u באחסון מקומי"
 
 #. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "שמור XMLTV באחסון מקומי"
+msgstr "שמירת XMLTV באחסון מקומי"
 
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
 msgid "{0:.1f} hours"
-msgstr ""
+msgstr "{0:.1f} שעות"
 
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr ""
+msgstr "טעינת ערוצי טלוויזיה בקבוצות בלבד"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
 msgid "TV Groups"
-msgstr ""
+msgstr "קבוצות טלוויזיה"
 
 #. label-category: channellogos
 #. label-group: Channel Logos - Channel Logos
 msgctxt "#30030"
 msgid "Channel Logos"
-msgstr ""
+msgstr "סמלילי ערוץ"
 
 #. label: Channel Logos - logoPath
 msgctxt "#30031"
 msgid "Channel logos folder"
-msgstr ""
+msgstr "תיקיית סמלילי ערוץ"
 
 #. label: Channel Logos - logoBaseUrl
 msgctxt "#30032"
 msgid "Channel logos base URL"
-msgstr ""
+msgstr "סמלילי ערוץ מבוסס כתובת אתר"
 
 #. label-group: General - Radio Groups
 msgctxt "#30033"
 msgid "Radio Groups"
-msgstr ""
+msgstr "קבוצות רדיו"
 
 #. label: General - tvGroupMoade
 msgctxt "#30034"
 msgid "TV group mode"
-msgstr ""
+msgstr "מצב קבוצות טלוויזיה"
 
 #. label: General - radioGroupMoade
 msgctxt "#30035"
 msgid "Radio group mode"
-msgstr ""
+msgstr "מצב קבוצות רדיו"
 
 #. label-option: Channels - tvGroupmode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30036"
 msgid "All groups"
-msgstr ""
+msgstr "כל הקבוצות"
 
 #. label-option: Channels - tvGroupMode
 #. label-option: Channels - radioGroupGode
 msgctxt "#30037"
 msgid "Some groups"
-msgstr ""
+msgstr "מספר קבוצות"
 
 #. label-option: General - tvGroupMode
 #. label-option: General - radioGroupGode
 msgctxt "#30038"
 msgid "Custom groups"
-msgstr ""
+msgstr "קבוצות מותאמות אישית"
 
 #. label: Channels - numTvGroups
 msgctxt "#30039"
 msgid "Number of TV groups"
-msgstr ""
+msgstr "מספר קבוצות טלוויזיה"
 
 #. label-group: Channel Logos - XMLTV Logos Options
 msgctxt "#30040"
 msgid "XMLTV Logos Options"
-msgstr "סמלי XMLTV"
+msgstr "אפשרות סמלילי XMLTV"
 
 #. label: Channel Logos - logoFromEpg
 msgctxt "#30041"
 msgid "Channels logos from XMLTV"
-msgstr ""
+msgstr "סמלילי ערוצים מתוך XMLTV"
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
 msgid "Ignore"
-msgstr "התעלם"
+msgstr "התעלמות"
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30043"
 msgid "Prefer M3U"
-msgstr "העדף M3U"
+msgstr "העדפת M3U"
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30044"
 msgid "Prefer XMLTV"
-msgstr "העדף XMLTV"
+msgstr "העדפת XMLTV"
 
 #. label: General - oneTvGroup
 msgctxt "#30045"
@@ -403,6 +424,16 @@ msgctxt "#30075"
 msgid "For local logos path ignore M3U logos"
 msgstr ""
 
+#. label-category: Groups
+msgctxt "#30076"
+msgid "Groups"
+msgstr ""
+
+#. label: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30077"
+msgid "Ignore Case for EPG Channel IDs"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -458,12 +489,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr ""
+msgstr "מושבת"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr ""
+msgstr "ברירת מחדל"
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -509,7 +540,7 @@ msgstr ""
 #. label-group: Timeshift - Timeshift
 msgctxt "#30120"
 msgid "Timeshift"
-msgstr ""
+msgstr "היסט זמן"
 
 #. label: Timeshift - timeshiftEnabled
 msgctxt "#30121"
@@ -551,16 +582,73 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
+# empty strings from id 30129 to 30449
+#. category-lavel: Media
+#. group-label: Media - Media
+msgctxt "#30150"
+msgid "Media"
+msgstr ""
+
+#. label: Media - mediaGroupByTitle
+msgctxt "#30151"
+msgid "Group entries by title"
+msgstr ""
+
+#. label: Media - mediaGroupBySeason
+msgctxt "#30152"
+msgid "Group entries by season"
+msgstr ""
+
+#. label: Media - mediaBySeasonEpisode
+msgctxt "#30153"
+msgid "Include season and episode number in title"
+msgstr ""
+
+#. label: Media - mediaVODAsRecordings
+msgctxt "#30154"
+msgid "Include VODs as media"
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30155"
+msgid "Show Media as recordings"
+msgstr ""
+
+#. label: Media - mediaUseM3UGroupForGrouping
+msgctxt "#30156"
+msgid "Use M3U Group name in path"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
+msgctxt "#30157"
+msgid "Never"
+msgstr "אף פעם"
+
+#. label-option: Media - mediaEnabled - ALWAYS_APPEND
+msgctxt "#30158"
+msgid "Always append"
+msgstr ""
+
+#. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
+msgctxt "#30159"
+msgid "When no media-dir is present"
+msgstr ""
+
+#. label: Media - mediaForcePlaylist
+msgctxt "#30160"
+msgid "Force all M3U entries to be media"
+msgstr ""
+
 # empty strings from id 30128 to 30449
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr ""
+msgstr "טלוויזיה"
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr ""
+msgstr "רדיו"
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -725,6 +813,11 @@ msgstr ""
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
+msgstr ""
+
+#. help: EPG Settings - epgIgnoreCaseForChannelIds
+msgctxt "#30627"
+msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr ""
 
 # empty strings from id 30627 to 30639
@@ -925,4 +1018,68 @@ msgstr ""
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
+msgstr ""
+
+# empty strings from id 30727 to 30739
+#. help info - Other categories continued
+#. help: General - defaultproviderName
+msgctxt "#30740"
+msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
+msgstr ""
+
+#. help: General - enableProviderMappings
+msgctxt "#30741"
+msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
+msgstr ""
+
+#. help: General - providerMappingFile
+msgctxt "#30742"
+msgid "The config file to map provider names received from the M3U or the default provider name to custom name, icons etc. The default file is [I]providerMappings.xml[/I]."
+msgstr ""
+
+#. help: Groups - groups
+msgctxt "#30743"
+msgid "Settings on customising channel groups."
+msgstr ""
+
+# empty strings from id 30744 to 30799
+#. help info - Media
+#. help-category: Media
+msgctxt "#30800"
+msgid "Settings related to VOD media."
+msgstr ""
+
+#. help: Media - mediaGroupByTitle
+msgctxt "#30801"
+msgid "If multiple entries exist with matching titles create a virtual folder to group them together."
+msgstr ""
+
+#. help: Media - mediaGroupBySeason
+msgctxt "#30802"
+msgid "If multiple entries exist with matching titles create a second virtual folder to group them together by season also if possible."
+msgstr ""
+
+#. help: Media - mediaTitleSeasonEpisode
+msgctxt "#30803"
+msgid "Prepend the season and episode numbers to the title."
+msgstr ""
+
+#. help: Media - mediaVODAsRecordings
+msgctxt "#30804"
+msgid "Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as recordings."
+msgstr ""
+
+#. label: Media - mediaEnabled
+msgctxt "#30805"
+msgid "If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels."
+msgstr ""
+
+#. label: Media - mediaM3UGroupPath
+msgctxt "#30806"
+msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
+msgstr ""
+
+#. label: Media - mediaForcePlaylist
+msgctxt "#30806"
+msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
 msgstr ""

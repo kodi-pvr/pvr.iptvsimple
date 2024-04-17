@@ -5,29 +5,28 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-05-10 12:16+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
-"Language-Team: Latvian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/lv_lv/>\n"
-"Language: lv_lv\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ast_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : 2;\n"
-"X-Generator: Weblate 4.15.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "Kodi PVR pielikums IPTV atbalstam. https://github.com/afedchin/Kodi-addon-iptvsimple/wiki/IPTV-Simple-Home"
+msgstr ""
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "IPTV vienkāršais PVR klients atbalsta m3u spēļsarakstus, tiešraides TV straumēšanu multiraides/uniraides avotiem, radio kanālu klausīšanos un EPG."
+msgstr ""
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "Šī ir nestabila programmatūra! Autori nav atbildīgi par neizdevušos atskaņošanu, nepareizu EPG laiku, iztērētām stundām vai jebkādiem citiem nevēlamiem efektiem."
+msgstr ""
 
 #. settings labels
 #. label: General - m3uPathType
@@ -35,7 +34,7 @@ msgstr "Šī ir nestabila programmatūra! Autori nav atbildīgi par neizdevušos
 #. label: Channel Logos - logoPathType
 msgctxt "#30000"
 msgid "Location"
-msgstr "Lokācija"
+msgstr ""
 
 #. label-option: General - m3uPathType
 #. label-option: General - epgPathType
@@ -56,7 +55,7 @@ msgstr ""
 #. label-option: General - m3uRefreshMode
 msgctxt "#30003"
 msgid "Disabled"
-msgstr "Izslēgts"
+msgstr ""
 
 #. label-option: General - m3uRefreshMode
 msgctxt "#30004"
@@ -88,11 +87,12 @@ msgctxt "#30009"
 msgid "Provider name mapping file"
 msgstr ""
 
+# empty strings from id 30006 to 30009
 #. label-category: general
 #. label-group: General - General
 msgctxt "#30010"
 msgid "General"
-msgstr "Vispārīgi"
+msgstr ""
 
 #. label: General - m3uPath
 msgctxt "#30011"
@@ -137,7 +137,7 @@ msgstr ""
 #. label-category: epgsettings
 msgctxt "#30019"
 msgid "EPG Settings"
-msgstr "EPG iestatījumi"
+msgstr ""
 
 #. label-group: EPG Settings - EPG Settings
 msgctxt "#30020"
@@ -152,7 +152,7 @@ msgstr ""
 #. label: EPG Settings - epgUrl
 msgctxt "#30022"
 msgid "XMLTV URL"
-msgstr "XMLTV URL"
+msgstr ""
 
 #. label: EPG Settings - epgTSOverride
 msgctxt "#30023"
@@ -167,12 +167,12 @@ msgstr ""
 #. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Kešot m3u lokālajā krātuvē"
+msgstr ""
 
 #. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Kešot XMLTV lokālajā krātuvē"
+msgstr ""
 
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
@@ -256,7 +256,7 @@ msgstr ""
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30042"
 msgid "Ignore"
-msgstr "Ignorēt"
+msgstr ""
 
 #. label-option: Channel Logos - logoFromEpg
 msgctxt "#30043"
@@ -297,7 +297,7 @@ msgstr ""
 #. label-group: Genres - Genres
 msgctxt "#30050"
 msgid "Genres"
-msgstr "Žanri"
+msgstr ""
 
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
@@ -347,7 +347,7 @@ msgstr ""
 #. label-category: advanced
 msgctxt "#30060"
 msgid "Advanced"
-msgstr "Papildus"
+msgstr ""
 
 #. label-group: Advanced - Multicast relay
 msgctxt "#30061"
@@ -434,7 +434,7 @@ msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr ""
 
-# empty strings from id 30075 to 30099
+# empty strings from id 30076 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
@@ -489,12 +489,12 @@ msgstr ""
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30110"
 msgid "Disabled"
-msgstr "Izslēgts"
+msgstr ""
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30111"
 msgid "Default"
-msgstr "Noklusējums"
+msgstr ""
 
 #. label-option: Catchup - allChannelsCatchupMode
 msgctxt "#30112"
@@ -622,7 +622,7 @@ msgstr ""
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
 msgid "Never"
-msgstr "Nekad"
+msgstr ""
 
 #. label-option: Media - mediaEnabled - ALWAYS_APPEND
 msgctxt "#30158"
@@ -639,16 +639,16 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr ""
 
-# empty strings from id 30128 to 30449
+# empty strings from id 30129 to 30449
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
-msgstr "TV"
+msgstr ""
 
 #. label: Radio
 msgctxt "#30451"
 msgid "Radio"
-msgstr "Radio"
+msgstr ""
 
 # empty strings from id 30452 to 30499
 #. notification: Inputstreams
@@ -852,7 +852,7 @@ msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
 msgstr ""
 
-# empty strings from id 30645 to 30659
+# empty strings from id 30646 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
@@ -983,7 +983,7 @@ msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
 msgstr ""
 
-# empty strings from id 30710 to 307019
+# empty strings from id 30711 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
