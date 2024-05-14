@@ -49,7 +49,7 @@ int FileUtils::GetFileContents(const std::string& url, std::string& content)
 {
   content.clear();
   kodi::vfs::CFile file;
-  if (file.OpenFile(url))
+  if (file.OpenFile(url, ADDON_READ_NO_CACHE | ADDON_READ_TRUNCATED | ADDON_READ_BITRATE))
   {
     char buffer[1024];
     while (int bytesRead = file.Read(buffer, 1024))
