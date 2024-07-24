@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2024-02-29 09:13+0000\n"
+"PO-Revision-Date: 2024-04-18 23:30+0000\n"
 "Last-Translator: Kai Sommerfeld <ksooo@users.noreply.kodi.weblate.cloud>\n"
 "Language-Team: German <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/de_de/>\n"
 "Language: de_de\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4\n"
+"X-Generator: Weblate 5.4.3\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -97,7 +97,7 @@ msgstr "Allgemein"
 #. label: General - m3uPath
 msgctxt "#30011"
 msgid "M3U playlist path"
-msgstr "Dateifad für M3U-Wiedergabeliste"
+msgstr "Dateipfad für M3U-Wiedergabeliste"
 
 #. label: General - m3uUrl
 msgctxt "#30012"
@@ -377,7 +377,7 @@ msgstr "Streaming"
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr "inputstream.adaptive für m3u8-(HLS)-Streams verwenden"
+msgstr "inputstream.adaptive für m3u8-(HLS-)Streams verwenden"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"

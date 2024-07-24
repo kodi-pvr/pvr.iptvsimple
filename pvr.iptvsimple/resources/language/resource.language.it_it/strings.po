@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2024-04-14 04:58+0000\n"
+"PO-Revision-Date: 2024-06-28 00:21+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.4.3\n"
+"X-Generator: Weblate 5.6\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -162,7 +162,7 @@ msgstr "Applica timeshift a tutti i canali"
 #. label: EPG Settings - epgTimeShift
 msgctxt "#30024"
 msgid "EPG time shift"
-msgstr "EPG timeshift"
+msgstr "Timeshift EPG"
 
 #. label: General - m3uCache
 msgctxt "#30025"
@@ -709,7 +709,7 @@ msgstr "Ignora eventuali tag 'tvg-chno' e numera solo i canali in base all'ordin
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
 msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
-msgstr "Scegli la modalità di aggiornamento automatico per i file M3U/XMLTV. Si noti che la memorizzazione nella cache è disabilitata se viene utilizzato l'aggiornamento automatico. Le opzioni sono: [B]Disabilitato[/B] - Non aggiorna automaticamente i file; [B]Aggiornamento ripetuto[/B] - Aggiorna i file a intervalli di minuti; [B]Una volta al giorno[/B] - Aggiorna i file una volta al giorno."
+msgstr "Scegli la modalità di aggiornamento automatico per i file M3U/XMLTV. Si noti che la memorizzazione nella cache è disabilitata se viene usato l'aggiornamento automatico. Le opzioni sono: [B]Disabilitato[/B] - Non aggiorna automaticamente i file; [B]Aggiornamento ripetuto[/B] - Aggiorna i file a intervalli di minuti; [B]Una volta al giorno[/B] - Aggiorna i file una volta al giorno."
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
@@ -757,12 +757,12 @@ msgstr "Se l'opzione precedente è stata impostata su 'Alcuni gruppi' è necessa
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr "Il file utilizzato per caricare i gruppi TV personalizzati. Il file predefinito è 'customTVGroups-example.xml'."
+msgstr "Il file usato per caricare i gruppi TV personalizzati. Il file predefinito è 'customTVGroups-example.xml'."
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr "Il file utilizzato per caricare i gruppi radio personalizzati. Il file predefinito è 'customRadioGroups-example.xml'."
+msgstr "Il file usato per caricare i gruppi radio personalizzati. Il file predefinito è 'customRadioGroups-example.xml'."
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
@@ -813,12 +813,12 @@ msgstr "Regola i tempi EPG di questo valore, da -12 ore a +14 ore."
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
 msgid "Whether or not to override the time shift for all channels with `EPG time shift`. If not enabled `EPG time shift` plus the individual time shift per channel (if available) will be used."
-msgstr "Ignora o meno il timeshift per tutti i canali con 'Timeshift EPG'. Se non abilitato, verrà utilizzato il 'Timeshift EPG' più il timeshift individuale per canale (se disponibile)."
+msgstr "Ignora o meno il timeshift per tutti i canali con 'Timeshift EPG'. Se non abilitato, verrà usato il 'Timeshift EPG' più il timeshift individuale per canale (se disponibile)."
 
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr "Ignora maiuscole e minuscole per gli ID EPG dei canali, noti anche come tvg-id, quando si abbinano i canali alle voci EPG. Se disabilitato, verrà utilizzata solo la corrispondenza con distinzione tra maiuscole e minuscole."
+msgstr "Ignora maiuscole e minuscole per gli ID EPG dei canali, noti anche come tvg-id, quando si abbinano i canali alle voci EPG. Se disabilitato, verrà usata solo la corrispondenza con distinzione tra maiuscole e minuscole."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -862,7 +862,7 @@ msgstr "Impostazioni relative ai generi."
 #. help: Genres - useEpgGenreText
 msgctxt "#30661"
 msgid "If enabled, and a genre mapping file is used to get a genre type and sub type use the EPG's genre text (i.e. 'category' text) for the genre instead of the kodi default text."
-msgstr "Se abilitato, e viene utilizzato un file di mappatura del genere per ottenere un tipo e un sottotipo di genere, utilizza il testo del genere dell'EPG (ad esempio il testo \"categoria\") per il genere anziché il testo predefinito di Kodi."
+msgstr "Se abilitato, e viene usato un file di mappatura del genere per ottenere un tipo e un sottotipo di genere, utilizza il testo del genere dell'EPG (ad esempio il testo \"categoria\") per il genere anziché il testo predefinito di Kodi."
 
 #. help: Genres - genresPathType
 msgctxt "#30662"
@@ -981,7 +981,7 @@ msgstr "Imposta l'ambito per ignorare la modalità di recupero. Le opzioni sono:
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
-msgstr "Regola il tempo utilizzato per la generazione dell'URL dello stream di recupero in base a questo valore, da -12 ore a +14 ore. Utile per gli stream di recupero che non corrispondono geograficamente all'ora sbagliata. Si noti che questo valore può essere sovrascritto dai valori nel file M3U."
+msgstr "Regola il tempo usato per la generazione dell'URL dello stream di recupero in base a questo valore, da -12 ore a +14 ore. Utile per gli stream di recupero che non corrispondono geograficamente all'ora sbagliata. Si noti che questo valore può essere sovrascritto dai valori nel file M3U."
 
 # empty strings from id 30710 to 307019
 #. help info - Timeshift
@@ -998,7 +998,7 @@ msgstr "Abilita la funzione timeshift."
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per gli stream basati su HTTP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
+msgstr "Abilita la funzione timeshift per gli stream basati su HTTP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
@@ -1013,24 +1013,24 @@ msgstr "Se una proprietà stream_mode non è specificata insieme a una propriet�
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per tutti gli stream. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
+msgstr "Abilita la funzione timeshift per tutti gli stream. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per gli stream basati su UDP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà utilizzato per il timeshift."
+msgstr "Abilita la funzione timeshift per gli stream basati su UDP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
 
 # empty strings from id 30727 to 30739
 #. help info - Other categories continued
 #. help: General - defaultproviderName
 msgctxt "#30740"
 msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
-msgstr "Se fornito, questo valore verrà utilizzato come nome del fornitore se non ne è stato fornito uno nell'M3U. Può essere utilizzato in combinazione con il file di mappatura del fornitore che può fornire campi come tipo, percorso icona, paese e lingua."
+msgstr "Se fornito, questo valore verrà usato come nome del fornitore se non ne è stato fornito uno nell'M3U. Può essere usato in combinazione con il file di mappatura del fornitore che può fornire campi come tipo, percorso icona, paese e lingua."
 
 #. help: General - enableProviderMappings
 msgctxt "#30741"
 msgid "If enabled any provider name read from the M3U or the default provider name will be used to read further metadata from the mapping file. The metadata includes custom name, type, icon path, country and language."
-msgstr "Se abilitato, qualsiasi nome di fornitore letto da M3U o il nome del fornitore predefinito verrà utilizzato per leggere ulteriori metadati dal file di mappatura. I metadati includono nome personalizzato, tipo, percorso dell'icona, paese e lingua."
+msgstr "Se abilitato, qualsiasi nome di fornitore letto da M3U o il nome del fornitore predefinito verrà usato per leggere ulteriori metadati dal file di mappatura. I metadati includono nome personalizzato, tipo, percorso dell'icona, paese e lingua."
 
 #. help: General - providerMappingFile
 msgctxt "#30742"
@@ -1077,7 +1077,7 @@ msgstr "Se abilitato, tutte le voci multimediali IPTV possono essere mostrate co
 #. label: Media - mediaM3UGroupPath
 msgctxt "#30806"
 msgid "Select how to use the M3U group title in the path. Note that it will only be used if a single group name is provided. The options are: [B]Never[/B] - Never use it; [B]Always append[/B] - Always append it; [B]When no media-dir is present[/B] - Only use the group title of the M3U when no media-dir is provided."
-msgstr "Seleziona come utilizzare il titolo del gruppo M3U nel percorso. Si noti che verrà utilizzato solo se viene fornito un singolo nome di gruppo. Le opzioni sono: [B]Mai[/B] - Non usarlo mai; [B]Aggiungi sempre[/B] - Aggiungilo sempre; [B]Quando non è presente alcuna cartella per i media; [/B] - Usa il titolo del gruppo di M3U solo quando non viene fornita alcuna directory multimediale."
+msgstr "Seleziona come utilizzare il titolo del gruppo M3U nel percorso. Si noti che verrà usato solo se viene fornito un singolo nome di gruppo. Le opzioni sono: [B]Mai[/B] - Non usarlo mai; [B]Aggiungi sempre[/B] - Aggiungilo sempre; [B]Quando non è presente alcuna cartella per i media; [/B] - Usa il titolo del gruppo di M3U solo quando non viene fornita alcuna directory multimediale."
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30806"
