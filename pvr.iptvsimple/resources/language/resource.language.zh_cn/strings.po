@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-05-10 12:16+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2024-04-30 14:11+0000\n"
+"Last-Translator: \"Eric Z.\" <eric.zhu.ym@gmail.com>\n"
 "Language-Team: Chinese (China) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/zh_cn/>\n"
 "Language: zh_cn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.5.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -71,7 +71,7 @@ msgstr "每天一次"
 #. label-group: General - Providers
 msgctxt "#30006"
 msgid "Providers"
-msgstr ""
+msgstr "提供商"
 
 #. label: Channels - defaultProviderName
 msgctxt "#30007"
@@ -427,12 +427,12 @@ msgstr "对于本地logo路径忽略 M3U logo"
 #. label-category: Groups
 msgctxt "#30076"
 msgid "Groups"
-msgstr ""
+msgstr "组"
 
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "忽略 EPG 频道 ID 的大小写"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -587,27 +587,27 @@ msgstr "回放修正"
 #. group-label: Media - Media
 msgctxt "#30150"
 msgid "Media"
-msgstr ""
+msgstr "媒体"
 
 #. label: Media - mediaGroupByTitle
 msgctxt "#30151"
 msgid "Group entries by title"
-msgstr ""
+msgstr "按标题分组"
 
 #. label: Media - mediaGroupBySeason
 msgctxt "#30152"
 msgid "Group entries by season"
-msgstr ""
+msgstr "按季分组"
 
 #. label: Media - mediaBySeasonEpisode
 msgctxt "#30153"
 msgid "Include season and episode number in title"
-msgstr ""
+msgstr "在标题中包含季和集"
 
 #. label: Media - mediaVODAsRecordings
 msgctxt "#30154"
 msgid "Include VODs as media"
-msgstr ""
+msgstr "将 VOD 包含在媒体中"
 
 #. label: Media - mediaEnabled
 msgctxt "#30155"
@@ -617,7 +617,7 @@ msgstr ""
 #. label: Media - mediaUseM3UGroupForGrouping
 msgctxt "#30156"
 msgid "Use M3U Group name in path"
-msgstr ""
+msgstr "在路径中使用 M3U 组名"
 
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
@@ -627,17 +627,17 @@ msgstr "从不"
 #. label-option: Media - mediaEnabled - ALWAYS_APPEND
 msgctxt "#30158"
 msgid "Always append"
-msgstr ""
+msgstr "总是追加"
 
 #. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
 msgctxt "#30159"
 msgid "When no media-dir is present"
-msgstr ""
+msgstr "当没有提供媒体目录时"
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30160"
 msgid "Force all M3U entries to be media"
-msgstr ""
+msgstr "强制所有 M3U 条目为媒体"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -729,7 +729,7 @@ msgstr "M3U文件中只有属于组（即拥有 [B]group-title[/B] 属性）的�
 #. help: Channels - tvGroupMode
 msgctxt "#30611"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all TV groups from the M3U file; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr "从以下三种模式中选择一种：[B]所有分组[/B] 载入M3U文件中所有的电视分组；[B]部分分组[/B] 仅加载下一个选项中的指定的分组；[B]自定义分组[/B] 从包含有组名称的 XML 文件中加载一组分组。"
+msgstr "从以下三种模式中选择一种：[B]所有组[/B] 载入M3U文件中所有的电视组；[B]部分组[/B] 仅加载下一个选项中的指定的组；[B]自定义组[/B] 从 M3U 加载组，这些组的名字从 XML 加载。"
 
 #. help: Channels - oneTvGroup
 #. help: Channels - twoTvGroup
@@ -738,12 +738,12 @@ msgstr "从以下三种模式中选择一种：[B]所有分组[/B] 载入M3U文�
 #. help: Channels - fiveTvGroup
 msgctxt "#30612"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a TV group to be loaded from the M3U file. Please note that this is the group name as shown in the group-title attribute (i.e. 'UK (TV)'). This setting is case-sensitive."
-msgstr "若上一个选项设置为“部分分组”，则您需要指定要从 M3U 文件中加载的电视分组。请注意，这里指的是 group-title 所显示的分组名称（即 'UK (TV)'）。此设置区分大小写。"
+msgstr "若上一个选项设置为“部分组”，则您需要指定要从 M3U 文件中加载的电视组。请注意，这里指的是 group-title 所显示的组名称（即 'UK (TV)'）。此设置区分大小写。"
 
 #. help: Channels - radioGroupMode
 msgctxt "#30613"
 msgid "Choose from one of the following three modes: [B]All groups[/B] Load all Radio groups from the M3U file[/B]; [B]Some groups[/B] Only load the groups specified in the next options; [B]Custom groups[/B] Load a set of groups from the M3U file whose names are loaded from an XML file."
-msgstr ""
+msgstr "从以下三种模式中选择： [B]所有组[/B] 从 M3U 中加载所有电台组[/B]; [B]部分组[/B] 仅加载在自定义组中指定的组 [B]自定义组[/B] 从 M3U 加载组，这些组的名字从 XML 加载。"
 
 #. help: Channels - oneRadioGroup
 #. help: Channels - twoRadioGroup
@@ -752,43 +752,43 @@ msgstr ""
 #. help: Channels - fiveRadioGroup
 msgctxt "#30614"
 msgid "If the previous option has been has been set to 'Some groups' you need to specify a Radio group to be fetched from the M3U file. Please not that this is the group name as shown on the group-title attribute (i.e. 'UK (Radio)'). This setting is case-sensitive."
-msgstr ""
+msgstr "如果前面的选项设置为“部分组”，您需要指定一个从 M3U 文件中提取的广播组。请注意，这个是组标题属性所显示的组名 （如 'UK (Radio)'）。这个设定是大小写敏感的。"
 
 #. help: Channels - customTvGroupsFile
 msgctxt "#30615"
 msgid "The file used to load the custom TV groups. The default file is `customTVGroups-example.xml`."
-msgstr ""
+msgstr "加载自定义电视组的文件。缺省文件是 “customTVGroups-example.xml” 。"
 
 #. help: Channels - customRadioGroupsFile
 msgctxt "#30616"
 msgid "The file used to load the custom Radio groups. The default file is `customRadioGroups-example.xml`."
-msgstr ""
+msgstr "加载自定义广播组的文件。缺省文件是 “customRadioGroups-example.xml” 。"
 
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr ""
+msgstr "如果选择了 “部分组” 模式，电视组的加载数量做多可以选 5 个。如果需要加载 5 个以上，需要选则 “自定义组” 模式。"
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
 msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
-msgstr ""
+msgstr "如果选择了 “部分组” 模式，电台组的加载数量做多可以选 5 个。如果需要加载 5 个以上，需要选则 “自定义组” 模式。"
 
 #. help: General - radioChannelGroupsOnly
 msgctxt "#30619"
 msgid "Only Radio channels that belong to groups (i.e. have a [B]group-title[/B] attribute) will be loaded from the M3U file."
-msgstr ""
+msgstr "只有属于组的电台频道 （如：有 [B]group-title[/B] 属性）才会被从 M3U 文件加载。"
 
 #. help info - EPG Settings
 #. help-category: EPG Settings
 msgctxt "#30620"
 msgid "Settings related to the EPG. Note that Kodi will only load the EPG data when it needs to. The add-on will force a load of the EPG data regardless of whether or not Kodi requests it if either catchup is enabled or XMLTV logos are required."
-msgstr ""
+msgstr "与电子节目单相关的设置。 注意 Kodi 只有在必要时才加载电子节目单数据。无论 Kodi 是否需要，如果开启了 catchup 或者需要 XMLTV logo，插件会强制加载电子节目单数据。"
 
 #. help: EPG Settings - epgPathType
 msgctxt "#30621"
 msgid "Select where to find the XMLTV resource. The options are: [B]Local path[/B] - A path to an XMLTV file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the XMLTV file."
-msgstr ""
+msgstr "选择 XMLTV 源。选项为： [B]本地路径[/B] - 本地设备或本地网络中指向一个 XMLTV 文件的路径； [B]远程路径[/B] - 一个指向 XMLTV 文件的 URL 。"
 
 #. help: EPG Settings - epgPath
 msgctxt "#30622"
@@ -889,42 +889,42 @@ msgstr ""
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
 msgid "Multicast (UDP/RTP) streams do not work well on Wifi networks. A multicast relay can convert the stream from UDP/RTP multicast to HTTP. Enabling this option will transform multicast stream URLs from the M3U file to HTTP addresses so they can be accesssed via a 'udpxy' relay on the local network. E.g. a UDP multicast stream URL like 'udp://@239.239.3.38:5239' would get transformed to something like 'http://192.168.1.1:4000/udp/239.239.3.38:5239'."
-msgstr ""
+msgstr "组播 （UDP/RTP） 流在 Wifi 网络上无法正常工作。组播中继可以将流从 UDP/RTP 组播转换为 HTTP。启用此选项会将组播流 URL 从 M3U 文件转换为 HTTP 地址，以便可以通过本地网络上的“udpxy”中继访问它们。例如，像“udp://@239.239.3.38:5239”这样的 UDP 组播流 URL 会转换为类似“http://192.168.1.1:4000/udp/239.239.3.38:5239”的东西。"
 
 #. help: Advanced - udpxyHost
 msgctxt "#30682"
 msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "本地网络中组播中继 （udpxy）的主机名或者 ip 地址。"
 
 #. help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
-msgstr ""
+msgstr "本地网络中组播中继 （udpxy）的端口号。"
 
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr ""
+msgstr "对 m3u8 （HLS） 流使用 inputstream.adaptive 而不是 ffmpeg 的 libavformat。"
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
 msgid "Note this can only apply to http/https streams that are processed by libavformat (e.g. M3u8/HLS). Using libavformat can be specified in an M3U file by setting the property `inputstream` as `inputstream.ffmpeg` for kodi's internal implementation or `inputstream.ffmpegdirect` for addon version. I.e. adding the line: `#KODIPROP:inputstream=inputstream.ffmpeg`. If this option is not enabled it can still be enabled per stream/channel by adding a kodi property, i.e.: `#KODIPROP:http-reconnect=true`."
-msgstr ""
+msgstr "请注意，这仅适用于由 libavformat 处理的 http/https 流（例如 M3u8/HLS）。在M3U文件中，可以通过将属性“inputstream”设置为“inputstream.ffmpeg”（kodi的内部实现）或“inputstream.ffmpegdirect”（插件版本）来指定使用libavformat。即添加行：'#KODIPROP：inputstream=inputstream.ffmpeg'。如果未启用此选项，仍可以通过添加 kodi 属性（即：“#KODIPROP：http-reconnect=true”）为每个流/通道启用它。"
 
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
-msgstr ""
+msgstr "如果未作为属性提供或作为频道流 URL 的一部分，则使用此 User-Agent。"
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr ""
+msgstr "如果频道的属性 （KODIPROP） 没有提供此 inputsream，则使用此 inputsream 作为默认值。请小心使用，因为这将禁用插件的默认流检查行为。请注意，对于“inputstream.ffmpegdirect”，如果“mimetype”和“inputstream.ffmpegdirect.manifest_type”都未设置，则仍会在需要时进行流检查。"
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr ""
+msgstr "如果未提供作为频道属性 （KODIPROP） 的 MIME 类型，则使用此 MIME 类型作为默认类型。请小心使用，因为这将禁用插件的默认流检查行为。"
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup

@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2023-05-10 12:16+0000\n"
-"Last-Translator: Christian Gade <gade@kodi.tv>\n"
+"PO-Revision-Date: 2024-06-28 00:21+0000\n"
+"Last-Translator: Antikruk <zmicerturok@gmail.com>\n"
 "Language-Team: Belarusian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/be_by/>\n"
 "Language: be_by\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 4.15.2\n"
+"X-Generator: Weblate 5.6\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -71,22 +71,22 @@ msgstr "Раз на дзень"
 #. label-group: General - Providers
 msgctxt "#30006"
 msgid "Providers"
-msgstr ""
+msgstr "Правайдары"
 
 #. label: Channels - defaultProviderName
 msgctxt "#30007"
 msgid "Default provider name"
-msgstr ""
+msgstr "Назва прадвызначанага правайдара"
 
 #. label: Channels - enableProviderMappings
 msgctxt "#30008"
 msgid "Enable provider mapping"
-msgstr ""
+msgstr "Уключыць супастаўленне правайдараў"
 
 #. label: Channels - providerMappingFile
 msgctxt "#30009"
 msgid "Provider name mapping file"
-msgstr ""
+msgstr "Файл супастаўлення назваў правайдараў"
 
 #. label-category: general
 #. label-group: General - General
@@ -427,12 +427,12 @@ msgstr "Выкарыстоўваць лакальныя лагатыпы, не �
 #. label-category: Groups
 msgctxt "#30076"
 msgid "Groups"
-msgstr ""
+msgstr "Групы"
 
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr ""
+msgstr "Не зважаць на рэгістр у ідэнтыфікатарах каналаў EPG"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -587,37 +587,37 @@ msgstr "Карэкцыя архівавання"
 #. group-label: Media - Media
 msgctxt "#30150"
 msgid "Media"
-msgstr ""
+msgstr "Медыя"
 
 #. label: Media - mediaGroupByTitle
 msgctxt "#30151"
 msgid "Group entries by title"
-msgstr ""
+msgstr "Групаваць запісы па назве"
 
 #. label: Media - mediaGroupBySeason
 msgctxt "#30152"
 msgid "Group entries by season"
-msgstr ""
+msgstr "Групаваць запісы па сезонах"
 
 #. label: Media - mediaBySeasonEpisode
 msgctxt "#30153"
 msgid "Include season and episode number in title"
-msgstr ""
+msgstr "Уключаць у назву нумары сезона і эпізода"
 
 #. label: Media - mediaVODAsRecordings
 msgctxt "#30154"
 msgid "Include VODs as media"
-msgstr ""
+msgstr "УключыцьVOD як медыя"
 
 #. label: Media - mediaEnabled
 msgctxt "#30155"
 msgid "Show Media as recordings"
-msgstr ""
+msgstr "Паказваць медыя як запісы"
 
 #. label: Media - mediaUseM3UGroupForGrouping
 msgctxt "#30156"
 msgid "Use M3U Group name in path"
-msgstr ""
+msgstr "Выкарыстоўваць у шляху назву групы M3U"
 
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
@@ -627,17 +627,17 @@ msgstr "Ніколі"
 #. label-option: Media - mediaEnabled - ALWAYS_APPEND
 msgctxt "#30158"
 msgid "Always append"
-msgstr ""
+msgstr "Заўсёды дадаваць"
 
 #. label-option: Media - mediaEnabled - ONLY_IF_EMPTY
 msgctxt "#30159"
 msgid "When no media-dir is present"
-msgstr ""
+msgstr "Калі няма media-dir"
 
 #. label: Media - mediaForcePlaylist
 msgctxt "#30160"
 msgid "Force all M3U entries to be media"
-msgstr ""
+msgstr "Прымусова рабіць усе M3U-запісы медыя"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -818,7 +818,7 @@ msgstr "Ці трэба перавызначаць зрух часу для ўс
 #. help: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
-msgstr ""
+msgstr "Пры супастаўленні каналаў з запісамі EPG не зважаць на рэгістр для ідэнтыфікатараў каналаў EPG, таксама вядомых як tvg-id. Калі адключана, будзе выкарыстоўвацца толькі супастаўленне з улікам рэгістра."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1025,7 +1025,7 @@ msgstr "Уключыць функцыю перамотвання для UDP-тр
 #. help: General - defaultproviderName
 msgctxt "#30740"
 msgid "If provided this value will be used as the provider name if one was not provided in the M3U. It can be used in combination with the provider mapping file which can supply type, icon path, country and language fields."
-msgstr ""
+msgstr "Калі пададзена, гэтае значэнне будзе выкарыстоўвацца як назва правайдара, калі яна не была пазначаная ў M3U. Можа выкарыстоўвацца ў спалучэнні з файлам правайдара, які можа паказаць тып, шлях да значка, краіну і мову."
 
 #. help: General - enableProviderMappings
 msgctxt "#30741"

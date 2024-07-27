@@ -7,19 +7,19 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2024-01-02 08:54+0000\n"
-"Last-Translator: José Antonio Alvarado <jalvarado0.eses@gmail.com>\n"
+"PO-Revision-Date: 2024-07-24 17:41+0000\n"
+"Last-Translator: roliverosc <roliverosc@hotmail.com>\n"
 "Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/es_es/>\n"
 "Language: es_es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.6.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "Complemento PVR de Kodi para soporte IPTV."
+msgstr "Complemento Kodi PVR para compatibilidad con IPTV."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
@@ -27,7 +27,7 @@ msgstr "IPTV Simple PVR Client soporta listas de reproducción m3u, transmisión
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "Este es un software inestable! El autor no se hace responsable de reproducciones fallidas, datos de EPG incorrectos, horas perdidas o cualquier otro efecto indeseado."
+msgstr "¡Este es un software inestable! El autor no se hace responsable de reproducciones fallidas, datos de EPG incorrectos, horas perdidas o cualquier otro efecto no deseado."
 
 #. settings labels
 #. label: General - m3uPathType
@@ -76,7 +76,7 @@ msgstr "Proveedores"
 #. label: Channels - defaultProviderName
 msgctxt "#30007"
 msgid "Default provider name"
-msgstr "Nombre predeterminado del proveedor"
+msgstr "Nombre del proveedor predeterminado"
 
 #. label: Channels - enableProviderMappings
 msgctxt "#30008"
@@ -167,12 +167,12 @@ msgstr "TimeShift de EPG"
 #. label: General - m3uCache
 msgctxt "#30025"
 msgid "Cache m3u at local storage"
-msgstr "Cachear M3U localmente"
+msgstr "Caché M3U en almacenamiento local"
 
 #. label: EPG Settings - epgCache
 msgctxt "#30026"
 msgid "Cache XMLTV at local storage"
-msgstr "Cachear XMLTV localmente"
+msgstr "Caché XMLTV en almacenamiento local"
 
 #. format-label: EPG Settings - epgTimeShift
 msgctxt "#30027"
@@ -193,17 +193,17 @@ msgstr "Grupos de TV"
 #. label-group: Channel Logos - Channel Logos
 msgctxt "#30030"
 msgid "Channel Logos"
-msgstr "Logotipos de Canales"
+msgstr "Logotipos de canales"
 
 #. label: Channel Logos - logoPath
 msgctxt "#30031"
 msgid "Channel logos folder"
-msgstr "Carpeta de Logotipos de Canales"
+msgstr "Carpeta de Logotipos de canales"
 
 #. label: Channel Logos - logoBaseUrl
 msgctxt "#30032"
 msgid "Channel logos base URL"
-msgstr "URL base de Logotipos de Canales"
+msgstr "URL base de Logotipos de canales"
 
 #. label-group: General - Radio Groups
 msgctxt "#30033"
@@ -302,7 +302,7 @@ msgstr "Géneros"
 #. label: Genres - useEpgGenreText
 msgctxt "#30051"
 msgid "Use genre text from XMLTV when mapping genres"
-msgstr "Usar texto género de XMLTV cuando se mapean géneros"
+msgstr "Usar texto de género de XMLTV al asignar géneros"
 
 #. label: Genres - genresPath
 msgctxt "#30052"
@@ -362,7 +362,7 @@ msgstr "Transformar URLs de transmisión multidifusión"
 #. label: Advanced - udpxyHost
 msgctxt "#30063"
 msgid "Relay hostname or IP address"
-msgstr "Dirección IP o nombre del retransmisor"
+msgstr "Dirección IP o Nombre de host de retransmisión"
 
 #. label: Advanced - udpxyPort
 msgctxt "#30064"
@@ -377,7 +377,7 @@ msgstr "Transmisión"
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr "Utilizar inputstream.adaptive para transmisiones m3u8 (HLS)"
+msgstr "Usar inputstream.adaptive para transmisiones m3u8 (HLS)"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
@@ -387,7 +387,7 @@ msgstr "Usar opciones de reconexión http de FFmpeg si es posible"
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
 msgid "User-Agent"
-msgstr "Agente-de-Usuario"
+msgstr "Agente de usuario"
 
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
@@ -417,7 +417,7 @@ msgstr "Archivo de grupos de Radio personalizado"
 #. label: General - radioChannelGroupsOnly
 msgctxt "#30074"
 msgid "Only load Radio channels in groups"
-msgstr "Sólo carga canales de radio en grupos"
+msgstr "Sólo carga canales de Radio en grupos"
 
 #. help: Channel Logos - useLogosLocalPathOnly
 msgctxt "#30075"
@@ -469,7 +469,7 @@ msgstr "Ver desde EPG"
 #. label: Catchup - catchupPlayEpgAsLive
 msgctxt "#30106"
 msgid "Play from EPG in Live TV mode (using timeshift)"
-msgstr "Reproducir desde EPG en modo TV en directo (con Timeshift)"
+msgstr "Reproducir desde EPG en modo TV en directo (usando Timeshift)"
 
 #. label: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30107"
@@ -555,17 +555,17 @@ msgstr "Activar Timeshift para transmisiones basadas en HTTP"
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
 msgid "- Modify inputstream.ffmpegdirect settings..."
-msgstr "- Modificar configuración de inputstream.ffmpegdirect..."
+msgstr "- Modificar ajustes de inputstream.ffmpegdirect..."
 
 #. label-group: Timeshift - Inputstream Settings
 msgctxt "#30124"
 msgid "Inputstream Settings"
-msgstr "Configuración de Inputstream"
+msgstr "Ajustes de Inputstream"
 
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr "Activar siempre el modo de transferencia timeshift si falta"
+msgstr "Activar siempre el modo de transmisión timeshift si falta"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
@@ -575,7 +575,7 @@ msgstr "Activar timeshift para todas las transmisiones"
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr "Activar timeshift para las transmisiones basadas en UDP"
+msgstr "Activar timeshift para transmisiones basadas en UDP"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
@@ -617,7 +617,7 @@ msgstr "Mostrar medios como grabaciones"
 #. label: Media - mediaUseM3UGroupForGrouping
 msgctxt "#30156"
 msgid "Use M3U Group name in path"
-msgstr "Utilizar nombre de grupo M3U en la ruta"
+msgstr "Usar nombre del grupo M3U en la ruta"
 
 #. label-option: Media - mediaEnabled - IGNORE_GROUP_NAME
 msgctxt "#30157"
@@ -718,7 +718,7 @@ msgstr "Si el modo de actualización automática de M3U es [B]Actualización rep
 #. help: General - m3uRefreshHour
 msgctxt "#30609"
 msgid "If auto refresh mode is [B]Once per day[/B] refresh the files every time this hour of the day is reached."
-msgstr "Si el modo de actualización automática es [B]Una vez al día[/B] actualiza los archivos cada vez que se alcanza la hora del día indicada."
+msgstr "Si el modo de actualización automática es [B]Una vez al día[/B], actualiza los archivos cada vez que se llegue a esta hora del día."
 
 #. help: General - tvChannelGroupsOnly
 msgctxt "#30610"
@@ -881,7 +881,7 @@ msgstr "Si la ubicación es [B]Ruta remota[/B] este parámetro debe contener una
 #. help-category: Advanced
 msgctxt "#30680"
 msgid "Advanced settings including multicast relays, streaming properties etc."
-msgstr "Ajustes avanzados, incluidos relés multidifusión, propiedades de transmisión, etc."
+msgstr "Ajustes avanzados, incluidos transmisiones multidifusión, propiedades de transmisión, etc."
 
 #. help: Advanced - transformMulticastStreamUrls
 msgctxt "#30681"
@@ -891,17 +891,17 @@ msgstr "Las transmisiones multidifusión (UDP/RTP) no funcionan bien en redes Wi
 #. help: Advanced - udpxyHost
 msgctxt "#30682"
 msgid "The hostname or ip address of the multicast relay (udpxy) on the local network."
-msgstr "El nombre de host o la dirección ip del relé de multidifusión (udpxy) en la red local."
+msgstr "El nombre de host o la dirección ip de la transmisión multidifusión (udpxy) en la red local."
 
 #. help: Advanced - udpxyPort
 msgctxt "#30683"
 msgid "The port of the multicast relay (udpxy) on the local network."
-msgstr "El puerto del relé de multidifusión (udpxy) en la red local."
+msgstr "El puerto de retransmisión multidifusión (udpxy) en la red local."
 
 #. help: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30684"
 msgid "Use inputstream.adaptive instead of ffmpeg's libavformat for m3u8 (HLS) streams."
-msgstr "Utilizar inputstream.adaptive en lugar de libavformat de ffmpeg para transmisiones m3u8 (HLS)."
+msgstr "Utiliza inputstream.adaptive en lugar de libavformat de ffmpeg para transmisiones m3u8 (HLS)."
 
 #. help: Advanced - useFFmpegReconnect
 msgctxt "#30685"
@@ -911,7 +911,7 @@ msgstr "Tenga en cuenta que esto sólo puede aplicarse a transmisiones http/http
 #. help: Advanced - defaultUserAgent
 msgctxt "#30686"
 msgid "Use this User-Agent if there is not one supplied as a property or as part of the channel stream URL."
-msgstr "Utilizar este User-Agent si no hay uno suministrado como propiedad o como parte de la URL de la transmisión del canal."
+msgstr "Utiliza este User-Agent si no se proporciona ninguno como propiedad o como parte de la URL de transmisión del canal."
 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
@@ -928,7 +928,7 @@ msgstr "Utilizar este tipo MIME por defecto si no hay uno suministrado como prop
 #. help-category: Catchup
 msgctxt "#30700"
 msgid "Catchup settings for viewing archived live programmes. Allows the option of 'Play programme' when viewing EPG entry info."
-msgstr "Configuración de catchup para ver programas en directo archivados. Permite la opción de \"Reproducir programa\" al ver la información de entrada de la EPG."
+msgstr "Ajustes de catchup para ver programas en directo archivados. Permite la opción de 'Reproducir programa' al ver la información de entrada de la EPG."
 
 #. help: Catchup - enableCatchup
 msgctxt "#30701"
@@ -958,12 +958,12 @@ msgstr "Si se desactiva, cualquier programa de catchup del pasado se reproducir�
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
 msgid "The amount of buffer to give before the playback start point of an EPG entry that will be watched as a video."
-msgstr "La cantidad de búfer a dar después del punto de inicio de la reproducción de una entrada EPG que se verá como un vídeo."
+msgstr "La cantidad de búfer que se debe dar antes del punto de inicio de la reproducción de una entrada de EPG que se verá como un video."
 
 #. help: Catchup - catchupWatchEpgEndBuffer
 msgctxt "#30707"
 msgid "The amount of buffer to give after the playback end point of an EPG entry that will be watched as a video."
-msgstr "La cantidad de búfer a dar después del punto final de la reproducción de una entrada EPG que se verá como un vídeo."
+msgstr "La cantidad de búfer que se debe dar después del punto final de reproducción de una entrada de EPG que se verá como un vídeo."
 
 #. help: Catchup - catchupOnlyOnFinishedProgrammes
 msgctxt "#30708"

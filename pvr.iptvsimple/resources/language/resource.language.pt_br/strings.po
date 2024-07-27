@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2024-01-28 23:13+0000\n"
-"Last-Translator: icarok99 <icarok00@gmail.com>\n"
+"PO-Revision-Date: 2024-05-18 19:13+0000\n"
+"Last-Translator: Havok Dan <havokdan@yahoo.com.br>\n"
 "Language-Team: Portuguese (Brazil) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/pt_br/>\n"
 "Language: pt_br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.3\n"
+"X-Generator: Weblate 5.5.4\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -392,7 +392,7 @@ msgstr "User-Agent"
 #. label: Advanced - defaultInputstream
 msgctxt "#30069"
 msgid "Inputstream name"
-msgstr ""
+msgstr "Nome do fluxo de entrada"
 
 #. label: Advanced - defaultMimeType
 msgctxt "#30070"
@@ -948,12 +948,12 @@ msgstr "Um número de alguns dias atrás em que é possível assistir a um progr
 #. help: Catchup - allChannelsCatchupMode
 msgctxt "#30704"
 msgid "If enabled it is assumed that channels support catchup using the selected catchup mode while also obeying the override mode. If required the 'Query format string' and 'Catchup window' number of days will come from the addon settings. If this option is disabled then an M3U entry must have at least a 'catchup=' tag to enable catchup. The options for how to build the catch URL are: [B]Disabled[/B] - Do not assume all channel support catchup; [B]Default[/B] - Use catchup source as the full catchup URL, if there is no catchup source use Append mode; [B]Append[/B] - Append the catchup source to the channel URL, if there is no catchup source using the 'Query format string'; [B]Shift (SIPTV)[/B] - Append the standard SIPTV catchup string to the channel URL; [B]Flussonic[/B] - Build a flussonic URL from the channel URL; [B]Xtream codes[/B] - Build an Xtream codes URL from the channel URL."
-msgstr ""
+msgstr "Se ativado, presume-se que os canais suportam catchup usando o modo de catchup selecionado, ao mesmo tempo que obedecem ao modo de substituição. Se necessário, o número de dias da 'Sequência de formato de consulta' e da 'Janela de recuperação' virá das configurações do complemento. Se esta opção estiver desabilitada, uma entrada M3U deverá ter pelo menos uma tag 'catchup=' para habilitar o catchup. As opções de como construir a URL catch são: 1[B]Disabled2[/B] - Não assumir todo o catchup do suporte do canal; 3[B]Default4[/B] - Use a fonte de catchup como a URL de catchup completa, se não houver nenhuma fonte de catchup, use o modo Append; 5[B]Append6[/B] - Anexe a fonte de catchup à URL do canal, se não houver nenhuma fonte de catchup usando a 'String de formato de consulta'; 7[B]Shift (SIPTV)8[/B] - Anexar a string de catchup SIPTV padrão ao URL do canal; 9[B]Flussonic0[/B] - Construa uma URL flussonic a partir da URL do canal; [B]Códigos Xtream[/B] - Crie um URL de códigos Xtream a partir do URL do canal."
 
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
 msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
-msgstr ""
+msgstr "Quando desativado, qualquer programa de recuperação do passado será reproduzido como um vídeo (limitado pelos horários de início e término). Se ativado, funcionará como uma transmissão ao vivo com timeshift, permitindo também a capacidade de retroceder e avançar programas. Observe que o único efeito que esta opção tem em fluxos que não suportam timeshifting é aplicar ou não o buffer antes/depois."
 
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
@@ -973,7 +973,7 @@ msgstr "Quando selecionado no EPG, o programa ao vivo atual não pode ser assist
 #. help: Catchup - catchupOverrideMode
 msgctxt "#30709"
 msgid "Set the scope for overriding the catchup mode. Options are: [B]without catchup mode[/B] - Only include channels with no catchup mode set (except legacy SIP [I]timeshift[/I] catchup mode); [B]with catchup mode[/B] - Only include channels with catchup mode set (ignore those without a catchup mode); [B]with and without catchup mode (all channels)[/B] - Include all channels ignoring any catchup mode from the M3U."
-msgstr ""
+msgstr "Defina o escopo para substituir o modo catchup. As opções são: 1[B]sem modo de catchup2[/B] - Inclui apenas canais sem modo de catchup definido (exceto modo de catchup SIP 3[I]timeshift4[/I] legado); 5[B]com modo catchup6[/B] - Inclui apenas canais com modo catchup definido (ignore aqueles sem modo catchup); 7[B]com e sem modo catchup (todos os canais)8[/B] - Inclui todos os canais ignorando qualquer modo catchup do M3U."
 
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
