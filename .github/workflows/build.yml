@@ -27,7 +27,7 @@ jobs:
       uses: actions/checkout@v4
       with:
         repository: xbmc/xbmc
-        ref: master
+        ref: Omega
         path: xbmc
     - name: Checkout add-on repo
       uses: actions/checkout@v4
@@ -41,7 +41,7 @@ jobs:
       run: |
         if [[ $DEBIAN_BUILD != true ]]; then cd ${app_id} && mkdir -p build && cd build; fi
         if [[ $DEBIAN_BUILD != true ]]; then cmake -DADDONS_TO_BUILD=${app_id} -DADDON_SRC_PREFIX=${{ github.workspace }} -DCMAKE_BUILD_TYPE=Debug -DCMAKE_INSTALL_PREFIX=${{ github.workspace }}/xbmc/addons -DPACKAGE_ZIP=1 ${{ github.workspace }}/xbmc/cmake/addons; fi
-        if [[ $DEBIAN_BUILD == true ]]; then wget https://raw.githubusercontent.com/xbmc/xbmc/master/xbmc/addons/kodi-dev-kit/tools/debian-addon-package-test.sh && chmod +x ./debian-addon-package-test.sh; fi
+        if [[ $DEBIAN_BUILD == true ]]; then wget https://raw.githubusercontent.com/xbmc/xbmc/Omega/xbmc/addons/kodi-dev-kit/tools/debian-addon-package-test.sh && chmod +x ./debian-addon-package-test.sh; fi
         if [[ $DEBIAN_BUILD == true ]]; then sudo apt-get build-dep ${{ github.workspace }}/${app_id}; fi
     - name: Build
       env:
