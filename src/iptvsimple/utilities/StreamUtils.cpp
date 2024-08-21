@@ -107,7 +107,8 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
 
       properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
       
-      if (streamType == StreamType::HLS || streamType == StreamType::DASH)
+      if (streamType == StreamType::HLS || streamType == StreamType::DASH ||
+          streamType == StreamType::SMOOTH_STREAMING)
         properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
     }
   }
@@ -287,6 +288,8 @@ const std::string StreamUtils::GetMimeType(const StreamType& streamType)
       return "application/x-mpegURL";
     case StreamType::DASH:
       return "application/xml+dash";
+    case StreamType::SMOOTH_STREAMING:
+      return "application/vnd.ms-sstr+xml";
     case StreamType::TS:
       return "video/mp2t";
     default:
