@@ -1,3 +1,9 @@
+v22.1.1
+- Always add mimetype for inputstream.adaptive
+- Better handled user-agent header for inputstream.adaptive use cases
+- Fix missing manifest user-agent header for inputstream.adaptive
+- Add missing SmoothStreaming mimetype for inputstream.adaptive
+
 v22.1.0
 - PVR Add-on API v9.0.0
 
