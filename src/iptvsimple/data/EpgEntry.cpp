@@ -360,13 +360,19 @@ bool EpgEntry::ParseXmltvNsEpisodeNumberInfo(const std::string& episodeNumberStr
 
     if (!episodePartString.empty())
     {
-      int totalNumberOfParts;
-      int numElementsParsed = std::sscanf(episodePartString.c_str(), "%d/%d", &m_episodePartNumber, &totalNumberOfParts);
+      int numElementsParsed = std::sscanf(episodePartString.c_str(), "%d/%d", &m_episodeNumber, &m_episodePartNumber);
 
       if (numElementsParsed == 2)
+      {
+        m_episodeNumber++;
         m_episodePartNumber++;
+      }
       else if (numElementsParsed == 1)
+      {
+        if (m_episodeNumber == EPG_TAG_INVALID_SERIES_EPISODE)
+          m_episodeNumber++;
         m_episodePartNumber = EPG_TAG_INVALID_SERIES_EPISODE;
+      }
     }
   }
 
