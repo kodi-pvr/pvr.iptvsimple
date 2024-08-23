@@ -1,3 +1,9 @@
+v21.8.6
+- Always add mimetype for inputstream.adaptive
+- Better handled user-agent header for inputstream.adaptive use cases
+- Fix missing manifest user-agent header for inputstream.adaptive
+- Add missing SmoothStreaming mimetype for inputstream.adaptive
+
 v21.8.5
 - Translations updates from Weblate
 	- be_by, de_de, es_es, it_it, pt_br, sl_si, zh_cn
