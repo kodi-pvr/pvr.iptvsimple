@@ -265,7 +265,7 @@ void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMedia
   // left.SetStarRating(m_starRating);
   left.SetSeriesNumber(m_seasonNumber);
   left.SetEpisodeNumber(m_episodeNumber);
-  // left.SetEpisodePartNumber(m_episodePartNumber);
+  left.SetEpisodePartNumber(m_episodePartNumber);
   left.SetEpisodeName(m_episodeName);
   left.SetFirstAired(m_firstAired);
   int iFlags = EPG_TAG_FLAG_UNDEFINED;
