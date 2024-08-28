@@ -437,6 +437,17 @@ PVR_ERROR IptvSimple::GetSignalStatus(int channelUid, kodi::addon::PVRSignalStat
 }
 
 /***************************************************************************
+ * Stream State
+ **************************************************************************/
+
+PVR_ERROR IptvSimple::StreamClosed()
+{
+  Logger::Log(LEVEL_INFO, "%s - Stream Closed", __FUNCTION__);
+
+  return PVR_ERROR_NO_ERROR;
+}
+
+/***************************************************************************
  * InstanceSettings
  **************************************************************************/
 
