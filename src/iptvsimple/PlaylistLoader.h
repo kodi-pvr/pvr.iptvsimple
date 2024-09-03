@@ -75,7 +75,7 @@ namespace iptvsimple
     void ReloadPlayList();
 
   private:
-    static std::string ReadMarkerValue(const std::string& line, const std::string& markerName);
+    static std::string ReadMarkerValue(const std::string& line, const std::string& markerName, bool isCheckDelimiters = true);
     static void ParseSinglePropertyIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, const std::string& markerName);
 
     std::string ParseIntoChannel(const std::string& line, iptvsimple::data::Channel& channel, data::MediaEntry& mediaEntry, int epgTimeShift, int catchupCorrectionSecs, bool xeevCatchup);
