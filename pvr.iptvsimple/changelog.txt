@@ -1,3 +1,6 @@
+v22.1.2
+- Fix #KODIPROP parsing from playlists
+
 v22.1.1
 - Always add mimetype for inputstream.adaptive
 - Better handled user-agent header for inputstream.adaptive use cases
