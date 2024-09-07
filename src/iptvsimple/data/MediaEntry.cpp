@@ -55,6 +55,7 @@ void MediaEntry::Reset()
   m_providerUniqueId = PVR_PROVIDER_INVALID_UID;
   m_directory.clear();
   m_sizeInBytes = 0;
+  m_mediaType = PVR_MEDIA_TAG_TYPE_UNKNOWN;
 
   m_tvgShift = 0;
 }
@@ -245,23 +246,23 @@ void MediaEntry::SetDirectory(const std::string& value)
 }
 
 
-void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes)
+void MediaEntry::UpdateTo(kodi::addon::PVRMediaTag& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes)
 {
   left.SetTitle(CreateTitle(m_title, m_seasonNumber, m_episodeNumber, m_settings));
   left.SetPlotOutline(m_plotOutline);
   left.SetPlot(m_plot);
-  // left.SetCast(m_cast);
-  // left.SetDirector(m_director);
-  // left.SetWriter(m_writer);
+  left.SetCast(m_cast);
+  left.SetDirector(m_director);
+  left.SetWriter(m_writer);
   left.SetYear(m_year);
   left.SetIconPath(m_iconPath);
   left.SetGenreType(m_genreType);
   left.SetGenreSubType(m_genreSubType);
   left.SetGenreDescription(m_genreString);
-  // if (m_parentalRatingSystem.empty())
-  //   left.SetParentalRatingCode(m_parentalRating);
-  // else
-  //   left.SetParentalRatingCode(m_parentalRatingSystem + "-" + m_parentalRating);
+  if (m_parentalRatingSystem.empty())
+    left.SetParentalRatingCode(m_parentalRating);
+  else
+    left.SetParentalRatingCode(m_parentalRatingSystem + "-" + m_parentalRating);
   // left.SetStarRating(m_starRating);
   left.SetSeriesNumber(m_seasonNumber);
   left.SetEpisodeNumber(m_episodeNumber);
@@ -276,18 +277,19 @@ void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMedia
   left.SetFlags(iFlags);
 
   // From Media Tag
-  left.SetRecordingId(m_mediaEntryId);
-  left.SetRecordingTime(m_startTime);
+  left.SetMediaTagId(m_mediaEntryId);
+  left.SetMediaTagTime(m_startTime);
   left.SetDuration(m_duration);
   left.SetPlayCount(m_playCount);
   left.SetLastPlayedPosition(m_lastPlayedPosition);
   left.SetProviderName(m_providerName);
   left.SetClientProviderUid(m_providerUniqueId);
   if (m_radio)
-    left.SetChannelType(PVR_RECORDING_CHANNEL_TYPE_RADIO);
+    left.SetSectionType(PVR_MEDIA_TAG_SECTION_TYPE_RADIO);
   else
-    left.SetChannelType(PVR_RECORDING_CHANNEL_TYPE_TV);
+    left.SetSectionType(PVR_MEDIA_TAG_SECTION_TYPE_TV);
   left.SetSizeInBytes(m_sizeInBytes);
+  left.SetMediaType(m_mediaType);
 
   std::string newDirectory = FixPath(m_directory);
   if (m_settings->GroupMediaByTitle() && isInVirtualMediaEntryFolder)
@@ -319,4 +321,25 @@ std::string MediaEntry::GetProperty(const std::string& propName) const
     return propPair->second;
 
   return {};
+}
+
+void MediaEntry::SetMediaType(const std::string& value)
+{
+  std::string valueLower = value;
+  StringUtils::ToLower(valueLower);
+
+  if (valueLower == "tv-show")
+    m_mediaType = PVR_MEDIA_TAG_TYPE_TV_SHOW;
+  else if (valueLower == "movie")
+    m_mediaType = PVR_MEDIA_TAG_TYPE_MOVIE;
+  else if (valueLower == "music-video")
+    m_mediaType = PVR_MEDIA_TAG_TYPE_MUSIC_VIDEO;
+  else if (valueLower == "music")
+    m_mediaType = PVR_MEDIA_TAG_TYPE_MUSIC;
+  else if (valueLower == "radio-show")
+    m_mediaType = PVR_MEDIA_TAG_TYPE_RADIO_SHOW;
+  else if (valueLower == "podcast")
+    m_mediaType = PVR_MEDIA_TAG_TYPE_PODCAST;
+  else
+    m_mediaType = PVR_MEDIA_TAG_TYPE_UNKNOWN;
 }

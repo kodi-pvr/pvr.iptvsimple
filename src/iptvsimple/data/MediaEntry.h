@@ -15,7 +15,7 @@
 #include <regex>
 #include <string>
 
-#include <kodi/addon-instance/pvr/Recordings.h>
+#include <kodi/addon-instance/pvr/Media.h>
 
 namespace iptvsimple
 {
@@ -68,6 +68,10 @@ namespace iptvsimple
       int64_t GetSizeInBytes() const { return m_sizeInBytes; }
       void SetSizeInBytes(int64_t value) { m_sizeInBytes = value; }
 
+      PVR_MEDIA_TAG_TYPE GetMediaType() const { return m_mediaType; }
+      void SetMediaType(const std::string& value);
+      void SetMediaType(PVR_MEDIA_TAG_TYPE value) { m_mediaType = value; }
+
       const std::string& GetFolderTitle() const { return m_folderTitle; }
       void SetFolderTitle(const std::string& value);
 
@@ -91,7 +95,7 @@ namespace iptvsimple
 
       void UpdateFrom(iptvsimple::data::Channel channel);
       void UpdateFrom(iptvsimple::data::EpgEntry epgEntry, const std::vector<EpgGenre>& genres);
-      void UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes);
+      void UpdateTo(kodi::addon::PVRMediaTag& left, bool isInVirtualMediaEntryFolder, bool haveMediaTypes);
 
       std::string GetMatchTextFromString(const std::string& text, const std::regex& pattern)
       {
@@ -126,6 +130,7 @@ namespace iptvsimple
       int m_providerUniqueId = PVR_PROVIDER_INVALID_UID;
       std::string m_directory;
       int64_t m_sizeInBytes = 0;
+      PVR_MEDIA_TAG_TYPE m_mediaType = PVR_MEDIA_TAG_TYPE_UNKNOWN;
       std::string m_folderTitle;
 
       // EPG lookup

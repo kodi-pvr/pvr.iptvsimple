@@ -121,7 +121,7 @@ void InstanceSettings::ReadSettings()
 
   // Media
   m_instance.CheckInstanceSettingBoolean("mediaEnabled", m_mediaEnabled);
-  m_instance.CheckInstanceSettingBoolean("mediaVODAsRecordings", m_showVodAsRecordings);
+  m_instance.CheckInstanceSettingBoolean("mediaVODAsMedia", m_showVodAsMedia);
   m_instance.CheckInstanceSettingBoolean("mediaGroupByTitle", m_groupMediaByTitle);
   m_instance.CheckInstanceSettingBoolean("mediaGroupBySeason", m_groupMediaBySeason);
   m_instance.CheckInstanceSettingEnum<MediaUseM3UGroupPathMode>("mediaM3UGroupPath", m_mediaUseM3UGroupPathMode);
@@ -291,8 +291,8 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetEnumSetting<MediaUseM3UGroupPathMode, ADDON_STATUS>(settingName, settingValue, m_mediaUseM3UGroupPathMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "mediaForcePlaylist")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_mediaForcePlaylist, ADDON_STATUS_OK, ADDON_STATUS_OK);
-  else if (settingName == "mediaVODAsRecordings")
-    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_showVodAsRecordings, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "mediaVODAsMedia")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_showVodAsMedia, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Timeshift
   else if (settingName == "timeshiftEnabled")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_timeshiftEnabled, ADDON_STATUS_OK, ADDON_STATUS_OK);
