@@ -552,7 +552,7 @@ void PlaylistLoader::ParseAndAddChannelGroups(const std::string& groupNamesListS
 
 void PlaylistLoader::ParseSinglePropertyIntoChannel(const std::string& line, Channel& channel, const std::string& markerName)
 {
-  const std::string value = ReadMarkerValue(line, markerName);
+  const std::string value = ReadMarkerValue(line, markerName, markerName != KODIPROP_MARKER);
   auto pos = value.find('=');
   if (pos != std::string::npos)
   {
@@ -604,7 +604,9 @@ void PlaylistLoader::ReloadPlayList()
   }
 }
 
-std::string PlaylistLoader::ReadMarkerValue(const std::string& line, const std::string& markerName)
+std::string PlaylistLoader::ReadMarkerValue(const std::string& line,
+                                            const std::string& markerName,
+                                            bool isCheckDelimiters /* = true */)
 {
   size_t markerStart = line.find(markerName);
   if (markerStart != std::string::npos)
@@ -613,21 +615,29 @@ std::string PlaylistLoader::ReadMarkerValue(const std::string& line, const std::
     markerStart += marker.length();
     if (markerStart < line.length())
     {
-      if (marker == M3U_GROUP_MARKER && line[markerStart] != '"')
+      size_t markerEnd;
+      if (isCheckDelimiters)
       {
-        //For this case we just want to return the full string without splitting it
-        //This is because groups use semi-colons and not spaces as a delimiter
-        return line.substr(markerStart, line.length());
-      }
+        if (marker == M3U_GROUP_MARKER && line[markerStart] != '"')
+        {
+          //For this case we just want to return the full string without splitting it
+          //This is because groups use semi-colons and not spaces as a delimiter
+          return line.substr(markerStart, line.length());
+        }
 
-      char find = ' ';
-      if (line[markerStart] == '"')
-      {
-        find = '"';
-        markerStart++;
+        char find = ' ';
+        if (line[markerStart] == '"')
+        {
+          find = '"';
+          markerStart++;
+        }
+        markerEnd = line.find(find, markerStart);
+        if (markerEnd == std::string::npos)
+        {
+          markerEnd = line.length();
+        }
       }
-      size_t markerEnd = line.find(find, markerStart);
-      if (markerEnd == std::string::npos)
+      else
       {
         markerEnd = line.length();
       }

@@ -1,3 +1,7 @@
+v21.8.7
+- Fix #KODIPROP parsing from playlists
+- Fix wrong fix to manifest user-agent header for inputstream.adaptive
+
 v21.8.6
 - Always add mimetype for inputstream.adaptive
 - Better handled user-agent header for inputstream.adaptive use cases

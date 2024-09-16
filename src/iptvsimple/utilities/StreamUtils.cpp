@@ -20,17 +20,28 @@ using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 
+namespace
+{
+bool SplitUrlProtocolOpts(const std::string& streamURL,
+                          std::string& url,
+                          std::string& encodedProtocolOptions)
+{
+  size_t found = streamURL.find_first_of('|');
+  if (found != std::string::npos)
+  {
+      // Headers found, split and url-encode them
+      url = streamURL.substr(0, found);
+      const std::string& protocolOptions = streamURL.substr(found + 1, streamURL.length());
+      encodedProtocolOptions = StreamUtils::GetUrlEncodedProtocolOptions(protocolOptions);
+      return true;
+  }
+  return false;
+}
+} // unnamed namespace
+
 void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<InstanceSettings>& settings)
 {
-  // Check if the channel has explicitly set up the use of inputstream.adaptive,
-  // if so, the best behaviour for media services is:
-  // - Always add mimetype to prevent kodi core to make an HTTP HEADER requests
-  //   this because in some cases services refuse this request and can also deny downloads
-  // - If requested by settings, always add the "user-agent" header to ISA properties
-  const bool isISAdaptiveSet =
-      channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM) == INPUTSTREAM_ADAPTIVE;
-
-  if (!isISAdaptiveSet && ChannelSpecifiesInputstream(channel))
+  if (ChannelSpecifiesInputstream(channel))
   {
     // Channel has an inputstream class set so we only set the stream URL
     properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
@@ -48,7 +59,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       streamType = StreamUtils::InspectStreamType(streamURL, channel);
 
     // Using kodi's built in inputstreams
-    if (!isISAdaptiveSet && StreamUtils::UseKodiInputstreams(streamType, settings))
+    if (StreamUtils::UseKodiInputstreams(streamType, settings))
     {
       std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, channel, settings);
 
@@ -91,19 +102,17 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       // If no media headers are explicitly set for inputstream.adaptive,
       // strip the headers from streamURL and put it to media headers property
 
-      if (channel.GetProperty("inputstream.adaptive.stream_headers").empty())
+      if (channel.GetProperty("inputstream.adaptive.manifest_headers").empty() &&
+          channel.GetProperty("inputstream.adaptive.stream_headers").empty())
       {
         // No stream headers declared by property, check if stream URL has any
-        size_t found = streamURL.find_first_of('|');
-        if (found != std::string::npos)
+        std::string url;
+        std::string encodedProtocolOptions;
+        if (SplitUrlProtocolOpts(streamURL, url, encodedProtocolOptions))
         {
-          // Headers found, split and url-encode them
-          const std::string& url = streamURL.substr(0, found);
-          const std::string& protocolOptions = streamURL.substr(found + 1, streamURL.length());
-          const std::string& encodedProtocolOptions = StreamUtils::GetUrlEncodedProtocolOptions(protocolOptions);
-
           // Set stream URL without headers and encoded headers as property
           properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, url);
+          properties.emplace_back("inputstream.adaptive.manifest_headers", encodedProtocolOptions);
           properties.emplace_back("inputstream.adaptive.stream_headers", encodedProtocolOptions);
           streamUrlSet = true;
         }
@@ -113,8 +122,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       if (!streamUrlSet)
         properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
-      if (!isISAdaptiveSet)
-        properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
+      properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
       
       if (streamType == StreamType::HLS || streamType == StreamType::DASH ||
           streamType == StreamType::SMOOTH_STREAMING)
