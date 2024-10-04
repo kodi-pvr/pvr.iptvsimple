@@ -412,11 +412,12 @@ PVR_ERROR IptvSimple::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResu
 
 PVR_ERROR IptvSimple::GetRecordingStreamProperties(const kodi::addon::PVRRecording& recording, std::vector<kodi::addon::PVRStreamProperty>& properties)
 {
+  auto mediaEntry = m_media.GetMediaEntry(recording);
   std::string url = m_media.GetMediaEntryURL(recording);
 
-  if (!url.empty())
+  if (!mediaEntry.GetMediaEntryId().empty() && !url.empty())
   {
-    properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, url);
+    StreamUtils::SetAllStreamProperties(properties, mediaEntry, url, m_settings);
 
     return PVR_ERROR_NO_ERROR;
   }

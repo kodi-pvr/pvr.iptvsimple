@@ -50,18 +50,29 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       CheckInputstreamInstalledAndEnabled(channel.GetInputStreamName());
 
     if (channel.GetInputStreamName() == INPUTSTREAM_FFMPEGDIRECT)
-      InspectAndSetFFmpegDirectStreamProperties(properties, channel, streamURL, isChannelURL, settings);
+    {
+      InspectAndSetFFmpegDirectStreamProperties(properties, channel.GetMimeType(), channel.GetProperty("inputstream.ffmpegdirect.manifest_type"), channel.GetCatchupMode(), channel.IsCatchupTSStream(), streamURL, settings);
+
+      if (channel.SupportsLiveStreamTimeshifting() && isChannelURL &&
+          channel.GetProperty("inputstream.ffmpegdirect.stream_mode").empty() &&
+          settings->AlwaysEnableTimeshiftModeIfMissing())
+      {
+        properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
+        if (channel.GetProperty("inputstream.ffmpegdirect.is_realtime_stream").empty())
+          properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
+      }
+    }
   }
   else
   {
-    StreamType streamType = StreamUtils::GetStreamType(streamURL, channel);
+    StreamType streamType = StreamUtils::GetStreamType(streamURL, channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE), channel.IsCatchupTSStream());
     if (streamType == StreamType::OTHER_TYPE)
-      streamType = StreamUtils::InspectStreamType(streamURL, channel);
+      streamType = StreamUtils::InspectStreamType(streamURL, channel.GetCatchupMode());
 
     // Using kodi's built in inputstreams
     if (StreamUtils::UseKodiInputstreams(streamType, settings))
     {
-      std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, channel, settings);
+      std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM), channel.GetProperty("http-reconnect") == "true" , settings);
 
       properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
       if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
@@ -75,7 +86,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, CATCHUP_INPUTSTREAM_NAME);
           // this property is required to force VideoPlayer for Radio channels
           properties.emplace_back("inputstream-player", "videodefaultplayer");
-          SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
+          SetFFmpegDirectManifestTypeStreamProperty(properties, channel.GetProperty("inputstream.ffmpegdirect.manifest_type"), streamURL, streamType);
         }
         else if (channel.SupportsLiveStreamTimeshifting() && isChannelURL &&
                  CheckInputstreamInstalledAndEnabled(INPUTSTREAM_FFMPEGDIRECT))
@@ -83,7 +94,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
           properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_FFMPEGDIRECT);
           // this property is required to force VideoPlayer for Radio channels
           properties.emplace_back("inputstream-player", "videodefaultplayer");
-          SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
+          SetFFmpegDirectManifestTypeStreamProperty(properties, channel.GetProperty("inputstream.ffmpegdirect.manifest_type"), streamURL, streamType);
           properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
           properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
         }
@@ -123,7 +134,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
         properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
 
       properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
-      
+
       if (streamType == StreamType::HLS || streamType == StreamType::DASH ||
           streamType == StreamType::SMOOTH_STREAMING)
         properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
@@ -142,6 +153,93 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       properties.emplace_back(prop.first, prop.second);
   }
 }
+
+void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::MediaEntry& mediaEntry, const std::string& streamURL, std::shared_ptr<InstanceSettings>& settings)
+{
+  // Check if the media entry has explicitly set up the use of inputstream.adaptive,
+  // if so, the best behaviour for media services is:
+  // - Always add mimetype to prevent kodi core to make an HTTP HEADER requests
+  //   this because in some cases services refuse this request and can also deny downloads
+  // - If requested by settings, always add the "user-agent" header to ISA properties
+  const bool isISAdaptiveSet =
+      mediaEntry.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM) == INPUTSTREAM_ADAPTIVE;
+
+  if (!isISAdaptiveSet && !mediaEntry.GetInputStreamName().empty())
+  {
+    // Media Entry has an inputstream class set so we only set the stream URL
+    properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+
+    if (mediaEntry.GetInputStreamName() != PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG)
+      CheckInputstreamInstalledAndEnabled(mediaEntry.GetInputStreamName());
+
+    if (mediaEntry.GetInputStreamName() == INPUTSTREAM_FFMPEGDIRECT)
+      InspectAndSetFFmpegDirectStreamProperties(properties, mediaEntry.GetMimeType(), mediaEntry.GetProperty("inputstream.ffmpegdirect.manifest_type"), CatchupMode::DISABLED, false, streamURL, settings);
+  }
+  else
+  {
+    StreamType streamType = StreamUtils::GetStreamType(streamURL, mediaEntry.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE), false);
+    if (streamType == StreamType::OTHER_TYPE)
+      streamType = StreamUtils::InspectStreamType(streamURL, CatchupMode::DISABLED);
+
+    // Using kodi's built in inputstreams
+    if (!isISAdaptiveSet && StreamUtils::UseKodiInputstreams(streamType, settings))
+    {
+      std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, mediaEntry.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM), mediaEntry.GetProperty("http-reconnect") == "true" , settings);
+
+      properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+      if (!mediaEntry.HasMimeType() && StreamUtils::HasMimeType(streamType))
+        properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+
+      if (streamType == StreamType::HLS || streamType == StreamType::TS)
+      {
+        properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG);
+      }
+    }
+    else // inputstream.adaptive
+    {
+      CheckInputstreamInstalledAndEnabled(INPUTSTREAM_ADAPTIVE);
+
+      bool streamUrlSet = false;
+
+      // If no media headers are explicitly set for inputstream.adaptive,
+      // strip the headers from streamURL and put it to media headers property
+
+      if (mediaEntry.GetProperty("inputstream.adaptive.manifest_headers").empty() &&
+          mediaEntry.GetProperty("inputstream.adaptive.stream_headers").empty())
+      {
+        // No stream headers declared by property, check if stream URL has any
+        std::string url;
+        std::string encodedProtocolOptions;
+        if (SplitUrlProtocolOpts(streamURL, url, encodedProtocolOptions))
+        {
+          // Set stream URL without headers and encoded headers as property
+          properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, url);
+          properties.emplace_back("inputstream.adaptive.manifest_headers", encodedProtocolOptions);
+          properties.emplace_back("inputstream.adaptive.stream_headers", encodedProtocolOptions);
+          streamUrlSet = true;
+        }
+      }
+
+      // Set intact stream URL if not previously set
+      if (!streamUrlSet)
+        properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
+
+      if (!isISAdaptiveSet)
+        properties.emplace_back(PVR_STREAM_PROPERTY_INPUTSTREAM, INPUTSTREAM_ADAPTIVE);
+
+      if (streamType == StreamType::HLS || streamType == StreamType::DASH ||
+          streamType == StreamType::SMOOTH_STREAMING)
+        properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
+    }
+  }
+
+  if (!mediaEntry.GetProperties().empty())
+  {
+    for (auto& prop : mediaEntry.GetProperties())
+      properties.emplace_back(prop.first, prop.second);
+  }
+}
+
 bool StreamUtils::CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName)
 {
   std::string version;
@@ -164,38 +262,29 @@ bool StreamUtils::CheckInputstreamInstalledAndEnabled(const std::string& inputst
   return true;
 }
 
-void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::shared_ptr<InstanceSettings>& settings)
+void StreamUtils::InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const std::string& mimeType, const std::string& manifestType, CatchupMode catchupMode, bool isCatchupTSStream, const std::string& streamURL, std::shared_ptr<InstanceSettings>& settings)
 {
   // If there is no MIME type and no manifest type (BOTH!) set then potentially inspect the stream and set them
-  if (!channel.HasMimeType() && !channel.GetProperty("inputstream.ffmpegdirect.manifest_type").empty())
+  if (!mimeType.empty() && !manifestType.empty())
   {
-    StreamType streamType = StreamUtils::GetStreamType(streamURL, channel);
+    StreamType streamType = StreamUtils::GetStreamType(streamURL, mimeType, isCatchupTSStream);
     if (streamType == StreamType::OTHER_TYPE)
-      streamType = StreamUtils::InspectStreamType(streamURL, channel);
+      streamType = StreamUtils::InspectStreamType(streamURL, catchupMode);
 
-    if (!channel.HasMimeType() && StreamUtils::HasMimeType(streamType))
+    if (mimeType.empty() && StreamUtils::HasMimeType(streamType))
       properties.emplace_back(PVR_STREAM_PROPERTY_MIMETYPE, StreamUtils::GetMimeType(streamType));
 
-    SetFFmpegDirectManifestTypeStreamProperty(properties, channel, streamURL, streamType);
-  }
-
-  if (channel.SupportsLiveStreamTimeshifting() && isChannelURL &&
-      channel.GetProperty("inputstream.ffmpegdirect.stream_mode").empty() &&
-      settings->AlwaysEnableTimeshiftModeIfMissing())
-  {
-    properties.emplace_back("inputstream.ffmpegdirect.stream_mode", "timeshift");
-    if (channel.GetProperty("inputstream.ffmpegdirect.is_realtime_stream").empty())
-      properties.emplace_back("inputstream.ffmpegdirect.is_realtime_stream", "true");
+    SetFFmpegDirectManifestTypeStreamProperty(properties, manifestType, streamURL, streamType);
   }
 }
 
-void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType)
+void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const std::string& manifestType, const std::string& streamURL, const StreamType& streamType)
 {
-  std::string manifestType = channel.GetProperty("inputstream.ffmpegdirect.manifest_type");
+  std::string newManifestType;
   if (manifestType.empty())
-    manifestType = StreamUtils::GetManifestType(streamType);
-  if (!manifestType.empty())
-    properties.emplace_back("inputstream.ffmpegdirect.manifest_type", manifestType);
+    newManifestType = StreamUtils::GetManifestType(streamType);
+  if (!newManifestType.empty())
+    properties.emplace_back("inputstream.ffmpegdirect.manifest_type", newManifestType);
 }
 
 std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<InstanceSettings>& settings)
@@ -223,12 +312,10 @@ std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamTyp
   return inputStreamName;
 }
 
-const StreamType StreamUtils::GetStreamType(const std::string& url, const Channel& channel)
+const StreamType StreamUtils::GetStreamType(const std::string& url, const std::string& mimeType, bool isCatchupTSStream)
 {
   if (StringUtils::StartsWith(url, "plugin://"))
     return StreamType::PLUGIN;
-
-  std::string mimeType = channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE);
 
   if (url.find(".m3u8") != std::string::npos ||
       mimeType == "application/x-mpegURL" ||
@@ -242,7 +329,7 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const Channe
       !(url.find(".ismv") != std::string::npos || url.find(".isma") != std::string::npos))
     return StreamType::SMOOTH_STREAMING;
 
-  if (mimeType == "video/mp2t" || channel.IsCatchupTSStream())
+  if (mimeType == "video/mp2t" || isCatchupTSStream)
     return StreamType::TS;
 
   // it has a MIME type but not one we recognise
@@ -252,7 +339,7 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const Channe
   return StreamType::OTHER_TYPE;
 }
 
-const StreamType StreamUtils::InspectStreamType(const std::string& url, const Channel& channel)
+const StreamType StreamUtils::InspectStreamType(const std::string& url, CatchupMode catchupMode)
 {
   if (!FileUtils::FileExists(url))
     return StreamType::OTHER_TYPE;
@@ -273,10 +360,10 @@ const StreamType StreamUtils::InspectStreamType(const std::string& url, const Ch
   }
 
   // If we can't inspect the stream type the only option left for default, append or shift mode is TS
-  if (channel.GetCatchupMode() == CatchupMode::DEFAULT ||
-      channel.GetCatchupMode() == CatchupMode::APPEND ||
-      channel.GetCatchupMode() == CatchupMode::SHIFT ||
-      channel.GetCatchupMode() == CatchupMode::TIMESHIFT)
+  if (catchupMode == CatchupMode::DEFAULT ||
+      catchupMode == CatchupMode::APPEND ||
+      catchupMode == CatchupMode::SHIFT ||
+      catchupMode == CatchupMode::TIMESHIFT)
     return StreamType::TS;
 
   return StreamType::OTHER_TYPE;
@@ -319,12 +406,12 @@ bool StreamUtils::HasMimeType(const StreamType& streamType)
   return streamType != StreamType::OTHER_TYPE && streamType != StreamType::SMOOTH_STREAMING;
 }
 
-std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<InstanceSettings>& settings)
+std::string StreamUtils::GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const std::string& inputstreamName, bool hasHTTPReconnect, std::shared_ptr<InstanceSettings>& settings)
 {
   std::string newStreamUrl = streamUrl;
 
-  if (WebUtils::IsHttpUrl(streamUrl) && SupportsFFmpegReconnect(streamType, channel) &&
-      (channel.GetProperty("http-reconnect") == "true" || settings->UseFFmpegReconnect()))
+  if (WebUtils::IsHttpUrl(streamUrl) && SupportsFFmpegReconnect(streamType, inputstreamName) &&
+      (hasHTTPReconnect|| settings->UseFFmpegReconnect()))
   {
     newStreamUrl = AddHeaderToStreamUrl(newStreamUrl, "reconnect", "1");
     if (streamType != StreamType::HLS)
@@ -381,10 +468,10 @@ bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& c
   return !channel.GetInputStreamName().empty();
 }
 
-bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel)
+bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const std::string& inputstreamName)
 {
   return streamType == StreamType::HLS ||
-         channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM) == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+         inputstreamName == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
 }
 
 std::string StreamUtils::GetUrlEncodedProtocolOptions(const std::string& protocolOptions)
