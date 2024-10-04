@@ -70,9 +70,9 @@ StreamEntry StreamManager::StreamEntryLookup(const Channel& channel, const std::
 
   if (!streamEntry)
   {
-    StreamType streamType = StreamUtils::GetStreamType(streamTestUrl, channel);
+    StreamType streamType = StreamUtils::GetStreamType(streamTestUrl, channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE), channel.IsCatchupTSStream());
     if (streamType == StreamType::OTHER_TYPE)
-      streamType = StreamUtils::InspectStreamType(streamTestUrl, channel);
+      streamType = StreamUtils::InspectStreamType(streamTestUrl, channel.GetCatchupMode());
 
     streamEntry = std::make_shared<StreamEntry>();
     streamEntry->SetStreamKey(streamKey);
