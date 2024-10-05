@@ -1,3 +1,9 @@
+v21.9.1
+- Fix release build
+
+v21.9.0
+- Correctly set inputstream properties for media entries
+
 v21.8.7
 - Fix #KODIPROP parsing from playlists
 - Fix wrong fix to manifest user-agent header for inputstream.adaptive

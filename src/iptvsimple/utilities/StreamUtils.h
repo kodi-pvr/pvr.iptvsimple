@@ -8,6 +8,7 @@
 #pragma once
 
 #include "../data/Channel.h"
+#include "../data/MediaEntry.h"
 #include "../data/StreamEntry.h"
 
 #include <map>
@@ -29,12 +30,13 @@ namespace iptvsimple
     {
     public:
       static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
-      static const StreamType GetStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
-      static const StreamType InspectStreamType(const std::string& url, const iptvsimple::data::Channel& channel);
+      static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::MediaEntry& mediaEntry, const std::string& streamUrl, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+      static const StreamType GetStreamType(const std::string& url, const std::string& mimeType, bool isCatchupTSStream);
+      static const StreamType InspectStreamType(const std::string& url, iptvsimple::CatchupMode catchupMode);
       static const std::string GetManifestType(const StreamType& streamType);
       static const std::string GetMimeType(const StreamType& streamType);
       static bool HasMimeType(const StreamType& streamType);
-      static std::string GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+      static std::string GetURLWithFFmpegReconnectOptions(const std::string& streamUrl, const StreamType& streamType, const std::string& inputstreamName, bool hasHTTPReconnect, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
       static std::string AddHeader(const std::string& headerTarget, const std::string& headerName, const std::string& headerValue, bool encodeHeaderValue);
       static std::string AddHeaderToStreamUrl(const std::string& streamUrl, const std::string& headerName, const std::string& headerValue);
       static bool UseKodiInputstreams(const StreamType& streamType, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
@@ -43,9 +45,9 @@ namespace iptvsimple
       static std::string GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
 
     private:
-      static bool SupportsFFmpegReconnect(const StreamType& streamType, const iptvsimple::data::Channel& channel);
-      static void InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, bool isChannelURL, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
-      static void SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, const StreamType& streamType);
+      static bool SupportsFFmpegReconnect(const StreamType& streamType, const std::string& inputstreamName);
+      static void InspectAndSetFFmpegDirectStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const std::string& mimeType, const std::string& manifestType, iptvsimple::CatchupMode catchupMode, bool isCatchupTSStream, const std::string& streamUrl, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+      static void SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::addon::PVRStreamProperty>& properties, const std::string& manifestType, const std::string& streamURL, const StreamType& streamType);
       static bool CheckInputstreamInstalledAndEnabled(const std::string& inputstreamName);
 
     };

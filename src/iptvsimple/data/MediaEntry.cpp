@@ -311,3 +311,12 @@ void MediaEntry::UpdateTo(kodi::addon::PVRRecording& left, bool isInVirtualMedia
 
   left.SetDirectory(newDirectory);
 }
+
+std::string MediaEntry::GetProperty(const std::string& propName) const
+{
+  auto propPair = m_properties.find(propName);
+  if (propPair != m_properties.end())
+    return propPair->second;
+
+  return {};
+}
