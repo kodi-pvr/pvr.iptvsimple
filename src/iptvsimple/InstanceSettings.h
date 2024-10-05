@@ -142,7 +142,7 @@ namespace iptvsimple
     bool UseLocalLogosOnlyIgnoreM3U() const { return m_useLocalLogosOnly; }
 
     bool IsMediaEnabled() const { return m_mediaEnabled; }
-    bool ShowVodAsRecordings() const { return m_showVodAsRecordings; }
+    bool ShowVodAsMedia() const { return m_showVodAsMedia; }
     bool GroupMediaByTitle() const { return m_groupMediaByTitle; }
     bool GroupMediaBySeason() const { return m_groupMediaBySeason; }
     const MediaUseM3UGroupPathMode& GetMediaUseM3UGroupPathMode() { return m_mediaUseM3UGroupPathMode; }
@@ -312,7 +312,7 @@ namespace iptvsimple
     bool m_includeShowInfoInMediaTitle = false;
     MediaUseM3UGroupPathMode m_mediaUseM3UGroupPathMode = MediaUseM3UGroupPathMode::IGNORE_GROUP_NAME;
     bool m_mediaForcePlaylist = false;
-    bool m_showVodAsRecordings = true;
+    bool m_showVodAsMedia = true;
 
     // Timeshift
     bool m_timeshiftEnabled = false;

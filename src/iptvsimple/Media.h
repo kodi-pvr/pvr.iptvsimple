@@ -22,11 +22,11 @@ namespace iptvsimple
   {
   public:
     Media(std::shared_ptr<iptvsimple::InstanceSettings>& settings);
-    void GetMedia(std::vector<kodi::addon::PVRRecording>& kodiRecordings);
+    void GetMedia(std::vector<kodi::addon::PVRMediaTag>& kodiMedia);
     int GetNumMedia() const;
     void Clear();
-    const data::MediaEntry GetMediaEntry(const kodi::addon::PVRRecording& mediaEntry);
-    const std::string GetMediaEntryURL(const kodi::addon::PVRRecording& mediaEntry);
+    const data::MediaEntry GetMediaEntry(const kodi::addon::PVRMediaTag& mediaEntry);
+    const std::string GetMediaEntryURL(const kodi::addon::PVRMediaTag& mediaEntry);
     const iptvsimple::data::MediaEntry* FindMediaEntry(const std::string& id, const std::string& displayName) const;
 
     bool AddMediaEntry(iptvsimple::data::MediaEntry& entry, std::vector<int>& groupIdList, iptvsimple::ChannelGroups& channelGroups, bool channelHadGroups);

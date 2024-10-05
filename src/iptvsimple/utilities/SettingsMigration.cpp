@@ -185,7 +185,11 @@ void SettingsMigration::MigrateBoolSetting(const char* key, bool defaultValue)
   bool value;
   if (kodi::addon::CheckSettingBoolean(key, value) && value != defaultValue)
   {
-    m_target.SetInstanceSettingBoolean(key, value);
+    const std::string stringKey = key;
+    if (stringKey == "mediaVODAsRecordings")
+      m_target.SetInstanceSettingBoolean("mediaVODAsMedia", value);
+    else
+      m_target.SetInstanceSettingBoolean(key, value);
     m_changed = true;
   }
 }

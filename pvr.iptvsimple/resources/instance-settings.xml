@@ -650,7 +650,7 @@
           </dependencies>
           <control type="toggle" />
         </setting>
-        <setting id="mediaVODAsRecordings" type="boolean" parent="mediaEnabled" label="30154" help="30804">
+        <setting id="mediaVODAsMedia" type="boolean" parent="mediaEnabled" label="30154" help="30804">
           <level>2</level>
           <default>true</default>
           <dependencies>

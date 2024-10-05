@@ -106,11 +106,9 @@ PVR_ERROR IptvSimple::GetCapabilities(kodi::addon::PVRCapabilities& capabilities
   capabilities.SetSupportsRadio(true);
   capabilities.SetSupportsChannelGroups(true);
   capabilities.SetSupportsProviders(true);
-  capabilities.SetSupportsRecordingsRename(false);
-  capabilities.SetSupportsRecordingsLifetimeChange(false);
   capabilities.SetSupportsDescrambleInfo(false);
-  capabilities.SetSupportsRecordings(true);
-  capabilities.SetSupportsRecordingsDelete(false);
+  capabilities.SetSupportsMedia(true);
+  capabilities.SetSupportsMediaTagSize(false);
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -380,40 +378,34 @@ PVR_ERROR IptvSimple::SetEPGMaxFutureDays(int epgMaxFutureDays)
  * Media
  **************************************************************************/
 
-PVR_ERROR IptvSimple::GetRecordingsAmount(bool deleted, int& amount)
+PVR_ERROR IptvSimple::GetMediaAmount(int& amount)
 {
   std::lock_guard<std::mutex> lock(m_mutex);
-  if (deleted)
-    amount = 0;
-  else
-    amount = m_media.GetNumMedia();
+  amount = m_media.GetNumMedia();
 
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR IptvSimple::GetRecordings(bool deleted, kodi::addon::PVRRecordingsResultSet& results)
+PVR_ERROR IptvSimple::GetMedia(kodi::addon::PVRMediaTagsResultSet& results)
 {
-  if (!deleted)
+  std::vector<kodi::addon::PVRMediaTag> media;
   {
-    std::vector<kodi::addon::PVRRecording> media;
-    {
-      std::lock_guard<std::mutex> lock(m_mutex);
-      m_media.GetMedia(media);
-    }
-
-    for (const auto& mediaTag : media)
-      results.Add(mediaTag);
-
-    Logger::Log(LEVEL_DEBUG, "%s - media available '%d'", __func__, media.size());
+    std::lock_guard<std::mutex> lock(m_mutex);
+    m_media.GetMedia(media);
   }
 
+  for (const auto& mediaTag : media)
+    results.Add(mediaTag);
+
+  Logger::Log(LEVEL_DEBUG, "%s - media available '%d'", __func__, media.size());
+
   return PVR_ERROR_NO_ERROR;
 }
 
-PVR_ERROR IptvSimple::GetRecordingStreamProperties(const kodi::addon::PVRRecording& recording, std::vector<kodi::addon::PVRStreamProperty>& properties)
+PVR_ERROR IptvSimple::GetMediaTagStreamProperties(const kodi::addon::PVRMediaTag& mediaTag, std::vector<kodi::addon::PVRStreamProperty>& properties)
 {
-  auto mediaEntry = m_media.GetMediaEntry(recording);
-  std::string url = m_media.GetMediaEntryURL(recording);
+  auto mediaEntry = m_media.GetMediaEntry(mediaTag);
+  std::string url = m_media.GetMediaEntryURL(mediaTag);
 
   if (!mediaEntry.GetMediaEntryId().empty() && !url.empty())
   {

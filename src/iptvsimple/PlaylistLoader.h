@@ -48,6 +48,7 @@ namespace iptvsimple
   static const std::string MEDIA                   = "media=";
   static const std::string MEDIA_DIR               = "media-dir=";
   static const std::string MEDIA_SIZE              = "media-size=";
+  static const std::string MEDIA_TYPE              = "media-type=";
   static const std::string REALTIME_OVERRIDE       = "realtime=\"";
   static const std::string KODIPROP_MARKER         = "#KODIPROP:";
   static const std::string EXTVLCOPT_MARKER        = "#EXTVLCOPT:";

@@ -22,16 +22,16 @@ Media::Media(std::shared_ptr<iptvsimple::InstanceSettings>& settings) : m_settin
 {
 }
 
-void Media::GetMedia(std::vector<kodi::addon::PVRRecording>& kodiRecordings)
+void Media::GetMedia(std::vector<kodi::addon::PVRMediaTag>& kodiMedia)
 {
   for (auto& mediaEntry : m_media)
   {
     Logger::Log(LEVEL_DEBUG, "%s - Transfer mediaEntry '%s', MediaEntry Id '%s'", __func__, mediaEntry.GetTitle().c_str(), mediaEntry.GetMediaEntryId().c_str());
-    kodi::addon::PVRRecording kodiRecording;
+    kodi::addon::PVRMediaTag kodiMediaEntry;
 
-    mediaEntry.UpdateTo(kodiRecording, IsInVirtualMediaEntryFolder(mediaEntry), m_haveMediaTypes);
+    mediaEntry.UpdateTo(kodiMediaEntry, IsInVirtualMediaEntryFolder(mediaEntry), m_haveMediaTypes);
 
-    kodiRecordings.emplace_back(kodiRecording);
+    kodiMedia.emplace_back(kodiMediaEntry);
   }
 }
 
@@ -136,18 +136,18 @@ bool Media::IsInVirtualMediaEntryFolder(const MediaEntry& mediaEntryToCheck) con
   return false;
 }
 
-const MediaEntry Media::GetMediaEntry(const kodi::addon::PVRRecording& recording)
+const MediaEntry Media::GetMediaEntry(const kodi::addon::PVRMediaTag& mediaTag)
 {
   Logger::Log(LEVEL_INFO, "%s", __func__);
 
-  return GetMediaEntry(recording.GetRecordingId());
+  return GetMediaEntry(mediaTag.GetMediaTagId());
 }
 
-const std::string Media::GetMediaEntryURL(const kodi::addon::PVRRecording& recording)
+const std::string Media::GetMediaEntryURL(const kodi::addon::PVRMediaTag& mediaTag)
 {
   Logger::Log(LEVEL_INFO, "%s", __func__);
 
-  auto mediaEntry = GetMediaEntry(recording.GetRecordingId());
+  auto mediaEntry = GetMediaEntry(mediaTag.GetMediaTagId());
 
   if (!mediaEntry.GetMediaEntryId().empty())
     return mediaEntry.GetStreamURL();

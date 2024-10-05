@@ -356,7 +356,7 @@ void Epg::ReloadEPG()
     for (const auto& myChannel : m_channels.GetChannelsList())
       m_client->TriggerEpgUpdate(myChannel.GetUniqueId());
 
-    m_client->TriggerRecordingUpdate();
+    m_client->TriggerMediaUpdate();
   }
 }
 

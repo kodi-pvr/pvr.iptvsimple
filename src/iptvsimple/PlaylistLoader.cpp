@@ -175,6 +175,7 @@ bool PlaylistLoader::LoadPlayList()
       isMediaEntry = line.find(MEDIA) != std::string::npos ||
                      line.find(MEDIA_DIR) != std::string::npos ||
                      line.find(MEDIA_SIZE) != std::string::npos ||
+                     line.find(MEDIA_TYPE) != std::string::npos ||
                      m_settings->MediaForcePlaylist();
 
       overrideRealTime = GetOverrideRealTime(line);
@@ -224,7 +225,7 @@ bool PlaylistLoader::LoadPlayList()
       Logger::Log(LEVEL_DEBUG, "%s - Adding channel or Media Entry '%s' with URL: '%s'", __FUNCTION__, tmpChannel.GetChannelName().c_str(), line.c_str());
 
       if (m_settings->IsMediaEnabled() &&
-          (isMediaEntry || (m_settings->ShowVodAsRecordings() && !isRealTime)))
+          (isMediaEntry || (m_settings->ShowVodAsMedia() && !isRealTime)))
       {
         MediaEntry entry = tmpMediaEntry;
         entry.UpdateFrom(tmpChannel);
@@ -340,6 +341,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     std::string strMedia = ReadMarkerValue(infoLine, MEDIA);
     std::string strMediaDir = ReadMarkerValue(infoLine, MEDIA_DIR);
     std::string strMediaSize = ReadMarkerValue(infoLine, MEDIA_SIZE);
+    std::string strMediaType = ReadMarkerValue(infoLine, MEDIA_TYPE);
 
     kodi::UnknownToUTF8(strTvgName, strTvgName);
     kodi::UnknownToUTF8(strCatchupSource, strCatchupSource);
@@ -521,6 +523,11 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     if (!strMediaSize.empty())
       mediaEntry.SetSizeInBytes(std::strtoll(strMediaSize.c_str(), nullptr, 10));
 
+    if (!strMediaType.empty())
+    {
+      mediaEntry.SetMediaType(strMediaType);
+    }
+
     return groupNames;
   }
 
@@ -595,7 +602,7 @@ void PlaylistLoader::ReloadPlayList()
     m_client->TriggerChannelUpdate();
     m_client->TriggerChannelGroupsUpdate();
     m_client->TriggerProvidersUpdate();
-    m_client->TriggerRecordingUpdate();
+    m_client->TriggerMediaUpdate();
   }
   else
   {

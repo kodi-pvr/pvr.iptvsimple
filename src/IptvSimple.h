@@ -73,9 +73,9 @@ public:
 
   PVR_ERROR StreamClosed() override;
 
-  PVR_ERROR GetRecordingsAmount(bool deleted, int& amount) override;
-  PVR_ERROR GetRecordings(bool deleted, kodi::addon::PVRRecordingsResultSet& results) override;
-  PVR_ERROR GetRecordingStreamProperties(const kodi::addon::PVRRecording& recording, std::vector<kodi::addon::PVRStreamProperty>& properties) override;
+  PVR_ERROR GetMediaAmount(int& amount) override;
+  PVR_ERROR GetMedia(kodi::addon::PVRMediaTagsResultSet& results) override;
+  PVR_ERROR GetMediaTagStreamProperties(const kodi::addon::PVRMediaTag& mediaTag, std::vector<kodi::addon::PVRStreamProperty>& properties) override;
 
   //@}
 

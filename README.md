@@ -178,7 +178,7 @@ Settings related to Channel Logos.
     - `Prefer XMLTV` - Use the channel logo from the XMLTV file if available otherwise use the M3U logo.
 
 ### Media
-Media entries can be used to access the Video-On-Demand (VOD) library provided by IPTV services. The IPTV media library can be organized either as a plain list of channels or the hierarchy tree made of folders and PVR recordings.
+Media entries can be used to access the Video-On-Demand (VOD) library provided by IPTV services. The IPTV media library can be organized either as a plain list of channels or the hierarchy tree made of folders and PVR media items.
 
 An M3U entry can denote that it's media by having:
 * an M3U property of `EXT-X-PLAYLIST-TYPE` set to `VOD`,
@@ -188,7 +188,7 @@ More detail on these can be found in [Supported M3U and XMLTV elements](#support
 
 Note that the media item will read from the XMLTV file, where it will read just the first entry. The entry must have a start time greater than now and be within the boundaries of the Kodi PVR Guide settings.
 
-* **Show media as recordings**: If enabled, all IPTV media entries can be shown as PVR recordings. Otherwise, they appear as regular PVR channels.
+* **Show media as media**: If enabled, all IPTV media entries can be shown as PVR media items. Otherwise, they appear as regular PVR channels.
 * **Group entries by title**: If multiple entries exist with matching titles, create a virtual folder to group them together.
 * **Group entries by season**: If multiple entries exist with matching titles, try additionally grouping them in sub-folders representing seasons.
 * **Include season and episode number in title**: Prepend the season and episode numbers to the title.
@@ -197,7 +197,7 @@ Note that the media item will read from the XMLTV file, where it will read just 
     - `Always append` - Always append it.
     - `When no media-dir is present` - Only use the group title of the M3U when no media-dir is provided.
 * **Force all M3U entries to be media**: Force the full playlist to be media, regardless of what tags are present. Since the introduction of multiple instances for PVR add-ons this option can be useful.
-* **Include VODs as media**: Show VOD as recordings if enabled. If disabled only M3U entries with media attributes will be shown as PVR recordings.
+* **Include VODs as media**: Show VOD as media if enabled. If disabled only M3U entries with media attributes will be shown as PVR media items.
 
 ### Timeshift
 Timeshift settings for pausing/rewinding and fast-forwarding live streams.
@@ -447,7 +447,7 @@ plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c
 http://path-to-stream/live/channel-l.mkv
 #EXTINF:-1 media="true",Channel M
 http://path-to-stream/live/channel-m.mkv
-#EXTINF:-1 radio="true" media="true" media-size="102400000",Channel N
+#EXTINF:-1 radio="true" media="true" media-size="102400000" media-type="tv-show",Channel N
 http://path-to-stream/live/channel-n.mkv
 #EXTINF:-1 media-dir="/movies/scifi",Channel O
 http://path-to-stream/live/channel-o.mkv
@@ -467,7 +467,7 @@ http://path-to-stream/live/channel-o.mkv
 - For `Channel K` this is an example of a VOD style entry which uses a default `catchup-source` of `{catchup-id}` and will allow playback of any EPG entry with a `catchup-id` past, present or future via a Kodi plugin URL.
 - For `Channel L` this is a tv media entry specified by the M3U `EXT-X-PLAYLIST-TYPE` property.
 - For `Channel M` this is a tv media entry specified by the `media` attribute on the M3U entry.
-- For `Channel N` this is a radio media entry of size 102400000 bytes.
+- For `Channel N` this is a radio media entry of size 102400000 bytes, and the type is a TV show. Available `media-type` values are: `tv-show`, `movie`, `music-video`, `music`, `radio-show` and `podcast`.
 - For `Channel O` this is a tv media entry specifying a directory path.
 
 *Channel k Plugin example:*
