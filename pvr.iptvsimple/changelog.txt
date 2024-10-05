@@ -1,3 +1,6 @@
+v22.3.0
+- Move from recordings for IPTV library to PVR Media
+
 v22.2.0
 - Correctly set inputstream properties for media entries
 
