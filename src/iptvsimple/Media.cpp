@@ -136,6 +136,13 @@ bool Media::IsInVirtualMediaEntryFolder(const MediaEntry& mediaEntryToCheck) con
   return false;
 }
 
+const MediaEntry Media::GetMediaEntry(const kodi::addon::PVRRecording& recording)
+{
+  Logger::Log(LEVEL_INFO, "%s", __func__);
+
+  return GetMediaEntry(recording.GetRecordingId());
+}
+
 const std::string Media::GetMediaEntryURL(const kodi::addon::PVRRecording& recording)
 {
   Logger::Log(LEVEL_INFO, "%s", __func__);

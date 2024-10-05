@@ -25,6 +25,7 @@ namespace iptvsimple
     void GetMedia(std::vector<kodi::addon::PVRRecording>& kodiRecordings);
     int GetNumMedia() const;
     void Clear();
+    const data::MediaEntry GetMediaEntry(const kodi::addon::PVRRecording& mediaEntry);
     const std::string GetMediaEntryURL(const kodi::addon::PVRRecording& mediaEntry);
     const iptvsimple::data::MediaEntry* FindMediaEntry(const std::string& id, const std::string& displayName) const;
 
