@@ -226,19 +226,21 @@ const XmltvFileFormat Epg::GetXMLTVFileFormat(const char* buffer)
   if (!buffer)
     return XmltvFileFormat::INVALID;
 
-  // xml should starts with '<?xml'
-  if (buffer[0] != '\x3C' || buffer[1] != '\x3F' || buffer[2] != '\x78' ||
-      buffer[3] != '\x6D' || buffer[4] != '\x6C')
+  if ((buffer[0] != '\x3C' && buffer[std::strlen(buffer) - 1] != '\x3E') || // Start with < and ends with >
+      (buffer[0] != '\x3C' && buffer[1] != '\x3F' &&  buffer[2] != '\x78' && // xml should starts with '<?xml'
+       buffer[3] != '\x6D' && buffer[4] != '\x6C'))
   {
-    // check for BOM
-    if (buffer[0] != '\xEF' || buffer[1] != '\xBB' || buffer[2] != '\xBF')
-    {
-      // check for tar archive
-      if (strcmp(buffer + 0x101, "ustar") || strcmp(buffer + 0x101, "GNUtar"))
-        return XmltvFileFormat::TAR_ARCHIVE;
-      else
-        return XmltvFileFormat::INVALID;
-    }
+    return XmltvFileFormat::NORMAL;
+  }
+
+  // check for BOM
+  if (buffer[0] != '\xEF' || buffer[1] != '\xBB' || buffer[2] != '\xBF')
+  {
+    // check for tar archive
+    if (strcmp(buffer + 0x101, "ustar") || strcmp(buffer + 0x101, "GNUtar"))
+      return XmltvFileFormat::TAR_ARCHIVE;
+    else
+      return XmltvFileFormat::INVALID;
   }
 
   return XmltvFileFormat::NORMAL;
