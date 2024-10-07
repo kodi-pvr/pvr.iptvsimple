@@ -1,3 +1,7 @@
+v22.2.1
+- Fix XML file format check
+- Always treat special paths as local
+
 v22.2.0
 - Correctly set inputstream properties for media entries
 
