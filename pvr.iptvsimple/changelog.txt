@@ -1,3 +1,6 @@
+v21.9.3
+- Fix XMLTV format check
+
 v21.9.2
 - Fix XML file format check
 - Always treat special paths as local
