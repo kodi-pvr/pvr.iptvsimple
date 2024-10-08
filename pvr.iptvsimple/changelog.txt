@@ -1,3 +1,7 @@
+v21.9.2
+- Fix XML file format check
+- Always treat special paths as local
+
 v21.9.1
 - Fix release build
 
