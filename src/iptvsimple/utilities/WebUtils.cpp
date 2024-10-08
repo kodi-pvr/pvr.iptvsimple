@@ -121,6 +121,11 @@ bool WebUtils::IsNfsUrl(const std::string& url)
   return StringUtils::StartsWith(url, NFS_PREFIX);
 }
 
+bool WebUtils::IsSpecialUrl(const std::string& url)
+{
+  return StringUtils::StartsWith(url, SPECIAL_PREFIX);
+}
+
 std::string WebUtils::RedactUrl(const std::string& url)
 {
   std::string redactedUrl = url;
@@ -139,7 +144,7 @@ std::string WebUtils::RedactUrl(const std::string& url)
 bool WebUtils::Check(const std::string& strURL, int connectionTimeoutSecs, bool isLocalPath)
 {
   // For local paths we only need to check existence of the file
-  if (isLocalPath && FileUtils::FileExists(strURL))
+  if ((isLocalPath || IsSpecialUrl(strURL)) && FileUtils::FileExists(strURL))
     return true;
 
   //Otherwise it's remote
