@@ -226,9 +226,9 @@ const XmltvFileFormat Epg::GetXMLTVFileFormat(const char* buffer)
   if (!buffer)
     return XmltvFileFormat::INVALID;
 
-  if ((buffer[0] != '\x3C' && buffer[std::strlen(buffer) - 1] != '\x3E') || // Start with < and ends with >
-      (buffer[0] != '\x3C' && buffer[1] != '\x3F' &&  buffer[2] != '\x78' && // xml should starts with '<?xml'
-       buffer[3] != '\x6D' && buffer[4] != '\x6C'))
+  if ((buffer[0] == '\x3C' && buffer[std::strlen(buffer) - 1] == '\x3E') || // Start with < and ends with >
+      (buffer[0] == '\x3C' && buffer[1] == '\x3F' &&  buffer[2] == '\x78' && // xml should starts with '<?xml'
+       buffer[3] == '\x6D' && buffer[4] == '\x6C'))
   {
     return XmltvFileFormat::NORMAL;
   }
