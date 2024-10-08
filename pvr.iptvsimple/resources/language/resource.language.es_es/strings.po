@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2024-07-24 17:41+0000\n"
+"PO-Revision-Date: 2024-09-11 09:27+0000\n"
 "Last-Translator: roliverosc <roliverosc@hotmail.com>\n"
 "Language-Team: Spanish (Spain) <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/es_es/>\n"
 "Language: es_es\n"
@@ -15,11 +15,11 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.7.2\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
-msgstr "Complemento Kodi PVR para compatibilidad con IPTV."
+msgstr "Complemento PVR de Kodi para compatibilidad con IPTV."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
@@ -112,12 +112,12 @@ msgstr "Número de canal inicial"
 #. label: General - numberByOrder
 msgctxt "#30014"
 msgid "Only number by channel order in M3U"
-msgstr "Solo numerar por orden de canales en M3U"
+msgstr "Sólo numerar por orden de canales en M3U"
 
 #. label: General - m3uRefreshMode
 msgctxt "#30015"
 msgid "Auto refresh mode"
-msgstr "Modo refresco automático"
+msgstr "Modo de refresco automático"
 
 #. label: General - m3uRefreshIntervalMins
 msgctxt "#30016"
@@ -182,7 +182,7 @@ msgstr "{0:.1f} horas"
 #. label: General - tvChannelGroupsOnly
 msgctxt "#30028"
 msgid "Only load TV channels in groups"
-msgstr "Cargar solo canales de TV en grupos"
+msgstr "Cargar sólo canales de TV en grupos"
 
 #. label-group: General - TV Groups
 msgctxt "#30029"
@@ -432,7 +432,7 @@ msgstr "Grupos"
 #. label: EPG Settings - epgIgnoreCaseForChannelIds
 msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
-msgstr "Ignorar mayúscula y minúsculas en los ID de canal EPG"
+msgstr "Ignorar mayúscula y minúsculas en los ID de canales de EPG"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -550,7 +550,7 @@ msgstr "Activar timeshift"
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr "Activar Timeshift para transmisiones basadas en HTTP"
+msgstr "Activar timeshift para transmisiones basadas en HTTP"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
@@ -703,12 +703,12 @@ msgstr "El número a partir del cual empezar a numerar los canales. Sólo se uti
 #. help: General - numberByOrder
 msgctxt "#30606"
 msgid "Ignore any 'tvg-chno' tags and only number channels by the order in the M3U starting at 'Start channel number'."
-msgstr "Ignorar cualquier etiqueta 'tvg-chno' y numerar los canales solo por el orden en el M3U empezando por el 'Número inicial de canal'."
+msgstr "Ignorar cualquier etiqueta 'tvg-chno' y numerar los canales sólo por el orden en el M3U empezando por el 'Número inicial de canal'."
 
 #. help: General - m3uRefreshMode
 msgctxt "#30607"
 msgid "Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are: [B]Disabled[/B] - Don't auto refresh the files; [B]Repeated refresh[/B] - Refresh the files on a minute based interval; [B]Once per day[/B] - Refresh the files once per day."
-msgstr "Seleccionar el modo de actualización automática para los archivos M3U/XMLTV. Tenga en cuenta que el almacenamiento en caché se desactiva si se utiliza la actualización automática. Las opciones son: [B]Desactivado[/B] - No actualizar automáticamente los archivos; [B]Actualizar repetidamente[/B] - Actualizar los archivos cada minuto; [B]Una vez al día[/B] - Actualizar los archivos una vez al día."
+msgstr "Seleccionar modo de actualización automática para los archivos M3U/XMLTV. Tenga en cuenta que el almacenamiento en caché se desactiva si se utiliza la actualización automática. Las opciones son: [B]Desactivado[/B] - No actualiza automáticamente los archivos; [B]Actualizar repetidamente[/B] - Actualiza los archivos cada minuto; [B]Una vez al día[/B] - Actualiza los archivos una vez al día."
 
 #. help: General - m3uRefreshIntervalMins
 msgctxt "#30608"
@@ -807,7 +807,7 @@ msgstr "Si la ubicación es [B]Ruta remota[/B], seleccione si el archivo XMLTV d
 #. help: EPG Settings - epgTimeShift
 msgctxt "#30625"
 msgid "Adjust the EPG times by this value, from -12 hours to +14 hours."
-msgstr "Ajustar las horas de la EPG con este valor, de -12 horas a +14 horas."
+msgstr "Ajusta las horas de la EPG con este valor, de -12 horas a +14 horas."
 
 #. help: EPG Settings - epgTSOverside
 msgctxt "#30626"
