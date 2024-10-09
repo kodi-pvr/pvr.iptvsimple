@@ -63,6 +63,9 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
       {
         m_programmeCatchupId = liveEpgEntry->GetCatchupId();
         UpdateProgrammeFrom(*liveEpgEntry, channel.GetTvgShift());
+
+        if (m_settings->CatchupPlayLiveAsEpg())
+          catchupProperties.insert({PVR_STREAM_PROPERTY_LIVEPLAYBACKASEPG, "true"});
       }
     }
   }
