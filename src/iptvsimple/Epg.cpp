@@ -195,12 +195,17 @@ char* Epg::FillBufferFromXMLTVData(std::string& data, std::string& decompressedD
   else if (data[0] == '\xFD' && data[1] == '7' && data[2] == 'z' &&
            data[3] == 'X' && data[4] == 'Z' && data[5] == '\x00')
   {
+#if defined (WITH_LZMA)
     if (!FileUtils::XzDecompress(data, decompressedData))
     {
       Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': unable to decompress xz/7z file.", __FUNCTION__, m_xmltvLocation.c_str());
       return nullptr;
     }
     buffer = &(decompressedData[0]);
+#else
+    Logger::Log(LEVEL_ERROR, "%s - Invalid EPG file '%s': xz/7z decompression unsupported.", __FUNCTION__, m_xmltvLocation.c_str());
+    return nullptr;
+#endif
   }
   else
   {
