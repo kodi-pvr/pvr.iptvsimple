@@ -392,6 +392,8 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t ep
     if (myChannel.GetUniqueId() != channelUid)
       continue;
 
+    Logger::Log(LEVEL_DEBUG, "%s - Getting EPG for Channel: %s", __FUNCTION__, myChannel.GetChannelName().c_str());
+
     if (epgWindowStart > m_lastStart || epgWindowEnd > m_lastEnd)
     {
       // reload EPG for new time interval only

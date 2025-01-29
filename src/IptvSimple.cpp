@@ -160,6 +160,8 @@ void IptvSimple::Process()
     {
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
+      Logger::Log(LEVEL_DEBUG, "%s - ReloadChannelsGroupsAndEPG", __func__);
+
       m_settings->ReloadAddonInstanceSettings();
       m_playlistLoader.ReloadPlayList();
       m_epg.ReloadEPG(); // Reloading EPG also updates media
