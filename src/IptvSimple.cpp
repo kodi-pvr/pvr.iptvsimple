@@ -149,16 +149,24 @@ void IptvSimple::Process()
 
     if (m_settings->GetM3URefreshMode() == RefreshMode::REPEATED_REFRESH &&
         refreshTimer >= (m_settings->GetM3URefreshIntervalMins() * 60))
+    {
+      Logger::Log(LEVEL_DEBUG, "%s - Refreshing Channels, Grous and EPG at minute interval: %d", __func__, m_settings->GetM3URefreshIntervalMins());
       m_reloadChannelsGroupsAndEPG = true;
+    }
 
     if (m_settings->GetM3URefreshMode() == RefreshMode::ONCE_PER_DAY &&
         lastRefreshHour != timeInfo.tm_hour && timeInfo.tm_hour == m_settings->GetM3URefreshHour())
+    {
+      Logger::Log(LEVEL_DEBUG, "%s - Refreshing Channels, Grous and EPG at hour of day: %d", __func__, m_settings->GetM3URefreshHour());
       m_reloadChannelsGroupsAndEPG = true;
+    }
 
     std::lock_guard<std::mutex> lock(m_mutex);
     if (m_running && m_reloadChannelsGroupsAndEPG)
     {
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+
+      Logger::Log(LEVEL_DEBUG, "%s - Reloading Channels, Groups and EPG", __func__);
 
       m_settings->ReloadAddonInstanceSettings();
       m_playlistLoader.ReloadPlayList();

@@ -48,6 +48,7 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
 
   if (m_settings->IsCatchupEnabled() || m_settings->IsMediaEnabled())
   {
+    Logger::Log(LEVEL_DEBUG, "%s - LoadEPG on Init, catchup or media", __FUNCTION__);
     // Kodi may not load the data on each startup so we need to make sure it's loaded whether
     // or not kodi considers it necessary when either 1) we need the EPG logos or 2) for
     // catchup we need a local store of the EPG data
@@ -374,8 +375,10 @@ void Epg::ReloadEPG()
 
   Clear();
 
+  Logger::Log(LEVEL_DEBUG, "%s - Reload EPG", __FUNCTION__);
   if (LoadEPG(m_lastStart, m_lastEnd))
   {
+    Logger::Log(LEVEL_DEBUG, "%s - Reloaded EPG", __FUNCTION__);
     MergeEpgDataIntoMedia();
 
     for (const auto& myChannel : m_channels.GetChannelsList())
@@ -392,11 +395,15 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t ep
     if (myChannel.GetUniqueId() != channelUid)
       continue;
 
+    Logger::Log(LEVEL_DEBUG, "%s - Getting EPG for Channel: %s", __FUNCTION__, myChannel.GetChannelName().c_str());
+
     if (epgWindowStart > m_lastStart || epgWindowEnd > m_lastEnd)
     {
+      Logger::Log(LEVEL_DEBUG, "%s - Attempting load of EPG for Channel: %s", __FUNCTION__, myChannel.GetChannelName().c_str());
       // reload EPG for new time interval only
       LoadEPG(epgWindowStart, epgWindowEnd);
       {
+        Logger::Log(LEVEL_DEBUG, "%s - Loaded EPG for Channel: %s", __FUNCTION__, myChannel.GetChannelName().c_str());
         MergeEpgDataIntoMedia();
 
         // doesn't matter is epg loaded or not we shouldn't try to load it for same interval
