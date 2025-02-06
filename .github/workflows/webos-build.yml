@@ -1,0 +1,112 @@
+name: Build Webos Addon
+on: 
+    push:
+    pull_request:
+env:
+
+  TOOLCHAIN_URL: https://github.com/openlgtv/buildroot-nc4/releases/download/webos-b17b4cc/arm-webos-linux-gnueabi_sdk-buildroot.tar.gz
+  KODI_REF: 21.2-Omega
+
+jobs:
+  build-iptvsimple:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Install needed ubuntu depends
+        run: |
+          sudo apt-get install build-essential
+          sudo apt install curl
+          sudo apt-get install libssl-dev libcurl4-openssl-dev
+
+      - name: Restore cached Kodi
+        id: cache-kodi-restore
+        uses: actions/cache/restore@v4
+        with:
+          path: |
+            ${{github.workspace}}/kodi
+            ${{github.workspace}}/kodi-deps
+            ${{github.workspace}}/kodi-dev
+          key: ${{ runner.os }}-kodi-${{ env.KODI_REF }}
+
+      - name: Download and unpack toolchain
+        if: steps.cache-kodi-restore.outputs.cache-hit != 'true'
+        working-directory: ${{github.workspace}}
+        run: |
+          mkdir -p kodi-dev
+          cd kodi-dev
+          wget ${TOOLCHAIN_URL}
+          tar xzf arm-webos-linux-gnueabi_sdk-buildroot.tar.gz 
+
+      - name: Relocate toolchain
+        if: steps.cache-kodi-restore.outputs.cache-hit != 'true'
+        working-directory: ${{github.workspace}}/kodi-dev/arm-webos-linux-gnueabi_sdk-buildroot
+        run: |
+          echo "./relocate-sdk.sh"
+
+
+      - name: Checkout Kodi repo
+        if: steps.cache-kodi-restore.outputs.cache-hit != 'true'
+        uses: actions/checkout@v4
+        with:
+          repository: xbmc/xbmc
+          ref: ${{ env.KODI_REF }}
+          path: kodi
+          fetch-depth: 1
+          
+
+      - name: Configure toolchain
+        if: steps.cache-kodi-restore.outputs.cache-hit != 'true'
+        working-directory: ${{github.workspace}}/kodi/tools/depends
+        run: |
+          ./bootstrap
+          ./configure --prefix=${{github.workspace}}/kodi-deps --host=arm-webos-linux-gnueabi --with-toolchain=${{github.workspace}}/kodi-dev/arm-webos-linux-gnueabi_sdk-buildroot --enable-debug=no
+     
+      - name: Build the Kodi tools
+        if: steps.cache-kodi-restore.outputs.cache-hit != 'true'
+        working-directory: ${{github.workspace}}/kodi/tools/depends
+        run: |      
+          make -j$(getconf _NPROCESSORS_ONLN)
+
+      - name: Save Kodi
+        if: steps.cache-kodi-restore.outputs.cache-hit != 'true'
+        id: cache-kodi-save
+        uses: actions/cache/save@v4
+        with:
+          path: |
+            ${{github.workspace}}/kodi
+            ${{github.workspace}}/kodi-deps
+            ${{github.workspace}}/kodi-dev
+          key: ${{ runner.os }}-kodi-${{ env.KODI_REF }}
+          
+      - name: Checkout add-on repo
+        uses: actions/checkout@v4
+        with:
+          path: pvr.iptvsimple
+          fetch-depth: 1    
+
+      - name: Build Addon
+        working-directory: ${{github.workspace}}/kodi
+        run: |
+          make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.iptvsimple" ADDON_SRC_PREFIX=${{github.workspace}}
+      
+      - name: List kodi-deps directory
+        working-directory: ${{github.workspace}}/kodi-deps/
+        run: |
+          ls -l
+
+      - name: Zip Addon Directory with Symlinks
+        working-directory: ${{ github.workspace }}/kodi-deps/arm-webos-linux-gnueabi-release/addons
+        run: |
+          zip -r -y ${{ github.workspace }}/pvr.iptvsimple.zip pvr.iptvsimple
+
+      - name: Upload zipped artifact pvr.iptvsimple
+        uses: actions/upload-artifact@v4
+        with:
+          name: pvr.iptvsimple
+          path: ${{ github.workspace }}/pvr.iptvsimple.zip
+
+      
