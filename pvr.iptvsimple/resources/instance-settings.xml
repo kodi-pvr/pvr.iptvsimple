@@ -794,6 +794,20 @@
           </dependencies>
           <control type="list" format="integer" />
         </setting>
+        <setting id="catchupFSMode" type="integer" label="30129" help="30711">
+          <level>3</level>
+          <default>0</default>
+          <constraints>
+            <options>
+              <option label="30130">0</option> <!-- RELATIVE_TIMESHIFT -->
+              <option label="30131">1</option> <!-- UTC_AND_DURATION -->
+            </options>
+          </constraints>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="list" format="integer" />
+        </setting>
         <setting id="catchupCorrection" type="number" label="30128" help="30710">
           <level>0</level>
           <default>0</default>

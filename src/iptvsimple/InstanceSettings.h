@@ -79,6 +79,13 @@ namespace iptvsimple
     ALL_CHANNELS
   };
 
+  enum class CatchupFSMode
+    : int // same type as addon settings
+  {
+    RELATIVE_TIMESHIFT = 0,
+    UTC_AND_DURATION
+  };
+
   class InstanceSettings
   {
   public:
@@ -161,6 +168,7 @@ namespace iptvsimple
     time_t GetCatchupDaysInSeconds() const { return static_cast<time_t>(m_catchupDays) * 24 * 60 * 60; }
     const CatchupMode& GetAllChannelsCatchupMode() const { return m_allChannelsCatchupMode; }
     const CatchupOverrideMode& GetCatchupOverrideMode() const { return m_catchupOverrideMode; }
+    const CatchupFSMode& GetCatchupFSMode() const { return m_catchupFSMode; }
     float GetCatchupCorrectionHours() const { return m_catchupCorrectionHours; }
     int GetCatchupCorrectionSecs() const { return static_cast<int>(m_catchupCorrectionHours * 60 * 60); }
     bool CatchupPlayEpgAsLive() const { return m_catchupPlayEpgAsLive; }
@@ -327,6 +335,7 @@ namespace iptvsimple
     int m_catchupDays = 3;
     CatchupMode m_allChannelsCatchupMode = CatchupMode::DISABLED;
     CatchupOverrideMode m_catchupOverrideMode = CatchupOverrideMode::WITHOUT_TAGS;
+    CatchupFSMode m_catchupFSMode = CatchupFSMode::RELATIVE_TIMESHIFT;
     float m_catchupCorrectionHours = 0;
     bool m_catchupPlayEpgAsLive = false;
     int m_catchupWatchEpgBeginBufferMins = 5;

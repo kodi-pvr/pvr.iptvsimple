@@ -598,7 +598,22 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
-#empty strings from id 30129 to 30449
+#. label: Catchup - catchupFSMode
+msgctxt "#30129"
+msgid "Catchup FS Mode"
+msgstr ""
+
+#. label-option: Catchup - catchupFSMode
+msgctxt "#30130"
+msgid "Relative Timeshift"
+msgstr ""
+
+#. label-option: Catchup - catchupFSMode
+msgctxt "#30131"
+msgid "UTC and Duration"
+msgstr ""
+
+#empty strings from id 30132 to 30449
 
 #. category-lavel: Media
 #. group-label: Media - Media
@@ -1024,7 +1039,12 @@ msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
 msgstr ""
 
-#empty strings from id 30711 to 307019
+#. label: Catchup - catchupFSMode
+msgctxt "#30711"
+msgid "For mono Flusonnic streams use either relative timeshift (default) or a combination of utc and duration."
+msgstr ""
+
+#empty strings from id 30712 to 307019
 
 #. help info - Timeshift
 
