@@ -498,9 +498,16 @@ bool Channel::GenerateFlussonicCatchupSource(const std::string& url)
       else
       {
         if (fsListType == "index")
+        {
           m_catchupSource = fsHost + "/" + fsChannelId + "/timeshift_rel-{offset:1}.m3u8" + fsUrlAppend;
+        }
         else
-          m_catchupSource = fsHost + "/" + fsChannelId + "/" + fsListType + "-timeshift_rel-{offset:1}.m3u8" + fsUrlAppend;
+        {
+          if (m_settings->GetCatchupFSMode() == CatchupFSMode::RELATIVE_TIMESHIFT)
+            m_catchupSource = fsHost + "/" + fsChannelId + "/" + fsListType + "-timeshift_rel-{offset:1}.m3u8" + fsUrlAppend;
+          else
+            m_catchupSource = fsHost + "/" + fsChannelId + "/" + fsListType + "-{utc}-{duration}.m3u8" + fsUrlAppend;
+        }
       }
 
       return true;

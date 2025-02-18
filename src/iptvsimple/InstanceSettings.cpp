@@ -141,6 +141,7 @@ void InstanceSettings::ReadSettings()
   m_instance.CheckInstanceSettingInt("catchupDays", m_catchupDays);
   m_instance.CheckInstanceSettingEnum<CatchupMode>("allChannelsCatchupMode", m_allChannelsCatchupMode);
   m_instance.CheckInstanceSettingEnum<CatchupOverrideMode>("catchupOverrideMode", m_catchupOverrideMode);
+  m_instance.CheckInstanceSettingEnum<CatchupFSMode>("catchupFSMode", m_catchupFSMode);
   m_instance.CheckInstanceSettingFloat("catchupCorrection", m_catchupCorrectionHours);
   m_instance.CheckInstanceSettingBoolean("catchupPlayEpgAsLive", m_catchupPlayEpgAsLive);
   m_instance.CheckInstanceSettingInt("catchupWatchEpgBeginBufferMins", m_catchupWatchEpgBeginBufferMins);
@@ -315,6 +316,8 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetEnumSetting<CatchupMode, ADDON_STATUS>(settingName, settingValue, m_allChannelsCatchupMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupOverrideMode")
     return SetEnumSetting<CatchupOverrideMode, ADDON_STATUS>(settingName, settingValue, m_catchupOverrideMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "catchupFSMode")
+    return SetEnumSetting<CatchupFSMode, ADDON_STATUS>(settingName, settingValue, m_catchupFSMode, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupCorrection")
     return SetSetting<float, ADDON_STATUS>(settingName, settingValue, m_catchupCorrectionHours, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "catchupPlayEpgAsLive")
