@@ -9,10 +9,13 @@
 
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
+#include "utilities/StringComparer.h"
 #include "utilities/XMLUtils.h"
 
+#include <algorithm>
 #include <chrono>
 #include <regex>
+#include <set>
 #include <thread>
 
 #include <kodi/tools/StringUtils.h>
@@ -361,8 +364,18 @@ void Epg::LoadEpgEntries(const xml_node& rootElement, int epgWindowStart, int ep
   }
 
   Logger::Log(LEVEL_INFO, "%s - Loaded '%d' EPG entries.", __FUNCTION__, count);
+  
+  // Remove channelEpg that have empty EPG entries
+  const int epgChannelCount = m_channelEpgs.size();
+  m_channelEpgs.erase(
+    std::remove_if(m_channelEpgs.begin(), m_channelEpgs.end(),
+      [](ChannelEpg& channelEpg) { 
+        return channelEpg.GetEpgEntries().empty(); 
+      }),
+    m_channelEpgs.end()
+  );
+  Logger::Log(LEVEL_INFO, "%s - Number of channels with EPG data after cleanup: %d (Removed %d channelEPGs)", __FUNCTION__, m_channelEpgs.size(), epgChannelCount - m_channelEpgs.size());
 }
-
 
 void Epg::ReloadEPG()
 {
@@ -387,11 +400,6 @@ void Epg::ReloadEPG()
 
 PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t epgWindowEnd, kodi::addon::PVREPGTagsResultSet& results)
 {
-  for (const auto& myChannel : m_channels.GetChannelsList())
-  {
-    if (myChannel.GetUniqueId() != channelUid)
-      continue;
-
     if (epgWindowStart > m_lastStart || epgWindowEnd > m_lastEnd)
     {
       // reload EPG for new time interval only
@@ -404,6 +412,10 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t ep
         m_lastEnd = static_cast<int>(epgWindowEnd);
       }
     }
+  for (const auto& myChannel : m_channels.GetChannelsList())
+  {
+    if (myChannel.GetUniqueId() != channelUid)
+      continue;
 
     ChannelEpg* channelEpg = FindEpgForChannel(myChannel);
     if (!channelEpg || channelEpg->GetEpgEntries().size() == 0)
@@ -433,23 +445,19 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t ep
   return PVR_ERROR_NO_ERROR;
 }
 
-namespace
-{
-  bool TvgIdMatchesCaseOrNoCase(const std::string& idOne, const std::string& idTwo, bool ignoreCaseForEpgChannelIds)
-  {
-    if (ignoreCaseForEpgChannelIds)
-      return StringUtils::EqualsNoCase(idOne, idTwo);
-    else
-      return idOne == idTwo;
-  }
-}
-
 ChannelEpg* Epg::FindEpgForChannel(const std::string& id) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), id, m_settings->IgnoreCaseForEpgChannelIds()))
+    if (m_settings->IgnoreCaseForEpgChannelIds())
+    {
+      if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), id))
+        return const_cast<ChannelEpg*>(&myChannelEpg);
+    }
+    else if (myChannelEpg.GetId() == id)
+    {
       return const_cast<ChannelEpg*>(&myChannelEpg);
+    }
   }
 
   return nullptr;
@@ -457,47 +465,79 @@ ChannelEpg* Epg::FindEpgForChannel(const std::string& id) const
 
 ChannelEpg* Epg::FindEpgForChannel(const Channel& channel) const
 {
+  double maxSimilarity = 0.0;
+  ChannelEpg* bestMatch = nullptr;
+
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), channel.GetTvgId(), m_settings->IgnoreCaseForEpgChannelIds()))
-      return const_cast<ChannelEpg*>(&myChannelEpg);
+    double similarity = utilities::StringComparer::SorensenDiceSimilarity(
+        myChannelEpg.GetId(), channel.GetTvgId(), m_settings);
+
+    if (similarity > maxSimilarity)
+    {
+      maxSimilarity = similarity;
+      bestMatch = const_cast<ChannelEpg*>(&myChannelEpg);
+
+      if (maxSimilarity == 1.0)
+        break;
+    }
   }
+  
+  if (bestMatch != nullptr)
+    return bestMatch;
 
   for (auto& myChannelEpg : m_channelEpgs)
   {
     for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
     {
-      if (StringUtils::EqualsNoCase(displayNamePair.m_displayNameWithUnderscores, channel.GetTvgName()) ||
-          StringUtils::EqualsNoCase(displayNamePair.m_displayName, channel.GetTvgName()))
-        return const_cast<ChannelEpg*>(&myChannelEpg);
+      double similarity = utilities::StringComparer::SorensenDiceSimilarity(
+          displayNamePair.m_displayName, channel.GetTvgName(), m_settings);
+
+      if (similarity == 0.0)
+        similarity = utilities::StringComparer::SorensenDiceSimilarity(
+            displayNamePair.m_displayNameWithUnderscores, channel.GetTvgName(), m_settings);
+      
+      if (similarity == 0.0)
+        similarity = utilities::StringComparer::SorensenDiceSimilarity(
+            displayNamePair.m_displayName, channel.GetChannelName(), m_settings);
+
+      if (similarity > maxSimilarity)
+      {
+        maxSimilarity = similarity;
+        bestMatch = const_cast<ChannelEpg*>(&myChannelEpg);
+
+        if (maxSimilarity == 1.0)
+          break;
+      }
     }
+    if (maxSimilarity == 1.0)
+      break;
   }
 
-  for (auto& myChannelEpg : m_channelEpgs)
-  {
-    for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
-    {
-      if (StringUtils::EqualsNoCase(displayNamePair.m_displayName, channel.GetChannelName()))
-        return const_cast<ChannelEpg*>(&myChannelEpg);
-    }
-  }
-
-  return nullptr;
+  return bestMatch;
 }
 
 ChannelEpg* Epg::FindEpgForMediaEntry(const MediaEntry& mediaEntry) const
 {
   for (auto& myChannelEpg : m_channelEpgs)
   {
-    if (TvgIdMatchesCaseOrNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId(), m_settings->IgnoreCaseForEpgChannelIds()))
+    if (m_settings->IgnoreCaseForEpgChannelIds())
+    {
+      if (StringUtils::EqualsNoCase(myChannelEpg.GetId(), mediaEntry.GetTvgId()))
+        return const_cast<ChannelEpg*>(&myChannelEpg);
+    }
+    else if (myChannelEpg.GetId() == mediaEntry.GetTvgId())
+    {
       return const_cast<ChannelEpg*>(&myChannelEpg);
+    }
   }
 
   for (auto& myChannelEpg : m_channelEpgs)
   {
     for (const DisplayNamePair& displayNamePair : myChannelEpg.GetDisplayNames())
     {
-      if (StringUtils::EqualsNoCase(displayNamePair.m_displayNameWithUnderscores, mediaEntry.GetTvgName()) ||
+      if (StringUtils::EqualsNoCase(displayNamePair.m_displayNameWithUnderscores,
+                                    mediaEntry.GetTvgName()) ||
           StringUtils::EqualsNoCase(displayNamePair.m_displayName, mediaEntry.GetTvgName()))
         return const_cast<ChannelEpg*>(&myChannelEpg);
     }
@@ -511,7 +551,7 @@ ChannelEpg* Epg::FindEpgForMediaEntry(const MediaEntry& mediaEntry) const
       if (StringUtils::EqualsNoCase(displayNamePair.m_displayName, mediaEntry.GetM3UName()))
         return const_cast<ChannelEpg*>(&myChannelEpg);
     }
-  }
+  }  
 
   return nullptr;
 }
@@ -522,7 +562,7 @@ void Epg::ApplyChannelsLogosFromEPG()
 
   for (const auto& channel : m_channels.GetChannelsList())
   {
-    const ChannelEpg* channelEpg = FindEpgForChannel(channel);
+    const ChannelEpg* channelEpg = FindEpgForChannel(channel.GetTvgName());
     if (!channelEpg || channelEpg->GetIconPath().empty())
       continue;
 

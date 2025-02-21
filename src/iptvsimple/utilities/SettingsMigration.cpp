@@ -65,7 +65,8 @@ const std::vector<std::pair<const char*, int>> intMap = {{"m3uPathType", 1},
                                                          {"catchupOverrideMode", 0},
                                                          {"catchupWatchEpgBeginBufferMins", 5},
                                                          {"catchupWatchEpgEndBufferMins", 15},
-                                                         {"udpxyPort", 4022}};
+                                                         {"udpxyPort", 4022},
+                                                         {"epgChannelNameMatchThreshold", 100}};
 
 const std::vector<std::pair<const char*, float>> floatMap = {{"epgTimeShift", 0.0f},
                                                              {"catchupCorrection", 0.0f}};

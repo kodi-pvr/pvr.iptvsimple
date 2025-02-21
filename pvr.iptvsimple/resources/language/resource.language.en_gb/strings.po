@@ -449,7 +449,12 @@ msgctxt "#30080"
 msgid "Interval for check"
 msgstr ""
 
-#empty strings from id 30081 to 30099
+#. label: EPG Settings - epgChannelNameMatchThreshold
+msgctxt "#30081"
+msgid "EPG Channel Name Match Threshold"
+msgstr ""
+
+#empty strings from id 30082 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -853,7 +858,12 @@ msgctxt "#30629"
 msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
 msgstr ""
 
-#empty strings from id 30630 to 30639
+#. help: EPG Settings - epgChannelNameMatchThreshold
+msgctxt "#30630" 
+msgid "Minimum similarity percentage required when matching EPG channel names. Lower values will match more channels but may cause incorrect matches."
+msgstr ""
+
+#empty strings from id 30631 to 30639
 
 #. help info - Channel Logos
 

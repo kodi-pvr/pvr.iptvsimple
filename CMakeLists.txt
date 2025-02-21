@@ -45,7 +45,8 @@ set(IPTV_SOURCES src/addon.cpp
                  src/iptvsimple/utilities/Logger.cpp
                  src/iptvsimple/utilities/SettingsMigration.cpp
                  src/iptvsimple/utilities/StreamUtils.cpp
-                 src/iptvsimple/utilities/WebUtils.cpp)
+                 src/iptvsimple/utilities/WebUtils.cpp
+                 src/iptvsimple/utilities/StringComparer.cpp)
 
 set(IPTV_HEADERS src/addon.h
                  src/IptvSimple.h
@@ -76,7 +77,8 @@ set(IPTV_HEADERS src/addon.h
                  src/iptvsimple/utilities/StreamUtils.h
                  src/iptvsimple/utilities/TimeUtils.h
                  src/iptvsimple/utilities/WebUtils.h
-                 src/iptvsimple/utilities/XMLUtils.h)
+                 src/iptvsimple/utilities/XMLUtils.h
+                 src/iptvsimple/utilities/StringComparer.h)
 
 addon_version(pvr.iptvsimple IPTV)
 add_definitions(-DIPTV_VERSION=${IPTV_VERSION})

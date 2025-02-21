@@ -10,6 +10,7 @@
 #include "ChannelGroups.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
+#include "utilities/StringComparer.h"
 
 #include <regex>
 
@@ -136,11 +137,26 @@ Channel* Channels::GetChannel(int uniqueId)
 
 const Channel* Channels::FindChannel(const std::string& id, const std::string& displayName) const
 {
+  double maxSimilarity = 0.0;
+  Channel* bestMatch = nullptr;
+
   for (const auto& myChannel : m_channels)
   {
-    if (StringUtils::EqualsNoCase(myChannel.GetTvgId(), id))
-      return &myChannel;
+    double similarity = utilities::StringComparer::SorensenDiceSimilarity(
+        myChannel.GetTvgId(), id, m_settings);
+
+    if (similarity > maxSimilarity)
+    {
+      maxSimilarity = similarity;
+      bestMatch = const_cast<Channel*>(&myChannel);
+
+      if (maxSimilarity == 1.0)
+        break;
   }
+  }
+
+  if (bestMatch != nullptr)
+    return bestMatch;
 
   if (displayName.empty())
     return nullptr;
@@ -148,18 +164,42 @@ const Channel* Channels::FindChannel(const std::string& id, const std::string& d
   const std::string convertedDisplayName = std::regex_replace(displayName, std::regex(" "), "_");
   for (const auto& myChannel : m_channels)
   {
-    if (StringUtils::EqualsNoCase(myChannel.GetTvgName(), convertedDisplayName) ||
-        StringUtils::EqualsNoCase(myChannel.GetTvgName(), displayName))
-      return &myChannel;
+    double similarity = utilities::StringComparer::SorensenDiceSimilarity(
+        myChannel.GetTvgName(), convertedDisplayName, m_settings);
+
+    if (similarity > maxSimilarity)
+    {
+      maxSimilarity = similarity;
+      bestMatch = const_cast<Channel*>(&myChannel);
+
+      if (maxSimilarity == 1.0)
+        break;
   }
+  }
+
+  if (bestMatch != nullptr)
+    return bestMatch;
 
   for (const auto& myChannel : m_channels)
   {
-    if (StringUtils::EqualsNoCase(myChannel.GetChannelName(), displayName))
-      return &myChannel;
+    double similarity = utilities::StringComparer::SorensenDiceSimilarity(
+        myChannel.GetTvgName(), displayName, m_settings);
+
+    if (similarity == 0.0)
+      similarity = utilities::StringComparer::SorensenDiceSimilarity(
+          myChannel.GetChannelName(), displayName, m_settings);
+
+    if (similarity > maxSimilarity)
+    {
+      maxSimilarity = similarity;
+      bestMatch = const_cast<Channel*>(&myChannel);
+
+      if (maxSimilarity == 1.0)
+        break;
+    }
   }
 
-  return nullptr;
+  return bestMatch;
 }
 
 int Channels::GenerateChannelId(const char* channelName, const char* streamUrl)
