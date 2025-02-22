@@ -214,6 +214,7 @@ bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
     return false;
 
   m_broadcastId = static_cast<int>(programmeStart);
+  m_plot = id + "\n" + GetNodeValue(programmeNode, "desc");
   m_channelId = std::atoi(id.c_str());
   m_genreType = 0;
   m_genreSubType = 0;
@@ -227,7 +228,6 @@ bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
   m_seasonNumber = EPG_TAG_INVALID_SERIES_EPISODE;
 
   m_title = GetNodeValue(programmeNode, "title");
-  m_plot = GetNodeValue(programmeNode, "desc");
   m_episodeName = GetNodeValue(programmeNode, "sub-title");
 
   m_genreString = GetJoinedNodeValues(programmeNode, "category");

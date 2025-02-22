@@ -127,6 +127,7 @@ namespace iptvsimple
     bool GetTsOverride() const { return m_tsOverride; }
     bool AlwaysLoadEPGData() const { return m_epgLogosMode == EpgLogosMode::PREFER_XMLTV || IsCatchupEnabled(); }
     bool IgnoreCaseForEpgChannelIds() const { return m_ignoreCaseForEpgChannelIds; }
+    int GetEpgChannelNameMatchThreshold() const { return m_epgChannelNameMatchThreshold; }
 
     const std::string& GetGenresLocation() const { return m_genresPathType == PathType::REMOTE_PATH ? m_genresUrl : m_genresPath; }
     bool UseEpgGenreTextWhenMapping() const { return m_useEpgGenreTextWhenMapping; }
@@ -291,6 +292,7 @@ namespace iptvsimple
     float m_epgTimeShiftHours = 0.0f;
     bool m_tsOverride = false;
     bool m_ignoreCaseForEpgChannelIds = true;
+    int m_epgChannelNameMatchThreshold = 100;
 
     // Genres
     bool m_useEpgGenreTextWhenMapping = false;

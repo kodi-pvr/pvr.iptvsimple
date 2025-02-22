@@ -477,6 +477,16 @@
           <default>false</default>
           <control type="toggle" />
         </setting>
+        <setting id="epgChannelNameMatchThreshold" type="integer" label="30081" help="30630">
+          <level>2</level>
+          <default>100</default>
+          <constraints>
+            <minimum>0</minimum>
+            <maximum>100</maximum>
+            <step>5</step>
+          </constraints>
+          <control type="slider" format="percentage"/>
+        </setting>
         <setting id="epgIgnoreCaseForChannelIds" type="boolean" label="30077" help="30627">
           <level>2</level>
           <default>true</default>

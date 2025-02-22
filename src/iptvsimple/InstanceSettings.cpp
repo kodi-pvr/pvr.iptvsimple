@@ -105,6 +105,7 @@ void InstanceSettings::ReadSettings()
   m_instance.CheckInstanceSettingFloat("epgTimeShift", m_epgTimeShiftHours);
   m_instance.CheckInstanceSettingBoolean("epgTSOverride", m_tsOverride);
   m_instance.CheckInstanceSettingBoolean("epgIgnoreCaseForChannelIds", m_ignoreCaseForEpgChannelIds);
+  m_instance.CheckInstanceSettingInt("epgChannelNameMatchThreshold", m_epgChannelNameMatchThreshold);
 
   //Genres
   m_instance.CheckInstanceSettingBoolean("useEpgGenreText", m_useEpgGenreTextWhenMapping);
@@ -258,6 +259,8 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_tsOverride, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "epgIgnoreCaseForChannelIds")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_ignoreCaseForEpgChannelIds, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "epgChannelNameMatchThreshold")
+    return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_epgChannelNameMatchThreshold, ADDON_STATUS_OK, ADDON_STATUS_OK);
   // Genres
   else if (settingName == "useEpgGenreText")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_useEpgGenreTextWhenMapping, ADDON_STATUS_OK, ADDON_STATUS_OK);

@@ -206,6 +206,10 @@
           <level>4</level> <!-- hidden -->
           <default>false</default>
         </setting>
+        <setting id="epgChannelNameMatchThreshold" type="integer">
+          <level>4</level> <!-- hidden -->
+          <default>100</default>
+        </setting>
         <setting id="epgIgnoreCaseForChannelIds" type="boolean">
           <level>4</level> <!-- hidden -->
           <default>true</default>
