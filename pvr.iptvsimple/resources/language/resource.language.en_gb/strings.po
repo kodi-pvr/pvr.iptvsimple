@@ -1130,3 +1130,18 @@ msgstr ""
 msgctxt "#30806"
 msgid "Force the full playlist to be media, regardless of what tags are present.  Since the introduction of multiple instances for PVR add-ons this option can be useful."
 msgstr ""
+
+#. label: WebServer
+msgctxt "#30807"
+msgid "WebServer"
+msgstr ""
+
+#. label: WebServer - Activate
+msgctxt "#30808"
+msgid "Activate"
+msgstr ""
+
+#. label: WebServer - Port
+msgctxt "#30809"
+msgid "Port"
+msgstr ""
