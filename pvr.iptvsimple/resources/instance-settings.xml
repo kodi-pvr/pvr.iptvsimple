@@ -819,6 +819,14 @@
           </dependencies>
           <control type="toggle" />
         </setting>
+        <setting id="catchupPlayLiveAsEpg" type="boolean" label="30129" help="30711">
+          <level>0</level>
+          <default>false</default>
+          <dependencies>
+            <dependency type="enable" setting="catchupEnabled" operator="is">true</dependency>
+          </dependencies>
+          <control type="toggle" />
+        </setting>
         <setting id="catchupWatchEpgBeginBufferMins" type="integer" parent="catchupPlayEpgAsLive" label="30107" help="30706">
           <level>0</level>
           <default>5</default>
