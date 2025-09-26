@@ -83,6 +83,13 @@ jobs:
             ${{github.workspace}}/kodi-deps
             ${{github.workspace}}/kodi-dev
           key: ${{ runner.os }}-kodi-${{ env.KODI_REF }}
+          
+      - name: Checkout add-on repo
+        uses: actions/checkout@v4
+        with:
+          repository: 'kodi-pvr/pvr.iptvsimple'
+          ref: '21.11.0-Omega'
+          fetch-depth: 0
 
       - name: Build Addon
         working-directory: ${{github.workspace}}/kodi
