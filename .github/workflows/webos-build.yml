@@ -14,7 +14,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          fetch-depth: 1
+          repository: 'kodi-pvr/pvr.iptvsimple'
+          ref: '21.11.0-Omega'
+          fetch-depth: 0
 
       - name: Install needed ubuntu depends
         run: |
