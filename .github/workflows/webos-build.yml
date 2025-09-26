@@ -14,8 +14,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          repository: 'kodi-pvr/pvr.iptvsimple'
-          ref: '21.11.0-Omega'
+          repository: 'xbmc/inputstream.ffmpegdirect'
+          ref: '21.3.8-Omega'
           fetch-depth: 0
 
       - name: Install needed ubuntu depends
@@ -87,15 +87,15 @@ jobs:
       - name: Checkout add-on repo
         uses: actions/checkout@v4
         with:
-          path: pvr.iptvsimple
-          repository: 'kodi-pvr/pvr.iptvsimple'
-          ref: '21.11.0-Omega'
+          path: inputstream.ffmpegdirect
+          repository: 'xbmc/inputstream.ffmpegdirect'
+          ref: '21.3.8-Omega'
           fetch-depth: 0
 
       - name: Build Addon
         working-directory: ${{github.workspace}}/kodi
         run: |
-          make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="pvr.iptvsimple" ADDON_SRC_PREFIX=${{github.workspace}}
+          make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="inputstream.ffmpegdirect" ADDON_SRC_PREFIX=${{github.workspace}}
       
       - name: List kodi-deps directory
         working-directory: ${{github.workspace}}/kodi-deps/
@@ -105,12 +105,12 @@ jobs:
       - name: Zip Addon Directory with Symlinks
         working-directory: ${{ github.workspace }}/kodi-deps/arm-webos-linux-gnueabi-release/addons
         run: |
-          zip -r -y ${{ github.workspace }}/pvr.iptvsimple.zip pvr.iptvsimple
+          zip -r -y ${{ github.workspace }}/inputstream.ffmpegdirect.zip inputstream.ffmpegdirect
 
-      - name: Upload zipped artifact pvr.iptvsimple
+      - name: Upload zipped artifact inputstream.ffmpegdirect
         uses: actions/upload-artifact@v4
         with:
-          name: pvr.iptvsimple
-          path: ${{ github.workspace }}/pvr.iptvsimple.zip
+          name: inputstream.ffmpegdirect
+          path: ${{ github.workspace }}/inputstream.ffmpegdirect.zip
 
       
