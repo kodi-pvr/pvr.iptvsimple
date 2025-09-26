@@ -87,6 +87,7 @@ jobs:
       - name: Checkout add-on repo
         uses: actions/checkout@v4
         with:
+          path: pvr.iptvsimple
           repository: 'kodi-pvr/pvr.iptvsimple'
           ref: '21.11.0-Omega'
           fetch-depth: 0
