@@ -14,7 +14,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         with:
-          repository: 'xbmc/inputstream.ffmpegdirect'
+          repository: 'xbmc/inputstream.rtmp'
           ref: '21.3.8-Omega'
           fetch-depth: 0
 
@@ -87,15 +87,15 @@ jobs:
       - name: Checkout add-on repo
         uses: actions/checkout@v4
         with:
-          path: inputstream.ffmpegdirect
-          repository: 'xbmc/inputstream.ffmpegdirect'
+          path: inputstream.rtmp
+          repository: 'xbmc/inputstream.rtmp'
           ref: '21.3.8-Omega'
           fetch-depth: 0
 
       - name: Build Addon
         working-directory: ${{github.workspace}}/kodi
         run: |
-          make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="inputstream.ffmpegdirect" ADDON_SRC_PREFIX=${{github.workspace}}
+          make -j$(getconf _NPROCESSORS_ONLN) -C tools/depends/target/binary-addons ADDONS="inputstream.rtmp" ADDON_SRC_PREFIX=${{github.workspace}}
       
       - name: List kodi-deps directory
         working-directory: ${{github.workspace}}/kodi-deps/
@@ -105,12 +105,12 @@ jobs:
       - name: Zip Addon Directory with Symlinks
         working-directory: ${{ github.workspace }}/kodi-deps/arm-webos-linux-gnueabi-release/addons
         run: |
-          zip -r -y ${{ github.workspace }}/inputstream.ffmpegdirect.zip inputstream.ffmpegdirect
+          zip -r -y ${{ github.workspace }}/inputstream.rtmp.zip inputstream.rtmp
 
-      - name: Upload zipped artifact inputstream.ffmpegdirect
+      - name: Upload zipped artifact inputstream.rtmp
         uses: actions/upload-artifact@v4
         with:
-          name: inputstream.ffmpegdirect
-          path: ${{ github.workspace }}/inputstream.ffmpegdirect.zip
+          name: inputstream.rtmp
+          path: ${{ github.workspace }}/inputstream.rtmp.zip
 
       
