@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: 'xbmc/inputstream.rtmp'
-          ref: '21.3.8-Omega'
+          ref: '21.1.0-Omega'
           fetch-depth: 0
 
       - name: Install needed ubuntu depends
@@ -89,7 +89,7 @@ jobs:
         with:
           path: inputstream.rtmp
           repository: 'xbmc/inputstream.rtmp'
-          ref: '21.3.8-Omega'
+          ref: '21.1.0-Omega'
           fetch-depth: 0
 
       - name: Build Addon
