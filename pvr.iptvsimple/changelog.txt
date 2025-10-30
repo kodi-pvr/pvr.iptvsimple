@@ -1,3 +1,7 @@
+v22.6.1
+- Translations updates from Weblate
+	- fr_fr
+
 v22.5.1
 - Add support to inputstream.adaptive.common_headers to set headers
 - Fix an issue that was replacing user headers set with inputstream.adaptive.common_headers
