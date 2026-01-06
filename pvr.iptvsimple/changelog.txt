@@ -1,3 +1,7 @@
+v22.6.2
+- Translations updates from Weblate
+	- ru_ru
+
 v22.6.1
 - Fix episode part parsing
 
