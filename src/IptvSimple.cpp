@@ -9,18 +9,68 @@
 
 #include "iptvsimple/InstanceSettings.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/StreamUtils.h"
 #include "iptvsimple/utilities/TimeUtils.h"
 #include "iptvsimple/utilities/WebUtils.h"
 
 #include <ctime>
 #include <chrono>
 
+#include <kodi/Filesystem.h>
 #include <kodi/tools/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace kodi::tools;
+
+namespace
+{
+// Fetches a RESOLVER-mode catchup-source (a resolver endpoint, not a
+// playable URL) and parses its plain-text "key=value" response; see
+// README (Catchup modes) for CatchupMode::RESOLVER's semantics and the
+// response format.
+bool FetchCatchupSourceOverrides(const std::string& url, std::string& streamUrl,
+                                  std::map<std::string, std::string>& propertyOverrides)
+{
+  kodi::vfs::CFile file;
+  if (!file.OpenFile(url, ADDON_READ_NO_CACHE))
+    return false;
+
+  std::string content;
+  char buffer[4096];
+  ssize_t bytesRead;
+  while ((bytesRead = file.Read(buffer, sizeof(buffer))) > 0)
+    content.append(buffer, static_cast<size_t>(bytesRead));
+  file.Close();
+
+  size_t pos = 0;
+  while (pos < content.size())
+  {
+    const size_t eol = content.find('\n', pos);
+    std::string line = content.substr(pos, eol == std::string::npos ? std::string::npos : eol - pos);
+    while (!line.empty() && line.back() == '\r')
+      line.pop_back();
+
+    const size_t eq = line.find('=');
+    if (eq != std::string::npos && eq > 0)
+    {
+      const std::string key = line.substr(0, eq);
+      const std::string value = line.substr(eq + 1);
+      if (key == "streamUrl")
+        streamUrl = value;
+      else
+        propertyOverrides[key] = value;
+    }
+
+    if (eol == std::string::npos)
+      break;
+    pos = eol + 1;
+  }
+
+  return !streamUrl.empty();
+}
+} // namespace
 
 IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple::IConnectionListener(instance), m_settings(new InstanceSettings(*this, instance))
 {
@@ -330,7 +380,8 @@ PVR_ERROR IptvSimple::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& ta
     Logger::Log(LEVEL_DEBUG, "%s - GetPlayEpgAsLive is %s", __FUNCTION__, m_settings->CatchupPlayEpgAsLive() ? "enabled" : "disabled");
 
     std::map<std::string, std::string> catchupProperties;
-    if (m_settings->CatchupPlayEpgAsLive() && (m_currentChannel.CatchupSupportsTimeshifting() || m_currentChannel.GetCatchupMode() == CatchupMode::VOD))
+    if (m_settings->CatchupPlayEpgAsLive() && (m_currentChannel.CatchupSupportsTimeshifting() ||
+        m_currentChannel.GetCatchupMode() == CatchupMode::VOD || m_currentChannel.GetCatchupMode() == CatchupMode::RESOLVER))
     {
       m_catchupController.ProcessEPGTagForTimeshiftedPlayback(tag, m_currentChannel, catchupProperties);
     }
@@ -343,9 +394,28 @@ PVR_ERROR IptvSimple::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& ta
     const std::string catchupUrl = m_catchupController.GetCatchupUrl(m_currentChannel);
     if (!catchupUrl.empty())
     {
-      StreamUtils::SetAllStreamProperties(properties, m_currentChannel, catchupUrl, false, catchupProperties, m_settings);
+      std::string streamUrl = catchupUrl;
 
-      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
+      // See FetchCatchupSourceOverrides() above.
+      if (m_currentChannel.GetCatchupMode() == CatchupMode::RESOLVER)
+      {
+        std::string resolvedStreamUrl;
+        std::map<std::string, std::string> propertyOverrides;
+        if (FetchCatchupSourceOverrides(catchupUrl, resolvedStreamUrl, propertyOverrides))
+        {
+          streamUrl = resolvedStreamUrl;
+          for (const auto& override : propertyOverrides)
+            catchupProperties[override.first] = override.second;
+        }
+        else
+        {
+          Logger::Log(LEVEL_ERROR, "%s - Catchup source resolver fetch failed for: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
+        }
+      }
+
+      StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamUrl, false, catchupProperties, m_settings);
+
+      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, WebUtils::RedactUrl(streamUrl).c_str());
       return PVR_ERROR_NO_ERROR;
     }
   }
