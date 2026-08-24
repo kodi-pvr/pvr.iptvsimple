@@ -66,6 +66,9 @@ void IptvSimple::ConnectionLost()
 
 void IptvSimple::ConnectionEstablished()
 {
+  // The getters read m_channels/m_epg under m_mutex, so writing them here needs it too
+  std::lock_guard<std::mutex> lock(m_mutex);
+
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
