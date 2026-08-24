@@ -67,6 +67,11 @@ void IptvSimple::ConnectionLost()
 
 void IptvSimple::ConnectionEstablished()
 {
+  // Take m_mutex here: GetChannels()/GetEPGForChannel()/etc all lock it
+  // before reading m_channels/m_epg, but this function previously wrote
+  // to those same members (and m_thread) unsynchronized.
+  std::lock_guard<std::mutex> lock(m_mutex);
+
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
