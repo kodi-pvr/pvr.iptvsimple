@@ -52,7 +52,12 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
     // or not kodi considers it necessary when either 1) we need the EPG logos or 2) for
     // catchup we need a local store of the EPG data
     time_t now = std::time(nullptr);
-    LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+    if (LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds))
+    {
+      // Tell Kodi core to pull the freshly loaded EPG, as ReloadEPG() does below
+      for (const auto& myChannel : m_channels.GetChannelsList())
+        m_client->TriggerEpgUpdate(myChannel.GetUniqueId());
+    }
     MergeEpgDataIntoMedia();
   }
 
