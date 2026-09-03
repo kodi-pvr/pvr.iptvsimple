@@ -306,7 +306,28 @@ PVR_ERROR IptvSimple::GetChannelStreamProperties(const kodi::addon::PVRChannel& 
 
     const std::string catchupUrl = m_catchupController.GetCatchupUrl(m_currentChannel);
     if (!catchupUrl.empty())
+    {
       streamURL = catchupUrl;
+
+      // Mirror the RESOLVER handling in GetEPGTagStreamProperties(): Kodi
+      // calls this function too when the EPG selection carries forward as
+      // timeshifted live playback.
+      if (m_currentChannel.GetCatchupMode() == CatchupMode::RESOLVER)
+      {
+        std::string resolvedStreamUrl;
+        std::map<std::string, std::string> propertyOverrides;
+        if (FetchCatchupSourceOverrides(catchupUrl, resolvedStreamUrl, propertyOverrides))
+        {
+          streamURL = resolvedStreamUrl;
+          for (const auto& override : propertyOverrides)
+            catchupProperties[override.first] = override.second;
+        }
+        else
+        {
+          Logger::Log(LEVEL_ERROR, "%s - Catchup source resolver fetch failed for: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
+        }
+      }
+    }
     else
       streamURL = m_catchupController.ProcessStreamUrl(m_currentChannel);
 
