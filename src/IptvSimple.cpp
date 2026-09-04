@@ -75,7 +75,16 @@ void IptvSimple::ConnectionEstablished()
   m_playlistLoader.Init();
   // Taken before loading, so a change made while loading is still picked up
   ResetWatchedFiles();
-  if (!m_playlistLoader.LoadPlayList())
+  if (m_playlistLoader.LoadPlayList())
+  {
+    // Tell Kodi core to re-pull the freshly loaded lists, as ReloadPlayList() does
+    // (recordings too, since catch-up counts as one)
+    TriggerChannelUpdate();
+    TriggerChannelGroupsUpdate();
+    TriggerProvidersUpdate();
+    TriggerRecordingUpdate();
+  }
+  else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
