@@ -76,7 +76,17 @@ void IptvSimple::ConnectionEstablished()
   m_channelGroups.Init();
   m_providers.Init();
   m_playlistLoader.Init();
-  if (!m_playlistLoader.LoadPlayList())
+  if (m_playlistLoader.LoadPlayList())
+  {
+    // LoadPlayList() only fills our own in-memory lists; Kodi core must be
+    // told to re-pull them (incl. recordings, since catch-up counts as one),
+    // same as ReloadPlayList() already does periodically.
+    TriggerChannelUpdate();
+    TriggerChannelGroupsUpdate();
+    TriggerProvidersUpdate();
+    TriggerRecordingUpdate();
+  }
+  else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
