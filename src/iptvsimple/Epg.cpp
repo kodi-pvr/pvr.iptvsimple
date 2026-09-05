@@ -52,7 +52,18 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
     // or not kodi considers it necessary when either 1) we need the EPG logos or 2) for
     // catchup we need a local store of the EPG data
     time_t now = std::time(nullptr);
-    LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+    if (LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds))
+    {
+      // LoadEPG() above only fills our own in-memory m_channelEpgs - Kodi core
+      // still has to be told to come pull it via GetEPGForChannel(), same as
+      // ReloadEPG() already does on its periodic timer below. Without this,
+      // a fresh Kodi start leaves the on-screen guide empty until the next
+      // periodic refresh (confirmed live: 30 min blank guide after a Kodi
+      // restart, since core's own pull-model EPG scheduler defaults to an
+      // even longer interval and doesn't ask proactively either).
+      for (const auto& myChannel : m_channels.GetChannelsList())
+        m_client->TriggerEpgUpdate(myChannel.GetUniqueId());
+    }
     MergeEpgDataIntoMedia();
   }
 
