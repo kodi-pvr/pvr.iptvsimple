@@ -465,26 +465,6 @@ std::string FormatDateTimeNowOnly(const std::string &urlFormatString, int timezo
   return formattedUrl;
 }
 
-std::string AppendQueryStringAndPreserveOptions(const std::string &url, const std::string &postfixQueryString)
-{
-  std::string urlFormatString;
-  if (!postfixQueryString.empty())
-  {
-    // preserve any kodi protocol options after "|"
-    size_t found = url.find_first_of('|');
-    if (found != std::string::npos)
-      urlFormatString = url.substr(0, found) + postfixQueryString + url.substr(found, url.length());
-    else
-      urlFormatString = url + postfixQueryString;
-  }
-  else
-  {
-    urlFormatString = url;
-  }
-
-  return urlFormatString;
-}
-
 std::string BuildEpgTagUrl(time_t startTime, time_t duration, const Channel& channel, long long timeOffset, const std::string& programmeCatchupId, int timezoneShiftSecs)
 {
   std::string startTimeUrl;

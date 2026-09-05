@@ -102,8 +102,6 @@ const std::vector<std::pair<const char*, bool>> boolMap = {{"m3uCache", true},
 bool SettingsMigration::MigrateSettings(kodi::addon::IAddonInstance& target)
 {
   std::string stringValue;
-  bool boolValue{false};
-  int intValue{0};
 
   if (target.CheckInstanceSettingString("kodi_addon_instance_name", stringValue) &&
       !stringValue.empty())

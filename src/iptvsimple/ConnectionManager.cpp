@@ -123,7 +123,6 @@ void ConnectionManager::Reconnect()
 
 void ConnectionManager::Process()
 {
-  static bool log = false;
   static unsigned int retryAttempt = 0;
   int fastReconnectIntervalMs = (m_settings->GetConnectioncCheckIntervalSecs() * 1000) / 2;
   int intervalMs = m_settings->GetConnectioncCheckIntervalSecs() * 1000;
