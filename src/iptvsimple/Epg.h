@@ -37,7 +37,7 @@ namespace iptvsimple
 
   class InstanceSettings;
 
-  class Epg
+  class ATTR_DLL_LOCAL Epg
   {
   public:
     Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::Media& media, std::shared_ptr<iptvsimple::InstanceSettings>& settings);

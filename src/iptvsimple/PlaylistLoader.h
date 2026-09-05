@@ -56,7 +56,7 @@ namespace iptvsimple
   static const std::string PLAYLIST_TYPE_MARKER    = "#EXT-X-PLAYLIST-TYPE:";
   static const std::string WEBPROP_MARKER          = "#WEBPROP:";
 
-  class PlaylistLoader
+  class ATTR_DLL_LOCAL PlaylistLoader
   {
     struct M3UHeaderStrings {
         // members will be public without `private:` keyword
