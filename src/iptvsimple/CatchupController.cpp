@@ -547,7 +547,7 @@ std::string CatchupController::GetStreamKey(const Channel& channel, bool fromEpg
   // The streamKey is simply the channelId + StreamUrl or the catchup source
   // Either can be used to uniquely identify the StreamType/MimeType pairing
   if ((m_catchupStartTime > 0 || fromEpg) && m_timeshiftBufferOffset < (std::time(nullptr) - 5))
-    std::to_string(channel.GetUniqueId()) + "-" + channel.GetCatchupSource();
+    return std::to_string(channel.GetUniqueId()) + "-" + channel.GetCatchupSource();
 
   return std::to_string(channel.GetUniqueId()) + "-" + channel.GetStreamURL();
 }
