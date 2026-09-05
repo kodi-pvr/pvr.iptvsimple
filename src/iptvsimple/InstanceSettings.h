@@ -79,7 +79,7 @@ namespace iptvsimple
     ALL_CHANNELS
   };
 
-  class InstanceSettings
+  class ATTR_DLL_LOCAL InstanceSettings
   {
   public:
     explicit InstanceSettings(kodi::addon::IAddonInstance& instance, const kodi::addon::IInstanceInfo& instanceInfo);

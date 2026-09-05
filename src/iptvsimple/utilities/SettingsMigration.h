@@ -9,6 +9,8 @@
 
 #include <string>
 
+#include <kodi/c-api/addon_base.h>
+
 namespace kodi
 {
 namespace addon
@@ -21,7 +23,7 @@ namespace iptvsimple
 {
 namespace utilities
 {
-class SettingsMigration
+class ATTR_DLL_LOCAL SettingsMigration
 {
 public:
   static bool MigrateSettings(kodi::addon::IAddonInstance& target);

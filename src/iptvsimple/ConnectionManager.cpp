@@ -26,7 +26,7 @@ using namespace kodi::tools;
  */
 
 ConnectionManager::ConnectionManager(IConnectionListener& connectionListener, std::shared_ptr<iptvsimple::InstanceSettings> settings)
-  : m_connectionListener(connectionListener), m_settings(settings), m_suspended(false), m_state(PVR_CONNECTION_STATE_UNKNOWN)
+  : m_connectionListener(connectionListener), m_suspended(false), m_state(PVR_CONNECTION_STATE_UNKNOWN), m_settings(settings)
 {
 }
 
@@ -123,7 +123,6 @@ void ConnectionManager::Reconnect()
 
 void ConnectionManager::Process()
 {
-  static bool log = false;
   static unsigned int retryAttempt = 0;
   int fastReconnectIntervalMs = (m_settings->GetConnectioncCheckIntervalSecs() * 1000) / 2;
   int intervalMs = m_settings->GetConnectioncCheckIntervalSecs() * 1000;

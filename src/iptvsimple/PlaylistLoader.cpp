@@ -30,7 +30,7 @@ using namespace iptvsimple::utilities;
 
 PlaylistLoader::PlaylistLoader(kodi::addon::CInstancePVRClient* client, Channels& channels,
                                ChannelGroups& channelGroups, Providers& providers, Media& media, std::shared_ptr<InstanceSettings>& settings)
-  : m_channelGroups(channelGroups), m_channels(channels), m_providers(providers), m_media(media), m_client(client), m_settings(settings) { }
+  : m_providers(providers), m_channelGroups(channelGroups), m_channels(channels), m_media(media), m_client(client), m_settings(settings) { }
 
 bool PlaylistLoader::Init()
 {
