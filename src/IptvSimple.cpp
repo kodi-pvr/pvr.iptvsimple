@@ -148,7 +148,7 @@ void IptvSimple::Process()
     lastRefreshTimeSeconds = currentRefreshTimeSeconds;
 
     if (m_settings->GetM3URefreshMode() == RefreshMode::REPEATED_REFRESH &&
-        refreshTimer >= (m_settings->GetM3URefreshIntervalMins() * 60))
+        refreshTimer >= static_cast<unsigned int>(m_settings->GetM3URefreshIntervalMins() * 60))
       m_reloadChannelsGroupsAndEPG = true;
 
     if (m_settings->GetM3URefreshMode() == RefreshMode::ONCE_PER_DAY &&
