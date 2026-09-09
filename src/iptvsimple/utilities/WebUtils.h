@@ -28,6 +28,8 @@ namespace iptvsimple
       static const std::string UrlDecode(const std::string& value);
       static bool IsEncoded(const std::string& value);
       static std::string ReadFileContentsStartOnly(const std::string& url, int* httpCode);
+      static std::string ReadFileContentsFull(const std::string& url);
+      static std::string GetUrlOrigin(const std::string& url);
       static bool IsHttpUrl(const std::string& url);
       static bool IsNfsUrl(const std::string& url);
       static bool IsSpecialUrl(const std::string& url);

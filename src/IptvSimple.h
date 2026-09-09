@@ -21,6 +21,7 @@
 #include <atomic>
 #include <mutex>
 #include <thread>
+#include <vector>
 
 #include <kodi/addon-instance/PVR.h>
 
