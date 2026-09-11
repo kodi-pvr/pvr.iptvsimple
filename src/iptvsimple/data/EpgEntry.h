@@ -47,6 +47,9 @@ namespace iptvsimple
       const std::string& GetCatchupId() const { return m_catchupId; }
       void SetCatchupId(const std::string& value) { m_catchupId = value; }
 
+      const std::string& GetSeriesId() const { return m_seriesId; }
+      void SetSeriesId(const std::string& value) { m_seriesId = value; }
+
       void UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeShift, const std::vector<EpgGenre>& genres);
       bool UpdateFrom(const pugi::xml_node& programmeNode, const std::string& id,
                       int epgWindowsStart, int epgWindowsEnd, int minShiftTime, int maxShiftTime);
@@ -62,6 +65,7 @@ namespace iptvsimple
       time_t m_startTime;
       time_t m_endTime;
       std::string m_catchupId;
+      std::string m_seriesId;
     };
   } //namespace data
 } //namespace iptvsimple

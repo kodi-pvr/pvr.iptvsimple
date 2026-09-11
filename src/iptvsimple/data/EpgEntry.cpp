@@ -67,6 +67,7 @@ void EpgEntry::UpdateTo(kodi::addon::PVREPGTag& left, int iChannelUid, int timeS
   left.SetEpisodePartNumber(m_episodePartNumber);
   left.SetEpisodeName(m_episodeName);
   left.SetFirstAired(m_firstAired);
+  left.SetSeriesLink(m_seriesId);
   int iFlags = EPG_TAG_FLAG_UNDEFINED;
   if (m_new)
     iFlags |= EPG_TAG_FLAG_IS_NEW;
@@ -205,6 +206,9 @@ bool EpgEntry::UpdateFrom(const xml_node& programmeNode, const std::string& id,
 
   GetAttributeValue(programmeNode, "catchup-id", m_catchupId);
   m_catchupId = StringUtils::Trim(m_catchupId);
+
+  GetAttributeValue(programmeNode, "series-id", m_seriesId);
+  m_seriesId = StringUtils::Trim(m_seriesId);
 
   // Discard only if this is not a first run AND
   //  - The programme end time + the max timeshift is earlier than the EPG window start OR
