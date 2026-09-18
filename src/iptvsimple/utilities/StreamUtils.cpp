@@ -481,7 +481,8 @@ bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& c
 bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const std::string& inputstreamName)
 {
   return streamType == StreamType::HLS ||
-         inputstreamName == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+         inputstreamName == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG ||
+         inputstreamName == INPUTSTREAM_FFMPEGDIRECT;
 }
 
 std::string StreamUtils::GetUrlEncodedProtocolOptions(const std::string& protocolOptions)
