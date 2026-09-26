@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2025-11-15 21:13+0000\n"
+"PO-Revision-Date: 2026-09-25 17:01+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/sv_se/>\n"
 "Language: sv_se\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.14.3\n"
+"X-Generator: Weblate 2026.9.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -107,7 +107,7 @@ msgstr "URL till M3U-spellista"
 #. label: General - startNum
 msgctxt "#30013"
 msgid "Start channel number"
-msgstr "Startkanalens nummer"
+msgstr "Starta kanalnummer"
 
 #. label: General - numberByOrder
 msgctxt "#30014"
@@ -382,7 +382,7 @@ msgstr "Använd inputstream.adaptive för m3u8-strömmar (HLS)"
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
 msgid "Use FFmpeg http reconnect options if possible"
-msgstr "Använd FFmpeg http reconnect-alternativ om möjligt"
+msgstr "Använd FFmpeg http-återanslutningsalternativ om möjligt"
 
 #. label: Advanced - defaultUserAgent
 msgctxt "#30068"
@@ -1003,7 +1003,7 @@ msgstr "Aktivera tidsförskjutningsfunktionen för HTTP-baserade strömmar. Gäl
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
 msgid "Open settings dialog for inputstream.ffmpegdirect for modification of timeshift and other settings."
-msgstr "Öppna inställningsdialogen för inputstream.ffmpegdirect för att ändra tidsförskjutning och andra inställningar."
+msgstr "Öppna inställningsdialogrutan för inputstream.ffmpegdirect för ändring av tidsförskjutning och andra inställningar."
 
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
