@@ -38,19 +38,28 @@ bool SplitUrlProtocolOpts(const std::string& streamURL,
   }
   return false;
 }
+
+template<typename T>
+bool HasInputstreamAdaptiveDrmConfig(const T& entry)
+{
+  return !entry.GetProperty("inputstream.adaptive.drm").empty() ||
+         !entry.GetProperty("inputstream.adaptive.drm_legacy").empty();
+}
 } // unnamed namespace
 
 void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<InstanceSettings>& settings)
 {
-  // Check if the channel has explicitly set up the use of inputstream.adaptive,
-  // if so, the best behaviour for media services is:
+  // Check if the channel explicitly uses inputstream.adaptive, or has its DRM configuration
+  // without another explicit inputstream. If so, the best behaviour for media services is:
   // - Always add mimetype to prevent kodi core to make an HTTP HEADER requests
   //   this because in some cases services refuse this request and can also deny downloads
   // - If requested by settings, always add the "user-agent" header to ISA properties
-  const bool isISAdaptiveSet =
-      channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM) == INPUTSTREAM_ADAPTIVE;
+  const std::string inputstream = channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM);
+  const bool isISAdaptiveSet = inputstream == INPUTSTREAM_ADAPTIVE;
+  const bool useISAdaptive = isISAdaptiveSet ||
+                             (inputstream.empty() && HasInputstreamAdaptiveDrmConfig(channel));
 
-  if (!isISAdaptiveSet && ChannelSpecifiesInputstream(channel))
+  if (!useISAdaptive && ChannelSpecifiesInputstream(channel))
   {
     // Channel has an inputstream class set so we only set the stream URL
     properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
@@ -79,7 +88,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       streamType = StreamUtils::InspectStreamType(streamURL, channel.GetCatchupMode());
 
     // Using kodi's built in inputstreams
-    if (!isISAdaptiveSet && StreamUtils::UseKodiInputstreams(streamType, settings))
+    if (!useISAdaptive && StreamUtils::UseKodiInputstreams(streamType, settings))
     {
       std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, channel.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM), channel.GetProperty("http-reconnect") == "true" , settings);
 
@@ -166,15 +175,17 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
 
 void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::MediaEntry& mediaEntry, const std::string& streamURL, std::shared_ptr<InstanceSettings>& settings)
 {
-  // Check if the media entry has explicitly set up the use of inputstream.adaptive,
-  // if so, the best behaviour for media services is:
+  // Check if the media entry explicitly uses inputstream.adaptive, or has its DRM configuration
+  // without another explicit inputstream. If so, the best behaviour for media services is:
   // - Always add mimetype to prevent kodi core to make an HTTP HEADER requests
   //   this because in some cases services refuse this request and can also deny downloads
   // - If requested by settings, always add the "user-agent" header to ISA properties
-  const bool isISAdaptiveSet =
-      mediaEntry.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM) == INPUTSTREAM_ADAPTIVE;
+  const std::string inputstream = mediaEntry.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM);
+  const bool isISAdaptiveSet = inputstream == INPUTSTREAM_ADAPTIVE;
+  const bool useISAdaptive = isISAdaptiveSet ||
+                             (inputstream.empty() && HasInputstreamAdaptiveDrmConfig(mediaEntry));
 
-  if (!isISAdaptiveSet && !mediaEntry.GetInputStreamName().empty())
+  if (!useISAdaptive && !mediaEntry.GetInputStreamName().empty())
   {
     // Media Entry has an inputstream class set so we only set the stream URL
     properties.emplace_back(PVR_STREAM_PROPERTY_STREAMURL, streamURL);
@@ -192,7 +203,7 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
       streamType = StreamUtils::InspectStreamType(streamURL, CatchupMode::DISABLED);
 
     // Using kodi's built in inputstreams
-    if (!isISAdaptiveSet && StreamUtils::UseKodiInputstreams(streamType, settings))
+    if (!useISAdaptive && StreamUtils::UseKodiInputstreams(streamType, settings))
     {
       std::string ffmpegStreamURL = StreamUtils::GetURLWithFFmpegReconnectOptions(streamURL, streamType, mediaEntry.GetProperty(PVR_STREAM_PROPERTY_INPUTSTREAM), mediaEntry.GetProperty("http-reconnect") == "true" , settings);
 
@@ -300,6 +311,9 @@ void StreamUtils::SetFFmpegDirectManifestTypeStreamProperty(std::vector<kodi::ad
 std::string StreamUtils::GetEffectiveInputStreamName(const StreamType& streamType, const iptvsimple::data::Channel& channel, std::shared_ptr<InstanceSettings>& settings)
 {
   std::string inputStreamName = channel.GetInputStreamName();
+
+  if (inputStreamName.empty() && HasInputstreamAdaptiveDrmConfig(channel))
+    inputStreamName = INPUTSTREAM_ADAPTIVE;
 
   if (inputStreamName.empty())
   {
