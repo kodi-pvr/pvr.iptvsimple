@@ -1,5 +1,30 @@
+v22.6.5
+- Updated zlib from 1.3.1 to 1.3.2
+- Updated XZ from 5.4.3 to 5.8.4
+- Updated pugixml from 1.14 to 1.16
+- Inferred inputstream.adaptive from DRM properties
+- Fixed catchup stream keys to avoid incorrect stream and MIME type selection
+- Improved CMake compatibility and resolved compiler warnings
+- Updated translations
+
+v22.6.4
+- Updated translations
+
+v22.6.3
+- Fixed zlib source mirror URL
+
+v22.6.2
+- Updated global minimum versions
+- Updated translations
+
 v22.6.1
 - Fix episode part parsing
+
+v22.6.0
+- Updated translations
+
+v22.5.2
+- Release
 
 v22.5.1
 - Add support to inputstream.adaptive.common_headers to set headers
