@@ -1,0 +1,12 @@
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -220,6 +220,9 @@
+     set_target_properties(
+         zlibstatic PROPERTIES EXPORT_NAME ZLIBSTATIC OUTPUT_NAME
+                                                      z${zlib_static_suffix})
++    if(WIN32)
++        set_target_properties(zlibstatic PROPERTIES OUTPUT_NAME zlib)
++    endif()
+ endif(ZLIB_BUILD_STATIC)
+ 
+ if(ZLIB_INSTALL)

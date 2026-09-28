@@ -1,1 +1,1 @@
-zlib https://mirrors.kodi.tv/build-deps/sources/zlib-1.3.1.tar.xz
+zlib https://github.com/madler/zlib/releases/download/v1.3.2/zlib-1.3.2.tar.xz
