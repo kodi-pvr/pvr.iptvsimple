@@ -1,1 +1,1 @@
-xz-utils http://mirrors.kodi.tv/build-deps/sources/xz-5.4.3.tar.xz
+xz-utils https://github.com/tukaani-project/xz/releases/download/v5.8.4/xz-5.8.4.tar.xz
