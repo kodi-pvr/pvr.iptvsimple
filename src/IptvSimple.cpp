@@ -9,18 +9,68 @@
 
 #include "iptvsimple/InstanceSettings.h"
 #include "iptvsimple/utilities/Logger.h"
+#include "iptvsimple/utilities/StreamUtils.h"
 #include "iptvsimple/utilities/TimeUtils.h"
 #include "iptvsimple/utilities/WebUtils.h"
 
 #include <ctime>
 #include <chrono>
 
+#include <kodi/Filesystem.h>
 #include <kodi/tools/StringUtils.h>
 
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
 using namespace kodi::tools;
+
+namespace
+{
+// Fetches a RESOLVER-mode catchup-source (a resolver endpoint, not a
+// playable URL) and parses its plain-text "key=value" response; see
+// README (Catchup modes) for CatchupMode::RESOLVER's semantics and the
+// response format.
+bool FetchCatchupSourceOverrides(const std::string& url, std::string& streamUrl,
+                                  std::map<std::string, std::string>& propertyOverrides)
+{
+  kodi::vfs::CFile file;
+  if (!file.OpenFile(url, ADDON_READ_NO_CACHE))
+    return false;
+
+  std::string content;
+  char buffer[4096];
+  ssize_t bytesRead;
+  while ((bytesRead = file.Read(buffer, sizeof(buffer))) > 0)
+    content.append(buffer, static_cast<size_t>(bytesRead));
+  file.Close();
+
+  size_t pos = 0;
+  while (pos < content.size())
+  {
+    const size_t eol = content.find('\n', pos);
+    std::string line = content.substr(pos, eol == std::string::npos ? std::string::npos : eol - pos);
+    while (!line.empty() && line.back() == '\r')
+      line.pop_back();
+
+    const size_t eq = line.find('=');
+    if (eq != std::string::npos && eq > 0)
+    {
+      const std::string key = line.substr(0, eq);
+      const std::string value = line.substr(eq + 1);
+      if (key == "streamUrl")
+        streamUrl = value;
+      else
+        propertyOverrides[key] = value;
+    }
+
+    if (eol == std::string::npos)
+      break;
+    pos = eol + 1;
+  }
+
+  return !streamUrl.empty();
+}
+} // namespace
 
 IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple::IConnectionListener(instance), m_settings(new InstanceSettings(*this, instance))
 {
@@ -35,6 +85,16 @@ IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple:
 IptvSimple::~IptvSimple()
 {
   Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
+
+  // Stop connectionManager FIRST: it can call back into
+  // ConnectionEstablished()/ConnectionLost() on its own thread until
+  // Stop() returns, and those callbacks touch m_thread/m_channels/m_epg
+  // without taking m_mutex.
+  if (connectionManager)
+    connectionManager->Stop();
+  delete connectionManager;
+  connectionManager = nullptr;
+
   m_running = false;
   if (m_thread.joinable())
     m_thread.join();
@@ -44,10 +104,6 @@ IptvSimple::~IptvSimple()
   m_channelGroups.Clear();
   m_providers.Clear();
   m_epg.Clear();
-
-  if (connectionManager)
-    connectionManager->Stop();
-  delete connectionManager;
 }
 
 /* **************************************************************************
@@ -61,11 +117,26 @@ void IptvSimple::ConnectionLost()
 
 void IptvSimple::ConnectionEstablished()
 {
+  // Take m_mutex here: GetChannels()/GetEPGForChannel()/etc all lock it
+  // before reading m_channels/m_epg, but this function previously wrote
+  // to those same members (and m_thread) unsynchronized.
+  std::lock_guard<std::mutex> lock(m_mutex);
+
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
   m_playlistLoader.Init();
-  if (!m_playlistLoader.LoadPlayList())
+  if (m_playlistLoader.LoadPlayList())
+  {
+    // LoadPlayList() only fills our own in-memory lists; Kodi core must be
+    // told to re-pull them (incl. recordings, since catch-up counts as one),
+    // same as ReloadPlayList() already does periodically.
+    TriggerChannelUpdate();
+    TriggerChannelGroupsUpdate();
+    TriggerProvidersUpdate();
+    TriggerRecordingUpdate();
+  }
+  else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
@@ -76,13 +147,27 @@ void IptvSimple::ConnectionEstablished()
 
   m_running = true;
   m_thread = std::thread([&] { Process(); });
+
+  {
+    std::lock_guard<std::mutex> connLock(m_connectionMutex);
+    m_connectionResolved = true;
+  }
+  m_connectionCv.notify_all();
 }
 
 bool IptvSimple::Initialise()
 {
-  std::lock_guard<std::mutex> lock(m_mutex);
+  {
+    std::lock_guard<std::mutex> lock(m_mutex);
+    connectionManager->Start();
+  }
 
-  connectionManager->Start();
+  // Wait for the first ConnectionEstablished() (bounded, so a genuinely
+  // unreachable source doesn't hang Kodi startup) instead of returning
+  // immediately - Kodi calls GetChannels()/GetEPGForChannel() right after
+  // this returns, before connectionManager's background thread has run.
+  std::unique_lock<std::mutex> connLock(m_connectionMutex);
+  m_connectionCv.wait_for(connLock, std::chrono::seconds(15), [this] { return m_connectionResolved; });
 
   return true;
 }
@@ -235,7 +320,28 @@ PVR_ERROR IptvSimple::GetChannelStreamProperties(const kodi::addon::PVRChannel& 
 
     const std::string catchupUrl = m_catchupController.GetCatchupUrl(m_currentChannel);
     if (!catchupUrl.empty())
+    {
       streamURL = catchupUrl;
+
+      // Mirror the RESOLVER handling in GetEPGTagStreamProperties(): Kodi
+      // calls this function too when the EPG selection carries forward as
+      // timeshifted live playback.
+      if (m_currentChannel.GetCatchupMode() == CatchupMode::RESOLVER)
+      {
+        std::string resolvedStreamUrl;
+        std::map<std::string, std::string> propertyOverrides;
+        if (FetchCatchupSourceOverrides(catchupUrl, resolvedStreamUrl, propertyOverrides))
+        {
+          streamURL = resolvedStreamUrl;
+          for (const auto& override : propertyOverrides)
+            catchupProperties[override.first] = override.second;
+        }
+        else
+        {
+          Logger::Log(LEVEL_ERROR, "%s - Catchup source resolver fetch failed for: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
+        }
+      }
+    }
     else
       streamURL = m_catchupController.ProcessStreamUrl(m_currentChannel);
 
@@ -309,7 +415,8 @@ PVR_ERROR IptvSimple::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& ta
     Logger::Log(LEVEL_DEBUG, "%s - GetPlayEpgAsLive is %s", __FUNCTION__, m_settings->CatchupPlayEpgAsLive() ? "enabled" : "disabled");
 
     std::map<std::string, std::string> catchupProperties;
-    if (m_settings->CatchupPlayEpgAsLive() && (m_currentChannel.CatchupSupportsTimeshifting() || m_currentChannel.GetCatchupMode() == CatchupMode::VOD))
+    if (m_settings->CatchupPlayEpgAsLive() && (m_currentChannel.CatchupSupportsTimeshifting() ||
+        m_currentChannel.GetCatchupMode() == CatchupMode::VOD || m_currentChannel.GetCatchupMode() == CatchupMode::RESOLVER))
     {
       m_catchupController.ProcessEPGTagForTimeshiftedPlayback(tag, m_currentChannel, catchupProperties);
     }
@@ -322,9 +429,28 @@ PVR_ERROR IptvSimple::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& ta
     const std::string catchupUrl = m_catchupController.GetCatchupUrl(m_currentChannel);
     if (!catchupUrl.empty())
     {
-      StreamUtils::SetAllStreamProperties(properties, m_currentChannel, catchupUrl, false, catchupProperties, m_settings);
+      std::string streamUrl = catchupUrl;
 
-      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
+      // See FetchCatchupSourceOverrides() above.
+      if (m_currentChannel.GetCatchupMode() == CatchupMode::RESOLVER)
+      {
+        std::string resolvedStreamUrl;
+        std::map<std::string, std::string> propertyOverrides;
+        if (FetchCatchupSourceOverrides(catchupUrl, resolvedStreamUrl, propertyOverrides))
+        {
+          streamUrl = resolvedStreamUrl;
+          for (const auto& override : propertyOverrides)
+            catchupProperties[override.first] = override.second;
+        }
+        else
+        {
+          Logger::Log(LEVEL_ERROR, "%s - Catchup source resolver fetch failed for: %s", __FUNCTION__, WebUtils::RedactUrl(catchupUrl).c_str());
+        }
+      }
+
+      StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamUrl, false, catchupProperties, m_settings);
+
+      Logger::Log(LEVEL_INFO, "%s - EPG Catchup URL: %s", __FUNCTION__, WebUtils::RedactUrl(streamUrl).c_str());
       return PVR_ERROR_NO_ERROR;
     }
   }
@@ -334,6 +460,19 @@ PVR_ERROR IptvSimple::GetEPGTagStreamProperties(const kodi::addon::PVREPGTag& ta
 
 PVR_ERROR IptvSimple::IsEPGTagPlayable(const kodi::addon::PVREPGTag& tag, bool& bIsPlayable)
 {
+  // Piggyback a lazy synopsis fetch here: Kodi has no per-tag "info dialog
+  // opened" hook, but calls this continuously per visible EPG grid cell.
+  // Placed before the catchup-enabled gate below so it works regardless.
+  if (tag.GetPlot().empty() && !tag.GetSeriesLink().empty())
+  {
+    Channel plotChannel{m_settings};
+    if (GetChannel(static_cast<int>(tag.GetUniqueChannelId()), plotChannel))
+    {
+      m_epg.RequestPlotFetch(tag.GetSeriesLink(), tag.GetUniqueChannelId(),
+                             plotChannel.GetCatchupSource());
+    }
+  }
+
   if (!m_settings->IsCatchupEnabled())
     return PVR_ERROR_NOT_IMPLEMENTED;
 

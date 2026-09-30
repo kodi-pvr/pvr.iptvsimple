@@ -25,7 +25,9 @@ namespace iptvsimple
     FLUSSONIC,
     XTREAM_CODES,
     TIMESHIFT, // Obsolete but still used by some providers, predates SHIFT
-    VOD
+    VOD,
+    RESOLVER // Resolver-fetched catchup override, see README (Catchup modes).
+             // Appended last: ordinals are persisted in addon settings.
   };
 
   constexpr int IGNORE_CATCHUP_DAYS = -1;

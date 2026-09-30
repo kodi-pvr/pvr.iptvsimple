@@ -19,8 +19,10 @@
 #include "iptvsimple/data/Channel.h"
 
 #include <atomic>
+#include <condition_variable>
 #include <mutex>
 #include <thread>
+#include <vector>
 
 #include <kodi/addon-instance/PVR.h>
 
@@ -110,4 +112,11 @@ private:
   std::thread m_thread;
   std::mutex m_mutex;
   std::atomic_bool m_reloadChannelsGroupsAndEPG{false};
+
+  // Lets Initialise() block until ConnectionEstablished() has populated
+  // m_channels/m_epg. Separate from m_mutex, which ConnectionEstablished()
+  // itself needs to take, so Initialise() must not hold it while waiting.
+  std::mutex m_connectionMutex;
+  std::condition_variable m_connectionCv;
+  bool m_connectionResolved = false;
 };

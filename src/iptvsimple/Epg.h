@@ -15,7 +15,11 @@
 #include "data/EpgGenre.h"
 
 #include <memory>
+#include <mutex>
 #include <string>
+#include <thread>
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include <kodi/addon-instance/PVR.h>
@@ -41,8 +45,15 @@ namespace iptvsimple
   {
   public:
     Epg(kodi::addon::CInstancePVRClient* client, iptvsimple::Channels& channels, iptvsimple::Media& media, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+    ~Epg();
 
     bool Init(int epgMaxPastDays, int epgMaxFutureDays);
+
+    // Lazily fetches a series' real synopsis (the bulk XMLTV feed only
+    // carries the show name) and merges it into subsequent
+    // GetEPGForChannel() results; runs on a background thread, never
+    // blocks the caller. De-dupes per series-id for the addon's lifetime.
+    void RequestPlotFetch(const std::string& seriesId, int channelUid, const std::string& catchupSource);
 
     PVR_ERROR GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t epgWindowEnd, kodi::addon::PVREPGTagsResultSet& results);
     void SetEPGMaxPastDays(int epgMaxPastDays);
@@ -90,5 +101,12 @@ namespace iptvsimple
     kodi::addon::CInstancePVRClient* m_client;
 
     std::shared_ptr<iptvsimple::InstanceSettings> m_settings;
+
+    // Synopsis cache/fetch state - see RequestPlotFetch().
+    std::unordered_map<std::string, std::string> m_seriesPlotCache;
+    std::unordered_set<std::string> m_seriesPlotAttempted;
+    std::mutex m_seriesPlotCacheMutex;
+    std::vector<std::thread> m_seriesPlotFetchThreads;
+    std::mutex m_seriesPlotFetchThreadsMutex;
   };
 } //namespace iptvsimple

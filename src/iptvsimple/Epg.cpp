@@ -9,6 +9,7 @@
 
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
+#include "utilities/WebUtils.h"
 #include "utilities/XMLUtils.h"
 
 #include <chrono>
@@ -37,6 +38,51 @@ Epg::Epg(kodi::addon::CInstancePVRClient* client, Channels& channels, Media& med
   m_media.SetGenreMappings(m_genreMappings);
 }
 
+Epg::~Epg()
+{
+  std::lock_guard<std::mutex> lock(m_seriesPlotFetchThreadsMutex);
+  for (auto& fetchThread : m_seriesPlotFetchThreads)
+  {
+    if (fetchThread.joinable())
+      fetchThread.join();
+  }
+  m_seriesPlotFetchThreads.clear();
+}
+
+void Epg::RequestPlotFetch(const std::string& seriesId, int channelUid, const std::string& catchupSource)
+{
+  {
+    std::lock_guard<std::mutex> lock(m_seriesPlotCacheMutex);
+    if (!m_seriesPlotAttempted.insert(seriesId).second)
+      return; // already fetched (or attempted and failed) this session
+  }
+
+  const std::string origin = WebUtils::GetUrlOrigin(catchupSource);
+  if (origin.empty())
+    return;
+
+  const std::string url = origin + "/epg-plot?series_id=" + WebUtils::UrlEncode(seriesId);
+
+  std::lock_guard<std::mutex> lock(m_seriesPlotFetchThreadsMutex);
+  m_seriesPlotFetchThreads.emplace_back(
+      [this, seriesId, channelUid, url]
+      {
+        const std::string plot = WebUtils::ReadFileContentsFull(url);
+        if (plot.empty())
+        {
+          Logger::Log(LogLevel::LEVEL_DEBUG, "%s - plot fetch failed or empty for: %s",
+                      __FUNCTION__, WebUtils::RedactUrl(url).c_str());
+          return;
+        }
+
+        {
+          std::lock_guard<std::mutex> cacheLock(m_seriesPlotCacheMutex);
+          m_seriesPlotCache[seriesId] = plot;
+        }
+        m_client->TriggerEpgUpdate(channelUid);
+      });
+}
+
 bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
 {
   m_xmltvLocation = m_settings->GetEpgLocation();
@@ -52,7 +98,14 @@ bool Epg::Init(int epgMaxPastDays, int epgMaxFutureDays)
     // or not kodi considers it necessary when either 1) we need the EPG logos or 2) for
     // catchup we need a local store of the EPG data
     time_t now = std::time(nullptr);
-    LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds);
+    if (LoadEPG(now - m_epgMaxPastDaysSeconds, now + m_epgMaxFutureDaysSeconds))
+    {
+      // LoadEPG() only fills our own in-memory m_channelEpgs; Kodi core
+      // must be told to pull it via TriggerEpgUpdate(), same as
+      // ReloadEPG() already does on its periodic timer below.
+      for (const auto& myChannel : m_channels.GetChannelsList())
+        m_client->TriggerEpgUpdate(myChannel.GetUniqueId());
+    }
     MergeEpgDataIntoMedia();
   }
 
@@ -420,6 +473,15 @@ PVR_ERROR Epg::GetEPGForChannel(int channelUid, time_t epgWindowStart, time_t ep
       kodi::addon::PVREPGTag tag;
 
       epgEntry.UpdateTo(tag, channelUid, shift, m_genreMappings);
+
+      // Merge in a synopsis fetched (and cached) by a prior RequestPlotFetch().
+      if (tag.GetPlot().empty() && !epgEntry.GetSeriesId().empty())
+      {
+        std::lock_guard<std::mutex> lock(m_seriesPlotCacheMutex);
+        const auto it = m_seriesPlotCache.find(epgEntry.GetSeriesId());
+        if (it != m_seriesPlotCache.end())
+          tag.SetPlot(it->second);
+      }
 
       results.Add(tag);
 

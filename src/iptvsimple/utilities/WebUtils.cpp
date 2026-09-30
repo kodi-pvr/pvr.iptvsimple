@@ -111,6 +111,32 @@ std::string WebUtils::ReadFileContentsStartOnly(const std::string& url, int* htt
   return strContent;
 }
 
+std::string WebUtils::ReadFileContentsFull(const std::string& url)
+{
+  kodi::vfs::CFile file;
+  if (!file.OpenFile(url, ADDON_READ_NO_CACHE))
+    return "";
+
+  std::string content;
+  char buffer[4096];
+  ssize_t bytesRead;
+  while ((bytesRead = file.Read(buffer, sizeof(buffer))) > 0)
+    content.append(buffer, static_cast<size_t>(bytesRead));
+  file.Close();
+
+  return content;
+}
+
+std::string WebUtils::GetUrlOrigin(const std::string& url)
+{
+  const size_t schemeEnd = url.find("://");
+  if (schemeEnd == std::string::npos)
+    return "";
+
+  const size_t pathStart = url.find('/', schemeEnd + 3);
+  return pathStart == std::string::npos ? url : url.substr(0, pathStart);
+}
+
 bool WebUtils::IsHttpUrl(const std::string& url)
 {
   return StringUtils::StartsWith(url, HTTP_PREFIX) || StringUtils::StartsWith(url, HTTPS_PREFIX);
