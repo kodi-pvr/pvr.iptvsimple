@@ -86,6 +86,9 @@ public:
   // For catchup
   bool GetChannel(unsigned int uniqueChannelId, iptvsimple::data::Channel& myChannel);
   iptvsimple::CatchupController& GetCatchupController() { return m_catchupController; }
+
+  // Add a method to get the Channels instance
+  iptvsimple::Channels& GetChannelsManager() { return m_channels; }
   //@}
 
 protected:

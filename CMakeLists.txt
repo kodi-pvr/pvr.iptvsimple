@@ -7,11 +7,13 @@ find_package(Kodi REQUIRED)
 find_package(pugixml REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(lzma REQUIRED)
+find_package(httplib REQUIRED)
 
 include_directories(${KODI_INCLUDE_DIR}/.. # Hack way with "/..", need bigger Kodi cmake rework to match right include ways
                     ${PUGIXML_INCLUDE_DIRS}
                     ${ZLIB_INCLUDE_DIRS}
-                    ${LZMA_INCLUDE_DIRS})
+                    ${LZMA_INCLUDE_DIRS}
+                    ${HTTPLIB_INCLUDE_DIR})
 
 set(DEPLIBS ${PUGIXML_LIBRARIES}
             ${ZLIB_LIBRARIES}
@@ -20,6 +22,7 @@ set(DEPLIBS ${PUGIXML_LIBRARIES}
 message(STATUS "PUGIXML_LIBRARIES: ${PUGIXML_LIBRARIES}")
 message(STATUS "ZLIB_LIBRARIES: ${ZLIB_LIBRARIES}")
 message(STATUS "LZMA_LIBRARIES: ${LZMA_LIBRARIES}")
+message(STATUS "CPP_HTTPLIB_LIBRARIES: ${HTTPLIB_INCLUDE_DIR}")
 
 set(IPTV_SOURCES src/addon.cpp
                  src/IptvSimple.cpp
@@ -48,6 +51,8 @@ set(IPTV_SOURCES src/addon.cpp
                  src/iptvsimple/utilities/WebUtils.cpp
                  src/iptvsimple/utilities/WebStreamExtractor.cpp
                  src/iptvsimple/utilities/CurlUtils.cpp
+                 src/iptvsimple/HttpServer.cpp
+                 src/iptvsimple/views/ChannelsView.cpp
                  )
 
 set(IPTV_HEADERS src/addon.h
@@ -82,6 +87,9 @@ set(IPTV_HEADERS src/addon.h
                  src/iptvsimple/utilities/XMLUtils.h
                  src/iptvsimple/utilities/WebStreamExtractor.h
                  src/iptvsimple/utilities/CurlUtils.h
+                 src/iptvsimple/HttpServer.h
+                 src/iptvsimple/views/ChannelsView.h
+                 src/iptvsimple/IHttpView.h
                  )
 
 addon_version(pvr.iptvsimple IPTV)

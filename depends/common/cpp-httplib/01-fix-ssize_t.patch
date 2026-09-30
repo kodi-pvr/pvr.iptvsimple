@@ -1,0 +1,435 @@
+--- a/httplib.h
++++ b/httplib.h
+@@ -166,9 +166,9 @@
+ #pragma comment(lib, "ws2_32.lib")
+ 
+ #ifdef _WIN64
+-using ssize_t = __int64;
++using httplib_ssize_t = __int64;
+ #else
+-using ssize_t = long;
++using httplib_ssize_t = long;
+ #endif
+ #endif // _MSC_VER
+ 
+@@ -611,8 +611,15 @@ public:
+   Reader reader_;
+   MultipartReader multipart_reader_;
+ };
++#ifndef httplib_ssize_t
++#ifdef _WIN64
++using httplib_ssize_t = __int64;
++#else
++using httplib_ssize_t = long;
++#endif
++#endif
+ 
+-using Range = std::pair<ssize_t, ssize_t>;
++using Range = std::pair<httplib_ssize_t, httplib_ssize_t>;
+ using Ranges = std::vector<Range>;
+ 
+ struct Request {
+@@ -737,16 +744,16 @@ public:
+   virtual bool is_readable() const = 0;
+   virtual bool is_writable() const = 0;
+ 
+-  virtual ssize_t read(char *ptr, size_t size) = 0;
+-  virtual ssize_t write(const char *ptr, size_t size) = 0;
++  virtual httplib_ssize_t read(char *ptr, size_t size) = 0;
++  virtual httplib_ssize_t write(const char *ptr, size_t size) = 0;
+   virtual void get_remote_ip_and_port(std::string &ip, int &port) const = 0;
+   virtual void get_local_ip_and_port(std::string &ip, int &port) const = 0;
+   virtual socket_t socket() const = 0;
+ 
+   virtual time_t duration() const = 0;
+ 
+-  ssize_t write(const char *ptr);
+-  ssize_t write(const std::string &s);
++  httplib_ssize_t write(const char *ptr);
++  httplib_ssize_t write(const std::string &s);
+ };
+ 
+ class TaskQueue {
+@@ -921,7 +928,7 @@ private:
+   std::regex regex_;
+ };
+ 
+-ssize_t write_headers(Stream &strm, const Headers &headers);
++httplib_ssize_t write_headers(Stream &strm, const Headers &headers);
+ 
+ } // namespace detail
+ 
+@@ -993,7 +1000,7 @@ public:
+ 
+   Server &set_default_headers(Headers headers);
+   Server &
+-  set_header_writer(std::function<ssize_t(Stream &, Headers &)> const &writer);
++  set_header_writer(std::function<httplib_ssize_t(Stream &, Headers &)> const &writer);
+ 
+   Server &set_keep_alive_max_count(size_t count);
+   Server &set_keep_alive_timeout(time_t sec);
+@@ -1135,7 +1142,7 @@ private:
+   SocketOptions socket_options_ = default_socket_options;
+ 
+   Headers default_headers_;
+-  std::function<ssize_t(Stream &, Headers &)> header_writer_ =
++  std::function<httplib_ssize_t(Stream &, Headers &)> header_writer_ =
+       detail::write_headers;
+ };
+ 
+@@ -1411,7 +1418,7 @@ public:
+   void set_default_headers(Headers headers);
+ 
+   void
+-  set_header_writer(std::function<ssize_t(Stream &, Headers &)> const &writer);
++  set_header_writer(std::function<httplib_ssize_t(Stream &, Headers &)> const &writer);
+ 
+   void set_address_family(int family);
+   void set_tcp_nodelay(bool on);
+@@ -1530,7 +1537,7 @@ protected:
+   Headers default_headers_;
+ 
+   // Header writer
+-  std::function<ssize_t(Stream &, Headers &)> header_writer_ =
++  std::function<httplib_ssize_t(Stream &, Headers &)> header_writer_ =
+       detail::write_headers;
+ 
+   // Settings
+@@ -1849,7 +1856,7 @@ public:
+   void set_default_headers(Headers headers);
+ 
+   void
+-  set_header_writer(std::function<ssize_t(Stream &, Headers &)> const &writer);
++  set_header_writer(std::function<httplib_ssize_t(Stream &, Headers &)> const &writer);
+ 
+   void set_address_family(int family);
+   void set_tcp_nodelay(bool on);
+@@ -2045,7 +2052,7 @@ inline uint64_t get_header_value_u64(const Headers &headers,
+   is_invalid_value = false;
+   auto rng = headers.equal_range(key);
+   auto it = rng.first;
+-  std::advance(it, static_cast<ssize_t>(id));
++  std::advance(it, static_cast<httplib_ssize_t>(id));
+   if (it != rng.second) {
+     if (is_numeric(it->second)) {
+       return std::strtoull(it->second.data(), nullptr, 10);
+@@ -2399,9 +2406,9 @@ bool parse_range_header(const std::string &s, Ranges &ranges);
+ 
+ int close_socket(socket_t sock);
+ 
+-ssize_t send_socket(socket_t sock, const void *ptr, size_t size, int flags);
++httplib_ssize_t send_socket(socket_t sock, const void *ptr, size_t size, int flags);
+ 
+-ssize_t read_socket(socket_t sock, void *ptr, size_t size, int flags);
++httplib_ssize_t read_socket(socket_t sock, void *ptr, size_t size, int flags);
+ 
+ enum class EncodingType { None = 0, Gzip, Brotli };
+ 
+@@ -2414,8 +2421,8 @@ public:
+ 
+   bool is_readable() const override;
+   bool is_writable() const override;
+-  ssize_t read(char *ptr, size_t size) override;
+-  ssize_t write(const char *ptr, size_t size) override;
++  httplib_ssize_t read(char *ptr, size_t size) override;
++  httplib_ssize_t write(const char *ptr, size_t size) override;
+   void get_remote_ip_and_port(std::string &ip, int &port) const override;
+   void get_local_ip_and_port(std::string &ip, int &port) const override;
+   socket_t socket() const override;
+@@ -3172,8 +3179,8 @@ inline int close_socket(socket_t sock) {
+ #endif
+ }
+ 
+-template <typename T> inline ssize_t handle_EINTR(T fn) {
+-  ssize_t res = 0;
++template <typename T> inline httplib_ssize_t handle_EINTR(T fn) {
++  httplib_ssize_t res = 0;
+   while (true) {
+     res = fn();
+     if (res < 0 && errno == EINTR) {
+@@ -3185,7 +3192,7 @@ template <typename T> inline ssize_t handle_EINTR(T fn) {
+   return res;
+ }
+ 
+-inline ssize_t read_socket(socket_t sock, void *ptr, size_t size, int flags) {
++inline httplib_ssize_t read_socket(socket_t sock, void *ptr, size_t size, int flags) {
+   return handle_EINTR([&]() {
+     return recv(sock,
+ #ifdef _WIN32
+@@ -3197,7 +3204,7 @@ inline ssize_t read_socket(socket_t sock, void *ptr, size_t size, int flags) {
+   });
+ }
+ 
+-inline ssize_t send_socket(socket_t sock, const void *ptr, size_t size,
++inline httplib_ssize_t send_socket(socket_t sock, const void *ptr, size_t size,
+                            int flags) {
+   return handle_EINTR([&]() {
+     return send(sock,
+@@ -3211,7 +3218,7 @@ inline ssize_t send_socket(socket_t sock, const void *ptr, size_t size,
+ }
+ 
+ template <bool Read>
+-inline ssize_t select_impl(socket_t sock, time_t sec, time_t usec) {
++inline httplib_ssize_t select_impl(socket_t sock, time_t sec, time_t usec) {
+ #ifdef CPPHTTPLIB_USE_POLL
+   struct pollfd pfd;
+   pfd.fd = sock;
+@@ -3241,11 +3248,11 @@ inline ssize_t select_impl(socket_t sock, time_t sec, time_t usec) {
+ #endif
+ }
+ 
+-inline ssize_t select_read(socket_t sock, time_t sec, time_t usec) {
++inline httplib_ssize_t select_read(socket_t sock, time_t sec, time_t usec) {
+   return select_impl<true>(sock, sec, usec);
+ }
+ 
+-inline ssize_t select_write(socket_t sock, time_t sec, time_t usec) {
++inline httplib_ssize_t select_write(socket_t sock, time_t sec, time_t usec) {
+   return select_impl<false>(sock, sec, usec);
+ }
+ 
+@@ -3328,8 +3335,8 @@ public:
+ 
+   bool is_readable() const override;
+   bool is_writable() const override;
+-  ssize_t read(char *ptr, size_t size) override;
+-  ssize_t write(const char *ptr, size_t size) override;
++  httplib_ssize_t read(char *ptr, size_t size) override;
++  httplib_ssize_t write(const char *ptr, size_t size) override;
+   void get_remote_ip_and_port(std::string &ip, int &port) const override;
+   void get_local_ip_and_port(std::string &ip, int &port) const override;
+   socket_t socket() const override;
+@@ -3364,8 +3371,8 @@ public:
+ 
+   bool is_readable() const override;
+   bool is_writable() const override;
+-  ssize_t read(char *ptr, size_t size) override;
+-  ssize_t write(const char *ptr, size_t size) override;
++  httplib_ssize_t read(char *ptr, size_t size) override;
++  httplib_ssize_t write(const char *ptr, size_t size) override;
+   void get_remote_ip_and_port(std::string &ip, int &port) const override;
+   void get_local_ip_and_port(std::string &ip, int &port) const override;
+   socket_t socket() const override;
+@@ -4216,7 +4223,7 @@ inline const char *get_header_value(const Headers &headers,
+                                     size_t id) {
+   auto rng = headers.equal_range(key);
+   auto it = rng.first;
+-  std::advance(it, static_cast<ssize_t>(id));
++  std::advance(it, static_cast<httplib_ssize_t>(id));
+   if (it != rng.second) { return it->second.c_str(); }
+   return def;
+ }
+@@ -4514,7 +4521,7 @@ bool read_content(Stream &strm, T &x, size_t payload_max_length, int &status,
+       });
+ }
+ 
+-inline ssize_t write_request_line(Stream &strm, const std::string &method,
++inline httplib_ssize_t write_request_line(Stream &strm, const std::string &method,
+                                   const std::string &path) {
+   std::string s = method;
+   s += " ";
+@@ -4523,7 +4530,7 @@ inline ssize_t write_request_line(Stream &strm, const std::string &method,
+   return strm.write(s.data(), s.size());
+ }
+ 
+-inline ssize_t write_response_line(Stream &strm, int status) {
++inline httplib_ssize_t write_response_line(Stream &strm, int status) {
+   std::string s = "HTTP/1.1 ";
+   s += std::to_string(status);
+   s += " ";
+@@ -4532,8 +4539,8 @@ inline ssize_t write_response_line(Stream &strm, int status) {
+   return strm.write(s.data(), s.size());
+ }
+ 
+-inline ssize_t write_headers(Stream &strm, const Headers &headers) {
+-  ssize_t write_len = 0;
++inline httplib_ssize_t write_headers(Stream &strm, const Headers &headers) {
++  httplib_ssize_t write_len = 0;
+   for (const auto &x : headers) {
+     std::string s;
+     s = x.first;
+@@ -4888,9 +4895,9 @@ inline bool parse_range_header(const std::string &s, Ranges &ranges) try {
+       }
+ 
+       const auto first =
+-          static_cast<ssize_t>(lhs.empty() ? -1 : std::stoll(lhs));
++          static_cast<httplib_ssize_t>(lhs.empty() ? -1 : std::stoll(lhs));
+       const auto last =
+-          static_cast<ssize_t>(rhs.empty() ? -1 : std::stoll(rhs));
++          static_cast<httplib_ssize_t>(rhs.empty() ? -1 : std::stoll(rhs));
+       if ((first == -1 && last == -1) ||
+           (first != -1 && last != -1 && first > last)) {
+         all_valid_ranges = false;
+@@ -5238,11 +5245,11 @@ serialize_multipart_formdata(const MultipartFormDataItems &items,
+ 
+ inline bool range_error(Request &req, Response &res) {
+   if (!req.ranges.empty() && 200 <= res.status && res.status < 300) {
+-    ssize_t contant_len = static_cast<ssize_t>(
++    httplib_ssize_t contant_len = static_cast<httplib_ssize_t>(
+         res.content_length_ ? res.content_length_ : res.body.size());
+ 
+-    ssize_t prev_first_pos = -1;
+-    ssize_t prev_last_pos = -1;
++    httplib_ssize_t prev_first_pos = -1;
++    httplib_ssize_t prev_last_pos = -1;
+     size_t overwrapping_count = 0;
+ 
+     // NOTE: The following Range check is based on '14.2. Range' in RFC 9110
+@@ -5305,9 +5312,9 @@ inline bool range_error(Request &req, Response &res) {
+ inline std::pair<size_t, size_t>
+ get_range_offset_and_length(Range r, size_t content_length) {
+   assert(r.first != -1 && r.second != -1);
+-  assert(0 <= r.first && r.first < static_cast<ssize_t>(content_length));
++  assert(0 <= r.first && r.first < static_cast<httplib_ssize_t>(content_length));
+   assert(r.first <= r.second &&
+-         r.second < static_cast<ssize_t>(content_length));
++         r.second < static_cast<httplib_ssize_t>(content_length));
+   (void)(content_length);
+   return std::make_pair(r.first, static_cast<size_t>(r.second - r.first) + 1);
+ }
+@@ -5832,7 +5839,7 @@ inline std::string Request::get_param_value(const std::string &key,
+                                             size_t id) const {
+   auto rng = params.equal_range(key);
+   auto it = rng.first;
+-  std::advance(it, static_cast<ssize_t>(id));
++  std::advance(it, static_cast<httplib_ssize_t>(id));
+   if (it != rng.second) { return it->second; }
+   return std::string();
+ }
+@@ -5983,11 +5990,11 @@ Result::get_request_header_value_count(const std::string &key) const {
+ }
+ 
+ // Stream implementation
+-inline ssize_t Stream::write(const char *ptr) {
++inline httplib_ssize_t Stream::write(const char *ptr) {
+   return write(ptr, strlen(ptr));
+ }
+ 
+-inline ssize_t Stream::write(const std::string &s) {
++inline httplib_ssize_t Stream::write(const std::string &s) {
+   return write(s.data(), s.size());
+ }
+ 
+@@ -6039,13 +6046,13 @@ inline bool SocketStream::is_writable() const {
+          is_socket_alive(sock_);
+ }
+ 
+-inline ssize_t SocketStream::read(char *ptr, size_t size) {
++inline httplib_ssize_t SocketStream::read(char *ptr, size_t size) {
+ #ifdef _WIN32
+   size =
+       (std::min)(size, static_cast<size_t>((std::numeric_limits<int>::max)()));
+ #else
+   size = (std::min)(size,
+-                    static_cast<size_t>((std::numeric_limits<ssize_t>::max)()));
++                    static_cast<size_t>((std::numeric_limits<httplib_ssize_t>::max)()));
+ #endif
+ 
+   if (read_buff_off_ < read_buff_content_size_) {
+@@ -6053,11 +6060,11 @@ inline ssize_t SocketStream::read(char *ptr, size_t size) {
+     if (size <= remaining_size) {
+       memcpy(ptr, read_buff_.data() + read_buff_off_, size);
+       read_buff_off_ += size;
+-      return static_cast<ssize_t>(size);
++      return static_cast<httplib_ssize_t>(size);
+     } else {
+       memcpy(ptr, read_buff_.data() + read_buff_off_, remaining_size);
+       read_buff_off_ += remaining_size;
+-      return static_cast<ssize_t>(remaining_size);
++      return static_cast<httplib_ssize_t>(remaining_size);
+     }
+   }
+ 
+@@ -6071,21 +6078,21 @@ inline ssize_t SocketStream::read(char *ptr, size_t size) {
+                          CPPHTTPLIB_RECV_FLAGS);
+     if (n <= 0) {
+       return n;
+-    } else if (n <= static_cast<ssize_t>(size)) {
++    } else if (n <= static_cast<httplib_ssize_t>(size)) {
+       memcpy(ptr, read_buff_.data(), static_cast<size_t>(n));
+       return n;
+     } else {
+       memcpy(ptr, read_buff_.data(), size);
+       read_buff_off_ = size;
+       read_buff_content_size_ = static_cast<size_t>(n);
+-      return static_cast<ssize_t>(size);
++      return static_cast<httplib_ssize_t>(size);
+     }
+   } else {
+     return read_socket(sock_, ptr, size, CPPHTTPLIB_RECV_FLAGS);
+   }
+ }
+ 
+-inline ssize_t SocketStream::write(const char *ptr, size_t size) {
++inline httplib_ssize_t SocketStream::write(const char *ptr, size_t size) {
+   if (!is_writable()) { return -1; }
+ 
+ #if defined(_WIN32) && !defined(_WIN64)
+@@ -6119,19 +6126,19 @@ inline bool BufferStream::is_readable() const { return true; }
+ 
+ inline bool BufferStream::is_writable() const { return true; }
+ 
+-inline ssize_t BufferStream::read(char *ptr, size_t size) {
++inline httplib_ssize_t BufferStream::read(char *ptr, size_t size) {
+ #if defined(_MSC_VER) && _MSC_VER < 1910
+   auto len_read = buffer._Copy_s(ptr, size, size, position);
+ #else
+   auto len_read = buffer.copy(ptr, size, position);
+ #endif
+   position += static_cast<size_t>(len_read);
+-  return static_cast<ssize_t>(len_read);
++  return static_cast<httplib_ssize_t>(len_read);
+ }
+ 
+-inline ssize_t BufferStream::write(const char *ptr, size_t size) {
++inline httplib_ssize_t BufferStream::write(const char *ptr, size_t size) {
+   buffer.append(ptr, size);
+-  return static_cast<ssize_t>(size);
++  return static_cast<httplib_ssize_t>(size);
+ }
+ 
+ inline void BufferStream::get_remote_ip_and_port(std::string & /*ip*/,
+@@ -6434,7 +6441,7 @@ inline Server &Server::set_default_headers(Headers headers) {
+ }
+ 
+ inline Server &Server::set_header_writer(
+-    std::function<ssize_t(Stream &, Headers &)> const &writer) {
++    std::function<httplib_ssize_t(Stream &, Headers &)> const &writer) {
+   header_writer_ = writer;
+   return *this;
+ }
+@@ -8949,7 +8956,7 @@ inline void ClientImpl::set_default_headers(Headers headers) {
+ }
+ 
+ inline void ClientImpl::set_header_writer(
+-    std::function<ssize_t(Stream &, Headers &)> const &writer) {
++    std::function<httplib_ssize_t(Stream &, Headers &)> const &writer) {
+   header_writer_ = writer;
+ }
+ 
+@@ -9206,7 +9213,7 @@ inline bool SSLSocketStream::is_writable() const {
+          is_socket_alive(sock_) && !is_ssl_peer_could_be_closed(ssl_, sock_);
+ }
+ 
+-inline ssize_t SSLSocketStream::read(char *ptr, size_t size) {
++inline httplib_ssize_t SSLSocketStream::read(char *ptr, size_t size) {
+   if (SSL_pending(ssl_) > 0) {
+     return SSL_read(ssl_, ptr, static_cast<int>(size));
+   } else if (is_readable()) {
+@@ -9239,7 +9246,7 @@ inline ssize_t SSLSocketStream::read(char *ptr, size_t size) {
+   }
+ }
+ 
+-inline ssize_t SSLSocketStream::write(const char *ptr, size_t size) {
++inline httplib_ssize_t SSLSocketStream::write(const char *ptr, size_t size) {
+   if (is_writable()) {
+     auto handle_size = static_cast<int>(
+         std::min<size_t>(size, (std::numeric_limits<int>::max)()));
+@@ -10342,7 +10349,7 @@ inline void Client::set_default_headers(Headers headers) {
+ }
+ 
+ inline void Client::set_header_writer(
+-    std::function<ssize_t(Stream &, Headers &)> const &writer) {
++    std::function<httplib_ssize_t(Stream &, Headers &)> const &writer) {
+   cli_->set_header_writer(writer);
+ }
