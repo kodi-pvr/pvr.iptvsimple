@@ -35,7 +35,15 @@ namespace iptvsimple
     : int // same type as addon settings
   {
     LOCAL_PATH = 0,
-    REMOTE_PATH
+    REMOTE_PATH,
+    XTREAM_CODES
+  };
+
+  enum class XtreamStreamFormat
+    : int // same type as addon settings
+  {
+    TS = 0,
+    HLS
   };
 
   enum class RefreshMode
@@ -91,10 +99,19 @@ namespace iptvsimple
 
     const std::string GetUserPath() const { return kodi::addon::GetUserPath(); }
 
-    const std::string& GetM3ULocation() const { return m_m3uPathType == PathType::REMOTE_PATH ? m_m3uUrl : m_m3uPath; }
+    const std::string& GetM3ULocation() const
+    {
+      if (m_m3uPathType == PathType::XTREAM_CODES)
+        return m_xtreamServer;
+      return m_m3uPathType == PathType::REMOTE_PATH ? m_m3uUrl : m_m3uPath;
+    }
     const PathType& GetM3UPathType() const { return m_m3uPathType; }
     const std::string& GetM3UPath() const { return m_m3uPath; }
     const std::string& GetM3UUrl() const { return m_m3uUrl; }
+    const std::string& GetXtreamServer() const { return m_xtreamServer; }
+    const std::string& GetXtreamUsername() const { return m_xtreamUsername; }
+    const std::string& GetXtreamPassword() const { return m_xtreamPassword; }
+    const XtreamStreamFormat& GetXtreamStreamFormat() const { return m_xtreamStreamFormat; }
     bool UseM3UCache() const { return m_m3uPathType == PathType::REMOTE_PATH ? m_cacheM3U : false; }
     int GetStartChannelNumber() const { return m_startChannelNumber; }
     bool NumberChannelsByM3uOrderOnly() const { return m_numberChannelsByM3uOrderOnly; }
@@ -253,6 +270,10 @@ namespace iptvsimple
     PathType m_m3uPathType = PathType::REMOTE_PATH;
     std::string m_m3uPath;
     std::string m_m3uUrl;
+    std::string m_xtreamServer;
+    std::string m_xtreamUsername;
+    std::string m_xtreamPassword;
+    XtreamStreamFormat m_xtreamStreamFormat = XtreamStreamFormat::TS;
     bool m_cacheM3U = true;
     int m_startChannelNumber = 1;
     bool m_numberChannelsByM3uOrderOnly = false;

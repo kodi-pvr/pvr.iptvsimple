@@ -7,11 +7,13 @@ find_package(Kodi REQUIRED)
 find_package(pugixml REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(lzma REQUIRED)
+find_package(NlohmannJson REQUIRED)
 
 include_directories(${KODI_INCLUDE_DIR}/.. # Hack way with "/..", need bigger Kodi cmake rework to match right include ways
                     ${PUGIXML_INCLUDE_DIRS}
                     ${ZLIB_INCLUDE_DIRS}
-                    ${LZMA_INCLUDE_DIRS})
+                    ${LZMA_INCLUDE_DIRS}
+                    ${NLOHMANNJSON_INCLUDE_DIRS})
 
 set(DEPLIBS ${PUGIXML_LIBRARIES}
             ${ZLIB_LIBRARIES}
@@ -34,6 +36,7 @@ set(IPTV_SOURCES src/addon.cpp
                  src/iptvsimple/PlaylistLoader.cpp
                  src/iptvsimple/Providers.cpp
                  src/iptvsimple/StreamManager.cpp
+                 src/iptvsimple/XtreamCodes.cpp
                  src/iptvsimple/data/Channel.cpp
                  src/iptvsimple/data/ChannelEpg.cpp
                  src/iptvsimple/data/ChannelGroup.cpp
@@ -64,6 +67,7 @@ set(IPTV_HEADERS src/addon.h
                  src/iptvsimple/PlaylistLoader.h
                  src/iptvsimple/Providers.cpp
                  src/iptvsimple/StreamManager.h
+                 src/iptvsimple/XtreamCodes.h
                  src/iptvsimple/data/BaseEntry.h
                  src/iptvsimple/data/Channel.h
                  src/iptvsimple/data/ChannelEpg.h

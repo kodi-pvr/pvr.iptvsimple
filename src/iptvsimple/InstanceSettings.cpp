@@ -32,6 +32,10 @@ void InstanceSettings::ReadSettings()
   m_instance.CheckInstanceSettingEnum<PathType>("m3uPathType", m_m3uPathType);
   m_instance.CheckInstanceSettingString("m3uPath", m_m3uPath);
   m_instance.CheckInstanceSettingString("m3uUrl", m_m3uUrl);
+  m_instance.CheckInstanceSettingString("xtreamServer", m_xtreamServer);
+  m_instance.CheckInstanceSettingString("xtreamUsername", m_xtreamUsername);
+  m_instance.CheckInstanceSettingString("xtreamPassword", m_xtreamPassword);
+  m_instance.CheckInstanceSettingEnum<XtreamStreamFormat>("xtreamStreamFormat", m_xtreamStreamFormat);
   m_instance.CheckInstanceSettingBoolean("m3uCache", m_cacheM3U);
   m_instance.CheckInstanceSettingInt("startNum", m_startChannelNumber);
   m_instance.CheckInstanceSettingBoolean("numberByOrder", m_numberChannelsByM3uOrderOnly);
@@ -184,6 +188,14 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_m3uPath, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uUrl")
     return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_m3uUrl, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "xtreamServer")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_xtreamServer, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "xtreamUsername")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_xtreamUsername, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "xtreamPassword")
+    return SetStringSetting<ADDON_STATUS>(settingName, settingValue, m_xtreamPassword, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "xtreamStreamFormat")
+    return SetEnumSetting<XtreamStreamFormat, ADDON_STATUS>(settingName, settingValue, m_xtreamStreamFormat, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uCache")
     return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_cacheM3U, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "startNum")
