@@ -35,6 +35,28 @@ IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple:
 IptvSimple::~IptvSimple()
 {
   Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
+
+  // Stop connectionManager FIRST, before touching
+  // m_thread/m_channels/m_epg. It can call back into
+  // ConnectionEstablished()/ConnectionLost() on its own thread at any time
+  // up until Stop() returns, and neither of those callbacks takes m_mutex -
+  // ConnectionEstablished() in particular does an unsynchronized
+  // read-modify-write of m_thread (`m_thread = std::thread(...)`). The
+  // original order joined m_thread first and stopped connectionManager
+  // last, leaving a window where ConnectionEstablished() could still be
+  // mid-assignment to m_thread while this destructor read/joined it -
+  // confirmed live via a coredump: std::terminate() inside this destructor
+  // (IptvSimpleD2Ev/D0Ev) with ConnectionEstablished's "Starting separate
+  // client update thread..." log line landing at the same timestamp.
+  // Reproduced reliably with catchupEnabled=true (EPG load does more work
+  // per entry, shifting timing enough to hit the race) but the race itself
+  // is timing-dependent, not catchup-specific - Stop() joining its own
+  // thread before returning is what actually closes the window.
+  if (connectionManager)
+    connectionManager->Stop();
+  delete connectionManager;
+  connectionManager = nullptr;
+
   m_running = false;
   if (m_thread.joinable())
     m_thread.join();
@@ -44,10 +66,6 @@ IptvSimple::~IptvSimple()
   m_channelGroups.Clear();
   m_providers.Clear();
   m_epg.Clear();
-
-  if (connectionManager)
-    connectionManager->Stop();
-  delete connectionManager;
 }
 
 /* **************************************************************************
@@ -61,11 +79,39 @@ void IptvSimple::ConnectionLost()
 
 void IptvSimple::ConnectionEstablished()
 {
+  // GetChannels()/GetEPGForChannel()/etc all lock
+  // m_mutex before reading m_channels/m_epg (see e.g. GetChannels() a few
+  // lines below), but this function previously wrote to those same members
+  // - and to m_thread - with no lock at all. Kodi core calls GetChannels()
+  // once during PVR manager startup; if that call raced this still-running
+  // load, it could see m_channels mid-Init()/before LoadPlayList()
+  // populated it - confirmed live: "LoadPlayList - Loaded 313 channels."
+  // logged successfully, but PVR.GetChannels via JSON-RPC returned 0 with
+  // an empty (but present) channel group, immediately after a clean
+  // startup with no crash. Same missing-synchronization class as the
+  // destructor/m_thread race fixed above, just surfacing as silent data
+  // loss instead of a crash this time.
+  std::lock_guard<std::mutex> lock(m_mutex);
+
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
   m_playlistLoader.Init();
-  if (!m_playlistLoader.LoadPlayList())
+  if (m_playlistLoader.LoadPlayList())
+  {
+    // LoadPlayList() only fills our own in-memory channel/group/provider lists;
+    // Kodi core must be told to re-pull them, same as ReloadPlayList() already
+    // does on its periodic timer. Without this, a startup GetChannels() call
+    // from core can race this still-running load (Start() is async) and get a
+    // safe-but-empty result with nothing to trigger a retry. This addon
+    // supports recordings (catch-up), so TriggerRecordingUpdate() is needed
+    // too, same as ReloadPlayList().
+    TriggerChannelUpdate();
+    TriggerChannelGroupsUpdate();
+    TriggerProvidersUpdate();
+    TriggerRecordingUpdate();
+  }
+  else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
