@@ -34,6 +34,10 @@ IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple:
 
 IptvSimple::~IptvSimple()
 {
+  // the connection manager can still start the update thread, so stop it first
+  if (connectionManager)
+    connectionManager->Stop();
+
   Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
   m_running = false;
   if (m_thread.joinable())
@@ -45,8 +49,6 @@ IptvSimple::~IptvSimple()
   m_providers.Clear();
   m_epg.Clear();
 
-  if (connectionManager)
-    connectionManager->Stop();
   delete connectionManager;
 }
 
