@@ -244,6 +244,7 @@ Addon settings for catchup:
     - `Shift (SIPTV)` - Append the standard SIPTV catchup string to the channel URL.
     - `Flussonic` - Build a flussonic URL from the channel URL.
     - `Xtream codes` - Build an Xtream codes URL from the channel URL.
+    - `Resolver` (`catchup="resolver"` in the M3U) - For providers where the catch-up stream needs a per-request resolved value that can't be baked statically into the M3U (e.g. a DRM license/manifest that differs from the channel's live-stream value). The `catchup-source` is not a playable URL itself but a resolver endpoint: it is fetched at playback time and its response - plain text, newline-separated `key=value` pairs - is applied as stream property overrides instead of being played directly. The special key `streamUrl` supplies the actual manifest/stream URL to play; every other key (e.g. `license_key`, `license_type`, custom headers) is merged into the stream properties as-is.
 * **Override catchup for channels**: Set the scope for overriding the catchup mode. Options are:
     - `without catchup mode` - Only include channels with no catchup mode set (except legacy SIP `timeshift` catchup mode).
     - `with catchup mode` - Only include channels with catchup mode set (ignore those without a catchup mode).
@@ -442,6 +443,8 @@ http://list.tv:8080/live/my@account.xc/my_password/1477.m3u8
 http://path-to-stream/live/channel-j.ts
 #EXTINF:-1 catchup="vod",Channel K
 plugin://plugin.video.my-vod-addon/play/catalog/channels/d8659669-b964-414c-aa9c-e31d8d15696b
+#EXTINF:-1 catchup="resolver" catchup-source="http://my-backend/resolve?channel=n",Channel N
+http://path-to-stream/live/channel-n.m3u8
 #EXTINF:-1,Channel L
 #EXT-X-PLAYLIST-TYPE:VOD
 http://path-to-stream/live/channel-l.mkv

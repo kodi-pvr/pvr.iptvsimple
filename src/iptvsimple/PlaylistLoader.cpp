@@ -416,7 +416,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
         StringUtils::EqualsNoCase(strCatchup, "shift") || StringUtils::EqualsNoCase(strCatchup, "flussonic") ||
         StringUtils::EqualsNoCase(strCatchup, "flussonic-hls") || StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") ||
         StringUtils::EqualsNoCase(strCatchup, "fs") || StringUtils::EqualsNoCase(strCatchup, "xc") ||
-        StringUtils::EqualsNoCase(strCatchup, "vod"))
+        StringUtils::EqualsNoCase(strCatchup, "vod") || StringUtils::EqualsNoCase(strCatchup, "resolver"))
       channel.SetHasCatchup(true);
 
     if (StringUtils::EqualsNoCase(strCatchup, "default"))
@@ -432,6 +432,8 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
       channel.SetCatchupMode(CatchupMode::XTREAM_CODES);
     else if (StringUtils::EqualsNoCase(strCatchup, "vod"))
       channel.SetCatchupMode(CatchupMode::VOD);
+    else if (StringUtils::EqualsNoCase(strCatchup, "resolver"))
+      channel.SetCatchupMode(CatchupMode::RESOLVER);
 
     if (StringUtils::EqualsNoCase(strCatchup, "flussonic-ts") || StringUtils::EqualsNoCase(strCatchup, "fs"))
       channel.SetCatchupTSStream(true);
@@ -454,7 +456,7 @@ std::string PlaylistLoader::ParseIntoChannel(const std::string& line, Channel& c
     // If we still don't have a value use the header supplied value if there is one
     else if (!m_m3uHeaderStrings.m_catchupSource.empty())
       channel.SetCatchupDays(atoi(m_m3uHeaderStrings.m_catchupDays.c_str()));
-    else if (channel.GetCatchupMode() == CatchupMode::VOD)
+    else if (channel.GetCatchupMode() == CatchupMode::VOD || channel.GetCatchupMode() == CatchupMode::RESOLVER)
       channel.SetCatchupDays(IGNORE_CATCHUP_DAYS);
     else if (siptvTimeshiftDays > 0)
       channel.SetCatchupDays(siptvTimeshiftDays);
