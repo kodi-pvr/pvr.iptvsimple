@@ -38,6 +38,7 @@ void InstanceSettings::ReadSettings()
   m_instance.CheckInstanceSettingEnum<RefreshMode>("m3uRefreshMode", m_m3uRefreshMode);
   m_instance.CheckInstanceSettingInt("m3uRefreshIntervalMins", m_m3uRefreshIntervalMins);
   m_instance.CheckInstanceSettingInt("m3uRefreshHour", m_m3uRefreshHour);
+  m_instance.CheckInstanceSettingBoolean("reloadOnLocalFileChange", m_reloadOnLocalFileChange);
   m_instance.CheckInstanceSettingString("defaultProviderName", m_defaultProviderName);
   m_instance.CheckInstanceSettingBoolean("enableProviderMappings", m_enableProviderMappings);
   m_instance.CheckInstanceSettingString("providerMappingFile", m_providerMappingFile);
@@ -196,6 +197,8 @@ ADDON_STATUS InstanceSettings::SetSetting(const std::string& settingName, const 
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshIntervalMins, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "m3uRefreshHour")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_m3uRefreshHour, ADDON_STATUS_OK, ADDON_STATUS_OK);
+  else if (settingName == "reloadOnLocalFileChange")
+    return SetSetting<bool, ADDON_STATUS>(settingName, settingValue, m_reloadOnLocalFileChange, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "connectionchecktimeout")
     return SetSetting<int, ADDON_STATUS>(settingName, settingValue, m_connectioncCheckTimeoutSecs, ADDON_STATUS_OK, ADDON_STATUS_OK);
   else if (settingName == "connectioncheckinterval")

@@ -104,6 +104,11 @@
             <formatlabel>17998</formatlabel>
           </control>
         </setting>
+        <setting id="reloadOnLocalFileChange" type="boolean" label="30161" help="30744">
+          <level>2</level>
+          <default>false</default>
+          <control type="toggle" />
+        </setting>
       </group>
 
       <group id="3" label="30078">
