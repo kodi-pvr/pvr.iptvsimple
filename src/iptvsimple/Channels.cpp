@@ -134,6 +134,17 @@ Channel* Channels::GetChannel(int uniqueId)
   return nullptr;
 }
 
+iptvsimple::data::Channel* Channels::FindChannel(int uniqueId)
+{
+  for (auto& myChannel : m_channels)
+  {
+    if (myChannel.GetUniqueId() == uniqueId)    
+      return &myChannel;
+  }
+
+  return nullptr;
+}
+
 const Channel* Channels::FindChannel(const std::string& id, const std::string& displayName) const
 {
   for (const auto& myChannel : m_channels)
