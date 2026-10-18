@@ -449,7 +449,42 @@ msgctxt "#30080"
 msgid "Interval for check"
 msgstr ""
 
-#empty strings from id 30081 to 30099
+#. label-option: General - m3uPathType
+msgctxt "#30081"
+msgid "Xtream Codes login"
+msgstr ""
+
+#. label: General - xtreamServer
+msgctxt "#30082"
+msgid "Server URL"
+msgstr ""
+
+#. label: General - xtreamUsername
+msgctxt "#30083"
+msgid "Username"
+msgstr ""
+
+#. label: General - xtreamPassword
+msgctxt "#30084"
+msgid "Password"
+msgstr ""
+
+#. label: General - xtreamStreamFormat
+msgctxt "#30085"
+msgid "Stream format"
+msgstr ""
+
+#. label-option: General - xtreamStreamFormat
+msgctxt "#30086"
+msgid "MPEG-TS"
+msgstr ""
+
+#. label-option: General - xtreamStreamFormat
+msgctxt "#30087"
+msgid "HLS"
+msgstr ""
+
+#empty strings from id 30088 to 30099
 
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -700,7 +735,7 @@ msgstr ""
 
 #. help: General - m3uPathType
 msgctxt "#30601"
-msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file."
+msgid "Select where to find the M3U resource. The options are: [B]Local path[/B] - A path to an M3U file whether it be on the device or the local network; [B]Remote path[/B] - A URL specifying the location of the M3U file; [B]Xtream Codes login[/B] - Load the live channels of an Xtream Codes account using its server URL, username and password. Xtream Codes channels are handled as an M3U playlist, so settings that mention M3U apply to them too."
 msgstr ""
 
 #. help: General - m3uPath
@@ -853,7 +888,27 @@ msgctxt "#30629"
 msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
 msgstr ""
 
-#empty strings from id 30630 to 30639
+#. help: General - xtreamServer
+msgctxt "#30630"
+msgid "If location is [B]Xtream Codes login[/B] this setting must contain the server URL given by the provider, e.g. http://example.com:8080."
+msgstr ""
+
+#. help: General - xtreamUsername
+msgctxt "#30631"
+msgid "If location is [B]Xtream Codes login[/B] this setting must contain the account username."
+msgstr ""
+
+#. help: General - xtreamPassword
+msgctxt "#30632"
+msgid "If location is [B]Xtream Codes login[/B] this setting must contain the account password."
+msgstr ""
+
+#. help: General - xtreamStreamFormat
+msgctxt "#30633"
+msgid "The stream format to request for channels and catchup. [B]MPEG-TS[/B] is supported by most providers; [B]HLS[/B] may be needed if the provider does not allow MPEG-TS for the account."
+msgstr ""
+
+#empty strings from id 30634 to 30639
 
 #. help info - Channel Logos
 
