@@ -246,7 +246,9 @@ void CatchupController::SetCatchupInputStreamProperties(bool playbackAsLive, con
 
 StreamType CatchupController::StreamTypeLookup(const Channel& channel, bool fromEpg /* false */)
 {
-  StreamType streamType = m_streamManager.StreamTypeLookup(channel, GetStreamTestUrl(channel, fromEpg), GetStreamKey(channel, fromEpg));
+  m_lastStreamTestUrl = GetStreamTestUrl(channel, fromEpg);
+  StreamType streamType = m_streamManager.StreamTypeLookup(channel, m_lastStreamTestUrl, GetStreamKey(channel, fromEpg));
+  m_lastStreamType = streamType;
 
   m_controlsLiveStream = StreamUtils::GetEffectiveInputStreamName(streamType, channel, m_settings) == "inputstream.ffmpegdirect" && channel.CatchupSupportsTimeshifting();
 
