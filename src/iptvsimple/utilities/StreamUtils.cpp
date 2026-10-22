@@ -365,7 +365,9 @@ const StreamType StreamUtils::GetStreamType(const std::string& url, const std::s
 
 const StreamType StreamUtils::InspectStreamType(const std::string& url, CatchupMode catchupMode)
 {
-  if (!FileUtils::FileExists(url))
+  // Some servers reject the HEAD request used by FileExists() but allow GET,
+  // so for HTTP rely on the read below to detect an unreachable stream.
+  if (!WebUtils::IsHttpUrl(url) && !FileUtils::FileExists(url))
     return StreamType::OTHER_TYPE;
 
   int httpCode = 0;
