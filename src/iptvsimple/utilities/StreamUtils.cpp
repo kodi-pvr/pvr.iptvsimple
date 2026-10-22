@@ -47,7 +47,7 @@ bool HasInputstreamAdaptiveDrmConfig(const T& entry)
 }
 } // unnamed namespace
 
-void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<InstanceSettings>& settings)
+void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<InstanceSettings>& settings, StreamType knownStreamType)
 {
   // Check if the channel explicitly uses inputstream.adaptive, or has its DRM configuration
   // without another explicit inputstream. If so, the best behaviour for media services is:
@@ -84,6 +84,8 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
   else
   {
     StreamType streamType = StreamUtils::GetStreamType(streamURL, channel.GetProperty(PVR_STREAM_PROPERTY_MIMETYPE), channel.IsCatchupTSStream());
+    if (streamType == StreamType::OTHER_TYPE)
+      streamType = knownStreamType;
     if (streamType == StreamType::OTHER_TYPE)
       streamType = StreamUtils::InspectStreamType(streamURL, channel.GetCatchupMode());
 

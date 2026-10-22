@@ -38,6 +38,10 @@ namespace iptvsimple
     std::string ProcessStreamUrl(const data::Channel& channel) const;
 
     bool ControlsLiveStream() const { return m_controlsLiveStream; }
+    StreamType GetKnownStreamType(const std::string& url) const
+    {
+      return url == m_lastStreamTestUrl ? m_lastStreamType : StreamType::OTHER_TYPE;
+    }
     void ResetCatchupState();
     data::EpgEntry* GetEPGEntry(const iptvsimple::data::Channel& myChannel, time_t lookupTime);
 
@@ -71,6 +75,8 @@ namespace iptvsimple
     std::string m_programmeCatchupId;
 
     bool m_controlsLiveStream = false;
+    std::string m_lastStreamTestUrl;
+    StreamType m_lastStreamType = StreamType::OTHER_TYPE;
     iptvsimple::Epg& m_epg;
     std::mutex* m_mutex = nullptr;
 
