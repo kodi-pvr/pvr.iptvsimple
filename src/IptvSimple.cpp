@@ -240,7 +240,8 @@ PVR_ERROR IptvSimple::GetChannelStreamProperties(const kodi::addon::PVRChannel& 
       streamURL = m_catchupController.ProcessStreamUrl(m_currentChannel);
 
     streamURL = StreamUtils::WebStreamExtractor(streamURL, m_currentChannel);
-    StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamURL, catchupUrl.empty(), catchupProperties, m_settings);
+    // The catchup controller already looked up the stream type of this URL
+    StreamUtils::SetAllStreamProperties(properties, m_currentChannel, streamURL, catchupUrl.empty(), catchupProperties, m_settings, m_catchupController.GetKnownStreamType(streamURL));
 
     Logger::Log(LogLevel::LEVEL_INFO, "%s - Live %s URL: %s", __FUNCTION__, catchupUrl.empty() ? "Stream" : "Catchup", WebUtils::RedactUrl(streamURL).c_str());
 
