@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2025-08-02 19:34+0000\n"
+"PO-Revision-Date: 2026-10-26 07:45+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.12.2\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -357,7 +357,7 @@ msgstr "Relay multicast (udpxy)"
 #. label: Advanced - transformMulticastStreamUrls
 msgctxt "#30062"
 msgid "Transform multicast stream URLs"
-msgstr "Trasforma URL di streaming multicast"
+msgstr "Trasforma URL dei flussi multicast"
 
 #. label: Advanced - udpxyHost
 msgctxt "#30063"
@@ -377,7 +377,7 @@ msgstr "Streaming"
 #. label: Advanced - useInputstreamAdaptiveforHls
 msgctxt "#30066"
 msgid "Use inputstream.adaptive for m3u8 (HLS) streams"
-msgstr "Usa inputstream.adaptive per gli stream m3u8 (HLS)"
+msgstr "Usa inputstream.adaptive per i flussi m3u8 (HLS)"
 
 #. label: Advanced - useFFmpegReconnect
 msgctxt "#30067"
@@ -550,7 +550,7 @@ msgstr "Abilita timeshift"
 #. label: Timeshift - timeshiftEnabledHttp
 msgctxt "#30122"
 msgid "Enable timeshift for HTTP based streams"
-msgstr "Abilita timeshift per gli stream basati su HTTP"
+msgstr "Abilita timeshift per i flussi basati su HTTP"
 
 #. label: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30123"
@@ -565,17 +565,17 @@ msgstr "Impostazioni Inputstream"
 #. label: Timeshift - timeshiftCustom
 msgctxt "#30125"
 msgid "Always enable timeshift stream mode if missing"
-msgstr "Abilita sempre la modalità stream timeshift se mancante"
+msgstr "Abilita sempre la modalità flusso timeshift se mancante"
 
 #. label: Timeshift - timeshiftEnabledAll
 msgctxt "#30126"
 msgid "Enable timeshift for all streams"
-msgstr "Abilita timeshift per tutti gli stream"
+msgstr "Abilita timeshift per tutti i flussi"
 
 #. label: Timeshift - timeshiftEnabledUdp
 msgctxt "#30127"
 msgid "Enable timeshift for UDP based streams"
-msgstr "Abilita timeshift per gli stream basati su UDP"
+msgstr "Abilita timeshift per i flussi basati su UDP"
 
 #. label-option: Catchup - catchupCorrection
 msgctxt "#30128"
@@ -919,12 +919,12 @@ msgstr "Usa questo User-Agent se non ce n'è uno fornito come proprietà o come 
 #. help: Advanced - defaultInputstream
 msgctxt "#30687"
 msgid "Use this inputsream as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour. Note that for `inputstream.ffmpegdirect` if both `mimetype` and `inputstream.ffmpegdirect.manifest_type` are unset stream inspection will still occur if required."
-msgstr "Usa questo stream in ingresso come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto questo disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on. Nota che per 'inputstream.ffmpegdirect' se, sia 'mimetype' che 'inputstream.ffmpegdirect.manifest_type' non sono impostati, l'ispezione dello stream avverrà comunque se necessario."
+msgstr "Usa questo flusso in ingresso come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto questo disabiliterà qualsiasi utilizzo del comportamento di ispezione del flusso predefinito dell'add-on. Nota che per 'inputstream.ffmpegdirect' se, sia 'mimetype' che 'inputstream.ffmpegdirect.manifest_type' non sono impostati, l'ispezione del flusso avverrà comunque se necessario."
 
 #. help: Advanced - defaultMimeType
 msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
-msgstr "Usa questo tipo MIME come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto questo disabiliterà qualsiasi utilizzo del comportamento di ispezione dello stream predefinito dell'add-on."
+msgstr "Usa questo tipo MIME come predefinito se non ce n'è uno fornito come proprietà (KODIPROP) del canale. Usalo con cautela in quanto questo disabiliterà qualsiasi utilizzo del comportamento di ispezione del flusso predefinito dell'add-on."
 
 # empty strings from id 30689 to 30699
 #. help info - Catchup
@@ -956,7 +956,7 @@ msgstr "Se abilitato, si presume che i canali supportino il recupero utilizzando
 #. help: Catchup - catchupPlayEpgAsLive
 msgctxt "#30705"
 msgid "When disabled any catchup programme from the past will be played like a video (bounded by start and end times). If enabled, it will instead act like a live stream with timeshift, also allowing the ability to skip back and forward programmes. Note that the only effect this option has on streams that do not support timeshifting is whether or not to apply the before/after buffer."
-msgstr "Se disabilitato, qualsiasi programma di recupero del passato verrà riprodotto come un video (limitato dall'ora di inizio e di fine). Se abilitato, agirà invece come un live streaming con timeshift, consentendo anche la possibilità di saltare avanti e indietro i programmi. Nota che l'unico effetto che questa opzione ha sugli stream che non supportano il timeshift è se applicare o meno il buffer prima/dopo."
+msgstr "Se disabilitato, qualsiasi programma di recupero del passato verrà riprodotto come un video (limitato dall'ora di inizio e di fine). Se abilitato, agirà invece come un flusso live con timeshift, consentendo anche la possibilità di saltare avanti e indietro i programmi. Nota che l'unico effetto che questa opzione ha sui flussi che non supportano il timeshift è se applicare o meno il buffer prima/dopo."
 
 #. help: Catchup - catchupWatchEpgBeginBuffer
 msgctxt "#30706"
@@ -981,7 +981,7 @@ msgstr "Imposta l'ambito per ignorare la modalità di recupero. Le opzioni sono:
 #. help: Catchup - catchupCorrection
 msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
-msgstr "Regola il tempo usato per la generazione dell'URL dello stream di recupero in base a questo valore, da -12 ore a +14 ore. Utile per gli stream di recupero che non corrispondono geograficamente all'ora sbagliata. Si noti che questo valore può essere sovrascritto dai valori nel file M3U."
+msgstr "Regola il tempo usato per la generazione dell'URL del flusso di recupero in base a questo valore, da -12 ore a +14 ore. Utile per i flussi di recupero che non corrispondono geograficamente all'ora sbagliata. Si noti che questo valore può essere sovrascritto dai valori nel file M3U."
 
 # empty strings from id 30710 to 307019
 #. help info - Timeshift
@@ -998,7 +998,7 @@ msgstr "Abilita la funzione timeshift."
 #. help: Timeshift - timeshiftEnabledHttp
 msgctxt "#30722"
 msgid "Enable the timeshift feature for HTTP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. . The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per gli stream basati su HTTP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
+msgstr "Abilita la funzione timeshift per i flussi basati su HTTP. Si applicherà solo ai flussi che non selezionano uno specifico add-on del flusso in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
 
 #. help: Timeshift - timeshiftFFmpegdirectSettings
 msgctxt "#30723"
@@ -1008,17 +1008,17 @@ msgstr "Apri la finestra di dialogo delle impostazioni per inputstream.ffmpegdir
 #. help: Timeshift - timeshiftEnabledCustom
 msgctxt "#30724"
 msgid "If a stream_mode property is not specified along with an inputstream.ffmpegdirect property always add it for any supported stream types. Note that this setting has no effect on catchup VOD streams that are not live."
-msgstr "Se una proprietà stream_mode non è specificata insieme a una proprietà inputstream.ffmpegdirect, la aggiunge sempre per qualsiasi tipo di stream supportato. Tieni presente che questa impostazione non ha effetto sugli stream VOD di recupero che non sono live."
+msgstr "Se una proprietà stream_mode non è specificata insieme a una proprietà inputstream.ffmpegdirect, la aggiunge sempre per qualsiasi tipo di flusso supportato. Tieni presente che questa impostazione non ha effetto sui flussi VOD di recupero che non sono live."
 
 #. help: Timeshift - timeshiftEnabledAll
 msgctxt "#30725"
 msgid "Enable the timeshift feature for all streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per tutti gli stream. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
+msgstr "Abilita la funzione timeshift per tutti i flussi. Si applicherà solo ai flussi che non selezionano uno specifico add-on del flusso in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
 
 #. help: Timeshift - timeshiftEnabledUdp
 msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
-msgstr "Abilita la funzione timeshift per gli stream basati su UDP. Si applicherà solo agli stream che non selezionano uno specifico add-on dello stream in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
+msgstr "Abilita la funzione timeshift per i flussi basati su UDP. Si applicherà solo ai flussi che non selezionano uno specifico add-on del flusso in ingresso per la riproduzione. L'add-on inputstream.ffmpegdirect verrà usato per il timeshift."
 
 # empty strings from id 30727 to 30739
 #. help info - Other categories continued
