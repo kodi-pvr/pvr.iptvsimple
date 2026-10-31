@@ -67,6 +67,11 @@ void CatchupController::ProcessChannelForPlayback(const Channel& channel, std::m
     }
   }
 
+  // Consume the carry-over flag unconditionally: the block below only
+  // reset it for channels with their own live timeshift buffer, leaving
+  // RESOLVER/VOD-catchup channels stuck with it true forever.
+  m_fromTimeshiftedEpgTagCall = false;
+
   if (m_controlsLiveStream)
   {
     if (m_resetCatchupState)
@@ -196,6 +201,9 @@ void CatchupController::ProcessEPGTagForVideoPlayback(const kodi::addon::PVREPGT
   if (m_catchupStartTime > 0)
     m_playbackIsVideo = true;
 
+  // Stays false: this path only runs when CatchupPlayEpgAsLive() is false,
+  // where Kodi opens via pvr://guide/... directly and never calls
+  // GetChannelStreamProperties() as a follow-up here.
   m_fromTimeshiftedEpgTagCall = false;
 }
 

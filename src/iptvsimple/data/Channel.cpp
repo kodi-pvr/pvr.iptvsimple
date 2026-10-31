@@ -43,6 +43,8 @@ const std::string Channel::GetCatchupModeText(const CatchupMode& catchupMode)
       return "Xtream codes";
     case CatchupMode::VOD:
       return "VOD";
+    case CatchupMode::RESOLVER:
+      return "Resolver";
     default:
       return "";
   }
@@ -287,7 +289,7 @@ bool IsValidTimeshiftingCatchupSource(const std::string& formatString, const Cat
   {
     // If we only have a catchup-id specifier and nothing else then we can't timeshift
     if ((formatString.find("{catchup-id}") != std::string::npos && numSpecifiers == 1) ||
-        catchupMode == CatchupMode::VOD)
+        catchupMode == CatchupMode::VOD || catchupMode == CatchupMode::RESOLVER)
       return false;
 
     return true;
@@ -405,6 +407,7 @@ void Channel::ConfigureCatchupMode()
         invalidCatchupSource = true;
       break;
     case CatchupMode::VOD:
+    case CatchupMode::RESOLVER:
       if (!m_catchupSource.empty())
       {
         if (m_catchupSource.find_first_of('|') != std::string::npos)
