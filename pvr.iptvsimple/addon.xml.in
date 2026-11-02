@@ -119,7 +119,7 @@
     <description lang="sl_SI">IPTV Simple odjemalec PVR podpira sezname m3u, pretakanja TV v živo za vire multicast/unicast, poslušenje radijskih postaj in EPG.</description>
     <description lang="sr_RS">IPTV Једноставан PVR Клијент подржава m3u листе за репродукцију, стримовање ТВ Уживо за multicast/unicast изворе, слушање Радио канала и EPG.</description>
     <description lang="sr_RS@latin">IPTV Jednostavan PVR Klijent podržava m3u liste za reprodukciju, strimovanje TV Uživo za multicast/unicast izvore, slušanje Radio kanala i EPG.</description>
-    <description lang="sv_SE">IPTV Simple PVR-klient stöder m3u-spellistor, strömning av direktsänd TV för multicast-/unicast-källor, lyssning på radiokanaler och EPG.[CR]    [CR]För dokumentation, besök: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
+    <description lang="sv_SE">IPTV Simple PVR-klient stöder M3U-spellistor, strömning av direktsänd tv för multicast-/unicast-källor, radiokanaler och EPG.[CR]    [CR]Dokumentation finns på https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
     <description lang="szl">Klijynt telewizyje dlŏ telewizyje internetowyj ôbsuguje wykŏzy ôdtwŏrzaniŏ m3u, szpricowanie kanałōw radyjowych i telewizyjnych ze źrōdeł pōnktowych i skupinowych, a tyż fōnkcyje EPG.</description>
     <description lang="tr_TR">IPTV Basit PVR İstemcisi m3u çalma listeleri, multicast/unicast kaynaklar için Canlı TV akışı, radyo kanallarını dinleme ve EPG destekler.[CR]    [CR]Kullanım belgesi için ziyaret edin: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    </description>
     <description lang="zh_CN">IPTV Simple PVR 客户端支持 m3u 播放列表、组播/单播源直播电视、收听电台和电子节目指南。[CR]    [CR]访问 https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md 以获取相关文档[CR]    </description>
@@ -171,7 +171,7 @@
     <disclaimer lang="sl_SI">To je nestabilna programska oprema! Avtorji niso odgovorni za neuspela predvajanja, nepravilne čase v EPG, zapravljen čas in katerikoli drug neželen učinek.</disclaimer>
     <disclaimer lang="sr_RS">Овај софтвер је нестабилан! Аутори ни на који начин нису одговорни за неуспела снимања, неисправне тајмере, изгубљене сате, или било које друге нежељене ефекте.</disclaimer>
     <disclaimer lang="sr_RS@latin">Ovaj softver je nestabilan! Autori ni na koji način nisu odgovorni za neuspela snimanja, neispravne tajmere, izgubljene sate, ili bilo koje druge neželjene efekte.</disclaimer>
-    <disclaimer lang="sv_SE">Denna mjukvara är ostabil! Upphovspersonerna kan inte på något sätt hållas ansvariga för felaktiga uppspelningar, EPG-tider, bortslösade timmar eller andra oönskade effekter.</disclaimer>
+    <disclaimer lang="sv_SE">Programvaran är instabil. Upphovspersonerna kan inte hållas ansvariga för misslyckade uppspelningar, felaktiga EPG-tider, bortslösad tid eller andra oönskade effekter.</disclaimer>
     <disclaimer lang="szl">To je niystabilny softwer! Autōry niy sōm ôdpedzialne za niypodarzōne graniy, niynŏleżne godziny EPG, stracōne godziny i inksze niychciane efekty.</disclaimer>
     <disclaimer lang="tr_TR">Yazanlar oynatma hatası, yanlış EPG zamanları, harcanmış saatler ya da diğer etkilerden sorumlu değildir.</disclaimer>
     <disclaimer lang="zh_CN">作者对播放失败、电子节目指南时间错误、耗时白费或其他任何不良后果，概不负责。</disclaimer>
