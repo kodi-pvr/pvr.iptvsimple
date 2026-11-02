@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2026-09-25 17:01+0000\n"
+"PO-Revision-Date: 2026-11-02 16:50+0000\n"
 "Last-Translator: Daniel Nylander <daniel@danielnylander.se>\n"
 "Language-Team: Swedish <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/sv_se/>\n"
 "Language: sv_se\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.9.1\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -23,11 +23,11 @@ msgstr "Kodi PVR-tillägg för IPTV-stöd."
 
 msgctxt "Addon Description"
 msgid "IPTV Simple PVR Client support m3u playlists, streaming of Live TV for multicast/unicast sources, listening to Radio channels and EPG.[CR]    [CR]For documentation visit: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
-msgstr "IPTV Simple PVR-klient stöder m3u-spellistor, strömning av direktsänd TV för multicast-/unicast-källor, lyssning på radiokanaler och EPG.[CR]    [CR]För dokumentation, besök: https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
+msgstr "IPTV Simple PVR-klient stöder M3U-spellistor, strömning av direktsänd tv för multicast-/unicast-källor, radiokanaler och EPG.[CR]    [CR]Dokumentation finns på https://github.com/kodi-pvr/pvr.iptvsimple/blob/Matrix/README.md[CR]    "
 
 msgctxt "Addon Disclaimer"
 msgid "The authors are in no way responsible for failed playings, incorrect EPG times, wasted hours, or any other undesirable effects."
-msgstr "Denna mjukvara är ostabil! Upphovspersonerna kan inte på något sätt hållas ansvariga för felaktiga uppspelningar, EPG-tider, bortslösade timmar eller andra oönskade effekter."
+msgstr "Programvaran är instabil. Upphovspersonerna kan inte hållas ansvariga för misslyckade uppspelningar, felaktiga EPG-tider, bortslösad tid eller andra oönskade effekter."
 
 #. settings labels
 #. label: General - m3uPathType
@@ -434,6 +434,21 @@ msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr "Ignorera skiftläge för EPG-kanalers ID"
 
+#. label-group: General - M3U Startup Check
+msgctxt "#30078"
+msgid "M3U Startup Check"
+msgstr ""
+
+#. label: Catchup - connectCheckTimoutSecs
+msgctxt "#30079"
+msgid "Timeout for check"
+msgstr ""
+
+#. label: Catchup - connectCheckIntervalSecs
+msgctxt "#30080"
+msgid "Interval for check"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -639,6 +654,11 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr "Tvinga alla M3U-poster att vara media"
 
+#. label: General - reloadOnLocalFileChange
+msgctxt "#30161"
+msgid "Reload when local files change"
+msgstr ""
+
 # empty strings from id 30128 to 30449
 #. label: TV
 msgctxt "#30450"
@@ -767,12 +787,12 @@ msgstr "Filen som används för att läsa in de anpassade radiogrupperna. Standa
 #. help: Channels - numTvGroups
 msgctxt "#30617"
 msgid "The number of TV groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups' mode should be used instead."
-msgstr "Antalet TV-grupper som ska läsas in när läget ”Några grupper” är valt. Upp till 5 kan väljas. Om fler än 5 krävs bör läget ”Anpassade grupper” användas istället."
+msgstr "Antalet tv-grupper som ska läsas in när läget ”Några grupper” är valt. Upp till 5 kan väljas. Om fler än 5 krävs bör läget ”Anpassade grupper” användas i stället."
 
 #. help: Channels - numRadioGroups
 msgctxt "#30618"
 msgid "The number of Radio groups to load when `Some groups` is the selected mode. Up to 5 can be chosen. If more than 5 are required the 'Custom groups'  mode should be used instead."
-msgstr "Antalet radiogrupper som ska läsas in när läget ”Några grupper” är valt. Upp till 5 kan väljas. Om fler än 5 krävs bör läget ”Anpassade grupper” användas istället."
+msgstr "Antalet radiogrupper som ska läsas in när läget ”Några grupper” är valt. Upp till 5 kan väljas. Om fler än 5 krävs bör läget ”Anpassade grupper” användas i stället."
 
 #. help: General - radioChannelGroupsOnly
 msgctxt "#30619"
@@ -819,6 +839,16 @@ msgstr "Om tidsförskjutningen ska åsidosättas för alla kanaler med `EPG-tids
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr "Ignorera skiftläge för EPG-kanal-ID:n, även kända som tvg-id:n, när kanaler matchas mot EPG-poster. Om denna funktion är inaktiverad kommer endast skiftlägeskänsliga att matchas."
+
+#. help: EPG Settings - connectionCheckTimeoutSecs
+msgctxt "#30628"
+msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
+msgstr ""
+
+#. help: EPG Settings - connectionCheckIntervalSecs
+msgctxt "#30629"
+msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
+msgstr ""
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1041,6 +1071,11 @@ msgstr "Konfigurationsfilen för att mappa leverantörsnamn som mottagits från 
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
 msgstr "Inställningar för anpassning av kanalgrupper."
+
+#. help: General - reloadOnLocalFileChange
+msgctxt "#30744"
+msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
+msgstr ""
 
 # empty strings from id 30744 to 30799
 #. help info - Media
