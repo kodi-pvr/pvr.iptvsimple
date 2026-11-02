@@ -656,7 +656,12 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr ""
 
-#empty strings from id 30161 to 30449
+#. label: General - reloadOnLocalFileChange
+msgctxt "#30161"
+msgid "Reload when local files change"
+msgstr ""
+
+#empty strings from id 30162 to 30449
 
 #. label: TV
 msgctxt "#30450"
@@ -1087,7 +1092,12 @@ msgctxt "#30743"
 msgid "Settings on customising channel groups."
 msgstr ""
 
-#empty strings from id 30744 to 30799
+#. help: General - reloadOnLocalFileChange
+msgctxt "#30744"
+msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
+msgstr ""
+
+#empty strings from id 30745 to 30799
 
 #. help info - Media
 

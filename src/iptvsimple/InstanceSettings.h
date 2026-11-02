@@ -101,6 +101,7 @@ namespace iptvsimple
     const RefreshMode& GetM3URefreshMode() const { return m_m3uRefreshMode; }
     int GetM3URefreshIntervalMins() const { return m_m3uRefreshIntervalMins; }
     int GetM3URefreshHour() const { return m_m3uRefreshHour; }
+    bool ReloadOnLocalFileChange() const { return m_reloadOnLocalFileChange; }
     bool HasDefaultProviderName() const { return !m_defaultProviderName.empty(); }
     const std::string& GetDefaultProviderName() const { return m_defaultProviderName; }
     bool ProviderNameMapFileEnabled() const { return m_enableProviderMappings; }
@@ -257,6 +258,7 @@ namespace iptvsimple
     int m_startChannelNumber = 1;
     bool m_numberChannelsByM3uOrderOnly = false;
     RefreshMode m_m3uRefreshMode = RefreshMode::DISABLED;
+    bool m_reloadOnLocalFileChange = false;
     int m_m3uRefreshIntervalMins = 60;
     int m_m3uRefreshHour = 4;
     std::string m_defaultProviderName;

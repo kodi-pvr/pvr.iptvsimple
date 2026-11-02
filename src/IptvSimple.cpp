@@ -15,6 +15,7 @@
 #include <ctime>
 #include <chrono>
 
+#include <kodi/Filesystem.h>
 #include <kodi/tools/StringUtils.h>
 
 using namespace iptvsimple;
@@ -65,6 +66,8 @@ void IptvSimple::ConnectionEstablished()
   m_channelGroups.Init();
   m_providers.Init();
   m_playlistLoader.Init();
+  // Taken before loading, so a change made while loading is still picked up
+  ResetWatchedFiles();
   if (!m_playlistLoader.LoadPlayList())
   {
     m_channels.ChannelsLoadFailed();
@@ -155,12 +158,20 @@ void IptvSimple::Process()
         lastRefreshHour != timeInfo.tm_hour && timeInfo.tm_hour == m_settings->GetM3URefreshHour())
       m_reloadChannelsGroupsAndEPG = true;
 
+    if (m_settings->ReloadOnLocalFileChange() && LocalFilesChanged())
+    {
+      Logger::Log(LEVEL_INFO, "%s - Local M3U/XMLTV file changed, reloading", __FUNCTION__);
+      m_reloadChannelsGroupsAndEPG = true;
+    }
+
     std::lock_guard<std::mutex> lock(m_mutex);
     if (m_running && m_reloadChannelsGroupsAndEPG)
     {
       std::this_thread::sleep_for(std::chrono::milliseconds(1000));
 
       m_settings->ReloadAddonInstanceSettings();
+      // Taken before loading, so a change made while loading is still picked up
+      ResetWatchedFiles();
       m_playlistLoader.ReloadPlayList();
       m_epg.ReloadEPG(); // Reloading EPG also updates media
 
@@ -169,6 +180,59 @@ void IptvSimple::Process()
     }
     lastRefreshHour = timeInfo.tm_hour;
   }
+}
+
+/***************************************************************************
+ * Local file change detection
+ **************************************************************************/
+
+IptvSimple::LocalFileState IptvSimple::GetLocalFileState(const std::string& path)
+{
+  LocalFileState state;
+  kodi::vfs::FileStatus status;
+  if (!path.empty() && kodi::vfs::StatFile(path, status))
+  {
+    state.modified = status.GetModificationTime();
+    state.size = static_cast<int64_t>(status.GetSize());
+  }
+  return state;
+}
+
+void IptvSimple::ResetWatchedFiles()
+{
+  // Only local files are watched. An empty EPG path falls back to the url in the
+  // M3U header, which is remote, so it is not watched either.
+  m_watchedM3U.path = m_settings->GetM3UPathType() == PathType::LOCAL_PATH ? m_settings->GetM3UPath() : "";
+  m_watchedEpg.path = m_settings->GetEpgPathType() == PathType::LOCAL_PATH ? m_settings->GetEpgPath() : "";
+
+  for (WatchedFile* file : {&m_watchedM3U, &m_watchedEpg})
+  {
+    file->loaded = GetLocalFileState(file->path);
+    file->seen = file->loaded;
+  }
+}
+
+bool IptvSimple::WatchedFileChanged(WatchedFile& file)
+{
+  if (file.path.empty())
+    return false;
+
+  const LocalFileState current = GetLocalFileState(file.path);
+  // A changed file is only reported once it was unchanged for a whole check
+  // interval, so a file that is still being written is not loaded half done.
+  // A missing file is not reported: reloading would only clear the channels.
+  const bool exists = current.size >= 0;
+  const bool changed = exists && current != file.loaded && current == file.seen;
+  file.seen = current;
+  return changed;
+}
+
+bool IptvSimple::LocalFilesChanged()
+{
+  // Both files are checked every time so each keeps an up to date 'seen' state
+  const bool m3uChanged = WatchedFileChanged(m_watchedM3U);
+  const bool epgChanged = WatchedFileChanged(m_watchedEpg);
+  return m3uChanged || epgChanged;
 }
 
 /***************************************************************************
