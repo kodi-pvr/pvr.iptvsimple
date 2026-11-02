@@ -448,7 +448,7 @@ msgctxt "#30080"
 msgid "Interval for check"
 msgstr ""
 
-#empty strings from id 30081 to 30099
+# empty strings from id 30081 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
 msgctxt "#30100"
@@ -596,7 +596,7 @@ msgctxt "#30128"
 msgid "Catchup correction"
 msgstr ""
 
-#empty strings from id 30129 to 30449
+# empty strings from id 30129 to 30449
 #. category-lavel: Media
 #. group-label: Media - Media
 msgctxt "#30150"
@@ -653,7 +653,12 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr ""
 
-#empty strings from id 30161 to 30449
+#. label: General - reloadOnLocalFileChange
+msgctxt "#30161"
+msgid "Reload when local files change"
+msgstr ""
+
+# empty strings from id 30161 to 30449
 #. label: TV
 msgctxt "#30450"
 msgid "TV"
@@ -664,7 +669,7 @@ msgctxt "#30451"
 msgid "Radio"
 msgstr ""
 
-#empty strings from id 30452 to 30499
+# empty strings from id 30452 to 30499
 #. notification: Inputstreams
 msgctxt "#30500"
 msgid "Inputstream error"
@@ -680,7 +685,7 @@ msgctxt "#30502"
 msgid "The %s addon is not enabled."
 msgstr ""
 
-#empty strings from id 30503 to 30599
+# empty strings from id 30503 to 30599
 #. ############
 #. help info #
 #. ############
@@ -844,7 +849,7 @@ msgctxt "#30629"
 msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
 msgstr ""
 
-#empty strings from id 30630 to 30639
+# empty strings from id 30630 to 30639
 #. help info - Channel Logos
 #. help-category: Channel Logos
 msgctxt "#30640"
@@ -876,7 +881,7 @@ msgctxt "#30645"
 msgid "If a local path is selected for logos ignore any logos from the M3U file."
 msgstr ""
 
-#empty strings from id 30646 to 30659
+# empty strings from id 30646 to 30659
 #. help info - Genres
 #. help-category: Genres
 msgctxt "#30660"
@@ -903,7 +908,7 @@ msgctxt "#30664"
 msgid "If location is [B]Remote Path[/B] this setting should contain a valid URL."
 msgstr ""
 
-#empty strings from id 30665 to 30679
+# empty strings from id 30665 to 30679
 #. help info - Advanced
 #. help-category: Advanced
 msgctxt "#30680"
@@ -950,7 +955,7 @@ msgctxt "#30688"
 msgid "Use this MIME type as the default if there is not one supplied as a property (KODIPROP) of the channel. Use with care as this will disable any use of the addon's default stream inspection behaviour."
 msgstr ""
 
-#empty strings from id 30689 to 30699
+# empty strings from id 30689 to 30699
 #. help info - Catchup
 #. help-category: Catchup
 msgctxt "#30700"
@@ -1007,7 +1012,7 @@ msgctxt "#30710"
 msgid "Adjust the time used for catchup stream URL generation by this value, from -12 hours to +14 hours. Useful for catchup streams which are geo mis-matched to the wrong time. Note that this value can be overridden by values in the M3U file."
 msgstr ""
 
-#empty strings from id 30711 to 307019
+# empty strings from id 30711 to 307019
 #. help info - Timeshift
 #. help-category: Timeshift
 msgctxt "#30720"
@@ -1044,7 +1049,7 @@ msgctxt "#30726"
 msgid "Enable the timeshift feature for UDP based streams. Will only apply to streams that do not select a specific inputstream addon for playback. The inputstream.ffmpegdirect addon will be used for timeshift."
 msgstr ""
 
-#empty strings from id 30727 to 30739
+# empty strings from id 30727 to 30739
 #. help info - Other categories continued
 #. help: General - defaultproviderName
 msgctxt "#30740"
@@ -1066,7 +1071,12 @@ msgctxt "#30743"
 msgid "Settings on customising channel groups."
 msgstr ""
 
-#empty strings from id 30744 to 30799
+#. help: General - reloadOnLocalFileChange
+msgctxt "#30744"
+msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
+msgstr ""
+
+# empty strings from id 30744 to 30799
 #. help info - Media
 #. help-category: Media
 msgctxt "#30800"

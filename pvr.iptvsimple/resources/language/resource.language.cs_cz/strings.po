@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: KODI Main\n"
 "Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2026-07-26 12:16+0000\n"
+"PO-Revision-Date: 2026-11-02 18:30+0000\n"
 "Last-Translator: Michal Várady <miko.vaji@gmail.com>\n"
 "Language-Team: Czech <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/cs_cz/>\n"
 "Language: cs_cz\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 2026.7.1\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -434,6 +434,21 @@ msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr "Ignorovat velikost písmen u ID kanálů EPG"
 
+#. label-group: General - M3U Startup Check
+msgctxt "#30078"
+msgid "M3U Startup Check"
+msgstr "Kontrola M3U při spuštění"
+
+#. label: Catchup - connectCheckTimoutSecs
+msgctxt "#30079"
+msgid "Timeout for check"
+msgstr "Časový limit kontroly"
+
+#. label: Catchup - connectCheckIntervalSecs
+msgctxt "#30080"
+msgid "Interval for check"
+msgstr "Interval kontroly"
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -639,6 +654,11 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr "Považovat všechny položky M3U za média"
 
+#. label: General - reloadOnLocalFileChange
+msgctxt "#30161"
+msgid "Reload when local files change"
+msgstr "Znovu načítat při změně místních souborů"
+
 # empty strings from id 30128 to 30449
 #. label: TV
 msgctxt "#30450"
@@ -819,6 +839,16 @@ msgstr "Určuje, zda se má časový posun pro všechny kanály přepsat hodnoto
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr "Ignoruje velikost písmen u ID kanálů EPG, známých také jako tvg-id, při párování kanálů s položkami EPG. Pokud je vypnuto, použije se pouze párování s rozlišením velikosti písmen."
+
+#. help: EPG Settings - connectionCheckTimeoutSecs
+msgctxt "#30628"
+msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
+msgstr "Doba čekání při kontrole platného souboru M3U před vypršením časového limitu pokusu."
+
+#. help: EPG Settings - connectionCheckIntervalSecs
+msgctxt "#30629"
+msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
+msgstr "Doba čekání mezi pokusy při kontrole platného souboru M3U. Platný soubor se kontroluje pouze při spuštění a po nalezení platného souboru se všechny kontroly zastaví."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1041,6 +1071,11 @@ msgstr "Konfigurační soubor pro mapování názvů poskytovatelů získaných 
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
 msgstr "Nastavení přizpůsobení skupin kanálů."
+
+#. help: General - reloadOnLocalFileChange
+msgctxt "#30744"
+msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
+msgstr "Několik sekund po změně místního souboru M3U nebo XMLTV znovu načte kanály a EPG bez restartování doplňku. Užitečné, pokud tyto soubory zapisuje jiný doplněk nebo skript. Vzdálené adresy URL se nekontrolují."
 
 # empty strings from id 30744 to 30799
 #. help info - Media

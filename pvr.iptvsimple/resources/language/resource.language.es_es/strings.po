@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2025-07-28 01:37+0000\n"
 "Last-Translator: Christian Gade <gade@kodi.tv>\n"
@@ -434,6 +434,21 @@ msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr "Ignorar mayúscula y minúsculas en los ID de canal EPG"
 
+#. label-group: General - M3U Startup Check
+msgctxt "#30078"
+msgid "M3U Startup Check"
+msgstr ""
+
+#. label: Catchup - connectCheckTimoutSecs
+msgctxt "#30079"
+msgid "Timeout for check"
+msgstr ""
+
+#. label: Catchup - connectCheckIntervalSecs
+msgctxt "#30080"
+msgid "Interval for check"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -639,6 +654,11 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr "Forzar que todas las entradas M3U sean medios"
 
+#. label: General - reloadOnLocalFileChange
+msgctxt "#30161"
+msgid "Reload when local files change"
+msgstr ""
+
 # empty strings from id 30128 to 30449
 #. label: TV
 msgctxt "#30450"
@@ -818,6 +838,16 @@ msgstr "Determina si sobreescribe el TimeShift para todos los canales con 'TimeS
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr "Ignorar mayúsculas y minúsculas para los IDs de canal EPG, también conocidos como tvg-id's, al emparejar canales con entradas EPG. Si se desactiva, sólo se utilizará la coincidencia teniendo en cuenta mayúsculas y minúsculas."
+
+#. help: EPG Settings - connectionCheckTimeoutSecs
+msgctxt "#30628"
+msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
+msgstr ""
+
+#. help: EPG Settings - connectionCheckIntervalSecs
+msgctxt "#30629"
+msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
+msgstr ""
 
 #. help info - Channel Logos
 #. help-category: Channel Logos
@@ -1038,6 +1068,11 @@ msgstr "El archivo de configuración para asignar nombres de proveedores recibid
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
 msgstr "Ajustes sobre la personalización de los grupos de canales."
+
+#. help: General - reloadOnLocalFileChange
+msgctxt "#30744"
+msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
+msgstr ""
 
 # empty strings from id 30744 to 30799
 #. help info - Media

@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2026-04-22 03:31+0000\n"
 "Last-Translator: wabisabi926 <wabisabi926@foxmail.com>\n"
@@ -434,6 +434,21 @@ msgctxt "#30077"
 msgid "Ignore Case for EPG Channel IDs"
 msgstr "电子节目指南频道 ID 匹配忽略大小写"
 
+#. label-group: General - M3U Startup Check
+msgctxt "#30078"
+msgid "M3U Startup Check"
+msgstr ""
+
+#. label: Catchup - connectCheckTimoutSecs
+msgctxt "#30079"
+msgid "Timeout for check"
+msgstr ""
+
+#. label: Catchup - connectCheckIntervalSecs
+msgctxt "#30080"
+msgid "Interval for check"
+msgstr ""
+
 # empty strings from id 30075 to 30099
 #. label-category: catchup
 #. label-group: Catchup - Catchup
@@ -639,6 +654,11 @@ msgctxt "#30160"
 msgid "Force all M3U entries to be media"
 msgstr "强制全部 M3U 条目识别为媒体资源"
 
+#. label: General - reloadOnLocalFileChange
+msgctxt "#30161"
+msgid "Reload when local files change"
+msgstr ""
+
 # empty strings from id 30128 to 30449
 #. label: TV
 msgctxt "#30450"
@@ -819,6 +839,16 @@ msgstr "是否用`电子节目指南时间偏移`覆盖所有频道的时移。�
 msgctxt "#30627"
 msgid "Ignore Case for EPG Channel IDs, also known as tvg-id's, when matching channels to EPG entries. If disabled, only case senitive matching will be used."
 msgstr "将频道与电子节目指南条目匹配时，忽略电子节目指南频道 ID（也称为 tvg-id）的大小写。如果禁用，则仅使用区分大小写匹配。"
+
+#. help: EPG Settings - connectionCheckTimeoutSecs
+msgctxt "#30628"
+msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
+msgstr ""
+
+#. help: EPG Settings - connectionCheckIntervalSecs
+msgctxt "#30629"
+msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
+msgstr ""
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1041,6 +1071,11 @@ msgstr "用于将从 M3U 接收的提供商名称或默认提供商名称映射�
 msgctxt "#30743"
 msgid "Settings on customising channel groups."
 msgstr "自定义频道组的设置。"
+
+#. help: General - reloadOnLocalFileChange
+msgctxt "#30744"
+msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
+msgstr ""
 
 # empty strings from id 30744 to 30799
 #. help info - Media
