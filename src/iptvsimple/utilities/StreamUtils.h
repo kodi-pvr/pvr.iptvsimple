@@ -29,7 +29,7 @@ namespace iptvsimple
     class StreamUtils
     {
     public:
-      static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
+      static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamUrl, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<iptvsimple::InstanceSettings>& settings, StreamType knownStreamType = StreamType::OTHER_TYPE);
       static void SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::MediaEntry& mediaEntry, const std::string& streamUrl, std::shared_ptr<iptvsimple::InstanceSettings>& settings);
       static const StreamType GetStreamType(const std::string& url, const std::string& mimeType, bool isCatchupTSStream);
       static const StreamType InspectStreamType(const std::string& url, iptvsimple::CatchupMode catchupMode);
