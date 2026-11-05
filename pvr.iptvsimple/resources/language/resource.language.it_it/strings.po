@@ -5,9 +5,9 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2026-10-26 07:45+0000\n"
+"PO-Revision-Date: 2026-11-03 08:40+0000\n"
 "Last-Translator: Massimo Pissarello <mapi68@gmail.com>\n"
 "Language-Team: Italian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/it_it/>\n"
 "Language: it_it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 2026.10.1\n"
+"X-Generator: Weblate 2026.11\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -437,17 +437,17 @@ msgstr "Ignora maiuscole e minuscole per gli ID EPG del canale"
 #. label-group: General - M3U Startup Check
 msgctxt "#30078"
 msgid "M3U Startup Check"
-msgstr ""
+msgstr "Controllo M3U all'avvio"
 
 #. label: Catchup - connectCheckTimoutSecs
 msgctxt "#30079"
 msgid "Timeout for check"
-msgstr ""
+msgstr "Timeout per il controllo"
 
 #. label: Catchup - connectCheckIntervalSecs
 msgctxt "#30080"
 msgid "Interval for check"
-msgstr ""
+msgstr "Intervallo per il controllo"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -657,7 +657,7 @@ msgstr "Forza tutte le voci M3U come media"
 #. label: General - reloadOnLocalFileChange
 msgctxt "#30161"
 msgid "Reload when local files change"
-msgstr ""
+msgstr "Ricarica quando i file locali cambiano"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -843,12 +843,12 @@ msgstr "Ignora maiuscole e minuscole per gli ID EPG dei canali, noti anche come 
 #. help: EPG Settings - connectionCheckTimeoutSecs
 msgctxt "#30628"
 msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
-msgstr ""
+msgstr "Durante il controllo di un file M3U valido, il tempo di attesa prima che il tentativo vada in timeout."
 
 #. help: EPG Settings - connectionCheckIntervalSecs
 msgctxt "#30629"
 msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
-msgstr ""
+msgstr "Durante il controllo di un file M3U valido, il tempo di attesa tra un tentativo e l'altro. Nota che un file valido viene cercato solo all'avvio e, una volta trovato, tutti i controlli si interrompono."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1075,7 +1075,7 @@ msgstr "Impostazioni sulla personalizzazione dei gruppi di canali."
 #. help: General - reloadOnLocalFileChange
 msgctxt "#30744"
 msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
-msgstr ""
+msgstr "Ricarica i canali e l'EPG pochi secondi dopo la modifica di un file M3U o XMLTV locale, senza riavviare l'add-on. Utile quando un altro add-on o script scrive questi file. Gli URL remoti non vengono controllati."
 
 # empty strings from id 30744 to 30799
 #. help info - Media
