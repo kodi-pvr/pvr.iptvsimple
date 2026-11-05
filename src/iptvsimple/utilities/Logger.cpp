@@ -47,6 +47,12 @@ void Logger::Log(LogLevel level, const char* message, ...)
   logMessage = StringUtils::FormatV(logMessage.c_str(), arguments);
   va_end(arguments);
 
+  {
+    std::lock_guard<std::mutex> lock(logger.m_redactionsMutex);
+    for (const auto& redaction : logger.m_redactions)
+      StringUtils::Replace(logMessage, redaction.first, redaction.second);
+  }
+
   logger.m_implementation(level, logMessage.c_str());
 }
 
@@ -58,4 +64,13 @@ void Logger::SetImplementation(LoggerImplementation implementation)
 void Logger::SetPrefix(const std::string& prefix)
 {
   m_prefix = prefix;
+}
+
+void Logger::AddRedaction(const std::string& text, const std::string& replacement)
+{
+  if (text.empty())
+    return;
+
+  std::lock_guard<std::mutex> lock(m_redactionsMutex);
+  m_redactions[text] = replacement;
 }
