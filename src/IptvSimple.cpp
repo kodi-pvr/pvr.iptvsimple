@@ -114,6 +114,7 @@ PVR_ERROR IptvSimple::GetCapabilities(kodi::addon::PVRCapabilities& capabilities
   capabilities.SetSupportsDescrambleInfo(false);
   capabilities.SetSupportsRecordings(true);
   capabilities.SetSupportsRecordingsDelete(false);
+  capabilities.SetSupportsChannelScan(true);
 
   return PVR_ERROR_NO_ERROR;
 }
@@ -511,6 +512,16 @@ PVR_ERROR IptvSimple::StreamClosed()
 {
   Logger::Log(LEVEL_INFO, "%s - Stream Closed", __FUNCTION__);
 
+  return PVR_ERROR_NO_ERROR;
+}
+
+/***************************************************************************
+ * Channel Scan
+ **************************************************************************/
+
+PVR_ERROR IptvSimple::OpenDialogChannelScan()
+{
+  m_reloadChannelsGroupsAndEPG = true;
   return PVR_ERROR_NO_ERROR;
 }
 
