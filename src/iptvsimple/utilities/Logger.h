@@ -8,6 +8,8 @@
 #pragma once
 
 #include <functional>
+#include <map>
+#include <mutex>
 #include <string>
 
 namespace iptvsimple
@@ -65,6 +67,13 @@ namespace iptvsimple
        */
       void SetPrefix(const std::string& prefix);
 
+      /**
+       * Replaces the specified text in every later log message
+       * @param text the text to hide, e.g. login details in a URL
+       * @param replacement what is logged instead
+       */
+      void AddRedaction(const std::string& text, const std::string& replacement);
+
     private:
       Logger();
 
@@ -77,6 +86,18 @@ namespace iptvsimple
        * The log message prefix
        */
       std::string m_prefix;
+
+      // Longest first, so a password that begins with an older one is still hidden whole
+      struct LongestFirst
+      {
+        bool operator()(const std::string& a, const std::string& b) const
+        {
+          return a.size() != b.size() ? a.size() > b.size() : a < b;
+        }
+      };
+
+      std::mutex m_redactionsMutex;
+      std::map<std::string, std::string, LongestFirst> m_redactions;
     };
   } // namespace utilities
 } // namespace iptvsimple

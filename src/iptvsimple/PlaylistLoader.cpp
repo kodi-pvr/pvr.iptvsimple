@@ -8,6 +8,7 @@
 #include "PlaylistLoader.h"
 
 #include "InstanceSettings.h"
+#include "XtreamCodes.h"
 #include "utilities/FileUtils.h"
 #include "utilities/Logger.h"
 #include "utilities/WebStreamExtractor.h"
@@ -81,7 +82,12 @@ bool PlaylistLoader::LoadPlayList()
   bool useM3UCache = m_settings->GetM3URefreshMode() != RefreshMode::DISABLED ? false : m_settings->UseM3UCache();
 
   std::string playlistContent;
-  if (!FileUtils::GetCachedFileContents(m_settings, m_settings->GetM3UCacheFilename(), m_m3uLocation, playlistContent, useM3UCache))
+  if (m_settings->GetM3UPathType() == PathType::XTREAM_CODES)
+  {
+    if (!XtreamCodes::GetPlaylist(m_settings, playlistContent))
+      return false;
+  }
+  else if (!FileUtils::GetCachedFileContents(m_settings, m_settings->GetM3UCacheFilename(), m_m3uLocation, playlistContent, useM3UCache))
   {
     Logger::Log(LEVEL_ERROR, "%s - Unable to load playlist cache file '%s':  file is missing or empty.", __FUNCTION__, m_m3uLocation.c_str());
     return false;
