@@ -5,17 +5,17 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: KODI Main\n"
-"Report-Msgid-Bugs-To: https://github.com/xbmc/xbmc/issues/\n"
+"Report-Msgid-Bugs-To: translations@kodi.tv\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"PO-Revision-Date: 2026-10-14 08:47+0000\n"
-"Last-Translator: Alexey <signfinder@gmail.com>\n"
+"PO-Revision-Date: 2026-11-10 13:50+0000\n"
+"Last-Translator: Andrei Stepanov <adem4ik@gmail.com>\n"
 "Language-Team: Russian <https://kodi.weblate.cloud/projects/kodi-add-ons-pvr-clients/pvr-iptvsimple/ru_ru/>\n"
 "Language: ru_ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2026.10.1\n"
+"X-Generator: Weblate 2026.11.1\n"
 
 msgctxt "Addon Summary"
 msgid "Kodi PVR addon for IPTV support."
@@ -437,17 +437,17 @@ msgstr "Игнорировать регистр для идентификато�
 #. label-group: General - M3U Startup Check
 msgctxt "#30078"
 msgid "M3U Startup Check"
-msgstr ""
+msgstr "Проверка M3U при запуске"
 
 #. label: Catchup - connectCheckTimoutSecs
 msgctxt "#30079"
 msgid "Timeout for check"
-msgstr ""
+msgstr "Тайм-аут проверки"
 
 #. label: Catchup - connectCheckIntervalSecs
 msgctxt "#30080"
 msgid "Interval for check"
-msgstr ""
+msgstr "Интервал проверки"
 
 # empty strings from id 30075 to 30099
 #. label-category: catchup
@@ -657,7 +657,7 @@ msgstr "Заставить все записи M3U стать медиа"
 #. label: General - reloadOnLocalFileChange
 msgctxt "#30161"
 msgid "Reload when local files change"
-msgstr ""
+msgstr "Перезагружать при изменении локальных файлов"
 
 # empty strings from id 30128 to 30449
 #. label: TV
@@ -843,12 +843,12 @@ msgstr "Игнорировать регистр для идентификато�
 #. help: EPG Settings - connectionCheckTimeoutSecs
 msgctxt "#30628"
 msgid "When checking for a valid M3U file, the length of time to wait before timing out the attempt."
-msgstr ""
+msgstr "При проверке действительного файла M3U — сколько времени ждать до истечения тайм-аута попытки."
 
 #. help: EPG Settings - connectionCheckIntervalSecs
 msgctxt "#30629"
 msgid "When checking for a valid M3U file, the length of time to wait between attempts. Note that a valid file will only be checked for on startup and once a valid file is found all checks stop."
-msgstr ""
+msgstr "При проверке действительного файла M3U — сколько времени ждать между попытками. Учтите, что наличие действительного файла проверяется только при запуске, и как только действительный файл найден, все проверки прекращаются."
 
 # empty strings from id 30627 to 30639
 #. help info - Channel Logos
@@ -1075,7 +1075,7 @@ msgstr "Настройки персонализации групп канало�
 #. help: General - reloadOnLocalFileChange
 msgctxt "#30744"
 msgid "Reload the channels and EPG a few seconds after a local M3U or XMLTV file changes, without restarting the add-on. Useful when another add-on or script writes these files. Remote URLs are not checked."
-msgstr ""
+msgstr "Перезагружать каналы и EPG через несколько секунд после изменения локального файла M3U или XMLTV, не перезапуская дополнение. Полезно, когда эти файлы записывает другое дополнение или скрипт. Удалённые URL-адреса не проверяются."
 
 # empty strings from id 30744 to 30799
 #. help info - Media
