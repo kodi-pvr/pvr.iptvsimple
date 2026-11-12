@@ -20,6 +20,7 @@ class ATTR_DLL_LOCAL CIptvSimpleAddon : public kodi::addon::CAddonBase
 {
 public:
   CIptvSimpleAddon() = default;
+  ~CIptvSimpleAddon() override;
 
   ADDON_STATUS Create() override;
   ADDON_STATUS SetSetting(const std::string& settingName, const kodi::addon::CSettingValue& settingValue) override;
@@ -29,4 +30,5 @@ public:
 private:
   std::unordered_map<std::string, IptvSimple*> m_usedInstances;
   std::shared_ptr<iptvsimple::AddonSettings> m_settings;
+  std::unique_ptr<iptvsimple::HttpServer> m_httpServer;
 };

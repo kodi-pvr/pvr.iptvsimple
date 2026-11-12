@@ -5,13 +5,19 @@
  *  See LICENSE.md for more information.
  */
 
+#include "iptvsimple/HttpServer.h"
+#include "iptvsimple/views/ChannelsView.h"
 #include "addon.h"
 #include "IptvSimple.h"
 #include "iptvsimple/utilities/SettingsMigration.h"
-
 using namespace iptvsimple;
 using namespace iptvsimple::data;
 using namespace iptvsimple::utilities;
+
+CIptvSimpleAddon::~CIptvSimpleAddon()
+{
+  Logger::Log(LogLevel::LEVEL_INFO, "%s IPTV Simple PVR client destroyed", __func__);
+}
 
 ADDON_STATUS CIptvSimpleAddon::Create()
 {
@@ -48,6 +54,19 @@ ADDON_STATUS CIptvSimpleAddon::Create()
   Logger::GetInstance().SetPrefix("pvr.iptvsimple");
 
   Logger::Log(LogLevel::LEVEL_INFO, "%s starting IPTV Simple PVR client...", __func__);
+
+  bool activateWebServer = true;
+  // TODO: Add a main setting option for the web server runs
+  if (activateWebServer)
+  {
+    m_httpServer = std::make_unique<iptvsimple::HttpServer>();
+    if (m_httpServer)
+    {
+      auto channelsView = std::make_shared<ChannelsView>(m_usedInstances);
+      m_httpServer->AddView(channelsView);
+      Logger::Log(LogLevel::LEVEL_INFO, "HTTP Server and ChannelsView initialized successfully");
+    }
+  }
 
   return ADDON_STATUS_OK;
 }
