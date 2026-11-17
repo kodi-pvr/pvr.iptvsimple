@@ -9,6 +9,7 @@
 
 #include "IConnectionListener.h"
 #include "InstanceSettings.h"
+#include "XtreamCodes.h"
 #include "utilities/Logger.h"
 #include "utilities/WebUtils.h"
 
@@ -142,6 +143,10 @@ void ConnectionManager::Process()
     const std::string url = m_settings->GetM3ULocation();
     int tcpTimeout = m_settings->GetConnectioncCheckTimeoutSecs();
     bool isLocalPath = m_settings->GetM3UPathType() == PathType::LOCAL_PATH;
+    // The server itself refuses unauthenticated requests
+    const std::string checkUrl = m_settings->GetM3UPathType() == PathType::XTREAM_CODES
+                                     ? XtreamCodes::GetApiUrl(m_settings)
+                                     : url;
 
     /* URL is set */
     if (url.empty())
@@ -152,7 +157,7 @@ void ConnectionManager::Process()
     }
 
     /* Connect */
-    if ((firstRun || !m_onStartupOnly) && !WebUtils::Check(url, tcpTimeout, isLocalPath))
+    if ((firstRun || !m_onStartupOnly) && !WebUtils::Check(checkUrl, tcpTimeout, isLocalPath))
     {
       /* Unable to connect */
       if (retryAttempt == 0)

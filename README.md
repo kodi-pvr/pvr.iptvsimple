@@ -99,9 +99,14 @@ General settings required for the addon to function.
 * **Location**: Select where to find the M3U resource. The options are:
     - `Local path` - A path to an M3U file whether it be on the device or the local network.
     - `Remote path` - A URL specifying the location of the M3U file.
+    - `Xtream Codes login` - Load the live channels of an Xtream Codes account. The XMLTV EPG from the same server is used unless an EPG location is set, and catchup is enabled for channels the server archives. Xtream Codes channels are handled as an M3U playlist, so settings that mention M3U apply to them too.
 * **M3U play list path**: If location is `Local path` this setting must contain a valid path for the addon to function.
 * **M3U play list URL**: If location is `Remote path` this setting must contain a valid URL for the addon to function.
 * **Cache M3U at local storage**: If location is `Remote path` select whether or not the the M3U file should be cached locally.
+* **Server URL**: If location is `Xtream Codes login` this setting must contain the server URL given by the provider, e.g. `http://example.com:8080`.
+* **Username**: If location is `Xtream Codes login` this setting must contain the account username.
+* **Password**: If location is `Xtream Codes login` this setting must contain the account password.
+* **Stream format**: The stream format to request for channels and catchup. `MPEG-TS` is supported by most providers; `HLS` may be needed if the provider does not allow MPEG-TS for the account.
 * **Start channel number**: The number to start numbering channels from. Only used when `Use backend channel numbers` from PVR settings is enabled and a channel number is not supplied in the M3U file.
 * **Only number by channel order in M3U**: Ignore any `tvg-chno` tags and only number channels by the order in the M3U starting at `Start channel number`.
 * **Auto refresh mode**: Select the auto refresh mode for the M3U/XMLTV files. Note that caching is disabled if auto refresh is used. The options are:
