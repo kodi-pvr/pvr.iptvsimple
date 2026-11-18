@@ -45,6 +45,42 @@ bool HasInputstreamAdaptiveDrmConfig(const T& entry)
   return !entry.GetProperty("inputstream.adaptive.drm").empty() ||
          !entry.GetProperty("inputstream.adaptive.drm_legacy").empty();
 }
+
+std::string GetStreamProperty(const std::vector<kodi::addon::PVRStreamProperty>& properties, const std::string& name)
+{
+  for (auto it = properties.rbegin(); it != properties.rend(); ++it)
+  {
+    if (it->GetName() == name)
+      return it->GetValue();
+  }
+  return "";
+}
+
+void SetFFmpegDirectReconnectOptions(std::vector<kodi::addon::PVRStreamProperty>& properties, bool hasHTTPReconnect, std::shared_ptr<InstanceSettings>& settings)
+{
+  // A catchup stream relies on EOF from the server to move on to the next part of the archive
+  if (GetStreamProperty(properties, PVR_STREAM_PROPERTY_INPUTSTREAM) != INPUTSTREAM_FFMPEGDIRECT ||
+      StringUtils::EqualsNoCase(GetStreamProperty(properties, "inputstream.ffmpegdirect.stream_mode"), "catchup"))
+    return;
+
+  const std::string openMode = GetStreamProperty(properties, "inputstream.ffmpegdirect.open_mode");
+  const std::string mimeType = GetStreamProperty(properties, PVR_STREAM_PROPERTY_MIMETYPE);
+  const bool isHLS = mimeType == "application/x-mpegURL" ||
+                     mimeType == "application/vnd.apple.mpegurl" ||
+                     GetStreamProperty(properties, "inputstream.ffmpegdirect.manifest_type") == "hls";
+
+  // Only FFmpeg reads the options, opened with curl they would be sent as HTTP headers
+  if (StringUtils::EqualsNoCase(openMode, "curl") ||
+      (!isHLS && !StringUtils::EqualsNoCase(openMode, "ffmpeg")))
+    return;
+
+  const StreamType streamType = isHLS ? StreamType::HLS : StreamType::OTHER_TYPE;
+  for (auto& property : properties)
+  {
+    if (property.GetName() == PVR_STREAM_PROPERTY_STREAMURL)
+      property.SetValue(StreamUtils::GetURLWithFFmpegReconnectOptions(property.GetValue(), streamType, INPUTSTREAM_FFMPEGDIRECT, hasHTTPReconnect, settings));
+  }
+}
 } // unnamed namespace
 
 void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::Channel& channel, const std::string& streamURL, bool isChannelURL, std::map<std::string, std::string>& catchupProperties, std::shared_ptr<InstanceSettings>& settings)
@@ -171,6 +207,9 @@ void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamPrope
     for (auto& prop : catchupProperties)
       properties.emplace_back(prop.first, prop.second);
   }
+
+  if (isChannelURL)
+    SetFFmpegDirectReconnectOptions(properties, channel.GetProperty("http-reconnect") == "true", settings);
 }
 
 void StreamUtils::SetAllStreamProperties(std::vector<kodi::addon::PVRStreamProperty>& properties, const iptvsimple::data::MediaEntry& mediaEntry, const std::string& streamURL, std::shared_ptr<InstanceSettings>& settings)
@@ -495,7 +534,8 @@ bool StreamUtils::ChannelSpecifiesInputstream(const iptvsimple::data::Channel& c
 bool StreamUtils::SupportsFFmpegReconnect(const StreamType& streamType, const std::string& inputstreamName)
 {
   return streamType == StreamType::HLS ||
-         inputstreamName == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG;
+         inputstreamName == PVR_STREAM_PROPERTY_VALUE_INPUTSTREAMFFMPEG ||
+         inputstreamName == INPUTSTREAM_FFMPEGDIRECT;
 }
 
 std::string StreamUtils::GetUrlEncodedProtocolOptions(const std::string& protocolOptions)
