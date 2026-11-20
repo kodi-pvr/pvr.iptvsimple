@@ -36,6 +36,14 @@ IptvSimple::IptvSimple(const kodi::addon::IInstanceInfo& instance) : iptvsimple:
 IptvSimple::~IptvSimple()
 {
   Logger::Log(LEVEL_DEBUG, "%s Stopping update thread...", __FUNCTION__);
+
+  // Stop connectionManager first: until Stop() returns its callbacks can still
+  // touch m_thread/m_channels/m_epg on its own thread, without m_mutex
+  if (connectionManager)
+    connectionManager->Stop();
+  delete connectionManager;
+  connectionManager = nullptr;
+
   m_running = false;
   if (m_thread.joinable())
     m_thread.join();
@@ -45,10 +53,6 @@ IptvSimple::~IptvSimple()
   m_channelGroups.Clear();
   m_providers.Clear();
   m_epg.Clear();
-
-  if (connectionManager)
-    connectionManager->Stop();
-  delete connectionManager;
 }
 
 /* **************************************************************************
@@ -62,13 +66,25 @@ void IptvSimple::ConnectionLost()
 
 void IptvSimple::ConnectionEstablished()
 {
+  // The getters read m_channels/m_epg under m_mutex, so writing them here needs it too
+  std::lock_guard<std::mutex> lock(m_mutex);
+
   m_channels.Init();
   m_channelGroups.Init();
   m_providers.Init();
   m_playlistLoader.Init();
   // Taken before loading, so a change made while loading is still picked up
   ResetWatchedFiles();
-  if (!m_playlistLoader.LoadPlayList())
+  if (m_playlistLoader.LoadPlayList())
+  {
+    // Tell Kodi core to re-pull the freshly loaded lists, as ReloadPlayList() does
+    // (recordings too, since catch-up counts as one)
+    TriggerChannelUpdate();
+    TriggerChannelGroupsUpdate();
+    TriggerProvidersUpdate();
+    TriggerRecordingUpdate();
+  }
+  else
   {
     m_channels.ChannelsLoadFailed();
     m_channelGroups.ChannelGroupsLoadFailed();
